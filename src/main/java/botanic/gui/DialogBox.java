@@ -13,7 +13,15 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
 /**
@@ -23,6 +31,14 @@ import javafx.scene.paint.Color;
  * This container is to be displayed onto the screen.
  */
 public class DialogBox extends HBox {
+    private static final BorderStrokeStyle BORDER_STROKE_STYLE = BorderStrokeStyle.SOLID;
+    private static final BorderWidths BORDER_WIDTH = new BorderWidths(1.0);
+    private static final Color BOTANIC_COLOR = Color.LAVENDERBLUSH;
+    private static final Color BORDER_COLOR = Color.BLACK;
+    private static final Color USER_COLOR = Color.LIGHTGOLDENRODYELLOW;
+    private static final CornerRadii DIALOG_BOX_CORNER_RADII = new CornerRadii(10.0);
+    private static final Insets INSETS = new Insets(-10);
+
     /**
      * The label containing a string representing the user input or botanic's response.
      */
@@ -34,14 +50,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private static final Color USER_COLOR = Color.LIGHTGOLDENRODYELLOW;
-    private static final Color BOTANIC_COLOR = Color.LAVENDERBLUSH;
-    private static final CornerRadii DIALOG_BOX_CORNER_RADII = new CornerRadii(10.0);
-    private static final Insets INSETS = new Insets(-10);
 
-    private static final BorderWidths BORDER_WIDTH = new BorderWidths(1.0);
-    private static final Color BORDER_COLOR = Color.BLACK;
-    private static final BorderStrokeStyle BORDER_STROKE_STYLE = BorderStrokeStyle.SOLID;
 
     /**
      * Instantiates DialogBox.
@@ -110,7 +119,7 @@ public class DialogBox extends HBox {
      * @return A DialogBox representing the user's input message.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox userDialog =  new DialogBox(text, img);
+        DialogBox userDialog = new DialogBox(text, img);
         designBorder(userDialog);
         setBackgroundColor(userDialog, DialogBox.USER_COLOR);
         return userDialog;
@@ -118,11 +127,11 @@ public class DialogBox extends HBox {
 
     /**
      * Instantiates DialogBox where the ImageView is on the left and text on the right,
-     * which represents the botanic's response.
+     * which represents the botanic response.
      *
-     * @param text Botanic's response.
-     * @param img Botanic's icon.
-     * @return A DialogBox representing Botanic's response message.
+     * @param text Botanic response.
+     * @param img Botanic icon.
+     * @return A DialogBox representing Botanic response message.
      */
     public static DialogBox getBotanicDialog(String text, Image img) {
         var botanicDialog = new DialogBox(text, img);

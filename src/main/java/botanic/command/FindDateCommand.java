@@ -2,9 +2,9 @@ package botanic.command;
 
 import java.time.LocalDate;
 
+import botanic.gui.Gui;
 import botanic.storage.Storage;
 import botanic.task.TaskList;
-import botanic.gui.Gui;
 
 /**
  * Encapsulates the related fields and behavior

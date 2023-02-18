@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import botanic.Formatter;
-import botanic.gui.Gui;
 import botanic.exception.OutOfBoundsException;
+import botanic.gui.Gui;
 
 /**
  * Encapsulates the related fields and behavior of the list containing tasks.

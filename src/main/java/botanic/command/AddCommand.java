@@ -1,9 +1,9 @@
 package botanic.command;
 
+import botanic.gui.Gui;
 import botanic.storage.Storage;
 import botanic.task.Task;
 import botanic.task.TaskList;
-import botanic.gui.Gui;
 
 /**
  * Encapsulates the related fields and behavior of a command to add a task.
