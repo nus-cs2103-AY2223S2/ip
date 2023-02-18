@@ -27,11 +27,6 @@ public class Duke extends Application {
     private static Ui ui = new Ui();
     private static Parser parser = new Parser();
 
-//    public static void main(String[] args) {
-//        ui.welcomeMessage();
-//        parser.getInput();
-//    }
-
     @FXML
     private ScrollPane scrollPane;
     @FXML
