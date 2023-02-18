@@ -1,28 +1,47 @@
 package duke.backend;
 
-import duke.commands.Bye;
-import duke.commands.Command;
-import duke.commands.Delete;
-import duke.commands.Find;
-import duke.commands.List;
-import duke.commands.MakeDeadline;
-import duke.commands.MakeEvent;
-import duke.commands.MakeTodo;
-import duke.commands.Mark;
-import duke.commands.Unmark;
+import duke.commands.*;
+import duke.tasks.Task;
 
-class Parser {
-    public static final String DIVIDER = "____________________________________________________________\n";
+public class Parser {
     private final TaskList tasklist;
+
+    /**
+     * A flag to indicate that Duke is handling duplicates.
+     */
+    private boolean isCheckingDuplicates = false;
+
+    /**
+     * Stores the duplicate item that is being stored.
+     */
+    private Task duplicateTask;
 
     public Parser(TaskList tasklist) {
         this.tasklist = tasklist;
     }
 
     public String parse(String instr) {
-        String[] tokens = instr.split(" ", 2);
+        String[] tokens = instr.strip().toLowerCase().split(" ", 2);
         String command = tokens[0];
         Command c;
+
+        //  Guard Clause for duplicate checking.
+        if (isCheckingDuplicates) {
+            switch (command) {
+            case "yes":
+                c = new ForceAddDuplicate(duplicateTask, tasklist);
+                this.isCheckingDuplicates = false;
+                return c.execute();
+
+            case "no":
+                this.isCheckingDuplicates = false;
+                return "OK, I'm not adding this duplicate task.";
+
+            default:
+                this.isCheckingDuplicates = false;
+            }
+        }
+
         switch (command) {
         case "list":
             c = new List(tasklist);
@@ -45,7 +64,7 @@ class Parser {
         case "todo":
             assert tokens.length > 1;
             String description = tokens[1];
-            c = new MakeTodo(description, tasklist);
+            c = new MakeTodo(description, tasklist, this);
             break;
 
         case "deadline":
@@ -54,7 +73,7 @@ class Parser {
             assert deadlineFinder.length == 2;
             description = deadlineFinder[0];
             String by = deadlineFinder[1];
-            c = new MakeDeadline(description, by, tasklist);
+            c = new MakeDeadline(description, by, tasklist, this);
             break;
 
         case "event":
@@ -64,7 +83,7 @@ class Parser {
             assert toFinder.length == 2;
             String from = toFinder[0];
             String to = toFinder[1];
-            c = new MakeEvent(description, from, to, tasklist);
+            c = new MakeEvent(description, from, to, tasklist, this);
             break;
 
         case "delete":
@@ -82,5 +101,10 @@ class Parser {
         }
 
         return c.execute();
+    }
+
+    public void handleDuplicates(Task t) {
+        this.isCheckingDuplicates = true;
+        this.duplicateTask = t;
     }
 }
