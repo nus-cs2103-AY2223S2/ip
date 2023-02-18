@@ -203,14 +203,14 @@ Exits the program.
 
 ## Command summary
 
-| **Action** | **Format, Examples**                                                                                                                                   |
-|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| todo       | `todo TASK_DESCRIPTION` <br> e.g. `todo assignment 1`                                                                                                  |
-| deadline   | `deadline TASK_DESCRIPTION /by YYYY-MM-DD HH:mm` <br> e.g. `deadline return book /by 2022-12-20 16:00`                                                 |
-| event      | `event TASK_DESCRIPTION /from YYYY-MM-DD HH:mm /to YYYY-MM-DD HH:mm` <br> e.g. `event NUS Open House <br/>/from 2022-12-22 16:00 /to 2022-12-29 16:00` |
-| list       | `list`                                                                                                                                                 |
-| delete     | `delete INDEX` <br> e.g. `delete 1`                                                                                                                    |
-| find       | `find KEYWORD` <br> e.g. `find a`                                                                                                                      |
-| mark       | `mark INDEX` <br> e.g. `mark 1`                                                                                                                        |
-| unmark     | `unmark INDEX` <br> e.g. `unmark 1`                                                                                                                    |
-| bye        | `bye`                                                                                                                                                  |
+| **Action** | **Format, Examples**                                                                                                                              |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| todo       | `todo TASK_DESCRIPTION` <br> e.g. `todo assignment 1`                                                                                             |
+| deadline   | `deadline TASK_DESCRIPTION /by YYYY-MM-DD HH:mm` <br> e.g. `deadline return book /by 2022-12-20 16:00`                                            |
+| event      | `event TASK_DESCRIPTION /from YYYY-MM-DD HH:mm /to YYYY-MM-DD HH:mm` <br> e.g. `event NUS Open House /from 2022-12-22 16:00 /to 2022-12-29 16:00` |
+| list       | `list`                                                                                                                                            |
+| delete     | `delete INDEX` <br> e.g. `delete 1`                                                                                                               |
+| find       | `find KEYWORD` <br> e.g. `find a`                                                                                                                 |
+| mark       | `mark INDEX` <br> e.g. `mark 1`                                                                                                                   |
+| unmark     | `unmark INDEX` <br> e.g. `unmark 1`                                                                                                               |
+| bye        | `bye`                                                                                                                                             |
