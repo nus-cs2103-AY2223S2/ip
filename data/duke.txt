@@ -1,2 +1,6 @@
 1. [T][X] read book
 2. [D][ ] return book  (by: Saturday, January 28, 2023)
+3. [E][ ] project meeting  (from: Friday, January 27, 2023 to: Saturday, January 28, 2023)
+4. [T][X] join sports club
+5. [T][ ] borrow book
+6. [T][ ] borrow pen

@@ -149,6 +149,8 @@ public class TaskList {
         stringBuilder.append("event: Adds an event task!\n");
         stringBuilder.append("delete: Deletes a task according to the position!\n");
         stringBuilder.append("find: Finds a task with the keyword!\n");
+        stringBuilder.append("\n");
+        stringBuilder.append("Special Thanks to Ryan Qiu @RyanQiu1 for letting me use his README.md\n");
 
         return stringBuilder.toString();
     }
