@@ -111,18 +111,38 @@ public class Task {
         return description;
     }
 
+    /**
+     * Makes a new LocalDateTime object with a date and time as a String.
+     * @param date date and time in the format of "yyyy-MM-dd HH:mm"
+     * @return a LocalDateTime storing the date and time
+     */
     public static LocalDateTime makeDateTime(String date) {
         return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
+    /**
+     * Returns a String representing the LocalDateTime object
+     * @param dateTime the LocalDateTime to be converted
+     * @return a String of date and time in the format of "MMM d yyyy HH:mm"
+     */
     public static String formatDateTime(LocalDateTime dateTime) {
         return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
     }
 
+    /**
+     * Returns a String representing the LocalDateTime object for saving into task list
+     * @param dateTime the LocalDateTime to be converted
+     * @return a String of date and time in the format of "yyyy-MM-dd HH:mm"
+     */
     public static String formatDateTimeForTaskList(LocalDateTime dateTime) {
         return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
+    /**
+     * Checks if the given task clashes in timing with this task.
+     * @param currTask other task given to compare
+     * @return true if clash is found and false if no clashes in timing
+     */
     public boolean taskClashWithCurrTask(Task currTask) {
         LocalDateTime currTaskStartDate = currTask.getStartDate();
         LocalDateTime currTaskEndDate = currTask.getEndDate();

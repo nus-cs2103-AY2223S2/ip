@@ -3,6 +3,8 @@ package eevee;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+import eevee.exception.EeveeException;
+import eevee.exception.TaskNoContentException;
 import eevee.task.Task;
 import eevee.task.ToDos;
 import eevee.task.Deadlines;
@@ -56,9 +58,13 @@ public class Parser {
      *             <code>String</code> format
      * @return a <code>Task</code> object of the <code>ToDos</code>
      */
-    public static Task makeTodoFromCommand(String line) {
-        String taskName = line.substring(TODO_TASK_DESCRIPTION_INDEX);
-        return new ToDos(taskName);
+    public static Task makeTodoFromCommand(String line) throws TaskNoContentException {
+        try {
+            String taskName = line.substring(TODO_TASK_DESCRIPTION_INDEX);
+            return new ToDos(taskName);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskNoContentException();
+        }
     }
 
     /**
@@ -67,11 +73,15 @@ public class Parser {
      *             <code>String</code> format
      * @return a <code>Task</code> object of the <code>Deadlines</code>
      */
-    public static Task makeDeadlineFromCommand(String line) {
-        String taskInfo = line.substring(DEADLINE_TASK_DESCRIPTION_INDEX);
-        String taskName = taskInfo.split(" /by")[TASK_NAME_INDEX];
-        String taskDeadline = taskInfo.split("/by ")[TASK_START_TIME_INDEX];
-        return new Deadlines(taskName, taskDeadline);
+    public static Task makeDeadlineFromCommand(String line) throws TaskNoContentException {
+        try {
+            String taskInfo = line.substring(DEADLINE_TASK_DESCRIPTION_INDEX);
+            String taskName = taskInfo.split(" /by")[TASK_NAME_INDEX];
+            String taskDeadline = taskInfo.split("/by ")[TASK_START_TIME_INDEX];
+            return new Deadlines(taskName, taskDeadline);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskNoContentException();
+        }
     }
 
     /**
@@ -80,13 +90,18 @@ public class Parser {
      *             <code>String</code> format
      * @return a <code>Task</code> object of the <code>Events</code>
      */
-    public static Task makeEventFromCommand(String line) {
-        String taskInfo = line.substring(EVENT_TASK_DESCRIPTION_INDEX);
-        String taskName = taskInfo.split(" /")[TASK_NAME_INDEX];
-        String[] taskInfoTimes = taskInfo.split(" /");
-        String taskStart = taskInfoTimes[TASK_START_TIME_INDEX].substring(TO_REMOVE_LEADING_FOUR_LETTERS);
-        String taskEnd = taskInfoTimes[TASK_END_TIME_INDEX].substring(TO_REMOVE_LEADING_TWO_LETTERS);
-        return new Events(taskName, taskStart, taskEnd);
+    public static Task makeEventFromCommand(String line) throws TaskNoContentException {
+        try {
+            String taskInfo = line.substring(EVENT_TASK_DESCRIPTION_INDEX);
+            String taskName = taskInfo.split(" /")[TASK_NAME_INDEX];
+            String[] taskInfoTimes = taskInfo.split(" /");
+            String taskStart = taskInfoTimes[TASK_START_TIME_INDEX].substring(TO_REMOVE_LEADING_FOUR_LETTERS);
+            String taskEnd = taskInfoTimes[TASK_END_TIME_INDEX].substring(TO_REMOVE_LEADING_TWO_LETTERS);
+            return new Events(taskName, taskStart, taskEnd);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskNoContentException();
+        }
+
     }
 
     /**
@@ -117,7 +132,7 @@ public class Parser {
     }
     
     public static String handleInput(String command, Ui ui, TaskList tasks, Storage storage) throws EeveeException,
-            IOException, IndexOutOfBoundsException, DateTimeParseException {
+            IOException, IndexOutOfBoundsException, DateTimeParseException, TaskNoContentException {
         String typeOfCommand = getTypeOfCommand(command);
         switch (typeOfCommand) {
         case "bye":

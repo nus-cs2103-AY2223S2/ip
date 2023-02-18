@@ -36,25 +36,25 @@ public class Ui {
     }
 
     public String showMarkingTaskDone(Task task) {
-        return String.format("EEVEE! I've marked this task as done:\n %s%n",
+        return String.format("EEVEE! EEVEE! I've marked this task as done:\n %s%n",
                 task.getDescription()) + askForNextCommand();
     }
 
     public String showMarkingTaskUndone(Task task) {
-        return String.format("EEVEE! I've marked this task as not done yet:\n %s%n",
+        return String.format("EEVEE. I've marked this task as not done yet:\n %s%n",
                 task.getDescription()) + askForNextCommand();
     }
 
     public String showTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
-            return "Eevee... No tasks in task list." + askForNextCommand();
+            return "Eevee? No tasks in task list." + askForNextCommand();
         }
         return String.format("EEVEE! Here are the tasks in your list: \n%s", showList(tasks) + askForNextCommand());
     }
 
     public String showFindingTask(TaskList tasks) {
         if (tasks.isEmpty()) {
-            return "Eevee... No matching tasks found." + askForNextCommand();
+            return "Eevee? No matching tasks found." + askForNextCommand();
         }
         return String.format("EEVEE! Here are the matching tasks in your list:\n%s", showList(tasks))
                 + askForNextCommand();
