@@ -8,6 +8,6 @@ import baymax.Ui;
  * Represents a command.
  */
 public interface Command {
-    void execute(TaskList taskList, Ui ui, Storage storage);
+    String execute(TaskList taskList, Ui ui, Storage storage);
 }
 

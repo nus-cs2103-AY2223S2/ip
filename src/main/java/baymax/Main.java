@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Baymax duke = new Baymax();
+    private final Baymax duke = new Baymax();
 
     @Override
     public void start(Stage stage) {

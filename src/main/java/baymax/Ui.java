@@ -7,42 +7,48 @@ import tasks.Event;
 
 
 public class Ui {
-
-    public void showLoadingErrorMessage() {
-        System.out.println("Unable to load previous tasks");
+    
+    public String showLoadingErrorMessage() {
+        return ("Unable to load previous tasks");
     }
-    public void welcomeMessage() {
-        System.out.println("Hello, I am Baymax.Baymax your personal chat bot Companion. \nWhat can I do for you today?");
-    }
-
-    public void exitMessage() {
-        System.out.println("See you soon!");
+    public String welcomeMessage() {
+        return ("Hello, I am Baymax.Baymax your personal chat bot Companion. \nWhat can I do for you today?");
     }
 
-    public void printList(TaskList taskList) {
+    public String exitMessage() {
+        return ("See you soon!");
+    }
+
+    public String printList(TaskList taskList) {
         int i = 1;
-            for (Task s : taskList.getTaskList()) {
-                System.out.println((i++) + ": " + s.toString());
-            }
+        String str = "";
+        for (Task s : taskList.getTaskList()) {
+            str = str + ((i++) + ": " + s.toString()) + "\n";
+        }
+        return str;
     }
 
-    public void newToDoMessage(Todo todo) {
-        System.out.println("New ToDo task has been added successfully: " + todo.toString());
+    public String newToDoMessage(Todo todo) {
+        return ("New ToDo task has been added successfully: " + todo.toString());
     }
 
-    public void newDeadlineMessage(Deadline deadline) {
-        System.out.println("New Deadline task has been added successfully: " + deadline.toString());
+    public String newDeadlineMessage(Deadline deadline) {
+        return ("New Deadline task has been added successfully: " + deadline.toString());
     }
 
-    public void newEventMessage(Event event) {
-        System.out.println("New Event task has been added successfully: " + event.toString());
+    public String newEventMessage(Event event) {
+        return ("New Event task has been added successfully: " + event.toString());
     }
 
-    public void markMessage(Task task) {
-        System.out.println("Task marked as done: " + task.toString());
+    public String markMessage(Task task) {
+        return ("Task marked as done: " + task.toString());
     }
 
-    public void unmarkMessage(Task task) {
-        System.out.println("Task marked as not done: " + task.toString());
+    public String unmarkMessage(Task task) {
+        return ("Task marked as not done: " + task.toString());
+    }
+
+    public String deleteMessage(Task task) {
+        return "Task has been deleted: " + task.toString();
     }
 }

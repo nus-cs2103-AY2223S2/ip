@@ -4,6 +4,8 @@ import baymax.Storage;
 import baymax.TaskList;
 import baymax.Ui;
 
+import tasks.Task;
+
 public class DeleteCommand implements Command {
     private String input;
 
@@ -19,9 +21,11 @@ public class DeleteCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        Task task = taskList.getTaskList().get(getIndex() - 1);
         taskList.getTaskList().remove(getIndex() - 1);
-        storage.store(taskList.getTaskList());
+        storage.store(taskList);
+        return ui.deleteMessage(task);
     }
 
     /**

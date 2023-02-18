@@ -20,11 +20,11 @@ public class UnmarkCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.getTaskList().get(getIndex(input) - 1);
         task.markAsNotDone();
-        storage.store(taskList.getTaskList());
-        ui.unmarkMessage(task);
+        storage.store(taskList);
+        return ui.unmarkMessage(task);
     }
 
     /**

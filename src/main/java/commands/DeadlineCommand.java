@@ -20,11 +20,11 @@ public class DeadlineCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Deadline deadline = new Deadline(getDescription(), getDateTime());
         taskList.getTaskList().add(deadline);
-        storage.store(taskList.getTaskList());
-        ui.newDeadlineMessage(deadline);
+        storage.store(taskList);
+        return ui.newDeadlineMessage(deadline);
     }
 
     /**

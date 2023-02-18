@@ -16,14 +16,14 @@ public class FindCommand implements Command {
         this.input = input;
     }
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ArrayList<Task> foundTasks = new ArrayList<Task>();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : taskList.getTaskList()) {
             if (task.getDescription().contains(input.split(" ", 2)[1])) {
                 foundTasks.add(task);
             }
         }
         TaskList newList = new TaskList(foundTasks);
-        ui.printList(newList);
+        return ui.printList(newList);
     }
 }

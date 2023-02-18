@@ -19,7 +19,7 @@ public class InvalidCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        System.out.println("Invalid");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.showLoadingErrorMessage();
     }
 }

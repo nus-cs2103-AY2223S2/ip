@@ -25,7 +25,6 @@ public class Storage {
 
     /**
      * Stores the task list into the data file.
-     * @param myList The task list to be stored.
      * @throws BaymaxException If there is an error in storing the task list.
      */
     public ArrayList<Task> load() throws BaymaxException {
@@ -78,13 +77,13 @@ public class Storage {
 
     /**
      * Stores the task list into the data file.
-     * @param myList The task list to be stored.
-     * @throws BaymaxException If there is an error in storing the task list.
+     * @param taskList The task list to be stored.
+     * @throws RuntimeException If there is an error in storing the task list.
      */
-    public void store(ArrayList<Task> myList) {
+    public void store(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(filepath);
-            for(Task task: myList) {
+            for(Task task: taskList.getTaskList()) {
                 writer.write(task.writeToFile() + "\n");
             }
             writer.close();

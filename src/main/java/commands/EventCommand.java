@@ -20,11 +20,11 @@ public class EventCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Event event = new Event(getDescription(), getStartDateTime(), getEndDateTime());
         taskList.getTaskList().add(event);
-        storage.store(taskList.getTaskList());
-        ui.newEventMessage(event);
+        storage.store(taskList);
+        return ui.newEventMessage(event);
     }
 
     /**

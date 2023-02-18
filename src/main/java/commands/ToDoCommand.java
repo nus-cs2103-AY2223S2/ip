@@ -21,11 +21,11 @@ public class ToDoCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Todo todo = new Todo(getDescription());
         taskList.getTaskList().add(todo);
-        storage.store(taskList.getTaskList());
-        ui.newToDoMessage(todo);
+        storage.store(taskList);
+        return ui.newToDoMessage(todo);
     }
 
     /**
