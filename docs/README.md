@@ -2,17 +2,18 @@
 
 ## Features 
 
-### Feature-List
-
 Words in UPPER_CASE are the parameters to be supplied by the user.
 
+### Feature-List
+
 Lists all current tasks in tasklist.
-Format: view
+
+Format: list
 
 
 ### Feature-Delete
 
-Description of the feature.
+Deletes task with specified index.
 
 Format: delete INDEX
 
