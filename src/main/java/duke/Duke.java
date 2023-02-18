@@ -18,8 +18,8 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("text-ui-test/saved-tasks.txt");
         try {
+            storage = new Storage("text-ui-test/saved-tasks.txt");
             taskList = new TaskList();
             storage.handleLoad();
         } catch (IOException e) {
@@ -31,7 +31,7 @@ public class Duke {
      * Constructor for Duke such that we will create a file.
      * @param filePath
      */
-    public Duke(String filePath) throws IOException {
+    /**public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -42,7 +42,7 @@ public class Duke {
             ui.printError(e.getMessage());
             taskList = new TaskList();
         }
-    }
+    }**/
 
 
     /**
@@ -53,7 +53,7 @@ public class Duke {
      * @return String representation based on the action
      * @throws IOException
      */
-    String getResponse(String input) throws IOException {
+    public String getResponse(String input) throws IOException {
             if (input.startsWith("deadline")) {
                 input = input.replaceAll("deadline ", "");
                 String[] replies = Parser.splitForDeadline(input);
@@ -61,6 +61,7 @@ public class Duke {
                 taskList.add(deadline);
                 deadline.handleDeadline();
                 storage.saveTasks();
+
                 return ui.addTask(deadline);
             }else if (input.startsWith("todo")) {
                 input = input.replaceAll("todo", "");
@@ -70,6 +71,7 @@ public class Duke {
                 taskList.add(toDo);
                 toDo.handleToDo();
                 storage.saveTasks();
+
                 return ui.addTask(toDo);
             } else if (input.startsWith("event")) {
                 input = input.replaceAll("event", "");

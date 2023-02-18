@@ -17,9 +17,18 @@ public class Storage {
      * This is the constructor for Storage
      * @param path path for the file
      */
-    public Storage(String path) {
+    public Storage(String path) throws IOException {
+        String[] info = path.split("/");
+        File dir = new File(info[0]);
+        if(!dir.exists()) {
+            dir.mkdir();
+        }
+        File filepath = new File(path);
+        if(!filepath.exists()) {
+            filepath.createNewFile();
+        }
         this.path = path;
-        this.file = new File("text-ui-test/saved-tasks.txt");
+        this.file = filepath;
     }
 
     /**
@@ -67,13 +76,16 @@ public class Storage {
      * @throws IOException
      */
     public void saveTasks() throws IOException {
-        BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
+        StringBuilder taskWriter = new StringBuilder();
+        //BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
+        FileWriter file = new FileWriter(this.file);
         String taskInString = "";
         for (int i = 0; i< (Task.tasks).size(); i++) {
-            taskInString += Task.tasks.get(i).toSaveString() + "\n";
+            taskWriter.append(Task.tasks.get(i).toSaveString() + "\n");
+            //taskInString += Task.tasks.get(i).toSaveString() + "\n";
         }
-        taskWriter.write(taskInString);
-        taskWriter.close();
+        file.write(taskWriter.toString());
+        file.close();
     }
 
 }

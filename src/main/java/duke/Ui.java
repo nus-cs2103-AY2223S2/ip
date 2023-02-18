@@ -71,7 +71,7 @@ public class Ui {
      */
     public String stringDelete(Task task) {
         String deleted = "Noted. I've removed this task: \n" + task;
-        deleted += "Now you have " + Task.actions + " tasks in the list";
+        deleted += "\n Now you have " + Task.actions + " tasks in the list";
         return deleted;
     }
 
