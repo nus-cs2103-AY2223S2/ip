@@ -8,6 +8,8 @@ public class Task {
     static final String DIVIDER = " | ";
     private boolean isMarked;
     private String name;
+    private boolean isTagged;
+    private String tag;
 
     /**
      * Constructs a new task with the given name.
@@ -16,6 +18,7 @@ public class Task {
     public Task(String name) {
         this.isMarked = false;
         this.name = name;
+        this.isTagged = false;
     }
 
     /**
@@ -40,6 +43,10 @@ public class Task {
         return (isMarked ? "[X] " : "[ ] ");
     }
 
+    public String getTagIcon() {
+        return isTagged ? " #" + this.tag : "";
+    }
+
     /**
      * Returns whether the current Task's name contains the specified keyword.
      * @param keyword the keyword to search for in the task's name
@@ -55,7 +62,11 @@ public class Task {
      */
     public String toSaveFormat() {
         String markToInt = this.isMarked ? "1" : "0";
-        return DIVIDER + markToInt + DIVIDER + name;
+        String tagToInt = this.isTagged ? "1" : "0";
+        return DIVIDER + markToInt + DIVIDER + tagToInt + DIVIDER + name;
+    }
+    public String getSaveTag() {
+        return this.isTagged ? (DIVIDER + tag) : "";
     }
 
     /**
@@ -64,6 +75,15 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.getStatusICon() + this.name;
+        return this.getStatusICon() + this.name + this.getTagIcon();
+    }
+
+    /**
+     * Adds a tag to the task by setting the isTagged flag to true and setting the tag name.
+     * @param tagName The name of the tag to be added to the task.
+     * */
+    public void addTag(String tagName) {
+        isTagged = true;
+        this.tag = tagName;
     }
 }

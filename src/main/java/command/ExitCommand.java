@@ -7,10 +7,9 @@ import task.Tasklist;
 /**
  * The ExitCommand class implements the Command interface and represents the command to exit the Duke application.
  */
-
 public class ExitCommand implements Command {
     /**
-     * Creates a new ExitCommand instance.
+     * Constructor that creates a new ExitCommand instance.
      */
     public ExitCommand() {
     }

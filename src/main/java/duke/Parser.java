@@ -11,6 +11,7 @@ import command.ExitCommand;
 import command.FindCommand;
 import command.ListCommand;
 import command.MarkCommand;
+import command.TagCommand;
 import command.UnMarkCommand;
 import exception.DukeException;
 import task.Deadline;
@@ -57,11 +58,10 @@ public class Parser {
         } else if (keyword.contains("delete")) {
             int zeroIndex = Integer.parseInt(splitString[1]) - 1;
             return new DeleteCommand(zeroIndex);
-
         } else if (keyword.equals("todo")) {
             int startIndex = keyword.length();
             if (startIndex >= input.length()) {
-                throw new DukeException("Oh no!! Fill in the description of a todo.");
+                throw new DukeException("Fill in the description of a todo.");
             }
             String taskFullDetails = input.substring(startIndex);
             Todo todoTask = new Todo(taskFullDetails);
@@ -69,13 +69,13 @@ public class Parser {
         } else if (keyword.equals("deadline")) {
             int startIndex = keyword.length();
             if (startIndex >= input.length()) {
-                throw new DukeException("Oh no!! Fill in the description of a deadline.");
+                throw new DukeException("Fill in the description of a deadline.");
             }
             int detailIndex = input.lastIndexOf("deadline");
             String taskFullDetails = input.substring(detailIndex);
             String[] splitDetails = taskFullDetails.split("/by ");
             if (splitDetails.length < 2) {
-                throw new DukeException("Oh no!! Please specify the deadline.");
+                throw new DukeException("Please specify the deadline.");
             }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate dateTime = LocalDate.parse(splitDetails[1].trim(), formatter);
@@ -84,14 +84,14 @@ public class Parser {
         } else if (keyword.equals("event")) {
             int startIndex = keyword.length();
             if (startIndex >= input.length()) {
-                throw new DukeException("Oh no! Fill in the description for this event .");
+                throw new DukeException("Fill in the description for this event .");
             }
             int detailIndex = input.lastIndexOf("event");
             String taskFullDetails = input.substring(detailIndex);
             String[] splitDescriptionAndDuration = taskFullDetails.split("/from");
             String[] splitStartAndEnd = splitDescriptionAndDuration[1].split("/to");
             if (splitDescriptionAndDuration.length < 2) {
-                throw new DukeException("Oh no!! Please specify the start and end.");
+                throw new DukeException("Please specify the start and end.");
             }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate startDate = LocalDate.parse(splitStartAndEnd[0].trim(), formatter);
@@ -100,8 +100,12 @@ public class Parser {
             return new AddCommand(eventTask);
         } else if (keyword.equals("find")) {
             return new FindCommand(splitString[1]);
+        } else if (keyword.equals("tag")) {
+            int zeroIndex = Integer.parseInt(splitString[1]) - 1;
+            String tagName = splitString[2];
+            return new TagCommand(zeroIndex, tagName);
         } else {
-            throw new DukeException("Oh no!!! What is this? Please try again!");
+            throw new DukeException("What is this? Please try again!");
         }
     }
 

@@ -4,7 +4,8 @@ import java.time.LocalDate;
 
 /**
  * The Deadline class extends the Task class and represents a deadline task.
- * It contains a due date which is a local date.
+ * It extends the `Task` class and contains additional information
+ * about the due date of the deadline.
  */
 public class Deadline extends Task {
     static final String TASKSYMBOL = "[D]";
@@ -23,19 +24,27 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overrides the toSaveFormat method in the super class to add the due date.
+     * Returns the Deadline task in the format
+     * "[TASKSAVESYMBOL | [mark] | [tag] | [task name] | [dueDate] | [tag name]" where
+     * TASKSAVESYMBOL is a static final variable that represents a Deadline task for saving
+     * mark is "1" if the task is marked done, and "0" otherwise.
+     * tag is "1" if the task is tagged, and "0" otherwise. If tag is 0, there is no tag name.
      *
-     * @return a string in the format "D" | [markToInt] | [name] | [dueDate]"
+     * @return a formatted string for deadline task that can be saved to a file
      */
     @Override
     public String toSaveFormat() {
-        return TASKSAVESYMBOL + super.toSaveFormat() + DIVIDER + dueDate;
+        return TASKSAVESYMBOL + super.toSaveFormat() + DIVIDER + dueDate + getSaveTag();
     }
 
     /**
-     * Overrides the toString method in the super class to add the due date.
+     * Method that returns the Deadline task as a string in the format
+     * "[TASKSYMBOL][status icon][task name][dueDate][tag name]" where
+     * TASKSYMBOL is a static final variable that represents a deadline task to display to user
+     * status icon is "X" if the task is marked done, and " " otherwise.
+     * tag is "1" if the task is tagged, and "0" otherwise. If tag is 0, there is no tag name.
      *
-     * @return a string in the format "[D] [status icon] [name] ([dueDate])"
+     * @return a string representation of the deadline task
      */
     @Override
     public String toString() {

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import exception.DukeException;
 import task.Deadline;
@@ -87,21 +88,23 @@ public class Storage {
             String input;
             while ((input = fileReader.readLine()) != null) {
                 String[] parts = input.split(" \\| ");
+                System.out.println(Arrays.toString(parts));
                 String taskType = parts[0].trim();
 
                 Task task;
                 switch (taskType) {
                 case "T":
-                    task = new Todo(parts[2]);
+                    task = new Todo(parts[3]);
                     break;
                 case "D":
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    LocalDate dueDate = LocalDate.parse(parts[3], formatter);
-                    task = new Deadline(parts[2], dueDate);
+                    LocalDate dueDate = LocalDate.parse(parts[4], formatter);
+                    task = new Deadline(parts[3], dueDate);
+
                     break;
                 case "E":
-                    String startDate = parts[3];
-                    String endDate = parts [4];
+                    String startDate = parts[4];
+                    String endDate = parts [5];
                     LocalDate start = Parser.parseFile(startDate);
                     LocalDate end = Parser.parseFile(endDate);
                     task = new Event(parts[2], start, end);
@@ -113,6 +116,10 @@ public class Storage {
                     task.markDone();
                 } else if (Integer.parseInt(parts[1].trim()) == 0) {
                     task.unmark();
+                }
+
+                if (Integer.parseInt(parts[2].trim()) == 1) {
+                    task.addTag(parts[parts.length - 1]);
                 }
                 tasks.add(task);
             }

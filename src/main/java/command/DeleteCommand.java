@@ -6,8 +6,8 @@ import task.Task;
 import task.Tasklist;
 
 /**
- * The DeleteCommand class represents a Command that implements the "delete" functionality in the task list application.
- * It deletes a task from the task list based on its index.
+ * The DeleteCommand class represents a Command that implements the "delete" function.
+ * Deletes a task from the tasklist according to its index.
  */
 public class DeleteCommand implements Command {
     private int index;
@@ -22,7 +22,7 @@ public class DeleteCommand implements Command {
     }
 
     /**
-     * Executes the delete command by calling the {@link Tasklist#deleteTask(int)} method
+     * Executes the delete command by calling the Tasklist - deleteTask(int) method
      * with the specified task index.
      * @param ui the User Interface component
      * @param list the task list

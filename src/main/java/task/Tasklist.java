@@ -114,8 +114,8 @@ public class Tasklist {
     }
 
     /**
-     * Returns whether the current Tasklist is empty.
-     * @return true if the current Tasklist is empty, false otherwise
+     * Returns if Tasklist is empty.
+     * @return true if the Tasklist is empty, false otherwise
      */
     public boolean isEmpty() {
         return this.list.isEmpty();
@@ -137,5 +137,15 @@ public class Tasklist {
         }
         stringTasklist = stringBuilder.toString();
         return stringTasklist;
+    }
+
+    /**
+     * Adds a tag to the task at the given index and saves the changes to the task list.
+     * @param index The index of the task to be tagged.
+     * @param tagName The name of the tag to be added to the task.
+     */
+    public void tagTask(int index, String tagName) {
+        this.list.get(index).addTag(tagName);
+        this.backend.save(this);
     }
 }

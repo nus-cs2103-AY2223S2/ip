@@ -25,24 +25,26 @@ public class Event extends Task {
         this.startDetails = startDetails;
         this.endDetails = endDetails;
     }
-
     /**
-     * Overrides the `toSaveFormat` method from the `Task` class to return
-     * a formatted string that contains the type of the task, its name,
-     * start date and end date. The format of the string is as follows:
-     * "E" + divider + markToInt + divider + name + divider + startDetails + divider + endDetails;
+     * Returns the Todo task in the format
+     * "[TASKSAVESYMBOL | [mark] | [tag] | [task name] | [startDetails] | [endDetails] | [tag name]" where
+     * TASKSAVESYMBOL is a static final variable that represents a Event task for saving
+     * mark is "1" if the task is marked done, and "0" otherwise.
+     * tag is "1" if the task is tagged, and "0" otherwise. If tag is 0, there is no tag name.
      *
-     * @return a formatted string that can be saved to a file
+     * @return a formatted string for event task that can be saved to a file
      */
     @Override
     public String toSaveFormat() {
-        return TASKSAVESYMBOL + super.toSaveFormat() + DIVIDER + startDetails + DIVIDER + endDetails;
+        return TASKSAVESYMBOL + super.toSaveFormat() + DIVIDER + startDetails + DIVIDER + endDetails + getSaveTag();
     }
 
     /**
-     * Overrides the `toString` method from the `Task` class to return
-     * a string representation of the event task. The format of the string is as follows:
-     * "[E]" + super.toString() + "(" + startDetails + " : " + endDetails + ")"
+     * Returns the Todo task as a string in the format
+     * "[TASKSYMBOL][status icon][task name][tag name][startDetails][endDetails]" where
+     * TASKSYMBOL is a static final variable that represents a event task to display to user
+     * status icon is "X" if the task is marked done, and " " otherwise.
+     * tag name appears only if there is a tag
      *
      * @return a string representation of the event task
      */
@@ -50,6 +52,4 @@ public class Event extends Task {
     public String toString() {
         return TASKSYMBOL + super.toString() + "(" + startDetails + " : " + endDetails + ")";
     }
-
-
 }
