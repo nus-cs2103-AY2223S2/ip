@@ -34,8 +34,13 @@ public class Ui {
      * 
      * @return String of user input
      */
-    public String getUserInput() throws IOException {
-        return br.readLine();
+    public String getUserInput() {
+        try {
+            return br.readLine();
+        } catch (IOException e) {
+            printResponse("Oh no! Duke didn't catch that!");
+            return getUserInput();
+        }
     }
     
     /**
@@ -53,8 +58,10 @@ public class Ui {
         printResponse(e.getMessage());
     }
 
-    public void endSession() throws IOException {
+    public void endSession() {
         printResponse("Bye! Hope you enjoyed using Duke! \n Your list awaits your return!");
-        br.close();
+        try {
+            br.close();
+        } catch (IOException ignore) { }
     }
 }

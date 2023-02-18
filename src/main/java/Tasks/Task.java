@@ -52,7 +52,7 @@ public abstract class Task {
             throw new UnknownTaskException(args[0]);
         } catch (DateTimeParseException e) {
             throw new InvalidDateFormatException(e.getParsedString());
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (NullPointerException e) {
             throw new InsufficientArgumentsException(args[0]);
         }
 
