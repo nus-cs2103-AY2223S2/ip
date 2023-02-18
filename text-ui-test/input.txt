@@ -1,0 +1,13 @@
+todo something
+todo
+list
+event something /2032-12-31t19:00 /2033-02-03t03:00
+event antoher thing /2022-02-03t18:00 /2033-01-01t10:00
+blah
+deadline d /2033-01-01t18:00
+mark 2
+unmark 3
+list
+delete 3
+list
+bye
