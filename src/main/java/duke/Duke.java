@@ -28,6 +28,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image appIcon = new Image(this.getClass().getResourceAsStream("/images/AppIcon.png"));
 
 
     public static void main(String[] args) {
@@ -69,9 +70,10 @@ public class Duke extends Application {
 
         scene = new Scene(mainLayout);
 
+        stage.getIcons().add(appIcon);
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("Duke");
+        stage.setTitle("Erato");
         stage.setResizable(false);
         stage.setMinHeight(800.0);
         stage.setMinWidth(600.0);

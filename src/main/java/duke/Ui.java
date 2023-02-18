@@ -19,15 +19,18 @@ public class Ui {
      * Prints the welcome screen of the app.
      */
     public String showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "\n"
+                + "                 _        \n"
+                + "                | |       \n"
+                + "   ___ _ __ __ _| |_ ___  \n"
+                + "  / _ \\ '__/ _` | __/ _ \\ \n"
+                + " |  __/ | | (_| | || (_) |\n"
+                + "  \\___|_|  \\__,_|\\__\\___/ \n"
+                + "                          \n";
 
         return "Hello from\n" + logo + "\n"
                 + showSepLine()
-                + "Hello! I'm Duke, what can I do for you?\n"
+                + "Hello~! I'm Erato, your secretary! What can I do for you?\n"
                 + showSepLine()
                 + this.showHelp();
     }
@@ -38,7 +41,9 @@ public class Ui {
      * @return String of Help message
      */
     public String showHelp() {
-        return "Commands:\n"
+        return "You require help? Here are some commands you can use!\n"
+                + "\n"
+                + "Commands:\n"
                 + "Adding tasks: todo, event, deadline\n"
                 + "Marking completion: mark, unmark\n"
                 + "Removing tasks: remove\n"
@@ -54,7 +59,7 @@ public class Ui {
      * @return String of Goodbye message
      */
     public String showGoodbye() {
-        return "Bye! Hope to see you again soon!";
+        return "Bye! Hope to see you again soon! I'll keep your tasks here ready for you!";
     }
 
     /**
@@ -73,7 +78,7 @@ public class Ui {
      * @return String of error message
      */
     public String showError(String message) {
-        return message;
+        return "Oh no! I can't process that!\n" + message;
     }
 
     /**
@@ -93,8 +98,9 @@ public class Ui {
      * @return String of details when a Task is added
      */
     public String showAddTask(Task task, TaskList tasks) {
-        return "Added: " + task + "\n"
-                + "Now you have " + tasks.size() + " task(s) in the list.";
+        return "Ok~ I have added: " + task + "\n"
+                + "Now you have " + tasks.size() + " task(s) in the list.\n"
+                + "Would you like to add any more?";
     }
 
     /**
@@ -105,7 +111,7 @@ public class Ui {
      * @return String of details when a Task is deleted.
      */
     public String showDeleteTask(Task task, TaskList tasks) {
-        return "Deleted: " + task + "\n"
+        return "Ok~ I have deleted: " + task + "\n"
                 + "Now you have " + tasks.size() + " task(s) in the list.";
     }
 
@@ -116,7 +122,7 @@ public class Ui {
      * @return String of details when a Task is marked.
      */
     public String showMarkTask(Task task) {
-        return "I've marked this task as done: " + task;
+        return "Alright! I've marked this task as done: " + task;
     }
 
     /**
@@ -126,11 +132,11 @@ public class Ui {
      * @return String of details when a Task is unmarked.
      */
     public String showUnmarkTask(Task task) {
-        return "I've unmarked this task as done: " + task;
+        return "You've changed your mind? I've unmarked this task as done: " + task;
     }
 
     public String showFoundTasks(TaskList keywordTasks) {
-        return "Here are the matching tasks in your list:\n"
+        return "I've found the matching tasks in your list!\n"
                 + keywordTasks;
     }
 }
