@@ -83,7 +83,7 @@ public class Ui {
         output += "Here's a list of my commands" + "\n";
         output += "✤ todo <task> - Adds a todo task to the list" + "\n";
         output += "✤ deadline <task> /by <date> - Adds a deadline task to the list" + "\n";
-        output += "✤ event <task> /at <date> - Adds an event task to the list" + "\n";
+        output += "✤ event <task> /from <date> /to <date> - Adds an event task to the list" + "\n";
         output += "✤ list - Displays the list of tasks" + "\n";
         output += "✤ mark <task number> - Marks a task as done" + "\n";
         output += "✤ unmark <task number> - Marks a task as not done" + "\n";
