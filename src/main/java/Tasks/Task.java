@@ -81,12 +81,22 @@ public abstract class Task {
     }
 
     /**
-     * Checks whether the task contains a specified date
+     * Checks whether this task contains a specified date
      *
      * @param date date to compare date of task to
      * @return true if task contains specified date, false otherwise
      */
     public abstract boolean contains(LocalDate date);
+
+    /**
+     * Checks whether this task contains a specified keyword
+     *
+     * @param keyword word to compare task name to
+     * @return true if task name contains keyword, false otherwise
+     */
+    public boolean contains(String keyword) {
+        return this.name.contains(keyword);
+    }
 
     /**
      * Marks a task as done

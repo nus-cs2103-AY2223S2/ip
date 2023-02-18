@@ -7,18 +7,16 @@ import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
 
-import exceptions.NoTaskDescriptionException;
 import storage.Storage;
 import storage.TaskList;
-import tasks.Todo;
 import ui.Ui;
 
-public class MarkCommandTest {
+public class FindCommandTest {
 
     private final PrintStream standardOut = System.out;
 
     @Test
-    public void markTest() {
+    public void checkKeywordCommand() {
 
         ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -27,22 +25,14 @@ public class MarkCommandTest {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
 
-        try {
-            tasks.add(new Todo("hello"));
-            tasks.add(new Todo("number 2"));
-            tasks.add(new Todo("3rd one"));
-        } catch (NoTaskDescriptionException e) {
-            System.out.println(e.getMessage());
-        }
-
-        MarkCommand mc = new MarkCommand(true, 2);
-        mc.execute(tasks, ui, storage);
+        FindCommand fc = new FindCommand("hello");
+        fc.execute(tasks, ui, storage);
         String actual = outputStreamCaptor.toString();
 
         ByteArrayOutputStream expectedStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(expectedStream));
 
-        ui.printResponse("This task is marked as done: \n    [T] [X] number 2");
+        ui.printResponse("You have no tasks containing the following search term:\n    hello");
         String expected = expectedStream.toString();
 
         assertEquals(expected, actual);

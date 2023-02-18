@@ -29,10 +29,11 @@ public class Event extends Task {
     }
 
     /**
-     * Check whether the event spans over the date
+     * Checks whether this event spans over the date
      *
      * @param date date to compare with this event's dates
      */
+    @Override
     public boolean contains(LocalDate date) {
         return (this.startTime.isEqualDate(date) || this.startTime.isBeforeDate(date))
                 && (this.endTime.isEqualDate(date) || this.endTime.isAfterDate(date));

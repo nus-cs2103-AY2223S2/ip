@@ -25,10 +25,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Check whether the task is due on the date
+     * Checks whether this deadine task is due on the date
      *
      * @param date date to compare endDate to
      */
+    @Override
     public boolean contains(LocalDate date) {
         return this.endDate.isEqualDate(date);
     }

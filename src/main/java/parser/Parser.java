@@ -9,10 +9,10 @@ import java.util.Date;
 import java.util.Locale;
 
 import commands.AddCommand;
-import commands.CheckCommand;
 import commands.Command;
 import commands.DeleteCommand;
 import commands.EnumCommand;
+import commands.FindCommand;
 import commands.ListTasksCommand;
 import commands.MarkCommand;
 import exceptions.InvalidDateFormatException;
@@ -49,10 +49,12 @@ public abstract class Parser {
             return new ListTasksCommand();
         case CHECK:
             try {
-                return new CheckCommand(LocalDate.parse(commands[1]));
+                return new FindCommand(LocalDate.parse(commands[1]));
             } catch (DateTimeParseException e) {
                 throw new InvalidDateFormatException(e.getParsedString());
             }
+        case FIND:
+            return new FindCommand(commands[1]);
         case MARK:
         case UNMARK:
         case DELETE:
