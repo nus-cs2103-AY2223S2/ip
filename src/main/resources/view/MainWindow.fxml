@@ -17,10 +17,10 @@
          <font>
             <Font name="PT Serif" size="14.0" />
          </font></Button>
-    <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="556.0" prefWidth="400.0" vbarPolicy="ALWAYS" vvalue="1.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <content>
-        <VBox fx:id="dialogContainer" prefHeight="556.0" prefWidth="380.0" style="-fx-background-color: #697990;" />
-      </content>
+    <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="556.0" prefWidth="400.0" vbarPolicy="ALWAYS" vvalue="1.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+        <VBox fx:id="dialogContainer" prefHeight="555.0" prefWidth="584.0" style="-fx-background-color: #697990;" />
+         </content>
     </ScrollPane>
   </children>
 </AnchorPane>

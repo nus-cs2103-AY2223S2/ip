@@ -23,7 +23,7 @@ public class DeleteCommand implements Command {
             assert taskToDelete != null;
             tasks.deleteTask(taskNumber - 1);
             String toDisplay = String.format("Alright, I have removed this task:\n%s\n"
-                    + "Now you have %d tasks in the list.", taskToDelete.toString(), tasks.getSize());
+                    + "Now you have %d tasks in the list.", taskToDelete, tasks.getSize());
             ui.displayMessage(toDisplay);
             return toDisplay;
         } catch (Exception e) {

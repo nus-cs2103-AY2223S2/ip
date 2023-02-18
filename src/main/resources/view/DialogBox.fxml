@@ -16,7 +16,7 @@
             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
          </opaqueInsets>
          <font>
-            <Font name="Microsoft Sans Serif" size="14.0" />
+            <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Label>
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
   </children>

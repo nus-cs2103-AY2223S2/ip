@@ -25,10 +25,10 @@ public class MarkCommand implements Command {
         String toDisplay;
         if (toMark) {
             tasks.markTask(taskNumber - 1);
-            toDisplay = "Ok, I've marked this task as done:\n" + tasks.getTask(taskNumber - 1).toString();
+            toDisplay = "Ok, I've marked this task as done:\n" + tasks.getTask(taskNumber - 1);
         } else {
             tasks.unmarkTask(taskNumber - 1);
-            toDisplay = "Ok, I've marked this task as undone:\n" + tasks.getTask(taskNumber - 1).toString();
+            toDisplay = "Ok, I've marked this task as undone:\n" + tasks.getTask(taskNumber - 1);
         }
         ui.displayMessage(toDisplay);
         return toDisplay;

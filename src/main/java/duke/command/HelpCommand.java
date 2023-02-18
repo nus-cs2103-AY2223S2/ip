@@ -38,7 +38,7 @@ public class HelpCommand implements Command {
         String toDisplay = "I see you asked for help? YOU GOT IT!\n"
                 + "Try the following commands:\n";
         for (commands c : commands.values()) {
-            toDisplay += String.format("\n- [%s] %s\n", c, c.getCommandFormat());
+            toDisplay += String.format("> [%s] %s\n", c, c.getCommandFormat());
         }
         ui.displayMessage(toDisplay);
         return toDisplay;

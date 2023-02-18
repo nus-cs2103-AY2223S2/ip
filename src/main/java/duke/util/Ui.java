@@ -60,7 +60,7 @@ public class Ui {
         if (taskList.getSize() == 0) {
             toDisplay = "You currently have no tasks!";
         } else {
-            toDisplay = "Here are the tasks in your list:";
+            toDisplay = "Here are the current tasks you have:";
             for (int i = 0; i < taskList.getSize(); i++) {
                 toDisplay += String.format("\n%s. %s", i + 1, taskList.getTask(i));
             }
@@ -78,44 +78,13 @@ public class Ui {
         if (matchedTasks.size() == 0) {
             toDisplay = "No tasks found!";
         } else {
-            toDisplay = "Here are the matching tasks in your list:";
+            toDisplay = "I found these tasks:";
             for (int i = 0; i < matchedTasks.size(); i++) {
                 toDisplay += String.format("\n%s. %s", i + 1, matchedTasks.get(i));
             }
         }
         displayMessage(toDisplay);
         return toDisplay;
-    }
-
-    /**
-     * Informs the user when a task has been added.
-     * @param newTask Task that is added.
-     * @param tasks The list that stores tasks.
-     */
-    public void displayAddedTask(Task newTask, TaskList tasks) {
-        String toDisplay = String.format("Gotcha! I have added this task:\n%s\nNow you have %d tasks in the list.",
-                newTask.toString(), tasks.getSize());
-        displayMessage(toDisplay);
-    }
-
-    /**
-     * Informs the user when a task has been deleted.
-     * @param taskToDelete Task that needs to be deleted.
-     * @param tasks The list that stores tasks.
-     */
-    public void displayDeletedTask(Task taskToDelete, TaskList tasks) {
-        String toDisplay = String.format("Alright, I have removed this task:\n%s\nNow you have %d tasks in the list.",
-                taskToDelete.toString(), tasks.getSize());
-        displayMessage(toDisplay);
-    }
-
-    /**
-     * Informs the user that a task is marked as done.
-     * @param taskList The list that stores tasks.
-     * @param index Index of the task in the TaskList.
-     */
-    public void displayMarkedTask(TaskList taskList, int index) {
-        displayMessage("Ok, I've marked this task as done:\n" + taskList.getTask(index).toString());
     }
 
     public boolean isRunning() {
