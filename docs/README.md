@@ -23,15 +23,21 @@ _**iPman**_ is also your personal accountant and tracks both the money you owe a
 
 ### `hi` - Say "hi" to the bot
 
-`hi`
+Greets the bot.
+
+Syntax: `hi`
 
 ### `help` - Displays the help text
 
-`help`
+Displays the help text.
+
+Syntax: `help`
 
 ### `bye` - Exits the application
 
-`bye`
+Exists the application.
+
+Syntax: `bye`
 
 ## Task Tracker Usage
 
@@ -39,35 +45,49 @@ _**iPman**_ is also your personal accountant and tracks both the money you owe a
 
 Provides the current status of all the tasks that you have added.
 
-`list`
+Syntax: `list`
 
 ### `todo` - Adds a new task
 
-`todo <description>`
+Adds a new task.
+
+Syntax: `todo <description>`
 
 ### `deadline` - Adds a new task with a deadline
 
-`deadline <description> /by <yyyy-MM-dd>`
+Adds a new task with a deadline.
+
+Syntax: `deadline <description> /by <yyyy-MM-dd>`
 
 ### `event` - Adds a new task with a time-range
 
-`event <description> /from <yyyy-MM-dd> /to <yyyy-MM-dd>`
+Adds a new task with a time range /from <start date> /to <end date>.
+
+Syntax: `event <description> /from <yyyy-MM-dd> /to <yyyy-MM-dd>`
 
 ### `find` - Finds a task that matches the provided keyword
 
-`find <keyword>`
+Finds a task that matches the provided keyword.
+
+Syntax: `find <keyword>`
 
 ### `mark` - Marks a task as complete
 
-`mark <index of task>`
+Marks a task of the indicated index as complete.
+
+Syntax: `mark <index of task>`
 
 ### `unmark` - Marks a task as incomplete
 
-`unmark <index of task>`
+Marks a task of the indicated index as incomplete.
+
+Syntax: `unmark <index of task>`
 
 ### `delete` - Deletes a task
 
-`unmark <index of task>`
+Deletes a task of the indicated index.
+
+Syntax: `unmark <index of task>`
 
 ## Loan Tracker Usage
 
@@ -75,16 +95,16 @@ Provides the current status of all the tasks that you have added.
 
 Provides a summary of all your loans.
 
-`loan-summary`
+Syntax: `loan-summary`
 
 ### `loan-record` - Displays a record of loans
 
 Provides the record of loans asssociated with a holder.
 
-`loan-record <holder>`
+Syntax: `loan-record <holder>`
 
 ### `loan` - Adds a new loan
 
 Adds a loan with an amount (negative represents an amount owed to the holder, positive represents an amount owed to you).
 
-`loan <amount> /holder <holder> /desc <description>`
+Syntax: `loan <amount> /holder <holder> /desc <description>`
