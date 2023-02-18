@@ -157,5 +157,7 @@ Command: `bye`
 ```
 The programme terminates and the window automatically closes
 ```
-
+remote_theme: pages-themes/hacker@v0.2.0
+plugins:
+- jekyll-remote-theme
 
