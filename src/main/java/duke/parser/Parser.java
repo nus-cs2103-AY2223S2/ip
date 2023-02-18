@@ -9,6 +9,7 @@ public class Parser {
     public String getInput(String input) {
         try {
             String command = input.split(" ")[0];
+            assert !command.equals("") : " Empty command";
 
             switch (command) {
             case "bye":
