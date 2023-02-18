@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.util.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.util.DukeException;
 
 /**
  * Represents an Event that is a Task.
@@ -80,7 +80,7 @@ public class Event extends Task {
             throw new DukeException("You did not enter a date which your task ends!");
         }
 
-        return new String[] {eventDescription, toDate, fromDate};
+        return new String[] {eventDescription, fromDate, toDate};
     }
 
     @Override
