@@ -76,7 +76,7 @@ Expected outcome:
     Now you have 5 tasks in the list.
 ````
 
-###`event` - Add an Event task 
+### `event` - Add an Event task 
 Adds an event task to the list of tasks using the command 
 `event [task description] /from [date when the event starts] /to [date when the event ends]`. The dates do not have to 
 follow a specific format. 
