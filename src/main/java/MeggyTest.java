@@ -23,7 +23,7 @@ import meggy.task.UserTask;
 public class MeggyTest {
     private static final Random RAND = new Random();
     /** Roughly 400 loops per second */
-    private static final int N_LOOP = 60 * 400;
+    private static final int N_LOOP = 5000 * 400;
     private static final int N_CORE = Runtime.getRuntime().availableProcessors();
     private static final Consumer<String> DROP = s -> {
     };
@@ -35,14 +35,13 @@ public class MeggyTest {
         while (true) {
             final int len = 1 + RAND.nextInt(strLenMax);
             char[] s = new char[len];
-            boolean isAllSpace = true;
             for (int i = 0; i < len; i++) {
                 final char c = (char) (' ' + RAND.nextInt(printableCharRange));
                 s[i] = c;
-                isAllSpace &= c == ' ';
             }
-            if (!isAllSpace) {
-                return new String(s);
+            final String ans = new String(s).trim();
+            if (!ans.isEmpty()) {
+                return ans;
             }
         }
     }
@@ -132,7 +131,7 @@ public class MeggyTest {
         m1.bindUi(DROP);
 
         final TaskList taskList = new TaskList();
-        for (int i = RAND.nextInt(listLenMax); i >= 0; i--) {
+        for (int i = RAND.nextInt(listLenMax); i > 0; i--) {
             final String s;
             final UserTask task;
             final String line;

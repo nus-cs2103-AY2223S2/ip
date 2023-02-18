@@ -97,10 +97,8 @@ public class Meggy {
         assert args != null;
         assert taskNew != null;
         final UserTask newTask = taskNew.apply(args);
-        for (UserTask task : tasks) {
-            if (task.equals(newTask)) {
-                throw new MeggyException(Resource.ERR_DUPE_TASK + Resource.TASK_STRING_INDENT + task);
-            }
+        if (tasks.contains(newTask)) {
+            throw new MeggyException(Resource.ERR_DUPE_TASK + Resource.TASK_STRING_INDENT + newTask);
         }
         tasks.add(newTask);
         saveListToFile();

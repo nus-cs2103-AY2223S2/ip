@@ -80,7 +80,7 @@ public final class Resource {
      * @return Message about task list size.
      */
     public static String fmtTaskCnt(int nTask) {
-        return "Now you have " + nTask + " task(s) in the list.\n";
+        return "Now you have " + nTask + " task" + (nTask > 1 ? "s" : "") + " in the list.\n";
     }
 
     /**
