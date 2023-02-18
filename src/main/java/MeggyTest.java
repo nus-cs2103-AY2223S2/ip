@@ -23,7 +23,7 @@ import meggy.task.UserTask;
 public class MeggyTest {
     private static final Random RAND = new Random();
     /** Roughly 400 loops per second */
-    private static final int N_LOOP = 5000 * 400;
+    private static final int N_LOOP = 32400 * 400;
     private static final int N_CORE = Runtime.getRuntime().availableProcessors();
     private static final Consumer<String> DROP = s -> {
     };
