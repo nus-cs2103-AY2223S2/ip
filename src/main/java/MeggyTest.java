@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +16,11 @@ import meggy.task.TodoTask;
 /** For testing purpose only. */
 public class MeggyTest {
     private static final Random RAND = new Random();
-    private static final int N_TEST = 6400;
+    private static final int N_TEST = 1000000;
 
     /** @return String that will never be entirely whitespace. */
     private static String randString() {
-        final int strLenMax = 50;
+        final int strLenMax = 10;
         final int printableCharRange = 95;
         while (true) {
             final int len = 1 + RAND.nextInt(strLenMax);
@@ -43,33 +44,48 @@ public class MeggyTest {
     }
 
     @Test
-    public void todoTaskIntegrityTest() throws MeggyException {
-        for (int k = 0; k < N_TEST; k++) {
-            TodoTask a = new TodoTask(randString());
-            String data = a.recreateCmd();
-            TodoTask b = new TodoTask(data.substring(data.indexOf(' ') + 1));
-            assertEquals(a, b);
-        }
+    public void todoTaskIntegrityTest() {
+        IntStream.range(0, N_TEST).parallel().forEach(i -> {
+            try {
+                String s = randString();
+                TodoTask a = new TodoTask(s);
+                String data = a.recreateCmd();
+                TodoTask b = new TodoTask(data.substring(data.indexOf(' ') + 1));
+                assertEquals(a, b, s);
+            } catch (MeggyException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Test
-    public void ddlTaskIntegrityTest() throws MeggyException {
-        for (int k = 0; k < N_TEST; k++) {
-            DdlTask a = DdlTask.of(randString() + DdlTask.DUE_KEYWORD_FORMATTED + randMeggyTime());
-            String data = a.recreateCmd();
-            DdlTask b = DdlTask.of(data.substring(data.indexOf(' ') + 1));
-            assertEquals(a, b);
-        }
+    public void ddlTaskIntegrityTest() {
+        IntStream.range(0, N_TEST).parallel().forEach(i -> {
+            try {
+                String s = randString() + DdlTask.DUE_KEYWORD_FORMATTED + randMeggyTime();
+                DdlTask a = DdlTask.of(s);
+                String data = a.recreateCmd();
+                DdlTask b = DdlTask.of(data.substring(data.indexOf(' ') + 1));
+                assertEquals(a, b, s);
+            } catch (MeggyException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Test
-    public void eventTaskIntegrityTest() throws MeggyException {
-        for (int k = 0; k < N_TEST; k++) {
-            EventTask a = EventTask.of(randString() + EventTask.START_KEYWORD_FORMATTED + randMeggyTime()
-                    + EventTask.END_KEYWORD_FORMATTED + randMeggyTime());
-            String data = a.recreateCmd();
-            EventTask b = EventTask.of(data.substring(data.indexOf(' ') + 1));
-            assertEquals(a, b);
-        }
+    public void eventTaskIntegrityTest() {
+        IntStream.range(0, N_TEST).parallel().forEach(i -> {
+            try {
+                String s = randString() + EventTask.START_KEYWORD_FORMATTED + randMeggyTime()
+                        + EventTask.END_KEYWORD_FORMATTED + randMeggyTime();
+                EventTask a = EventTask.of(s);
+                String data = a.recreateCmd();
+                EventTask b = EventTask.of(data.substring(data.indexOf(' ') + 1));
+                assertEquals(a, b, s);
+            } catch (MeggyException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }

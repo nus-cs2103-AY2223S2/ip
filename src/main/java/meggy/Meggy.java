@@ -55,7 +55,7 @@ public class Meggy {
     }
 
     /** Save task list to storage file. Redirects {@link MeggyException} to {@code notifMsgSender} */
-    private void saveToFile() {
+    private void saveListToFile() {
         if (!fileWrite) {
             return;
         }
@@ -85,7 +85,7 @@ public class Meggy {
         }
         final UserTask task = tasks.get(idx);
         task.setDone(newStatus);
-        saveToFile();
+        saveListToFile();
         return (newStatus ? Resource.NOTIF_MARK : Resource.NOTIF_UNMK) + Resource.TASK_STRING_INDENT + task + '\n';
     }
 
@@ -107,7 +107,7 @@ public class Meggy {
             }
         }
         tasks.add(newTask);
-        saveToFile();
+        saveListToFile();
         return Resource.NOTIF_ADD + reportChangedTaskAndList(newTask);
     }
 
@@ -128,7 +128,7 @@ public class Meggy {
             throw e;
         }
         final UserTask task = tasks.remove(idx);
-        saveToFile();
+        saveListToFile();
         return Resource.NOTIF_DEL + reportChangedTaskAndList(task);
     }
 

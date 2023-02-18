@@ -3,6 +3,10 @@ Known bugs
 Expected :[D][ ] Zul/by (by: [[`)uFR2zbRF#U[1@Y7L^Ct `mh_g.[Q2A|d~i>IkG4O}S`3jzW]])
 Actual   :[D][ ] Zul (by: [/by [`)uFR2zbRF#U[1@Y7L^Ct `mh_g.[Q2A|d~i>IkG4O}S`3jzW]])
 
+deadline x/by /by t
+
 2.
 Expected :[E][ ] 3~8;W>"?(>8't"nBWbgfm'KF}#<+]14d/to (from: 1984-09-29 13:52 to: 1991-09-18 08:20)
 Actual   :[E][ ] 3~8;W>"?(>8't"nBWbgfm'KF}#<+]14d (from: [29091984 1352 /to 18091991 0820] to: [])
+
+event x/to /from t

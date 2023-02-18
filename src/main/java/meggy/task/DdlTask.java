@@ -49,7 +49,7 @@ public class DdlTask extends UserTask {
     /** @inheritDoc */
     @Override
     public String recreateCmd() {
-        return Resource.CMD_DDL + ' ' + desc + ' ' + DUE_KEYWORD_FORMATTED + due.encode();
+        return Resource.CMD_DDL + ' ' + desc + DUE_KEYWORD_FORMATTED + due.encode();
     }
 
     /** Two {@link DdlTask} objects are equal iff they have same (non-null) description and due time. */
