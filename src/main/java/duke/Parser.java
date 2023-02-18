@@ -4,6 +4,7 @@ import duke.command.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -16,6 +17,9 @@ public class Parser {
 		UNMARK,
 		LIST,
 		DELETE,
+		SAVE,
+		LOAD,
+		SHOWSAVE,
 		BYE,
 	}
 
@@ -42,8 +46,6 @@ public class Parser {
 			case DEADLINE:
 				String[] splitted = inputs[1].split("/by ", 2);
 				String[] byWhen = splitted[1].split(" ", 2);
-				System.out.println(byWhen[0]);
-				System.out.println(byWhen[1]);
 				LocalDate d1 = LocalDate.parse(byWhen[0]);
 				LocalTime t1 = LocalTime.parse(byWhen[1]);
 				Task newDeadline = new Task.Deadline(splitted[0], d1, t1);
@@ -54,6 +56,20 @@ public class Parser {
 				String toWhen = fromWhenToWhen[4];
 				Task newEvent = new Task.Event(inputs[1], fromWhen, toWhen);
 				return new AddCommand(newEvent);
+			case SAVE:
+				String[] noAndDesc = inputs[1].split(" ", 2);
+				Save newSave = new Save(Integer.parseInt(noAndDesc[0]), noAndDesc[1]);
+				SaveList saveData = Storage.readSaveData();
+				saveData.addSave(Integer.parseInt(noAndDesc[0]), newSave);
+				Storage.writeSaveData(saveData, Integer.parseInt(noAndDesc[0]));
+				return new SaveCommand(Integer.parseInt(noAndDesc[0]), noAndDesc[1]);
+			case LOAD:
+				int loadNo = Integer.parseInt(inputs[1]);
+				assert (loadNo > 0 && loadNo <= 3) : "Save slot must be between 1 and 3!";
+				return new LoadCommand(loadNo);
+			case SHOWSAVE:
+				SaveList savedData = Storage.readSaveData();
+				return new ListSaveCommand(savedData);
 			default:
 				throw new Exception("OOPS!!! I'm sorry, but I don't know what that means :-(");
 			}

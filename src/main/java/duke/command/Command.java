@@ -9,7 +9,7 @@ import duke.Ui;
  */
 public abstract class Command {
 
-    public abstract String execute(Tasklist tasklist) throws Exception;
+    public abstract String execute(Tasklist tasklist, int saveNo) throws Exception;
 
     public abstract boolean isExit();
 }

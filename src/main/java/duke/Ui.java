@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -60,6 +61,26 @@ public class Ui {
 	public static String showDelete(Task task) {
 		return "Got it. Deleting this task :\n"
 				+ INDENT + task;
+	}
+
+	/**
+	 * Returns the message for saving a file
+	 *
+	 * @param saveNo Slot to be saved
+	 * @return {@code String} Message for saving to that slot
+	 */
+	public static String showSave(int saveNo) {
+		return "Saved to slot number " + saveNo + "!";
+	}
+
+	public static String showLoad(int saveNo) {
+		return "Loaded from slot number " + saveNo + "!";
+	}
+
+	public static String listSaves(SaveList saves) {
+		String returnedString = "Here are the current save files!\n";
+		returnedString += saves;
+		return returnedString;
 	}
 	/**
 	 * Returns the message for marking a task as done

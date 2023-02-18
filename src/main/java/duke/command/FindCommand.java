@@ -10,7 +10,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(Tasklist tasklist) throws Exception {
+    public String execute(Tasklist tasklist, int saveNo) throws Exception {
         String returnedString = tasklist.findTasks(this.keyword);
         return returnedString;
     }

@@ -13,9 +13,9 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String execute(Tasklist tasklist) throws Exception {
+    public String execute(Tasklist tasklist, int saveNo) throws Exception {
         tasklist.add(this.task);
-        Storage.save(tasklist);
+        Storage.save(tasklist, saveNo);
         return Ui.showAdd(this.task) + "\n" + Ui.showTasklistSize(tasklist);
     }
 

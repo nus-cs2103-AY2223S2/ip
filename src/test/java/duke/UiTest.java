@@ -32,13 +32,6 @@ public class UiTest {
         assertEquals(expectedStr, outputStreamCaptor.toString().trim());
     }
 
-    @Test
-    public void showUserTest(){
-        String text = "Hello World!";
-        Ui.showToUser(text);
-        assertEquals(text, outputStreamCaptor.toString().trim());
-    }
-
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);

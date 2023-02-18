@@ -6,8 +6,7 @@ import duke.Ui;
 
 public class ExitCommand extends Command {
     @Override
-    public String execute(Tasklist tasklist) throws Exception {
-        Storage.save(tasklist);
+    public String execute(Tasklist tasklist, int saveNo) throws Exception {
         return Ui.showGoodbyeMessage();
     }
 

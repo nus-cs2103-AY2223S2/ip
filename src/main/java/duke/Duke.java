@@ -1,7 +1,5 @@
 package duke;
 
-import static duke.Storage.SAVE_LOCATION;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -38,9 +36,9 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public Tasklist tasklist = new Tasklist();
+    private Tasklist tasklist = new Tasklist();
+    private int saveNo = 1;
 
-    public static void main(String[] args) { }
 
     @Override
     public void start(Stage stage) {
@@ -110,19 +108,8 @@ public class Duke extends Application {
 
 
     }
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
 
-        return textToAdd;
-    }
+
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -144,15 +131,17 @@ public class Duke extends Application {
      */
     @FXML
     public String getResponse(String input) {
+
         try {
-            File saveFile = new File(SAVE_LOCATION);
+            saveNo = Storage.getCurrentSaveNumber();
+            File saveFile = new File("duke" + saveNo + ".txt");
             if (saveFile.createNewFile()) {
                 System.out.println("Save file created: " + saveFile.getName());
             } else {
-                tasklist = Storage.load();
+                tasklist = Storage.load(saveNo);
             }
             Command command = Parser.parseInput(input);
-            String output = command.execute(tasklist);
+            String output = command.execute(tasklist, saveNo);
             if (command.isExit()) {
                 Platform.exit();
             }

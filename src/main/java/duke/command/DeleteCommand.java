@@ -12,10 +12,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(Tasklist tasklist) throws Exception {
+    public String execute(Tasklist tasklist, int saveNo) throws Exception {
         String returnedMsg = Ui.showDelete(tasklist.get(index - 1)) + "\n" + Ui.showTasklistSize(tasklist);
         tasklist.delete(index);
-        Storage.save(tasklist);
+        Storage.save(tasklist, saveNo);
         return returnedMsg;
     }
 
