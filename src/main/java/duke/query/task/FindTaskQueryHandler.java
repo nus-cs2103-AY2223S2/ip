@@ -15,7 +15,7 @@ public class FindTaskQueryHandler extends TaskQueryHandler {
 
     @Override
     public String processQuery(Query query) throws DukeException {
-        String keyword = getNotBlankParam(query, "Please provide a keyword!");
+        String keyword = getNotBlankParam(query, getErrorMessage("keyword"));
         String matchStr = tt.listTasksByKeyword(keyword);
         return matchStr.isBlank() ? "No matches found for " + keyword : matchStr;
     }

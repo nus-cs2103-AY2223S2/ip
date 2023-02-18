@@ -23,7 +23,7 @@ public class MarkQueryHandler extends TaskQueryHandler {
 
     @Override
     public String processQuery(Query query) throws DukeException {
-        Task t = tt.markUnmarkTask(Integer.parseInt(query.getParam()) - 1, true);
+        Task t = tt.markUnmarkTask(getIntegerParam(query, getErrorMessage("task index")) - 1, true);
 
         assert t.getStatusIndicator().equals("[X]") : "task should be marked!";
 

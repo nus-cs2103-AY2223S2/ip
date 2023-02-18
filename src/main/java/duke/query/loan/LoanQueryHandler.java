@@ -25,10 +25,10 @@ public class LoanQueryHandler extends QueryHandler {
      */
     @Override
     public String processQuery(Query query) throws DukeException {
-        String holder = getNotBlankArg(query, "/holder", getErrorMessage("holder", QUERY_SYNTAX));
+        String holder = getNotBlankArg(query, "/holder", getErrorMessage("holder"));
         int amount = getAmountFromQuery(query);
         String description = getNotBlankArg(query, "/desc",
-                getErrorMessage("description", QUERY_SYNTAX));
+                getErrorMessage("description"));
         Loan newLoan = loanShark.addLoan(amount, amount, description, holder);
         loanShark.saveLoans();
 
@@ -53,7 +53,7 @@ public class LoanQueryHandler extends QueryHandler {
         try {
             return (int) (Double.parseDouble(query.getParam()) * 100);
         } catch (NumberFormatException e) {
-            throw new InvalidCommandParamException(getErrorMessage("amount", QUERY_SYNTAX));
+            throw new InvalidCommandParamException(getErrorMessage("amount"));
         }
     }
 }

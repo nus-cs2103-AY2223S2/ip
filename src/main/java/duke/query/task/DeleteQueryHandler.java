@@ -22,7 +22,7 @@ public class DeleteQueryHandler extends TaskQueryHandler {
      */
     @Override
     public String processQuery(Query query) throws DukeException {
-        int taskIndex = Integer.parseInt(query.getParam()) - 1;
+        int taskIndex = getIntegerParam(query, getErrorMessage("task index")) - 1;
         Task t = tt.deleteTask(taskIndex);
         tt.saveAllTasks();
         return "Task deleted: " + t;

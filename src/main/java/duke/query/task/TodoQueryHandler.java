@@ -22,7 +22,7 @@ public class TodoQueryHandler extends TaskQueryHandler {
      */
     @Override
     public String processQuery(Query query) throws DukeException {
-        String desc = getNotBlankParam(query, "Please provide a description for your todo!");
+        String desc = getNotBlankParam(query, getErrorMessage("description"));
         Task newTask = tt.addTodo(desc);
         tt.saveAllTasks();
         return "Added " + newTask;

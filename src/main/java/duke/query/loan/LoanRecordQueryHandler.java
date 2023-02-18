@@ -10,7 +10,7 @@ import duke.query.QueryHandler;
  */
 public class LoanRecordQueryHandler extends QueryHandler {
     private static final String QUERY_SYNTAX = "loan-record <holder>";
-    private static LoanShark ls;
+    private final LoanShark ls;
 
     public LoanRecordQueryHandler(LoanShark loanShark) {
         this.ls = loanShark;
@@ -23,7 +23,7 @@ public class LoanRecordQueryHandler extends QueryHandler {
      */
     @Override
     public String processQuery(Query query) throws DukeException {
-        String holder = getNotBlankParam(query, "Please provide a holder!");
+        String holder = getNotBlankParam(query, getErrorMessage("holder"));
         return String.format("Here is your loan record.\n%s", ls.getAccountLoanRecordString(holder));
     }
 

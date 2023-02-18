@@ -24,7 +24,7 @@ public class EventQueryHandler extends DeadlineQueryHandler {
      */
     @Override
     public String processQuery(Query query) throws DukeException {
-        String desc = getNotBlankParam(query, getInvalidCommandResponse("a description"));
+        String desc = getNotBlankParam(query, getInvalidCommandResponse("description"));
         LocalDateTime startDate = getLocalDateTimeFromQuery(query, "/from", "start date");
         LocalDateTime endDate = getLocalDateTimeFromQuery(query, "/to", "end date");
 

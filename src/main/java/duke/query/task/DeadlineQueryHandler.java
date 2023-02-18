@@ -29,7 +29,7 @@ public class DeadlineQueryHandler extends TaskQueryHandler {
      */
     @Override
     public String processQuery(Query query) throws DukeException {
-        String desc = getNotBlankParam(query, "Please provide a description for your deadline!");
+        String desc = getNotBlankParam(query, getErrorMessage("description"));
         LocalDateTime endDateTime = getLocalDateTimeFromQuery(query, "/by", "end date");
 
         Task newTask = tt.addDeadline(desc, endDateTime);
@@ -54,12 +54,12 @@ public class DeadlineQueryHandler extends TaskQueryHandler {
         }
     }
 
-    protected static String getInvalidCommandResponse(String expectedParam) {
+    protected String getInvalidCommandResponse(String expectedParam) {
         return getInvalidCommandResponse(expectedParam, "");
     }
 
-    protected static String getInvalidCommandResponse(String expectedParam, String correctFormat) {
-        return String.format("Please provide a valid %s! %s", expectedParam, correctFormat);
+    protected String getInvalidCommandResponse(String expectedParam, String correctFormat) {
+        return getErrorMessage(expectedParam);
     }
 
     @Override

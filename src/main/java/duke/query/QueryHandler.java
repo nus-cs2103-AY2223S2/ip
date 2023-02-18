@@ -48,8 +48,16 @@ public abstract class QueryHandler {
         return param;
     }
 
-    protected String getErrorMessage(String invalidParam, String correctSyntax) {
-        return String.format("\nPlease provide a valid \"%s\"!\n\nThis is how you should do it:\n%s",
-                invalidParam, correctSyntax);
+    protected int getIntegerParam(Query query, String errMsg) throws InvalidCommandParamException {
+        try {
+            return Integer.parseInt(query.getParam());
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandParamException(errMsg);
+        }
+    }
+
+    protected String getErrorMessage(String invalidParam) {
+        return String.format("\nPlease provide a valid \"%s\"!\n\nTry following this syntax instead:\n%s",
+                invalidParam, getQuerySyntax());
     }
 }
