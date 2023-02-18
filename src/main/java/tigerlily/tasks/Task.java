@@ -4,6 +4,10 @@ public class Task {
     private String description;
     private boolean isComplete;
 
+    /**
+     * Constructor for Task
+     * @param description the description of the Task
+     */
     public Task(String description) {
         this.description = description;
         this.isComplete = false;
@@ -46,7 +50,7 @@ public class Task {
      *
      * @return the Task in String format for data storage
      */
-    public String getDataString() {
+    public String getStorageString() {
         if (this.getStatus()) {
             return "1 | " + this.getDescription();
         } else {

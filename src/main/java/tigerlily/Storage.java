@@ -19,6 +19,10 @@ import java.util.List;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor for Storage
+     * @param filePath the file path of the file which Storage uses
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -63,7 +67,7 @@ public class Storage {
 
             for (int i = 0; i < tasks.getSize(); i++) {
                 Task thisTask = tasks.getTasks().get(i);
-                sb.append(thisTask.getDataString()).append(System.lineSeparator());
+                sb.append(thisTask.getStorageString()).append(System.lineSeparator());
             }
             fw.write(sb.toString());
             fw.close();

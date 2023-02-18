@@ -8,6 +8,11 @@ public class Deadline extends Task {
     private final LocalDate deadlineDue;
     private static final DateTimeFormatter DEADLINE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    /**
+     * Constructor for Deadline
+     * @param description the description of the Deadline
+     * @param deadlineDue the date when the Deadline is due
+     */
     public Deadline(String description, LocalDate deadlineDue) {
         super(description);
         this.deadlineDue = deadlineDue;
@@ -28,8 +33,8 @@ public class Deadline extends Task {
      * @return the Deadline in String format for data storage
      */
     @Override
-    public String getDataString() {
-        return "D | " + super.getDataString() + " | " + this.deadlineDue.format(getDeadlineFormatter());
+    public String getStorageString() {
+        return "D | " + super.getStorageString() + " | " + this.deadlineDue.format(getDeadlineFormatter());
     }
 
     /**

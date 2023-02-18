@@ -9,6 +9,12 @@ public class Event extends Task {
     private final LocalDateTime eventEnd;
     private static final DateTimeFormatter EVENT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    /**
+     * Constructor for Event
+     * @param description the description of the Event
+     * @param eventStart the start date and time of the Event
+     * @param eventEnd the end date and time of the Event
+     */
     public Event(String description, LocalDateTime eventStart, LocalDateTime eventEnd) {
         super(description);
         this.eventStart = eventStart;
@@ -30,8 +36,8 @@ public class Event extends Task {
      * @return the Event in String format for data storage
      */
     @Override
-    public String getDataString() {
-        return "E | " + super.getDataString() + " | " + this.eventStart.format(getEventFormatter()) + " to " +
+    public String getStorageString() {
+        return "E | " + super.getStorageString() + " | " + this.eventStart.format(getEventFormatter()) + " to " +
                 this.eventEnd.format(getEventFormatter());
     }
 

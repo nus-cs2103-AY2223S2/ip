@@ -8,9 +8,17 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList when there is no pre-existing TaskList
+     */
     public TaskList() {
 
     }
+
+    /**
+     * Constructor for TaskList when there is a pre-existing TaskList
+     * @param tasks the ArrayList of pre-existing Tasks
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
