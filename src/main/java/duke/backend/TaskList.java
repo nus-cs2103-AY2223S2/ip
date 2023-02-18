@@ -1,17 +1,19 @@
 package duke.backend;
 
+import duke.tasks.Task;
+
 import java.io.File;
 import java.io.IOException;
+
 import java.util.ArrayList;
 
-import duke.tasks.*;
 
 class TaskList {
     private final ArrayList<Task> tasks;
     private final Storage saveManager;
 
     public TaskList() throws IOException {
-//        load from file
+        //  load from file
         File prevTasks = new File("./tasks.txt");
         prevTasks.createNewFile();
         this.saveManager = new Storage(prevTasks);

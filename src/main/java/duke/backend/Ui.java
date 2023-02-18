@@ -1,12 +1,15 @@
 package duke.backend;
 
+import duke.tasks.Task;
+
 import java.io.IOException;
+
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
-import duke.tasks.*;
 
-class UI {
+class Ui {
     public static final String DIVIDER = "____________________________________________________________\n";
 
     private Scanner sc;
@@ -14,7 +17,7 @@ class UI {
     private TaskList taskManager;
     private boolean isEnded;
 
-    public UI(TaskList taskManager) {
+    public Ui(TaskList taskManager) {
         this.parser = new Parser(this, taskManager);
         this.taskManager = taskManager;
         this.sc = new Scanner(System.in);
@@ -22,13 +25,12 @@ class UI {
     }
 
     public void welcome() {
-        //        Intro text
+        //  Intro text
         System.out.println(DIVIDER + "Hello! I'm Duke");
         System.out.println("What can I do for you?\n" + DIVIDER);
     }
     public boolean readInput() throws IOException {
-
-//        Read next command
+        //  Read next command
         if (sc.hasNext()) {
             String instr = sc.nextLine();
             parser.parse(instr);
@@ -49,7 +51,6 @@ class UI {
     public void bye() {
         this.isEnded = true;
         taskManager.closeAndSave();
-//        saveManager.saveTasks(tasks);
         System.out.println(DIVIDER + "Bye. Hope to see you again soon!\n" + DIVIDER);
     }
 }

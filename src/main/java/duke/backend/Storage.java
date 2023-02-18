@@ -1,16 +1,22 @@
 package duke.backend;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 class Storage {
-    File prevTasks;
+    private File prevTasks;
 
     public Storage(File prevTasks) {
         this.prevTasks = prevTasks;
@@ -46,7 +52,8 @@ class Storage {
             fileSc.close();
         } catch (FileNotFoundException fnfe) {
             System.out.println("Unable to retrieve saved tasks!");
-            prevTasks.createNewFile();                      //Previous task file doesn't exist,
+            //  Previous task file doesn't exist,
+            prevTasks.createNewFile();
         }
         return tasks;
     }
@@ -66,7 +73,7 @@ class Storage {
                 break;
             case "Event":
                 encoding = encoding + ("E | " + (t.isDone() ? "1" : "0" + " | "));
-                encoding = encoding + (t.getDescription() + " | " + ((Event) t).start + " | " + ((Event) t).end);
+                encoding = encoding + (t.getDescription() + " | " + ((Event) t).getStart() + " | " + ((Event) t).getEnd());
                 break;
             }
             encoding = encoding + "\n";
