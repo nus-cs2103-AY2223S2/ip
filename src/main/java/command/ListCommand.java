@@ -10,7 +10,7 @@ import task.Tasklist;
  */
 public class ListCommand implements Command {
     /**
-     * Constructs a new ListCommand.
+     * Constructor that creates a new ListCommand instance.
      * */
     public ListCommand() {
     }
@@ -24,7 +24,6 @@ public class ListCommand implements Command {
      */
     @Override
     public String execute(Ui ui, Tasklist list, Storage storage) {
-
         return ui.getListReply(list);
     }
 }

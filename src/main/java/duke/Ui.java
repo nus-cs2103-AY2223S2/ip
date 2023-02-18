@@ -118,4 +118,10 @@ public class Ui {
     public String getExitReply() {
         return "Bye. Hope to see you again soon!";
     }
+
+    public String getTagReply(Task taggedTask) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Nice. I've tagged this task:\n").append(taggedTask.toString());
+        return stringBuilder.toString();
+    }
 }

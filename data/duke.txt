@@ -1,4 +1,4 @@
-T | 1 |  hi
-T | 1 |  lol
-T | 0 |  happy
-D | 0 | deadline buy food | 2022-12-22
+T | 1 | 1 | hi | fun
+T | 0 | 0 | lol
+T | 1 | 1 | happy | TGIF
+D | 0 | 1 | deadline buy food | 2022-12-22 | Yum

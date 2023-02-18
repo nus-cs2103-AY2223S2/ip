@@ -13,7 +13,8 @@ public class UnMarkCommand implements Command {
     private int index;
 
     /**
-     * The index of the task to be unmarked
+     * Constructor that creates an UnMarkCommand object with the specified task index.
+     * @param index the index of the task to unmark.
      */
     public UnMarkCommand(int index) {
         this.index = index;

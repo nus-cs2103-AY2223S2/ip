@@ -6,14 +6,14 @@ import task.Task;
 import task.Tasklist;
 
 /**
- * The {@code MarkCommand} class implements the {@link Command} interface and
+ * The MarkCommand class implements the Command interface and
  * represents a command to mark a task in the task list as done.
  */
 public class MarkCommand implements Command {
     private int index;
 
     /**
-     * Constructs a {@code MarkCommand} object with the specified task index.
+     * Constructor that creates a MarkCommand object with the specified task index.
      * @param index the index of the task to mark as done.
      */
     public MarkCommand(int index) {

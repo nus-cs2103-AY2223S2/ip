@@ -26,9 +26,11 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/WushuMaster.png"));
 
     /**
-     * Initializes the JavaFX controller, binds the scrollPane to the dialogContainer's heightProperty,
-     * creates a new Ui instance to handle user interface interactions, displays a welcome message from the Ui,
-     * and adds the Duke dialog containing the welcome message to the dialogContainer.
+     * This method sets up the JavaFX controller and performs the following operations:
+     * Binds the scrollPane to the dialogContainer's heightProperty.
+     * Creates a new Ui instance to handle user interface interactions.
+     * Displays a welcome message from the Ui.
+     * Adds the Duke dialog containing the welcome message to the dialogContainer.
      */
     @FXML
     public void initialize() {
@@ -45,8 +47,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Generates a pair of dialogue boxes: one box displays the user's input, while the other one shows Duke's response.
+     * These dialog boxes are then appended to the dialog container.
+     * The method clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {

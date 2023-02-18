@@ -1,6 +1,6 @@
 package exception;
 /**
- * The DukeException class represents a custom exception thrown in the program.
+ * The DukeException class represents a exception thrown in the program unique to Duke
  * It extends the Exception class and provides a constructor that accepts a string as input.
  */
 

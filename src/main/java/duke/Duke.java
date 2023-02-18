@@ -6,7 +6,6 @@ import task.Tasklist;
 
 /**
  * The main class for the Duke task management application.
- *
  * */
 public class Duke {
     private Ui userInterface;
@@ -35,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Starts processing the user's input by parsing it into a command and executing it.
+     * Takes in a user's input by parsing it into a command and executing it.
      * @param input the user's input to process
      * @return the result of executing the command generated from the user's input
      */
@@ -50,9 +49,9 @@ public class Duke {
     }
 
     /**
-     * Processes the user's input and returns the Duke's response.
+     * Takes in the user's input and returns the Duke's response.
      * @param input the user's input to process
-     * @return the Duke's response to the user's input
+     * @return Duke's reply to the user's input
      */
     public String getResponse(String input) {
         return this.start(input);
