@@ -6,10 +6,14 @@ package duke.task;
  */
 public class Todo extends Task {
 
+    /**
+     * The constructor of Todo task.
+     * @param taskDescription The description of the task.
+     */
     public Todo(String taskDescription) {
         super(taskDescription);
         super.typeOfTask = 'T';
-        
+
     }
 
     @Override

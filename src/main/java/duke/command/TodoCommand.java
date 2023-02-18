@@ -6,10 +6,19 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.UI.UI;
 
+/**
+ * The todo command.
+ * Extends from AddCommand.
+ * Handles the adding of a todo task.
+ */
 public class TodoCommand extends AddCommand {
     public static final String COMMAND = "todo";
     private String[] index;
 
+    /**
+     * The constructor for the todo command.
+     * @param index The arguments of the command.
+     */
     public TodoCommand(String[] index) {
         this.index = index;
     }

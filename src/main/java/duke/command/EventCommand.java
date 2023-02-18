@@ -9,10 +9,19 @@ import duke.task.Event;
 import duke.UI.UI;
 import duke.UI.Parser;
 
+/**
+ * The event command.
+ * Extends from AddCommand.
+ * Handles the adding of an event task.
+ */
 public class EventCommand extends AddCommand {
     public static final String COMMAND = "event";
     private String[] index;
 
+    /**
+     * The constructor for the event command.
+     * @param index The arguments of the command.
+     */
     public EventCommand(String[] index) {
         this.index = index;
     }

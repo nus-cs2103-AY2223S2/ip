@@ -8,6 +8,10 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.UI.UI;
 import duke.UI.Parser;
+
+/**
+ * An administrative bot that handles a user's tasks.
+ */
 public class Duke {
     private TaskList nameOfTask;
     private Storage storage;
@@ -15,6 +19,9 @@ public class Duke {
     private UI ui;
     private boolean isExit;
 
+    /**
+     * The constructor of Duke.
+     */
     public Duke() {
         storage = new Storage();
         parser = new Parser();
@@ -53,10 +60,23 @@ public class Duke {
             isExit = command.isExit();
         } catch (DukeException error1) {
             ui.showError(error1);
-        } catch (DukeException error2) {
+        } catch (IOException error2) {
             ui.showError(error2);
         }
     }
+
+    /**
+     * Generates corresponding response after taking a command from the user.
+     * @param input The command entered by the user.
+     * @return A corresponding response to the user's command.
+     */
+    public String getResponse(String input) {
+        runProgramme(input);
+        String response = ui.show();
+        ui.clearResponse();
+        return response;
+    }
+
     public static void main(String[] args) {
         new Duke().runProgramme();
     }

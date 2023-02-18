@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import duke.UI.UI;
 /**
- * The Event of tasks.
+ * The Event task.
  * Inherits from the superclass Task.
  */
 public class Event extends Task {
@@ -14,8 +14,8 @@ public class Event extends Task {
     /**
      * The constructor of Event task.
      * @param taskDescription Name of the task.
-     * @param from Start of the event.
-     * @param to End of the event.
+     * @param from Start time of the event.
+     * @param to End time of the event.
      */
     public Event(String taskDescription, LocalDateTime from, LocalDateTime to) {
         super(taskDescription);

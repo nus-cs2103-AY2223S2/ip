@@ -63,6 +63,11 @@ public class Storage {
         return lineArray;
     }
 
+    /**
+     * Convers the file to a <code>TaskList</code> object.
+     * @return The TaskList converted from the file.
+     * @throws IOException If the programme cannot read the file.
+     */
     public TaskList listFile() throws IOException {
         int lineNumber = Math.toIntExact(Files.lines(filePath).count());
         TaskList nameOfTask = new TaskList(new ArrayList<>());
@@ -109,17 +114,27 @@ public class Storage {
         return LocalDateTime.of(LocalDate.parse(dateTime[0]), LocalTime.parse(dateTime[1]));
     }
 
-    public void save(TaskList nameOfTask) throws IOException {
+    /**
+     * Saves the entire list of task to the file.
+     * @param nameOfTasks A list of tasks to be recorded.
+     * @throws IOException If it is unable to save the file.
+     */
+    public void save(TaskList nameOfTasks) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath.toString());
-        int length = nameOfTask.numberOfTasks();
+        int length = nameOfTasks.numberOfTasks();
 
         for (int i = 0; i < length; i++) {
-            fileWriter.write(nameOfTask.getTask(i).savedTaskFormat());
+            fileWriter.write(nameOfTasks.getTask(i).savedTaskFormat());
             fileWriter.write(System.lineSeparator());
         }
         fileWriter.close();
     }
 
+    /**
+     * Adds a new task to the end of an existing file of tasks.
+     * @param task The new task to be added.
+     * @throws IOException If it is unable to add the task.
+     */
     public void addToStorage(Task task) throws IOException {
         assert task != null: "task is non-empty";
         FileWriter fileWriter = new FileWriter(filePath.toString(), true);

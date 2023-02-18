@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import duke.DukeException;
 import duke.command.*;
 
+/**
+ * Parses the input command from user to Duke.
+ */
 public class Parser {
     protected static final String INPUT_DATE_FORMAT = "yyyy-MM-dd HH:mm";
 
@@ -77,6 +80,11 @@ public class Parser {
         return new DeadlineCommand(index);
     }
 
+    /**
+     * Parses the input command provided by the user.
+     * @param userInput Input command from the user.
+     * @return The corresponding Command object that contains the argument.
+     */
     public Command parseInput(String userInput) {
         Command command;
         String inputCommand = userInput.split(" ", 2)[0];
@@ -105,6 +113,11 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Parses the date and time as a String to LocalDateTime object.
+     * @param dateTime The String form of the given date and time.
+     * @return A LocalDateTime object.
+     */
     public static LocalDateTime parseDateTime(String dateTime) {
         return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(INPUT_DATE_FORMAT));
     }

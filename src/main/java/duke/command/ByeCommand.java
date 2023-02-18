@@ -4,6 +4,10 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.UI.UI;
 
+/**
+ * The Bye command.
+ * Stops the program.
+ */
 public class ByeCommand extends Command {
     public static final String COMMAND = "bye";
 

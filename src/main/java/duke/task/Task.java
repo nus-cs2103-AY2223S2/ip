@@ -24,7 +24,7 @@ public class Task {
 
     /**
      * Determines the status of a task.
-     * @return The status of the task.
+     * @return The status of the task. If the task is done, return "X", " " otherwise.
      */
     public String getStatus() {
         return isDone
@@ -32,6 +32,10 @@ public class Task {
                 : " ";
     }
 
+    /**
+     * Gets the name of the task.
+     * @return The name of the task.
+     */
     public String getNameOfTask() {
         return this.nameOfTask = nameOfTask;
     }

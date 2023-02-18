@@ -5,6 +5,11 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.UI.UI;
 
+/**
+ * The list command.
+ * Extends from Command.
+ * Lists down all the tasks saved in the storage.
+ */
 public class ListCommand extends Command {
     public static final String COMMAND = "list";
 

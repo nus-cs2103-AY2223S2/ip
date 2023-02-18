@@ -4,10 +4,19 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.UI.UI;
 
+/**
+ * The unmark command.
+ * Extends from Command.
+ * Unmarks a previously marked task as undone.
+ */
 public class UnmarkCommand extends Command {
     public static final String COMMAND = "unmark";
     private String[] index;
 
+    /**
+     * The constructor for the unmark command.
+     * @param index The arguments of the command.
+     */
     public UnmarkCommand(String[] index) {
         this.index = index;
     }

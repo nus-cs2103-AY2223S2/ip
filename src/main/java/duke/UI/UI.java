@@ -9,7 +9,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * The skeleton version of Duke.
  * Return appropriate replies or updates user on certain tasks
  * depending on user input.
  */
@@ -24,23 +23,41 @@ public class UI {
     private Scanner scanner;
     private StringBuilder response;
 
+    /**
+     * The constructor of UI.
+     */
     public UI() {
         scanner = new Scanner(System.in);
         response = new StringBuilder();
     }
 
+    /**
+     * Shows the response of Duke to the user.
+     * @return The response of Duke to the user.
+     */
     public String show() {
         return response.toString();
     }
 
+    /**
+     * Reads the command entered by the user/
+     * @return The command entered by the user.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays the welcome message.
+     */
     public void welcomeResponse() {
         System.out.println("Good day! My name is Duke. \n" + logo + "\nHow am I of service today?");
     }
 
+    /**
+     * Prints the response of Duke.
+     * @param lines Responses to be shown to the user.
+     */
     public void printResponse(String ... lines) {
         int linesLength = lines.length;
 
@@ -51,42 +68,68 @@ public class UI {
         }
     }
 
+    /**
+     * Clears off all previous responses.
+     */
     public void clearResponse() {
         response = new StringBuilder();
     }
 
-    public void printError(Exception error) {
-        printResponse(error.getMessage());
-        System.err.println(INDENTATION + error);
-    }
-
+    /**
+     * Displays the goodbye message.
+     */
     public void goodbyeResponse() {
         printResponse("It has been a great pleasure serving you. \n" + "Have a nice day.");
     }
 
+    /**
+     * Returns the date and time in output format.
+     * @param dateTime Date and Time.
+     * @return The String from of date and time.
+     */
     public static String getOutputDateFormat(LocalDateTime dateTime) {
         return dateTime.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT));
     }
 
+    /**
+     * Shows successful marking done of the task to the user.
+     * @param task The task that is marked as done.
+     */
     public void showMark(Task task) {
         printResponse("Nice work! This task has been marked as done:");
         printResponse("  " + task);
     }
 
+    /**
+     * Shows successful unmarking of a previously done task to the user.
+     * @param task The task that is unmarked as done.
+     */
     public void showUnmark(Task task) {
         printResponse("Noted. This task has been marked as not done yet:");
         printResponse("  " + task);
     }
 
+    /**
+     * Shows an error message to the user.
+     * @param error The error in the command.
+     */
     public void showError(Exception error) {
         printResponse(error.getMessage());
         System.err.println(error);
     }
 
+    /**
+     * Prints an empty line.
+     */
     public void printEmptyLine() {
         System.out.println("\n");
     }
 
+    /**
+     * Shows successful deletion of a task to the user.
+     * @param task The task deleted.
+     * @param taskList The current lit of tasks.
+     */
     public void showDelete(Task task, TaskList taskList) {
         printResponse("Understood. I have removed this task:");
         printResponse("\n" + task);
