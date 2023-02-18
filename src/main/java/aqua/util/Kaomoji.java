@@ -6,7 +6,7 @@ public class Kaomoji {
     /** Crying kaomoji. */
     public static final String CRY = "(\u2565\ufe4f\u2565)";
     /** Passing heart kaomoji. */
-    public static final String HEART_PASS = "(\u22c8\u25cd\uff1e\u25e1\uff1c\u22c8)\u3002\u2727\u2661";
+    public static final String HEART_PASS = "(\u22c8\u25cd\uff1e\u25e1\uff1c\u22c8)\u3002\u2727";
     /** Tossing cutely kaomoji. */
     public static final String CUTE_TOSS = "(*\u309d\u03c9\uff65*)\uff89";
     /** Thinking kaomoji, */
@@ -22,7 +22,7 @@ public class Kaomoji {
     /** Cheering in encouragement kaomoji. */
     public static final String CHEER_ENCOURAGE = "( \u0e07*`\ua4b3\u00b4*)\u0e27";
     /** Placing something down kaomoji. */
-    public static final String PLACING_DOWN = "( \ua706 '\u1d55' )\ua706";
+    public static final String PLACING_DOWN = "(  '\u1d55' )";
     /** Blushing kaomoji. */
     public static final String BLUSH = "( \u02f6'\u1d55'\u02f6)";
     /** Oh no reaction kaomoji. */

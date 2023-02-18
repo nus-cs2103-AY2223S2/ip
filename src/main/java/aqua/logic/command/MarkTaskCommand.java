@@ -98,12 +98,12 @@ public class MarkTaskCommand extends CommandController {
             if (isCompletedMarker) {
                 message = String.format(String.join("\n",
                                 "I have marked this task:",
-                                "  %s"),
+                                "%s"),
                         task.toString());
             } else {
                 message = String.format(String.join("\n",
                                 "Uah " + Kaomoji.OH_NO + " Okay I have unmarked the task:",
-                                "  %s"),
+                                "%s"),
                         task.toString());
             }
             manager.reply(message);
