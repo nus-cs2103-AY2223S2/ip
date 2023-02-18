@@ -1,5 +1,0 @@
-E | 1 | dea | 2019-12-01 | 2019-12-01
-T | 0 | wdoajo
-T | 0 | dea
-T | 0 | run
-T | 1 | swaomda
