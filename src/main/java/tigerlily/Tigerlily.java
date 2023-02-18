@@ -1,7 +1,6 @@
 package tigerlily;
 
 import tigerlily.commands.Command;
-
 import tigerlily.exceptions.DukeExceptions;
 import tigerlily.tasks.TaskList;
 
@@ -11,6 +10,10 @@ public class Tigerlily {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor for Tigerlily
+     * @param filePath the file path needed for Storage
+     */
     public Tigerlily(String filePath) {
         this.parser = new Parser();
         this.storage = new Storage(filePath);

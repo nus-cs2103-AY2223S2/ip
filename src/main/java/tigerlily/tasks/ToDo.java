@@ -1,6 +1,10 @@
 package tigerlily.tasks;
 
 public class ToDo extends Task {
+    /**
+     * Constructor for ToDo
+     * @param description the description of the ToDo
+     */
     public ToDo(String description) {
         super(description);
     }
@@ -11,8 +15,8 @@ public class ToDo extends Task {
      * @return the ToDo in String format for data storage
      */
     @Override
-    public String getDataString() {
-        return "T | " + super.getDataString();
+    public String getStorageString() {
+        return "T | " + super.getStorageString();
     }
 
     /**

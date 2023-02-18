@@ -1,0 +1,9 @@
+T | 1 | hey
+T | 1 | learn korean
+E | 1 | date | 2023-01-30 10:45 to 2023-01-30 11:45
+T | 0 | read
+T | 0 | finish iP
+D | 0 | finish iP | 2023-02-17
+T | 0 | bake
+T | 0 | bake a cake
+T | 0 | sleep

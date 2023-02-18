@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private Tigerlily tigerlily = new Tigerlily("data/data.txt");
+    private Tigerlily tigerlily = new Tigerlily("data/storage.txt");
 
     @Override
     public void start(Stage stage) {
