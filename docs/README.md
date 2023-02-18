@@ -51,6 +51,8 @@ Expected outcome:
 Task *increment ip* will be added to the list.
 
 
+
+
 ### `deadline [TASK] by [DATETIME]` - Adding deadline task.
 
 - `deadline` keyword to create deadline task.
@@ -65,6 +67,8 @@ Example of usage:
 
 Expected outcome:
 Task *increment ip* with deadline *2023/02/15 1800* will be added to the list.
+
+
 
 
 ### `event [TASK] from [DATETIME] to [DATETIME]` - Adding event task.
@@ -84,16 +88,22 @@ Expected outcome:
 Task *increment ip* from *2023/02/10 1800* to *2023/02/15 1800* will be added to the list.
 
 
+
+
 ### `list` - Shows current list of tasks.
 
 Expected outcome:
 list of task will be displayed.
 
 
+
+
 ### `clear` - Clears current list of tasks.
 
 Expected outcome:
 list of task will be cleared.
+
+
 
 
 ### `mark [INDX]` - Marks task at specified index.
@@ -108,6 +118,8 @@ Expected outcome:
 Task 1 is marked.
 
 
+
+
 ### `unmark [INDX]` - Unmarks task at specified index.
 
 - `[INDX]` has to be more than 0 and has to be a number currently existing in the list of tasks.
@@ -118,6 +130,8 @@ Example of usage:
 
 Expected outcome:
 Task 1 is unmarked.
+
+
 
 
 ### `delete [INDX]` - Deletes task at specified index.
@@ -132,6 +146,8 @@ Expected outcome:
 Task 1 is deleted.
 
 
+
+
 ### `find [KEYWORD]` - Finds task with specified keyword.
 
 - `[Keyword]` can be a word or phrase.
@@ -142,6 +158,8 @@ Example of usage:
 
 Expected outcome:
 Tasks containing the word "project" is displayed.
+
+
 
 
 ### `tag [INDX] [TAGGING]` - Tags a task at specified index with the specified tagging.
