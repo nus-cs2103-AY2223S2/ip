@@ -135,4 +135,21 @@ public class TaskList {
 
         return stringBuilder.toString();
     }
+
+    public String sendHelp() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Here are some commands for you to use this app!\n");
+        stringBuilder.append("bye: Says bye!\n");
+        stringBuilder.append("list: Lists the tasks already saved!\n");
+        stringBuilder.append("mark: Mark task as done!\n");
+        stringBuilder.append("unmark: Unmark task as not done!\n");
+        stringBuilder.append("todo: Adds a todo task!\n");
+        stringBuilder.append("deadline: Adds a deadline task!\n");
+        stringBuilder.append("event: Adds an event task!\n");
+        stringBuilder.append("delete: Deletes a task according to the position!\n");
+        stringBuilder.append("find: Finds a task with the keyword!\n");
+
+        return stringBuilder.toString();
+    }
 }

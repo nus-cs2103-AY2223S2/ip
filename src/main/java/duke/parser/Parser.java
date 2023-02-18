@@ -31,6 +31,8 @@ public class Parser {
                 return tasksList.deleteTask(input);
             case "find":
                 return tasksList.findEvent(input);
+            case "help":
+                return tasksList.sendHelp();
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
