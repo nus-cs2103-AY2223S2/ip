@@ -108,10 +108,34 @@ public class TaskList implements Serializable {
         }
     }
 
-    public TaskList find(String keyword) {
+    public TaskList filterTaskByKeyword(String keyword) {
         List<Task> filteredTaskList = taskList.stream().filter((task) -> task.contains(keyword))
                 .collect(Collectors.toList());
         return new TaskList(filteredTaskList);
     }
+
+    public TaskList filterTaskByDate(String dateString) {
+
+        List<Task> filteredTaskList = new ArrayList<>();
+
+        // TODO : Refactor this
+        for (Task task : taskList) {
+            if (task instanceof Event) {
+                Event event = (Event) task;
+                boolean isEventWithinDate = event.checkIfEventActiveOnDate(dateString);
+                if (isEventWithinDate)
+                    filteredTaskList.add(event);
+            }
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                boolean isDeadlineActive = deadline.checkIfDeadlineActive(dateString);
+                if (isDeadlineActive)
+                    filteredTaskList.add(deadline);
+            }
+        }
+
+        return new TaskList(filteredTaskList);
+    }
+
 
 }

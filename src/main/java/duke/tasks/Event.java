@@ -16,6 +16,13 @@ public class Event extends Task {
 
     }
 
+    public boolean checkIfEventActiveOnDate(String dateString) {
+        LocalDate date = DukeDate.parseDateString(dateString);
+        boolean isAfterStartingDate = date.isAfter(from);
+        boolean isBeforeEndDate = date.isBefore(to);
+        return isAfterStartingDate && isBeforeEndDate && !super.isDone;
+    }
+
     @Override
     public String toString() {
         return String.format("  [E]%s (from: %s to: %s)", super.toString(),

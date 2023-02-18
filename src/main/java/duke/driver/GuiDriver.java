@@ -38,6 +38,10 @@ public class GuiDriver {
             case FIND:
                 return processFindCommand(commandArgs);
 
+            case VIEW_SCHEDULE: {
+                return processViewScheduleCommand(commandArgs);
+            }
+
             // Process task-creation commands
             case DEADLINE:
             case EVENT:
@@ -59,6 +63,15 @@ public class GuiDriver {
 
 
 
+    private static String processViewScheduleCommand(String[] commandArgs) {
+        String dateString = commandArgs[0];
+        TaskList filteredDateList = taskList.filterTaskByDate(dateString);
+        return UiPrinter.addLineBreak("Here are some some scheduled date on",
+                filteredDateList.toString());
+    }
+
+
+
     private static String processListCommand(TaskList taskList) {
         String taskStringList = UiPrinter.addLineBreak("Here are your tasks:", taskList.toString());
         return taskStringList;
@@ -68,7 +81,7 @@ public class GuiDriver {
         String keyword = commandArgs[0];
 
         return UiPrinter.addLineBreak("Here are the matching tasks in your list:",
-                taskList.find(keyword).toString());
+                taskList.filterTaskByKeyword(keyword).toString());
     }
 
     private static String processTaskCreationCommand(DukeCommand command, String[] commandArgs) {

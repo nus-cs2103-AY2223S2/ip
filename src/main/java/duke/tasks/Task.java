@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Task implements Serializable {
     private static final long serialVersionUID = 4048021127880559361L;
 
-    private boolean isDone = false;
+    protected boolean isDone = false;
     private String description;
 
     public Task(String description) {

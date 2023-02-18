@@ -70,6 +70,11 @@ public class DukeParser {
             break;
         }
 
+        case VIEW_SCHEDULE: {
+            parseViewSchedule(inputString, commandArgs);
+            break;
+        }
+
         case DELETE: {
             parseDelete(inputString, commandArgs);
             break;
@@ -84,6 +89,18 @@ public class DukeParser {
         }
         }
         return commandArgs.toArray(new String[] {});
+    }
+
+    private static void parseViewSchedule(String inputString, List<String> commandArgs)
+            throws Error {
+        int offset = DukeCommand.VIEW_SCHEDULE.text.length();
+        String dateString = inputString.substring(offset).strip();
+        try {
+            DukeDate.parseDateString(dateString);
+            commandArgs.add(dateString);
+        } catch (DateTimeParseException e) {
+            throw new Error("☹ OOPS!!! The time format is invalid, please use yyyy-MM-dd");
+        }
     }
 
     private static void parseListOrBye(String inputString, List<String> commandArgs) {

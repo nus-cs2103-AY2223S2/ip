@@ -14,6 +14,12 @@ public class Deadline extends Task {
         this.by = DukeDate.parseDateString(by);
     }
 
+    public boolean checkIfDeadlineActive(String dateString) {
+        LocalDate date = DukeDate.parseDateString(dateString);
+        boolean isBeforeByDate = date.isBefore(by);
+        return isBeforeByDate && !super.isDone;
+    }
+
     @Override
     public String toString() {
         return String.format("  [D]%s (by: %s)", super.toString(),
