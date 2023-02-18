@@ -22,6 +22,7 @@ public class Mark extends Command {
 
     @Override
     public String execute() {
+        assert (idx <= tasklist.getWholeList().size());
         Task t = tasklist.get(idx - 1);
         t.mark();
         return "Nice! I've marked this task as done:\n" + t + "\n";

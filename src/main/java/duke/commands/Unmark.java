@@ -22,6 +22,7 @@ public class Unmark extends Command {
 
     @Override
     public String execute() {
+        assert (idx <= tasklist.getWholeList().size());
         Task t = tasklist.get(idx - 1);
         t.unmark();
         return "OK! I've marked this task as not done:\n" + t + "\n";

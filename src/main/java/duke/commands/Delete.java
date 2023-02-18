@@ -23,6 +23,7 @@ public class Delete extends Command {
 
     @Override
     public String execute() {
+        assert (idx <= tasklist.getWholeList().size());
         Task t = tasklist.delete(idx - 1);
         String res = "OK! I've deleted the following task: " + t.toString() + "\n";
         return res;

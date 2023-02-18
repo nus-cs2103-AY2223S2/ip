@@ -43,14 +43,17 @@ class Parser {
             break;
 
         case "todo":
+            assert tokens.length > 1;
             String description = tokens[1];
             c = new MakeTodo(description, tasklist);
             break;
 
         case "deadline":
-            String[] moreTokens = tokens[1].split(" /by ");
-            description = moreTokens[0];
-            String by = moreTokens[1];
+            assert tokens.length > 1;
+            String[] deadlineFinder = tokens[1].split(" /by ");
+            assert deadlineFinder.length == 2;
+            description = deadlineFinder[0];
+            String by = deadlineFinder[1];
             c = new MakeDeadline(description, by, tasklist);
             break;
 
@@ -58,6 +61,7 @@ class Parser {
             String[] fromFinder = tokens[1].split(" /from ");
             description = fromFinder[0];
             String[] toFinder = fromFinder[1].split(" /to ");
+            assert toFinder.length == 2;
             String from = toFinder[0];
             String to = toFinder[1];
             c = new MakeEvent(description, from, to, tasklist);
