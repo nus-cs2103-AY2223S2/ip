@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Class for Ui object.
  * This class handles the interface that the user interacts with.
- * 
+ *
  * @author Bryan Tan
  */
 public class Ui {
@@ -42,7 +42,7 @@ public class Ui {
 
     /**
      * Saves list of tasks in current session to hard drive.
-     * 
+     *
      * @throws IOException when file to write to is not found.
      */
     public void save() throws IOException {
@@ -156,11 +156,14 @@ public class Ui {
 
     /**
      * Creates a ToDo object.
-     * 
+     *
      * @param task String array containing descriptions of the task.
      * @return String format of ToDo object.
      */
     public String makeToDo(String[] task) {
+        if (!(task.length > 1)) {
+            return "Please specify task to do!!";
+        }
         assert task[0].equalsIgnoreCase("todo") && task.length > 1: "Wrong format!!";
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < task.length; i++) {
@@ -171,7 +174,7 @@ public class Ui {
 
     /**
      * Creates Event object.
-     * 
+     *
      * @param task String array containing descriptions of the event.
      * @return String format of Event object.
      * @throws DateTimeParseException if user inputs date and time in the wrong format.
@@ -181,25 +184,31 @@ public class Ui {
         StringBuilder end = new StringBuilder();
         StringBuilder desc = new StringBuilder();
         boolean isDescripton = true;
-        boolean first = false;
-        boolean second = false;
+        boolean isFromDate = false;
+        boolean isToDate = false;
 
         for (int i = 1; i < task.length; i++) {
-            if (task[i].equalsIgnoreCase("/from")) {
-                first = true;
+            if (task[i].equalsIgnoreCase("from")) {
+                isFromDate = true;
                 isDescripton = false;
                 continue;
             }
-            if (task[i].equalsIgnoreCase("/to")) {
-                second = true;
-                first = false;
+            if (task[i].equalsIgnoreCase("to")) {
+                isToDate = true;
+                isFromDate = false;
                 continue;
             }
-            if (first) {
-                start.append(task[i] + " ");
+            if (isFromDate) {
+                start.append(task[i]);
+                if (!task[i + 1].equalsIgnoreCase("to")) {
+                    start.append(" ");
+                }
             }
-            if (second) {
-                end.append(task[i] + " ");
+            if (isToDate) {
+                end.append(task[i]);
+                if (i != task.length - 1) {
+                    end.append(" ");
+                }
             }
             if (isDescripton) {
                 desc.append(task[i] + " ");
@@ -214,13 +223,14 @@ public class Ui {
             Event temp = createEvent(task);
             return addToList(temp);
         } catch (DateTimeParseException e) {
-            return "Wrong date/time format!" + "\n" + "Please enter correct format (yyyy/MM/dd HHmm)!";
+            return "Wrong date/time format!" + "\n"
+                    + "Please enter correct format (from yyyy/MM/dd HHmm to yyyy/MM/dd HHmm)!";
         }
     }
 
     /**
      * Creates a task with given deadline.
-     * 
+     *
      * @param task String array containing descriptions of the event.
      * @return String format of Deadline object.
      * @throws DateTimeParseException if user inputs date and time in the wrong format.
@@ -231,7 +241,7 @@ public class Ui {
         boolean isDesc = true;
 
         for (int i = 1; i < task.length; i++) {
-            if (task[i].equalsIgnoreCase("/by")) {
+            if (task[i].equalsIgnoreCase("by")) {
                 isDesc = false;
                 continue;
             }
@@ -253,7 +263,7 @@ public class Ui {
             Deadline temp = createDeadline(task);
             return addToList(temp);
         } catch (DateTimeParseException e) {
-            return "Wrong date/time format!" + "\n" + "Please enter correct format (yyyy/MM/dd HHmm)!";
+            return "Wrong date/time format!" + "\n" + "Please enter correct format (by yyyy/MM/dd HHmm)!";
         }
     }
 
@@ -322,11 +332,14 @@ public class Ui {
         if (this.getList().isEmpty()) {
             return emptyErr();
         }
+        if (s.equals("")) {
+            return "Empty tag error!!";
+        }
         if (num >= this.tList.size()) {
             return ("Task no." + (num + 1) + " not found. Try again.");
         } else {
             this.tList.get(num).tag(s);
-            return "Nice! " + this.tList.get(num) + "is tagged as " + this.tList.get(num).getTag() + ".";
+            return "Nice! " + this.tList.get(num) + " is tagged as " + this.tList.get(num).getTag() + ".";
         }
     }
 

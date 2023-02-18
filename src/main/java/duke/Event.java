@@ -15,7 +15,7 @@ public class Event extends Task {
     private LocalDateTime start;
     private LocalDateTime end;
     private DateTimeFormatter acceptingFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
-    private DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("dd/MMM/yyyy HHmm");
+    private DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("dd/MMM/yyyy HHmm" );
 
     /**
      * Constructor for Event object.
@@ -57,7 +57,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (from: " + this.start.format(displayFormat) + 
-            " to: " + this.end.format(displayFormat) + "Hrs" + ")";
+        return "[E] " + super.toString() + " (from: " + this.start.format(displayFormat) + "Hrs" +
+            " to: " + this.end.format(displayFormat) + "Hrs" + ")"
+                + (super.isTagged() ? " " + "#" + super.getTag() : "");
     }
 }

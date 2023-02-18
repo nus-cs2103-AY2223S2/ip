@@ -64,27 +64,37 @@ public class Storage {
             if (curr instanceof Deadline) {
                 Deadline newCurr = (Deadline) curr;
                 if (currMarked) {
-                    fw.write("D" + "|" + "1" + "|" + newCurr.getTask() + "|" + newCurr.getDeadline() 
+                    fw.write("D" + "|" + "1" + "|" + newCurr.getTask() + "|" + newCurr.getDeadline()
+                            + "|" + (newCurr.isTagged() ? newCurr.getTag() : "0")
                         + System.lineSeparator());
                 } else {
                     fw.write("D" + "|" + "0" + "|" + newCurr.getTask() + "|" + newCurr.getDeadline()
+                            + "|" + (newCurr.isTagged() ? newCurr.getTag() : "0")
                         + System.lineSeparator());
                 }
             } else if (curr instanceof Event) {
                 Event newCurr = (Event) curr;
                 if (currMarked) {
                     fw.write("E" + "|" + "1"  + "|" + newCurr.getTask() + "|" + 
-                            newCurr.getStart() + "|" + newCurr.getEnd() + System.lineSeparator());
+                            newCurr.getStart() + "|" + newCurr.getEnd()
+                            + "|" + (newCurr.isTagged() ? newCurr.getTag() : "0")
+                            + System.lineSeparator());
                 } else {
                     fw.write("E" + "|" + "0"  + "|" + newCurr.getTask() + "|" + 
-                            newCurr.getStart() + "|" + newCurr.getEnd() + System.lineSeparator());
+                            newCurr.getStart() + "|" + newCurr.getEnd()
+                            + "|" + (newCurr.isTagged() ? newCurr.getTag() : "0")
+                            + System.lineSeparator());
                 }
             } else if (curr instanceof ToDo) {
                 ToDo newCurr = (ToDo) curr;
                     if (currMarked) {
-                        fw.write("T" + "|" + "1" + "|" + newCurr.getTask() + System.lineSeparator());
+                        fw.write("T" + "|" + "1" + "|" + newCurr.getTask()
+                                + "|" + (newCurr.isTagged() ? newCurr.getTag() : "0")
+                                + System.lineSeparator());
                     } else {
-                        fw.write("T" + "|" + "0" + "|" + newCurr.getTask() + System.lineSeparator());
+                        fw.write("T" + "|" + "0" + "|" + newCurr.getTask()
+                                + "|" + (newCurr.isTagged() ? newCurr.getTag() : "0")
+                                + System.lineSeparator());
                     }
             }
         }
@@ -104,8 +114,10 @@ public class Storage {
         while (sc.hasNext()) {
             String curr = sc.nextLine();
             String[] parsed = curr.split("\\|");
+            int length = parsed.length;
             String type = parsed[0];
             boolean isMarked = parsed[1].equals("1");
+            boolean isTagged = !parsed[length - 1].equals("0");
 
             if (type.equals("D")) {
                 LocalDateTime savedDateTime = LocalDateTime.parse(parsed[3], savedFormat);
@@ -113,6 +125,9 @@ public class Storage {
                 Deadline temp = new Deadline(parsed[2], loadDateTime.format(loadFormat));
                 if (isMarked) {
                     temp.mark();
+                }
+                if (isTagged) {
+                    temp.tag(parsed[length - 1]);
                 }
                 list.add(temp);
             } else if (type.equals("E")) {
@@ -125,12 +140,18 @@ public class Storage {
                     loadEndTime.format(loadFormat));
                 if (isMarked) {
                     temp.mark();
-                } 
+                }
+                if (isTagged) {
+                    temp.tag(parsed[length - 1]);
+                }
                 list.add(temp);
             } else if (type.equals("T")) {
                 ToDo temp = new ToDo(parsed[2]);
                 if (isMarked) {
                     temp.mark();
+                }
+                if (isTagged) {
+                    temp.tag(parsed[length - 1]);
                 }
                 list.add(temp);
             }

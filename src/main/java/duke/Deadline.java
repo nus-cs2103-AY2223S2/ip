@@ -44,6 +44,7 @@ public class Deadline extends Task {
     
     @Override 
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + this.deadline.format(displayFormat) + "Hrs" + ")";
+        return "[D] " + super.toString() + " (by: " + this.deadline.format(displayFormat) + "Hrs" + ")"
+                + (super.isTagged() ? " " + "#" + super.getTag() : "");
     }
 }

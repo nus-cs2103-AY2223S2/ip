@@ -10,6 +10,7 @@ public class Task {
     private String name;
     private boolean done;
     private  String tagging;
+    private boolean tagged;
 
     /**
      * Constructor for Task object.
@@ -50,7 +51,12 @@ public class Task {
     }
 
     public void tag(String s) {
-        this.tagging = "#" + s;
+        this.tagging = s;
+        this.tagged = true;
+    }
+
+    public boolean isTagged() {
+        return this.tagged;
     }
 
     public String getTag() {
