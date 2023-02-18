@@ -19,19 +19,20 @@ public class Storage {
 
     /**
      * Constructor to instantiate a new Storage object and creates a tasks.txt file to store tasks if
-     * one does not already exist in the given file path
+     * one does not already exist in the given file path.
      * @param filePath location of task list in hard disk
      */
     public Storage(String filePath) {
         try {
-            this.eeveeFilePath = filePath;
-            File eeveeTxt = new File(filePath);
+            String currPath = new File("").getCanonicalPath();
+            this.eeveeFilePath = currPath + filePath;
+            File eeveeTxt = new File(eeveeFilePath);
             eeveeTxt.getParentFile().mkdirs();
             if (!eeveeTxt.exists()) {
                 eeveeTxt.createNewFile();
             }
         } catch (IOException e) {
-            System.out.printf("Something went wrong ): %s", e);
+            System.out.printf("Something went wrong when creating file ): %s", e);
         }
     }
 
