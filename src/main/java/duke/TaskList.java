@@ -14,10 +14,6 @@ import duke.task.Todo;
 public class TaskList {
     private ArrayList<Task> tasks;
 
-    TaskList() {
-        this.tasks = new ArrayList<Task>();
-    }
-
     public TaskList(ArrayList<Task> existingTasks) {
         this.tasks = existingTasks;
     }
