@@ -34,6 +34,7 @@ public class MarkCommand implements Command {
             throw new ForgottenArgumentException();
         } else {
             int index = Integer.parseInt(input.substring(5)) - 1;
+            assert index > 0 : "Invalid index input";
             if (index >= taskList.getSize()) {
                 throw new InvalidIndexException();
             }
