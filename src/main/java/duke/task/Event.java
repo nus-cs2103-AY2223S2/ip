@@ -85,7 +85,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (From: %s, To: %s)", this.getStatusIcon(), this.getDescription(),
+        return String.format("[E][%s] %s (FROM: %s, TO: %s)", this.getStatusIcon(), this.getDescription(),
                 this.fromDateTime.format(DATE_TIME_FORMATTER), this.toDateTime.format(DATE_TIME_FORMATTER));
     }
 }

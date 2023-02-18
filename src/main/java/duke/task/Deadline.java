@@ -67,7 +67,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s)", this.getStatusIcon(),
+        return String.format("[D][%s] %s (BY: %s)", this.getStatusIcon(),
                 this.getDescription(), this.deadline.format(DATE_TIME_FORMATTER));
     }
 }
