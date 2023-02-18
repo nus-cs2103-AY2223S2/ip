@@ -25,9 +25,7 @@ Connor is capable of sorting your tasks by the date, learn how Connor formats a 
 
 Adds a task that has no time constraint. This task will be stored in the memory in a form of a text file. 
 
-#### Usage format: 
-
-```todo {TASK}```
+#### Usage format: ```todo {TASK}```
 
 Example: ```todo tidy room```
 
@@ -49,9 +47,7 @@ T|false|{TASK}
 
 Adds a task that has a deadline. This task will be stored in the memory in a form of a text file. 
 
-#### Usage format: 
-
-```deadline {TASK} /by {DATE}```
+#### Usage format: ```deadline {TASK} /by {DATE}```
 
 Example: ```deadline Project submission /by 2023-02-17 1800```
 
@@ -73,9 +69,7 @@ D|false|{TASK}|{deadline}
 
 Adds a task that has a start and end date. This task will be stored in the memory in a form of a text file. 
 
-#### Usage format: 
-
-```Event {TASK} /from {STARTDATE} /to {ENDDATE}```
+#### Usage format: ```Event {TASK} /from {STARTDATE} /to {ENDDATE}```
 
 Example: ```Event Dinner /from 2023-02-14 1800 /to 2023-02-14 2000```
 
@@ -114,9 +108,7 @@ I have 3 tasks in my memory
 
 Marks a certain task on the list (according to its index) as done. 
 
-#### Usage format: 
-
-```mark {INDEX}```
+#### Usage format: ```mark {INDEX}```
 
 Example: ```mark 1```
 
@@ -131,9 +123,7 @@ Understood, I have marked the task as done:
 
 Marks a certain task on the list (according to its index) as undone. 
 
-#### Usage format: 
-
-```unmark {INDEX}```
+#### Usage format: ```unmark {INDEX}```
 
 Example: ```unmark 1```
 
@@ -148,9 +138,7 @@ Understood, I have marked the task as undone:
 
 Deletes a certain task on the list (according to its index).
 
-#### Usage format: 
-
-```delete {INDEX}```
+#### Usage format: ```delete {INDEX}```
 
 Example: ```delete 1```
 
@@ -166,9 +154,7 @@ You have {Number of tasks in memory} tasks in the list.
 
 Deletes all tasks on the list.
 
-#### Usage format: 
-
-```deleteall```
+#### Usage format: ```deleteall```
 
 Example: ```deleteall```
 
@@ -182,9 +168,7 @@ All tasks on the list have been cleared.
 
 Deletes a certain task on the list (according to its index).
 
-#### Usage format: 
-
-```find {KEYWORD}```
+#### Usage format: ```find {KEYWORD}```
 
 Example: ```find work```
 
@@ -210,9 +194,7 @@ Sorts the list according to the following rules:
   - if both have the same earliest start time, they are then sorted based on earliest end time.
   - if both have same earliest and start time, they are then sorted in chronological order.
 
-#### Usage format: 
-
-```sort```
+#### Usage format: ```sort```
 
 Example: ```sort```
 
@@ -226,9 +208,7 @@ I have successfully sorted the tasks.
 
 Prompts Connor to greet you.
 
-#### Usage format: 
-
-```hi```
+#### Usage format: ```hi```
 
 Example: ```hi```
 
@@ -242,9 +222,7 @@ Hi, I hope that you are having a nice day
 
 Prompts Connor to say goodbye. Program will exit after a 1-second delay. 
 
-#### Usage format: 
-
-```bye```
+#### Usage format: ```bye```
 
 Example: ```bye```
 
