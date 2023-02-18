@@ -25,7 +25,7 @@ public class Ui {
      */
     public String getWelcomeReply() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("What's up! I'm duuk.What do you want?");
+        stringBuilder.append("HEY THERE YOU. I'm Duuk. Duke's evil twin brother");
         return stringBuilder.toString();
     }
 
@@ -34,7 +34,7 @@ public class Ui {
      * @param message the error message to be displayed.
      */
     public String displayErrorMessage(String message) {
-        return ("Oh no there is an error:" + message);
+        return ("You are a PAIN, there is an error:" + message);
     }
 
     /**
@@ -45,8 +45,8 @@ public class Ui {
      */
     public String getDeleteReply(Task deletedTask, int listSize) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Noted. I've removed this task:\n").append(deletedTask.toString()).append("\n");
-        stringBuilder.append("Now you have " + listSize + " tasks in the list.");
+        stringBuilder.append("FINE. I've removed this task:\n").append(deletedTask.toString()).append("\n");
+        stringBuilder.append("Boy you are not bad yourself...you have" + listSize + " tasks in the list.");
         return stringBuilder.toString();
     }
 
@@ -57,7 +57,7 @@ public class Ui {
      */
     public String getAddReply(Task addedTask) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Got it. I've added this task:\n " + addedTask.toString());
+        stringBuilder.append("WHAT A BOTHER! Whatever...I've added this task:\n " + addedTask.toString());
         return stringBuilder.toString();
     }
 
@@ -69,11 +69,11 @@ public class Ui {
     public String getMatchedListReply(Tasklist tasklist) {
         StringBuilder stringBuilder = new StringBuilder();
         if (tasklist.isEmpty()) {
-            stringBuilder.append("Oh no you don't have any matching tasks.\n");
+            stringBuilder.append("Oh boy you don't have any matching tasks.\n");
             return stringBuilder.toString();
         }
 
-        stringBuilder.append("Here are the tasks that matches yor description:\n");
+        stringBuilder.append("I dug out the WHOLE BEDROOM and found want you wanted NOW LEAVE:\n");
         String[] taskLines = tasklist.toString().split("\n");
 
         for (int i = 1; i <= taskLines.length; i++) {
@@ -89,7 +89,7 @@ public class Ui {
      */
     public String getListReply(Tasklist tasklist) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Here are your tasks boy!\n ").append(tasklist.toString());
+        stringBuilder.append("AGAIN? TAKE THIS LIST AND LEAVE!\n ").append(tasklist.toString());
         return stringBuilder.toString();
     }
 
@@ -100,7 +100,7 @@ public class Ui {
      */
     public String getMarkReply(Task markedTask) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Nice! I've marked this task as done:\n").append(markedTask.toString());
+        stringBuilder.append("MARK MY WORDS...and this task:\n").append(markedTask.toString());
         return stringBuilder.toString();
     }
 
@@ -111,7 +111,7 @@ public class Ui {
      */
     public String getUnMarkReply(Task unMarkedTask) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Nice! I've unmarked this task:\n").append(unMarkedTask.toString());
+        stringBuilder.append("Make up your mind! I will unmark just this once\n").append(unMarkedTask.toString());
         return stringBuilder.toString();
     }
 
@@ -120,17 +120,17 @@ public class Ui {
      * @return The reply to be displayed.
      */
     public String getExitReply() {
-        return "Bye. Hope to see you again soon!";
+        return "Hope I never see your face here again!";
     }
 
     public String getTagReply(Task taggedTask) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Nice. I've tagged this task:\n").append(taggedTask.toString());
+        stringBuilder.append("You want me to what? Tag? Fine.\n").append(taggedTask.toString());
         return stringBuilder.toString();
     }
 
     public void closeWindow(String response) {
-        if (response.equals("Bye. Hope to see you again soon!")) {
+        if (response.equals("Hope I never see your face here again!")) {
             Timeline delayExit = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
                 Platform.exit();
             }));

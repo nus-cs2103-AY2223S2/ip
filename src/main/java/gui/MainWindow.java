@@ -24,7 +24,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/CaptainCTF.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/WushuMaster.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duuk.png"));
 
     /**
      * This method sets up the JavaFX controller and performs the following operations:
