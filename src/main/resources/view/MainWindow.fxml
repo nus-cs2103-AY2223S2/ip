@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@Application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwuke.view.MainWindow">
   <children>
-    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" pannable="true" prefHeight="557.0" prefWidth="400.0" style="-fx-background-color: #343540;" vbarPolicy="NEVER" vvalue="1.0">
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="400.0" style="-fx-background-color: #343540;" vvalue="1.0">
       <content>
         <VBox fx:id="dialogContainer" prefHeight="555.0" prefWidth="398.0" style="-fx-background-color: #343540;" />
       </content>
