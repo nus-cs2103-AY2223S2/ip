@@ -59,18 +59,6 @@ public class Parser {
     }
 
     /**
-     * Checks if the details given for a Task is valid.
-     * @param details Task details input by user.
-     * @return false if details are blank and true otherwise.
-     */
-    public boolean areValidDetails(String details) {
-        if (details.isBlank()) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Takes in an input from the user and executes the command.
      * @param userInput Input from user stored in a String array.
      * @return A Command corresponding to user input.
