@@ -2,9 +2,15 @@ package catbot.parser;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
+import org.ocpsoft.prettytime.nlp.parse.DateGroup;
 
 import catbot.CatBotException;
 import catbot.commands.AddDeadlineCommand;
@@ -17,6 +23,7 @@ import catbot.commands.EchoCommand;
 import catbot.commands.FindCommand;
 import catbot.commands.ListCommand;
 import catbot.commands.MarkCommand;
+
 
 /**
  * Handles parsing user input.
@@ -44,7 +51,8 @@ public class Parser {
         case "deadline":
             try {
                 temp = commandComponents[1].split("/by", 2);
-                LocalDateTime by = LocalDateTime.parse(temp[1].strip());
+                Date parsedBy = new PrettyTimeParser().parse(temp[1].strip()).get(0);
+                LocalDateTime by = parsedBy.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                 return new AddDeadlineCommand(temp[0].strip(), by);
             } catch (DateTimeParseException e) {
                 throw new CatBotException("Dates should be in the format yyyy-MM-ddTHH:mm");
@@ -55,8 +63,10 @@ public class Parser {
         case "event":
             try {
                 temp = commandComponents[1].split("/from|/to", 3);
-                LocalDateTime from = LocalDateTime.parse(temp[1].strip());
-                LocalDateTime to = LocalDateTime.parse(temp[2].strip());
+                Date parsedFrom = new PrettyTimeParser().parse(temp[1].strip()).get(0);
+                LocalDateTime from = parsedFrom.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                Date parsedTo = new PrettyTimeParser().parse(temp[2].strip()).get(0);
+                LocalDateTime to = parsedTo.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                 return new AddEventCommand(temp[0].strip(), from, to);
             } catch (DateTimeParseException e) {
                 throw new CatBotException("Dates should be in the format yyyy-MM-ddTHH:mm");
@@ -66,19 +76,23 @@ public class Parser {
 
         case "recurring":
             try {
-                temp = commandComponents[1].split("/at|/every", 3);
-                LocalDateTime at = LocalDateTime.parse(temp[1].strip());
-                Duration every = Duration.parse(temp[2].strip());
+                temp = commandComponents[1].split("/on|/at|/every", 3);
+                Date parsedOn = new PrettyTimeParser().parse(temp[1].strip()).get(0);
+                LocalDateTime on = parsedOn.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                DateGroup parsedEvery = new PrettyTimeParser().parseSyntax("every " + temp[2].strip()).get(0);
+                Duration every = Duration.ofMillis(
+                        parsedEvery.getRecurInterval()).plusMillis(500).truncatedTo(ChronoUnit.SECONDS
+                );
                 if (every.isNegative() || every.isZero()) {
                     throw new CatBotException("I can't travel back in time ... yet!");
                 }
-                return new AddRecurringCommand(temp[0].strip(), at, every);
+                return new AddRecurringCommand(temp[0].strip(), on, every);
             } catch (DateTimeParseException e) {
                 if (e.toString().contains("Duration")) {
                     throw new CatBotException("Durations should be in the format P#DT#H#M#S");
                 }
                 throw new CatBotException("Dates should be in the format yyyy-MM-ddTHH:mm");
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new CatBotException("That's the wrong format!");
             }
 

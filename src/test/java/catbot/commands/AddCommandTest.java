@@ -46,7 +46,7 @@ public class AddCommandTest {
         testCommand.execute(tasks, ui, storage);
         assertEquals(1, tasks.size());
         assertEquals("Added new task!\n"
-                + "    [D][ ] This is a test by 29 Jan 2023, 8:00 PM\n"
+                + "    [D][ ] This is a test by 29 Jan, 08:00 PM\n"
                 + "You have 1 task now.", ui.getNextOutput().getText());
     }
 
@@ -57,7 +57,7 @@ public class AddCommandTest {
         testCommand.execute(tasks, ui, storage);
         assertEquals(1, tasks.size());
         assertEquals("Added new task!\n"
-                + "    [E][ ] This is a test (29 Jan 2023, 8:00 PM – 29 Jan 2023, 8:00 PM)\n"
+                + "    [E][ ] This is a test (29 Jan, 08:00 PM – 29 Jan, 08:00 PM)\n"
                 + "You have 1 task now.", ui.getNextOutput().getText());
     }
 }
