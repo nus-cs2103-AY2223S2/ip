@@ -31,7 +31,7 @@ Format: `todo DESC`
 
 Example: `todo read book`
 
-Expected outcome: Adds a To-Do to the task list with the description "Take out the trash".
+Expected outcome: Adds a To-Do to the task list with the description "read book".
 
 ### `deadline` - Adds a deadline
 
