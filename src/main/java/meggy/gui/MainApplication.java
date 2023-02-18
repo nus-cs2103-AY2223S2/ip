@@ -26,6 +26,8 @@ public class MainApplication extends Application {
             final FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/view/MainWindow.fxml"));
             final AnchorPane ap = fxmlLoader.load();
             final Scene scene = new Scene(ap);
+            stage.getIcons().add(GuiUtil.MEGGY_PROF_PIC);
+            stage.setTitle(Meggy.class.getSimpleName());
             stage.setScene(scene);
 
             final MainWindow mainWindow = fxmlLoader.getController();
