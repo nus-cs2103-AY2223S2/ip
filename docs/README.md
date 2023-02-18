@@ -1,29 +1,56 @@
-# User Guide
+# *Panav*
 
-## Features 
+***Panav* is a chatbot to help you through you day-to-day tasks with ease using a user-friendly interface!**
 
-### Feature-ABC
+What all can *Panav* do - 
+- Add 3 types of tasks: todos, deadlines and events
+- Listing all the available tasks
+- Mark, unmark or delete tasks according to need
+- Search through all the tasks in your lists matching your keyword
+- Store your list of tasks when you shut down *Panav* and restore the list upon opening
 
-Description of the feature.
+## Features
 
-### Feature-XYZ
+### Listing all tasks : `list`
+Lists all your tasks which you have added  
+Syntax: `list`
 
-Description of the feature.
+### Adding a ToDo : `todo`
+Adds a ToDo task to your list  
+Syntax: `todo {DESCRIPTION}`   
+Exmaple: `todo work`
 
-## Usage
+### Adding a deadline : `deadline`
+Adds a deadline task to your list  
+Syntax: `deadline {DESCRIPTION} /by {DEADLINE_TIMEFRAME}`   
+Example: `deadline work /by tonight ` 
 
-### `Keyword` - Describe action
+### Adding an event : `event`
+Adds an event task to your list  
+Syntax: `event {DESCRIPTION} /from {START_TIME} /to {END_TIME}`   
+Example: `CS2103T exam /from 26th April 4pm /to 6pm`  
 
-Describe the action and its outcome.
+### Find a task : `find`
+Searches through your whole list for tasks matching the keyword you input  
+Syntax: `find {KEYWORD}`  
+Example `find exam`  
 
-Example of usage: 
+### Mark a task : `mark`
+Marks a task in your list as done according to the index you input
+Syntax: `mark {TASK_INDEX}`  
+Example: `mark 1`
 
-`keyword (optional arguments)`
+### Unmark a task : `unmark`  
+Unmarks a task in your list which was previously marked as done according to the index you input  
+Syntax: `unmark {TASK_INDEX}`  
+Example `unmark 1`
 
-Expected outcome:
+### Delete a task: `delete`
+Deletes the task correspinding to the index you input from the list  
+Syntax: `delete {TASK_INDEX}`  
+Example `delete 1`
 
-Description of the outcome.
-
-```
-expected output
-```
+### Exit : `bye`  
+Exits from the chatbot after saving your list  
+Syntax: `bye`  
+ 
