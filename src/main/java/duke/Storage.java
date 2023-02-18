@@ -17,7 +17,7 @@ public class Storage {
     /**
      * Class constructor.
      *
-     * @param filePath the path of the text file to read/store tasks
+     * @param filePath the path of the text file to read/store tasks.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -26,8 +26,8 @@ public class Storage {
     /**
      * Reads data from a file, creates new Task objects and stores them in an ArrayList<Task>.
      *
-     * @return the arrayList<Task> of Tasks stored in the file
-     * @throws IOException if an error occurs during reading the file
+     * @return the arrayList<Task> of Tasks stored in the file.
+     * @throws IOException if an error occurs during reading the file.
      */
     public ArrayList<Task> readFromFile() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -49,6 +49,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Creates new Task objects according to the input and adds them to the list.
+     *
+     * @param taskList list of tasks.
+     * @param task task to be added in list.
+     */
     private void storeTask(ArrayList<Task> taskList, String task) {
         char taskType = task.charAt(1);
         char taskStatus = task.charAt(4);
@@ -82,7 +88,7 @@ public class Storage {
     /**
      * Writes the data stored in ArrayList<Task> to a file specified by 'filepath'.
      *
-     * @param taskList contains the Tasks to be written in the file
+     * @param taskList contains the Tasks to be written in the file.
      */
     public void writeToFile(TaskList taskList) {
         try {

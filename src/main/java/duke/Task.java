@@ -4,25 +4,44 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Class constructor.
+     *
+     * @param description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Returns "X" if the task is done or " " otherwise.
+     *
+     * @return "X" if the task is done or " " otherwise.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Returns true if the task is marked as done, or false otherwise.
+     *
+     * @return true if the task is marked as done, or false otherwise.
+     */
     public boolean isDone() {
         return this.isDone;
     }
 
-    // Mark task as done
+    /**
+     * Marks the task as done.
+     */
     public void mark() {
         this.isDone = true;
     }
 
-    // Unmark task
+    /**
+     * Marks the task as not done.
+     */
     public void unmark() {
         this.isDone = false;
     }

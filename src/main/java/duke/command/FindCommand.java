@@ -8,11 +8,26 @@ import duke.TaskList;
 public class FindCommand extends Command {
     String command;
 
+    /**
+     * Class constructor.
+     *
+     * @param command the task to be found in the list
+     */
     public FindCommand(String command) {
         this.command = command;
     }
 
-    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    /**
+     * Finds and returns the items in the list that include the keyword given.
+     * Returns an error message otherwise.
+     *
+     * @param taskList the list of tasks.
+     * @param storage the items read from the file.
+     * @param ui methods to be used to interact with the user.
+     * @return list of items.
+     * @throws DukeException
+     */
+    public String execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         String keyword = command.substring(command.indexOf(" ") + 1);
         int[] indexArray = new int[taskList.getSize()];
         boolean isContained = false;
@@ -25,9 +40,9 @@ public class FindCommand extends Command {
         }
 
         if (!isContained) {
-            System.out.println("There are no such items in your list!");
+            return "There are no such items in your list!";
         } else {
-            ui.printFind(taskList, indexArray);
+            return ui.printFind(taskList, indexArray);
         }
     }
 }

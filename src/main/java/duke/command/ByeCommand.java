@@ -6,12 +6,23 @@ import duke.Ui;
 import duke.Storage;
 
 public class ByeCommand extends Command {
-    public ByeCommand() {
-    }
+    /**
+     * Class constructor.
+     */
+    public ByeCommand() {}
 
-    public void execute(TaskList taskList, Storage storage,  Ui ui) throws DukeException {
-        ui.showGoodbye();
+    /**
+     * Returns the goodbye message.
+     *
+     * @param taskList the list of tasks.
+     * @param storage the items read from the file.
+     * @param ui methods to be used to interact with the user.
+     * @return goodbye message.
+     * @throws DukeException
+     */
+    public String execute(TaskList taskList, Storage storage,  Ui ui) throws DukeException {
         storage.writeToFile(taskList);
+        return ui.showGoodbye();
     }
 
     @Override

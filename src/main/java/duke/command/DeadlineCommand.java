@@ -7,34 +7,54 @@ import duke.TaskList;
 import duke.Task;
 import duke.Deadline;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineCommand extends Command {
     String command;
 
+    /**
+     * Class constructor.
+     *
+     * @param command the task to be added in the list.
+     */
     public DeadlineCommand(String command) {
         this.command = command;
     }
 
-    public void execute(TaskList taskList, Storage storage,  Ui ui) throws DukeException {
+    /**
+     * Adds a new deadline task to the list and returns a "taskAdded" message.
+     *
+     * @param taskList the list of tasks.
+     * @param storage the items read from the file.
+     * @param ui methods to be used to interact with the user.
+     * @return "taskAdded" message.
+     * @throws DukeException if input is wrong.
+     */
+    public String execute(TaskList taskList, Storage storage,  Ui ui) throws DukeException {
         try {
             Task newTask;
             String description = command.substring(command.indexOf(" ") + 1, command.indexOf("/"));
-            String by = command.substring(command.indexOf("/by") + 4);
+            String stringDate = command.substring(command.indexOf("/by") + 4);
 
             if (description.equals("")) {
-                throw new DukeException("deadline");
-            } else if (by.equals("")) {
-                throw new DukeException("empty time");
+                throw new DukeException("OOPS!!! The description of a deadline task cannot be empty.");
+            } else if (stringDate.equals("")) {
+                throw new DukeException("Please specify the time the time period for this task.");
             } else {
-                newTask = new Deadline(description, by);
+                try {
+                    LocalDateTime by = LocalDateTime.parse(stringDate, DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
+                    newTask = new Deadline(description, by);
+                } catch (Exception e){
+                    throw new DukeException("The time period must be in the format: 'HH:mm dd-MM-yyyy'");
+                }
+
             }
 
             taskList.addTask(newTask);
-            ui.showTaskAdded(newTask);
+            return ui.showTaskAdded(newTask);
         } catch (DukeException e) {
-            e.WrongCommandException();
-            e.EmptyDescriptionException();
-            e.EmptyTimeException();
+            throw new DukeException(e.getMessage());
         }
-
     }
 }

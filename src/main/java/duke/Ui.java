@@ -8,15 +8,9 @@ public class Ui {
     /**
      * Prints welcome message.
      */
-    public void showWelcome() {
-        String LOGO = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String output = "Hello from\n" + LOGO;
-        output += "What can I help you with?";
-        System.out.println(output);
+    public static String showWelcome() {
+        String output = "Hello from DUKE!\n" + "What can I help you with?";
+        return output;
     }
 
     /**
@@ -29,60 +23,87 @@ public class Ui {
     /**
      * Returns the next command from user input.
      *
-     * @return the next command from user input
+     * @return the next command from user input.
      */
     public String getInput() {
         return (scanner.nextLine());
     }
 
     /**
-     * Prints goodbye message and closes scanner.
+     * Returns the goodbye message and closes scanner.
+     *
+     * @return goodbye message.
      */
-    public void showGoodbye() {
+    public String showGoodbye() {
         String output = "Bye. Hope to see you again soon!";
         scanner.close();
-        System.out.println(output);
+        return output;
     }
 
     /**
-     * Prints message when a task is added to the list.
+     * Returns message when a task is added to the list.
      *
-     * @param task the task to be stored in list
+     * @param task the task to be stored in list.
+     * @return message when a task is added to the list.
      */
-    public void showTaskAdded(Task task) {
+    public String showTaskAdded(Task task) {
         String output = "I've added this task to your list:\n";
         output += task;
-        System.out.println(output);
+        return output;
     }
 
-    public void printList(TaskList taskList) {
+    /**
+     * Returns the list of tasks.
+     *
+     * @param taskList list of tasks.
+     * @return list of tasks.
+     */
+    public String printList(TaskList taskList) {
         if (taskList.getSize() == 0) {
-            System.out.println("Your list is empty!");
+            return "Your list is empty!";
         } else {
             String output = "Here is your list:\n";
             for (int i = 0; i < taskList.getSize(); i++) {
                 output += (i + 1) + ". " + taskList.getTask(i) + "\n";
             }
-            System.out.println(output);
+            return output;
         }
     }
 
-    public void printMark(Task task) {
+    /**
+     * Returns the task that has been marked as done and the "marked" message.
+     *
+     * @param task the task to be marked as done.
+     * @return task that has been marked as done and the "marked" message.
+     */
+    public String printMark(Task task) {
         String output = "Nice! I've marked this task as done:\n" + task.toString();
-        System.out.println(output);
+        return output;
     }
 
-    public void printUnmark(Task task) {
+    /**
+     * Returns the task that has been marked as not done and the "unmarked" message.
+     *
+     * @param task task that to be marked as not done.
+     * @return task that has been marked as not done and the "unmarked" message.
+     */
+    public String printUnmark(Task task) {
         String output = "OK, I've marked this task as not done yet:\n" + task.toString();
-        System.out.println(output);
+        return output;
     }
 
-    public void printDeleteTask(Task task) {
+    /**
+     * Returns the deleted task.
+     *
+     * @param task task to be deleted.
+     * @return deleted task.
+     */
+    public String printDeleteTask(Task task) {
         String output = "Noted. I've removed this task:\n" + task.toString();
-        System.out.println(output);
+        return output;
     }
 
-    public void printFind(TaskList taskList, int[] indexArray) {
+    public String printFind(TaskList taskList, int[] indexArray) {
         String output = "Here are the matching tasks in your list:\n";
         int counter = 1;
         for (int i = 0; i < taskList.getSize(); i++) {
@@ -91,14 +112,14 @@ public class Ui {
                 counter++;
             }
         }
-        System.out.println(output);
+        return output;
     }
 
     public void showLoadingError() {
         System.out.println( "There was an error in loading your file!");
     }
 
-    public void showError(DukeException e) {
-        System.out.println(e.getMessage());
+    public String showError(DukeException e) {
+        return e.getMessage();
     }
 }

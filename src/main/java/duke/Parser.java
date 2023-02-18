@@ -6,13 +6,21 @@ public class Parser {
     /**
      * Returns true if user input is "bye".
      *
-     * @param command user input
-     * @return true if user input is "bye", false otherwise
+     * @param command user input.
+     * @return true if user input is "bye", false otherwise.
      */
     public boolean checkEnd(String command) {
         return command.equalsIgnoreCase("bye");
     }
 
+    /**
+     * Returns the command being executed.
+     * Returns an error if the input is not in the pre-determined commands.
+     *
+     * @param command the command to be executed.
+     * @return the Command to be executed.
+     * @throws DukeException if input is not in the pre-determined commands.
+     */
     public static Command parse(String command) throws DukeException {
         try {
             switch(command) {
@@ -42,13 +50,12 @@ public class Parser {
                 case "event":
                     return new EventCommand(command);
                 default:
-                    throw new DukeException("wrong");
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
                 }
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (DukeException e) {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
         }
-        return new ByeCommand();
     }
 }
 

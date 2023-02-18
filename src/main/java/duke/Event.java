@@ -10,22 +10,9 @@ public class Event extends Task {
     /**
      * Class constructor.
      *
-     * @param description description of event task
-     * @param from date/time the event starts
-     * @param to date/time the event ends
-     */
-    public Event(String description, String from, String to) {
-        super(description);
-        this.from = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
-        this.to = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
-    }
-
-    /**
-     * Class constructor to be used when reading from files.
-     *
-     * @param description description of event task
-     * @param from date/time the event starts
-     * @param to date/time the event ends
+     * @param description description of event task.
+     * @param from date/time the event starts.
+     * @param to date/time the event ends.
      */
     public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
@@ -35,7 +22,8 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of an event.
-     * @return the string representation of an event
+     *
+     * @return the string representation of an event.
      */
     @Override
     public String toString() {
