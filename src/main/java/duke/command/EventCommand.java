@@ -27,7 +27,7 @@ public class EventCommand implements Command {
         Task newTask = new Event(eventDescription, eventPeriod);
         assert newTask != null;
         tasks.addTask(newTask);
-        String toDisplay = String.format("Gotcha! I have added this task:\n%s\nNow you have %d tasks in the list.",
+        String toDisplay = String.format("Gotcha! I have added this task:\n%s\nNow you have a total of %d tasks.",
                 newTask, tasks.getSize());
         ui.displayMessage(toDisplay);
         return toDisplay;
