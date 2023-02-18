@@ -13,6 +13,7 @@ import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
+import duke.commands.RemindCommand;
 import duke.commands.UnmarkCommand;
 import duke.exceptions.DukeException;
 
@@ -84,6 +85,9 @@ public class Parser {
             break;
         case "find":
             ret = new FindCommand(tokens);
+            break;
+        case "remind":
+            ret = new RemindCommand(tokens);
             break;
         default:
             throw new DukeException("I'm sorry, I could not understand that command.");

@@ -72,4 +72,17 @@ public class TaskList implements Serializable {
         currTask.unmark();
     }
 
+    /**
+     * returns list of tasks within the stipulated number of days
+     */
+    public ArrayList<Task> getUpcomingTasks(int days) {
+        ArrayList<Task> out = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.isToBeReminded(days)) {
+                out.add(task);
+            }
+        }
+        return out;
+    }
+
 }

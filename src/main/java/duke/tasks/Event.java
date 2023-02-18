@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 /**
  * This is the Event task class to represent events passed to Duke.
@@ -33,5 +34,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from.format(DTFORMAT) + " to: " + to.format(DTFORMAT) + ")";
+    }
+
+    @Override
+    public boolean isToBeReminded(int days) {
+        LocalDate now = LocalDate.now();
+        long daysUntilTask = now.until(this.from, ChronoUnit.DAYS);
+        return daysUntilTask < days && !isDone;
     }
 }

@@ -43,6 +43,7 @@ public class MainWindow extends AnchorPane {
                 + "mark\n"
                 + "unmark\n"
                 + "delete\n"
+                + "remind\n"
                 + "try typing a command! :D";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)

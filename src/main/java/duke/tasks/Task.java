@@ -64,4 +64,10 @@ public abstract class Task implements Serializable {
     public boolean containsString(String keyword) {
         return this.description.contains(keyword);
     }
+
+    /**
+     * Returns true if task is within the number of days provided
+     * @param days leading up to task to be reminded
+     */
+    public abstract boolean isToBeReminded(int days);
 }
