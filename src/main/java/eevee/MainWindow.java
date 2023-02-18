@@ -1,4 +1,4 @@
-package duke;
+package eevee;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -24,7 +24,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Eevee eevee;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/piplup.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/eevee.png"));
@@ -35,8 +35,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getHelloMessage(dukeImage));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setEevee(Eevee e) {
+        eevee = e;
     }
 
     /**
@@ -46,10 +46,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = eevee.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getEeveeDialog(response, dukeImage)
         );
         if (input.equals("bye")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1));

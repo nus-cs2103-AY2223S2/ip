@@ -1,4 +1,4 @@
-package duke;
+package eevee;
 
 import javafx.application.Application;
 
