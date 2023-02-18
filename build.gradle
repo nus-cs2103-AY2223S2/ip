@@ -43,11 +43,11 @@ test {
 }
 
 application {
-    mainClassName = "uwuke.UwUke"
+    mainClassName = "uwuke.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "uwuke"
     archiveClassifier = null
 }
 
