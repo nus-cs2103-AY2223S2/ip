@@ -3,11 +3,18 @@ package duke.commands;
 import duke.backend.TaskList;
 import duke.tasks.Task;
 
+/**
+ * Command to Mark a Task as done.
+ */
 public class Mark extends Command {
     private int idx;
-
     private TaskList tasklist;
 
+    /**
+     * Constructor for a Mark command.
+     * @param idx The 1-index of the Task to mark.
+     * @param tasklist The list to mark the Task from.
+     */
     public Mark(int idx, TaskList tasklist) {
         this.idx = idx;
         this.tasklist = tasklist;

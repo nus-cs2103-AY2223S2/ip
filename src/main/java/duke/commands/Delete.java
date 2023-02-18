@@ -3,11 +3,19 @@ package duke.commands;
 import duke.backend.TaskList;
 import duke.tasks.Task;
 
+/**
+ * Command for Deletion.
+ */
 public class Delete extends Command {
 
-    int idx;
-    TaskList tasklist;
+    private int idx;
+    private TaskList tasklist;
 
+    /**
+     * Constructor for Delete command.
+     * @param idx 1-index of Task to be deleted.
+     * @param tasklist The list to be deleted from.
+     */
     public Delete(int idx, TaskList tasklist) {
         this.idx = idx;
         this.tasklist = tasklist;

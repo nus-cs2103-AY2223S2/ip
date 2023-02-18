@@ -3,10 +3,18 @@ package duke.commands;
 import duke.backend.TaskList;
 import duke.tasks.Task;
 
+/**
+ * Command to Mark a Task as not done.
+ */
 public class Unmark extends Command {
     private int idx;
     private TaskList tasklist;
 
+    /**
+     * Constructor for an Unmark command.
+     * @param idx 1-index of the Task to be unmarked.
+     * @param tasklist The list to unmark the Task from.
+     */
     public Unmark(int idx, TaskList tasklist) {
         this.idx = idx;
         this.tasklist = tasklist;
