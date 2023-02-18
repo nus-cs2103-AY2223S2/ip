@@ -94,6 +94,9 @@ public class LoanSharkStorage {
                 Scanner recordScanner = new Scanner(recordFile);
                 while (recordScanner.hasNext()) {
                     String loanData = recordScanner.nextLine();
+                    if (loanData.isBlank()) {
+                        continue;
+                    }
                     String[] splitLoanData = loanData.split("[|]");
                     int balance = Integer.parseInt(splitLoanData[1]);
                     int original = Integer.parseInt(splitLoanData[2]);
