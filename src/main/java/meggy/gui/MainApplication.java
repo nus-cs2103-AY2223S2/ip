@@ -8,11 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import meggy.Meggy;
+import meggy.Util;
 
 /** A chatbot GUI using FXML. */
 public class MainApplication extends Application {
 
-    private final Meggy meggy = new Meggy();
+    private final Meggy meggy = new Meggy(Util.DATA_FILE_PATH);
 
     /**
      * Run the GUI. Creates views using FXML.

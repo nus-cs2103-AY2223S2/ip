@@ -47,8 +47,6 @@ public class Parser {
      */
     public static <E> JobAndArg<E> parseJobAndArg(Map<String, Function<String, E>> jobTable, String line) {
         assert jobTable != null;
-        assert !jobTable.containsKey(null);
-        assert !jobTable.containsValue(null);
         assert line != null;
         //Multiple whitespace characters are treated as 1 whitespace.
         line = line.replaceAll("[ \t\r\n\f]+", " ").trim();

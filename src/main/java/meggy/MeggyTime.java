@@ -11,9 +11,7 @@ public class MeggyTime {
     /** Cached dummy NA value. */
     public static final MeggyTime NA = new MeggyTime();
     /** The date-time format to be pass to output. */
-    public static final DateTimeFormatter OUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    /** The date-time format to be encoded to data file. */
-    public static final DateTimeFormatter ENCODE_FORMAT = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
+    public static final DateTimeFormatter OUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     /** All acceptable date-time formats. Singapore's convention (date-month) is prioritized. */
     private static final DateTimeFormatter[] FORMATTERS;
 
@@ -89,11 +87,6 @@ public class MeggyTime {
     /** @return User-customized time string in square brackets or formatted date-time. */
     public String toString() {
         return formatted == null ? '[' + customized + ']' : formatted.format(OUT_FORMAT);
-    }
-
-    /** @return String representation used in data file. User-customized time is unchanged. */
-    public String encode() {
-        return formatted == null ? customized : formatted.format(ENCODE_FORMAT);
     }
 
     /**

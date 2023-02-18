@@ -2,7 +2,6 @@ package meggy;
 
 import java.io.File;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 
 import meggy.exception.Function;
@@ -25,9 +24,6 @@ public class Meggy {
      * function that modifies task list of the command requires it.
      */
     public final Map<String, Function<String, String>> cmdToJob;
-    /** Commmands that changes the task list */
-    public final Set<String> listChangingCmd = Set.of(Resource.CMD_MARK, Resource.CMD_UNMK, Resource.CMD_TODO,
-            Resource.CMD_DDL, Resource.CMD_EVENT, Resource.CMD_DEL);
     /** List of tasks. Allows dupes. */
     private final TaskList tasks;
     /** Location to save cross-session data. */
@@ -38,7 +34,7 @@ public class Meggy {
     private Consumer<String> notifMsgSender = System.out::println;
 
     /** Creates a chatbot agent instance. */
-    public Meggy() {
+    public Meggy(String storageFilePath) {
         tasks = new TaskList();
         cmdToJob = Map.of(
                 Resource.CMD_EXIT, s -> Resource.FAREWELL,
@@ -51,7 +47,7 @@ public class Meggy {
                 Resource.CMD_DEL, this::deleteTask,
                 Resource.CMD_FIND, this::find
         );
-        storage = new Storage(new File(Util.DATA_FILE_PATH));
+        storage = new Storage(new File(storageFilePath));
     }
 
     /** Save task list to storage file. Redirects {@link MeggyException} to {@code notifMsgSender} */
@@ -192,5 +188,11 @@ public class Meggy {
             notifMsgSender.accept(e.getMessage());
         }
         fileWrite = true;
+    }
+
+    /** To chatbots are equal if they have same taslk list. */
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Meggy && ((Meggy) o).tasks.equals(tasks);
     }
 }
