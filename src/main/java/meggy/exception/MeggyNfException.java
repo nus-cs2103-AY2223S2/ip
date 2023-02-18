@@ -6,6 +6,6 @@ import meggy.Resource;
 public class MeggyNfException extends MeggyException {
     /** @param arg Non-null. The string that can't be parsed. */
     public MeggyNfException(String arg) {
-        super(Resource.errNfe(arg));
+        super(Resource.fmtErrNfe(arg));
     }
 }

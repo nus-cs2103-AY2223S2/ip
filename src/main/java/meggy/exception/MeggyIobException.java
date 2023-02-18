@@ -9,6 +9,6 @@ public class MeggyIobException extends MeggyException {
      * @param listSize Size of list that would cause {@link IndexOutOfBoundsException} when queried with idx.
      */
     public MeggyIobException(int idx, int listSize) {
-        super(Resource.errOutOfBounds(idx, listSize));
+        super(Resource.fmtErrOutOfBounds(idx, listSize));
     }
 }

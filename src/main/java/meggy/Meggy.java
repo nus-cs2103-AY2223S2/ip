@@ -11,9 +11,9 @@ import meggy.task.UserTask;
 
 /** The chatbot. After initialization, interact by calling {@code getResponse} method. */
 public class Meggy {
-    /** What to do when the user-typed the command is unknown. Currently: notify user command is unknown. */
-    public final static Function<String, String> unknownCmdBehavior = s -> {
-        throw new MeggyException(Resource.errUnknownCmd(Parser.get1stArg(s)));
+    /** Notifies user that command is unknown. */
+    public static final Function<String, String> NOTIFY_UNKNOWN_CMD = s -> {
+        throw new MeggyException(Resource.fmtErrUnknownCmd(Parser.get1stArg(s)));
     };
     /**
      * What to do when reaching different commands.
@@ -21,7 +21,7 @@ public class Meggy {
      * Keys: non-null strings.
      * <p>
      * Values: Non-null function that accepts unparsed string arguments and return chatbot response strings. Must be the
-     * function that modifies task list of the command requires it.
+     * function that modifies task list and write to file if the command requires so.
      */
     public final Map<String, Function<String, String>> cmdToJob;
     /** List of tasks. Allows dupes. */
@@ -50,7 +50,7 @@ public class Meggy {
         storage = new Storage(new File(storageFilePath));
     }
 
-    /** Save task list to storage file. Redirects {@link MeggyException} to {@code notifMsgSender} */
+    /** Saves task list to storage file. Redirects {@link MeggyException} to {@code notifMsgSender} */
     private void saveListToFile() {
         if (!fileWrite) {
             return;
@@ -76,7 +76,7 @@ public class Meggy {
             idx = Parser.parseIdx(args);
             tasks.boundsCheck(idx);
         } catch (MeggyException e) {
-            notifMsgSender.accept(Util.usageIdxCmd(newStatus ? Resource.CMD_MARK : Resource.CMD_UNMK));
+            notifMsgSender.accept(Util.fmrUsageOfIdxCmd(newStatus ? Resource.CMD_MARK : Resource.CMD_UNMK));
             throw e;
         }
         final UserTask task = tasks.get(idx);
@@ -120,7 +120,7 @@ public class Meggy {
             idx = Parser.parseIdx(arg);
             tasks.boundsCheck(idx);
         } catch (MeggyException e) {
-            notifMsgSender.accept(Util.usageIdxCmd(Resource.CMD_DEL));
+            notifMsgSender.accept(Util.fmrUsageOfIdxCmd(Resource.CMD_DEL));
             throw e;
         }
         final UserTask task = tasks.remove(idx);
@@ -135,7 +135,7 @@ public class Meggy {
      */
     private String reportChangedTaskAndList(UserTask task) {
         assert task != null;
-        return Resource.TASK_STRING_INDENT + task + '\n' + Resource.nTaskFmt(tasks.size());
+        return Resource.TASK_STRING_INDENT + task + '\n' + Resource.fmtTaskCnt(tasks.size());
     }
 
     /**
@@ -169,14 +169,16 @@ public class Meggy {
     public String parseAndGetResponse(String line) throws MeggyException {
         assert line != null;
         final Parser.JobAndArg<String> jobAndArg = Parser.parseJobAndArg(cmdToJob, line);
-        final Function<String, String> job = jobAndArg.job == null ? unknownCmdBehavior : jobAndArg.job;
+        final Function<String, String> job = jobAndArg.job == null ? NOTIFY_UNKNOWN_CMD : jobAndArg.job;
         return job.apply(jobAndArg.args);
     }
 
     /**
-     * Sets new {@code notifMsgSender}, use this channel to send greeting message, and add tasks from file to list.
+     * Sets new {@code notifMsgSender}, send greeting messages, and add tasks from file to list.
+     *
+     * @param notifMsgSender Non-null. This channel to send extra messages.
      */
-    public void bindGui(Consumer<String> notifMsgSender) {
+    public void bindUi(Consumer<String> notifMsgSender) {
         assert notifMsgSender != null;
         this.notifMsgSender = notifMsgSender;
         notifMsgSender.accept(Resource.GREETINGS);
@@ -190,7 +192,7 @@ public class Meggy {
         fileWrite = true;
     }
 
-    /** To chatbots are equal if they have same taslk list. */
+    /** Two chatbots are equal if they have equal task list. */
     @Override
     public boolean equals(Object o) {
         return o instanceof Meggy && ((Meggy) o).tasks.equals(tasks);

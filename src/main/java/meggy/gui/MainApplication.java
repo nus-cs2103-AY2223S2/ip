@@ -12,7 +12,7 @@ import meggy.Util;
 
 /** A chatbot GUI using FXML. */
 public class MainApplication extends Application {
-
+    /** The chatbot in use. */
     private final Meggy meggy = new Meggy(Util.DATA_FILE_PATH);
 
     /**
@@ -28,7 +28,7 @@ public class MainApplication extends Application {
             final Scene scene = new Scene(ap);
             stage.setScene(scene);
 
-            MainWindow mainWindow = fxmlLoader.getController();
+            final MainWindow mainWindow = fxmlLoader.getController();
             mainWindow.setChatbot(meggy);
             mainWindow.setApDimProperty(ap.heightProperty(), ap.widthProperty());
             stage.show();

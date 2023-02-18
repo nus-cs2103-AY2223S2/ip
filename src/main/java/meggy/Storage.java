@@ -24,7 +24,7 @@ public class Storage {
     }
 
     /**
-     * Write the content of the entire {@code tasks} list into data file. Creates data file if it did not previously
+     * Writes the content of the entire {@code tasks} list into data file. Creates data file if it did not previously
      * exist.
      *
      * @param tasks Non-null. The task list to take snapshot.

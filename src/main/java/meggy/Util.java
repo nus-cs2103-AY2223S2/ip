@@ -19,8 +19,8 @@ public final class Util {
     /** Task list data file. */
     public static final String DATA_FILE_PATH = "MeggyData.txt";
     public static final String ERROR_WRONG_FILE_0 = "This file does NOT look like my task list record: \"";
-    public static final String ERROR_WRONG_FILE_1 = "\". If this file is important, please back up before executing a" +
-            "ny more command because this file will be overwritten!";
+    public static final String ERROR_WRONG_FILE_1 = "\". If this file is important, please back up before executing any"
+            + " more command because this file will be overwritten!";
 
     /** @deprecated Class stores all values statically should not be initialized. */
     private Util() {
@@ -32,12 +32,13 @@ public final class Util {
     }
 
     /**
-     * Notification message to indicate the correct syntax of index commands (todo/deadline/event/delete)
+     * Formats the notification message to indicate the correct syntax of index commands (todo/deadline/event/delete/
+     * mark/unmark)
      *
-     * @param cmd Non-null. Index command. Currently 'mark', 'unmark', or 'delete' only.
+     * @param cmd Non-null. Index command (todo/deadline/event/delete/mark/unmark only).
      * @return Notification message.
      */
-    public static String usageIdxCmd(String cmd) {
+    public static String fmrUsageOfIdxCmd(String cmd) {
         assert cmd != null;
         return Resource.NOTIF_USAGE + cmd + " <idx: integer between 1 and list size (inclusive)>\n";
     }

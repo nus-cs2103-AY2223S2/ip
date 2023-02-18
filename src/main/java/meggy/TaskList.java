@@ -25,7 +25,7 @@ public class TaskList extends ArrayList<UserTask> {
         final StringBuilder ans = new StringBuilder();
         int i = 0;
         for (UserTask task : this) {
-            ans.append(Resource.idxFmt(i++)).append(task).append('\n');
+            ans.append(Resource.fmtIdx(i++)).append(task).append('\n');
         }
         return ans.toString();
     }

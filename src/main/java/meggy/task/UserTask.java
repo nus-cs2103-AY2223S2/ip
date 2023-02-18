@@ -15,6 +15,8 @@ public abstract class UserTask {
     private boolean isDone;
 
     /**
+     * Sets description and args value to the task.
+     *
      * @param desc Non-null. Description string of task with command removed.
      * @param args Non-null. The line (command and extra space removed) that created this task.
      */
@@ -46,17 +48,17 @@ public abstract class UserTask {
      * @param keyword Non-null. Raw time keyword.
      * @return Command-syntax-marking time keyword.
      */
-    public static String formatKeyword(String keyword) {
+    public static String fmtKeyword(String keyword) {
         assert keyword != null;
         return '/' + keyword + ' ';
     }
 
-    /** Get task completion status. */
+    /** Gets task completion status. */
     public boolean isDone() {
         return isDone;
     }
 
-    /** Update task completion status. */
+    /** Updates task completion status. */
     public void setDone(boolean done) {
         isDone = done;
     }

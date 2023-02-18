@@ -12,9 +12,9 @@ public class EventTask extends UserTask {
     /** Bracketed icon of task type. */
     public static final String LABEL = getTaskTypeLabel(Resource.CMD_EVENT);
     /** 'Start' keyword formatted to be looked up in user input during parsing. */
-    public static final String START_KEYWORD_FORMATTED = formatKeyword(Resource.KW_STT);
+    public static final String START_KEYWORD_FORMATTED = fmtKeyword(Resource.KW_STT);
     /** 'End' keyword formatted to be looked up in user input during parsing. */
-    public static final String END_KEYWORD_FORMATTED = formatKeyword(Resource.KW_END);
+    public static final String END_KEYWORD_FORMATTED = fmtKeyword(Resource.KW_END);
     /** Start time. */
     public final MeggyTime start;
     /** End time. */
@@ -35,7 +35,7 @@ public class EventTask extends UserTask {
     }
 
     /**
-     * Factory method. Parses description, start time, and end time from arguments.
+     * Parses description, start time, and end time from arguments. Factory method.
      *
      * @param args Non-null. The line (command and extra space removed) that created this task.
      */

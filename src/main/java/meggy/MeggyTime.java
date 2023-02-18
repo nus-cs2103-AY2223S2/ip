@@ -11,7 +11,7 @@ public class MeggyTime {
     /** Cached dummy NA value. */
     public static final MeggyTime NA = new MeggyTime();
     /** The date-time format to be pass to output. */
-    public static final DateTimeFormatter OUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    public static final DateTimeFormatter OUT_FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     /** All acceptable date-time formats. Singapore's convention (date-month) is prioritized. */
     private static final DateTimeFormatter[] FORMATTERS;
 
@@ -53,7 +53,7 @@ public class MeggyTime {
     /** @param time Non-null. The trimmed time value to be interpreted. */
     private MeggyTime(String time) {
         assert time != null;
-        formatted = parseTime(time);
+        formatted = parseDateTime(time);
         customized = formatted == null ? time : null;
     }
 
@@ -70,14 +70,16 @@ public class MeggyTime {
     }
 
     /**
-     * @param time Non-null. The raw string to attempt to parsed.
+     * Attaempts to parse date-time from string.
+     *
+     * @param dateTime Non-null. The raw string to attempt to parsed.
      * @return parsed date-time or {@code null} if no formatter can parse correctly.
      */
-    public static LocalDateTime parseTime(String time) {
-        assert time != null;
+    public static LocalDateTime parseDateTime(String dateTime) {
+        assert dateTime != null;
         for (DateTimeFormatter format : FORMATTERS) {
             try {
-                return LocalDateTime.parse(time, format);
+                return LocalDateTime.parse(dateTime, format);
             } catch (DateTimeException ignored) {
             } // Try next formatter if unsuccessful
         }
@@ -86,7 +88,7 @@ public class MeggyTime {
 
     /** @return User-customized time string in square brackets or formatted date-time. */
     public String toString() {
-        return formatted == null ? '[' + customized + ']' : formatted.format(OUT_FORMAT);
+        return formatted == null ? '[' + customized + ']' : formatted.format(OUT_FMT);
     }
 
     /**

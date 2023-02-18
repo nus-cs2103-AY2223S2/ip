@@ -46,6 +46,13 @@ public class MainWindow extends AnchorPane {
         chatHistory = dialogContainer.getChildren();
     }
 
+    /**
+     * Binds pref dimension on crucial GUI elements to the window ({@link AnchorPane}) dimension to enable dynamic
+     * resizing according to window size.
+     *
+     * @param apHeightProperty Non-null. The {@link AnchorPane}'s {@code heightProperty}.
+     * @param apWidthProperty  Non-null. The {@link AnchorPane}'s {@code widthProperty}.
+     */
     public void setApDimProperty(ReadOnlyDoubleProperty apHeightProperty, ReadOnlyDoubleProperty apWidthProperty) {
         scrollPane.prefHeightProperty().bind(apHeightProperty.subtract(41));
         scrollPane.prefWidthProperty().bind(apWidthProperty);
@@ -54,14 +61,14 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Updates current chatbot.
+     * Updates the current chatbot.
      *
      * @param m Non-null. The new chatbot.
      */
     public void setChatbot(Meggy m) {
         assert m != null;
         meggy = m;
-        meggy.bindGui(s -> chatHistory.add(DialogBox.ofMeggy(s)));
+        meggy.bindUi(s -> chatHistory.add(DialogBox.ofMeggy(s)));
     }
 
     /**

@@ -59,7 +59,7 @@ public final class Resource {
     /** Icon for tasks marked 'done'. */
     public static final char DONE_MK = 'X';
     /** Front page greetings. */
-    public final static String GREETINGS = "Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
+    public static final String GREETINGS = "Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
 
     /** @deprecated Class stores all resource values statically should not be initialized. */
     private Resource() {
@@ -70,50 +70,50 @@ public final class Resource {
      *
      * @return Formatted index (starts with 1).
      */
-    public static String idxFmt(int i) {
+    public static String fmtIdx(int i) {
         return " " + (i + 1) + '.';
     }
 
     /**
-     * Notification message after each change to task list.
+     * Formats the notification message after each change to task list.
      *
      * @return Message about task list size.
      */
-    public static String nTaskFmt(int nTask) {
+    public static String fmtTaskCnt(int nTask) {
         return "Now you have " + nTask + " task(s) in the list.\n";
     }
 
     /**
-     * Message of error caused by {@link NumberFormatException}
+     * Formats the message of error caused by {@link NumberFormatException}
      *
      * @param arg Non-null. String in question.
      * @return Error message.
      */
-    public static String errNfe(String arg) {
+    public static String fmtErrNfe(String arg) {
         assert arg != null;
         return "Can't interpret \"" + arg + "\" as an index number.\n";
     }
 
     /**
-     * Notification message after empty input or unknown command or empty input.
+     * Formats the notification message after empty input or unknown command or empty input.
      *
      * @param cmd Non-null. String in question.
      * @return Message about empty input or unknown command or empty input.
      */
-    public static String errUnknownCmd(String cmd) {
+    public static String fmtErrUnknownCmd(String cmd) {
         assert cmd != null;
         return cmd.isEmpty() ? "Umm that's all blank? Say something! Speak to me!\n" : "Don't know what \""
                 + cmd + "\" means.\n";
     }
 
     /**
-     * Message of error would have caused by {@link IndexOutOfBoundsException}
+     * Formats the message of error would have caused by {@link IndexOutOfBoundsException}
      *
      * @param idx      Index (starts with 0) in question.
      * @param listSize Size of list that would cause {@link IndexOutOfBoundsException} when queried with idx.
      * @return Error message.
      */
-    public static String errOutOfBounds(int idx, int listSize) {
+    public static String fmtErrOutOfBounds(int idx, int listSize) {
         idx += 1;
         return "Can't retrieve item with " + (
                 idx > 0 ? "index " + idx + " from a list of size " + listSize : "non-positive index (" + idx + ')')
