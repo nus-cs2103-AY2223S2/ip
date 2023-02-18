@@ -1,18 +1,17 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.components.Storage;
 import duke.components.TaskList;
 import duke.exceptions.DukeException;
-
-import java.util.ArrayList;
-
 /**
  * The abstract class Command is the superclass of AddCommand, DeleteCommand, ExitCommand, ListCommand, MarkCommand
  * and UnmarkCommand.
  * Subclasses of Command have to provide methods for the execution of the Commands they encapsulate.
  */
 public abstract class Command {
-    ArrayList<String> tokens;
+    protected ArrayList<String> tokens;
 
     /**
      * Abstract constructor of a Command object.

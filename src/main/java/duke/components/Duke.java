@@ -1,16 +1,12 @@
 package duke.components;
 
-import duke.commands.Command;
-import duke.components.Parser;
-import duke.components.Storage;
-import duke.components.TaskList;
-import duke.exceptions.DukeException;
-
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
 
 /**
  * This is the driver class for Duke, the CLI task manager.
@@ -22,7 +18,7 @@ import java.nio.file.Paths;
 
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
 
     /**

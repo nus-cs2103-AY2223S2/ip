@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
+import duke.components.Storage;
+import duke.components.TaskList;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
-import duke.components.TaskList;
-import duke.components.Storage;
-
-import java.util.ArrayList;
 
 /**
  * The abstract class AddCommand inherits from the Command class and is the superclass of AddDeadlineCommand,
@@ -34,14 +34,6 @@ public abstract class AddCommand extends Command {
     }
 
     /**
-     * Getter for task being added.
-     * @return Task being added
-     */
-    public Task getTaskToAdd() {
-        return this.taskToAdd;
-    }
-
-    /**
      * {@inheritDoc}
      * @param tasks TaskList object to handle task management.
      * @param storage Storage object to handle reading/writing to/from storage.
@@ -51,7 +43,7 @@ public abstract class AddCommand extends Command {
         tasks.addTask(taskToAdd);
         return "Got it. I've added this task:\n"
                 + taskToAdd
-                +"\nNow you have "
+                + "\nNow you have "
                 + tasks.size()
                 + " tasks in the list.";
     }

@@ -1,13 +1,12 @@
 package duke.components;
 
-import duke.exceptions.DukeException;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import duke.exceptions.DukeException;
 
 /**
  * This is the Storage class for Duke, the CLI task manager.
@@ -16,7 +15,7 @@ import java.io.ObjectOutputStream;
  */
 
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     /**
      * Creates a Storage object.
