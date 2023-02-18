@@ -47,7 +47,7 @@ public class Storage {
             for (int i = 0; i < taskList.getSize(); i++) {
                 Task currenttask = taskList.getTask(i);
                 myWriter.write(currenttask.getNature() + " " + currenttask.getStatus() + " "
-                        + currenttask.getAction() + " "+ currenttask.getAdditionalInfo() + '\n');
+                        + currenttask.getAction() + " "+ currenttask.getTimeInfo() + '\n');
             }
             myWriter.close();
             System.out.println("[X] FINISHED WRITING");
@@ -73,13 +73,14 @@ public class Storage {
                 String[] availableTask = data.split(" ");
                 List<String> availableTaskAsList = Arrays.asList(availableTask);
                 boolean isDone = Boolean.parseBoolean(availableTaskAsList.get(1));
-                if (availableTaskAsList.get(0).equals("T")) {
+                String natureOfTask = availableTaskAsList.get(0);
+                if (natureOfTask.equals("T")) {
                     String action = "";
                     for (int i = 2; i < availableTaskAsList.size(); i++) {
                         action += availableTaskAsList.get(i) + " ";
                     }
                     returnTaskList.addTask(new ToDo(action, isDone));
-                } else if (availableTaskAsList.get(0).equals("D")) {
+                } else if (natureOfTask.equals("D")) {
                     String actionAndDate = "";
                     for (int i = 2; i < availableTaskAsList.size(); i++) {
                         actionAndDate += availableTaskAsList.get(i) + " ";
@@ -88,7 +89,7 @@ public class Storage {
                     List<String> deadlineInfoAsList = Arrays.asList(deadlineInfo);
                     String date = deadlineInfoAsList.get(1);
 
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy");
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy ");
 
                     returnTaskList.addTask(
                             new Deadline(LocalDateTime.parse(date,format), deadlineInfoAsList.get(0), isDone));
@@ -103,7 +104,7 @@ public class Storage {
 
                     String dateInfo = eventInfoAsList.get(1);
 
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy");
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy ");
 
                     String[] dateInfoAsArray = dateInfo.split(" /TO ");
                     List<String> dateInfoAsList = Arrays.asList(dateInfoAsArray);
@@ -136,14 +137,26 @@ public class Storage {
         }
     }
 
+
     /**
      * Add a task to the database and assign it to a key for easy retrieval.
-     * @param keyword the keyword to assign the {@code Task}
+     * @param userInput the keywords to assign the {@code Task}
      * @return a new {@code Storage} with the task added to the database
      */
 
     public Storage addToKeywordStorage(String userInput, Task task) {
-        for (String keyword : userInput.split(" ")) {
+        String toUpdateKeywordDatabase = "";
+        if (task.getNature().equals("T")) {
+            toUpdateKeywordDatabase = "TODO " + task.getAction();
+        } else if (task.getNature().equals("D")) {
+            toUpdateKeywordDatabase = "DEADLINE " + task.getAction()
+                    + " " + task.getTimeInfo();
+        } else {
+            toUpdateKeywordDatabase = "EVENT " + task.getAction()
+                    + " " + task.getTimeInfo();
+        }
+
+        for (String keyword : toUpdateKeywordDatabase.split(" ")) {
             if (this.database.containsKey(keyword)) {
                 TaskList currentList = this.database.get(keyword);
                 currentList = currentList.addTask(task);
@@ -160,7 +173,7 @@ public class Storage {
     /**
      * Remove a task from the database
      *
-     * @param keyword the keyword to remove the {@code Task} from the
+     * @param task the task to remove from the
      *                list of Tasks in database with assigned to that
      *                keyword
      * @return a new {@code Storage} with the task removed from the database

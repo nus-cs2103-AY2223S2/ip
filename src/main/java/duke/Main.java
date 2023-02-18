@@ -1,8 +1,6 @@
 package duke;
 
-import java.io.IOException;
 
-import duke.workflow.Greeting;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

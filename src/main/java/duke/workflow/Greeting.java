@@ -35,7 +35,9 @@ public class Greeting extends Event {
             return new Ending();
         } else {
             DoTask doTask = new DoTask();
-            doTask.setTaskList(Storage.loadProgress());
+            TaskList oldTasks = Storage.loadProgress();
+            doTask.loadOldTasks(oldTasks);
+            doTask.updateKeywordDatabase(oldTasks);
             return doTask;
         }
     }

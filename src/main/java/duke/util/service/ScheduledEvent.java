@@ -42,19 +42,19 @@ public class ScheduledEvent extends Task {
     }
 
     @Override
-    public String getAdditionalInfo() {
+    public String getTimeInfo() {
         return " /FROM " + dateBegin.format(
-                DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy"))
+                DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy"))
                 + " /TO " + dateEnd.format(
-                        DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy")) + ")";
+                        DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy"));
     }
 
     @Override
 
     public String toString() {
         return super.toString() + " (FROM: " + dateBegin.format(
-                DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy"))
+                DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy"))
                 + " TO: " + dateEnd.format(
-                        DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy")) + ")";
+                        DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy")) + ")";
     }
 }

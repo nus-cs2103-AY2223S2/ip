@@ -32,7 +32,7 @@ public class TaskList {
      *              of the list of tasks
      */
 
-    public TaskList markDone(int index) {
+    public TaskList markTask(int index) {
         Task currentTask = this.listTask.get(index);
         this.listTask.set(index, currentTask.markDone());
         return this;
@@ -49,7 +49,7 @@ public class TaskList {
      *              of the list of tasks
      */
 
-    public TaskList unMark(int index) {
+    public TaskList unmarkTask(int index) {
         Task currentTask = this.listTask.get(index);
         this.listTask.set(index, currentTask.unMark());
         return this;

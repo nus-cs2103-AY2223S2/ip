@@ -56,7 +56,7 @@ public class Task {
         return this;
     }
 
-    public String getAdditionalInfo () {
+    public String getTimeInfo () {
         return "";
     }
 

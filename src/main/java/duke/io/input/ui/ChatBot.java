@@ -1,7 +1,6 @@
 package duke.io.input.ui;
 
-import java.util.Arrays;
-import java.util.List;
+
 import java.util.Scanner;
 
 import duke.util.Storage;
@@ -23,51 +22,17 @@ import duke.workflow.Greeting;
  */
 
 public class ChatBot {
-    /**
-     * Print out Duke's logo.
-     */
-    public void printLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("_".repeat(22));
-        System.out.println("Hello from\n" + logo);
-        System.out.println("_".repeat(22));
-        System.out.println("");
+    private boolean usedByUser;
+    private Event lastEvent;
+
+
+    public ChatBot () {
+        this.usedByUser = false;
+        this.lastEvent = new Greeting();
     }
 
-    public String printGuiLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return printWithBracketGui(logo);
-    }
-
-    public String printWithBracketGui(String input) {
-        String toPrintOut = "";
-        if (input.contains("\n")) {
-            String[] inputSplitArray = input.split("\n");
-            List<String> inputSplitList = Arrays.asList(inputSplitArray);
-            int max = 0;
-            for (int i = 0; i < inputSplitList.size(); i++) {
-                if (inputSplitList.get(i).length() > max) {
-                    max = inputSplitList.get(i).length();
-                }
-            }
-            toPrintOut += "_".repeat(max) + "\n";
-            toPrintOut += input + "\n";
-            toPrintOut += "_".repeat(max) + "\n";
-        } else {
-            int size = input.length();
-            toPrintOut += "_".repeat(size) + "\n";
-            toPrintOut += input;
-            toPrintOut += "_".repeat(size) + "\n";
-        }
-        return toPrintOut;
+    public void greetUser() {
+        UserInterface.printLogo();
     }
 
     /**
@@ -77,56 +42,42 @@ public class ChatBot {
      * @param input the {@code String} being printed out
      */
 
-    public static void printWithBracket(String input) {
-        if (input.contains("\n")) {
-            String[] inputSplitArray = input.split("\n");
-            List<String> inputSplitList = Arrays.asList(inputSplitArray);
-            int max = 0;
-            for (int i = 0; i < inputSplitList.size(); i++) {
-                if (inputSplitList.get(i).length() > max) {
-                    max = inputSplitList.get(i).length();
-                }
-            }
-            System.out.println("_".repeat(max));
-            System.out.println(input);
-            System.out.println("_".repeat(max));
-        } else {
-            int size = input.length();
-            System.out.println("_".repeat(size));
-            System.out.println(input);
-            System.out.println("_".repeat(size));
-        }
-    }
 
     /**
      * Duke begins interacting with user.
      */
 
-    public void chatBegin() {
+    public void beginChat() {
         Scanner sc = new Scanner(System.in);
         Greeting greeting = new Greeting();
-        ChatBot.printWithBracket(greeting.greet());
+        System.out.println(UserInterface.printWithBracket(greeting.greet()));
         String isUsingDuke = sc.nextLine();
 
         while (!isUsingDuke.equals("YES") && !isUsingDuke.equals("NO")) {
-            ChatBot.printWithBracket("FOCUS, HUMAN. "
-                    + "YOU ARE TO ENTER INPUT WITH FULL CAPS.");
+            UserInterface.printInputWarning();
             isUsingDuke = sc.nextLine();
         }
 
         if (isUsingDuke.equals("NO")) {
-            Event nextEvent = greeting.toNextEvent("NOT PLAYING");
-            ChatBot.printWithBracket(nextEvent.toString());
-        } else if (isUsingDuke.equals("YES")) {
-            Event nextEvent = greeting.toNextEvent("PLAYING");
-            ChatBot.printWithBracket(nextEvent.toString());
+            Event currentEvent = greeting.toNextEvent("NOT PLAYING");
+            System.out.println(UserInterface.printWithBracket(currentEvent.toString()));
+        } else {
+            Event currentEvent = greeting.toNextEvent("PLAYING");
+            System.out.println(UserInterface.printWithBracket(currentEvent.toString()));
 
-            while (!nextEvent.isFinalEvent()) {
+            while (!currentEvent.isFinalEvent()) {
                 String nextTask = sc.nextLine();
-                nextEvent = nextEvent.toNextEvent(nextTask);
-                ChatBot.printWithBracket(nextEvent.toString());
+                currentEvent = currentEvent.toNextEvent(nextTask);
+                System.out.println(UserInterface.printWithBracket(currentEvent.toString()));
             }
-            Storage.saveProgressQuery(nextEvent.getTaskList());
+            usedByUser = true;
+            lastEvent = currentEvent;
+        }
+    }
+
+    public void endChat() {
+        if (usedByUser) {
+            Storage.saveProgressQuery(lastEvent.getTaskList());
         }
     }
 }

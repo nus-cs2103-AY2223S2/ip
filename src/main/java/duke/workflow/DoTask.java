@@ -1,22 +1,13 @@
 package duke.workflow;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-import duke.io.input.exception.DukeException;
-import duke.io.input.exception.UserInputException;
+import duke.io.input.ui.UserInterface;
 import duke.util.Storage;
 import duke.util.Task;
 import duke.util.TaskList;
 import duke.util.Parser;
-
-import duke.util.service.Deadline;
-import duke.util.service.ScheduledEvent;
-import duke.util.service.ToDo;
-
 
 /**
  * A more specific implementation of {@code Event}.
@@ -26,12 +17,12 @@ import duke.util.service.ToDo;
  */
 
 public class DoTask extends Event {
-    private boolean firstTimeUsing;
-    private String lastCommand;
+    private boolean justOpenedDuke;
+    private String userCommand;
     private TaskList taskList;
     private Task removedTask;
     private Storage storage;
-    private TaskList foundList;
+    private TaskList foundListFromKeyword;
 
     /**
      * Constructs the {@code DoTask} as the user interacts
@@ -39,15 +30,33 @@ public class DoTask extends Event {
      */
     public DoTask() {
         super(false);
-        this.firstTimeUsing = true;
-        this.lastCommand = "";
+        this.justOpenedDuke = true;
+        this.userCommand = "LIST";
         this.taskList = new TaskList();
         this.storage = new Storage();
-        this.foundList = new TaskList();
+        this.foundListFromKeyword = new TaskList();
     }
 
-    public void setTaskList(TaskList taskList) {
+    public void loadOldTasks(TaskList taskList) {
         this.taskList = taskList;
+    }
+
+    public void updateKeywordDatabase(TaskList oldTaskList) {
+        for (int i = 0; i < oldTaskList.getSize(); i++) {
+            String toUpdateKeywordDatabase = "";
+            Task taskToUpdate = oldTaskList.getTask(i);
+            if (taskToUpdate.getNature().equals("T")) {
+                toUpdateKeywordDatabase = "TODO " + taskToUpdate.getAction();
+            } else if (taskToUpdate.getNature().equals("D")) {
+                toUpdateKeywordDatabase = "DEADLINE " + taskToUpdate.getAction()
+                        + " " + taskToUpdate.getTimeInfo();
+            } else {
+                toUpdateKeywordDatabase = "EVENT " + taskToUpdate.getAction()
+                        + " " + taskToUpdate.getTimeInfo();
+            }
+            this.storage = this.storage.addToKeywordStorage(
+                    toUpdateKeywordDatabase, taskToUpdate);
+        }
     }
 
     private void parseTask(String userInput) {
@@ -62,120 +71,75 @@ public class DoTask extends Event {
      * @return a new event that follows from the last user input
      */
 
-    public Event toNextEvent(String nextTask) {
-        this.firstTimeUsing = false;
-        this.lastCommand = nextTask;
-        if (nextTask.equals("BYE")) {
+    public Event toNextEvent(String userCommand) {
+        this.justOpenedDuke = false;
+        if (userCommand.equals("BYE")) {
+            this.userCommand = userCommand;
             return new Ending(this.taskList);
-        } else if (nextTask.equals("LIST")) {
+        } else if (userCommand.equals("LIST")) {
+            this.userCommand = userCommand;
             return this;
-        } else {
-            try {
-                UserInputException.checkUserInput(nextTask, this.taskList.getSize());
+        } else if (Parser.checkInputValidity(userCommand, this.taskList.getSize())) {
+            this.userCommand = userCommand;
+            String[] userInput = userCommand.split(" ");
+            List<String> userInputSplit = Arrays.asList(userInput);
+            String mainCommand = userInputSplit.get(0);
+            int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
 
-                String[] userInput = nextTask.split(" ");
-                List<String> userInputSplit = Arrays.asList(userInput);
-                String mainCommand = userInputSplit.get(0);
-
-                if (mainCommand.equals("MARK")) {
-                    assert (userInputSplit.size() > 0);
-                    int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
-                    this.taskList = this.taskList.markDone(indexOfTask);
-                    assert (this.taskList.getTask(indexOfTask).getStatus() == true);
-                } else if (mainCommand.equals("UNMARK")) {
-                    assert (userInputSplit.size() > 0);
-                    int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
-                    this.taskList = this.taskList.unMark(indexOfTask);
-                    assert (this.taskList.getTask(indexOfTask).getStatus() == false);
-                } else if (mainCommand.equals("TODO") || mainCommand.equals("DEADLINE")
-                        || mainCommand.equals("EVENT")) {
-                    parseTask(nextTask);
-                } else if (mainCommand.equals("DELETE")) {
-                    int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
-                    this.removedTask = this.taskList.getTask(indexOfTask);
-                    this.taskList = this.taskList.removeTask(indexOfTask);
-                    this.storage = this.storage.removeFromKeywordStorage(this.removedTask);
-                } else if (mainCommand.equals("FIND")) {
-                    String[] keywordToFind = nextTask.split("FIND ");
-                    List<String> keywords = Arrays.asList(keywordToFind);
-                    TaskList findList = this.storage.getTaskList(keywords.get(1));
-                    this.foundList = findList;
-                }
-            } catch (DukeException exception) {
-                System.out.println(exception);
-            } catch (Exception exception) {
-                System.out.println("ERRRR ERROR ERRR. SYSTEM FAILURE. UNKNOWN EXCEPTION. ERR ERR");
+            if (mainCommand.equals("MARK")) {
+                assert (userInputSplit.size() > 0);
+                this.taskList = this.taskList.markTask(indexOfTask);
+                assert (this.taskList.getTask(indexOfTask).getStatus() == true);
+            } else if (mainCommand.equals("UNMARK")) {
+                assert (userInputSplit.size() > 0);
+                this.taskList = this.taskList.unmarkTask(indexOfTask);
+                assert (this.taskList.getTask(indexOfTask).getStatus() == false);
+            } else if (mainCommand.equals("TODO") || mainCommand.equals("DEADLINE")
+                    || mainCommand.equals("EVENT")) {
+                parseTask(userCommand);
+            } else if (mainCommand.equals("DELETE")) {
+                this.removedTask = this.taskList.getTask(indexOfTask);
+                this.taskList = this.taskList.removeTask(indexOfTask);
+                this.storage = this.storage.removeFromKeywordStorage(this.removedTask);
+            } else if (mainCommand.equals("FIND")) {
+                String[] keywordToFind = userCommand.split("FIND ");
+                List<String> keywords = Arrays.asList(keywordToFind);
+                TaskList findList = this.storage.getTaskList(keywords.get(1));
+                this.foundListFromKeyword = findList;
             }
         }
         return this;
     }
 
-
     public TaskList getTaskList() {
         return this.taskList;
     }
 
-    public String printMarkedItem(int index) {
-        String toPrintOut = "";
-        toPrintOut += "MARKED. ONE STEP CLOSER..." + '\n';
-        toPrintOut += this.taskList.getTask(index).toString() + '\n';
-        return toPrintOut;
-    }
-
     @Override
     public String toString() {
-        String toPrintOut = "";
-        if (this.firstTimeUsing) {
-            if (this.taskList.getSize() == 0) {
-            toPrintOut += "INTERESTING. VERY INTERESTING. WHAT'S YOUR PLANS?";
-            } else {
-                toPrintOut += "WELCOME BACK... WHAT'S YOUR PLAN TODAY...";
-            }
-
-        } else if (lastCommand.equals("LIST")) {
-            toPrintOut += this.taskList.toString();
+        if (justOpenedDuke) {
+            boolean firstTimeUsingDuke = this.taskList.getSize() == 0;
+            return UserInterface.welcomeUser(firstTimeUsingDuke);
+        } else if (userCommand.equals("LIST")) {
+            return this.taskList.toString();
         } else {
-            String[] command = lastCommand.split(" ");
-            List<String> commandWords = Arrays.asList(command);
-
-            if (commandWords.get(0).equals("MARK")) {
+            String[] commands = userCommand.split(" ");
+            List<String> commandWords = Arrays.asList(commands);
+            String mainCommand = commandWords.get(0);
+            if (mainCommand.equals("MARK") || mainCommand.equals("UNMARK")) {
                 int index = Integer.valueOf(commandWords.get(1)) - 1;
-                toPrintOut += printMarkedItem(index);
-            } else if (commandWords.get(0).equals("UNMARK")) {
-                toPrintOut += "HAVING OTHER PLANS I SEE..." + '\n';
-                toPrintOut += this.taskList.getTask(Integer.valueOf(commandWords.get(1)) - 1).toString() + '\n';
-            } else if (commandWords.get(0).equals("DELETE")) {
-                toPrintOut += "KABOOM. GONE. REDUCED TO ATOMS. HOW EXCITING!" + '\n';
-                toPrintOut += '\n' + "TASK " + this.removedTask.toString() + " NO LONGER EXISTED" + '\n';
-                int numberOfTasks = this.taskList.getSize();
-                if (numberOfTasks > 1) {
-                    toPrintOut += numberOfTasks + " TASKS LEFT. BETTER HURRY." + '\n';
-                } else {
-                    toPrintOut += "ONLY " + numberOfTasks + " TASK LEFT. BORING DAYS AHEAD." + '\n';
-                }
-            } else if (commandWords.get(0).equals("FIND")) {
-                toPrintOut += "YOU'RE STARTING TO FORGET..." + '\n';
-                if (this.foundList.getSize() == 0) {
-                    toPrintOut += "THIS WAS NEVER IN YOUR PLANS";
-                } else {
-                    toPrintOut += '\n' + "LET ME REMIND YOU OF WHAT YOU STARTED" + '\n';
-                    for (int i = 0; i < this.foundList.getSize(); i++) {
-                        toPrintOut += this.foundList.getTask(i).toString() + '\n';
-                    }
-                }
+                Task taskToPrint = this.taskList.getTask(index);
+                return UserInterface.printMarkedUnmarkedTask(mainCommand, taskToPrint);
+            } else if (mainCommand.equals("DELETE")) {
+                int numberOfTasksRemaining = this.taskList.getSize();
+                return UserInterface.printDeletedTask(numberOfTasksRemaining, this.removedTask);
+            } else if (mainCommand.equals("FIND")) {
+                return UserInterface.printSearchedTaskFromKeyword(this.foundListFromKeyword);
             } else {
-                toPrintOut += "SO YOU WANT TO ADD " + '"' + this.lastCommand + '"' + ". VERY WELL..." + '\n';
-                toPrintOut += '\n' + "ADDED: " + lastCommand + '\n';
                 int numberOfTasks = this.taskList.getSize();
-                if (numberOfTasks > 1) {
-                    toPrintOut += numberOfTasks + " TASKS. BETTER HURRY." + '\n';
-                } else {
-                    toPrintOut += "ONLY " + numberOfTasks + " TASK. BORING DAYS AHEAD." + '\n';
-                }
-                toPrintOut += '\n' + "WHAT ELSE?";
+                return UserInterface.printAddedTask(this.userCommand, numberOfTasks);
             }
         }
-        return toPrintOut;
     }
 }
 

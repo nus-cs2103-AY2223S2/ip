@@ -1,5 +1,8 @@
 package duke.util;
 
+import duke.io.input.exception.DukeException;
+import duke.io.input.exception.UserInputException;
+import duke.io.input.ui.UserInterface;
 import duke.util.service.Deadline;
 import duke.util.service.ScheduledEvent;
 import duke.util.service.ToDo;
@@ -68,5 +71,18 @@ public class Parser {
                 eventPhraseList.get(1));
 
         return newTask;
+    }
+
+    public static boolean checkInputValidity(String userCommand, int tasklistSize) {
+        try {
+            UserInputException.checkUserInput(userCommand, tasklistSize);
+        } catch (DukeException exception) {
+            UserInterface.printInputWarning(exception);
+            return false;
+        } catch (Exception exception) {
+            UserInterface.printInputWarning("ERRRR ERROR ERRR. SYSTEM FAILURE. UNKNOWN EXCEPTION. ERR ERR");
+            return false;
+        }
+        return true;
     }
 }

@@ -10,17 +10,6 @@ import javafx.scene.image.Image;
 
 
 public class Duke {
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/ArnimZola.jpg"));
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Vader.jpg"));
-
-
     /**
      * Initialize Duke chatbot and begin chatting with user.
      *
@@ -28,8 +17,9 @@ public class Duke {
      */
     public static void main(String[] args) {
         ChatBot chatBot = new ChatBot();
-        chatBot.printLogo();
-        chatBot.chatBegin();
+        chatBot.greetUser();
+        chatBot.beginChat();
+        chatBot.endChat();
     }
 
 

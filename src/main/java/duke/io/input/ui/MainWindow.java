@@ -64,7 +64,7 @@ public class MainWindow extends AnchorPane {
 
     public void greet() {
         Greeting greeting = new Greeting();
-        String response = chatbot.printGuiLogo();
+        String response = UserInterface.printGuiLogo();
         String toPrintOut = greeting.toString();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage),

@@ -2,7 +2,6 @@ package duke.util.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 import duke.util.Task;
@@ -31,9 +30,9 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getAdditionalInfo() {
+    public String getTimeInfo() {
         return "/BY " + deadline.format(
-                DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy"));
+                DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy"));
     }
 
     public List<LocalDateTime> getDates() {

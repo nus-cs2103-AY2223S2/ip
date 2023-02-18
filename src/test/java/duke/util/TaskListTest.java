@@ -10,17 +10,17 @@ public class TaskListTest {
     private TaskList taskList = new TaskList();
     private ToDo todoCheck = new ToDo("DRINK WATER");
     @Test
-    void markDoneTest() {
+    void markTaskTest() {
         taskList = taskList.addTask(todoCheck);
-        taskList.markDone(0);
+        taskList.markTask(0);
         assertEquals("[T][X] DRINK WATER", taskList.getTask(0).toString());
     }
 
     @Test
-    void unMarkTest() {
+    void unmarkTaskTest() {
         taskList = taskList.addTask(todoCheck);
-        taskList.markDone(0);
-        taskList.unMark(0);
+        taskList.markTask(0);
+        taskList.unmarkTask(0);
         assertEquals("[T][ ] DRINK WATER", taskList.getTask(0).toString());
     }
 
