@@ -20,10 +20,10 @@ Adds a deadline task to the task-list
 
 Format: `deadline (DESCRIPTION) /by (DATE) (TIME)
 
-<p>
+```
 * `DATE` should be in yyyy-MM-dd format.
 * `TIME` should be in hh:mm format.
-</p>
+```
 
 Examples:
 * `deadline Assignment 1 /by 2022-03-14 23:58`
@@ -53,9 +53,9 @@ Mark a task as done
 
 Format: `mark (INDEX)`
 
-<p>
+```
 * `INDEX` is the index of the task to mark. Must be greater than 1.
-</p>
+```
   
 Examples:
 * `mark 2`
@@ -66,9 +66,9 @@ Mark a task as undone
 
 Format: `unmark (INDEX)`
 
-<p>
+```
 * `INDEX` is the index of the task to unmark. Must be greater than 1.
-</p>
+```
   
 Examples:
 * `unmark 2`
@@ -79,9 +79,9 @@ Delete a task
 
 Format: `delete (INDEX)`
 
-<p>
+```
 * `INDEX` is the index of the task to delete. Must be greater than 1.
-</p>
+```
 
 Examples:
 * `delete 2`
@@ -98,9 +98,9 @@ Save a task
 
 Format: `save (SAVE_INDEX)`
 
-<p>
+```
 * `SAVE_INDEX` can only be an integer from 1 to 3.
-</p>
+```
 
 Examples:
 * `save 1`
@@ -111,9 +111,9 @@ Load a save file.
 
 Format: `load (SAVE_INDEX)`
 
-<p>
+```
 * `SAVE_INDEX` needs to refer to an available save
-</p>
+```
 
 Examples:
 * `load 1`
