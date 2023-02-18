@@ -1,5 +1,1 @@
 [ ] Todo : run
-[ ] Event : concert [ Jan 01 2023 - Jan 01 2023 ]
-[X] Deadline : assignment 2 [ Jan 29 2023 ]
-[ ] Todo : run
-[X] Todo : play
