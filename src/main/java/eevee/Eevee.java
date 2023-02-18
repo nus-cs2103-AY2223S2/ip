@@ -3,6 +3,7 @@ package eevee;
 import eevee.exception.EeveeException;
 import eevee.exception.NoTaskToDeleteException;
 import eevee.exception.TaskNoContentException;
+import eevee.exception.TaskNoNameException;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -28,7 +29,7 @@ public class Eevee {
     protected String getResponse(String input) {
         try {
             return Parser.handleInput(input, ui, tasks, storage);
-        } catch (EeveeException | TaskNoContentException | NoTaskToDeleteException e) {
+        } catch (EeveeException | TaskNoContentException | NoTaskToDeleteException | TaskNoNameException e) {
             return e.getMessage();
         } catch (IndexOutOfBoundsException e) {
             return "Eevee... Something went wrong while handling this task.";
@@ -45,7 +46,11 @@ public class Eevee {
         System.out.println(eevee.ui.sayHello());
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            System.out.println(eevee.getResponse(sc.nextLine()));
+            String input = sc.nextLine();
+            System.out.println(eevee.getResponse(input));
+            if (input.equals("bye")) {
+                break;
+            }
         }
     }
 

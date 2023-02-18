@@ -1,6 +1,7 @@
 package eevee;
 
 import eevee.exception.TaskNoContentException;
+import eevee.exception.TaskNoNameException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +17,7 @@ public class ParserTest {
             Task expectedTask = new Event("japan trip", "2022-12-01", "2022-12-16");
             String input = "event japan trip /from 2022-12-01 /to 2022-12-16";
             assertEquals(expectedTask.getDescription(), Parser.makeEventFromCommand(input).getDescription());
-        } catch (TaskNoContentException e) {
+        } catch (TaskNoContentException | TaskNoNameException e) {
             System.out.println("failed");
         }
     }

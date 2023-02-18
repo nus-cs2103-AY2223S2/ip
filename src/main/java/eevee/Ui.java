@@ -19,7 +19,7 @@ public class Ui {
     }
 
     public String showDeletingTask(Task task, TaskList taskList) {
-        return String.format("EEVEE! I have removed this task:\n%s\n "
+        return String.format("EEVEE! I have removed this task:\n%s\n"
                         + "Now you have %d tasks in the list.%n", task.getDescription(),
                 taskList.getTaskListSize()) + askForNextCommand();
     }
