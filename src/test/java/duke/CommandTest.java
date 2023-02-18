@@ -1,11 +1,11 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 public class CommandTest {
 
@@ -25,7 +25,7 @@ public class CommandTest {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         } finally {
-            assertTrue(tasks.getTaskList().get(2-1).isDone());
+            assertTrue(tasks.getTaskList().get(2 - 1).isDone());
         }
     }
 

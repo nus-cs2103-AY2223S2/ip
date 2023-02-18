@@ -161,7 +161,7 @@ public class Ui {
         String finishedList = spacesPrefix + "Here are the tasks in your list:";
         for (int i = 0; i < taskList.getSize(); i++) {
             int number = i + 1;
-            finishedList = finishedList + "\n" + spacesPrefix + " " + number
+            finishedList += "\n" + spacesPrefix + " " + number
                     + ". " + taskList.getTaskList().get(i);
         }
         return finishedList;

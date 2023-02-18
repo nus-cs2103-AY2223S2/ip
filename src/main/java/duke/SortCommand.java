@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * A command to sort tasks in tasklist.
+ */
 public class SortCommand extends Command {
     /**
      * Constructs the list command with given user input.
