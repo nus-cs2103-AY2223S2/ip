@@ -48,12 +48,8 @@ Example of usage:
 `todo increment ip`
 
 Expected outcome:
-
 Task *increment ip* will be added to the list.
 
-```
-![image](https://user-images.githubusercontent.com/65648138/219869153-851fa751-4765-4d37-b763-1951be8ed441.png)
-```
 
 ### `deadline [TASK] by [DATETIME]` - Adding deadline task.
 
@@ -68,12 +64,8 @@ Example of usage:
 `deadline increment ip by 2023/02/15 1800`
 
 Expected outcome:
-
 Task *increment ip* with deadline *2023/02/15 1800* will be added to the list.
 
-```
-!<img width="597" alt="image" src="https://user-images.githubusercontent.com/65648138/219869171-a56904f0-9b56-4f8c-8e4c-b5060fe7f5a1.png">
-```
 
 ### `event [TASK] from [DATETIME] to [DATETIME]` - Adding event task.
 
@@ -89,13 +81,83 @@ Example of usage:
 `event increment ip from 2023/02/10 1800 to 2023/02/15 1800`
 
 Expected outcome:
-
 Task *increment ip* from *2023/02/10 1800* to *2023/02/15 1800* will be added to the list.
 
-```
-!<img width="599" alt="image" src="https://user-images.githubusercontent.com/65648138/219869193-062bdf83-262e-45db-8f64-529afd3d8284.png">
-```
 
-`list` - Shows current list of tasks.
+### `list` - Shows current list of tasks.
+
+Expected outcome:
+list of task will be displayed.
+
+
+### `clear` - Clears current list of tasks.
+
+Expected outcome:
+list of task will be cleared.
+
+
+### `mark [INDX]` - Marks task at specified index.
+
+- `[INDX]` has to be more than 0 and has to be a number currently existing in the list of tasks.
 
 Example of usage:
+
+`mark 1`
+
+Expected outcome:
+Task 1 is marked.
+
+
+### `unmark [INDX]` - Unmarks task at specified index.
+
+- `[INDX]` has to be more than 0 and has to be a number currently existing in the list of tasks.
+
+Example of usage:
+
+`unmark 1`
+
+Expected outcome:
+Task 1 is unmarked.
+
+
+### `delete [INDX]` - Deletes task at specified index.
+
+- `[INDX]` has to be more than 0 and has to be a number currently existing in the list of tasks.
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+Task 1 is deleted.
+
+
+### `find [KEYWORD]` - Finds task with specified keyword.
+
+- `[Keyword]` can be a word or phrase.
+
+Example of usage:
+
+`find project`
+
+Expected outcome:
+Tasks containing the word "project" is displayed.
+
+
+### `tag [INDX] [TAGGING]` - Tags a task at specified index with the specified tagging.
+
+- `[INDX]` has to be more than 0 and has to be a number currently existing in the list of tasks.
+- `[TAGGING]` can be word or phrase but will concatenated if is phrase.
+
+Example of usage:
+
+`tag 1 Easy Task`
+
+Expected outcome:
+Task 1 is tagged as *"#EasyTask"*.
+
+
+### `bye` - Saves current list of tasks and exits program.
+
+Expected outcome:
+Program is exited and any existing list will be loaded upon next start-up.
