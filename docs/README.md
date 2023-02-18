@@ -17,7 +17,7 @@ Tasks can be of three types:
 
 <br>
 
-All tasks have a status associated with them - done (`"X"`) and undone (`" "`).
+All tasks have a status associated with them - done (`X`) and undone (` `).
 > All tasks are set to be _undone_ by default. However, you can set the status of a task to be _done_.
 
 <br>
