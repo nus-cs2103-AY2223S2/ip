@@ -5,8 +5,8 @@ package duke.task;
  * Super class of Deadline, Event, and ToDo
  */
 public class Task {
-    protected  String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor of Task

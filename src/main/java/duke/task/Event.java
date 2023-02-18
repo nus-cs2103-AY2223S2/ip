@@ -8,7 +8,7 @@ import java.time.format.FormatStyle;
  * Class for Event, a subclass of Task
  */
 public class Event extends Task{
-    private final String taskType = "[E]";
+    private final String TASK_TYPE = "[E]";
     private LocalDate startTime;
     private LocalDate endTime;
 
@@ -33,7 +33,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return taskType + super.toString() + " (from: "
+        return TASK_TYPE + super.toString() + " (from: "
                 + DateTimeFormatter.ofLocalizedDate((FormatStyle.FULL)).format(this.startTime) + " to: "
                 + DateTimeFormatter.ofLocalizedDate((FormatStyle.FULL)).format(this.endTime) + ")";
     }

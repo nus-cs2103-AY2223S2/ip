@@ -5,7 +5,7 @@ package duke.task;
  * subclass of Task
  */
 public class ToDo extends Task {
-    private final String taskType = "[T]";
+    private final String TASK_TYPE = "[T]";
 
     /**
      * Constructor of ToDo
@@ -21,6 +21,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return taskType + super.toString();
+        return TASK_TYPE + super.toString();
     }
 }
