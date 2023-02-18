@@ -92,7 +92,8 @@ Expected outcome:
 
 Marks task 1 as not done and returns the following message:
 
-```Alright! I've marked this task as not done:
+```
+Alright! I've marked this task as not done:
 [T][ ] task 1
 ```
 ### `find` - Find tasks
