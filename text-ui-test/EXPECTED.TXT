@@ -1,7 +1,38 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+Hello! I'm T-Rex. Roarrrrrrrrrrrrrr!
+What do you need from me?
+____________________________________________________________
 
+____________________________________________________________
+New Todo task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!
+  [T][ ] borrow book
+You save 1 tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!
+____________________________________________________________
+
+____________________________________________________________
+Roarrrrrrrrrrrrrrr! Task list shown below!
+1.[T][ ] borrow book
+____________________________________________________________
+
+____________________________________________________________
+New Deadline task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!
+  [D][ ] return book (by: Sunday)
+You save 2 tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!
+____________________________________________________________
+
+____________________________________________________________
+New Event task is added. Roarrrrrrrrrrrrrrrrrrrrrrrrr!
+  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+You save 3 tasks in the list. Roarrrrrrrrrrrrrrrrrrrr!
+____________________________________________________________
+
+____________________________________________________________
+Roarrrrrrrrrrrrrrr! Task list shown below!
+1.[T][ ] borrow book
+2.[D][ ] return book (by: Sunday)
+3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+____________________________________________________________
+
+____________________________________________________________
+See you! Roarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr!
+____________________________________________________________
