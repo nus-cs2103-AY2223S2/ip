@@ -27,7 +27,7 @@ public class DeleteCommand implements Command {
             ui.displayMessage(toDisplay);
             return toDisplay;
         } catch (Exception e) {
-            throw new DukeException("Enter a valid task number!");
+            throw new DukeException("I can't delete a task that doesn't exist!!");
         }
     }
 }

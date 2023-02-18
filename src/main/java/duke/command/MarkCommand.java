@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -21,7 +22,10 @@ public class MarkCommand implements Command {
         this.toMark = toMark;
     }
     @Override
-    public String execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) throws DukeException {
+        if (!tasks.isValidTaskNumber(taskNumber)) {
+            throw new DukeException("I cannot mark a task that doesn't exist!!");
+        }
         String toDisplay;
         if (toMark) {
             tasks.markTask(taskNumber - 1);

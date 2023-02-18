@@ -15,7 +15,6 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
-
     /**
      * Gets the description for a task.
      * @return The String description for a task.
