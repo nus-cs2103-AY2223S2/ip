@@ -44,9 +44,7 @@ public class Storage {
 
     public ArrayList<Task> loadFromFile() throws FileNotFoundException {
         ArrayList<Task> tasksList = new ArrayList<>();
-        System.out.println(STORAGE_PATH);
         String path = System.getProperty("user.dir") + STORAGE_PATH;
-        System.out.println(path);
         File sourceFile = new File(path);
         if (!sourceFile.exists()) {
             return tasksList;
