@@ -25,10 +25,19 @@ public class RecurringTask extends Task {
 
     // from https://stackoverflow.com/questions/3471397/how-can-i-pretty-print-a-duration-in-java
     private static String formatDuration(Duration duration) {
-        return duration.toString()
-                .substring(2)
+        long days = duration.toDays();
+        return ((days != 0 ? days + " Days " : 0)
+                + duration.minusDays(days).toString()
+                .substring(2))
                 .replaceAll("(\\d[HMS])(?!$)", "$1 ")
-                .toLowerCase();
+                .replace("H", " Hours")
+                .replace("M", " Minutes")
+                .replace("S", " Seconds")
+                .replaceAll("\\b1 Days", "1 Day")
+                .replaceAll("\\b1 Hours", "1 Hour")
+                .replaceAll("\\b1 Minutes", "1 Minute")
+                .replaceAll("\\b1 Seconds", "1 Second")
+                .replaceAll("\\b0 Seconds", "");
     }
 
     @Override
@@ -37,13 +46,15 @@ public class RecurringTask extends Task {
             nextOccurrence = nextOccurrence.plus(repeatsEvery);
             this.setDone(false);
         }
-        return "[R]" + super.toString() + " at " + formatDate(nextOccurrence)
+
+        String formattedDate = formatDate(nextOccurrence);
+        return "[R]" + super.toString() + (formattedDate.charAt(2) == ':' ? " at " : " on ") + formattedDate
                 + " every " + formatDuration(repeatsEvery);
     }
 
     @Override
     public String toCommand() {
-        return "recurring " + super.description + " /at " + nextOccurrence + " /every " + repeatsEvery
+        return "recurring " + super.description + " /on " + nextOccurrence + " /every " + formatDuration(repeatsEvery)
                 + (super.isDone ? "\nmark 0" : "");
     }
 }

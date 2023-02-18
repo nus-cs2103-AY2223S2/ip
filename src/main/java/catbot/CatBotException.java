@@ -10,6 +10,6 @@ public class CatBotException extends Exception {
      * @param message is the message to show the user
      */
     public CatBotException(String message) {
-        super(message);
+        super(message + " >@w@<");
     }
 }
