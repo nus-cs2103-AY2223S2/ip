@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TaskList {
     private static final String ADD_MSG = "Got it. I've added this task:";
@@ -117,22 +119,30 @@ public class TaskList {
     /**
      * Returns a string of tasks that contain a certain keyword
      *
-     * @param keyword String used to find matches
+     * @param regex String used to find matches
      * @return String of matches
      */
-    public String find(String keyword) {
-        boolean success = false;
-        StringBuilder output = new StringBuilder(FIND_SUCCESS_MSG);
+    public String find(String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        LinkedList<Task> foundMatches = new LinkedList<>();
+
         for (Task curr : tasks) {
-            if (curr.toString().contains(keyword)) {
-                output.append("\n");
-                output.append(curr.toString());
-                success = true;
+            Matcher m = pattern.matcher(curr.toString());
+            if (m.find()) {
+                foundMatches.add(curr);
             }
         }
-        return success
-            ? FIND_FAILURE_MSG
-            : output.toString();
+
+        if (foundMatches.size() == 0) {
+            return FIND_FAILURE_MSG;
+        }
+
+        StringBuilder output = new StringBuilder(FIND_SUCCESS_MSG);
+        for (Task curr : foundMatches) {
+            output.append("\n");
+            output.append(curr.toString());
+        }
+        return output.toString();
     }
 
     /**
