@@ -13,4 +13,6 @@ public class DukeKeyword {
     public static final String MARK_TASK = "mark";
     public static final String ADD_TODO_TASK = "todo";
     public static final String UNMARK_TASK = "unmark";
+
+    public static final String SET_PRIOIRTY = "set";
 }

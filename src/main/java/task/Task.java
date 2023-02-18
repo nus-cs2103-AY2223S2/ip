@@ -1,5 +1,7 @@
 package task;
 
+import duke.Ui;
+
 /**
  * Base class for all types of tasks.
  */
@@ -14,6 +16,8 @@ public abstract class Task {
     private final String dateFormatA = "dd/MM/yyyy";
 
     private final String dateFormatB = "dd-MM-yyyy";
+
+    private PriorityLevel level = PriorityLevel.LOW;
 
     /**
      * Constructor for Task.
@@ -78,6 +82,21 @@ public abstract class Task {
             return "[X] " + this.taskName;
         }
         return "[ ] " + this.taskName;
+    }
+
+    public String setPriorityHigh() {
+        this.level = PriorityLevel.HIGH;
+        return Ui.setToHighPriorityMessage(this);
+    }
+
+    public String setPriorityMid() {
+        this.level = PriorityLevel.MID;
+        return Ui.setToMidPriorityMessage(this);
+    }
+
+    public String setPriorityLow() {
+        this.level = PriorityLevel.LOW;
+        return Ui.setToLowPriorityMessage(this);
     }
 
     public String getName() {

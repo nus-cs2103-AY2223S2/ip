@@ -1,16 +1,6 @@
 package duke;
 
-import command.Command;
-import command.CommandBye;
-import command.CommandDeadline;
-import command.CommandDelete;
-import command.CommandEvent;
-import command.CommandFind;
-import command.CommandInvalid;
-import command.CommandList;
-import command.CommandMark;
-import command.CommandToDo;
-import command.CommandUnMark;
+import command.*;
 import storage.Storage;
 import task.TaskList;
 
@@ -76,6 +66,12 @@ public class Parser {
         if (arr[0].equals(DukeKeyword.FIND)) {
             String phrase = arr[1];
             return new CommandFind(taskList, phrase);
+        }
+        if (arr[0].equals(DukeKeyword.SET_PRIOIRTY)) {
+            String[] s = arr[1].split(" ");
+            String index = s[0];
+            String priority = s[1];
+            return new CommandPriority(this.taskList, index, this.storage, priority);
         }
         return new CommandInvalid();
     }

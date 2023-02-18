@@ -67,4 +67,20 @@ public class Ui {
     public static String getEmptyDetailsForEventMessage() {
         return "EXCUSE ME!!!, 'Deadline' details cannot be empty";
     }
+
+    public static String getInvalidPriorityMessage() {
+        return "Please follow the relevant format priority index h/m/l";
+    }
+
+    public static String setToHighPriorityMessage(Task setTask) {
+        return setTask.getName() + " has been set to high priority";
+    }
+
+    public static String setToMidPriorityMessage(Task setTask) {
+        return setTask.getName() + " has been set to mid priority";
+    }
+
+    public static String setToLowPriorityMessage(Task setTask) {
+        return setTask.getName() + " has been set to low priority";
+    }
 }

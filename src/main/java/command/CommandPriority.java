@@ -3,45 +3,40 @@ package command;
 import duke.DukeException;
 import duke.Ui;
 import storage.Storage;
+import task.PriorityLevel;
 import task.Task;
 import task.TaskList;
 
 /**
- * Command to mark a task as done.
+ * Command to set priority
  */
-public class CommandMark extends Command {
+public class CommandPriority extends Command {
 
     private final TaskList taskList;
     private final String index;
     private final Storage storage;
 
+    private final String priorityLevel;
+
     /**
-     * Constructor for CommandMark.
+     * Constructor for priority command.
      *
      * @param taskList List of all tasks.
      * @param index Index of task to mark, starting from 1.
      * @param storage Handles storage actions.
      */
-    public CommandMark(TaskList taskList, String index, Storage storage) {
+    public CommandPriority(TaskList taskList, String index, Storage storage, String priorityLevel) {
         this.taskList = taskList;
         this.index = index;
         this.storage = storage;
+        this.priorityLevel = priorityLevel;
     }
 
     @Override
     public String execute() throws DukeException {
-        Task markedTask = this.markTaskAt(this.index);
-        this.updateFile();
-        return this.getConfirmationMessageOf(markedTask);
-    }
-
-    private void updateFile() throws DukeException {
-        this.storage.overwriteFile(this.taskList);
-    }
-
-    private Task markTaskAt(String index) throws DukeException {
         int i = this.getIndex(index);
-        return this.taskList.getTaskAt(i).markIsDone();
+        Task task = this.taskList.getTaskAt(i);
+        return this.getPriority(task);
     }
 
     private int getIndex(String index) throws DukeException {
@@ -52,7 +47,18 @@ public class CommandMark extends Command {
         }
     }
 
-    private String getConfirmationMessageOf(Task markedTask) {
-        return Ui.getMarkMessageWithAttitude(markedTask);
+    private String getPriority(Task task) throws DukeException {
+        switch (this.priorityLevel) {
+        case "h":
+            return task.setPriorityHigh();
+        case "m":
+            return task.setPriorityMid();
+        case "l":
+            return task.setPriorityLow();
+        default:
+            throw new DukeException(Ui.getInvalidPriorityMessage());
+        }
     }
+
+
 }
