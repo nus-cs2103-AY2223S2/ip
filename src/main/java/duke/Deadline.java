@@ -71,12 +71,13 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a new Deadline task from a user's input
-     *
-     * @param array a list of tasks.
-     * @param splitInput an array of strings containing the user input.
+     * Formats user input for creating a Deadline task and adds it to the ArrayList of tasks.
+     * @param array The ArrayList of tasks.
+     * @param splitInput The user input split by whitespace.
+     * @return The String representation of the added task if successful, "error" otherwise.
+     * @throws DukeException if there is an error in the input format.
      */
-    public static String createDeadlineTask(ArrayList<Task> array, String[] splitInput) {
+    public static String formatForDeadline(ArrayList<Task> array, String[] splitInput) {
         if (splitInput.length == 1 || splitInput[1].equals("")) {
             try {
                 throw new DukeException("deadline");
@@ -98,19 +99,31 @@ public class Deadline extends Task {
             }
             String date = splitInput[splitInput.length - 1];
             String desc = splitInput[1];
-            if (isDate(date)) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate ld = LocalDate.parse(date, formatter);
-                Deadline d = new Deadline(desc, ld);
-                array.add(d);
-                return Ui.addTask(array, d);
-            } else {
-                Deadline d = new Deadline(desc, date);
-                array.add(d);
-                return Ui.addTask(array, d);
-            }
+            return createDeadline(array, date, desc);
         }
         return "error";
+    }
+
+    /**
+     * Adds a deadline task to the list.
+     *
+     * @param array the list of tasks
+     * @param date the date of the deadline task
+     * @param desc the description of the deadline task
+     * @return a message confirming the addition of the deadline task
+     */
+    private static String createDeadline(ArrayList<Task> array, String date, String desc) {
+        if (isDate(date)) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate ld = LocalDate.parse(date, formatter);
+            Deadline d = new Deadline(desc, ld);
+            array.add(d);
+            return Ui.addTask(array, d);
+        } else {
+            Deadline d = new Deadline(desc, date);
+            array.add(d);
+            return Ui.addTask(array, d);
+        }
     }
     /**
      * Checks whether a string is an instance of LocalDate

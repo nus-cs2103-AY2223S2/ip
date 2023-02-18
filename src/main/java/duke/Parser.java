@@ -27,10 +27,10 @@ public class Parser {
             return TaskList.unmarkTask(array, splitInput);
         } else if (splitInput[0].equalsIgnoreCase("deadline")) {
             //Creates a Deadline type Task
-            return Deadline.createDeadlineTask(array, splitInput);
+            return Deadline.formatForDeadline(array, splitInput);
         } else if (splitInput[0].equalsIgnoreCase("event")) {
             //Creates an Event type Task
-            return Event.createEventTask(array, splitInput);
+            return Event.formatForEvent(array, splitInput);
         } else if (splitInput[0].equalsIgnoreCase("todo")) {
             //Creates a Todo type Task
             return Todo.createTodoTask(array, splitInput);

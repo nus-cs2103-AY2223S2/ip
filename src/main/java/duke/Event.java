@@ -74,12 +74,15 @@ public class Event extends Task {
 
 
     /**
-     * Creates a new Event task from a user's input
+     * Formats the user input for an event task and creates the task.
+     * If the input is invalid, a DukeException is thrown.
      *
-     * @param array  a list of tasks.
-     * @param splitInput an array of strings containing the user input.
+     * @param array the list of tasks
+     * @param splitInput the user input for an event task
+     * @return a message to confirm that the task has been added
+     * @throws DukeException if the user input is invalid
      */
-    public static String createEventTask(ArrayList<Task> array, String[] splitInput) {
+    public static String formatForEvent(ArrayList<Task> array, String[] splitInput) {
         String combinedString = String.join(" ", splitInput);
         if (splitInput.length == 1 || splitInput[1].equals("")) {
             try {
@@ -96,22 +99,35 @@ public class Event extends Task {
                 if (periodArr.length == 2) {
                     String from = periodArr[0].strip();
                     String to = periodArr[1].strip();
-                    if (isDate(from) && isDate(to)) {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                        LocalDate ldFrom = LocalDate.parse(from, formatter);
-                        LocalDate ldTo = LocalDate.parse(to, formatter);
-                        Event e = new Event(desc, ldFrom, ldTo);
-                        array.add(e);
-                        return Ui.addTask(array, e);
-                    } else {
-                        Event e = new Event(desc, from, to);
-                        array.add(e);
-                        return Ui.addTask(array, e);
-                    }
+                    return createEvent(array, desc, from, to);
                 }
             }
         }
         return "error";
+    }
+    /**
+     * Creates an event task and adds it to the list of tasks. If the dates in the input are valid, they are parsed
+     * and used to create the task. Otherwise, the dates are assumed to be in a string format and the string is used.
+     *
+     * @param array the list of tasks
+     * @param desc the description of the task
+     * @param from the start date of the task
+     * @param to the end date of the task
+     * @return a message to confirm that the task has been added
+     */
+    private static String createEvent(ArrayList<Task> array, String desc, String from, String to) {
+        if (isDate(from) && isDate(to)) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate ldFrom = LocalDate.parse(from, formatter);
+            LocalDate ldTo = LocalDate.parse(to, formatter);
+            Event e = new Event(desc, ldFrom, ldTo);
+            array.add(e);
+            return Ui.addTask(array, e);
+        } else {
+            Event e = new Event(desc, from, to);
+            array.add(e);
+            return Ui.addTask(array, e);
+        }
     }
 
     /**

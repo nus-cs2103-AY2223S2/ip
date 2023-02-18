@@ -1,6 +1,5 @@
 package duke;
 
-import java.awt.*;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -34,7 +33,6 @@ import javafx.stage.Stage;
 public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui = new Ui();
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -120,19 +118,6 @@ public class Duke extends Application {
                 e.printStackTrace();
             }
         });
-    }
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
     /**
      * Iteration 2:

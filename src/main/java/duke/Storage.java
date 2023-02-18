@@ -89,7 +89,7 @@ public class Storage {
      * @param list a list of tasks
      * @throws IOException if there is an error writing to the file
      */
-    public static void saveToFile(TaskList list) throws IOException {
+    public void saveToFile(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/data/duke.txt");
         ArrayList<Task> tasks = TaskList.getList();
         for (Task t: tasks) {
