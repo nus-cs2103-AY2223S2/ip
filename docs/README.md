@@ -14,6 +14,7 @@ CatBot is a simple CLI interface for keeping track of your tasks!
 * Finding tasks which match a given keyword
 * Making CatBot repeat a message
 * Understand dates in natural language
+* Store Tasks persistently
 
 ### Todo Tasks
 
