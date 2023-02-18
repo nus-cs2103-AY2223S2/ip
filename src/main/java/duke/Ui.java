@@ -1,5 +1,9 @@
 package duke;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.util.Duration;
 import task.Task;
 import task.Tasklist;
 
@@ -123,5 +127,14 @@ public class Ui {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Nice. I've tagged this task:\n").append(taggedTask.toString());
         return stringBuilder.toString();
+    }
+
+    public void closeWindow(String response) {
+        if (response.equals("Bye. Hope to see you again soon!")) {
+            Timeline delayExit = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+                Platform.exit();
+            }));
+            delayExit.play();
+        }
     }
 }
