@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" style="-fx-background-color: #f9dbda;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" style="-fx-background-color: #f9dbda;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Label" wrapText="true">
          <font>
