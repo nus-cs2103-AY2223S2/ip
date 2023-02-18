@@ -125,7 +125,7 @@ Delete a task at the given index.
 
 Usage:<br>`clear`
 
-Removes all tasks in your list.
+Delete all tasks in your list.
 
 ### Find tasks with a keyword: **find**
 

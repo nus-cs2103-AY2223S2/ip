@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import duke.model.task.DeadlineTask;
 import duke.model.task.TaskList;
 
-public class SortDeadlinesCommand extends Command {
+public class SortCommand extends Command {
 
     @Override
     public String execute(TaskList list) {
@@ -21,6 +21,6 @@ public class SortDeadlinesCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof SortDeadlinesCommand;
+        return obj instanceof SortCommand;
     }
 }

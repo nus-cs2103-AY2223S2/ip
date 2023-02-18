@@ -8,8 +8,8 @@ public enum Keyword {
 
     // @formatter:off
     BYE("bye"), LIST("list"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), MARK("mark"),
-    UNMARK("unmark"), DELETE("delete"), FIND("find"), SORT_DEADLINES("sort-deadlines"), CLEAR("clear"),
-    SET_DESCRIPTION("set-description"), HELP("help"), UNKNOWN(null);
+    FIND("find"), UNMARK("unmark"), DELETE("delete"), SORT("sort"), CLEAR("clear"), EDIT("edit"),
+    HELP("help");
     // @formatter:on
 
     private final String value;

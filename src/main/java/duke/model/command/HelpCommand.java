@@ -81,6 +81,10 @@ public class HelpCommand extends Command {
             " - You can use 'list' to find the exact indicies of the tasks.",
             " - <index> must be a number that is greater than 0.");
 
+    private static final String CLEAR_COMMAND_HELP_MESSAGE = String.join("\n",
+            "Usage: clear",
+            "Removes all tasks in your list.");
+
     private static final String FIND_COMMAND_HELP_MESSAGE = String.join("\n",
             "Usage: find <keyword>",
             "Find and list all tasks, whose descriptions contain the given keyword.");
@@ -119,17 +123,18 @@ public class HelpCommand extends Command {
             return UNMARK_COMMAND_HELP_MESSAGE;
         case DELETE:
             return DELETE_COMMAND_HELP_MESSAGE;
+        case CLEAR:
+            return CLEAR_COMMAND_HELP_MESSAGE;
         case FIND:
             return FIND_COMMAND_HELP_MESSAGE;
-        case SET_DESCRIPTION:
+        case EDIT:
             return SET_DESCRIPTION_HELP_MESSAGE;
-        case SORT_DEADLINES:
+        case SORT:
             return SORT_DEADLINES_HELP_MESSAGE;
         case BYE:
             return BYE_COMMAND_HELP_MESSAGE;
-        default:
-            return null;
         }
+        throw new RuntimeException("should not reach here");
     }
 
     private Optional<Keyword> keyword;

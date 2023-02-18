@@ -14,8 +14,8 @@ import duke.model.command.Keyword;
 import duke.model.command.ListCommand;
 import duke.model.command.MarkCommand;
 import duke.model.command.RemoveCommand;
-import duke.model.command.SetDescriptionCommand;
-import duke.model.command.SortDeadlinesCommand;
+import duke.model.command.EditCommand;
+import duke.model.command.SortCommand;
 import duke.model.command.UnmarkCommand;
 import duke.model.task.DeadlineTask;
 import duke.model.task.EventTask;
@@ -166,61 +166,54 @@ public class CommandParser {
             throw new DukeRuntimeException("this parser is already used");
         }
         isUsed = true;
-        Keyword keyword = Keyword.UNKNOWN;
         Command cmd = null;
-        try {
-            keyword = runParser(KEYWORD_PARSER);
-            switch (keyword) {
-            case BYE:
-                cmd = new ExitCommand();
-                break;
-            case LIST:
-                cmd = new ListCommand();
-                break;
-            case TODO:
-                cmd = new AddCommand(runParser(TODO_TASK_PARSER));
-                break;
-            case DEADLINE:
-                cmd = new AddCommand(runParser(DEADLINE_TASK_PARSER));
-                break;
-            case EVENT:
-                cmd = new AddCommand(runParser(EVENT_TASK_PARSER));
-                break;
-            case MARK:
-                cmd = new MarkCommand(runParser(INT_PARSER));
-                break;
-            case UNMARK:
-                cmd = new UnmarkCommand(runParser(INT_PARSER));
-                break;
-            case DELETE:
-                cmd = new RemoveCommand(runParser(INT_PARSER));
-                break;
-            case FIND:
-                cmd = new FindCommand(runParser(WORD_PARSER));
-                break;
-            case SORT_DEADLINES:
-                cmd = new SortDeadlinesCommand();
-                break;
-            case SET_DESCRIPTION:
-                cmd = new SetDescriptionCommand(
-                        runParser(INT_PARSER),
-                        runParser(DESCRIPTION_UNTIL_EOF_PARSER));
-                break;
-            case CLEAR:
-                cmd = new ClearCommand();
-                break;
-            case HELP:
-                cmd = new HelpCommand(runParser(OPTIONAL_KEYWORD_PARSER));
-                break;
-            default:
-                throw new ParserException("unknown command");
-            }
-            runParser(THROW_IF_TOO_MANY_ARGUMENTS_PARSER);
-        } catch (ParserException ex) {
-            throw keyword == Keyword.UNKNOWN
-                    ? ex
-                    : new ParserException(keyword.getValue() + ": " + ex.getMessage());
+        Keyword keyword = runParser(KEYWORD_PARSER);
+        switch (keyword) {
+        case BYE:
+            cmd = new ExitCommand();
+            break;
+        case LIST:
+            cmd = new ListCommand();
+            break;
+        case TODO:
+            cmd = new AddCommand(runParser(TODO_TASK_PARSER));
+            break;
+        case DEADLINE:
+            cmd = new AddCommand(runParser(DEADLINE_TASK_PARSER));
+            break;
+        case EVENT:
+            cmd = new AddCommand(runParser(EVENT_TASK_PARSER));
+            break;
+        case MARK:
+            cmd = new MarkCommand(runParser(INT_PARSER));
+            break;
+        case UNMARK:
+            cmd = new UnmarkCommand(runParser(INT_PARSER));
+            break;
+        case DELETE:
+            cmd = new RemoveCommand(runParser(INT_PARSER));
+            break;
+        case FIND:
+            cmd = new FindCommand(runParser(WORD_PARSER));
+            break;
+        case SORT:
+            cmd = new SortCommand();
+            break;
+        case EDIT:
+            cmd = new EditCommand(
+                    runParser(INT_PARSER),
+                    runParser(DESCRIPTION_UNTIL_EOF_PARSER));
+            break;
+        case CLEAR:
+            cmd = new ClearCommand();
+            break;
+        case HELP:
+            cmd = new HelpCommand(runParser(OPTIONAL_KEYWORD_PARSER));
+            break;
+        default:
+            throw new RuntimeException("should not reach here");
         }
+        runParser(THROW_IF_TOO_MANY_ARGUMENTS_PARSER);
         return cmd;
     }
 }

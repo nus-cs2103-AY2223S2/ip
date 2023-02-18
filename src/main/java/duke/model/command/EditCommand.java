@@ -5,12 +5,12 @@ import java.util.Objects;
 import duke.model.task.Task;
 import duke.model.task.TaskList;
 
-public class SetDescriptionCommand extends Command {
+public class EditCommand extends Command {
 
     private int index;
     private String newDescription;
 
-    public SetDescriptionCommand(int index, String newDescription) {
+    public EditCommand(int index, String newDescription) {
         this.index = index;
         this.newDescription = newDescription;
     }
@@ -28,10 +28,10 @@ public class SetDescriptionCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof SetDescriptionCommand)) {
+        if (!(obj instanceof EditCommand)) {
             return false;
         }
-        SetDescriptionCommand cmd = (SetDescriptionCommand) obj;
+        EditCommand cmd = (EditCommand) obj;
         return index == cmd.index && Objects.equals(newDescription, cmd.newDescription);
     }
 }
