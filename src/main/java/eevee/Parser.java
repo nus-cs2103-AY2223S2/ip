@@ -6,9 +6,9 @@ import java.time.format.DateTimeParseException;
 import eevee.exception.EeveeException;
 import eevee.exception.TaskNoContentException;
 import eevee.task.Task;
-import eevee.task.ToDos;
-import eevee.task.Deadlines;
-import eevee.task.Events;
+import eevee.task.ToDo;
+import eevee.task.Deadline;
+import eevee.task.Event;
 
 public class Parser {
 
@@ -39,14 +39,14 @@ public class Parser {
         String taskDescription = taskInfo[TASK_DESCRIPTION].trim();
         switch (taskType) {
         case "T":
-            return new ToDos(taskDescription, isDone);
+            return new ToDo(taskDescription, isDone);
         case "D":
             String taskTime = taskInfo[START_TIME_INDEX].trim();
-            return new Deadlines(taskDescription, taskTime, isDone);
+            return new Deadline(taskDescription, taskTime, isDone);
         case "E":
             String startTime = taskInfo[START_TIME_INDEX].trim();
             String endTime = taskInfo[END_TIME_INDEX].trim();
-            return new Events(taskDescription, startTime, endTime, isDone);
+            return new Event(taskDescription, startTime, endTime, isDone);
         default:
             throw new IllegalStateException("Unexpected value: " + taskType);
         }
@@ -61,7 +61,7 @@ public class Parser {
     public static Task makeTodoFromCommand(String line) throws TaskNoContentException {
         try {
             String taskName = line.substring(TODO_TASK_DESCRIPTION_INDEX);
-            return new ToDos(taskName);
+            return new ToDo(taskName);
         } catch (IndexOutOfBoundsException e) {
             throw new TaskNoContentException();
         }
@@ -78,7 +78,7 @@ public class Parser {
             String taskInfo = line.substring(DEADLINE_TASK_DESCRIPTION_INDEX);
             String taskName = taskInfo.split(" /by")[TASK_NAME_INDEX];
             String taskDeadline = taskInfo.split("/by ")[TASK_START_TIME_INDEX];
-            return new Deadlines(taskName, taskDeadline);
+            return new Deadline(taskName, taskDeadline);
         } catch (IndexOutOfBoundsException e) {
             throw new TaskNoContentException();
         }
@@ -97,7 +97,7 @@ public class Parser {
             String[] taskInfoTimes = taskInfo.split(" /");
             String taskStart = taskInfoTimes[TASK_START_TIME_INDEX].substring(TO_REMOVE_LEADING_FOUR_LETTERS);
             String taskEnd = taskInfoTimes[TASK_END_TIME_INDEX].substring(TO_REMOVE_LEADING_TWO_LETTERS);
-            return new Events(taskName, taskStart, taskEnd);
+            return new Event(taskName, taskStart, taskEnd);
         } catch (IndexOutOfBoundsException e) {
             throw new TaskNoContentException();
         }

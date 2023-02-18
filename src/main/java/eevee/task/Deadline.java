@@ -3,13 +3,13 @@ package eevee.task;
 /**
  * Represents a Task that has a due date.
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
 
-    public Deadlines(String name, String dueDate) {
+    public Deadline(String name, String dueDate) {
         super(name, "D", makeDateTime(dueDate), null);
     }
 
-    public Deadlines(String name, String dueDate, boolean isDone) {
+    public Deadline(String name, String dueDate, boolean isDone) {
         super(name, "D", makeDateTime(dueDate), null, isDone);
     }
 

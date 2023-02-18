@@ -1,12 +1,12 @@
 package eevee.task;
 
-public class Events extends Task {
+public class Event extends Task {
 
-    public Events(String name, String startDate, String endDate) {
+    public Event(String name, String startDate, String endDate) {
         super(name, "E", makeDateTime(startDate), makeDateTime(endDate));
     }
 
-    public Events(String name, String startDate, String endDate, boolean isDone) {
+    public Event(String name, String startDate, String endDate, boolean isDone) {
         super(name, "E", makeDateTime(startDate), makeDateTime(endDate), isDone);
     }
 

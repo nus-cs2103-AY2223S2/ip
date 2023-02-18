@@ -1,12 +1,12 @@
 package eevee.task;
 
-public class ToDos extends Task {
+public class ToDo extends Task {
 
-    public ToDos(String name) {
+    public ToDo(String name) {
         super(name, "T", null, null);
     }
 
-    public ToDos(String name, boolean isDone) {
+    public ToDo(String name, boolean isDone) {
         super(name, "T", null, null, isDone);
     }
 
