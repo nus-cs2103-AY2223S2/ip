@@ -16,8 +16,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Storage {
     private static final String SAVE_DATA_LOCATION = "savedata.txt";
-    private static final int INDEX_OF_TYPE = 4;
-    private static final int INDEX_OF_DONE = 7;
+    private static final int INDEX_OF_TYPE = 3;
+    private static final int INDEX_OF_DONE = 6;
+    private static final int INDEX_OF_DESCRIPTION = 9;
 
     /**
      * Loads the save file from a fixed location
@@ -32,7 +33,8 @@ public class Storage {
         Scanner fileReader = new Scanner(saveFile);
         while (fileReader.hasNextLine()) {
             String data = fileReader.nextLine();
-            char taskType = data.charAt(INDEX_OF_TYPE);
+            int firstDot = data.indexOf(".");
+            char taskType = data.charAt(firstDot + INDEX_OF_TYPE);
             switch (taskType) {
             case 'T':
                 listOfThings.add(loadTodo(data));
@@ -80,8 +82,9 @@ public class Storage {
     }
 
     private static Task loadTodo(String saveString) {
-        String taskName = saveString.substring(10, saveString.length());
-        boolean taskDone = (saveString.charAt(INDEX_OF_DONE) == 'X');
+        int firstDot = saveString.indexOf(".");
+        String taskName = saveString.substring(firstDot + INDEX_OF_DESCRIPTION, saveString.length());
+        boolean taskDone = (saveString.charAt(firstDot + INDEX_OF_DONE) == 'X');
         Task.Todo newTodo = new Task.Todo(taskName);
         if (taskDone) {
             newTodo.setDone();
@@ -90,8 +93,9 @@ public class Storage {
     }
 
     private static Task loadDeadline(String saveString) {
-        boolean taskDone = saveString.charAt(INDEX_OF_DONE) == 'X';
-        String taskName = saveString.substring(10, saveString.indexOf("(by:") - 1);
+        int firstDot = saveString.indexOf(".");
+        boolean taskDone = saveString.charAt(firstDot + INDEX_OF_DONE) == 'X';
+        String taskName = saveString.substring(firstDot + INDEX_OF_DESCRIPTION, saveString.indexOf("(by:") - 1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
         String byWhen = saveString.substring(saveString.indexOf("by:") + 4, saveString.length() - 7);
         LocalDate date = LocalDate.parse(byWhen, formatter);
@@ -105,8 +109,9 @@ public class Storage {
     }
 
     private static Task loadEvent(String saveString) {
-        boolean taskDone = saveString.charAt(INDEX_OF_DONE) == 'X';
-        String taskName = saveString.substring(10, saveString.indexOf("(from:") - 1);
+        int firstDot = saveString.indexOf(".");
+        boolean taskDone = saveString.charAt(firstDot + INDEX_OF_DONE) == 'X';
+        String taskName = saveString.substring(firstDot + INDEX_OF_DESCRIPTION, saveString.indexOf("(from:") - 1);
         String fromWhen = saveString.substring(saveString.indexOf("from:") + 6, saveString.indexOf("to:") - 1);
         String toWhen = saveString.substring(saveString.indexOf("to:") + 4, saveString.length() - 1);
         Task.Event newEvent = new Task.Event(taskName, fromWhen, toWhen);
