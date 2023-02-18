@@ -1,6 +1,7 @@
 # User Guide for DUKE
 
-##Overview
+## Overview
+
 Duke is a task management chatbot that allows you to keep track
 of your tasks and manage them. You can ask Duke to create new tasks 
 and tick them off when done. You can also edit, delete, and find your 
