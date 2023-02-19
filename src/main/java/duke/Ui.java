@@ -107,8 +107,6 @@ public class Ui {
             return emptyErr();
         }
         StringBuilder sb = new StringBuilder();
-//        System.out.println("Here's your list of tasks:");
-//        System.out.println();
         sb.append("Heres your list of tasks: " + "\n");
         for (int i  = 0; i < this.tList.size(); i++) {
         sb.append(i + 1 + ". " + this.tList.get(i) + "\n");

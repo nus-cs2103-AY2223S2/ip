@@ -8,7 +8,7 @@ package duke;
  */
 public class Task {
     private String name;
-    private boolean done;
+    private boolean isDone;
     private  String tagging;
     private boolean tagged;
 
@@ -16,11 +16,10 @@ public class Task {
      * Constructor for Task object.
      * 
      * @param name Description of task.
-     * @return Task object.
      */
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     public String getTask() {
@@ -31,14 +30,14 @@ public class Task {
      * Marks task as done and set boolean value of current task to true.
      */
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Marks task as undone and set boolean value of current task to false.
      */
     public void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -47,7 +46,7 @@ public class Task {
      * @return true if task is done, false otherwise.
      */
     public boolean isMarked() {
-        return this.done;
+        return this.isDone;
     }
 
     public void tag(String s) {
@@ -65,6 +64,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.done ? "[X] " + this.name : "[ ] " + this.name; 
+        return this.isDone ? "[X] " + this.name : "[ ] " + this.name;
     }
 }

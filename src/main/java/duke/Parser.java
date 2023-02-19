@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Class for Parser object.
@@ -11,8 +10,6 @@ import java.util.Scanner;
  */
 public class Parser {
     private Ui ui;
-    //private String rawUnsplit;
-    //private Scanner sc = new Scanner(System.in);
     private String input;
     private String[] raw;
 
