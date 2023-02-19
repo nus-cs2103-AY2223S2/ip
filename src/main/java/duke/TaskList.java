@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Class representing a list of tasks.
@@ -19,7 +20,7 @@ public class TaskList {
      * Parameterized constructor to create a TaskList
      * @param init the initial list containing previously saved tasks
      */
-    public TaskList(ArrayList<Task> init) {
+    public TaskList(ArrayList<? extends Task> init) {
         this.taskList = new ArrayList<>();
         this.taskList.addAll(init);
     }
@@ -84,8 +85,7 @@ public class TaskList {
     public TaskList find(String keyword) {
         TaskList matchingTasks = new TaskList();
 
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
+        for (Task task : taskList) {
             if (task.description.toLowerCase().contains(keyword.toLowerCase())) {
                 matchingTasks.add(task);
             }
@@ -100,5 +100,18 @@ public class TaskList {
      */
     public boolean isEmpty() {
         return taskList.isEmpty();
+    }
+
+    public TaskList sortDeadlines() {
+        ArrayList<Deadline> deadlineList = new ArrayList<>();
+        Comparator<Deadline> comparator = Comparator.comparing(d -> d.by);
+        for (Task t : taskList) {
+            if (t instanceof Deadline) {
+                deadlineList.add((Deadline) t);
+            }
+        }
+        deadlineList.sort(comparator);
+
+        return new TaskList(deadlineList);
     }
 }

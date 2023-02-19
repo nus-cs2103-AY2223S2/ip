@@ -12,6 +12,7 @@ public class Parser {
     private static final String LIST = "list";
     private static final String DELETE = "delete";
     private static final String FIND = "find";
+    private static final String SORT = "sort";
 
     private static final int INDEX_TODO_DESCRIPTION = TODO.length();
     private static final int INDEX_DEADLINE_DESCRIPTION = DEADLINE.length();
@@ -155,6 +156,10 @@ public class Parser {
         return ui.getAddMessage(t, taskList);
     }
 
+    private String sortDeadlines() {
+        return ui.getFormattedTaskList(taskList.sortDeadlines(), true);
+    }
+
     /**
      * Parses a single line of user input
      * @param input the String containing a single line of user input
@@ -175,6 +180,8 @@ public class Parser {
             return delete(index);
         } else if (input.startsWith(FIND)) {
             return find(input);
+        } else if (input.startsWith(SORT)) {
+            return sortDeadlines();
         } else {
             return add(input);
         }
