@@ -1,19 +1,12 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
-
 
 public class Event extends Task {
-<<<<<<< Updated upstream
-    String tag = "[E]";
-    protected String from;
-    protected String to;
-=======
+
     String tag = "E";
     protected LocalDateTime from;
     protected LocalDateTime to;
->>>>>>> Stashed changes
 
     public Event() {
         super.tag = tag;
@@ -36,12 +29,7 @@ public class Event extends Task {
         if (fromId == -1 || toId == -1) {
             throw new InvalidEvent();
         }
-<<<<<<< Updated upstream
-        this.from = dscp.substring(fromId + 6, toId - 1);
-        this.to = dscp.substring(toId + 4);
-        String task = String.format("%s (from: %s to: %s)", dscp.substring(0, fromId - 1), this.from, this.to);
-        super.task = task;
-=======
+
         try {
             this.from = LocalDateTime.parse(input.substring(fromId + 6, toId - 1),
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
@@ -56,8 +44,5 @@ public class Event extends Task {
         String description = String.format("%s (from: %s to: %s)", input.substring(0, fromId - 1),
                 formattedFrom, formattedTo);
         super.description = description;
->>>>>>> Stashed changes
     }
-
-    //Override toString
 }
