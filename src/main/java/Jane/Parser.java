@@ -33,7 +33,6 @@ public class Parser {
             }
         } catch(jane.JaneException err) {
             System.out.println("Please specify when the deadline is :(((");
-
         }
         jane.task.Deadline d = new jane.task.Deadline(count +1, s[0], LocalDateTime.parse(s[1]));
         return d;
