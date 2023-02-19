@@ -9,11 +9,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.exception.DukeStorageException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.exception.DukeStorageException;
+import duke.task.Task;
+import duke.task.ToDo;
+
 
 
 /**
@@ -23,6 +24,11 @@ public class Storage {
     private static final Path DATA_PATH = Paths.get("data");
     private static final Path TASK_LIST_PATH = Paths.get("data", "duke.txt");
 
+    /**
+     * Returns the list of tasks from the default data file if it exists or an empty list otherwise.
+     *
+     * @return An ArrayList containing the list of tasks loaded from the default data file.
+     */
     public ArrayList<Task> loadTaskList() {
         try {
             if (!Files.exists(DATA_PATH)) {
@@ -57,7 +63,7 @@ public class Storage {
             clearDataFile();
             return new ArrayList<>();
         }
-}
+    }
 
     private Task parseTask(String line) throws DukeStorageException {
         String[] parts = line.split(" \\| ");
@@ -90,7 +96,7 @@ public class Storage {
         if (isDone) {
             task.setDone();
         }
-       return task;
+        return task;
     }
 
     private void clearDataFile() throws IOException {
@@ -99,6 +105,13 @@ public class Storage {
         bufferedWriter.close();
     }
 
+    /**
+     * Stores the given taskList in the default data file.
+     *
+     * @param taskList The ArrayList containing the list of tasks to be stored.
+     * @throws DukeStorageException If the file specified by {@code TASK_LIST_PATH} does not exist or
+     *     if the data could not be stored successfully.
+     */
     public void storeTaskList(ArrayList<Task> taskList) throws DukeStorageException {
         try {
             if (!Files.exists(TASK_LIST_PATH)) {

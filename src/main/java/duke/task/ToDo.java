@@ -14,11 +14,11 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a string representation of the to-do task
+     * Returns the string representation of the to-do.
      *
-     * @return A string representation of the to-do task,
-     * with the format "[T][X] <Task description>" if it is done,
-     * and "[T][ ] <Task description> otherwise".
+     * @return A string representation of the to-do,
+     *     with the format "[T][X] Task description" if it is done,
+     *     and "[T][ ] Task description" otherwise.
      */
     @Override
     public String toString() {

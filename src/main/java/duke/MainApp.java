@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Represents the main entry point for the Duke chatbot application.
+ */
 public class MainApp extends Application {
 
     private Duke duke = new Duke();

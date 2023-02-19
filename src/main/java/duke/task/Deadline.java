@@ -7,8 +7,9 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline that has a due-date.
  */
 public class Deadline extends Task {
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE, d LLL uuuu, hh:mm a");
     private LocalDateTime dueDate;
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE, d LLL uuuu, hh:mm a");
 
     /**
      * Creates a deadline object with the given task description and due-date.
@@ -22,11 +23,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string representation of the deadline task.
+     * Returns the string representation of the deadline.
      *
-     * @return A string representation of the deadline task,
-     * with the format "[D][X] <Task description>" if it is done,
-     * and "[D][ ] <Task description> otherwise".
+     * @return A string representation of the deadline,
+     *     with the format "[D][X] Task description" if it is done,
+     *     and "[D][ ] Task description" otherwise.
      */
     @Override
     public String toString() {

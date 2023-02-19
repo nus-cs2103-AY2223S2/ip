@@ -11,22 +11,27 @@ import duke.parser.Parser;
  * Represents a TaskList that can hold {@link Task} objects.
  */
 public class TaskList {
+    //CHECKSTYLE.OFF: AbbreviationAsWordInName
     private final ArrayList<Task> TASKS;
+    //CHECKSTYLE.ON: AbbreviationAsWordInName
 
     /**
-     * Creates a task-list object with the given list of Task objects.
+     * Creates a {@code TaskList} object with the given list of {@code Task} objects.
      *
-     * @param taskList The list of Task objects to be contained in the TaskList.
+     * @param taskList The list of {@code Task} objects.
      */
     public TaskList(ArrayList<Task> taskList) {
         TASKS = taskList;
     }
 
     /**
-     * Adds a to-do task from the given user command to the TaskList.
+     * Adds a new to-do task to the list of tasks and
+     * returns a message indicating the task was added successfully.
      *
      * @param userCommand The user command that contains the task description.
-     * @throws DukeException If the task description is missing.
+     * @return A string message indicating that the to-do task was added successfully,
+     *     along with a summary of the newly added to-do task.
+     * @throws DukeException If the {@code userCommand} has an invalid format.
      */
     public String addToDo(String userCommand) throws DukeException {
 
@@ -43,10 +48,13 @@ public class TaskList {
     }
 
     /**
-     * Adds a deadline task from the given user command to the TaskList.
+     * Adds a new deadline task to the list of tasks and
+     * returns a message indicating the task was added successfully.
      *
      * @param userCommand The user command that contains the task description
      *                    and the due-date.
+     * @return A string message indicating that the deadline task was added successfully,
+     *     along with a summary of the newly added deadline task.
      * @throws DukeException If the command has an invalid format.
      */
     public String addDeadline(String userCommand) throws DukeException {
@@ -60,14 +68,14 @@ public class TaskList {
 
         if (userCommandParts.length < 2) {
             throw new DukeInvalidArgumentException("Invalid format!\n"
-                    + "Use `deadline {description} /by {due date}`");
+                    + "Use: deadline {description} /by {due date}");
         }
 
         if (userCommandParts[1].trim().isEmpty()) {
-            throw new DukeInvalidArgumentException("Please provide due date after `/by` parameter");
+            throw new DukeInvalidArgumentException("Please provide due date after `/by`");
         }
 
-        LocalDateTime dueDate = Parser.parseDateTime(userCommandParts[1].trim()) ;
+        LocalDateTime dueDate = Parser.parseDateTime(userCommandParts[1].trim());
         Deadline deadline = new Deadline(description, dueDate);
         TASKS.add(deadline);
 
@@ -76,10 +84,13 @@ public class TaskList {
     }
 
     /**
-     * Adds an event task from the given user command to the TaskList.
+     * Adds an event task to the list of tasks and
+     * returns a message indicating the task was added successfully.
      *
      * @param userCommand The user command that contains the task description,
      *                    the start date-time, and the end date-time.
+     * @return A string message indicating that the event task was added successfully,
+     *     along with a summary of the newly added event task.
      * @throws DukeException If the command has an invalid format.
      */
     public String addEvent(String userCommand) throws DukeException {
@@ -93,19 +104,19 @@ public class TaskList {
 
         if (userCommandParts.length < 2) {
             throw new DukeInvalidArgumentException("Invalid format!\n"
-                    + "Use `event {description} /from {start date/time} /to {end date/time}`");
+                    + "Use: event {description} /from {start date/time} /to {end date/time}");
         }
 
         String[] timeParts = userCommandParts[1].split(" /to", 2);
 
         boolean isEmptyStartDateTime = timeParts.length < 1 || timeParts[0].trim().isEmpty();
         if (isEmptyStartDateTime) {
-            throw new DukeInvalidArgumentException("Please provide start date/time after `/from` parameter");
+            throw new DukeInvalidArgumentException("Please provide start date/time after `/from`");
         }
 
         boolean isEmptyEndDateTime = timeParts.length < 2 || timeParts[1].trim().isEmpty();
         if (isEmptyEndDateTime) {
-            throw new DukeInvalidArgumentException("Please provide end date/time after `/to` parameter");
+            throw new DukeInvalidArgumentException("Please provide end date/time after `/to`");
         }
 
         LocalDateTime startDateTime = Parser.parseDateTime(timeParts[0].trim());
@@ -123,8 +134,9 @@ public class TaskList {
     }
 
     /**
-     * Prints the tasks in the TaskList according to
-     * their string representation in an ordered list.
+     * Returns the string representation of all the tasks in the {@code TaskList} in an ordered list.
+     *
+     * @return The string containing all tasks in an ordered list.
      */
     public String printTaskList() {
 
@@ -146,11 +158,15 @@ public class TaskList {
     }
 
     /**
-     * Marks the task specified in the user command as done in the TaskList.
+     * Marks the task specified in the user command as done in the TaskList and
+     * returns a message indicating the change was successful.
      *
      * @param userCommand The user command that contains the index (1-indexed)
      *                    of the task in the TaskList to be marked as done.
-     * @throws DukeException If the given index is out of bounds or invalid.
+     * @return A string message indicating that the task was marked as done successfully,
+     *     along with a summary of the newly modified task.
+     * @throws DukeException If the {@code userCommand} has an invalid format or
+     *     if the given index is out of bounds or invalid.
      */
     public String markTask(String userCommand) throws DukeException {
         try {
@@ -182,11 +198,15 @@ public class TaskList {
     }
 
     /**
-     * Marks the task specified in the user command as not done in the TaskList.
+     * Marks the task specified in the user command as not done in the TaskList and
+     * returns a message indicating the change was successful.
      *
      * @param userCommand The user command that contains the index (1-indexed)
      *                    of the task in the TaskList to be marked as not done.
-     * @throws DukeException If the given index is out of bounds or invalid.
+     * @return A string message indicating that the task was marked as not done successfully,
+     *     along with a summary of the newly modified task.
+     * @throws DukeException If the {@code userCommand} has an invalid format or
+     *     if the given index is out of bounds or invalid.
      */
     public String unmarkTask(String userCommand) throws DukeException {
         try {
@@ -219,11 +239,15 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task specified in the user command from the TaskList.
+     * Deletes the task specified in the user command from the TaskList and
+     * returns a message indicating the change was successful.
      *
      * @param userCommand The user command that contains the index (1-indexed)
-     *                    of the task in the TaskList to be deleted.
-     * @throws DukeException If the given index is out of bounds or invalid.
+     *                    of the task in the TaskList to be deleted.     *
+     * @return A string message indicating that the task was deleted successfully,
+     *     along with the updated number of tasks.
+     * @throws DukeException If the {@code userCommand} has an invalid format or
+     *     if the given index is out of bounds or invalid.
      */
     public String deleteTask(String userCommand) throws DukeException {
         try {
@@ -263,6 +287,13 @@ public class TaskList {
         return TASKS;
     }
 
+    /**
+     * Returns the list of tasks with descriptions that contain the keyword(s) provided by the user.
+     *
+     * @param userCommand The user command that contains the keyword(s) to search for.
+     * @return The string representation of the list of tasks with descriptions that contain the keyword(s) provided.
+     * @throws DukeException If the {@code userCommand} has an invalid format.
+     */
     public String findTask(String userCommand) throws DukeException {
         String[] userCommandParts = userCommand.split(" ", 2);
         if (userCommandParts.length != 2) {

@@ -4,14 +4,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents an event that has a description,
- * start date-time and end date-time.
+ * Represents an event that has a description, start date-time and end date-time.
  */
 public class Event extends Task {
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE, d LLL uuuu, hh:mm a");
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE, d LLL uuuu, hh:mm a");
 
     /**
      * Creates an event object with the given task description,
@@ -29,11 +28,11 @@ public class Event extends Task {
 
 
     /**
-     * Returns a string representation of the event task.
+     * Returns the string representation of the event.
      *
-     * @return A string representation of the event task,
-     * with the format "[E][X] <Task description>" if it is done,
-     * and "[E][ ] <Task description> otherwise".
+     * @return A string representation of the event,
+     *     with the format "[E][X] Task description" if it is done,
+     *     and "[E][ ] Task description" otherwise.
      */
     @Override
     public String toString() {
