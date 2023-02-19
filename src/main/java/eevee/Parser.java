@@ -146,6 +146,8 @@ public class Parser {
         switch (typeOfCommand) {
         case "bye":
             return ui.sayBye();
+        case "help":
+            return ui.getHelp();
         case "list":
             return ui.showTaskList(tasks);
         case "mark":

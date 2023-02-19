@@ -14,6 +14,22 @@ public class Ui {
         return "EEVEE!";
     }
 
+    public String getHelp() {
+        return "Here are the commands that you can use in EeveeBot!\n\n" +
+                "Adding todos      :todo DESCRIPTION\n" +
+                "Adding deadlines  :deadline DESCRIPTION /by DEADLINE\n" +
+                "Adding events     :event DESCRIPTION /from START /to END\n" +
+                "Show task list    :list\n" +
+                "Delete task       :delete INDEX\n" +
+                "Mark task         :mark INDEX\n" +
+                "Unmark task       :unmark INDEX\n" +
+                "Find task         :find KEYWORD\n" +
+                "Exit programme    :bye\n\n" +
+                "Make sure the format of DEADLINE, START and END is:\n" +
+                "yyyy-MM-dd HH:mm :D\n\n" +
+                "For a more detailed guide, visit https://toh-xinyi.github.io/ip/";
+    }
+
     public String showLoadingError() {
         return "Eevee... Currently no task in task list. Creating new task list..." + askForNextCommand();
     }
