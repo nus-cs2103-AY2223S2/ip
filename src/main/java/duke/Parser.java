@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
+
 /**
  * Parser class to parse in input.
  */
@@ -13,7 +15,7 @@ public class Parser {
      * @return a String that is created from executing the command.
      * @throws DukeException if command is unknown.
      */
-    public static String parse(String cmd, TaskList list) throws DukeException {
+    public static String parse(String cmd, TaskList list) throws DukeException, DateTimeParseException {
         Command command = new Command(cmd, list, ui);
         try {
             if (cmd.equals("list")) {
@@ -25,7 +27,11 @@ public class Parser {
             } else if (cmd.startsWith("todo") || cmd.startsWith("t ")) {
                 return command.toDoCommand();
             } else if (cmd.startsWith("deadline") || cmd.startsWith("d ")) {
-                return command.deadlineCommand();
+                try {
+                    return command.deadlineCommand();
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("change date format");
+                }
             } else if (cmd.startsWith("event") || cmd.startsWith("e ")) {
                 return command.eventCommand();
             } else if (cmd.startsWith("delete")) {

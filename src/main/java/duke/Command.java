@@ -141,7 +141,7 @@ public class Command {
         }
         TaskList matches = new TaskList(matchingTaskList);
         assert matches.size() < LIST.size() : "list of filtered task should not be bigger than actual task list";
-        return UI.showFind(matches);
+        return UI.showTaskList(matches);
     }
 
     /**

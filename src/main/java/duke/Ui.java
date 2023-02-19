@@ -20,9 +20,9 @@ public class Ui {
         return "Noted. I've removed this task:\n" + task.toString() + "\n";
     }
 
-    public String showFind(TaskList tasks) {
+    /*public String showFind(TaskList tasks) {
         return "Here are the matching tasks in your list:\n" + tasks + "\n";
-    }
+    }*/
 
     public String showTaskSize(int size) {
         return "Now you have " + size + " tasks in the list. \n";
@@ -40,7 +40,7 @@ public class Ui {
     public String showTaskList(TaskList list) {
         String result = "";
         if (list.isEmpty()) {
-            result = "No tasks added.\n";
+            result = "No tasks found.\n";
         } else {
             for (int i = 0; i < list.size(); i++) {
                 result += (i + 1) + ":" + list.get(i) + "\n";

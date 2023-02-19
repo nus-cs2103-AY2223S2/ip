@@ -4,8 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke {
-    private final Storage STORAGE = new Storage("data/duke.txt");
+    private Storage storage;
     private TaskList tasks;
+    private Ui ui;
 
     /**
      * receive input and converts it to appropriate response to be parsed.
@@ -17,7 +18,7 @@ public class Duke {
         if (input.equals("bye")) {
             try {
                 response = Parser.parse(input, tasks);
-                STORAGE.write("data/duke.txt", tasks);
+                storage.write("data/duke.txt", tasks);
             } catch (DukeException e) {
                 response = e.toString();
             } catch (IOException e) {
@@ -37,15 +38,16 @@ public class Duke {
      * constructs a Duke object.
      * @throws DukeException if file is not found.
      */
-    public Duke() throws DukeException {
-        Ui UI = new Ui();
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            tasks = new TaskList(STORAGE.load());
+            tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            UI.showError();
+            ui.showError();
             tasks = new TaskList();
         } catch (FileNotFoundException e) {
-            throw new DukeException(e.toString());
+            e.printStackTrace();
         }
     }
 }

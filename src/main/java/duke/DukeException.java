@@ -8,6 +8,6 @@ public class DukeException extends Exception{
 
     @Override
     public String toString() {
-        return "OOPS! Something went wrong.";
+        return "OOPS! Something went wrong.\n" + DukeException.super.toString();
     }
 }
