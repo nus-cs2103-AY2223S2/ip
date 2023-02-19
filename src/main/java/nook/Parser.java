@@ -97,7 +97,7 @@ public class Parser {
     }
 
     private static String generateDefaultMessage() {
-        return "Huh? What do you mean? :o";
+        return "Oh dear, I wasn't expecting that at all... What do you mean by that?";
     }
 
     private static Todo generateTodo(Validator validator, String taskInput) throws DukeException {

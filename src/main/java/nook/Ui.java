@@ -32,7 +32,7 @@ public class Ui {
      * @return The greeting message string.
      */
     public String getGreeting() {
-        return "Hey there! I'm Sirius\nWhat can I do for you today? :D";
+        return "Hello there, yes yes! I'm Tom Nook\nHow can I assist you today? :)";
     }
 
     /**
@@ -41,7 +41,7 @@ public class Ui {
      * @return The farewell message string.
      */
     public String getBye() {
-        return "Well, I'm off! Hope to see you again soon :)";
+        return "Have a great day, don't forget to stay on top of those tasks!";
     }
 
     /**

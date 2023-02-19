@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
             Task toDelete = list.getTask(taskIndex);
             list.deleteTask(taskIndex);
             storage.saveListToFile(list, ui);
-            return "Ok. I've removed this task:\n"
+            return "Okay, I've removed that task for you. It's no longer on your to-do list:\n"
                     + toDelete.toString() + "\n Now you have "
                     + list.getSize() + " tasks in the list.";
         }

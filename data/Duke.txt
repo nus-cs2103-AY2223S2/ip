@@ -2,3 +2,4 @@ D | 0 | return book 2 | HIGH | 2023-05-05
 E | 0 | project meeting | MEDIUM | Mon 2pm | 4pm
 D | 0 | return book 1 | MEDIUM | 2023-05-05
 E | 1 | project meeting | LOW | Mon 2pm | 4pm
+T | 0 | borrow laptop | LOW
