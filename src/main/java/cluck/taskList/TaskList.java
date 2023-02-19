@@ -74,7 +74,6 @@ public class TaskList {
             throw new TaskIndexOutOfBoundsException();
         }
     }
-
     public String toString() {
         StringBuilder tasks = new StringBuilder();
         for (Task task : taskList) {

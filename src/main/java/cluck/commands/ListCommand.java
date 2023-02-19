@@ -6,7 +6,6 @@ import cluck.taskList.TaskList;
 public class ListCommand implements Command{
 
     public String execute(TaskList taskList) {
-        String output = Messages.MESSAGE_LIST_DISPLAY + "\n" + taskList.listTasks();
-        return output;
+        return Messages.MESSAGE_LIST_DISPLAY + "\n" + taskList.toString();
     }
 }

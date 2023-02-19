@@ -1,6 +1,5 @@
 package cluck.ui;
 
-import java.io.File;
 import java.util.Scanner;
 
 import cluck.messages.Messages;
@@ -28,7 +27,7 @@ public class Ui {
     }
 
     public void printResponse(String response) {
-
+        System.out.println(response);
     }
 
 }
