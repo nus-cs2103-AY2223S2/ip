@@ -10,6 +10,9 @@ Introducing Duke Chatbot to improve your productivity! Manage tasks in a conveni
 3. Navigate to the folder with the JAR file and run the application via typing the comman `java -jar duke.jar`
 4. Get to work with Duke!
 
+![Duke chatbot](./Ui.png)
+
+
 ## Features
 1. Add task
 2. Delete task
