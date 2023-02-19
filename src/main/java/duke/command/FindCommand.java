@@ -27,6 +27,7 @@ public class FindCommand extends Command {
     @Override
     public void runCommand(TaskList taskList, UI ui, Storage storage) {
         String findString = index[1];
+        assert findString != "" : "string must be non-empty.";
         ArrayList<Task> searchResults = new ArrayList<>();
         ArrayList<Integer> taskNumber = new ArrayList<>();
         int num = 1;

@@ -59,6 +59,7 @@ public class TaskList {
      * @param storage Storage in the disk
      */
     public void mark(int taskNumber, Storage storage) {
+        assert taskNumber >= 0 : "taskNumber is non-negative.";
         Task nameOfTask = tasks.get(taskNumber - 1);
         nameOfTask.markAsDone();
         System.out.println("Nice work! This task has been marked as done: \n" + nameOfTask);
@@ -76,10 +77,10 @@ public class TaskList {
      * @param storage Storage in the disk.
      */
     public void unmark(int taskNumber, Storage storage) {
+        assert taskNumber >= 0 : "taskNumber is non-negative.";
         Task nameOfTask = tasks.get(taskNumber - 1);
         nameOfTask.unmarkAsDone();
         System.out.println("Noted. This task has been marked as not done yet: \n"  + nameOfTask);
-
         try {
             storage.save(this);
         } catch (IOException error) {
