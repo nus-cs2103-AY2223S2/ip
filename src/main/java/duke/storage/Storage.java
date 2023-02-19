@@ -34,7 +34,7 @@ public class Storage {
             System.out.println("The data folder is not found, creating new data folder");
             dataFolder.mkdir();
             System.out.println("Folder created successfully");
-            File f = new File(dataFolder, "task.txt");
+            File f = new File(dataFolder, "duke.txt");
             try {
                 f.createNewFile();
                 System.out.printf("file created successfully\n");
@@ -121,7 +121,7 @@ public class Storage {
     }
 
     public static void saveData(TaskList list) throws IOException {
-        FileWriter dukeWriter = new FileWriter(path, false);
+        FileWriter dukeWriter = new FileWriter(path, true);
         for (Task i : list.getList()) {
             if (i instanceof ToDo) {
                 dukeWriter.write("T | " + i.getStatusIcon() + " | " + i.getDescription() + "\n");
