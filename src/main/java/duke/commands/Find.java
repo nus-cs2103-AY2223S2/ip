@@ -33,6 +33,11 @@ public class Find extends Command {
                 matchingTasks.append(counter).append(". ").append(taskdescription).append("\n");
             }
         }
+        try {
+            assert counter > 0 : ui.printNoTasksError();
+        } catch (AssertionError a) {
+            return a.getMessage();
+        }
         return matchingTasks.toString();
     }
 }

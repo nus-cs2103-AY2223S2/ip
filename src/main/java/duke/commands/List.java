@@ -15,6 +15,11 @@ public class List extends Command {
      * @return
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            assert tasks.size() > 0 : ui.printNoTasksError();
+        } catch (AssertionError a) {
+            return a.getMessage();
+        }
         return tasks.list();
     }
 }

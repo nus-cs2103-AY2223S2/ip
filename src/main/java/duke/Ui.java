@@ -84,6 +84,10 @@ public class Ui {
     public String printInvalidCommandError() {
         return "OOPS!!! I'm sorry, but I don't know what that means :(((((";
     }
-    public void message() {
+    public String printInvalidIndex() {
+        return "Sorry, you used an invalid index";
+    }
+    public String printNoTasksError() {
+        return "Sorry, you have no tasks yet";
     }
 }
