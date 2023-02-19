@@ -89,4 +89,8 @@ public class Parser {
         }
         return res;
     }
+
+    public boolean isCommand(String userInputCommand, Command command) {
+        return userInputCommand.equals(convertEnum(command));
+    }
 }
