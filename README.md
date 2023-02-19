@@ -169,4 +169,3 @@ To exit the system, simply type "bye" command
 
 
 ## Let's start using DUKE!
-## Let's start using DUKE!
