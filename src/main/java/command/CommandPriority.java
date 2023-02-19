@@ -3,7 +3,6 @@ package command;
 import duke.DukeException;
 import duke.Ui;
 import storage.Storage;
-import task.PriorityLevel;
 import task.Task;
 import task.TaskList;
 
