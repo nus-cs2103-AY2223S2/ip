@@ -178,6 +178,7 @@ public class Duke {
         System.out.println();
     }
 
+    
     private void exit() {
         System.out.println("\tBye, hope to see you again!");
     }
