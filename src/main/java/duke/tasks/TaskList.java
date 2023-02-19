@@ -23,7 +23,7 @@ public class TaskList implements Serializable {
 
     /**
      * Gets the number of tasks in the task list.
-     * 
+     *
      * @return Number of tasks in the task list
      */
     public int getNumTasks() {
@@ -54,7 +54,7 @@ public class TaskList implements Serializable {
 
     /**
      * Adds a new task into the list of tasks.
-     * 
+     *
      * @param task a {@code Task} instance.
      */
     public void addTask(Task task) {
@@ -64,7 +64,7 @@ public class TaskList implements Serializable {
 
     /**
      * Deletes an existing task from the list of tasks.
-     * 
+     *
      * @param taskIndex the index of the {@code Task} instance obtained through list command.
      * @return The string representation of the deleted task.
      */
@@ -81,7 +81,7 @@ public class TaskList implements Serializable {
 
     /**
      * Marks an existing task as done from the list of tasks.
-     * 
+     *
      * @param taskIndex the index of the {@code Task} instance obtained through list command.
      * @return The string representation of the marked task.
      */
@@ -100,7 +100,7 @@ public class TaskList implements Serializable {
 
     /**
      * Marks an existing task as not done from the list of tasks.
-     * 
+     *
      * @param taskIndex the index of the {@code Task} instance obtained through list command.
      * @return The string representation of the unmarked task.
      */
@@ -118,7 +118,7 @@ public class TaskList implements Serializable {
 
     /**
      * Filters tasks that contain a given keyword.
-     * 
+     *
      * @param keyword
      * @return A filtered {@code TaskList} that contains task that contain {@code keyword}.
      */
@@ -130,7 +130,7 @@ public class TaskList implements Serializable {
 
     /**
      * Filters incomplete tasks that land on a given date.
-     * 
+     *
      * @param dateString
      * @return A filtered {@code TaskList} that contains task that are not done and land on
      *         {@code dateString}.

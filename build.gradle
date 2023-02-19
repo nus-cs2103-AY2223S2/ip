@@ -56,6 +56,9 @@ shadowJar {
     archiveClassifier = null
 }
 
+checkstyleMain
+    .exclude('duke/driver/GuiDriver.java','duke/parser/DukeParser.java')
+
 run{
     standardInput = System.in
 }

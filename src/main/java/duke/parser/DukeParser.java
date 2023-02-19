@@ -19,7 +19,7 @@ public class DukeParser {
     /**
      * Breaks the input string into commands and its corresponding arguments, or throw an error if
      * the input string is not a valid command.
-     * 
+     *
      * @param inputString
      * @return
      */
@@ -47,7 +47,7 @@ public class DukeParser {
     /**
      * Parses {@code inputString} to get the command arguments by using {@code command} to check for
      * the type of arguments it should get.
-     * 
+     *
      * @param command
      * @param inputString
      * @return

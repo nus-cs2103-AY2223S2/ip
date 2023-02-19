@@ -18,7 +18,7 @@ public class GuiDriver {
 
     /**
      * Processes the input string and return its response.
-     * 
+     *
      * @param inputString
      * @return
      */

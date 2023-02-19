@@ -24,7 +24,7 @@ public class Event extends Task {
 
     /**
      * Checks if this event is still incomplete and whether it lands on {@code dateString}.
-     * 
+     *
      * @param dateString
      * @return Whether this task is
      */
