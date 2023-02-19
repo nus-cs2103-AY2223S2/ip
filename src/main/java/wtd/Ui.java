@@ -45,6 +45,9 @@ public class Ui {
      * @param list the list of tasks to display.
      */
     public String showList(TaskList list) {
+        if (list.size() == 0) {
+            return "Nothing's going on, why are you even here?\n";
+        }
         String ret = list.stream()
             .map(task -> (list.indexOf(task) + 1) + ". " + task + "\n")
             .reduce("Here! Now leave me alone...\n", (a, b) -> a + b);
