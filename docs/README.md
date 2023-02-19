@@ -8,6 +8,27 @@ Introducing Duke! Tasks made easier.
 
 ## Features
 
+### Add tasks
+Add todo, deadline, or event to Duke.
+
+### List tasks
+Lists out all the tasks available
+
+### Mark/Unmark tasks
+Marks a task as done or undone.
+
+### Delete task
+Delete a task when you no longer need it.
+
+### Find tasks
+Find tasks using a keyword.
+
+### Save/Load files
+Save the current tasklist or load from an available save.
+
+### Exit
+Exit the application.
+
 ## Usage
 
 ### Adding a todo task: `todo`
