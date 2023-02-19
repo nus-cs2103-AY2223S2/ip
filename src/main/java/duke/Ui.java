@@ -20,7 +20,8 @@ public class Ui {
     }
 
     public static String getEmptyDetailsForDeadlineMessage() {
-        return "EXCUSE ME!!!, 'Deadline' details cannot be empty";
+        return "EXCUSE ME!!!, 'Deadline' details cannot be empty"
+                + "\ndeadline <details> /by dd/mm/yyyy";
     }
 
     public static String getEventTaskFormat() {
@@ -65,7 +66,8 @@ public class Ui {
     }
 
     public static String getEmptyDetailsForEventMessage() {
-        return "EXCUSE ME!!!, 'Deadline' details cannot be empty";
+        return "EXCUSE ME!!!, 'Deadline' details cannot be empty"
+                + "\nevent <details> /from dd/mm/yyyy /to dd/mm/yyyy";
     }
 
     public static String getInvalidPriorityMessage() {
@@ -82,5 +84,9 @@ public class Ui {
 
     public static String setToLowPriorityMessage(Task setTask) {
         return setTask.getName() + " has been set to low priority";
+    }
+
+    public static String getEmptyStringResponse() {
+        return "I've got nothing.";
     }
 }

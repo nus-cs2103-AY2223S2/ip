@@ -68,6 +68,11 @@ public class MainWindow extends AnchorPane {
      */
     public void showCurrentList() {
         String response = duke.getResponse("list");
+        if (response.isBlank()) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(Ui.getEmptyStringResponse(), dukeImage));
+            return;
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
         );
