@@ -52,7 +52,7 @@ public abstract class Task {
         Task task = null;
 
         try {
-            EnumTask tt = EnumTask.valueOf(args[0]);
+            EnumTask tt = EnumTask.valueOf(args[0].toUpperCase());
             switch(tt) {
             case TODO:
                 task = new Todo(args[1].strip());

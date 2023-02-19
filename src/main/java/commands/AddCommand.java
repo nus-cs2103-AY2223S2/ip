@@ -20,8 +20,8 @@ public class AddCommand extends Command {
      *
      * @param args user input that has been parsed
      */
-    public AddCommand(String[] args) {
-        this.args = args;
+    public AddCommand(String[] taskDetails) {
+        this.args = taskDetails;
     }
 
     /**
