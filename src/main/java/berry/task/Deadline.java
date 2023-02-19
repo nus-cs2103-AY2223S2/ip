@@ -15,22 +15,54 @@ public class Deadline extends Task {
     // The date to do the task by
     private LocalDate by;
 
+    /**
+     * Initialises a new {@code Deadline} object.
+     *
+     * @param description name of the task
+     * @param by time to do the task before
+     * @throws IncorrectDateException when the given date is not recognisable
+     */
     public Deadline(String description, String by) throws IncorrectDateException {
         super(description);
         checkAndAssignDate(by);
     }
 
+    /**
+     * Initialises a new {@code Deadline} object.
+     *
+     * @param description name of the task
+     * @param isDone indicates whether the task has been done
+     * @param by time to do the task before
+     * @throws IncorrectDateException when the given date is not recognisable
+     */
     public Deadline(String description, boolean isDone, String by) throws IncorrectDateException {
         super(description);
         this.isDone = isDone;
         checkAndAssignDate(by);
     }
 
+    /**
+     * Initialises a new {@code Deadline} object.
+     *
+     * @param description name of the task
+     * @param by time to do the task before
+     * @param tags what the task is tagged as
+     * @throws IncorrectDateException when the given date is not recognisable
+     */
     public Deadline(String description, String by, HashSet<String> tags) throws IncorrectDateException {
         super(description, tags);
         checkAndAssignDate(by);
     }
 
+    /**
+     * Initialises a new {@code Deadline} object.
+     *
+     * @param description name of the task
+     * @param isDone indicates whether the task has been done
+     * @param by time to do the task before
+     * @param tags what the task is tagged as
+     * @throws IncorrectDateException when the given date is not recognisable
+     */
     public Deadline(String description, boolean isDone, String by, HashSet<String> tags) throws IncorrectDateException {
         super(description, isDone, tags);
         this.isDone = isDone;
@@ -81,5 +113,18 @@ public class Deadline extends Task {
             }
         }
         return output;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Deadline)
+        {
+            Deadline newDeadline = (Deadline) object;
+            if (this.description != newDeadline.description
+                    || this.by != newDeadline.by) {
+                return false;
+            }
+        }
+        return true;
     }
 }

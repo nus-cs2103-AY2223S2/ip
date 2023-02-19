@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Gui extends Application {
 
-    private Berry berry = new Berry();
+    private final Berry berry = new Berry();
 
     public Gui() throws Storage.InvalidStorageFilePathException {
     }

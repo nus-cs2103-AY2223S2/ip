@@ -16,7 +16,7 @@ public class Ui {
     private static Scanner sc = new Scanner(System.in);
 
     /**
-     * General command to show a string to the ui.
+     * General command to show a string to the UI.
      *
      * @param toPrint string to be printed to ui
      * @return string to be printed to ui
@@ -25,6 +25,11 @@ public class Ui {
         return toPrint;
     }
 
+    /**
+     * Shows a welcome message.
+     *
+     * @return the welcome message
+     */
     public static String showWelcome() {
         String logo = "";
         return logo + "Hey there! \nI'm Berry the Bunny~ <3 "
@@ -36,6 +41,13 @@ public class Ui {
         return "Bye! I hope Berry was helpful to you <: \n";
     }
 
+    /**
+     * Shows the tasks currently stored in {@code TaskList}.
+     *
+     * @param tasks all tasks are stored here
+     * @return a string representing the tasks
+     * @throws NoTasksException when there are no tasks in the {@code tasks}
+     */
     public static String showListOfTasks(TaskList tasks) throws NoTasksException {
         ArrayList<Task> listOfTasks = tasks.getList();
         int length = listOfTasks.size();
@@ -75,6 +87,11 @@ public class Ui {
         return "I can't seem to load the file\n";
     }
 
+    /**
+     * Shows a help menu.
+     *
+     * @return the help menu message
+     */
     public static String showHelpMenu() {
         String output = "Here's what berry can do:"
             + "\n-----------------Adding Tasks------------------"
@@ -97,6 +114,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Shows a notice at the end of the help menu.
+     *
+     * @return the notice message
+     */
     public static String showNotice() {
 
         String output = "\n------------------------------------------------"

@@ -16,6 +16,14 @@ public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
 
+    /**
+     * Initialises a new {@code Event} object.
+     *
+     * @param description name of the task
+     * @param from time the task starts
+     * @param to time the task ends
+     * @throws IncorrectDateException when the given date is not recognisable
+     */
     public Event(String description, String from, String to) throws IncorrectDateException {
         super(description);
         try {
@@ -26,19 +34,48 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Initialises a new {@code Event} object.
+     *
+     * @param description name of the task
+     * @param isDone indicates whether the task has been done
+     * @param from time the task starts
+     * @param to time the task ends
+     * @throws IncorrectDateException when the given date is not recognisable
+     */
     public Event(String description, boolean isDone, String from, String to) throws IncorrectDateException {
         super(description, isDone);
         checkAndAssignFromDate(from);
         checkAndAssignToDate(to);
     }
 
+    /**
+     * Initialises a new {@code Event} object.
+     *
+     * @param description name of the task
+     * @param from time the task starts
+     * @param to time the task ends
+     * @param tags what the task is tagged as
+     * @throws IncorrectDateException when the given date is not recognisable
+     */
     public Event(String description, String from, String to, HashSet<String> tags) throws IncorrectDateException {
         super(description, tags);
         checkAndAssignFromDate(from);
         checkAndAssignToDate(to);
     }
 
-    public Event(String description, boolean isDone, String from, String to, HashSet<String> tags) throws IncorrectDateException {
+    /**
+     * Initialises a new {@code Event} object.
+     *
+     * @param description name of the task
+     * @param isDone indicates whether the task has been done
+     * @param from time the task starts
+     * @param to time the task ends
+     * @param tags what the task is tagged as
+     * @throws IncorrectDateException when the given date is not recognisable
+     */
+    public Event(String description, boolean isDone, String from, String to, HashSet<String> tags)
+            throws IncorrectDateException {
         super(description, isDone, tags);
         checkAndAssignFromDate(from);
         checkAndAssignToDate(to);
@@ -96,5 +133,19 @@ public class Event extends Task {
             }
         }
         return output;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Event)
+        {
+            Event newEvent = (Event) object;
+            if (this.description != newEvent.description
+                    || this.from != newEvent.from
+                    || this.to != newEvent.to) {
+                return false;
+            }
+        }
+        return true;
     }
 }

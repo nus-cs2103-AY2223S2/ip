@@ -18,9 +18,9 @@ public class Berry {
     public static final String DEFAULT_PATH = "data/tasks.txt";
 
     // Functionality
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Berry() throws Storage.InvalidStorageFilePathException {
         this(DEFAULT_PATH);

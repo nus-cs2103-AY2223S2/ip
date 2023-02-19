@@ -28,16 +28,16 @@ import berry.task.Todo;
  * Parses user input into {@code Commands}.
  */
 public class Parser {
-    private static String PREFIX_TAG = "#";
-    private static String PREFIX_BY = "/by";
-    private static String PREFIX_FROM = "/from";
-    private static String PREFIX_TO = "/to";
+    private static final String PREFIX_TAG = "#";
+    private static final String PREFIX_BY = "/by";
+    private static final String PREFIX_FROM = "/from";
+    private static final String PREFIX_TO = "/to";
 
-    private static int INDEX_COMMAND_TYPE = 0;
-    private static int INDEX_DESCRIPTION = 1;
+    private static final int INDEX_COMMAND_TYPE = 0;
+    private static final int INDEX_DESCRIPTION = 1;
 
     /**
-     * Types of commands.
+     * Types of commands
      */
     private enum CommandType {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE, HELP
@@ -99,7 +99,7 @@ public class Parser {
      * Parses and returns a {@code FindCommand}.
      *
      * @param userInput full user input string
-     * @return a corresonding {@code FindCommand}
+     * @return a corresponding {@code FindCommand}
      */
     private static FindCommand parseFindCommand(String userInput) {
         String[] keywords = userInput.split(" ").length > 2
@@ -131,7 +131,8 @@ public class Parser {
         }
 
         // Contain tags
-        stringOfTags = userInput.split(toDate)[1].trim();
+        stringOfTags = userInput.split(PREFIX_TO)[1].split(" ", 3)[2].trim();
+
         tags = splitTags(stringOfTags);
         return new AddTaskCommand(new Event(description, fromDate, toDate, tags));
     }
@@ -184,7 +185,8 @@ public class Parser {
         }
 
         // Contain tags
-        stringOfTags = userInput.split("#")[1];
+        stringOfTags = userInput.split("#", 2)[1];
+
 
         tags = splitTags(stringOfTags);
         return new AddTaskCommand(new Todo(description, tags));
@@ -241,6 +243,7 @@ public class Parser {
      * @return a hash set of tags
      */
     private static HashSet<String> splitTags(String stringOfTags) {
+        String[] arrTags = stringOfTags.split("#");
         ArrayList<String> tags = new ArrayList<String>(List.of(stringOfTags.trim().split("#")));
         return new HashSet<String>(tags);
     }
@@ -262,7 +265,7 @@ public class Parser {
         }
 
         try {
-            return CommandType.valueOf(command.toUpperCase()); //check if its a valid command type
+            return CommandType.valueOf(command.toUpperCase()); //check if it is a valid command type
         } catch (IllegalArgumentException e) {
             throw new UnknownCommandException();
         }

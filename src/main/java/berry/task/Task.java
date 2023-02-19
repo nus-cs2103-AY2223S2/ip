@@ -9,36 +9,60 @@ import berry.exception.IncorrectDateException;
  * Represents a task class.
  */
 public abstract class Task {
-    private static int INDEX_COMMAND_TYPE = 0;
-    private static int INDEX_ISDONE = 1;
-    private static int INDEX_DESCRIPTION = 2;
+    private static final int INDEX_COMMAND_TYPE = 0;
+    private static final int INDEX_ISDONE = 1;
+    private static final int INDEX_DESCRIPTION = 2;
 
-    private static int INDEX_DEADLINE_BY = 3;
-    private static int INDEX_EVENT_FROM = 3;
-    private static int INDEX_EVENT_TO = 4;
+    private static final int INDEX_DEADLINE_BY = 3;
+    private static final int INDEX_EVENT_FROM = 3;
+    private static final int INDEX_EVENT_TO = 4;
 
     protected boolean isDone;
     protected String description;
     protected HashSet<String> tags;
 
+    /**
+     * Initialises a new {@code Task} object.
+     *
+     * @param description name of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.tags = null;
     }
 
+    /**
+     * Initialises a new {@code Task} object.
+     *
+     * @param description name of the task
+     * @param isDone indicates whether the task has been done
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
         this.tags = null;
     }
 
+    /**
+     * Initialises a new {@code Event} object.
+     *
+     * @param description name of the task
+     * @param tags what the task is tagged as
+     */
     public Task(String description, HashSet<String> tags) {
         this.description = description;
         this.isDone = false;
         this.tags = tags;
     }
 
+    /**
+     * Initialises a new {@code Event} object.
+     *
+     * @param description name of the task
+     * @param isDone indicates whether the task has been done
+     * @param tags what the task is tagged as
+     */
     public Task(String description, boolean isDone, HashSet<String> tags) {
         this.description = description;
         this.isDone = isDone;

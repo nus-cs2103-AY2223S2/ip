@@ -57,4 +57,16 @@ public class Todo extends Task {
         }
         return output;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Todo)
+        {
+            Todo newTodo = (Todo) object;
+            if (this.description != newTodo.description) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

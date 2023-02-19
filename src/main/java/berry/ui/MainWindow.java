@@ -33,6 +33,9 @@ public class MainWindow extends AnchorPane {
     private Image berryDefaultImage = new Image(this.getClass().getResourceAsStream("/images/berryDefault.png"));
     private Image berryThinkImage = new Image(this.getClass().getResourceAsStream("/images/berryHappy.png"));
 
+    /**
+     * Initialises the starting page of the GUI.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

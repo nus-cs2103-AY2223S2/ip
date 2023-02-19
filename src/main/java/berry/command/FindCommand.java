@@ -10,6 +10,11 @@ import berry.ui.Ui;
 public class FindCommand extends Command {
     private static String[] listOfKeywords;
 
+    /**
+     * Instantiates a new {@code FindCommand} object with the given keywords
+     *
+     * @param listOfKeywords keywords to search the tasks with.
+     */
     public FindCommand(String[] listOfKeywords) {
         assert listOfKeywords != null : "listOfKeywords should not be null";
         this.listOfKeywords = listOfKeywords;
