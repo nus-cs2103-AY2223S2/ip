@@ -12,7 +12,6 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.tool.Command;
 import duke.exception.DukeCommandNotFoundException;
 import duke.exception.DukeEmptyTaskException;
 
@@ -35,24 +34,32 @@ public class Parser {
             LocalDateTime lt = LocalDateTime.parse(input, read_fmt);
             return lt.format(print_fmt);
         } catch (DateTimeParseException | UnsupportedTemporalTypeException e) {
-            e.printStackTrace();
             print("please follow the standard datetime format: yyyy-MM-dd HH:mm");
         }
         return input;
     }
 
-    public static int parse_task_id(String input) {
+    public static int parse_task_id(String input) throws DukeEmptyTaskException {
         int tid = -1;
         try {
             tid = Integer.parseInt(input.split(" ")[1]);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            e.printStackTrace();
-            System.exit(1);
+            throw new DukeEmptyTaskException();
         }
         return tid;
     }
 
-    public static Todo parse_todo(String trigger, String input) throws DukeEmptyTaskException {
+    public static String parse_task_match_string(String input) throws DukeEmptyTaskException {
+        String match_str = "";
+        try {
+            match_str = input.split(" ")[1].strip();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeEmptyTaskException();
+        }
+        return match_str;
+    }
+
+    public static Todo parse_todo(String trigger, String input) {
         if (input.split(trigger).length == 0) {
             return new Todo();
         } else {
@@ -62,7 +69,7 @@ public class Parser {
     }
 
     public static Deadline parse_deadline(String trigger, String input) {
-        String content = "", ddl = "";
+        String content, ddl;
         try {
             input = input.split(trigger)[1];
             content = input.split("/by")[0].strip();
@@ -70,13 +77,12 @@ public class Parser {
             return new Deadline(content, ddl);
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
-            System.exit(1);
         }
         return new Deadline();
     }
 
     public static Event parse_event(String trigger, String input) throws DukeEmptyTaskException {
-        String content = "", from = "", to = "";
+        String content, from, to;
         if (input.split(trigger).length == 1) {
             throw new DukeEmptyTaskException();
         } else {
@@ -143,6 +149,10 @@ public class Parser {
             case "delete":
                 tid = parse_delete_task_id(trigger, input);
                 Command.delete_task(tid, tasks, ui);
+                break;
+            case "find":
+                String match_str = parse_task_match_string(input);
+                Command.find_tasks(match_str, tasks, ui);
                 break;
             default:
                 throw new DukeCommandNotFoundException();

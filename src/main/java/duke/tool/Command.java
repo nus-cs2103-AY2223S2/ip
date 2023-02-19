@@ -43,4 +43,19 @@ public class Command {
         tasks.remove(task);
         ui.print_remove_task_msg(task, tasks.size());
     }
+
+    public static void find_tasks(String match_str, ArrayList<Task> tasks, Ui ui) {
+        if (match_str.isBlank()) {
+            return;
+        }
+        ArrayList<Task> matched_tasks = new ArrayList<>();
+        String decription;
+        for (Task task : tasks) {
+            decription = task.toString();
+            if (decription.contains(match_str)) {
+                matched_tasks.add(task);
+            }
+        }
+        ui.print_task_list(matched_tasks);
+    }
 }

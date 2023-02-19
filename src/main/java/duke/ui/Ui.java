@@ -21,7 +21,7 @@ public class Ui {
 
     public void print_task_list(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            print("No items yet.");
+            print("None yet.");
         } else {
             int i = 1;
             for (Task t : tasks) {
