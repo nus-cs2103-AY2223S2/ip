@@ -44,12 +44,11 @@ test {
 }
 
 application {
-//    mainClassName = "duke.backend.Duke"
-    mainClassName = "duke.frontend.Main"
+    mainClassName = "jarvis.frontend.Main"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "jarvis"
     archiveClassifier = null
 }
 
