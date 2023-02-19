@@ -40,7 +40,7 @@ public class Event extends Task {
             this.to = LocalDateTime.parse(input.substring(toId + 4),
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));;
         } catch (DateTimeParseException e) {
-            throw new InvalidEvent("Please enter date correctly");
+            throw new InvalidEvent("Please enter the event period correctly");
         }
         String formattedFrom = this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
         String formattedTo = this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
