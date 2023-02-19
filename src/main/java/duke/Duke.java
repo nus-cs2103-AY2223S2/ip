@@ -14,6 +14,7 @@ import duke.dukeexception.DukeException;
  */
 public class Duke {
     private static final String FILEPATH = "data";
+    private static final String TERMINATION_STATEMENT = "Done";
     private final Ui ui;
     private final Storage storage;
     private TaskList toDoList;
@@ -22,21 +23,23 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(Duke.FILEPATH);
-        this.toDoList = this.storage.initialise();
+        this.toDoList = this.storage.initialize();
         this.isTerminated = false;
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response based on the user input.
+     *
+     * @param input The user input.
+     * @return A String representing the program's response.
      */
-    protected String getResponse(String input) {
+    public String getResponse(String input) {
         Parser parser = new Parser(input);
         try {
             Command currCommand = parser.process();
             executeUserInput(currCommand);
             String response = ui.getCommandMessage(currCommand);
-            this.isTerminated = response.startsWith("Done") ? true : false;
+            this.isTerminated = response.startsWith(Duke.TERMINATION_STATEMENT);
             return response;
         } catch (DukeException ex) {
             return ui.getExceptionMessage(ex);
@@ -52,14 +55,15 @@ public class Duke {
         this.storage.update(this.toDoList);
     }
 
-    // todo: remove main or change it to another method as it is no longer needed
-    public static void main(String[] args) {
+    /**
+     * Runs the program using command line UI.
+     */
+    public static void runWithCommandLineUi() {
         Ui ui = new Ui();
         ui.printWelcome();
-        // todo: change this to constant
-        Storage storage = new Storage("data");
+        Storage storage = new Storage(Duke.FILEPATH);
         TaskList toDoList;
-        toDoList = storage.initialise();
+        toDoList = storage.initialize();
         Scanner sc = new Scanner(System.in);
         while (true) {
             String command = sc.nextLine();

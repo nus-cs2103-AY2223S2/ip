@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
+    private static String IDENTIFIER = "E";
+    private static String DATE_FORMAT = "MMM dd yyyy";
     protected LocalDate from;
     protected LocalDate to;
+
     public Event(String description, String from, String to) {
         this(description, false, from, to);
     }
@@ -17,18 +20,18 @@ public class Event extends Task {
     }
 
     /**
-     * Generates a letter representing the type of task
+     * Generates a letter representing the type of task.
      *
-     * @return a letter representing the type of this task
+     * @return a letter representing the type of this task.
      */
     public String getTaskClass() {
-        return "E";
+        return Event.IDENTIFIER;
     }
 
     /**
-     * Generates a String to store this task in a local text file
+     * Generates a String to store this task in a local text file.
      *
-     * @return A representative String that contains data about the current task
+     * @return A representative String that contains data about the current task.
      */
     public String generateStorageText() {
         return String.format("%s~%s~%s~%s~%s",
@@ -37,11 +40,11 @@ public class Event extends Task {
     }
 
     private String getFrom() {
-        return this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return this.from.format(DateTimeFormatter.ofPattern(Event.DATE_FORMAT));
     }
 
     private String getTo() {
-        return this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return this.to.format(DateTimeFormatter.ofPattern(Event.DATE_FORMAT));
     }
 
     public String toString() {

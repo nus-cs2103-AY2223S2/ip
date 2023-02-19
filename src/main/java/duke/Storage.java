@@ -13,26 +13,28 @@ import duke.commands.tasks.ToDo;
 import duke.dukeexception.DukeException;
 
 /**
- * This class handles updating Duke's task list into a local file
+ * This class handles updating Duke's task list into a local file.
  */
 public class Storage {
-    private final File fileDirectory;
-    private final File file;
-    private final Ui ui;
     private static final String INITIALIZATION_ERROR = "Unable to initialize file/directory, " +
             "see error message here: ";
     private static final String LOAD_ERROR = "Unable to load existing to-do list, " +
             "see error message here: ";
+    private static final String UNIDENTIFIED_TASK_ERROR = "Encountered unidentified task in local task file";
     private static final String UPDATE_ERROR = "Unable to update to-do list, " +
             "see error message here: ";
     private static final String SPECIFIC_FILE_PATH = "/text.txt";
     private static final String REGEX = "~";
+    private static final String COMPLETE_MARK = "X";
     private static final int TASK_TYPE_INDEX = 0;
     private static final int TASK_COMPLETION_STATUS_INDEX = 1;
     private static final int TASK_DESCRIPTION_INDEX = 2;
     private static final int TASK_DEADLINE_INDEX = 3;
     private static final int TASK_START_TIME_INDEX = 3;
     private static final int TASK_END_TIME_INDEX = 4;
+    private final File fileDirectory;
+    private final File file;
+    private final Ui ui;
 
     public Storage(String filePath) {
         this.fileDirectory = new File(filePath);
@@ -40,7 +42,7 @@ public class Storage {
         this.ui = new Ui();
     }
 
-    public TaskList initialise() {
+    public TaskList initialize() {
         try {
             fileDirectory.mkdirs();
             file.createNewFile();
@@ -62,14 +64,18 @@ public class Storage {
         String str = br.readLine();
         TaskList toDoList = new TaskList();
         while (str != null) {
-            toDoList.add(getTask(str));
+            try {
+                toDoList.add(getTask(str));
+            } catch (DukeException ex) {
+                this.ui.printExceptionMessage(ex);
+            }
             str = br.readLine();
         }
         br.close();
         return toDoList;
     }
 
-    private Task getTask(String task) {
+    private Task getTask(String task) throws DukeException {
         assert !task.isEmpty() : "Empty task!";
         String[] taskDescription = task.split(Storage.REGEX);
         switch (taskDescription[Storage.TASK_TYPE_INDEX]) {
@@ -80,17 +86,18 @@ public class Storage {
             return new Deadline(taskDescription[Storage.TASK_DESCRIPTION_INDEX],
                     getCompletionStatus(taskDescription[Storage.TASK_COMPLETION_STATUS_INDEX]),
                     taskDescription[Storage.TASK_DEADLINE_INDEX]);
-        default:
+        case "E":
             return new Event(taskDescription[Storage.TASK_DESCRIPTION_INDEX],
                     getCompletionStatus(taskDescription[Storage.TASK_COMPLETION_STATUS_INDEX]),
                     taskDescription[Storage.TASK_START_TIME_INDEX],
                     taskDescription[Storage.TASK_END_TIME_INDEX]);
+        default:
+            throw new DukeException(Storage.UNIDENTIFIED_TASK_ERROR);
         }
-        //todo: better logic here
     }
 
     private boolean getCompletionStatus(String status) {
-        return status.equals("X") ? true : false;
+        return status.equals(Storage.COMPLETE_MARK) ? true : false;
     }
 
     public void update(TaskList tasks) {

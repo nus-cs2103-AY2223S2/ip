@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
+    private static String IDENTIFIER = "D";
     protected static final String DATE_FORMAT = "MMM dd yyyy";
     protected LocalDate deadline;
 
@@ -17,22 +18,22 @@ public class Deadline extends Task {
     }
 
     /**
-     * Generates a letter representing the type of task
+     * Generates a letter representing the type of task.
      *
-     * @return a letter representing the type of this task
+     * @return a letter representing the type of this task.
      */
     public String getTaskClass() {
-        return "D";
+        return Deadline.IDENTIFIER;
     }
 
     private String getDeadline() {
-        return this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return this.deadline.format(DateTimeFormatter.ofPattern(Deadline.DATE_FORMAT));
     }
 
     /**
-     * Generates a String to store this task in a local text file
+     * Generates a String to store this task in a local text file.
      *
-     * @return A representative String that contains data about the current task
+     * @return A representative String that contains data about the current task.
      */
     public String generateStorageText() {
         return String.format("%s~%s~%s~%s",

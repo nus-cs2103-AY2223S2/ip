@@ -5,32 +5,32 @@ import java.util.ArrayList;
 import duke.commands.tasks.Task;
 
 /**
- * This class serves to represent a to-do list
+ * This class serves to represent a to-do list.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
     private static final int START_INDEX = 0;
 
     /**
-     * Constructor
+     * Creates a TaskList object.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * Adds a task to the list
+     * Adds a task to the list.
      *
-     * @param newTask The task to be added to the list
+     * @param newTask The task to be added to the list.
      */
     public void add(Task newTask) {
         this.tasks.add(newTask);
     }
 
     /**
-     * Removes a task from the list
+     * Removes a task from the list.
      *
-     * @param index The index to be removed
+     * @param index The index to be removed.
      */
     public void remove(int index) {
         assert index < this.size() : "Index out of bounds (too big)";
@@ -39,19 +39,19 @@ public class TaskList {
     }
 
     /**
-     * Shows the size of the list
+     * Shows the size of the list.
      *
-     * @return The size of the list
+     * @return The size of the list.
      */
     public int size() {
         return this.tasks.size();
     }
 
     /**
-     * Retrieves a task from the list
+     * Retrieves a task from the list.
      *
-     * @param index The index of the task to be retrieved
-     * @return The retrieved task
+     * @param index The index of the task to be retrieved.
+     * @return The retrieved task.
      */
     public Task get(int index) {
         return this.tasks.get(index);

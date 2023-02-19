@@ -1,6 +1,6 @@
-package duke;
+package duke.gui;
 
-import duke.dukeexception.DukeException;
+import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,9 +25,10 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    //todo: add constants for these
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/You.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Kal.jpeg"));
+    private static final String USER_IMAGE_FILEPATH = "/images/You.jpeg";
+    private static final String DUKE_IMAGE_FILEPATH = "/images/Kal.jpeg";
+    private Image userImage = new Image(this.getClass().getResourceAsStream(MainWindow.USER_IMAGE_FILEPATH));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream(MainWindow.DUKE_IMAGE_FILEPATH));
 
     @FXML
     public void initialize() {

@@ -7,6 +7,7 @@ import duke.commands.tasks.Task;
  * This class handles addition commands.
  */
 public class Add extends Command {
+    private static final String RESPONSE_HEADER = "Got it! I've added this task:\n";
     private final Task task;
 
     /**
@@ -32,7 +33,9 @@ public class Add extends Command {
 
     @Override
     public String getResponseOutput() {
-        return String.format("Got it! I've added this task:\n" + "    %s\n",
+        return String.format(Add.RESPONSE_HEADER
+                + Command.INDENT
+                + "%s\n",
                 this.task.toString());
     }
 }

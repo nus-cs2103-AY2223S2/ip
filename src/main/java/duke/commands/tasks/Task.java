@@ -1,7 +1,9 @@
 package duke.commands.tasks;
 
-// skeleton code for this class is taken from cs2103 website
 public abstract class Task {
+    private static String DONE_MARK = "X";
+    private static String UNDONE_MARK = " ";
+    private static String REGEX = "~";
     protected String description;
     protected boolean isDone;
 
@@ -18,26 +20,28 @@ public abstract class Task {
     public abstract String getTaskClass();
 
     /**
-     * Gets the description of this task
+     * Gets the description of this task.
      *
-     * @return A String representing the description of this task
+     * @return A String representing the description of this task.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Generates a String to store this task in a local text file
+     * Generates a String to store this task in a local text file.
      *
-     * @return A representative String that contains data about the current task
+     * @return A representative String that contains data about the current task.
      */
     public String generateStorageText() {
-        return String.format("%s~%s~%s",
-                this.getTaskClass(), this.getStatusIcon(), this.getDescription());
+        return String.format("%s" + Task.REGEX + "%s" + Task.REGEX + "%s",
+                this.getTaskClass(),
+                this.getStatusIcon(),
+                this.getDescription());
     }
 
     protected String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (this.isDone ? Task.DONE_MARK : Task.UNDONE_MARK); // mark done task with X
     }
 
     public void markDone() {
