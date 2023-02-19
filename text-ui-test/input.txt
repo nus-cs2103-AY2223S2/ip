@@ -1,0 +1,32 @@
+todo buy yarn
+todo buy keychain
+todo buy label
+list
+deadline make plushie /by Saturday
+deadline make smt
+deadline /by Some Day
+list
+event popup store /from Sunday 1pm /to Monday 4pm
+event idk /from /to 100 days later
+event /from 10am /to 9pm
+list
+mark 1
+mark 2
+unmark 1
+delete 2
+list
+mark 10
+mark 0
+unmark 11
+unmark -3
+delete 1
+delete 1
+list
+do something like this
+wb this?
+list
+mark 6
+delete 1
+mark 1
+list
+bye
