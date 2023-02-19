@@ -1,7 +1,39 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm DonkeyChat!
+What can I do for you?
+You have no tasks in your list!
+Please input a valid command.
+Added Todo task:
+[T][ ] drink coffee
+Now you have 1 tasks in the list!
+Added Todo task:
+[T][ ] dunk on a noob
+Now you have 2 tasks in the list!
+Here are the tasks in your list:
+1.[T][ ] drink coffee
+2.[T][ ] dunk on a noob
+Nice! I've marked this task as done:
+[T][X] dunk on a noob
+Here are the tasks in your list:
+1.[T][ ] drink coffee
+2.[T][X] dunk on a noob
+Added donkeychat.Event task:
+[E][ ] slap a duck's bum (from: yesterday to: today)
+Now you have 3 tasks in the list!
+Added donkeychat.Deadline task:
+[D][ ] chinese new year (by: saturday)
+Now you have 4 tasks in the list!
+Nice! I've marked this task as done:
+[E][X] slap a duck's bum (from: yesterday to: today)
+Here are the tasks in your list:
+1.[T][ ] drink coffee
+2.[T][X] dunk on a noob
+3.[E][X] slap a duck's bum (from: yesterday to: today)
+4.[D][ ] chinese new year (by: saturday)
+OK, I've marked this task as not done yet:
+[T][ ] dunk on a noob
+Here are the tasks in your list:
+1.[T][ ] drink coffee
+2.[T][ ] dunk on a noob
+3.[E][X] slap a duck's bum (from: yesterday to: today)
+4.[D][ ] chinese new year (by: saturday)
+Adios!
