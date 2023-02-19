@@ -99,11 +99,6 @@ public class Gui extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     private void handleUserInput() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userInput.getText(), userImage),
@@ -111,11 +106,7 @@ public class Gui extends Application {
         );
         userInput.clear();
     }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
+    
     protected String getResponse(String input) {
         return duke.getResponse(input);
     }
