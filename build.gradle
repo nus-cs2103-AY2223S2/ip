@@ -5,7 +5,9 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'checkstyle'
 }
-
+checkstyle{
+    toolVersion = '10.2'
+}
 repositories {
     mavenCentral()
 }
@@ -24,23 +26,22 @@ test {
 }
 
 
+
+
 application {
-    mainClassName = "Main"
+    mainClassName = "jane.javafx.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "Main"
+    archiveBaseName = "jane"
     archiveClassifier = null
 }
-
 run{
     standardInput = System.in
 }
-
 repositories {
     mavenCentral()
 }
-
 
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'

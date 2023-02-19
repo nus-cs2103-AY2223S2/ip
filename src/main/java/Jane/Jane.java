@@ -1,19 +1,29 @@
 package jane;
 
-import java.util.Scanner;
+import jane.javafx.MainWindow;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-public class Jane {
-    public static void main(String[] args) throws JaneException {
-        jane.Ui.start();
-        Storage.createDir();
-        Scanner in = new Scanner(System.in);
-        TaskList tasks = new TaskList(Storage.loadList());
-        while (in.hasNext()) {
-            String output = in.nextLine();
-            tasks.useCommand(output);
-            if (output.equals("bye")) {
-                break;
-            }
+import java.io.IOException;
+
+/**
+ * Main class
+ */
+public class Jane extends Application {
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Jane.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
