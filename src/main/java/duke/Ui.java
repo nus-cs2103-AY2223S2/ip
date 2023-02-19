@@ -19,15 +19,11 @@ public class Ui {
     /**
      * Returns the String representation of the list of tasks
      * @param taskList taskList the list of tasks
-     * @param isMatchingList boolean representing whether the list is a keyword-matched list
+     * @param addString the String denoting the type of list being returned
      * @return the String representation of the list of tasks
      */
-    private String getTaskList(TaskList taskList, boolean isMatchingList) {
-        assert (!taskList.isEmpty()) : "TaskList is empty"; // ensure list is not empty
-        String addString = " ";
-        if (isMatchingList) {
-            addString = " matching ";
-        }
+    private String getTaskList(TaskList taskList, String addString) {
+        assert (!taskList.isEmpty()) : "TaskList is empty";
         StringBuilder taskListStringBuilder = new StringBuilder("Here are the"
                 + addString + "tasks in your list:\n");
         for (int i = 0; i < taskList.size() - 1; i++) {
@@ -41,29 +37,25 @@ public class Ui {
     /**
      * Returns the formatted list of tasks
      * @param taskList the list of tasks
+     * @param type the type of list being returned
      * @return the formatted String representation of the list of tasks
      */
-    public String getFormattedTaskList(TaskList taskList) {
-        if (!taskList.isEmpty()) {
-            return getFormatted(getTaskList(taskList, false));
+    public String getFormattedTaskList(TaskList taskList, ListType type) {
+        String addString;
+
+        if (type == ListType.MATCHING_LIST) {
+            addString = " matching ";
+        } else if (type == ListType.SORTED_DEADLINE_LIST) {
+            addString = " sorted deadline ";
         } else {
-            return "There are no tasks in your list";
+            assert type == ListType.LIST;
+            addString = " ";
         }
-    }
-
-    /**
-     * Returns the formatted list of matching tasks
-     * @param taskList the list of matching tasks
-     * @param isMatchingList boolean representing whether the list is a keyword-matched list
-     * @return the formatted list of matching tasks
-     */
-    public String getFormattedTaskList(TaskList taskList, boolean isMatchingList) {
-        assert isMatchingList : "Should be a keyword-matched list";
 
         if (!taskList.isEmpty()) {
-            return getFormatted(getTaskList(taskList, true));
+            return getFormatted(getTaskList(taskList, addString));
         } else {
-            return "There are no matching tasks in your list";
+            return "There are no" + addString + "tasks in your list";
         }
     }
 
@@ -92,7 +84,7 @@ public class Ui {
     public String getDeleteMessage(Task deletedTask, TaskList taskList) {
         int len = taskList.size();
         return getFormatted("Noted. I've removed this task:\n" + deletedTask + "\nNow you have "
-                + len + " tasks in the list.\n\n") + getFormattedTaskList(taskList);
+                + len + " tasks in the list.\n\n") + getFormattedTaskList(taskList, ListType.LIST);
     }
 
     /**
@@ -126,6 +118,7 @@ public class Ui {
     public String getAddMessage(Task task, TaskList taskList) {
         int len = taskList.size();
         return getFormatted("Got it. I've added this task:\n" + task
-                + "\nNow you have " + len + " tasks in the list.\n\n") + getFormattedTaskList(taskList);
+                + "\nNow you have " + len + " tasks in the list.\n\n")
+                + getFormattedTaskList(taskList, ListType.LIST);
     }
 }

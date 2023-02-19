@@ -102,6 +102,10 @@ public class TaskList {
         return taskList.isEmpty();
     }
 
+    /**
+     * Returns the list of deadlines sorted in ascending order
+     * @return a TaskList containing deadlines in ascending order
+     */
     public TaskList sortDeadlines() {
         ArrayList<Deadline> deadlineList = new ArrayList<>();
         Comparator<Deadline> comparator = Comparator.comparing(d -> d.by);

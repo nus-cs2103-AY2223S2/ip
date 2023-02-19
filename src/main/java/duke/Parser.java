@@ -43,7 +43,7 @@ public class Parser {
      * @return the current list of tasks
      */
     private String showList() {
-        return ui.getFormattedTaskList(taskList);
+        return ui.getFormattedTaskList(taskList, ListType.LIST);
     }
 
     /**
@@ -132,7 +132,7 @@ public class Parser {
     private String find(String task) {
         String keyword = task.substring(INDEX_FIND).trim();
         TaskList matchingTasks = taskList.find(keyword);
-        return ui.getFormattedTaskList(matchingTasks, true);
+        return ui.getFormattedTaskList(matchingTasks, ListType.MATCHING_LIST);
     }
 
     /**
@@ -156,8 +156,12 @@ public class Parser {
         return ui.getAddMessage(t, taskList);
     }
 
+    /**
+     * Sorts deadlines in ascending order
+     * @return the list of deadlines in ascending order
+     */
     private String sortDeadlines() {
-        return ui.getFormattedTaskList(taskList.sortDeadlines(), true);
+        return ui.getFormattedTaskList(taskList.sortDeadlines(), ListType.SORTED_DEADLINE_LIST);
     }
 
     /**
