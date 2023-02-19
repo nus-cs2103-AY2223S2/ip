@@ -112,7 +112,7 @@ public class Ui {
     public static void farewellMessage() {
         response = "";
         response += "Writing list to storage. Hope to Sigma you again! \n";
-        response += "GigaChad is leaving the chat......";
+        response += "GigaChad is leaving the chat.....";
         dukeClosed = true;
     }
 
