@@ -1,7 +1,5 @@
 # Duke
-<picture>
-<src = "Ui.png"></src>
-</picture>
+![Image of Duke](Ui.png)
 
 Duke is an application that keeps track of your various tasks. This project was built on the Duke greenfield Java template.
 
