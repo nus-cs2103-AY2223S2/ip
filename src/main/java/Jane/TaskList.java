@@ -74,6 +74,7 @@ public class TaskList {
                 if (s.length == 1) {
                     finalOutput.append("Please specify when the event is :(((");
                     return finalOutput.toString();
+
                 }
                 //here I am assuming an event only lasts 1 day since the day it starts is the day it ends
                 jane.task.Event e = jane.Parser.parserE(output, tasks.size() + 1);
@@ -94,6 +95,7 @@ public class TaskList {
                     err.printStackTrace();
                     return finalOutput.toString();
                 }
+
             } else if (output.startsWith("delete")) {
                 String[] s = output.split(" ");
                 int num = Integer.parseInt(s[1]);
@@ -105,6 +107,7 @@ public class TaskList {
                         jane.task.Task t = tasks.get(j);
                         t.changeNum();
                     }
+
                     tasks.remove(n);
                     finalOutput.append("You now have " + tasks.size() + " tasks");
                     return finalOutput.toString();
@@ -117,6 +120,7 @@ public class TaskList {
                 for (jane.task.Task task : tasks) {
                     String s1 = task.toString() + "\n";
                     finalOutput.append(s1);
+
                 }
                 return finalOutput.toString();
             }
@@ -125,7 +129,7 @@ public class TaskList {
     }
 
 
-
+// comment so that i can make the pull request
 
 
 
