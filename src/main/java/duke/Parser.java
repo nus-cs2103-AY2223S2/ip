@@ -53,7 +53,7 @@ public class Parser {
     private String getUpComingDeadlines(TaskList toDoList) {
         StringBuilder response = new StringBuilder();
 
-        response.append("Here are the upcoming deadlines");
+        response.append("Here are the upcoming deadlines\n");
         int counter = 1;
         for (int i = 0; i < toDoList.size(); i++) {
             if (toDoList.get(i).isUpcomingDeadline()) {
@@ -210,7 +210,7 @@ public class Parser {
         StringBuilder response = new StringBuilder();
 
         if (checkDescription(inputTokens)) {
-            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+            throw new DukeException("OOPS!!! Please include a number.");
         }
 
         String taskDelete = inputTokens[1];
