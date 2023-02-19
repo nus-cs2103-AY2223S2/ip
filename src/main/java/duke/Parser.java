@@ -14,9 +14,11 @@ import commands.DeleteCommand;
 import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
+import commands.ReprioritiseCommand;
 import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
+import tasks.Priority;
 import tasks.Todo;
 /**
  * Represents the Parser that helps to parse input commands
@@ -63,13 +65,17 @@ public class Parser {
         case UNMARK:
             index = Integer.parseInt(inputArr[1]) - 1;
             return new MarkCommand(commandType, index);
+        case PRIORITISE:
+        case DEPRIORITISE:
+            index = Integer.parseInt(inputArr[1]) - 1;
+            return new ReprioritiseCommand(commandType, index);
         case DELETE:
             index = Integer.parseInt(inputArr[1]) - 1;
             return new DeleteCommand(index);
         case TODO:
             validator.validateDescription(inputArr, commandType.getValue());
             taskInput = inputArr[1];
-            Todo todo = new Todo(taskInput);
+            Todo todo = generateTodo(validator, taskInput);
             return new AddCommand(TODO, todo);
         case DEADLINE:
             validator.validateDescription(inputArr, commandType.getValue());
@@ -94,22 +100,46 @@ public class Parser {
         return "Huh? What do you mean? :o";
     }
 
-    private static Event generateEvent(String taskInput) {
+    private static Todo generateTodo(Validator validator, String taskInput) throws DukeException {
+        String[] todoInputArr = taskInput.split("/priority", 2);
+        String todoDesc = todoInputArr[0].trim();
+        if (todoInputArr.length == 2) {
+            String priorityStr = todoInputArr[1].trim();
+            validator.validatePriority(priorityStr);
+            Priority priority = Priority.getPriority(priorityStr);
+            return new Todo(todoDesc, priority);
+        }
+        return new Todo(todoDesc);
+    }
+
+    private static Event generateEvent(String taskInput) throws DukeException {
+        Validator validator = new Validator();
         String[] eventInputArr = taskInput.split("/");
         String eventDesc = eventInputArr[0].trim();
         String from = eventInputArr[1].trim().substring(5);
         String to = eventInputArr[2].trim().substring(3);
+        if (eventInputArr.length == 4) {
+            String priorityStr = eventInputArr[3].trim().substring(9);
+            validator.validatePriority(priorityStr);
+            Priority priority = Priority.getPriority(priorityStr);
+            return new Event(eventDesc, from, to, priority);
+        }
         return new Event(eventDesc, from, to);
     }
 
     private static Deadline generateDeadline(String taskInput) throws DukeException {
         Validator validator = new Validator();
-        String[] deadlineInputArr = taskInput.split("/by", 2);
+        String[] deadlineInputArr = taskInput.split("/");
         String deadlineDesc = deadlineInputArr[0].trim();
-        String byStr = deadlineInputArr[1].trim();
+        String byStr = deadlineInputArr[1].trim().substring(3);
         validator.validateDate(byStr);
         LocalDate byDate = LocalDate.parse(byStr);
-        Deadline deadline = new Deadline(deadlineDesc, byDate);
-        return deadline;
+        if (deadlineInputArr.length == 3) {
+            String priorityStr = deadlineInputArr[2].trim().substring(9);
+            validator.validatePriority(priorityStr);
+            Priority priority = Priority.getPriority(priorityStr);
+            return new Deadline(deadlineDesc, byDate, priority);
+        }
+        return new Deadline(deadlineDesc, byDate);
     }
 }

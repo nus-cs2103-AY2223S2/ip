@@ -1,9 +1,11 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import tasks.Task;
+import tasks.TaskComparator;
 
 /**
  * Represents a list of tasks. It contains methods for adding, retrieving and deleting tasks.
@@ -81,6 +83,7 @@ public class TaskList {
 
 
     public List<Task> getTaskList() {
+        Collections.sort(list, new TaskComparator());
         return list;
     }
 

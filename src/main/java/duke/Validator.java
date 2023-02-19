@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import exceptions.DukeException;
+import tasks.Priority;
 
 /**
- * Represents the Validator that handles all input validations
+ * Represents the Validator which acts as a utility class
+ * and handles all input validations
  */
 public class Validator {
     private static final String DATE_ERROR_MESSAGE = "Woah.. Error parsing date time for deadline task. "
@@ -38,6 +40,18 @@ public class Validator {
     }
 
     /**
+     * Returns a boolean indicating if the priority string parsed is a
+     * valid and recognised priority
+     *
+     * @param input string that represents the priority the user entered
+     * @return if the priority string parsed is a valid and recognised priority
+     */
+    public boolean isPriorityValid(String input) {
+        Priority priority = Priority.getPriority(input);
+        return priority != Priority.UNKNOWN;
+    }
+
+    /**
      * Generates the error message if task description is empty for a specified task
      *
      * @param task string of the task type derived from commandType
@@ -52,7 +66,7 @@ public class Validator {
      * and throws a DukeException if it is empty
      *
      * @param inputArr an array representation of the user's input line
-     * @param task string of the task type derived from commandType
+     * @param task     string of the task type derived from commandType
      * @throws DukeException
      */
     public void validateDescription(String[] inputArr, String task) throws DukeException {
@@ -71,6 +85,20 @@ public class Validator {
     public void validateDate(String input) throws DukeException {
         if (!isDateValid(input)) {
             throw new DukeException(DATE_ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Validates the priority string if it can be parsed into recognisable Priority
+     * and throws a DukeException if it is unable to be parsed into recognisable Priority
+     *
+     * @param input string of the priority to be parsed
+     * @throws DukeException
+     */
+    public void validatePriority(String input) throws DukeException {
+        if (!isPriorityValid(input)) {
+            throw new DukeException("Oops! If you want to set a priority, "
+                    + "please enter values such as: low, medium, high");
         }
     }
 }
