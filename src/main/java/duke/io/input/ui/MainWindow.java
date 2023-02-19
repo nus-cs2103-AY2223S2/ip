@@ -129,17 +129,20 @@ public class MainWindow extends AnchorPane {
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(input, userImage),
                         DialogBox.getDukeDialog(this.currentEvent.toString(), dukeImage));
+                if (this.currentEvent.isFinalEvent()) {
+                    String saveProgressQuery = "SAVE YOUR GRAND PLAN FOR ANOTHER DAY? ";
+                    dialogContainer.getChildren().add(
+                            DialogBox.getDukeDialog(saveProgressQuery, dukeImage));
+                }
             } else {
-                String saveProgressQuery = "SAVE YOUR GRAND PLAN FOR ANOTHER DAY? ";
-
                 String input = userInput.getText();
                 userInput.clear();
 
                 dialogContainer.getChildren().addAll(
-                        DialogBox.getDukeDialog(saveProgressQuery, dukeImage),
                         DialogBox.getUserDialog(input, userImage));
 
                 Storage.saveProgressGUI(input, this.currentEvent.getTaskList());
+                System.exit(0);
             }
         } else {
             return;

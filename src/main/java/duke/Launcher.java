@@ -10,7 +10,7 @@ import javafx.application.Application;
 //modify launcher to initiate both GUI and CLI versions of Duke
 public class Launcher {
     public static void main(String[] args) {
-        if (args.length > 0 && args[0].equals("--gui")) {
+        if (args.length > 0 && args[0].equals("GUI")) {
             Application.launch(Main.class, args);
         } else {
             Duke.main(args);
