@@ -12,7 +12,6 @@ public class Event extends Task {
         super(str);
         this.from = LocalDateTime.parse(from, INPUT_FORMAT);
         this.to = LocalDateTime.parse(to, INPUT_FORMAT);
-        ;
     }
 
     @Override
@@ -20,12 +19,12 @@ public class Event extends Task {
         return "E";
     }
 
-    public LocalDateTime getFrom() {
-        return this.from;
+    public String getFrom() {
+        return this.from.format(INPUT_FORMAT);
     }
 
-    public LocalDateTime getTo() {
-        return this.to;
+    public String getTo() {
+        return this.to.format(INPUT_FORMAT);
     }
 
     @Override
