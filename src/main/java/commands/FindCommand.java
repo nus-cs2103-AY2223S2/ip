@@ -28,13 +28,15 @@ public class FindCommand extends Command {
      * @param list the TaskList to search for Tasks with the keyword
      * @param ui the Ui to help inform the user of the results of the search
      * @param storage the Storage to save the updated TaskList to (not used in this command)
+     *
+     * @return The execution result string.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         TaskList results = list.search(keyword);
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n\t ");
         sb.append(results.toString());
-        ui.printOutput(sb.toString());
+        return sb.toString();
     }
 }

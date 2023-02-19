@@ -6,14 +6,14 @@ package duke;
 public class Ui {
 
     /**
-     * Formats the input string to standard output message format.
+     * Formats the input string to standard output message format for duke CLI.
      *
      * @param input The string to be formatted.
      * @return The formatted string.
      */
     public static String formatOutput(String input) {
-        String line = "\t____________________________________________________________\n";
-        return line + "\t " + input + "\n" + line;
+        String line = "____________________________________________________________\n";
+        return line + input + "\n" + line;
     }
 
     /**
@@ -25,18 +25,68 @@ public class Ui {
         System.out.println(formatOutput(output));
     }
 
+
     /**
-     * Prints the greeting message to the console.
+     * Retrieves the greeting message.
+     *
+     * @return The greeting message string.
      */
-    public void showGreeting() {
-        printOutput("Hey there! I'm Sirius\n\t What can I do for you today? :D");
+    public String getGreeting() {
+        return "Hey there! I'm Sirius\nWhat can I do for you today? :D";
     }
 
     /**
-     * Prints the farewell message to the console.
+     * Prints the farewell message.
+     *
+     * @return The farewell message string.
      */
-    public void showBye() {
-        printOutput("Well, I'm off! Hope to see you again soon :)");
+    public String getBye() {
+        return "Well, I'm off! Hope to see you again soon :)";
+    }
+
+    /**
+     * Retrieves the error message of the given exception.
+     *
+     * @param e The exception that was thrown.
+     * @return The exception message string.
+     */
+    public String getExceptionError(Exception e) {
+        return e.getMessage();
+    }
+
+    /**
+     * Retrieves the error message for when there is an error parsing a date-time string.
+     *
+     * @return The exception message string.
+     */
+    public String getDateTimeParseError() {
+        return "Woah.. Error parsing date time for deadline task. "
+              + "Please enter the by datetime in this format yyyy-mm-dd (e.g., 2023-10-15).";
+    }
+
+    /**
+     * Retrieves the error message for when there is an error loading data.
+     *
+     * @return The exception message string.
+     */
+    public String getLoadingError() {
+        return "No initial data found. I'll be generating a new task list for you..";
+    }
+
+    /**
+     * Retrieves the error message for when there is an error saving data.
+     *
+     * @return The exception message string.
+     */
+    public String getSavingError() {
+        return "Uh oh... An error occurred while I was trying to save your latest task list :0";
+    }
+
+    /**
+     * Shows the greeting message to the console.
+     */
+    public void showGreeting() {
+        printOutput(getGreeting());
     }
 
     /**
@@ -53,20 +103,6 @@ public class Ui {
      */
     public void showDateTimeParseError() {
         printOutput("Woah.. Error parsing date time for deadline task. "
-              + "Please enter the by datetime in this format yyyy-mm-dd (e.g., 2023-10-15).");
-    }
-
-    /**
-     * Prints the error message for when there is an error loading data.
-     */
-    public void showLoadingError() {
-        printOutput("No initial data found. I'll be generating a new task list for you..");
-    }
-
-    /**
-     * Prints the error message for when there is an error saving data.
-     */
-    public void showSavingError() {
-        printOutput("Uh oh... An error occurred while I was trying to save your latest task list :0");
+                + "Please enter the by datetime in this format yyyy-mm-dd (e.g., 2023-10-15).");
     }
 }

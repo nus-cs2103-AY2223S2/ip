@@ -23,12 +23,14 @@ public class ListCommand extends Command {
      * @param list the existing TaskList
      * @param ui the Ui to help inform the user of all the stored tasks
      * @param storage the Storage storing the latest TaskList (not used in this command)
+     *
+     * @return The execution result string.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n\t ");
         sb.append(list.toString());
-        ui.printOutput(sb.toString());
+        return sb.toString();
     }
 }
