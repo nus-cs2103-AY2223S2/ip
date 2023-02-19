@@ -44,15 +44,19 @@ public class MarkCommand extends Command {
         } else {
             assert taskIndex > 0 : "Task Index cannot be less than 1";
             Task currentTask = list.getTask(taskIndex);
+            String resultMessage = "";
             if (this.getType().equals(MARK)) {
                 currentTask.markAsDone();
+                resultMessage = "Great :D I knew you could do it! "
+                        + "I've marked this task as done:\n"
+                        + currentTask.toString();
             } else {
                 currentTask.markAsNotDone();
+                resultMessage = "Alright, I've marked this task as not done\n"
+                        + currentTask.toString();
             }
             storage.saveListToFile(list, ui);
-            return "Great :D I knew you could do it! "
-                    + "I've marked this task as done:\n"
-                    + currentTask.toString();
+            return resultMessage;
         }
     }
 }
