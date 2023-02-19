@@ -27,18 +27,21 @@ public class MainWindow extends AnchorPane {
 
     private Jarvis jarvis;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/soyjak.png"));
+    private final Image jarvisImage
+            = new Image(this.getClass().getResourceAsStream("/images/chad.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-//        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(jarvis.getResponse("welcome"), dukeImage));
+//        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(jarvis.getResponse("welcome"), jarvisImage
+//        ));
     }
 
     public void setJarvis(Jarvis j) {
         jarvis = j;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(jarvis.getResponse("welcome"), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(jarvis.getResponse("welcome"), jarvisImage
+        ));
     }
 
     /**
@@ -55,7 +58,8 @@ public class MainWindow extends AnchorPane {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog((input), userImage),
-                DialogBox.getDukeDialog((response), dukeImage)
+                DialogBox.getDukeDialog((response), jarvisImage
+                )
         );
         userInput.clear();
 
