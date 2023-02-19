@@ -30,7 +30,7 @@ public class Handler{
             throw new ProgramException("Index needed!");
         }
         else if(parameters.length>2){
-            throw new ProgramException("Too many parameters, pick just one!");
+            throw new ProgramException("Too many parameters, pick only one!");
         }
         try{
             int index = Integer.parseInt(parameters[1]);
@@ -43,12 +43,27 @@ public class Handler{
     }
 
     public String parseToDo(String input) throws ProgramException{
+        String parameters[] = input.split(" ",2);
+        if(parameters.length==1){
+            throw new ProgramException("Task description needed!");
+        }
+        return parameters[1];
+    }
+
+    public String[] parseDeadline(String input) throws ProgramException{
         return "1";
     }
 
-    
+    public String[] parseEvent(String input) throws ProgramException{
+        return "1";
+    }
+
+
     public Command processCommand(String input, TaskList taskList) throws ProgramException {
         Command c = null;
+        String content = null;
+        String start = null;
+        String end = null;
         int index = 0;
         CommandList command = getCommand(input);
         switch (command) {
@@ -74,7 +89,8 @@ public class Handler{
                 c = new EventCommand("2","2","2");
                 break;
             case TODO:
-                c = new ToDoCommand("2");
+                content = parseToDo(input);
+                c = new ToDoCommand(content);
                 break;
             case BYE:
                 c = new ByeCommand();
