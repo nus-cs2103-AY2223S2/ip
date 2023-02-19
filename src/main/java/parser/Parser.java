@@ -23,7 +23,7 @@ import exceptions.UnknownTaskException;
 /**
  * This class parses user input commands into commands that Duke can understand and execute
  */
-public class Parser {
+public abstract class Parser {
 
     /**
      * Parses the commandString input into an executable command
@@ -67,10 +67,11 @@ public class Parser {
                 return new MarkCommand(false, index);
             case DELETE:
                 return new DeleteCommand(index);
-            default:
-                break; // will not reach here
+            default: 
+                assert comm != EnumCommand.MARK 
+                    || comm != EnumCommand.UNMARK 
+                    || comm != EnumCommand.DELETE;
             }
-            throw new UnknownTaskException(j); // will not reach here
         case BYE:
             return new ByeCommand();
         default:
