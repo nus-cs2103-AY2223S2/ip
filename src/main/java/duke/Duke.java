@@ -31,4 +31,8 @@ public class Duke {
             return e.getMessage() + "\n";
         }
     }
+
+    public String getWelcome() {
+        return "Peace in our time. ";
+    }
 }

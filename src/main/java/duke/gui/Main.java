@@ -23,7 +23,10 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Ultron");
+            MainWindow main = fxmlLoader.<MainWindow>getController();
+            main.setDuke(duke);
+            main.showWelcome();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
