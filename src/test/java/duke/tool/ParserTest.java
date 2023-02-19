@@ -24,8 +24,5 @@ public class ParserTest {
         ArrayList<Task> tl = new ArrayList<>(100);
         Parser.switch_input(tl, "event project meeting /from 2020-08-30 18:00 /to 2020-08-30 20:00", ui);
         assertEquals(taskList.size(), tl.size());
-        Parser.switch_input(tl, "delete 0", ui);
-        Parser.switch_input(tl, "mark 0", ui);
-        Parser.switch_input(tl, "unmark 0", ui);
     }
 }

@@ -115,55 +115,57 @@ public class Parser {
     public static void print(String str) {
         System.out.println(str);
     }
-    public static void switch_input(ArrayList<Task> tasks, String input, Ui ui) throws DukeCommandNotFoundException, DukeEmptyTaskException {
+    public static String switch_input(ArrayList<Task> tasks, String input, Ui ui) throws DukeCommandNotFoundException, DukeEmptyTaskException {
         String trigger = input.split(" ")[0];
         int tid;
         Task task;
+        String output;
         switch (trigger) {
             case "bye":
-                ui.print_bye_msg();
-                System.exit(0);
+                output = ui.print_bye_msg();
+                break;
             case "list":
-                ui.print_task_list(tasks);
+                output = ui.print_task_list(tasks);
                 break;
             case "mark":
                 tid = parse_task_id(input);
-                Command.mark_as_done(tid, tasks, ui);
+                output = Command.mark_as_done(tid, tasks, ui);
                 break;
             case "unmark":
                 tid = parse_task_id(input);
-                Command.mark_as_undone(tid, tasks, ui);
+                output = Command.mark_as_undone(tid, tasks, ui);
                 break;
             case "deadline":
                 task = parse_deadline(trigger, input);
-                Command.add_task_to_list(task, tasks, ui);
+                output = Command.add_task_to_list(task, tasks, ui);
                 break;
             case "event":
                 task = parse_event(trigger, input);
-                Command.add_task_to_list(task, tasks, ui);
+                output = Command.add_task_to_list(task, tasks, ui);
                 break;
             case "todo":
                 task = parse_todo(trigger, input);
-                Command.add_task_to_list(task, tasks, ui);
+                output = Command.add_task_to_list(task, tasks, ui);
                 break;
             case "delete":
                 tid = parse_delete_task_id(trigger, input);
-                Command.delete_task(tid, tasks, ui);
+                output = Command.delete_task(tid, tasks, ui);
                 break;
             case "find":
                 String match_str = parse_task_match_string(input);
-                Command.find_tasks(match_str, tasks, ui);
+                output = Command.find_tasks(match_str, tasks, ui);
                 break;
             default:
                 throw new DukeCommandNotFoundException();
         }
+        return output;
     }
 
     public static void process_input(ArrayList<Task> tasks, Scanner sc, Ui ui) {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             try {
-                switch_input(tasks, input, ui);
+                print(switch_input(tasks, input, ui));
             } catch (Exception e) {
                 e.printStackTrace();
             }

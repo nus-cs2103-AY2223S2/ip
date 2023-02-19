@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.ui.Ui;
 import duke.tool.Storage;
@@ -22,10 +23,28 @@ public class Duke {
     }
 
     public void run() {
-        this.ui.print_greet_msg();
+        System.out.println(this.ui.print_greet_msg());
         Scanner sc = new Scanner(System.in);
         Parser.process_input(this.tasks, sc, this.ui);
         this.storage.save_to_file(this.tasks);
+    }
+
+    public String getResponse(String input) {
+        String output = "";
+        try {
+            output = Parser.switch_input(this.tasks, input, this.ui);
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
+        if (output.isBlank()) {
+            return this.ui.print_empty_msg();
+        } else {
+            return output;
+        }
+    }
+
+    public Ui getUi() {
+        return this.ui;
     }
 
     public static void main(String[] args) {

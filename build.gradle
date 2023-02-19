@@ -34,6 +34,7 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed"
+
         showExceptions true
         exceptionFormat "full"
         showCauses true
@@ -43,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
@@ -52,9 +53,10 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '10.2'
+    toolVersion = '8.29'
 }
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
