@@ -102,6 +102,7 @@ public class Parser {
         case BYE:
             return new ByeCommand();
         default:
+            assert commandType == CommandType.UNKNOWN : "Command type is not a declared type";
             throw new DukeException("Huh? What do you mean? :o");
         }
     }

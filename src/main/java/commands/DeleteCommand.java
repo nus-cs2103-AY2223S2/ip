@@ -37,6 +37,7 @@ public class DeleteCommand extends Command {
         if (taskIndex >= list.getSize()) {
             return "Oopsies.. Seems like that task does not exist :(";
         } else {
+            assert taskIndex > 0 : "Task Index cannot be less than 1";
             Task toDelete = list.getTask(taskIndex);
             list.deleteTask(taskIndex);
             storage.saveListToFile(list, ui);
