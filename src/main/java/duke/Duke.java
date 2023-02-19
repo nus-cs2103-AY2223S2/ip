@@ -26,6 +26,7 @@ import java.util.Queue;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * The main class of the Duke program.
@@ -57,7 +58,7 @@ public class Duke {
 
         Command[] commands = new Command[]{
             new Command("exit", "exit the app",
-                    stateful -> stateful.next("Goodbye.", stateful.state().next(true))
+                    stateful -> stateful.next("Goodbye.", stateful.getState().next(true))
             ),
             new Command("help",
                     "show this help message",
@@ -121,11 +122,11 @@ public class Duke {
                             new Command("/list",
                                     "list aliases",
                                     (stateful, input) -> {
-                                        if (stateful.state().aliases().isEmpty()) {
+                                        if (stateful.getState().getAliases().isEmpty()) {
                                             return stateful.next("No aliases found");
                                         }
                                         stateful.next("aliases:");
-                                        stateful.state().aliases().entrySet().stream()
+                                        stateful.getState().getAliases().entrySet().stream()
                                                 .map(e -> "\t" + e.getKey() + " -> " + e.getValue())
                                                 .forEach(stateful::next);
                                         return stateful;
@@ -135,7 +136,7 @@ public class Duke {
                                     "add alias",
                                     (stateful, input) -> {
                                         HashMap<String, String> args = Parser.extractTokensWithJoin(Set.of("/is"), input);
-                                        stateful.state().aliases().put(args.get(""), args.get("/is"));
+                                        stateful.getState().getAliases().put(args.get(""), args.get("/is"));
                                         return stateful.next("alias added: " + args.get("") + " -> " + args.get("/is"));
                                     }
                             ),
@@ -143,7 +144,7 @@ public class Duke {
                                     "delete alias",
                                     (stateful, input) -> {
                                         String name = String.join(" ", input);
-                                        String orig = stateful.state().aliases().remove(name);
+                                        String orig = stateful.getState().getAliases().remove(name);
                                         return stateful.next("alias deleted: " + name + " -> " + orig);
                                     }
                             ),
@@ -158,7 +159,7 @@ public class Duke {
             List<String> commandList = input.stream()
                     .map(s -> ui.getHelpDict().get(s))
                     .filter(Objects::nonNull)
-                    .toList();
+                    .collect(Collectors.toList());
             if (commandList.isEmpty()) {
                 return stateful.next("No such command.");
             }
@@ -195,9 +196,9 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             Stateful stateful = this.getResponse(scanner.nextLine());
-            this.state = stateful.state();
-            ui.print(String.join("\n",stateful.outputs()));
-            if (this.state.doQuit()) {
+            this.state = stateful.getState();
+            ui.print(String.join("\n",stateful.getOutputs()));
+            if (this.state.isDoQuit()) {
                 break;
             }
         }
@@ -213,7 +214,7 @@ public class Duke {
     public Stateful getResponse(String input) {
         try {
             Queue<String> words = new LinkedList<>(Arrays.asList(input.split("\\s")));
-            Command cmd = this.parser.parseCommand(words.remove(), this.state.aliases());
+            Command cmd = this.parser.parseCommand(words.remove(), this.state.getAliases());
             if (cmd.hasSubCommands()) {
                 if (words.isEmpty()) {
                     throw new IllegalArgumentException("Missing argument for command: "  + cmd.getName());

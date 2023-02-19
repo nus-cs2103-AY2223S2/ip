@@ -216,7 +216,7 @@ public class TaskList {
         List<Integer> matchIndexes = IntStream.range(0, this.tasks.size())
                 .parallel()
                 .filter(i -> this.tasks.get(i).getDesc().toLowerCase().contains(keyword))
-                .boxed().toList();
+                .boxed().collect(Collectors.toList());
         if (matchIndexes.size() < 1) {
             return new LinkedList<>(Collections.singletonList("No matches found."));
         } else {

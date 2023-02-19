@@ -20,7 +20,6 @@ import java.util.function.Supplier;
 
 /**
  * Represents a command that Duke recognizes.
- *
  * Apart from possible reads/writes to data, a command when given an input may perform a modification on a
  * {@link Stateful} object via a (bi)function which can be writing to output, changing the state of the program, or both.
  */
@@ -59,7 +58,7 @@ public class Command {
     }
 
     private static BiFunction<Stateful, Queue<String>, Stateful> makeStateful (Supplier<Stateful> supplier) {
-        return (stateful, string) ->  stateful.next(supplier.get().outputs());
+        return (stateful, string) ->  stateful.next(supplier.get().getOutputs());
     }
 
     private static BiFunction<Stateful, Queue<String>, Stateful> makeStateful(Function<Stateful, Stateful> function) {

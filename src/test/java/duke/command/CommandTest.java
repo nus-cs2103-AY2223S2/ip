@@ -20,8 +20,8 @@ public class CommandTest {
         assertEquals("test", command.getName());
         assertEquals("\ttest : test help", command.getHelpText());
         assertFalse(command.hasSubCommands());
-        assertEquals("test", command.execute(new Stateful(new LinkedList<>(), new State(false)),new LinkedList<>()).outputs().poll());
-        assertFalse(command.execute(new Stateful(new LinkedList<>(), new State(false)),new LinkedList<>()).state().doQuit());
+        assertEquals("test", command.execute(new Stateful(new LinkedList<>(), new State(false)),new LinkedList<>()).getOutputs().poll());
+        assertFalse(command.execute(new Stateful(new LinkedList<>(), new State(false)),new LinkedList<>()).getState().isDoQuit());
     }
 
     @Test

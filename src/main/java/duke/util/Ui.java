@@ -100,13 +100,11 @@ public class Ui {
      * Prints the introductory message.
      */
     public void printIntro() {
-        String logo = """
-                 ____        _       \s
-                |  _ \\ _   _| | _____\s
-                | | | | | | | |/ / _ \\
-                | |_| | |_| |   <  __/
-                |____/ \\__,_|_|\\_\\___| ,
-                """;
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello, I'm\n" + logo + "how may I help?");
     }
 

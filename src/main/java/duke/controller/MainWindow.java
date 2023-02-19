@@ -46,14 +46,14 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         Stateful response = duke.getResponse(input);
-        assert response.outputs() != null && response.outputs().size() > 0;
-        String output = String.join("\n", response.outputs());
+        assert response.getOutputs() != null && response.getOutputs().size() > 0;
+        String output = String.join("\n", response.getOutputs());
         dialogContainer.getChildren()
                 .addAll(DialogBox.getUserDialog(input, userImage),
                         DialogBox.getDukeDialog(output, dukeImage)
                 );
         userInput.clear();
-        if (response.state().doQuit()) {
+        if (response.getState().isDoQuit()) {
             userInput.setEditable(false);
             Stage stage = (Stage) scrollPane.getScene().getWindow();
             stage.close();
