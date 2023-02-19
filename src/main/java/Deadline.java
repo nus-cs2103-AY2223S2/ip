@@ -6,8 +6,12 @@ import java.util.Date;
 
 
 public class Deadline extends Task{
+<<<<<<< .merge_file_a16696
 <<<<<<< Updated upstream
     String tag = "[D]";
+=======
+    String tag = "D";
+>>>>>>> .merge_file_a09564
     protected String by;
 =======
     String tag = "D";
@@ -23,15 +27,15 @@ public class Deadline extends Task{
     }
 
     @Override
-    public void genDscp(String input) throws InvalidDeadline{
-        String dscp = input.replace("deadline ", "");
-        if (dscp.isBlank()) {
+    public void genDscp(String input) throws InvalidDeadline {
+        if (input.isBlank()) {
             throw new InvalidDeadline();
         }
-        int byId = dscp.indexOf("/by");
+        int byId = input.indexOf("/by");
         if (byId == -1) {
             throw new InvalidDeadline();
         }
+<<<<<<< .merge_file_a16696
 <<<<<<< Updated upstream
         this.by = dscp.substring(byId + 4);
         String task = String.format("%s (by: %s)", dscp.substring(0, byId - 1), this.by);
@@ -46,6 +50,11 @@ public class Deadline extends Task{
         String description = String.format("%s (by: %s)", input.substring(0, byId - 1), formattedBy);
         super.description = description;
 >>>>>>> Stashed changes
+=======
+        this.by = input.substring(byId + 4);
+        String description = String.format("%s (by: %s)", input.substring(0, byId - 1), this.by);
+        super.description = description;
+>>>>>>> .merge_file_a09564
     }
 
     //Override toString

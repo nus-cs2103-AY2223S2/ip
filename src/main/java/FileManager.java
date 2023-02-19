@@ -75,6 +75,7 @@ public class FileManager {
             char type = entry.charAt(0);
             int marked = Character.getNumericValue(entry.charAt(1));
             String description = entry.substring(2);
+<<<<<<< .merge_file_a08512
             if (type == 'T') {
                 ToDo todo = new ToDo(description);
                 if (marked == 1) {
@@ -93,6 +94,34 @@ public class FileManager {
                     event.mark();
                 }
                 data.addFileEntry(event);
+=======
+            try {
+                if (type == 'T') {
+                    ToDo todo = new ToDo();
+                    todo.genDscp(description);
+                    if (marked == 1) {
+                        todo.mark();
+                    }
+                    data.addFileEntry(todo);
+                } else if (type == 'D') {
+                    Deadline deadline = new Deadline();
+                    deadline.genDscp(description);
+                    if (marked == 1) {
+                        deadline.mark();
+                    }
+                    data.addFileEntry(deadline);
+                } else {
+                    Event event = new Event();
+                    event.genDscp(description);
+                    if (marked == 1) {
+                        event.mark();
+                    }
+                    data.addFileEntry(event);
+                }
+
+            } catch (DukeExceptions e) {
+                System.out.println(e.getMessage());
+>>>>>>> .merge_file_a12744
             }
         }
         return data;

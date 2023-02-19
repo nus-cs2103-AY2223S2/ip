@@ -3,13 +3,21 @@ import java.util.Scanner;
 public class Duke {
 
     public static void userInput() {
+<<<<<<< .merge_file_a14772
         Data data = new Data();
+=======
+        Data data = FileManager.populateList();
+>>>>>>> .merge_file_a22372
         System.out.println("Greetings");
         Scanner user = new Scanner(System.in);
 
         while (true) {
             String input = user.nextLine();
             if (input.equals("bye")) {
+<<<<<<< .merge_file_a14772
+=======
+                FileManager.writeFile(data);
+>>>>>>> .merge_file_a22372
                 System.out.println("Bye!");
                 break;
             }
@@ -52,41 +60,71 @@ public class Duke {
 
             if (input.contains("todo ")) {
                 Task todo = new ToDo();
+<<<<<<< .merge_file_a14772
                 try {
                     todo.genDscp(input);
+=======
+                String description = input.replace("todo ", "");
+                try {
+                    todo.genDscp(description);
+>>>>>>> .merge_file_a22372
                 } catch (DukeExceptions e){
                     System.out.println(e.getMessage());
                     continue;
                 }
                 data.addEntry(todo);
+<<<<<<< .merge_file_a14772
                 System.out.println(String.format("Now you have %d tasks in the list", data.getNum()));
+=======
+                System.out.println(String.format("Now you have %d tasks in the list", data.getSize()));
+>>>>>>> .merge_file_a22372
                 continue;
             }
 
             if (input.contains("event ")) {
                 Task event = new Event();
+<<<<<<< .merge_file_a14772
                 try {
                     event.genDscp(input);
+=======
+                String description = input.replace("event ", "");
+                try {
+                    event.genDscp(description);
+>>>>>>> .merge_file_a22372
                 } catch (DukeExceptions e) {
                     System.out.println(e.getMessage());
                     continue;
                 }
                 data.addEntry(event);
+<<<<<<< .merge_file_a14772
                 System.out.println(String.format("Now you have %d tasks in the list", data.getNum()));
+=======
+                System.out.println(String.format("Now you have %d tasks in the list", data.getSize()));
+>>>>>>> .merge_file_a22372
                 continue;
             }
 
             if (input.contains("deadline ")) {
                 Task deadline = new Deadline();
+<<<<<<< .merge_file_a14772
                 try {
                     deadline.genDscp(input);
+=======
+                String description = input.replace("deadline ", "");
+                try {
+                    deadline.genDscp(description);
+>>>>>>> .merge_file_a22372
                 } catch (DukeExceptions e) {
                     System.out.println(e.getMessage());
                     continue;
                 }
 
                 data.addEntry(deadline);
+<<<<<<< .merge_file_a14772
                 System.out.println(String.format("Now you have %d tasks in the list", data.getNum()));
+=======
+                System.out.println(String.format("Now you have %d tasks in the list", data.getSize()));
+>>>>>>> .merge_file_a22372
                 continue;
             }
             System.out.println("I do not understand your instructions...");

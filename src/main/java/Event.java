@@ -5,8 +5,12 @@ import java.time.temporal.ChronoUnit;
 
 
 public class Event extends Task {
+<<<<<<< .merge_file_a10728
 <<<<<<< Updated upstream
     String tag = "[E]";
+=======
+    String tag = "E";
+>>>>>>> .merge_file_a17964
     protected String from;
     protected String to;
 =======
@@ -26,16 +30,16 @@ public class Event extends Task {
 
     //KEEP ALL WORDS SEPARATED BY SPACES
     @Override
-    public void genDscp(String input) throws InvalidEvent{
-        String dscp = input.replace("event ", "");
-        if (dscp.isBlank()) {
+    public void genDscp(String input) throws InvalidEvent {
+        if (input.isBlank()) {
             throw new InvalidEvent();
         }
-        int fromId = dscp.indexOf("/from");
-        int toId = dscp.indexOf(("/to"));
+        int fromId = input.indexOf("/from");
+        int toId = input.indexOf(("/to"));
         if (fromId == -1 || toId == -1) {
             throw new InvalidEvent();
         }
+<<<<<<< .merge_file_a10728
 <<<<<<< Updated upstream
         this.from = dscp.substring(fromId + 6, toId - 1);
         this.to = dscp.substring(toId + 4);
@@ -57,6 +61,12 @@ public class Event extends Task {
                 formattedFrom, formattedTo);
         super.description = description;
 >>>>>>> Stashed changes
+=======
+        this.from = input.substring(fromId + 6, toId - 1);
+        this.to = input.substring(toId + 4);
+        String description = String.format("%s (from: %s to: %s)", input.substring(0, fromId - 1), this.from, this.to);
+        super.description = description;
+>>>>>>> .merge_file_a17964
     }
 
     //Override toString
