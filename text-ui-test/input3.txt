@@ -1,5 +1,5 @@
 todo borrow book
-deadline return book /by monday 2pm
+deadline return book /by 12/12/20 1800
 event party /from thurs 9am /to 10pm
 list
 mark 1
@@ -10,4 +10,7 @@ unmark 1
 unmark 2
 unmark 3
 list
+delete 1
+delete 1
+delete 1
 bye

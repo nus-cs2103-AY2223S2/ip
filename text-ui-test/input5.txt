@@ -3,4 +3,6 @@ deadline
 event party /from thurs 9am /to 10pm
 list
 Your uncle a eughuougheughelel
+delete 1
+delete 1
 bye
