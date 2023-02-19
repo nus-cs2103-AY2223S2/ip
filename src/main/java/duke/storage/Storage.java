@@ -28,9 +28,12 @@ public class Storage {
             if (!Files.exists(DATA_PATH)) {
                 Files.createDirectories(DATA_PATH);
             }
+            assert Files.exists(DATA_PATH) : "Data directory does not exist";
+
             if (!Files.exists(TASK_LIST_PATH)) {
                 Files.createFile(TASK_LIST_PATH);
             }
+            assert Files.exists(TASK_LIST_PATH) : "Task list file does not exist";
 
             return parseTaskList();
 
@@ -58,6 +61,8 @@ public class Storage {
 
     private Task parseTask(String line) throws DukeStorageException {
         String[] parts = line.split(" \\| ");
+        assert parts.length >= 3 : "Malformed task string: " + line;
+
         String taskType = parts[0];
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
@@ -68,10 +73,12 @@ public class Storage {
             task = new ToDo(description);
             break;
         case "D":
+            assert parts.length == 4 : "Malformed deadline task string: " + line;
             LocalDateTime dueDate = LocalDateTime.parse(parts[3]);
             task = new Deadline(description, dueDate);
             break;
         case "E":
+            assert parts.length == 5 : "Malformed event task string: " + line;
             LocalDateTime fromDate = LocalDateTime.parse(parts[3]);
             LocalDateTime toDate = LocalDateTime.parse(parts[4]);
             task = new Event(description, fromDate, toDate);

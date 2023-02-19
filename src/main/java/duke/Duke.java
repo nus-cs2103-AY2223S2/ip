@@ -21,7 +21,7 @@ public class Duke {
         }
 
         try {
-            return Parser.processCommand(input, storage, tasks);
+            return Parser.processCommand(formattedInput, storage, tasks);
         } catch (DukeException e) {
             return e.getMessage();
         }

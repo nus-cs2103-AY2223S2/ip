@@ -167,6 +167,7 @@ public class TaskList {
 
             } else if (0 <= taskIndex && taskIndex < TASKS.size()) {
                 Task task = TASKS.get(taskIndex);
+                assert task != null : "Task cannot be null";
                 task.setDone();
                 return ("Task marked as completed\n" + task);
 
@@ -202,6 +203,7 @@ public class TaskList {
 
             } else if (0 <= taskIndex && taskIndex < TASKS.size()) {
                 Task task = TASKS.get(taskIndex);
+                assert task != null : "Task cannot be null";
                 task.setNotDone();
                 return ("Task marked as not completed\n" + task);
 
@@ -237,6 +239,7 @@ public class TaskList {
                 return "There are no tasks in your Task List!";
             } else if (0 <= taskIndex && taskIndex < TASKS.size()) {
                 Task task = TASKS.get(taskIndex);
+                assert task != null : "Task cannot be null";
                 TASKS.remove(taskIndex);
 
                 return ("Noted. I've deleted this task:\n\t" + task
@@ -270,6 +273,7 @@ public class TaskList {
         ArrayList<Task> results = new ArrayList<>();
 
         for (Task task : TASKS) {
+            assert task != null : "Task cannot be null";
             if (task.getDescription().contains(keyword)) {
                 results.add(task);
             }
