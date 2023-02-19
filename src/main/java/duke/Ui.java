@@ -51,7 +51,7 @@ public class Ui {
      */
     public static void findMessage(String searchFor, TaskList tasks) {
         response = "";
-        response += "Got it Sigma. Here are the tasks in your list that contain [" + searchFor + "]:\n";
+        response += "Let me do it for you Sigma. Here are the tasks in your list that contain [" + searchFor + "]:\n";
         for (int i = 0; i < tasks.size(); i++) {
             int j = i + 1;
             response += j + "." + tasks.get(i).toString() +"\n";
