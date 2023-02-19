@@ -36,6 +36,12 @@ public class Task {
     public String getShortPriority() {
         return priority.shortString();
     }
+
+    /**
+     * Sets the tasks' priority.
+     *
+     * @param priority Priority to be set to.
+     */
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
