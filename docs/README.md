@@ -1,27 +1,65 @@
-# Duke project template
+# Duke
+<picture>
+<src = "Ui.png"></src>
+</picture>
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke is an application that keeps track of your various tasks. This project was built on the Duke greenfield Java template.
 
-## Setting up in Intellij
+## Requirements
+1. Java 11 or above must be installed
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Getting Started
+1.	Download the JAR file
+2.	Move the JAR file to any directory on your computer
+3.	Run the file by double clicking on it.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
-   
-Acknolwedgements:
+If step 3 fails, open the command prompt in the directory with the Jar file and run:
+```
+java -jar Duke.java
+```
+## Commands
+
+### Add a Todo Task
+```
+todo DESCRRIPTION
+```
+Creates a Todo task. A Todo task is a basic task with only a description.
+
+### Add a Deadline Task
+```
+deadline DESCRRIPTION /by DATE
+```
+Creates a Deadline task. A Deadline task is a task with a date attached.
+
+### Add an Event Task
+```
+event DESCRRIPTION /from DATE /to DATE
+```
+Creates an Event task. A Event task is a task with two dates attached.
+
+### List All Recorded Tasks
+```
+list
+```
+Shows the list of all tasks
+
+### Find a Task
+```
+find KEYWORD
+```
+Finds tasks with the keyword. Regex can be used for advanced users.
+
+### Mark/Unmark a Task
+```
+mark/unmark INDEX
+```
+Marks a task with the index shown in the list command as done or undone.
+
+### Delete a Task
+```
+delete INDEX
+```
+Deletes a task with the index shown in the list command. Note that the index of other tasks will be updated to maintain a continuous order.
+
+## Acknowledgements
 Code for GUI was taken from SE-EDU.
