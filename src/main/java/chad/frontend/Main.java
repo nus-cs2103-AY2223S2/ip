@@ -135,7 +135,7 @@ public class Main extends Application {
 
     public static void exit() {
         Platform.exit();
-        exit();
+        System.exit(0);
     }
 
     @Override
