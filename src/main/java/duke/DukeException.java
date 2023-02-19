@@ -7,31 +7,27 @@ import java.io.FileNotFoundException;
 public class DukeException extends Exception {
 
     public DukeException() {
-        System.out.println("idk what you are saying");
+        super("idk what you are saying");
     }
-
     public DukeException(String problem) {
-        System.out.println(problem);
+        super(problem);
     }
-
     public DukeException(Throwable cause) {
-        System.out.println(cause);
+        super(cause.toString());
     }
-
     public DukeException(IllegalArgumentException i) {
-        System.out.println("did you forget a keyword? ie /by /to /from");
+        super("did you forget a keyword? ie /by /to /from");
     }
     public DukeException(FileNotFoundException i) {
-        System.out.println("File not found");
+        super("File not found");
     }
-
     public DukeException(IndexOutOfBoundsException i) {
-        System.out.println("Did you try to mark a task that is not in the list?");
+        super("Did you try to mark a task that is not in the list?");
     }
-
     public DukeException(NumberFormatException i) {
-        System.out.println("You must input a number");
+        super("You must input a number");
     }
-
-
+    public String toString() {
+        return String.format(super.getMessage());
+    }
 }

@@ -32,7 +32,7 @@ public class Duke {
         }
 
     }
-
+      //just in case still want to run cli version
     public static void main(String[] args) throws DukeException, IOException {
         Duke duke = new Duke();
         duke.ui.printLogo();

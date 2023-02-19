@@ -35,9 +35,8 @@ public class Ui {
             Command c = Parser.parseIn(in);
             return c.execute(taskList, ui, storage);
         } catch (DukeException e) {
-            //empty because exception should be caught by parser or command class
+            return e.toString();
         }
-        return "no response";
     }
     public String showList(TaskList taskList) {
        return taskList.showList();
