@@ -18,7 +18,7 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList tasks) throws InvalidArgumentException {
         assert this.index >= 0;
         try {
-        return tasks.setNotDone(this.index);
+            return tasks.setNotDone(this.index);
         } catch (IndexOutOfBoundsException error) {
             throw new InvalidArgumentException("Index " + (this.index + 1) + " is out of bound.");
         }

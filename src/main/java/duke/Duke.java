@@ -50,7 +50,11 @@ public class Duke {
         storage.save(taskList);
     }
 
-
+    /**
+     * Parses, executes and return a string response to a request by the user
+     *
+     * @return reply to the request
+     */
     public String getResponse(String request) {
         try {
             Command com = Parser.parse(request);

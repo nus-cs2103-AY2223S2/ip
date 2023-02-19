@@ -45,7 +45,6 @@ public class TaskList {
             int index = i + 1;
             result += "  " + index + ". " + list[i].toString();
         }
-        System.out.print(result);
         return result;
     }
 
@@ -57,10 +56,8 @@ public class TaskList {
      */
     public String setDone(int index) {
         this.list[index].setDone();
-        String reply = "  Nice! I've marked this task as done:\n"
+        return "  Nice! I've marked this task as done:\n"
                 + "    " + list[index].toString();
-        System.out.print(reply);
-        return reply;
     }
 
     /**
@@ -71,10 +68,8 @@ public class TaskList {
      */
     public String setNotDone(int index) {
         this.list[index].setNotDone();
-        String reply = "  OK, I've marked this task as not done:\n"
+        return "  OK, I've marked this task as not done:\n"
                 + "    " + list[index].toString();
-        System.out.print(reply);
-        return reply;
     }
 
     /**
@@ -138,16 +133,16 @@ public class TaskList {
             throw new InvalidArgumentException("This task doesn't exist");
         }
         Task deletedTask = list[index];
+
         for (int i = index; i < this.len; i++) {
             this.list[i] = this.list[i + 1];
         }
 
         this.len--;
-        String reply = "  Noted. I've removed this task:\n"
+
+        return "  Noted. I've removed this task:\n"
                 + "    " + deletedTask.toString()
                 + "  Now you have " + this.len + " tasks in the list.\n";
-        System.out.print(reply);
-        return reply;
 
     }
 

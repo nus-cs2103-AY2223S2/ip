@@ -19,7 +19,7 @@ public class MarkCommand extends Command {
     public String execute(TaskList tasks) throws InvalidArgumentException {
         assert this.index >= 0;
         try {
-        return tasks.setDone(this.index);
+            return tasks.setDone(this.index);
         } catch (IndexOutOfBoundsException error) {
             throw new InvalidArgumentException("Index " + (this.index + 1) + " is out of bound.");
         }

@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks) throws IndexOutOfBoundsException {
         assert this.index >= 0;
         try {
-        return tasks.delete(index);
+            return tasks.delete(index);
         } catch (IndexOutOfBoundsException error) {
             throw new InvalidArgumentException("Index " + (this.index + 1) + " is out of bound.");
         }
