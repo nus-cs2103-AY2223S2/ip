@@ -9,7 +9,7 @@ Smudge frees your mind of having to remember things you need to do. It's:
 
 All you need to do is,
 
-1. download it from [here](https://github.com/nevinlim/ip/releases/tag/A-Jar)
+1. download it from [here](https://github.com/nevinlim/ip/releases/tag/A-Release)
 2. double-click it or 
 3. (SKIP THIS if you've done step 2) open a command window (Powershell, Terminal) in the directory you downloaded Smudge and using the command window, type the following command: java -jar Smudge.jar
 4. add your tasks. 
