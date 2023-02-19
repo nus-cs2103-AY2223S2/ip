@@ -25,6 +25,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserPic.png"));
     private Image fidelineNormalImage = new Image(this.getClass().getResourceAsStream("/images/NormalFi.png"));
+    private Image fidelineErrorImage = new Image(this.getClass().getResourceAsStream("/images/ErrorFi.png"));
 
     @FXML
     public void initialize() {
@@ -47,11 +48,16 @@ public class MainWindow extends AnchorPane {
         String response = fideline.getResponse(input);
         if (fideline.isTerminated()) {
             Platform.exit();
+        }
+
+        if (!fideline.isLastCommandValid()) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getFidelineDialog(response, fidelineErrorImage));
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getFidelineDialog(response, fidelineNormalImage)
-            );
+                    DialogBox.getFidelineDialog(response, fidelineNormalImage));
         }
         userInput.clear();
     }

@@ -8,6 +8,10 @@ package fideline.task;
  */
 public abstract class Task {
 
+    static final char DONE = 'X';
+
+    static final char UNDONE = ' ';
+
 
     /** Title describing the task */
     private String description;
@@ -25,7 +29,7 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
 
@@ -35,7 +39,9 @@ public abstract class Task {
      * @return String representing the task.
      */
     public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + description;
+        char statusString = isDone ? DONE : UNDONE;
+        String stringFormat = "[%c] %s";
+        return String.format(stringFormat, statusString, description);
     }
 
 
@@ -43,7 +49,7 @@ public abstract class Task {
      * Changes status of the task to done.
      */
     public void mark() {
-        this.isDone = true;
+        isDone = true;
     }
 
 
@@ -51,7 +57,11 @@ public abstract class Task {
      * Changes status of the task to not done.
      */
     public void unmark() {
-        this.isDone = false;
+        isDone = false;
+    }
+
+    public boolean isMarked() {
+        return isDone;
     }
 
 
@@ -63,5 +73,18 @@ public abstract class Task {
     public String getDescription() {
         return description;
     }
+
+    public String getStorageString() {
+        char markStatus = isDone ? DONE : UNDONE;
+        String stringFormat = "%s|%s";
+        return String.format(stringFormat, markStatus, description);
+    }
+
+    public boolean equals(Task task) {
+        boolean isSameDescription = (task.getDescription().equals(description));
+        boolean isSameStatus = task.isMarked() == isDone;
+        return isSameDescription && isSameStatus;
+    }
+
 
 }

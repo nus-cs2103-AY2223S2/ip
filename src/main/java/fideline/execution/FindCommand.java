@@ -21,6 +21,7 @@ public class FindCommand extends Command {
 
     private String findString;
     public FindCommand(String findString) {
+        assert findString.equals("") : "find command should not allow empty args";
         this.findString = findString;
     }
 

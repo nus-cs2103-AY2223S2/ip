@@ -28,7 +28,25 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startTime
-                + " to: " + endTime + ")";
+        String stringFormat = "[E]%s (from: %s to: %s)";
+        return String.format(stringFormat, super.toString(), startTime, endTime);
+    }
+
+    @Override
+    public String getStorageString() {
+        String stringFormat = "E|%s|%s|%s";
+        return String.format(stringFormat, super.getStorageString(),
+                startTime, endTime);
+    }
+
+    @Override
+    public boolean equals(Task task) {
+        boolean isEvent = task instanceof Event;
+        if (!isEvent) {
+            return false;
+        }
+        boolean isSameStart = startTime.equals(((Event) task).startTime);
+        boolean isSameEnd = endTime.equals(((Event) task).endTime);
+        return isSameStart && isSameEnd && super.equals(task);
     }
 }

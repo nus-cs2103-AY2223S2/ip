@@ -15,6 +15,6 @@ public class WrongFormatException extends FidelineException {
      * @param correctFormat The correct format of the given argument.
      */
     public WrongFormatException(String correctFormat) {
-        super("wrong format! " + correctFormat);
+        super("wrong format! command should follow the format:\n\n" + correctFormat);
     }
 }
