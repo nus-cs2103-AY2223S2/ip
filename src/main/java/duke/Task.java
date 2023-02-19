@@ -3,6 +3,7 @@ package duke;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String tag;
 
     /**
      * Class constructor.
@@ -12,6 +13,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = "";
     }
 
     /**
@@ -46,9 +48,13 @@ public class Task {
         this.isDone = false;
     }
 
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public String toString() {
-        return ("[" + this.getStatusIcon() + "] " + this.description);
+        return ("[" + this.getStatusIcon() + "] " + this.description + "[tag: " + this.tag + "] ");
     }
 }
 

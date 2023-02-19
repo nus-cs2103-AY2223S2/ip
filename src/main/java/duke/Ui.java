@@ -132,6 +132,11 @@ public class Ui {
         return output;
     }
 
+    public String printTagTask(Task task) {
+        String output = "I have tagged the following task:\n" + task;
+        return output;
+    }
+
     public void showLoadingError() {
         System.out.println( "There was an error in loading your file!");
     }
