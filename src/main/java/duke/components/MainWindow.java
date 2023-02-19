@@ -42,6 +42,11 @@ public class MainWindow extends AnchorPane {
         Path dukeFilePath = Path.of(home, "duke.txt");
         duke = new Duke(dukeFilePath.toString());
 
+        if (duke.getInitErrorMessage() != null) {
+            String errorMessage = duke.getInitErrorMessage();
+            dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(errorMessage, dukeImage));
+        }
+
         String welcomeMessage = "Welcome to Duchess!\nAutomatically running the `list` command...";
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
 

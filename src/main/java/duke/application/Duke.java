@@ -15,6 +15,7 @@ public class Duke {
     private final Storage storage;
     private final Ui ui;
     private TaskList taskList;
+    private String initErrorMessage;
 
     /**
      * Instantiates a new Duke object.
@@ -29,9 +30,8 @@ public class Duke {
         try {
             taskList = new TaskList(storage.loadTaskList());
         } catch (DukeInvalidFileFormatException e) {
-            e.printStackTrace();
-            ui.showMessage(e.getMessage());
             taskList = new TaskList();
+            initErrorMessage = e.getMessage();
         }
     }
 
@@ -43,7 +43,18 @@ public class Duke {
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
         Path dukeFilePath = Path.of(home, "duke.txt");
-        new Duke(dukeFilePath.toString()).run();
+        Duke duke = new Duke(dukeFilePath.toString());
+
+        if (duke.getInitErrorMessage() != null) {
+            String errorMessage = duke.getInitErrorMessage();
+            duke.ui.showMessage(errorMessage);
+        }
+
+        duke.run();
+    }
+
+    public String getInitErrorMessage() {
+        return initErrorMessage;
     }
 
     /**
