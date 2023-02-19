@@ -3,8 +3,9 @@ Duke Task Manager is a desktop application build in Java for managing your tasks
 greenfield Java Project.
 
 ## Quick Start
-1. Ensure that you have Java `11` or above installed.
-2. Download the latest Duke Task Manager from here [ins link here]
+1. Ensure that you have Java `11` or above installed. 
+   - For MacOS and Linux users, we recommend the use of `JDK FX` Azul Zulu Builds of OpenJDK found [here](https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=arm-64-bit&package=jdk-fx).
+2. Download the latest Duke Task Manager, named `duke.jar` from [here](https://github.com/ExtraShotLatte/ip/releases/tag/A-Release).
 3. Copy the file into any folder that you like.
 4. Open command terminal and `cd` to the location that you placed the jar file in.
 5. Issue the command `java -jar duke.jar` to begin!
