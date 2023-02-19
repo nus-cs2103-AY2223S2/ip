@@ -1,4 +1,4 @@
-package cluck;
+package cluck.ui;
 
 import java.io.File;
 import java.util.Scanner;

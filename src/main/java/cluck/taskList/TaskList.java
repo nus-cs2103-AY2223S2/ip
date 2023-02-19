@@ -1,24 +1,20 @@
-package cluck;
+package cluck.taskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import cluck.exceptions.TaskIndexOutOfBoundsException;
-import cluck.tasks.Deadline;
-import cluck.tasks.Event;
 import cluck.tasks.Task;
-import cluck.tasks.ToDo;
 
 /**
  * TaskList contains the tasks. In a list. Yea.
  */
 public class TaskList {
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<Task> taskList = new ArrayList<>();
 
     public TaskList() {
     }
@@ -84,12 +80,14 @@ public class TaskList {
     }
     public void readSave(File savedFile) {
         try {
-            Scanner saveFileScanner = new Scanner(savedFile);
-            while (saveFileScanner.hasNextLine()) {
-                this.addSavedTask(saveFileScanner.nextLine());
+            Scanner savedFileScanner = new Scanner(savedFile);
+            while (savedFileScanner.hasNextLine()) {
+                this.addSavedTask(savedFileScanner.nextLine());
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } finally {
+            return;
         }
     }
 
