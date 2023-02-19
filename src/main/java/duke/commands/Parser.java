@@ -14,9 +14,9 @@ import duke.dukeexception.InvalidCommandException;
 public class Parser {
     private static final String REGEX = " ";
     private static final String WHITESPACE = " ";
-    private static final String DEADLINE_TIME = "/by";
-    private static final String EVENT_START = "/from";
-    private static final String EVENT_END = "/to";
+    private static final String DEADLINE_INDICATOR = "/by";
+    private static final String EVENT_START_INDICATOR = "/from";
+    private static final String EVENT_END_INDICATOR = "/to";
     private static final String COMMAND_FIND = "find";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_MARK = "mark";
@@ -27,6 +27,7 @@ public class Parser {
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_BYE = "bye";
     private static final int COMMAND_INDEX = 0;
+    private static final int DESCRIPTION_INDEX = 1;
     private static final int FIND_KEYWORD_INDEX = 1;
     private static final int FROM_INDEX = 0;
     private static final int TO_INDEX = 1;
@@ -39,66 +40,69 @@ public class Parser {
     }
 
     private void checkLength(String str) throws DukeException {
-        if (str.length() == 0) {
+        if (str.isEmpty()) {
             throw new EmptyFieldException();
         }
     }
 
     private void checkDate(String str) throws DukeException {
-        if (str.length() == 0) {
+        if (str.isEmpty()) {
             throw new EmptyDateException();
         }
     }
 
     private String getTaskName() {
         String taskName = "";
-        for (int i = 1; i < commandArr.length
-                && !commandArr[i].equals(Parser.DEADLINE_TIME)
-                && !commandArr[i].equals(Parser.EVENT_START); i++) {
+        for (int i = Parser.DESCRIPTION_INDEX; i < commandArr.length
+                && !commandArr[i].equals(Parser.DEADLINE_INDICATOR)
+                && !commandArr[i].equals(Parser.EVENT_START_INDICATOR); i++) {
             taskName += commandArr[i] + Parser.WHITESPACE;
         }
         return taskName;
     }
 
+    private int findIndex(String indicator) {
+        int curInd = Parser.DESCRIPTION_INDEX;
+        while (curInd < commandArr.length && !commandArr[curInd].equals(indicator)) {
+            curInd += 1;
+        }
+        return curInd + 1;
+    }
+
+    private String getTime(int startIndex) {
+        String result = "";
+        int index = startIndex;
+        while (index < commandArr.length) {
+            result += commandArr[index] + Parser.WHITESPACE;
+            index += 1;
+        }
+        return result.trim();
+    }
+
+    private String getTime(int startIndex, String stop) {
+        String result = "";
+        int index = startIndex;
+        while (index < commandArr.length && !commandArr[index].equals(stop)) {
+            result += commandArr[index] + Parser.WHITESPACE;
+            index += 1;
+        }
+        return result.trim();
+    }
+
     private String getByTime() {
-        // todo: SLAP?
-        int curInd = 1;
-        while (curInd < commandArr.length && !commandArr[curInd].equals(Parser.DEADLINE_TIME)) {
-            curInd += 1;
-        }
-        curInd += 1; // skips "/by"
-        String taskDeadline = "";
-        while (curInd < commandArr.length) {
-            taskDeadline += commandArr[curInd] + Parser.WHITESPACE;
-            curInd += 1;
-        }
-        taskDeadline = taskDeadline.trim();
+        int byIndex = this.findIndex(Parser.DEADLINE_INDICATOR);
+        String taskDeadline = getTime(byIndex);
         return taskDeadline;
     }
 
     private String[] getEventTimes() {
-        // todo: SLAP?
-        int curInd = 1;
-        while (curInd < commandArr.length && !commandArr[curInd].equals(Parser.EVENT_START)) {
-            curInd += 1;
-        }
-        curInd += 1;
-        String from = "";
-        while (curInd < commandArr.length && !commandArr[curInd].equals(Parser.EVENT_END)) {
-            from += commandArr[curInd] + Parser.WHITESPACE;
-            curInd += 1;
-        }
-        from = from.trim();
-        curInd += 1;
-        String to = "";
-        while (curInd < commandArr.length) {
-            to += commandArr[curInd] + Parser.WHITESPACE;
-            curInd += 1;
-        }
-        to = to.trim();
+        int fromIndex = findIndex(Parser.EVENT_START_INDICATOR);
+        String from = getTime(fromIndex, Parser.EVENT_END_INDICATOR);
+        int endIndex = findIndex((Parser.EVENT_END_INDICATOR));
+        String to = getTime(endIndex);
         return new String[]{from, to};
     }
-
+    
     /**
      * Interprets the command stored internally within the class.
      *
@@ -106,11 +110,6 @@ public class Parser {
      * @throws DukeException when command is invalid.
      */
     public Command process() throws DukeException {
-        try {
-            checkLength(this.command);
-        } catch (DukeException ex) {
-            throw ex;
-        }
         int editIndex = Character.getNumericValue(command.charAt(command.length() - 1)) - 1;
         String description = this.getTaskName();
         switch (commandArr[Parser.COMMAND_INDEX]) {
@@ -130,14 +129,9 @@ public class Parser {
             }
             return new Add(this.command, new ToDo(description));
         case Parser.COMMAND_DEADLINE:
-            // todo: SLAP?
-            try {
-                checkLength(description);
-            } catch (DukeException ex) {
-                throw ex;
-            }
             String byTime = getByTime();
             try {
+                checkLength(description);
                 checkDate(byTime);
             } catch (DukeException ex) {
                 throw ex;
