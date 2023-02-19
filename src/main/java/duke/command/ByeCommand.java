@@ -1,7 +1,7 @@
 package duke.command;
 
 /**
- * The command to terminate the UI.
+ * Terminates the UI.
  */
 public class ByeCommand extends Command {
     @Override

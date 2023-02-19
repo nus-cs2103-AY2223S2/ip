@@ -3,7 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 
 /**
- * The task list class.
+ * Stores a list of tasks.
  * Contains the task list and operations to modify the task list.
  */
 public class TaskList {

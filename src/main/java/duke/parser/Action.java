@@ -1,5 +1,8 @@
 package duke.parser;
 
+/**
+ * Enumerates actions for different command types
+ */
 enum Action {
     DEADLINE("deadline"), DELETE("delete"), ERROR("error"),
     EVENT("event"), LIST("list"), MARK("mark"),

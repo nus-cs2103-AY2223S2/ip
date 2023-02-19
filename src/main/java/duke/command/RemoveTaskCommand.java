@@ -4,7 +4,7 @@ import duke.DukeException;
 import duke.task.Task;
 
 /**
- * The command to remove a task from the task list.
+ * Removes a task from the task list.
  */
 public class RemoveTaskCommand extends Command {
     private final int index;

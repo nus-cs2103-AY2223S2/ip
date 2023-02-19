@@ -29,7 +29,7 @@ import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 
 /**
- * Main JavaFxUi class to create interface.
+ * Creates a JavaFx based UI class to create the interface.
  */
 public class DukeUi extends Application {
     private static Storage storage;
@@ -61,9 +61,6 @@ public class DukeUi extends Application {
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         dialogContainer.setBackground(new Background(
@@ -117,7 +114,6 @@ public class DukeUi extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);

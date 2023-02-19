@@ -9,9 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * A DialogBox is a HBox that contains a Label and an ImageView.
- * The Label contains the text of the dialog, and the ImageView contains the
- * display picture of the speaker.
+ * Displays a picture of the speaker and their text response.
  */
 public class DialogBox extends HBox {
 
@@ -19,7 +17,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * The DialogBox constructor shows a chat component, i.e. a dialog box
+     * Shows a chat component, i.e. a dialog box constructor
      * @param l The label/text
      * @param iv The display image
      */
@@ -44,7 +42,6 @@ public class DialogBox extends HBox {
 
     /**
      * Returns a DialogBox for user input.
-     *
      * @param l  Label containing the text of the dialog.
      * @param iv ImageView containing the display picture of the speaker.
      * @return DialogBox for user input.
@@ -55,7 +52,6 @@ public class DialogBox extends HBox {
 
     /**
      * Returns a DialogBox for Duke's response.
-     *
      * @param l  Label containing the text of the dialog.
      * @param iv ImageView containing the display picture of the speaker.
      * @return DialogBox for Duke's response.

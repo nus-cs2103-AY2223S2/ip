@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The task that has a deadline.
+ * Stores tasks that have a deadline.
  */
 public class Deadline extends Task {
     private final LocalDateTime deadline;

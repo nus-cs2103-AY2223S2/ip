@@ -1,10 +1,10 @@
 package duke.task;
 
 /**
- * The task class.
+ * Stores the description of a task and whether the task is done.
  */
 public class Task implements Comparable<Task> {
-    private boolean done;
+    private boolean isDone;
     private final String task;
 
     /**
@@ -13,7 +13,7 @@ public class Task implements Comparable<Task> {
      */
     public Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
     public String getTask() {
@@ -21,39 +21,39 @@ public class Task implements Comparable<Task> {
     }
 
     public void markAsDone() {
-        done = true;
+        isDone = true;
     }
 
     public void markAsNotDone() {
-        done = false;
+        isDone = false;
     }
 
     @Override
     public String toString() {
-        return "[" + (done ? "X" : " ") + "] " + task;
+        return "[" + (isDone ? "X" : " ") + "] " + task;
     }
 
     public String toFileString() {
-        return (done ? "1" : "0") + " | " + task;
+        return (isDone ? "1" : "0") + " | " + task;
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Task) {
-            return task.equals(((Task) obj).task) && done == ((Task) obj).done;
+            return task.equals(((Task) obj).task) && isDone == ((Task) obj).isDone;
         }
         return false;
     }
 
     @Override
     public int compareTo(Task o) {
-        if (done && !o.done) {
+        if (isDone && !o.isDone) {
             return 1;
-        } else if (!done && o.done) {
+        } else if (!isDone && o.isDone) {
             return -1;
         }
         return task.compareTo(o.task);

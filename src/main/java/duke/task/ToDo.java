@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * The todo class.
+ * Stores a todo object.
  * A todo is a task that does not have a deadline.
  */
 public class ToDo extends Task {

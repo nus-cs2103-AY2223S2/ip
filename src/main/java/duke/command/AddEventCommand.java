@@ -3,7 +3,7 @@ package duke.command;
 import duke.task.Event;
 
 /**
- * The command to add an event to the task list.
+ * Adds an event to the task list.
  */
 public class AddEventCommand extends Command {
     private final Event event;

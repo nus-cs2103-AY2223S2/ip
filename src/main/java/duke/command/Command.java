@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * The command to be executed. All commands are subclasses of this class.
+ * Executes a user command. All commands are subclasses of this class.
  */
 public abstract class Command {
     protected TaskList taskList;

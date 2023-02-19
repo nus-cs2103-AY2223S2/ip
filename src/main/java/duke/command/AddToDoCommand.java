@@ -3,7 +3,7 @@ package duke.command;
 import duke.task.ToDo;
 
 /**
- * The command to add a todo to the task list.
+ * Adds a todo to the task list.
  */
 public class AddToDoCommand extends Command {
     private final ToDo toDo;

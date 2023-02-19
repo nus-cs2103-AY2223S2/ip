@@ -13,7 +13,7 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 
 /**
- * The class that handles the storage of the task list.
+ * Handles the storage of the task list.
  * It reads from the file and writes to the file.
  * It also creates the file if it does not exist.
  * The file is stored in the data folder.

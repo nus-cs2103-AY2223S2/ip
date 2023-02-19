@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The task that has a duration.
+ * Stores tasks that have a duration.
  */
 public class Event extends Task {
     private final LocalDateTime from;

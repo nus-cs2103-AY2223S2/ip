@@ -1,7 +1,7 @@
 package duke.command;
 
 /**
- * The command to sort the task list.
+ * Sorts the task list.
  */
 public class SortCommand extends Command {
     @Override
