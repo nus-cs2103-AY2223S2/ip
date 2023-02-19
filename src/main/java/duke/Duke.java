@@ -39,7 +39,7 @@ public class Duke {
             Command currCommand = parser.process();
             executeUserInput(currCommand);
             String response = ui.getCommandMessage(currCommand);
-            this.isTerminated = response.startsWith(Duke.TERMINATION_STATEMENT) ? true : false;
+            this.isTerminated = response.startsWith(Duke.TERMINATION_STATEMENT);
             return response;
         } catch (DukeException ex) {
             return ui.getExceptionMessage(ex);

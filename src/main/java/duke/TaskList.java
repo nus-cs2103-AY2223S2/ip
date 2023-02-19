@@ -9,6 +9,7 @@ import duke.commands.tasks.Task;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+    private static final int START_INDEX = 0;
 
     /**
      * Creates a TaskList object.
@@ -32,6 +33,8 @@ public class TaskList {
      * @param index The index to be removed.
      */
     public void remove(int index) {
+        assert index < this.size() : "Index out of bounds (too big)";
+        assert index >= TaskList.START_INDEX : "Index out of bounds (too small)";
         this.tasks.remove(index);
     }
 
@@ -57,7 +60,7 @@ public class TaskList {
     @Override
     public String toString() {
         String res = "";
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = TaskList.START_INDEX; i < tasks.size(); i++) {
             res += String.format("%d.%s\n", i + 1, tasks.get(i));
         }
         return res;

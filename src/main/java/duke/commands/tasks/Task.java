@@ -12,6 +12,7 @@ public abstract class Task {
     }
 
     public Task(String description, boolean isDone) {
+        assert !description.isEmpty() : "Command empty";
         this.description = description.trim();
         this.isDone = isDone;
     }

@@ -59,8 +59,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         this.catchTermination();
 
+        assert false : "Testing assertions are enabled";
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        assert !response.isEmpty() : "Response string empty";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
