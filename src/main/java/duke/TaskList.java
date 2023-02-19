@@ -34,7 +34,7 @@ public class TaskList {
             int count = i + 1;
             String res = count + "." + getTask(i).toString();
             if (i != getSize() - 1) {
-                res += "\n\t ";
+                res += "\n ";
             }
             sb.append(res);
         }

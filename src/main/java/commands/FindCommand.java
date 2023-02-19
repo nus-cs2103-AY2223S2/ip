@@ -35,7 +35,7 @@ public class FindCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) {
         TaskList results = list.search(keyword);
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your list:\n\t ");
+        sb.append("Here are the matching tasks in your list:\n ");
         sb.append(results.toString());
         return sb.toString();
     }

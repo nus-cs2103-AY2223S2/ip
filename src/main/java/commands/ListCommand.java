@@ -29,7 +29,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the tasks in your list:\n\t ");
+        sb.append("Here are the tasks in your list:\n ");
         sb.append(list.toString());
         return sb.toString();
     }

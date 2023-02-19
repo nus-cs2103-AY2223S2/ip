@@ -47,7 +47,7 @@ public class MarkCommand extends Command {
             }
             storage.saveListToFile(list, ui);
             return "Great :D I knew you could do it! "
-                    + "I've marked this task as done:\n\t\t"
+                    + "I've marked this task as done:\n"
                     + currentTask.toString();
         }
     }

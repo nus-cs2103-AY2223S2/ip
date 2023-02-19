@@ -40,8 +40,8 @@ public class DeleteCommand extends Command {
             Task toDelete = list.getTask(taskIndex);
             list.deleteTask(taskIndex);
             storage.saveListToFile(list, ui);
-            return "Ok. I've removed this task:\n\t\t"
-                    + toDelete.toString() + "\n\t Now you have "
+            return "Ok. I've removed this task:\n"
+                    + toDelete.toString() + "\n Now you have "
                     + list.getSize() + " tasks in the list.";
         }
     }

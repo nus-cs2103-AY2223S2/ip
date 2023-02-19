@@ -37,7 +37,7 @@ public class AddCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) {
         list.addTask(task);
         storage.saveListToFile(list, ui);
-        return "Got it. I've added this task:\n\t\t" + task.toString() + "\n\t Now you have "
+        return "Got it. I've added this task:\n" + task.toString() + "\n Now you have "
                 + list.getSize() + " tasks in the list.";
     }
 }
