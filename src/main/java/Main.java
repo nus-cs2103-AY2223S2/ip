@@ -1,4 +1,5 @@
 import duke.Duke;
+import javafx.application.Application;
 
 /**
  * Main class for Duke.
@@ -13,7 +14,6 @@ public class Main {
      * @param args The command line arguments
      */
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        Application.launch(Duke.class, args);
     }
 }

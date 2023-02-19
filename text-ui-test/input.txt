@@ -1,6 +1,0 @@
-todo Play chess
-deadline Complete Assignment /by Friday
-list
-mark 2
-list
-bye

@@ -5,43 +5,46 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import duke.Duke;
 import duke.tasks.TaskList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 /**
  * Manages the user interface of the application.
  *
  * @author Samarth Verma
  */
-public class UserInterface {
+public class UserInterface extends AnchorPane {
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private VBox dialogContainer;
+    @FXML
+    private TextField userInput;
+    @FXML
+    private Button sendButton;
 
-    private InputStream in;
-    private PrintStream out;
-    private Scanner sc;
+    private Duke duke;
 
     /** Creates a new UserInterface object. */
     public UserInterface() {
-        in = System.in;
-        out = System.out;
-        sc = new Scanner(in);
-    }
-
-    /** Prints a line of underscores. */
-    private void printLine() {
-        out.println("____________________________________________________________");
     }
 
     /** Prints a greeting message. */
     public void showGreeting() {
-        printLine();
-        out.println();
-        out.println("Hello! I'm Duke");
-        out.println("What can I do for you?");
-        printLine();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Hello! I'm Duke", null));
     }
 
     /** Prints an exit message */
     public void showExitMessage() {
-        showMessage("Bye! Have a great day!");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Bye. Hope to see you again soon!", null));
     }
 
     /**
@@ -50,14 +53,18 @@ public class UserInterface {
      * @param message The message to be printed.
      */
     public void showMessage(String message) {
-        out.println();
-        out.println(message);
-        printLine();
+
     }
 
     /** Prints the prompt symbol. */
     public void showPrompt() {
-        out.print("\n> ");
+
+    }
+
+    public void setDuke(Duke d) {
+        duke = d;
+        // dialogContainer.getChildren().addAll(
+        // DialogBox.getDukeDialog(duke.getGreeting(), dukeImage));
     }
 
     /**
@@ -66,18 +73,7 @@ public class UserInterface {
      * @return The input from the user.
      */
     public String getInput() {
-        showPrompt();
-        String input = sc.nextLine();
-        return input;
-    }
-
-    /**
-     * Checks if the input has more lines
-     *
-     * @return
-     */
-    public boolean hasNextLine() {
-        return sc.hasNextLine();
+        return "";
     }
 
     /**
@@ -86,10 +82,11 @@ public class UserInterface {
      * @param list List which is printed
      */
     public void showTasks(TaskList list) {
-        String message = list.stream()
-                .map(t -> String.format("%d. %s", t.id(), t.toString()))
-                .collect(Collectors.joining("\n"));
 
-        showMessage(message);
+    }
+
+    @FXML
+    private void handleUserInput() {
+        userInput.clear();
     }
 }

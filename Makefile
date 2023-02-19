@@ -1,7 +1,7 @@
 .PHONY: run compile test
 
 run:
-	./gradlew run -q --console=plain  
+	./gradlew run
 
 compile: 
 	./gradlew build
