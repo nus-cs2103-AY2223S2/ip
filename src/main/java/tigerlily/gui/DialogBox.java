@@ -1,4 +1,4 @@
-package tigerlily;
+package tigerlily.gui;
 
 import java.io.IOException;
 import java.util.Collections;

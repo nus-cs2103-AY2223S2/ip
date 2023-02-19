@@ -66,11 +66,15 @@ public class TaskList {
      * @return the String representation of the TaskList
      */
     public String printList() {
-        StringBuilder sb = new StringBuilder("here's your list:\n");
-        for (int i = 0; i < this.getSize(); i++) {
-            sb.append(i + 1).append(".").append(tasks.get(i).toString()).append(System.lineSeparator());
+        if(this.getSize() > 0) {
+            StringBuilder sb = new StringBuilder("here's your list:\n");
+            for (int i = 0; i < this.getSize(); i++) {
+                sb.append(i + 1).append(".").append(tasks.get(i).toString()).append(System.lineSeparator());
+            }
+            return sb.toString();
+        } else {
+            return "looks like your list is empty, try adding some tasks!";
         }
-        return sb.toString();
     }
 
     /**
