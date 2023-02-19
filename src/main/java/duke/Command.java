@@ -64,7 +64,7 @@ public class Command {
      */
     public String toDoCommand() throws EmptyDescriptionException {
         String str = "";
-        if(INPUT.startsWith("todo")) {
+        if(INPUT.startsWith("todo ")) {
             str = INPUT.substring(5);
         } else if (INPUT.startsWith("t ")) {
             str = INPUT.substring(2);
@@ -81,7 +81,7 @@ public class Command {
      */
     public String deadlineCommand() throws EmptyDescriptionException {
         String str = "";
-        if (INPUT.startsWith("deadline")) {
+        if (INPUT.startsWith("deadline ")) {
             str = INPUT.substring(9);
         } else if (INPUT.startsWith("d ")) {
             str = INPUT.substring(2);
@@ -100,7 +100,7 @@ public class Command {
      */
     public String eventCommand() throws EmptyDescriptionException {
         String str = "";
-        if (INPUT.startsWith("event")) {
+        if (INPUT.startsWith("event ")) {
             str = INPUT.substring(6);
         } else if (INPUT.startsWith("e ")) {
             str = INPUT.substring(2);

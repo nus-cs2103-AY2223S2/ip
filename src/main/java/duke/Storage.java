@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Storage {
     private static File f;
+    private File directory = new File("./data");
 
     /**
      * constructs a Storage object that stores data into a file.
@@ -16,6 +17,7 @@ public class Storage {
     public Storage(String filePath) {
         f = new File(filePath);
         try {
+            directory.mkdir();
             f.createNewFile();
         } catch (IOException e) {
             e.getMessage();
@@ -49,6 +51,7 @@ public class Storage {
                     break;
             }
             if (mark.equals("X")) {
+                assert x != null;
                 x.markAsDone();
             }
             list.add(x);

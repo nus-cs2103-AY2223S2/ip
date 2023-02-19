@@ -18,7 +18,7 @@ public class Duke {
         if (input.equals("bye")) {
             try {
                 response = Parser.parse(input, tasks);
-                storage.write("data/duke.txt", tasks);
+                storage.write("./data/duke.txt", tasks);
             } catch (DukeException e) {
                 response = e.toString();
             } catch (IOException e) {
@@ -27,7 +27,7 @@ public class Duke {
         } else {
             try {
                 response = Parser.parse(input, tasks);
-            } catch (DukeException e) {
+            } catch (Exception e) {
                 return e.toString();
             }
         }
@@ -36,7 +36,6 @@ public class Duke {
 
     /**
      * constructs a Duke object.
-     * @throws DukeException if file is not found.
      */
     public Duke(String filePath) {
         ui = new Ui();
