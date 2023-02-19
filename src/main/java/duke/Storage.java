@@ -94,10 +94,9 @@ public class Storage {
         try {
             FileWriter file = new FileWriter(this.filePath);
             for (int i = 0; i < taskList.getSize(); i++) {
-                file.write(taskList.getTask(i) + System.lineSeparator());
+                file.write(taskList.getTask(i) + "\n");
             }
             file.close();
-            System.out.println("Your updated list is stored in the file.");
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }

@@ -103,6 +103,13 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Returns the items from the list that match the given keyword.
+     *
+     * @param taskList list of tasks.
+     * @param indexArray list of items that match the keyword.
+     * @return a list of items that match the given keyword.
+     */
     public String printFind(TaskList taskList, int[] indexArray) {
         String output = "Here are the matching tasks in your list:\n";
         int counter = 1;
@@ -112,6 +119,16 @@ public class Ui {
                 counter++;
             }
         }
+        return output;
+    }
+
+    /**
+     * Returns a message when no items in the list match the given keyword.
+     *
+     * @return message.
+     */
+    public String printNotInList() {
+        String output = "There are no such items in your list!";
         return output;
     }
 

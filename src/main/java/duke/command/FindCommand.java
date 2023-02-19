@@ -40,7 +40,7 @@ public class FindCommand extends Command {
         }
 
         if (!isContained) {
-            return "There are no such items in your list!";
+            return ui.printNotInList();
         } else {
             return ui.printFind(taskList, indexArray);
         }
