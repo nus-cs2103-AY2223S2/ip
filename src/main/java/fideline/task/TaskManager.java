@@ -108,6 +108,13 @@ public class TaskManager {
         addNewTask(newEvent);
     }
 
+    /**
+     * Adds new task to the task list. New task cannot be a duplicate of a pre-existing
+     * task.
+     *
+     * @param task new task that is to be created.
+     * @throws DuplicateTaskException Thrown if the new task created already exists in the task list.
+     */
     public void addNewTask(Task task) throws DuplicateTaskException {
         if (isExistingTask(task)) {
             throw new DuplicateTaskException();
