@@ -10,7 +10,11 @@ public class InvalidDateFormatException extends DukeException {
      *
      * @param s user input string of date
      */
-    public InvalidDateFormatException(String s) {
-        super("Invalid date-time format! Please input " + s + " in the format YYYY-MM-DDThh:mm");
+    public InvalidDateFormatException(String s, boolean... canBeLocalDate) {
+        super("Invalid date-time format! Please input " + s
+                    + " in the format YYYY-MM-DDThh:mm"
+                    + (canBeLocalDate[0]
+                        ? "or YYYY-MM-DD"
+                        : ""));
     }
 }

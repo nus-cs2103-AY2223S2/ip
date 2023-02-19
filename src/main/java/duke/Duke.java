@@ -1,6 +1,9 @@
 package duke;
 
+import java.time.LocalDate;
+
 import commands.Command;
+import commands.FindCommand;
 import exceptions.DukeException;
 import parser.Parser;
 import storage.Storage;
@@ -48,6 +51,10 @@ public class Duke {
         }
     }
 
+    public String remindTasks() {
+        LocalDate today = LocalDate.now();
+        return new FindCommand(today).execute(tasks, ui, storage);
+    }
     /**
      * Generates Duke's response to a given user command
      *

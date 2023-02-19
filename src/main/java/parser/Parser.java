@@ -3,6 +3,7 @@ package parser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,11 +50,8 @@ public abstract class Parser {
         case LIST:
             return new ListTasksCommand();
         case CHECK:
-            try {
-                return new FindCommand(LocalDate.parse(commands[1]));
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateFormatException(e.getParsedString());
-            }
+            LocalDate date = Parser.parseToLocalDate(commands[1]);
+            return new FindCommand(date);
         case FIND:
             return new FindCommand(commands[1]);
         case MARK:
@@ -102,6 +100,25 @@ public abstract class Parser {
         }
 
         return commandDetails;
+    }
+
+    /**
+     * Parses string input in format of LocalDateTime or LocalDate into Local Date format
+     *
+     * @param s string input
+     * @return Local Date format of string
+     * @throws InvalidDateFormatException if string input cannot be parsed
+     */
+    public static LocalDate parseToLocalDate(String s) throws InvalidDateFormatException {
+        try {
+            return LocalDate.parse(s);
+        } catch (DateTimeParseException e) {
+            try {
+                return LocalDateTime.parse(s).toLocalDate();
+            } catch (DateTimeParseException f) {
+                throw new InvalidDateFormatException(s, true);
+            }
+        }
     }
 
     /**

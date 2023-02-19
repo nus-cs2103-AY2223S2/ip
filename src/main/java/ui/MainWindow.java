@@ -43,7 +43,8 @@ public class MainWindow {
         duke = d;
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(duke.greetUser(), dukeImage),
-            DialogBox.getDukeDialog(duke.loadList(), dukeImage));
+            DialogBox.getDukeDialog(duke.loadList(), dukeImage),
+            DialogBox.getDukeDialog(duke.remindTasks(), dukeImage));
     }
 
     /**

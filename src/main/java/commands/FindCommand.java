@@ -66,12 +66,14 @@ public class FindCommand extends Command {
                                 : len + (len > 1
                                         ? " task"
                                         : " tasks"))
-                + " containing the following search term:\n    "
-                + (this.date != null
-                    ? this.date.toString()
-                    : (this.keyword != null
-                        ? this.keyword
-                        : ""))
+                + (this.date != null && this.date.isEqual(LocalDate.now())
+                    ? " today"
+                    : (" containing the following search term:\n    "
+                        + (this.date != null
+                            ? this.date.toString()
+                            : (this.keyword != null
+                                ? this.keyword
+                                : ""))))
                 + (len == 0 ? "" : "\n")
                 + taskContainSearchList.getAllAsString();
     }
