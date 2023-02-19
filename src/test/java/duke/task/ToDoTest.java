@@ -8,6 +8,6 @@ public class ToDoTest {
     @Test
     public void testToString() {
         ToDo todo = new ToDo("Eat food");
-        assertEquals("[T][ ] Eat food", todo.toString());
+        assertEquals("[T][ ][LOW] Eat food", todo.toString());
     }
 }
