@@ -28,11 +28,6 @@ public class Duke {
         this.parser = new Parser(taskList);
     }
 
-//    public static void main(String[] args) {
-//        Duke duke = new Duke();
-//
-//    }
-
     public String getResponse(String input) {
         if (input.equals("bye")) {
             System.exit(0);
