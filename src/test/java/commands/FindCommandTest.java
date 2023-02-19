@@ -12,9 +12,6 @@ import storage.TaskList;
 import ui.Ui;
 
 public class FindCommandTest {
-
-    private final PrintStream standardOut = System.out;
-
     @Test
     public void checkKeywordCommand() {
 

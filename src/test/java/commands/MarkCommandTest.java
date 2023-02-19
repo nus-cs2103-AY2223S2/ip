@@ -15,8 +15,6 @@ import ui.Ui;
 
 public class MarkCommandTest {
 
-    private final PrintStream standardOut = System.out;
-
     @Test
     public void markTest() {
 
