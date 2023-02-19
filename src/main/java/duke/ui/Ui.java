@@ -9,12 +9,14 @@ public class Ui {
     /**
      * Prints the welcome message.
      */
-    public void showWelcome() {
+    public static String showWelcome() {
         String introduction = "  ________________________________\n"
                 + "  Yo Great to see you!\n"
                 + "  What can I do for you?\n"
                 + "  ________________________________\n";
         System.out.println(introduction);
+
+        return "  Yo Great to see you!";
     }
 
     /**

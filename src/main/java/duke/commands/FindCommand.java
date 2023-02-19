@@ -17,6 +17,7 @@ public class FindCommand extends Command{
 
     @Override
     public String execute(TaskList tasks){
+        assert this.keyword != "";
         return tasks.find(this.keyword);
     }
 }

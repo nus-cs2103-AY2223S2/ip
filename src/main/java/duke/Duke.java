@@ -28,7 +28,7 @@ public class Duke {
      * Begins the execution of the Duke program.
      */
     public void run() {
-        this.ui.showWelcome();
+        Ui.showWelcome();
         boolean isExit = false;
         Scanner sc = new Scanner(System.in);
 
