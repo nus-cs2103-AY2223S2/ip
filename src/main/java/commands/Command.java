@@ -25,8 +25,10 @@ public abstract class Command {
      * @param tasks the existing TaskList that the command may need to update
      * @param ui the Ui object that helps display command execution results to the user
      * @param storage the Storage object that helps save tasks after the command has been executed
+     *
+     * @return The command execution result string.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Returns true if the command type is a bye command, false otherwise.

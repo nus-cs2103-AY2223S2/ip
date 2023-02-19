@@ -24,18 +24,20 @@ public class AddCommand extends Command {
 
     /**
      * Executes this AddCommand with a specified TaskList, Ui, and Storage.
-     * Adds the specified Task to the TaskList, informs the Ui to display the added task,
-     * and saves the updated TaskList to the file using the Storage object.
+     * Adds the specified Task to the TaskLis, saves the updated TaskList to
+     * the file using the Storage object, informs the Ui to display the added task
      *
      * @param list the TaskList to add the Task to
      * @param ui the Ui to help inform the user of the addition
      * @param storage the Storage to save the updated TaskList to
+     *
+     * @return The execution result string.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
-        ui.printOutput("Got it. I've added this task:\n\t\t" + task.toString() + "\n\t Now you have "
-                + (list.getSize() + 1) + " tasks in the list.");
+    public String execute(TaskList list, Ui ui, Storage storage) {
         list.addTask(task);
         storage.saveListToFile(list, ui);
+        return "Got it. I've added this task:\n\t\t" + task.toString() + "\n\t Now you have "
+                + list.getSize() + " tasks in the list.";
     }
 }

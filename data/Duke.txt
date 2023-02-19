@@ -1,5 +1,2 @@
-T | 1 | read book
-D | 0 | return book | 2023-06-06
-E | 0 | project meeting | Aug 6th 2pm | 4pm
-T | 1 | join sports club
-E | 0 | meeting | Aug 7th 5pm | 8pm
+T | 0 | borrow list
+T | 0 | do that

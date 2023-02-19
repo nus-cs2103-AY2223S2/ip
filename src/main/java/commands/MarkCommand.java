@@ -31,11 +31,13 @@ public class MarkCommand extends Command {
      * @param list the TaskList to retrieve the existing task from
      * @param ui the Ui to help inform the user of the update
      * @param storage the Storage to save the updated TaskList to
+     *
+     * @return The execution result string.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         if (taskIndex >= list.getSize()) {
-            System.out.println("Oopsies.. Seems like that task does not exist :(");
+            return "Oopsies.. Seems like that task does not exist :(";
         } else {
             Task currentTask = list.getTask(taskIndex);
             if (this.getType().equals(CommandType.MARK)) {
@@ -43,9 +45,10 @@ public class MarkCommand extends Command {
             } else {
                 currentTask.markAsNotDone();
             }
-            ui.printOutput("Great :D I knew you could do it! I've marked this task as done:\n\t\t"
-                    + currentTask.toString());
             storage.saveListToFile(list, ui);
+            return "Great :D I knew you could do it! "
+                    + "I've marked this task as done:\n\t\t"
+                    + currentTask.toString();
         }
     }
 }

@@ -1,6 +1,10 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +25,10 @@ public class Storage {
      *
      * @param filePath the file path to the storage file
      */
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
         file.getParentFile().mkdirs();
-        file.createNewFile();
     }
 
     /**
@@ -36,11 +39,12 @@ public class Storage {
      * @return the arraylist of tasks loaded from the storage file (if any)
      * @throws Exception
      */
-    public List<Task> loadFile() throws Exception {
+    public List<Task> loadFile() throws IOException {
         List<Task> initTasks = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
-        String line = reader.readLine().trim();
+        String line = reader.readLine();
         while (line != null) {
+            line = line.trim();
             String[] strArr = line.split(" \\| ");
             String type = strArr[0];
             boolean isCompleted = Integer.parseInt(strArr[1]) == 1;
@@ -73,6 +77,9 @@ public class Storage {
      */
     public void saveListToFile(TaskList taskList, Ui ui) {
         try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             FileWriter writer = new FileWriter(filePath, false);
             List<Task> list = taskList.getTaskList();
             for (Task t : list) {
@@ -80,7 +87,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            ui.showSavingError();
+            ui.getSavingError();
         }
     }
 

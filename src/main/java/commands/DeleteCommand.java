@@ -29,18 +29,20 @@ public class DeleteCommand extends Command {
      * @param list the TaskList to delete the Task from
      * @param ui the Ui to help inform the user of the deletion
      * @param storage the Storage to save the updated TaskList to
+     *
+     * @return The execution result string.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         if (taskIndex >= list.getSize()) {
-            System.out.println("Oopsies.. Seems like that task does not exist :(");
+            return "Oopsies.. Seems like that task does not exist :(";
         } else {
             Task toDelete = list.getTask(taskIndex);
             list.deleteTask(taskIndex);
-            ui.printOutput("Ok. I've removed this task:\n\t\t"
-                    + toDelete.toString() + "\n\t Now you have "
-                    + list.getSize() + " tasks in the list.");
             storage.saveListToFile(list, ui);
+            return "Ok. I've removed this task:\n\t\t"
+                    + toDelete.toString() + "\n\t Now you have "
+                    + list.getSize() + " tasks in the list.";
         }
     }
 }
