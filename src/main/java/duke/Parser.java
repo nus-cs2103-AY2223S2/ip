@@ -40,6 +40,8 @@ public class Parser {
                 return new UnmarkCommand(j);
             case "delete":
                 return new DeleteCommand(command);
+            case "tag":
+                return new TagCommand(command);
             case "find":
                 return new FindCommand(command);
             case "todo":

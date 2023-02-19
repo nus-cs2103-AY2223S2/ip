@@ -27,4 +27,9 @@ public class TaskList {
     public Task getTask(int index) {
         return this.taskList.get(index);
     }
+
+    public Task tagTask(int index, String tag) {
+        this.getTask(index).setTag(tag);
+        return this.getTask(index);
+    }
 }

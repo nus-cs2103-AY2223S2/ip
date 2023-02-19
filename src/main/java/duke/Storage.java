@@ -58,23 +58,24 @@ public class Storage {
     private void storeTask(ArrayList<Task> taskList, String task) {
         char taskType = task.charAt(1);
         char taskStatus = task.charAt(4);
+        String tempTask = task.substring(task.indexOf("[tag: "));
+        String tag = tempTask.substring(6, tempTask.indexOf("]"));
         Task newTask;
 
         if (taskType == 'T') {
-            newTask = new ToDo(task.substring(7));
+            newTask = new ToDo(task.substring(7, task.indexOf("[tag:")));
         } else if (taskType == 'D') {
             LocalDateTime by = LocalDateTime.parse(task.substring(task.indexOf("(by: ") + 5, task.length() - 1),
                     DateTimeFormatter.ofPattern("HH:mm, EEEE, MMM dd yyyy"));
-            newTask = new Deadline(task.substring(7, task.indexOf(" (by:")), by);
+            newTask = new Deadline(task.substring(7, task.indexOf("[tag:")), by);
         } else if (taskType == 'E'){
             LocalDateTime from = LocalDateTime.parse(task.substring(task.indexOf("(from: ") + 7, task.indexOf("to: ") - 1),
                     DateTimeFormatter.ofPattern("HH:mm, EEEE, MMM dd yyyy"));
             LocalDateTime to = LocalDateTime.parse(task.substring(task.indexOf("to: ") + 4, task.length() - 1),
                     DateTimeFormatter.ofPattern("HH:mm, EEEE, MMM dd yyyy"));
 
-            newTask = new Event(task.substring(7, task.indexOf(" (from:")), from, to);
+            newTask = new Event(task.substring(7, task.indexOf("[tag:")), from, to);
         } else {
-            System.out.println("There is no such option!");
             newTask = null;
         }
 
@@ -82,6 +83,7 @@ public class Storage {
             newTask.mark();
         }
 
+        newTask.setTag(tag);
         taskList.add(newTask);
     }
 
