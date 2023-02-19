@@ -25,10 +25,18 @@ public class Storage {
             "see error message here: ";
     private static final String UPDATE_ERROR = "Unable to update to-do list, " +
             "see error message here: ";
+    private static final String SPECIFIC_FILE_PATH = "/text.txt";
+    private static final String REGEX = "~";
+    private static final int TASK_TYPE_INDEX = 0;
+    private static final int TASK_COMPLETION_STATUS_INDEX = 1;
+    private static final int TASK_DESCRIPTION_INDEX = 2;
+    private static final int TASK_DEADLINE_INDEX = 3;
+    private static final int TASK_START_TIME_INDEX = 3;
+    private static final int TASK_END_TIME_INDEX = 4;
 
     public Storage(String filePath) {
         this.fileDirectory = new File(filePath);
-        this.file = new File(filePath + "/text.txt");
+        this.file = new File(filePath + Storage.SPECIFIC_FILE_PATH);
         this.ui = new Ui();
     }
 
@@ -62,21 +70,23 @@ public class Storage {
     }
 
     private Task getTask(String task) {
-        // index 0 is task type
-        // index 1 is task completion status (done or not)
-        // index 2 is task description
-        // index 3 to 4 are task times
-        // todo: put those into constants
-        String[] taskDescription = task.split("~");
-        switch (taskDescription[0]) {
+        assert !task.isEmpty() : "Empty task!";
+        String[] taskDescription = task.split(Storage.REGEX);
+        switch (taskDescription[Storage.TASK_TYPE_INDEX]) {
         case "T":
-            return new ToDo(taskDescription[2], getCompletionStatus(taskDescription[1]));
+            return new ToDo(taskDescription[Storage.TASK_DESCRIPTION_INDEX],
+                    getCompletionStatus(taskDescription[Storage.TASK_COMPLETION_STATUS_INDEX]));
         case "D":
-            return new Deadline(taskDescription[2], getCompletionStatus(taskDescription[1]), taskDescription[3]);
+            return new Deadline(taskDescription[Storage.TASK_DESCRIPTION_INDEX],
+                    getCompletionStatus(taskDescription[Storage.TASK_COMPLETION_STATUS_INDEX]),
+                    taskDescription[Storage.TASK_DEADLINE_INDEX]);
         default:
-            return new Event(taskDescription[2], getCompletionStatus(taskDescription[1]),
-                    taskDescription[3], taskDescription[4]);
+            return new Event(taskDescription[Storage.TASK_DESCRIPTION_INDEX],
+                    getCompletionStatus(taskDescription[Storage.TASK_COMPLETION_STATUS_INDEX]),
+                    taskDescription[Storage.TASK_START_TIME_INDEX],
+                    taskDescription[Storage.TASK_END_TIME_INDEX]);
         }
+        //todo: better logic here
     }
 
     private boolean getCompletionStatus(String status) {
@@ -84,9 +94,8 @@ public class Storage {
     }
 
     public void update(TaskList tasks) {
-        FileWriter fw;
         try {
-            fw = new FileWriter(this.file);
+            FileWriter fw = new FileWriter(this.file);
             for (int i = 0; i < tasks.size(); i++) {
                 fw.write(tasks.get(i).generateStorageText() + "\n");
             }

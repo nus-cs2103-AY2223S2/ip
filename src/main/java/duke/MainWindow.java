@@ -25,6 +25,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    //todo: add constants for these
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/You.jpeg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Kal.jpeg"));
 
@@ -48,6 +49,7 @@ public class MainWindow extends AnchorPane {
             }
         }
     }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -56,8 +58,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         this.catchTermination();
 
+        assert false : "Testing assertions are enabled";
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        assert !response.isEmpty() : "Response string empty";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

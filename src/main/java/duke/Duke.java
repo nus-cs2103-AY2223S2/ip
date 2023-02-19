@@ -52,9 +52,11 @@ public class Duke {
         this.storage.update(this.toDoList);
     }
 
+    // todo: remove main or change it to another method as it is no longer needed
     public static void main(String[] args) {
         Ui ui = new Ui();
         ui.printWelcome();
+        // todo: change this to constant
         Storage storage = new Storage("data");
         TaskList toDoList;
         toDoList = storage.initialise();
