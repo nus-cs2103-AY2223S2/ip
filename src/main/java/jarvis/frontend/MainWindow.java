@@ -33,11 +33,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("welcome", dukeImage));
+//        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(jarvis.getResponse("welcome"), dukeImage));
     }
 
-    public void setJarvis(Jarvis d) {
-        jarvis = d;
+    public void setJarvis(Jarvis j) {
+        jarvis = j;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(jarvis.getResponse("welcome"), dukeImage));
     }
 
     /**

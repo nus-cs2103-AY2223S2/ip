@@ -43,6 +43,8 @@ public class Parser {
         }
 
         switch (command) {
+        case "welcome":
+            return "Hello, Boss. I am Jarvis, your personal assistant.";
         case "list":
             c = new List(tasklist);
             break;
