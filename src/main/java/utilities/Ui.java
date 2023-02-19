@@ -1,13 +1,11 @@
 package utilities;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
-
 import collections.TaskList;
 import exceptions.SundayException;
 import task.Task;
+
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 /**
  * The Ui class is a user interface for the Sunday task manager.
@@ -17,25 +15,14 @@ import task.Task;
  */
 public class Ui {
 
-    private static PrintStream dummyStream = new PrintStream(new OutputStream() {
+    private static final PrintStream dummyStream = new PrintStream(new OutputStream() {
         @Override
-        public void write(int b) throws IOException {
+        public void write(int b) {
             // Empty to hide prints while reading from file
         }
     });
 
-    private static PrintStream defaultStream = System.out;
-
-    private Scanner sc = new Scanner(System.in);
-
-    /**
-     * Closes the user interface.
-     */
-    public void close() {
-        this.sc.close();
-        dummyStream.close();
-        defaultStream.close();
-    }
+    private static final PrintStream defaultStream = System.out;
 
     /**
      * Sets the output stream to a dummy stream.
@@ -93,10 +80,8 @@ public class Ui {
      * @return The message indicating that the task list is empty.
      */
     public static String getEmptyTaskListMessage() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Your list is currently empty.\n");
-        sb.append("Tell me what to note down and I'll remember it accordingly!\n");
-        return sb.toString();
+        return "Your list is currently empty.\n" +
+                "Tell me what to note down and I'll remember it accordingly!\n";
     }
 
     /**
@@ -107,11 +92,9 @@ public class Ui {
      * @return The message indicating that a task has been added to the task list.
      */
     public static String getAddedTaskMessage(Task task, int uncompletedSize) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Got it. I've added this task:\n");
-        sb.append("  ").append(task).append("\n");
-        sb.append("Now you have ").append(uncompletedSize).append(" task(s) in the list.\n");
-        return sb.toString();
+        return "Got it. I've added this task:\n" +
+                "  " + task + "\n" +
+                "Now you have " + uncompletedSize + " task(s) in the list.\n";
     }
 
     /**
@@ -122,11 +105,9 @@ public class Ui {
      * @return The message indicating that a task has been marked as complete.
      */
     public static String getMarkedTaskMessage(Task task, int uncompletedSize) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Well Done! I've marked this task as done:\n");
-        sb.append("  ").append(task).append("\n");
-        sb.append("Now you have ").append(uncompletedSize).append(" task(s) in the list.\n");
-        return sb.toString();
+        return "Well Done! I've marked this task as done:\n" +
+                "  " + task + "\n" +
+                "Now you have " + uncompletedSize + " task(s) in the list.\n";
     }
 
     /**
@@ -137,11 +118,9 @@ public class Ui {
      * @return The message indicating that a task has been unmarked.
      */
     public static String getUnmarkedTaskMessage(Task task, int uncompletedSize) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("OK, I've marked this task as not done yet:\n");
-        sb.append("  ").append(task).append("\n");
-        sb.append("Now you have ").append(uncompletedSize).append(" task(s) in the list.\n");
-        return sb.toString();
+        return "OK, I've marked this task as not done yet:\n" +
+                "  " + task + "\n" +
+                "Now you have " + uncompletedSize + " task(s) in the list.\n";
     }
 
     /**
@@ -152,11 +131,9 @@ public class Ui {
      * @return The message indicating that a task has been deleted from the task list.
      */
     public static String getDeletedTaskMessage(Task task, int uncompletedSize) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Noted. I've removed this task:\n");
-        sb.append("  ").append(task).append("\n");
-        sb.append("Now you have ").append(uncompletedSize).append(" task(s) in the list.\n");
-        return sb.toString();
+        return "Noted. I've removed this task:\n" +
+                "  " + task + "\n" +
+                "Now you have " + uncompletedSize + " task(s) in the list.\n";
     }
 
     /**

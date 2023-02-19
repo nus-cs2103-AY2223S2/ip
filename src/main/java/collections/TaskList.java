@@ -84,8 +84,8 @@ public class TaskList {
      */
     public int getUncompletedSize() {
         int count = 0;
-        for (int i = 0; i < this.list.size(); i++) {
-            if (!this.list.get(i).isComplete()) {
+        for (Task task : this.list) {
+            if (!task.isComplete()) {
                 count++;
             }
         }
@@ -140,8 +140,7 @@ public class TaskList {
      */
     public TaskList find(String keyword) {
         TaskList found = new TaskList();
-        for (int i = 0; i < this.list.size(); i++) {
-            Task task = this.list.get(i);
+        for (Task task : this.list) {
             if (task.match(keyword)) {
                 found.add(task);
             }

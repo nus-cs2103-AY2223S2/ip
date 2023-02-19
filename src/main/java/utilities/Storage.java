@@ -86,10 +86,10 @@ public class Storage {
 
                 switch (strArr[1].length()) {
                 case 1:
-                    Command.UNMARK.execute(" " + String.valueOf(itemIndex));
+                    Command.UNMARK.execute(" " + itemIndex);
                     break;
                 case 2:
-                    Command.MARK.execute(" " + String.valueOf(itemIndex));
+                    Command.MARK.execute(" " + itemIndex);
                     break;
                 default:
                     throw new SundayException("ERROR 2: unable to read file");
