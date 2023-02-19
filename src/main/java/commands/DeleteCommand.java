@@ -27,12 +27,13 @@ public class DeleteCommand extends Command {
      * @param taskList the list of tasks to delete from
      * @param ui {@inheritDoc}
      * @param storage {@inheritDoc}
+     * @return {@inheritDoc}
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task t = taskList.get(index);
         taskList.remove(t);
 
-        ui.printResponse("The following task has been removed: \n    " + t
-                        + "\n" + taskList.getSizeAsString());
+        return "The following task has been removed: \n    "
+                + t + "\n" + taskList.getSizeAsString();
     }
 }

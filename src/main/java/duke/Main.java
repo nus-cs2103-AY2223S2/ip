@@ -16,10 +16,6 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
-    // public static void main(String[] args) {
-    //     Duke.main(args);
-    // }
-
     @Override
     public void start(Stage stage) {
         try {

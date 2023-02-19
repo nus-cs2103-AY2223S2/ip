@@ -30,15 +30,16 @@ public class AddCommand extends Command {
      * @param taskList the list to add the new task to
      * @param ui {@inheritDoc}
      * @param storage {@inheritDoc}
+     * @return {@inheritDoc}
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task t = Task.createTask(args);
             taskList.add(t);
-            ui.printResponse("The following task has been added to your list: \n    " + t + "\n\n"
-                            + taskList.getSizeAsString());
+            return "The following task has been added to your list: \n    " + t + "\n\n"
+                            + taskList.getSizeAsString();
         } catch (DukeException e) {
-            ui.printException(e);
+            return ui.printException(e);
         }
     }
 }

@@ -34,8 +34,16 @@ public class MainWindow {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets duke instance for the application
+     *
+     * @param d duke instance
+     */
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog(duke.greetUser(), dukeImage),
+            DialogBox.getDukeDialog(duke.loadList(), dukeImage));
     }
 
     /**

@@ -15,8 +15,9 @@ public class ListTasksCommand extends Command {
      * @param taskList the list containing the tasks to list
      * @param ui {@inheritDoc}
      * @param storage {@inheritDoc}
+     * @return {@inheritDoc}
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printResponse(taskList.getSizeAsString() + taskList.getAllAsString());
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.getSizeAsString() + taskList.getAllAsString();
     }
 }

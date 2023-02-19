@@ -42,8 +42,9 @@ public class FindCommand extends Command {
      * @param taskList the task list to check
      * @param ui {@inheritDoc}
      * @param storage {@inheritDoc}
+     * @return {@inheritDoc}
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
 
         TaskList taskContainSearchList = new TaskList();
 
@@ -60,18 +61,18 @@ public class FindCommand extends Command {
         }
 
         int len = taskContainSearchList.size();
-        ui.printResponse("You have " + (len == 0
-                                        ? "no tasks"
-                                        : len + (len > 1
-                                                ? " task"
-                                                : " tasks"))
-                        + " containing the following search term:\n    "
-                        + (this.date != null
-                            ? this.date.toString()
-                            : (this.keyword != null
-                                ? this.keyword
-                                : ""))
-                        + (len == 0 ? "" : "\n")
-                        + taskContainSearchList.getAllAsString());
+        return "You have " + (len == 0
+                                ? "no tasks"
+                                : len + (len > 1
+                                        ? " task"
+                                        : " tasks"))
+                + " containing the following search term:\n    "
+                + (this.date != null
+                    ? this.date.toString()
+                    : (this.keyword != null
+                        ? this.keyword
+                        : ""))
+                + (len == 0 ? "" : "\n")
+                + taskContainSearchList.getAllAsString();
     }
 }

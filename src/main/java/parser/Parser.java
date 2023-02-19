@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import commands.AddCommand;
+import commands.ByeCommand;
 import commands.Command;
 import commands.DeleteCommand;
 import commands.EnumCommand;
@@ -22,7 +23,7 @@ import exceptions.UnknownTaskException;
 /**
  * This class parses user input commands into commands that Duke can understand and execute
  */
-public abstract class Parser {
+public class Parser {
 
     /**
      * Parses the commandString input into an executable command
@@ -70,6 +71,8 @@ public abstract class Parser {
                 break; // will not reach here
             }
             throw new UnknownTaskException(j); // will not reach here
+        case BYE:
+            return new ByeCommand();
         default:
             String[] commandDetails = new String[4];
             commandDetails[0] = comm.toString();

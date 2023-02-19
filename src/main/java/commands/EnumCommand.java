@@ -11,6 +11,7 @@ package commands;
  * {@link #DELETE}
  * {@link #CHECK}
  * {@link #FIND}
+ * {@link #BYE}
  */
 public enum EnumCommand {
     LIST,
@@ -21,5 +22,6 @@ public enum EnumCommand {
     EVENT,
     DELETE,
     CHECK,
-    FIND
+    FIND,
+    BYE
 }

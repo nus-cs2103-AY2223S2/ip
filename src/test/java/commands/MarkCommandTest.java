@@ -1,9 +1,7 @@
 package commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,9 +16,6 @@ public class MarkCommandTest {
     @Test
     public void markTest() {
 
-        ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStreamCaptor));
-
         Storage storage = new Storage();
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
@@ -30,18 +25,14 @@ public class MarkCommandTest {
             tasks.add(new Todo("number 2"));
             tasks.add(new Todo("3rd one"));
         } catch (NoTaskDescriptionException e) {
-            System.out.println(e.getMessage());
+            assertNotEquals(e, e);
         }
 
-        MarkCommand mc = new MarkCommand(true, 2);
-        mc.execute(tasks, ui, storage);
-        String actual = outputStreamCaptor.toString();
+        // parsing of index is done before MarkCommand is initialised
+        MarkCommand mc = new MarkCommand(true, 1);
+        String actual = mc.execute(tasks, ui, storage);
 
-        ByteArrayOutputStream expectedStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(expectedStream));
-
-        ui.printResponse("This task is marked as done: \n    [T] [X] number 2");
-        String expected = expectedStream.toString();
+        String expected = "This task is marked as done: \n    [T] [X] number 2";
 
         assertEquals(expected, actual);
     }

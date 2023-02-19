@@ -20,7 +20,7 @@ public class MarkCommand extends Command {
      */
     public MarkCommand(boolean toMark, int i) {
         this.toMark = toMark;
-        this.index = i - 1;
+        this.index = i;
     }
 
     /**
@@ -29,9 +29,10 @@ public class MarkCommand extends Command {
      * @param taskList the list that contains the task
      * @param ui {@inheritDoc}
      * @param storage {@inheritDoc}
+     * @return {@inheritDoc}
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task t = taskList.get(index);
-        ui.printResponse(toMark ? t.mark() : t.unmark());
+        return toMark ? t.mark() : t.unmark();
     }
 }
