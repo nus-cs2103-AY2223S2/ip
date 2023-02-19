@@ -1,14 +1,15 @@
 package duke.task;
 public abstract class Task {
-
     protected String description;
     protected boolean isDone;
+    public abstract String getTag();
+    public abstract String getDate();
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-    abstract public String getTag();
-    abstract public String getDate();
+
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }

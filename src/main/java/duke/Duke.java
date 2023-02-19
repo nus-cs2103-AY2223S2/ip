@@ -1,7 +1,8 @@
 package duke;
-import duke.command.*;
 import java.io.*;
 import java.util.*;
+
+import duke.command.*;
 /**
  * main duke class. helps abstract all the other components
  */
@@ -14,7 +15,7 @@ public class Duke {
         String filePath = "./duke.txt";
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        try { 
+        try {
             this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
@@ -33,7 +34,7 @@ public class Duke {
         }
 
     }
-      //just in case still want to run cli version
+    //just in case still want to run cli version
     public static void main(String[] args) throws DukeException, IOException {
         Duke duke = new Duke();
         duke.ui.printLogo();

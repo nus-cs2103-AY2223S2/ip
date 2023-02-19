@@ -1,6 +1,6 @@
 package duke.command;
 import duke.*;
-public class DeleteCommand extends Command { 
+public class DeleteCommand extends Command {
     private int taskInt;
     public DeleteCommand(int taskInt) {
         this.taskInt = taskInt;

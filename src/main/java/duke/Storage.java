@@ -1,16 +1,18 @@
 package duke;
-import duke.command.*;
-import duke.task.*;
+
 import java.io.*;
 import java.util.*;
+
+import duke.command.*;
+import duke.task.*;
 
 /**
  * handles the loading and storing onto external file
  */
 public class Storage {
+    private static ArrayList<Task> list;
     private String filePath;
     private File save;
-    private static ArrayList<Task> list;
 
     public Storage(String filePath) {
         this.list = new ArrayList<>();
@@ -20,45 +22,47 @@ public class Storage {
 
     public ArrayList<Task> load() throws DukeException {
         this.save = new File(filePath);
-        if(save.exists()) {  
-                try { 
-                    BufferedReader reader = new BufferedReader(new FileReader(save));
-                    String line = reader.readLine();
-                    String[] parmArr = line.split("\\|");
-                    List<String> parm = Arrays.asList(parmArr);
-                    while (line != null) {
-                        parmArr = line.split("\\|");
-                        parm = Arrays.asList(parmArr);
-                        CommandEnum command = CommandEnum.fromTag(parm.get(0));
-                        boolean isMark = parm.get(1) == "1";
-                        String description = parm.get(2);
-                        switch (command) {
-                        case TODO:
-                            list.add(new Todo(description, isMark));
-                            break;
-                        case DEADLINE:
-                            String date = parm.get(3);
-                            list.add(new Deadline(description, date, isMark));
-                            break;
-                        case EVENT:
-                            String from = parm.get(3);
-                            String to = parm.get(4);
-                            list.add(new Event(description, from, to, isMark));
-                            break;
-                        default:
-                            break;
-                        }
-                        line = reader.readLine();
-                    }
-                    reader.close();
-                } catch (Exception e) {
-                    throw new DukeException("save file is blank");
-                }
-                return this.list;
-
-        } else {
+        if (save.exists()) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(save));
+                writeTo(reader);
+                reader.close();
+            } catch (Exception e) {
                 throw new DukeException("save file is blank");
-            
+            }
+            return this.list;
+        } else {
+            throw new DukeException("save file is blank");
+        }
+    }
+
+    private void writeTo(BufferedReader reader) throws Exception {
+        String line = reader.readLine();
+        String[] parmArr = line.split("\\|");
+        List<String> parm = Arrays.asList(parmArr);
+        while (line != null) {
+            parmArr = line.split("\\|");
+            parm = Arrays.asList(parmArr);
+            CommandEnum command = CommandEnum.fromTag(parm.get(0));
+            boolean isMark = parm.get(1) == "1";
+            String description = parm.get(2);
+            switch (command) {
+            case TODO:
+                list.add(new Todo(description, isMark));
+                break;
+            case DEADLINE:
+                String date = parm.get(3);
+                list.add(new Deadline(description, date, isMark));
+                break;
+            case EVENT:
+                String from = parm.get(3);
+                String to = parm.get(4);
+                list.add(new Event(description, from, to, isMark));
+                break;
+            default:
+                break;
+            }
+            line = reader.readLine();
         }
     }
 

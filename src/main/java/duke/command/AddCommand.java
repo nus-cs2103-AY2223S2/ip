@@ -1,7 +1,8 @@
 package duke.command;
+import java.util.List;
+
 import duke.*;
 import duke.task.*;
-import java.util.List;
 public class AddCommand extends Command {
     private CommandEnum command;
     private List<String> arg;
@@ -13,31 +14,31 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         switch(this.command) {
-            case TODO:
-                if (arg.size() == 0) {
-                    assert arg.size() > 0;
-                    throw new DukeException("TASK MUST HAS DESCRIPSHUN MEOW");
-                }
-                String description = String.join(" ", arg);
-                return taskList.addList(new Todo(description));
-            case DEADLINE:
-                try {
-                    return deadline(taskList, ui, storage);
-                } catch (IllegalArgumentException e) {
-                    throw new DukeException(e);
-                } catch (Exception e) {
-                    throw new DukeException(e);
-                }
-            case EVENT:
-                try {
-                    return event(taskList, ui, storage);
-                } catch (IllegalArgumentException e) {
-                    throw new DukeException(e);
-                } catch (Exception e) {
-                    throw new DukeException(e);
-                }
-            default:
-                return "idk what you are saying";
+        case TODO:
+            if (arg.size() == 0) {
+                assert arg.size() > 0;
+                throw new DukeException("TASK MUST HAS DESCRIPSHUN MEOW");
+            }
+            String description = String.join(" ", arg);
+            return taskList.addList(new Todo(description));
+        case DEADLINE:
+            try {
+                return deadline(taskList, ui, storage);
+            } catch (IllegalArgumentException e) {
+                throw new DukeException(e);
+            } catch (Exception e) {
+                throw new DukeException(e);
+            }
+        case EVENT:
+            try {
+                return event(taskList, ui, storage);
+            } catch (IllegalArgumentException e) {
+                throw new DukeException(e);
+            } catch (Exception e) {
+                throw new DukeException(e);
+            }
+        default:
+            return "idk what you are saying";
         }
     }
     private String deadline(TaskList taskList, Ui ui, Storage storage) throws DukeException {
