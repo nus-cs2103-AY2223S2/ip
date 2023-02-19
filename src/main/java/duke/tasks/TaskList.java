@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 import duke.storage.Storage;
 
+/**
+ * A class to represent a list of tasks.
+ */
 public class TaskList implements Serializable {
     private static final long serialVersionUID = 8098680977751428278L;
 
@@ -18,11 +21,16 @@ public class TaskList implements Serializable {
         this.taskList = taskList;
     }
 
+    /**
+     * Gets the number of tasks in the task list.
+     * 
+     * @return Number of tasks in the task list
+     */
     public int getNumTasks() {
         return taskList.size();
     }
 
-
+    @Override
     public String toString() {
         String taskListString = "";
         for (int i = 0; i < taskList.size(); i++) {
@@ -108,12 +116,25 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Filters tasks that contain a given keyword.
+     * 
+     * @param keyword
+     * @return A filtered {@code TaskList} that contains task that contain {@code keyword}.
+     */
     public TaskList filterTaskByKeyword(String keyword) {
         List<Task> filteredTaskList = taskList.stream().filter((task) -> task.contains(keyword))
                 .collect(Collectors.toList());
         return new TaskList(filteredTaskList);
     }
 
+    /**
+     * Filters incomplete tasks that land on a given date.
+     * 
+     * @param dateString
+     * @return A filtered {@code TaskList} that contains task that are not done and land on
+     *         {@code dateString}.
+     */
     public TaskList filterTaskByDate(String dateString) {
 
         List<Task> filteredTaskList = new ArrayList<>();
@@ -123,14 +144,16 @@ public class TaskList implements Serializable {
             if (task instanceof Event) {
                 Event event = (Event) task;
                 boolean isEventWithinDate = event.checkIfEventActiveOnDate(dateString);
-                if (isEventWithinDate)
+                if (isEventWithinDate) {
                     filteredTaskList.add(event);
+                }
             }
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 boolean isDeadlineActive = deadline.checkIfDeadlineActive(dateString);
-                if (isDeadlineActive)
+                if (isDeadlineActive) {
                     filteredTaskList.add(deadline);
+                }
             }
         }
 

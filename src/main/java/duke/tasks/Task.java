@@ -2,6 +2,9 @@ package duke.tasks;
 
 import java.io.Serializable;
 
+/**
+ * A class to represent Task.
+ */
 public class Task implements Serializable {
     private static final long serialVersionUID = 4048021127880559361L;
 

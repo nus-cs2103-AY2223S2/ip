@@ -1,14 +1,14 @@
 package duke.parser;
 
-import duke.command.DukeCommand;
-import duke.date.DukeDate;
-import duke.exception.InvalidArgumentException;
-import duke.exception.InvalidCommandException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.command.DukeCommand;
+import duke.date.DukeDate;
+import duke.exception.InvalidArgumentException;
+import duke.exception.InvalidCommandException;
 
 /**
  * A class for parsing the user's input.
@@ -44,6 +44,14 @@ public class DukeParser {
         throw new InvalidCommandException();
     }
 
+    /**
+     * Parses {@code inputString} to get the command arguments by using {@code command} to check for
+     * the type of arguments it should get.
+     * 
+     * @param command
+     * @param inputString
+     * @return
+     */
     public static String[] parseCommandArgs(DukeCommand command, String inputString) {
         List<String> commandArgs = new ArrayList<>();
         switch (command) {
@@ -108,8 +116,9 @@ public class DukeParser {
         boolean isInputJustBye = inputString.strip().length() == DukeCommand.BYE.text.length();
 
         boolean hasUserProvidedArgs = !isInputJustList && !isInputJustBye;
-        if (hasUserProvidedArgs)
+        if (hasUserProvidedArgs) {
             throw new InvalidCommandException();
+        }
     }
 
 
@@ -123,8 +132,9 @@ public class DukeParser {
         int offset = DukeCommand.DEADLINE.text.length();
         int byIndex = inputString.indexOf("/by", offset);
         boolean isByKeywordExist = byIndex != -1;
-        if (!isByKeywordExist)
+        if (!isByKeywordExist) {
             throw new Error("Invalid argument!");
+        }
         String description = inputString.substring(offset, byIndex).strip();
         String deadline = inputString.substring(byIndex + ("/by".length())).strip();
 
@@ -143,8 +153,9 @@ public class DukeParser {
         int toIndex = inputString.indexOf("/to", offset);
 
         boolean isKeywordExist = fromIndex != -1 && toIndex != -1;
-        if (!isKeywordExist)
+        if (!isKeywordExist) {
             throw new InvalidArgumentException();
+        }
 
         String description = inputString.substring(offset, fromIndex).strip();
 
@@ -156,8 +167,9 @@ public class DukeParser {
 
             boolean isValidFromDate = fromDate.isBefore(toDate) || fromDate.isEqual(toDate);
 
-            if (!isValidFromDate)
+            if (!isValidFromDate) {
                 throw new Error("☹ OOPS!!! from date should be before to date!");
+            }
             commandArgs.add(description);
             commandArgs.add(from);
             commandArgs.add(to);

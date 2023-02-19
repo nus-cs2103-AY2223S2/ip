@@ -2,6 +2,9 @@ package duke.ui;
 
 import duke.tasks.Task;
 
+/**
+ * A class for adding indentation and printing messages to fit Duke's style.
+ */
 public class UiPrinter {
 
 

@@ -1,11 +1,14 @@
 package duke.ui;
 
+import duke.controller.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import duke.controller.MainWindow;
 
+/**
+ * A class that acts as the entry point into the GUI.
+ */
 public class Gui extends Application {
 
 

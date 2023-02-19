@@ -12,7 +12,9 @@ import java.nio.file.Path;
 import duke.tasks.TaskList;
 
 
-
+/**
+ * A class to represent some commonly used methods for reading and writing from Storage.
+ */
 public class Storage {
     private static final Path STORAGE_PATH = Path.of("src/main/java/data", "Storage.ser");
     private static File storageFile = STORAGE_PATH.toFile();
