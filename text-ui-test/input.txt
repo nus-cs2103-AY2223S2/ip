@@ -1,0 +1,29 @@
+list
+todo do quiz
+list
+deadline print hello world /by tonight
+event career fair /from 11am /to 3pm
+mark 1
+mark 2
+list
+unmark 2
+event meet friends /from sat 10am /to 4pm
+list
+mark 4
+mark 4
+list
+mark 3
+mark 2
+list
+delete 2
+delete 3
+list
+todo
+deadline
+event
+deadline do stuff /limit 3am
+event midterms /from3pm/to5pm
+event midterms /from 3pm
+event midterms /from 3pm /until 5pm
+delete 4
+bye
