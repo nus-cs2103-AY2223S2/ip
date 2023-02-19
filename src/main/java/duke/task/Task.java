@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.util.Optional;
-
 /**
  * Class to store duke.task description along with completion status.
  */

@@ -3,16 +3,12 @@ package duke;
 import java.util.Objects;
 import java.util.Scanner;
 
-import duke.ui.MainWindow;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -171,7 +167,6 @@ public class Duke extends Application {
         } catch (DukeException e) {
             response.append("Something went wrong... ");
             response.append(e.getMessage());
-//            e.printStackTrace();
         }
         return response.toString();
     }
@@ -188,11 +183,6 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getDukeDialog(dukeText, duke)
         );
-
-        // code to exit on "bye". Not functioning unless within getResponse.
-        if (userText.equals("bye")) {
-            Platform.exit();
-        }
         userInput.clear();
     }
 
@@ -233,10 +223,10 @@ public class Duke extends Application {
 
         // You will need to import `javafx.scene.layout.Region` for this.
 //        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-//
-//        userInput.setPrefWidth(325.0);
-//
-//        sendButton.setPrefWidth(55.0);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 

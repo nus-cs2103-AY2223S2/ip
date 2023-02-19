@@ -8,8 +8,6 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
-import javax.print.DocFlavor;
-
 /**
  * Class to perform UI operations.
  */
