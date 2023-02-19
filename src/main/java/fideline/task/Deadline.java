@@ -30,8 +30,9 @@ public class Deadline extends Task {
             // Stores deadline as a DateTime.
             timingLocalDate = LocalDate.parse(deadlineTiming);
             // Changes the format of the deadline.
+            final String dateFormat = "MMM dd yyyy";
             timingString = timingLocalDate.format(
-                    DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                    DateTimeFormatter.ofPattern(dateFormat));
         } catch (DateTimeParseException e) {
             // Simply stores the given timing
             timingString = deadlineTiming;
@@ -40,6 +41,23 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + timingString + ")";
+        final String stringFormat = "[D]%s (by: %s)";
+        return String.format(stringFormat, super.toString(), timingString);
+    }
+
+    @Override
+    public String getStorageString() {
+        String stringFormat = "D|%s|%s";
+        return String.format(stringFormat, super.getStorageString(), timingString);
+    }
+
+    @Override
+    public boolean equals(Task task) {
+        boolean isDeadline = task instanceof Deadline;
+        if (!isDeadline) {
+            return false;
+        }
+        boolean isSameTiming = timingString.equals(((Deadline) task).timingString);
+        return isSameTiming && super.equals(task);
     }
 }
