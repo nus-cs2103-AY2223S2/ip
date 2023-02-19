@@ -85,4 +85,8 @@ public class TaskList {
 
         return matchingTasks;
     }
+
+    public boolean isEmpty() {
+        return taskList.isEmpty();
+    }
 }

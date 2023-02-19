@@ -18,6 +18,8 @@ public class Duke extends Application {
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
+    private static final String FILE_PATH = "./data/duke.txt";
+//    private boolean isLoadedFromFile;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -27,23 +29,21 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-
-
     public Duke() {
         try {
-            String filePath = "./data/duke.txt";
-            storage = new Storage(filePath);
-            tasks = new TaskList(storage.load());
-            ui = new Ui();
-            parser = new Parser(tasks, ui);
+            this.storage = new Storage(FILE_PATH);
+            this.tasks = new TaskList(storage.load());
+            this.ui = new Ui();
+            this.parser = new Parser(tasks, ui);
+//            this.isLoadedFromFile = true;
         } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
+//            System.out.println(ui.showLoadingError());
+            this.storage = new Storage(FILE_PATH);
+            this.tasks = new TaskList();
+            this.ui = new Ui();
+            this.parser = new Parser(tasks, ui);
+//            this.isLoadedFromFile = false;
         }
-    }
-
-    public Duke(String filePath) {
-
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("Vincent");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -77,7 +77,6 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -92,7 +91,6 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             try {
                 handleUserInput();
@@ -110,27 +108,40 @@ public class Duke extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        showInitMessage();
+
+//        if (!isLoadedFromFile) {
+//            showLoadingError();
+//        }
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+    private void showInitMessage() {
+        Label initMessage = new Label(ui.showInitMessage());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(initMessage, new ImageView(duke)));
     }
 
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
+    private void showLoadingError() {
+        Label initMessage = new Label(ui.showLoadingError());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(initMessage, new ImageView(duke)));
+    }
+
+//    /**
+//     * Iteration 1:
+//     * Creates a label with the specified text and adds it to the dialog container.
+//     * @param text String containing text to add
+//     * @return a label with the specified text that has word wrap enabled.
+//     */
+//    private Label getDialogLabel(String text) {
+//        // You will need to import `javafx.scene.control.Label`.
+//        Label textToAdd = new Label(text);
+//        textToAdd.setWrapText(true);
+//
+//        return textToAdd;
+//    }
+
     private void handleUserInput() throws DukeException {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -141,10 +152,6 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     private String getResponse(String input) throws DukeException {
         if (input.equals("bye")) {
             storage.store(tasks);
@@ -153,17 +160,4 @@ public class Duke extends Application {
             return parser.parse(input);
         }
     }
-
-//    public void run() {
-//        ui.showInitMessage();
-//        Parser p = new Parser(tasks, ui);
-//        p.parseAll();
-//        storage.store(tasks);
-//    }
-
-//    public static void main(String[] args) {
-//        String filePath =
-//        Duke d = new Duke(filePath);
-//        d.run();
-//    }
 }
