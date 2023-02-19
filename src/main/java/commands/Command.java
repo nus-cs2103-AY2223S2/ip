@@ -1,5 +1,7 @@
 package commands;
 
+import static commands.CommandType.BYE;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -36,7 +38,7 @@ public abstract class Command {
      * @return check if the Command is a bye command
      */
     public boolean isBye() {
-        return type.equals(CommandType.BYE);
+        return type.equals(BYE);
     }
 
     public CommandType getType() {

@@ -103,8 +103,6 @@ public class Duke {
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.getExceptionError(e);
-        } catch (DateTimeParseException e) {
-            return ui.getDateTimeParseError();
         }
     }
 

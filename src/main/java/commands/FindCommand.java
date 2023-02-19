@@ -1,5 +1,7 @@
 package commands;
 
+import static commands.CommandType.FIND;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -9,14 +11,14 @@ import duke.Ui;
  */
 public class FindCommand extends Command {
     private String keyword;
-
+    private final static String RESULT_MESSAGE = "Here are the matching tasks in your list:\n ";
     /**
      * Constructs a new FindCommand with the specified keyword to search the tasklist for.
      *
      * @param keyword the keyword of the task description to be searched in the tasklist
      */
     public FindCommand(String keyword) {
-        super(CommandType.FIND);
+        super(FIND);
         this.keyword = keyword;
     }
 
@@ -35,7 +37,7 @@ public class FindCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) {
         TaskList results = list.search(keyword);
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your list:\n ");
+        sb.append(RESULT_MESSAGE);
         sb.append(results.toString());
         return sb.toString();
     }

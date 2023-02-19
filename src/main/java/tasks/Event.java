@@ -1,5 +1,7 @@
 package tasks;
 
+import static tasks.TaskType.EVENT;
+
 /**
  * Represents a scheduled event
  */
@@ -16,7 +18,7 @@ public class Event extends Task {
      * @param to the end time of the event.
      */
     public Event(String description, String from, String to) {
-        super(description);
+        super(description, EVENT);
         this.from = from;
         this.to = to;
     }
@@ -30,18 +32,19 @@ public class Event extends Task {
      * @param to the end time of the event.
      */
     public Event(String description, boolean isDone, String from, String to) {
-        super(description, isDone);
+        super(description, isDone, EVENT);
         this.from = from;
         this.to = to;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[" + type.getValue() + "]"
+                + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 
     @Override
     public String parseToSave() {
-        return "E" + " | " + super.parseToSave() + " | " + from + " | " + to;
+        return type.getValue() + " | " + super.parseToSave() + " | " + from + " | " + to;
     }
 }

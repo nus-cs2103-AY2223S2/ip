@@ -61,7 +61,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 

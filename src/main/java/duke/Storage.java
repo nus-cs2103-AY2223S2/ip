@@ -5,13 +5,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import tasks.*;
 
 /**
  * Represents the Storage that helps to store the tasks entered by the user
@@ -32,6 +30,21 @@ public class Storage {
     }
 
     /**
+     * Returns the TaskType based on the String input given
+     * by iterating through the existing TaskType values
+     *
+     * @return the TaskType based on the String input given
+     */
+    public TaskType getTaskType(String input) {
+        for (TaskType t : TaskType.values()) {
+            if (t.isEqual(input)) {
+                return t;
+            }
+        }
+        return TaskType.DEFAULT;
+    }
+
+    /**
      * Loads any existing data from the filePath of the Storage (if such a file in the filePath exists),
      * parses each line into a corresponding task and then adds each task into a
      * newly initialised arraylist of tasks. Returns the arraylist of tasks loaded.
@@ -40,28 +53,32 @@ public class Storage {
      * @throws Exception
      */
     public List<Task> loadFile() throws IOException {
+        Validator validator = new Validator();
         List<Task> initTasks = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String line = reader.readLine();
         while (line != null) {
             line = line.trim();
             String[] strArr = line.split(" \\| ");
-            String type = strArr[0];
+            TaskType type = getTaskType(strArr[0]);
             boolean isCompleted = Integer.parseInt(strArr[1]) == 1;
             String taskDesc = strArr[2];
-
+            // TODO: Handle error case when strArr.length < 2 after splitting by ' | '
             switch (type) {
-            case "T":
+            case TODO:
                 initTasks.add(new Todo(taskDesc, isCompleted));
                 break;
-            case "D":
-                initTasks.add(new Deadline(taskDesc, isCompleted, strArr[3]));
+            case DEADLINE:
+                if (validator.isDateValid(strArr[3])) {
+                    LocalDate byDate = LocalDate.parse(strArr[3]);
+                    initTasks.add(new Deadline(taskDesc, isCompleted, byDate));
+                }
                 break;
-            case "E":
+            case EVENT:
                 initTasks.add(new Event(taskDesc, isCompleted, strArr[3], strArr[4]));
                 break;
             default:
-                initTasks.add(new Task(taskDesc));
+                initTasks.add(new Task(taskDesc, isCompleted, type));
             }
             line = reader.readLine();
         }
@@ -87,6 +104,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
+            // TODO: Better error handling needed, Throw error forward instead
             ui.getSavingError();
         }
     }
