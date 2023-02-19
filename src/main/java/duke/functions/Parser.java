@@ -42,7 +42,11 @@ public class Parser {
                 reply = tasks.findTask(inputArr[1]);
 
             } else if (inputArr[0].equals("list") || inputArr[0].equals("L")) {
-                reply = tasks.printTasks();
+                try {
+                    reply = tasks.printTasks();
+                } catch (DukeException e) {
+                    reply = e.getMessage();
+                }
 
             } else if (inputArr[0].equals("mark") || inputArr[0].equals("M")) {
                 int index = Integer.valueOf(inputArr[1]) - 1;
@@ -63,7 +67,7 @@ public class Parser {
                 if (input.equals("")) {
                     throw new Missing("");
                 }
-                newTask = new ToDo(input);
+                newTask = new ToDo(input + '\n');
                 type = "T";
 
                 tasks.addTask(newTask);
@@ -81,7 +85,7 @@ public class Parser {
                 LocalDateTime dateTime = LocalDateTime.parse(taskDate[1], formatter);
                 String dateTimeString = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
                 input = taskDate[0] + "(by:" + dateTimeString + ")";
-                newTask = new Deadline(input);
+                newTask = new Deadline(input + '\n');
                 type = "D";
 
                 tasks.addTask(newTask);
@@ -105,7 +109,7 @@ public class Parser {
                 input = taskDate2[0] + "(from: " + fromString + " ";
                 input = input + "to: " + toString + ")";
 
-                newTask = new Event(input);
+                newTask = new Event(input + '\n');
                 type = "E";
 
                 tasks.addTask(newTask);

@@ -1,5 +1,6 @@
 package duke.task;
 import duke.dukeexceptions.DukeException;
+import duke.dukeexceptions.TaskListEmpty;
 import duke.functions.Storage;
 
 import java.util.ArrayList;
@@ -79,8 +80,11 @@ public class TaskList {
      *
      * @return a string displaying all the Tasks in the checklist.
      */
-    public String printTasks() {
+    public String printTasks() throws TaskListEmpty{
         int len = tasks.size();
+        if (len == 0) {
+            throw new TaskListEmpty("");
+        }
         String reply = "";
         for (int i = 0; i < len; i++) {
             reply = reply + (i + 1) + ". " + tasks.get(i).status();
