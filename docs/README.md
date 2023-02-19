@@ -1,5 +1,7 @@
 # User Guide 📖
 
+Duke is your friendly bot who helps to keep track of all your tasks.
+
 ## Features 📄
 
 ### Add task: todo
