@@ -19,11 +19,13 @@ public class Ui {
      * @return the String representation of the list of tasks
      */
     private String getTaskList(TaskList taskList, boolean isMatchingList) {
+        assert (!taskList.isEmpty()) : "TaskList is empty"; // ensure list is not empty
         String addString = " ";
         if (isMatchingList) {
             addString = " matching ";
         }
         StringBuilder taskListStringBuilder = new StringBuilder("Here are the" + addString + "tasks in your list:\n");
+        
         for (int i = 0; i < taskList.size() - 1; i++) {
             taskListStringBuilder.append(i + 1).append(".").append(taskList.get(i)).append("\n");
         }
