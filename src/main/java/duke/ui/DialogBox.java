@@ -10,6 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
+/**
+ * Represents a dialog, use code from https://se-education.org/guides/tutorials/javaFx.html
+ * with some modification in format setting.
+ */
 public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;

@@ -20,6 +20,11 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Represents User Interface, handle interaction with users, use code from
+ * https://se-education.org/guides/tutorials/javaFx.html with modification in format,
+ * some additional method and fields, some logic handling.
+ */
 public class Ui extends Application{
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
