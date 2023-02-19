@@ -1,3 +1,7 @@
+package duke;
+
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -5,7 +9,7 @@ public class TaskList {
 
     public void addEntry(Task task) {
         this.data.add(task);
-        System.out.println("added: " + task.description);
+        System.out.println("added: " + task.getDescription());
     }
 
     public void addFileEntry(Task task) {

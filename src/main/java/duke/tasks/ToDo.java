@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.exceptions.InvalidTodo;
+
 public class ToDo extends Task{
     String tag = "T";
     public ToDo() {

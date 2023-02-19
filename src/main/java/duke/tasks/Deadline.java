@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.exceptions.InvalidDeadline;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -17,7 +21,7 @@ public class Deadline extends Task{
     }
 
     @Override
-    public void genDscp(String input) throws InvalidDeadline{
+    public void genDscp(String input) throws InvalidDeadline {
         String dscp = input.replace("deadline ", "");
         if (dscp.isBlank()) {
             throw new InvalidDeadline();

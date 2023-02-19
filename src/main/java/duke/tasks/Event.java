@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.exceptions.InvalidEvent;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -19,7 +23,7 @@ public class Event extends Task {
 
     //KEEP ALL WORDS SEPARATED BY SPACES
     @Override
-    public void genDscp(String input) throws InvalidEvent{
+    public void genDscp(String input) throws InvalidEvent {
         String dscp = input.replace("event ", "");
         if (dscp.isBlank()) {
             throw new InvalidEvent();

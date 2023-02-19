@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.exceptions.DukeExceptions;
+
 public class Task {
     String description;
     String tag = " ";

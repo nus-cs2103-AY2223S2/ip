@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exceptions.DukeExceptions;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 public class Parser {
     public TaskList data;
 
@@ -54,7 +62,7 @@ public class Parser {
                 return e.getMessage();
             }
             data.addEntry(todo);
-            return String.format("Now you have %d tasks in the list", data.getSize());
+            return String.format("Now you have %d duke.tasks in the list", data.getSize());
         }
 
         if (input.contains("event ")) {
@@ -66,7 +74,7 @@ public class Parser {
                 return e.getMessage();
             }
             data.addEntry(event);
-            return String.format("Now you have %d tasks in the list", data.getSize());
+            return String.format("Now you have %d duke.tasks in the list", data.getSize());
         }
 
         if (input.contains("deadline ")) {
@@ -79,7 +87,7 @@ public class Parser {
             }
 
             data.addEntry(deadline);
-            return String.format("Now you have %d tasks in the list", data.getSize());
+            return String.format("Now you have %d duke.tasks in the list", data.getSize());
         }
         return "I do not understand your instructions...";
     }
