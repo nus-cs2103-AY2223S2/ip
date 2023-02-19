@@ -21,6 +21,7 @@ public class EventCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert !input.isEmpty() : "Input to Event Command can't be empty";
         Event event = new Event(getDescription(), getStartDateTime(), getEndDateTime());
         taskList.getTaskList().add(event);
         storage.store(taskList);
