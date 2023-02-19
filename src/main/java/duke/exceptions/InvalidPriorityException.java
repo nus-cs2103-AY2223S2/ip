@@ -2,7 +2,7 @@ package duke.exceptions;
 public class InvalidPriorityException extends Exception {
 
     public InvalidPriorityException() {
-        super("Priority level doesn't exist bruh");
+        super("Apologies but this priority level does not exist");
     }
 
     public InvalidPriorityException(String message) {

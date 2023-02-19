@@ -39,7 +39,7 @@ public class Parser {
                             return taskList.createTask(parts);
                         default:
                             assert false : "Command does not make sense";
-                            return "Sorry i'm not sure what you mean...";
+                            return "I'm sorry but I'm afraid I do not understand what you mean";
                     }
                 }
             } catch (TaskDoesNotExistException e) {

@@ -3,7 +3,7 @@ package duke.exceptions;
 public class TaskDoesNotExistException extends Exception {
 
     public TaskDoesNotExistException() {
-        super("Task doesn't exist bruh");
+        super("Apologies, however this task does not exist");
     }
 
     public TaskDoesNotExistException(String message) {

@@ -1,11 +1,13 @@
 package duke;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -27,10 +29,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setPadding(new Insets(20, 10, 0, 10));
+        dialogContainer.setSpacing(30.0);
+        scrollPane.setFitToWidth(true);
     }
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("Xingqiu at your service, what can I do for you, my liege?", dukeImage)
+        );
     }
 
 
@@ -44,7 +52,6 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
 
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("Hi! i'm Duke, what can I do for you?", dukeImage),
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );
