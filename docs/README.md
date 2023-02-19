@@ -198,3 +198,14 @@ OK, I've marked this task as not done yet:
   [D][ ] Complete math assignment (by: 23 Oct 2023 23:59)
 ```
 
+### `bye` - Exit application
+
+Saves and closes the application.
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+- chat interface closes
