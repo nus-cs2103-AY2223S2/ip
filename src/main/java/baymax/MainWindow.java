@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
 
     private Baymax baymax;
 
-    private Ui ui = new Ui();
+    private final Ui ui = new Ui();
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        ui.welcomeMessage();
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.welcomeMessage(), dukeImage));
     }
 

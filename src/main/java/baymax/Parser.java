@@ -17,7 +17,6 @@ public class Parser {
     private enum commands {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     }
-
     
     private commands getCommand(String input) {
         return commands.valueOf(input.split(" ")[0].toUpperCase());
