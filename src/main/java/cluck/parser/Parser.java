@@ -1,6 +1,8 @@
 package cluck.parser;
 
 import cluck.commands.Command;
+import cluck.commands.ExitCommand;
+import cluck.commands.ListCommand;
 import cluck.messages.Messages;
 import cluck.tasks.Deadline;
 import cluck.tasks.Event;
@@ -18,6 +20,8 @@ public class Parser {
     private static final String DUE_DATE_FLAG = "/by ";
     private static final String EVENT_START_FLAG = "/from ";
     private static final String EVENT_END_FLAG = "/to ";
+    private static final String EXIT_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
 
     private static final String SAVE_DIR_STRING = "SavedData";
     private static final String SAVE_FILE_STRING = "CluckSave.txt";
@@ -43,24 +47,17 @@ public class Parser {
     /**
      * Takes the string input of the user and converts it into an executable command.
      *
-     * @return sublcass of Command
+     * @return child of Command
      */
     public static Command commandFactory(String userInput) {
         String[] words = userInput.split(" ");
 
         switch (words[0]) {
-            case "bye":
-                writeSave(toDoList);
-                System.out.println(Messages.MESSAGE_GOODBYE);
-                loop = false;
-                break;
+            case EXIT_COMMAND:
+                return new ExitCommand();
 
-            case "list":
-                System.out.println(Messages.MESSAGE_LIST_DISPLAY);
-                for (int i = 0; i < toDoList.size(); i++) {
-                    System.out.println("    " + (i + 1) + ": " + toDoList.get(i).toString());
-                }
-                break;
+            case LIST_COMMAND:
+                return new ListCommand();
 
             case "mark":
                 if (words.length == 1) {
