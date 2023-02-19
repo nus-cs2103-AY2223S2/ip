@@ -20,7 +20,7 @@ public class Task {
      * @return "X" if the task is done or " " otherwise.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     /**

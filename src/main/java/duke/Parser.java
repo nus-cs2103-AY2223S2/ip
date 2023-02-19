@@ -22,6 +22,7 @@ public class Parser {
      * @throws DukeException if input is not in the pre-determined commands.
      */
     public static Command parse(String command) throws DukeException {
+        assert !command.isEmpty() : "empty command";
         try {
             switch(command) {
             case "bye":
