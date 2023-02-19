@@ -12,6 +12,10 @@ public class ListCommand extends Command {
         output += ui.printListMessage();
         output += list.list();
         return output;
+    }
 
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

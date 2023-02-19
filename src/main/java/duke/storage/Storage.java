@@ -121,15 +121,14 @@ public class Storage {
     }
 
     public static void saveData(TaskList list) throws IOException {
-        FileWriter dukeWriter = new FileWriter(path, true);
+        FileWriter dukeWriter = new FileWriter(path, false);
         for (Task i : list.getList()) {
             if (i instanceof ToDo) {
                 dukeWriter.write("T | " + i.getStatusIcon() + " | " + i.getDescription() + "\n");
             } else if (i instanceof Deadline) {
-                dukeWriter.write("D | " + i.getStatusIcon() + " | " + i.getDescription() + i.getRemarks() + "\n");
+                dukeWriter.write("D | " + i.getStatusIcon() + " | " + i.getDescription() + " " + i.getRemarks() + "\n");
             } else {
-                String[] nameAndStart = i.toString().split(" \\(from: ");
-                dukeWriter.write("E | " + i.getStatusIcon() + " | " + i.getDescription() + i.getRemarks() + "\n");
+                dukeWriter.write("E | " + i.getStatusIcon() + " | " + i.getDescription() + " " + i.getRemarks() + "\n");
             }
         }
         dukeWriter.close();

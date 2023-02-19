@@ -23,4 +23,9 @@ public class MarkCommand extends Command {
         list.mark(index);
         return ui.printMarkMessage(list.get(index));
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

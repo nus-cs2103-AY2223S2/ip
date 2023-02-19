@@ -23,4 +23,9 @@ public class UnmarkCommand extends Command {
         list.unmark(index);
         return ui.printUnmarkMessage(list.get(index));
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

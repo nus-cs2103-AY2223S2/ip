@@ -20,4 +20,9 @@ public class InvalidCommand extends Command {
             return message;
         }
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

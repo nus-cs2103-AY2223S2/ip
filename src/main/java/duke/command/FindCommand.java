@@ -20,4 +20,9 @@ public class FindCommand extends Command {
         output += list.find(keyword);
         return output;
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

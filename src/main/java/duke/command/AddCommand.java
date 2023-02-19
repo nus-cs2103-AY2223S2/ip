@@ -20,4 +20,9 @@ public class AddCommand extends Command {
         list.add(task);
         return ui.printAddMessage(list.getLast(), list);
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

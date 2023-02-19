@@ -26,52 +26,27 @@ public class Duke {
             list = new TaskList();
         }
     }
-    public static void main(String[] args) throws DukeException, IOException {
-        ui.printWelcomeMessage();
-        ui.showLine();
-        list = Storage.loadData();
+    public void run() throws DukeException, IOException {
+        System.out.println(System.getProperty("user.dir"));
+        System.out.println(ui.printWelcomeMessage());
+        System.out.println(ui.showLine());
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-
-        while (!logic.checkBye(input)) {
-            if (logic.checkList(input)) {
-                ui.printListMessage();
-                list.list();
-                ui.showLine();
-            } else if (logic.checkFind(input)) {
-                String word = input.split(" ")[1];
-                ui.printFindMessage();
-                list.find(word);
-                ui.showLine();
-            } else if (logic.checkMark(input)) {
-                int num = Integer.parseInt(input.split(" ")[1]);
-                list.mark(num);
-                ui.printMarkMessage(list.get(num));
-                ui.showLine();
-            } else if (logic.checkUnmark(input)) {
-                int num = Integer.parseInt(input.split(" ")[1]);
-                list.unmark(num);
-                ui.printUnmarkMessage(list.get(num));
-                ui.showLine();
-           } else if (logic.checkDelete(input)) {
-                int num = Integer.parseInt(input.split(" ")[1]);
-                ui.printDeleteMessage(list.get(num), list);
-                list.removeFind(list.get(num));
-                list.delete(num);
-                ui.showLine();
-            } else if (logic.checkTask(input)) {
-                list.add(input);
-                ui.printAddMessage(list.getLast(), list);
-                ui.showLine();
-            } else if (!logic.isValidCommand(input)) {
-                ui.printInvalidCommandMessage();
-                ui.showLine();
+        boolean isExit = false;
+        while (!isExit) {
+            Command cmd = logic.parse(input);
+            System.out.println(cmd.execute(list, ui));
+            System.out.println(ui.showLine());
+            isExit = cmd.isExit();
+            if (!isExit) {
+                input = sc.nextLine();
             }
-            input = sc.nextLine();
         }
         Storage.saveData(list);
-        ui.printByeMessage();
-        ui.showLine();
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Duke("./data/duke.txt", "./data").run();
     }
 
 
@@ -80,7 +55,6 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-
         Command cmd = logic.parse(input);
         assert cmd != null : "command must not be null";
         return cmd.execute(list, ui);

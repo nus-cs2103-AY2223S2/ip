@@ -24,6 +24,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             assert duke != null: "duke must not be null";
+            fxmlLoader.<MainWindow>getController().showWelcome();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

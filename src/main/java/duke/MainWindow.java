@@ -8,6 +8,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.application.Platform;
 
+import duke.ui.Ui;
+
 import java.io.IOException;
 
 
@@ -15,6 +17,8 @@ import java.io.IOException;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private Ui ui = new Ui();
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -34,6 +38,12 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    public void showWelcome() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.printWelcomeMessage(), dukeImage)
+        );
     }
 
     /**

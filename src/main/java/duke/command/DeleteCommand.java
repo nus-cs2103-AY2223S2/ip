@@ -24,4 +24,9 @@ public class DeleteCommand extends Command {
         list.delete(index);
         return output;
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }
