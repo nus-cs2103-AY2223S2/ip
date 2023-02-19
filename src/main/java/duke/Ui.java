@@ -8,7 +8,8 @@ public class Ui {
      * @param toDisplay the String to be displayed in the formatted manner
      */
     private String printFormatted(String toDisplay) {
-        return INDENT_LINE + "\n" + toDisplay + "\n" + INDENT_LINE;
+        return toDisplay;
+//        return INDENT_LINE + "\n" + toDisplay + "\n" + INDENT_LINE;
     }
 
     /**
@@ -30,7 +31,11 @@ public class Ui {
      * @param taskList the list of tasks
      */
     public String showTaskList(TaskList taskList) {
-        return printFormatted(getTaskList(taskList));
+        if (!taskList.isEmpty()) {
+            return printFormatted(getTaskList(taskList));
+        } else {
+            return "There are no tasks in your list";
+        }
     }
 
     /**
