@@ -52,7 +52,7 @@ public class DeleteCommand extends Command {
             ui.dukeDisplay("Successfully deleted the following task! \n"
                     + deleted.toString());
         } catch (NumberFormatException e) {
-            throw new IllegalInputException("Invalid task index chosed!");
+            throw new IllegalInputException("Seems like you didn't key in an integer?");
         } catch (TaskListIndexOutOfBoundsException e) {
             ui.errorDisplay(e);
         } catch (IOException e) {
@@ -60,7 +60,6 @@ public class DeleteCommand extends Command {
                     + "Any updates will not be saved!");
             ui.errorDisplay(e);
             e.printStackTrace();
-
         }
     }
 }

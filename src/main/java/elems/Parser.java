@@ -24,6 +24,8 @@ public class Parser {
     private static final HashSet<String> voidKeywords = new HashSet<>(Arrays.asList("list",
             "bye", "forcequit", "find"));
     private static final HashSet<String> modifyKeywords = new HashSet<>(Arrays.asList("mark", "unmark"));
+    private static final String COMMAND_SEPARATOR = " ";
+    private static final String PARAM_SEPARATOR = "/";
 
     /**
      * Returns an appropriate <code>Command</code> given the user's <code>String</code> input
@@ -32,11 +34,11 @@ public class Parser {
      * @throws IllegalCommandException when an invalid input has been given
      */
     public Command parse(String input) throws IllegalCommandException {
-        String[] commandSplit = input.split(" ", 2);
+        String[] commandSplit = input.split(COMMAND_SEPARATOR, 2);
         String keyword = commandSplit[0];
         String paramChain = commandSplit.length == 1 ? "" : commandSplit[1];
 
-        String[] parsedParams = paramChain.split("/");
+        String[] parsedParams = paramChain.split(PARAM_SEPARATOR);
 
         ArrayList<String> params = new ArrayList<>(Arrays.asList(parsedParams));
 
