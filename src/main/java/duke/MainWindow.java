@@ -50,10 +50,12 @@ public class MainWindow extends AnchorPane {
         String response = gui.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog("\n" + input + "      " , userImage),
-                DialogBox.getDukeDialog("\n" + "      " + response, dukeImage)
+                DialogBox.getDukeDialog("\n" + response, dukeImage)
         );
         userInput.clear();
         if (input.equalsIgnoreCase("bye")) {
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
