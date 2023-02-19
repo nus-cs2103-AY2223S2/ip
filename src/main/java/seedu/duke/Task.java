@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a task added by the user
+ */
 public abstract class Task implements Serializable {
 
     protected String task;
@@ -46,6 +49,11 @@ public abstract class Task implements Serializable {
         return response.trim();
     }
 
+    /**
+     * Returns true if the name of the task contains the substring
+     * @param search Substring to find
+     * @return true if the name of the task contains the substring
+     */
     public Boolean contains(String search) {
         Pattern pattern = Pattern.compile(search);
         Matcher matcher = pattern.matcher(task);
@@ -55,6 +63,4 @@ public abstract class Task implements Serializable {
     public void addTag(Tag tag) {
         this.tags.add(tag);
     }
-
-    public abstract String getBreakdown();
 }

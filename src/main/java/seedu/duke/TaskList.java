@@ -4,20 +4,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Represents the list of tasks created by the user.
+ */
 public class TaskList implements Serializable {
 
-    public ArrayList<Task> list = new ArrayList<>();
-    public ArrayList<Task> getList() {
-        return list;
-    }
+    private ArrayList<Task> list = new ArrayList<>();
 
-    public TaskList() {
-    }
+
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
+    public TaskList() {
+    }
 
+    public ArrayList<Task> getList() {
+        return list;
+    }
     /**
      * Using the chat of the user, creates a new ToDo object and adds it to the list
      * @param chat (String inputted by user)
@@ -57,6 +61,12 @@ public class TaskList implements Serializable {
         return newEvent;
     }
 
+    /**
+     * Gives the task at the indicated index a tag
+     * @param index
+     * @param tag
+     * @return
+     */
     public Task addTag(int index, Tag tag) {
         Task task = list.get(index);
         task.addTag(tag);

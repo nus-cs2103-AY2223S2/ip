@@ -8,8 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.concurrent.TimeUnit;
-
+/**
+ * Represents the main window of application
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

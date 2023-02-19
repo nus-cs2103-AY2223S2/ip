@@ -1,9 +1,16 @@
 package seedu.duke;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-
+/**
+ * Responsible for loading and storing application information
+ */
 public class Storage {
 
     private static final File save = new File("./data/duke.txt");
@@ -25,7 +32,6 @@ public class Storage {
 
     /**
      * Creates a new TaskList based on an existing save
-     * @param ls The TaskList to be written to
      */
     public static TaskList loadSave() {
         try {
@@ -40,7 +46,7 @@ public class Storage {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return null;
+        return new TaskList();
     }
 
     /**

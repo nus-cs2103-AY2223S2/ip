@@ -3,6 +3,10 @@ package seedu.duke;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents the UI portion of application
+ * Responsible for processing inputs and performing functions based on user inputs
+ */
 public class Ui {
 
     public static void showError(Exception e) {
