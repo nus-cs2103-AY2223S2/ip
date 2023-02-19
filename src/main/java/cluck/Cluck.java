@@ -1,11 +1,6 @@
 package cluck;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import cluck.messages.Messages;
@@ -13,7 +8,8 @@ import cluck.tasks.Deadline;
 import cluck.tasks.Event;
 import cluck.tasks.Task;
 import cluck.tasks.ToDo;
-import cluck.TaskList;
+import cluck.taskList.TaskList;
+import cluck.ui.Ui;
 
 
 public class Cluck {
@@ -27,7 +23,8 @@ public class Cluck {
     private static final String SAVE_DIR_STRING = "SavedData";
     private static final String SAVE_FILE_STRING = "CluckSave.txt";
 
-    private TaskList taskList = new TaskList();
+    private TaskList taskList;
+    private Ui userInterface;
 
     /**
      * @param strNum String of interest.
@@ -43,6 +40,31 @@ public class Cluck {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Cluck class contains tasklist, User interface and parser needed.
+     */
+    public Cluck() {
+        File savedFile = new File(SAVE_FILE_STRING);
+        this.userInterface = new Ui();
+        this.taskList = new TaskList().readSave(savedFile);
+    }
+
+    /**
+     * Starts cluck instance such that it loads saved data and
+     * begins taking in user commands.
+     */
+    public void run() {
+        this.userInterface.greetUser();
+
+    }
+
+    /**
+     * Saves taskList and stop cluck instance
+     */
+    public void stop() {
+
     }
 
     /**
