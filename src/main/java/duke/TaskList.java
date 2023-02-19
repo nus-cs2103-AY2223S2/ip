@@ -35,7 +35,7 @@ public class TaskList {
     public String addTodo(String command) {
         try {
             String note;
-            String[] descriptionAndNote = command.replace("todo", "").split("/note");
+            String[] descriptionAndNote = command.substring(4).split("/note");
             String description = descriptionAndNote[0];
             if (descriptionAndNote.length == 1) {
                 note = "";
@@ -60,7 +60,7 @@ public class TaskList {
     public String addDeadline(String command) {
         try {
             String note;
-            String fullDescription = command.replace("deadline", "");
+            String fullDescription = command.substring(8);
             String[] descriptionAndDateAndNote = fullDescription.split("/by ");
             String deadlineDescription = descriptionAndDateAndNote[0];
             String[] dateAndNote = descriptionAndDateAndNote[1].split(" /note");
@@ -93,7 +93,7 @@ public class TaskList {
     public String addEvent(String command) {
         try {
             String note;
-            String description = command.replace("event", "");
+            String description = command.substring(5);
             String[] input = description.split("/from");
             String eventDescription = input[0];
             String[] remainder = input[1].split("/to");

@@ -16,13 +16,13 @@ Adds a Todo task into the list of tasks.
 #### Usage
 
 Format of usage:
-` todo <description> /note <note to attach>`
+` todo <description> `
 
 Expected outcome:
 ```
 Got it. I've added this task: 
 [T][] <description> 
-Note: <note to attach> 
+Note: There are no notes!
 Now you have <number of tasks in list> tasks in the list.
 ```
 
@@ -34,13 +34,13 @@ Adds a Deadline task into the list of tasks.
 
 Format of usage: 
 
-`deadline <description> /by <deadline in YYYY-MM-DD format> /note <note to attach> `
+`deadline <description> /by <deadline in YYYY-MM-DD format> `
 
 Expected outcome: 
 ```
 Got it. I've added this task:
 [D][] <description> (by: d MMM YYYY) 
-Note: <note to attach> 
+Note: There are no notes! 
 Now you have <number of tasks in list> tasks in the list.
 ```
 
@@ -52,13 +52,13 @@ Adds an Event task into the list of tasks
 
 Format of usage:
 
-`event <description> /from <start> /to <end> /note <note to attach>`
+`event <description> /from <start> /to <end>`
 
 Expected outcome:
 ```
 Got it. I've added this task:
 [E][] <description> (from: <start> to: <end>) 
-Note: <note to attach> 
+Note: There are no notes!
 Now you have <number of tasks in list> tasks in the the list. 
 ```
 
@@ -199,7 +199,7 @@ Expected outcome:
 Note: Location is vivocity 
 ```
 
-If the field `<note to attach>` is empty,
+If the field `<note to attach>` is empty or if /note is excluded from the command,
 
 ```
 1.[T][] watch movie 
