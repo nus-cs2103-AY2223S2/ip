@@ -132,3 +132,14 @@ Here are the matching tasks in your list:
 Bye. Hope to see you again soon!
 ```
 _App closes after 3 seconds._
+
+### Import data from CSV
+
+Load task data from a CSV file. An example file with the correct format can be found [here](https://github.com/winsonheng/ip/blob/master/data/tasks.csv)
+
+**How**: Click File -> Load csv -> Select a csv file to import
+
+**Expected output:**
+```
+Tasks loaded successfully!
+```
