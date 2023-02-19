@@ -1,4 +1,4 @@
-package duke;
+package nook;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import javafx.util.Duration;
  * The class holds a task list, a storage, and a UI,
  * uses a scanner to receive user inputs and execute the corresponding commands.
  */
-public class Duke {
+public class TomNook {
     private static final String PATH = "data/Duke.txt";
     private Storage storage;
     private TaskList tasks;
@@ -26,7 +26,7 @@ public class Duke {
      * Loads the task list from the file and sets up the UI.
      * In case of a loading error, shows an error message and creates an empty task list.
      */
-    public Duke() {
+    public TomNook() {
         ui = new Ui();
         storage = new Storage(this.PATH);
         try {
@@ -45,7 +45,7 @@ public class Duke {
      *
      * @param filePath the file path to the storage file
      */
-    public Duke(String filePath) {
+    public TomNook(String filePath) {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
@@ -85,7 +85,7 @@ public class Duke {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        new Duke(PATH).run();
+        new TomNook(PATH).run();
     }
 
     /**

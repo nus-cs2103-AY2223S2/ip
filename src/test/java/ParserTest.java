@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import commands.Command;
 import commands.CommandType;
-import duke.Parser;
+import nook.Parser;
 import exceptions.DukeException;
 
 public class ParserTest {

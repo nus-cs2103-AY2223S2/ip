@@ -2,9 +2,9 @@ package commands;
 
 import static commands.CommandType.BYE;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import nook.Storage;
+import nook.TaskList;
+import nook.Ui;
 
 /**
  * Command is an abstract class that represents a command that Sirius can recognise and execute.

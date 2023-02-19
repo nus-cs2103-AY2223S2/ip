@@ -1,4 +1,4 @@
-package duke;
+package nook;
 
 /**
  * Represents the Ui that handles all interactions with the user

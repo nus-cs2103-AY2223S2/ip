@@ -2,9 +2,9 @@ package commands;
 
 import static commands.CommandType.FIND;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import nook.Storage;
+import nook.TaskList;
+import nook.Ui;
 
 /**
  * Represents the command that finds tasks using a specified keyword.

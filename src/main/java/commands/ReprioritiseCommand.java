@@ -2,9 +2,9 @@ package commands;
 
 import static commands.CommandType.PRIORITISE;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import nook.Storage;
+import nook.TaskList;
+import nook.Ui;
 import tasks.Priority;
 import tasks.Task;
 

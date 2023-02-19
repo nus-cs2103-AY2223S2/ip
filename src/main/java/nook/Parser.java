@@ -1,4 +1,4 @@
-package duke;
+package nook;
 
 import static commands.CommandType.DEADLINE;
 import static commands.CommandType.EVENT;

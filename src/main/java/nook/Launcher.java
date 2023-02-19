@@ -1,4 +1,4 @@
-package duke;
+package nook;
 
 import javafx.application.Application;
 
