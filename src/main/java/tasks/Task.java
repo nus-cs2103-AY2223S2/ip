@@ -1,32 +1,39 @@
 package tasks;
 
+import static tasks.TaskType.DEFAULT;
+
 /**
  * Represents a task that a user can do/plans to do.
  * It has a description and a status (done or not done) of the task.
  */
 public class Task {
     protected String description;
+    protected TaskType type;
     protected boolean isDone;
 
     /**
-     * Constructs a new Task instance with the given description.
+     * Constructs a new Task instance with the given description and task type.
      *
      * @param description the description of the task.
+     * @param type the type of the task.
      */
-    public Task(String description) {
+    public Task(String description, TaskType type) {
         this.description = description;
         this.isDone = false;
+        this.type = type;
     }
 
     /**
-     * Constructs a new Task instance with the given description and status.
+     * Constructs a new Task instance with the given description, status, type.
      *
      * @param description the description of the task.
      * @param isDone the status of the task.
+     * @param type the type of the task.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, TaskType type) {
         this.description = description;
         this.isDone = isDone;
+        this.type = type;
     }
 
     /**

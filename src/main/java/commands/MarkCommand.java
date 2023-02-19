@@ -5,11 +5,14 @@ import duke.TaskList;
 import duke.Ui;
 import tasks.Task;
 
+import static commands.CommandType.MARK;
+
 /**
  * Represents the command that toggles the completion status
  * of a specific task in the tasklist.
  */
 public class MarkCommand extends Command {
+    private static final String UNKNOWN_TASK_MESSAGE = "Oopsies.. Seems like that task does not exist :(";
     private int taskIndex;
 
     /**
@@ -37,10 +40,10 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         if (taskIndex >= list.getSize()) {
-            return "Oopsies.. Seems like that task does not exist :(";
+            return UNKNOWN_TASK_MESSAGE;
         } else {
             Task currentTask = list.getTask(taskIndex);
-            if (this.getType().equals(CommandType.MARK)) {
+            if (this.getType().equals(MARK)) {
                 currentTask.markAsDone();
             } else {
                 currentTask.markAsNotDone();

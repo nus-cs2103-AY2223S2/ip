@@ -1,5 +1,7 @@
 package tasks;
 
+import static tasks.TaskType.TODO;
+
 /**
  * Represents a simple to-do task
  */
@@ -10,7 +12,7 @@ public class Todo extends Task {
      * @param description the description of the to-do task
      */
     public Todo(String description) {
-        super(description);
+        super(description, TODO);
     }
 
     /**
@@ -20,16 +22,16 @@ public class Todo extends Task {
      * @param isDone the status of the to-do task (completed or not)
      */
     public Todo(String description, boolean isDone) {
-        super(description, isDone);
+        super(description, isDone, TODO);
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + type.getValue() + "]" + super.toString();
     }
 
     @Override
     public String parseToSave() {
-        return "T" + " | " + super.parseToSave();
+        return type.getValue() + " | " + super.parseToSave();
     }
 }

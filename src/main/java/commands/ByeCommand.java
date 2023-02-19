@@ -1,5 +1,7 @@
 package commands;
 
+import static commands.CommandType.BYE;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -13,7 +15,7 @@ public class ByeCommand extends Command {
      * Constructs a new ByeCommand with the CommandType of BYE.
      */
     public ByeCommand() {
-        super(CommandType.BYE);
+        super(BYE);
     }
 
     /**

@@ -1,5 +1,7 @@
 package commands;
 
+import static commands.CommandType.DELETE;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -9,6 +11,7 @@ import tasks.Task;
  * Represents the command that deletes an existing task from the tasklist.
  */
 public class DeleteCommand extends Command {
+    private static final String UNKNOWN_TASK_MESSAGE = "Oopsies.. Seems like that task does not exist :(";
     private int taskIndex;
 
     /**
@@ -17,7 +20,7 @@ public class DeleteCommand extends Command {
      * @param taskIndex the index of the task to be deleted in the tasklist
      */
     public DeleteCommand(int taskIndex) {
-        super(CommandType.DELETE);
+        super(DELETE);
         this.taskIndex = taskIndex;
     }
 
@@ -35,7 +38,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         if (taskIndex >= list.getSize()) {
-            return "Oopsies.. Seems like that task does not exist :(";
+            return UNKNOWN_TASK_MESSAGE;
         } else {
             Task toDelete = list.getTask(taskIndex);
             list.deleteTask(taskIndex);

@@ -1,5 +1,7 @@
 package commands;
 
+import static commands.CommandType.LIST;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -8,11 +10,12 @@ import duke.Ui;
  * Represents the command that lists the existing tasks currently being stored.
  */
 public class ListCommand extends Command {
+    private static final String LIST_LABEL = "Here are the tasks in your list:";
     /**
      * Constructs a new ListCommand with the CommandType of LIST.
      */
     public ListCommand() {
-        super(CommandType.LIST);
+        super(LIST);
     }
 
     /**
@@ -29,7 +32,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the tasks in your list:\n ");
+        sb.append(LIST_LABEL + "\n ");
         sb.append(list.toString());
         return sb.toString();
     }
