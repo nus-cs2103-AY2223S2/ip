@@ -30,8 +30,8 @@ public class UI extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/resources/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/resources/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/DaDuke.png"));
 
     private Parser parser;
     private Storage storage;
@@ -146,6 +146,10 @@ public class UI extends Application {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+
+        if (response.equals("goodbye")) {
+            Platform.exit();
+        }
         userInput.clear();
     }
 
