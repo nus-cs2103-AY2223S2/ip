@@ -20,6 +20,7 @@ public class DeadlineCommand extends Command {
      */
     public DeadlineCommand(String command) {
         this.command = command;
+        assert command.substring(0, command.indexOf(" ")).equals("deadline");
     }
 
     /**
@@ -43,6 +44,7 @@ public class DeadlineCommand extends Command {
                 throw new DukeException("Please specify the time the time period for this task.");
             } else {
                 try {
+                    assert !(description.equals("")) || !(stringDate.equals(""));
                     LocalDateTime by = LocalDateTime.parse(stringDate, DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
                     newTask = new Deadline(description, by);
                 } catch (Exception e){

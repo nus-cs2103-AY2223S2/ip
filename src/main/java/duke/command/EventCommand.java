@@ -20,6 +20,7 @@ public class EventCommand extends Command {
      */
     public EventCommand(String command) {
         this.command = command;
+        assert command.substring(0, command.indexOf(" ")).equals("event");
     }
 
     /**
@@ -46,6 +47,7 @@ public class EventCommand extends Command {
                 try {
                     LocalDateTime from = LocalDateTime.parse(stringFrom, DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
                     LocalDateTime to = LocalDateTime.parse(stringTo, DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
+                    assert !(description.equals("")) || !(from.equals("")) || !(to.equals(""));
                     newTask = new Event(description, from, to);
                 } catch (Exception e) {
                     throw new DukeException("The time period must be in the format: 'HH:mm dd-MM-yyyy'");
