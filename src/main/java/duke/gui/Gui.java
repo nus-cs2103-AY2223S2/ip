@@ -106,7 +106,7 @@ public class Gui extends Application {
         );
         userInput.clear();
     }
-    
+
     protected String getResponse(String input) {
         return duke.getResponse(input);
     }
