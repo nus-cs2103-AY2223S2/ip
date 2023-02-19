@@ -16,7 +16,7 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeExceptions {
-        todoList.find(description);
+    public String execute() throws DukeExceptions {
+        return (todoList.find(description));
     }
 }

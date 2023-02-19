@@ -13,5 +13,5 @@ public class MarkCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeExceptions { todoList.mark(index); }
+    public String execute() throws DukeExceptions { return todoList.mark(index); }
 }

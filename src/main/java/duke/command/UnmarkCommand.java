@@ -13,7 +13,7 @@ public class UnmarkCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeExceptions {
-        todoList.unmark(index);
+    public String execute() throws DukeExceptions {
+        return todoList.unmark(index);
     }
 }

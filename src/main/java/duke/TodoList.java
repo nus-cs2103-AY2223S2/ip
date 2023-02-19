@@ -20,12 +20,11 @@ public class TodoList implements Serializable {
      * @param task Description of task.
      * @throws DukeExceptions If the input syntax is incorrect.
      */
-    public void add(String type, String task) throws DukeExceptions{
+    public String add(String type, String task) throws DukeExceptions{
         Task taskObject = new Task();
         Task newTask = taskObject.createNewTask(type, task);
-        System.out.println("Got it. I've added this task:");
         todo_list.add(newTask);
-        System.out.println(newTask);
+        return ("Got it. I've added this task:\n" + newTask.toString());
     }
 
     /**
@@ -34,7 +33,7 @@ public class TodoList implements Serializable {
      * @param index The number order of the task.
      * @throws DukeExceptions If the input syntax is incorrect.
      */
-    public void mark(int index) throws DukeExceptions{
+    public String mark(int index) throws DukeExceptions{
         int todo_list_length = todo_list.size();
         boolean isOutOfBound = index < 0 || index > todo_list_length;
         if (isOutOfBound) {
@@ -42,8 +41,7 @@ public class TodoList implements Serializable {
         }
         Task task = todo_list.get(index - 1);
         task.markTask();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(todo_list.get(index-1));
+        return String.format("Nice! I've marked this task as done:\n%s", todo_list.get(index-1));
     }
 
     /**
@@ -52,7 +50,7 @@ public class TodoList implements Serializable {
      * @param index The number order of the task.
      * @throws DukeExceptions If the input syntax is incorrect.
      */
-    public void unmark(int index) throws DukeExceptions{
+    public String unmark(int index) throws DukeExceptions{
         int todo_list_length = todo_list.size();
         boolean isOutOfBound = index < 0 || index > todo_list_length;
         if (isOutOfBound) {
@@ -60,9 +58,7 @@ public class TodoList implements Serializable {
         }
         Task task = todo_list.get(index - 1);
         task.unmarkTask();
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(todo_list.get(index-1));
-
+        return String.format("OK, I've marked this task as not done yet:\n%s", todo_list.get(index-1));
     }
 
     /**
@@ -71,15 +67,14 @@ public class TodoList implements Serializable {
      * @param index The number order of the task.
      * @throws DukeExceptions If the input syntax is incorrect.
      */
-    public void delete(int index) throws DukeExceptions {
+    public String delete(int index) throws DukeExceptions {
         int todo_list_length = todo_list.size();
         boolean isOutOfBound = index < 0 || index > todo_list_length;
         if (isOutOfBound) {
             throw new DukeExceptions("Please use list command to check the index!");
         }
         Task task = todo_list.remove(index - 1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
+        return String.format("Noted. I've removed this task:\n%s", task);
     }
 
     /**
@@ -91,8 +86,7 @@ public class TodoList implements Serializable {
         return todo_list.size();
     }
 
-    public void find(String keyword) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String find(String keyword) {
         String result_list = "";
         int todo_list_length = todo_list.size();
         int resultIndex = 1;
@@ -102,7 +96,7 @@ public class TodoList implements Serializable {
                 result_list += String.format("%d. %s\n", resultIndex++, task);
             }
         }
-        System.out.println(result_list);
+        return("Here are the matching tasks in your list:\n" + result_list);
     }
 
     @Override

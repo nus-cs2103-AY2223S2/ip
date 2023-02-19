@@ -39,8 +39,7 @@ public class Task implements Serializable {
         } else if (type.equals("event")) {
             return new Event(task);
         } else {
-            System.out.println("unknown command! Please try again.");
-            return null;
+            throw new DukeExceptions("unknown command! Please try again.");
         }
     }
 

@@ -11,9 +11,9 @@ public class ListCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeExceptions {
+    public String execute() throws DukeExceptions {
         String shown_list = todoList.toString();
-        System.out.println(shown_list);
+        return(shown_list);
     }
 }
 

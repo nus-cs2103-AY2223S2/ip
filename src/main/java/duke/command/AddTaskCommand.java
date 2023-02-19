@@ -18,8 +18,8 @@ public class AddTaskCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeExceptions {
-        todoList.add(instruction, description);
-        System.out.println(String.format("Now I have %d tasks in the list.", todoList.number_of_tasks()));
+    public String execute() throws DukeExceptions {
+        String result = todoList.add(instruction, description);
+        return(String.format("%s\nNow I have %d tasks in the list.", result, todoList.number_of_tasks()));
     }
 }
