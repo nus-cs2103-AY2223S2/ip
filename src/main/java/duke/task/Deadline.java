@@ -18,6 +18,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+
+    public Deadline() {
+        super();
+    }
+
     /**
      * Represents the string written into todo_list.txt.
      *

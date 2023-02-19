@@ -4,9 +4,18 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    public Task() {
+        this.description = "fake task";
+        this.isDone = false;
+    }
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public boolean isNull() {
+        return this.description.equals("fake task");
     }
 
     public String getStatusIcon() {
