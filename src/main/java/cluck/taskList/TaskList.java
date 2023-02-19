@@ -1,11 +1,7 @@
 package cluck.taskList;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.lang.StringBuilder;
 
 import cluck.exceptions.TaskIndexOutOfBoundsException;
 import cluck.tasks.Task;
@@ -37,7 +33,7 @@ public class TaskList {
     /**
      * @param taskIndex index of task in ArrayList.
      * @return task at index given if un-mark operation was successful.
-     * @throws TaskIndexOutOfBoundsException
+     * @throws TaskIndexOutOfBoundsException if given index lies outside taskList's range
      */
     public Task unmarkTask(int taskIndex) throws TaskIndexOutOfBoundsException {
         try {
@@ -58,6 +54,14 @@ public class TaskList {
         return task;
     }
 
+    public String toSave() {
+        StringBuilder savedTasks = new StringBuilder();
+        for (Task t : taskList) {
+            savedTasks.append(t.makeSaveFormat());
+        }
+        return savedTasks.toString();
+    }
+
     /**
      * @param taskIndex index of task to be deleted.
      * @return return task if deletion was successful.
@@ -73,24 +77,5 @@ public class TaskList {
 
 
 
-    /**
-     * Saves the current list of tasks into 'CluckSave.txt'.
-     * This will overwrite previous saves.
-     * There should be no missing directory error since readSave()
-     * will create the save directory if it does not exist.
-     *
-     * @param saveFile save location for tasks in task list
-     */
-    public void writeSave(File saveFile) {
-        try {
-            FileWriter writer = new FileWriter(saveFile);
-            for (Task t : taskList) {
-                writer.write(t.makeSaveFormat());
-            }
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Buh oh! An error occurred!!");
-            e.printStackTrace();
-        }
-    }
+
 }
