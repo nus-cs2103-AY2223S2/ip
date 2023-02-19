@@ -29,6 +29,7 @@ public class UI extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private AnchorPane mainLayout;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/DaDuke.png"));
@@ -43,6 +44,13 @@ public class UI extends Application {
         ArrayList<Task> taskListArray = new ArrayList<>();
         this.storage.readStorage(taskListArray);
         this.taskList = new TaskList(taskListArray);
+
+        this.scrollPane = new ScrollPane();
+        this.dialogContainer = new VBox();
+        this.scrollPane.setContent(dialogContainer);
+        this.userInput = new TextField();
+        this.sendButton = new Button("Send");
+        this.mainLayout = new AnchorPane();
 
     }
 
@@ -81,26 +89,8 @@ public class UI extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
-    /**
-     * runs the user interface *
-     * 
-     */
-    @Override
-    public void start(Stage stage) {
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-
-        setStage(stage);
-
+    private void setDimensions() {
         mainLayout.setPrefSize(400.0, 600.0);
-
-        setScrollPane(scrollPane);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
@@ -108,12 +98,9 @@ public class UI extends Application {
 
         sendButton.setPrefWidth(55.0);
 
-        setAnchorPane(scrollPane, userInput, sendButton);
+    }
 
-        Label introText = new Label(this.getIntroduction());
-
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(introText, new ImageView(duke)));
-
+    private void setButtonsOnClick() {
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -121,6 +108,26 @@ public class UI extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+    }
+
+    /**
+     * runs the user interface *
+     */
+    @Override
+    public void start(Stage stage) {
+        setStage(stage);
+        setScrollPane(scrollPane);
+
+        setAnchorPane(scrollPane, userInput, sendButton);
+
+        setDimensions();
+
+        Label introText = new Label(this.getIntroduction());
+
+        setButtonsOnClick();
+
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(introText, new ImageView(duke)));
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
