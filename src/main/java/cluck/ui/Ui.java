@@ -23,8 +23,12 @@ public class Ui {
         System.out.println(Messages.MESSAGE_GOODBYE);
     }
 
-    public void readCommand() {
-        userInput.hasNextLine();
+    public String readInput() {
+        return userInput.nextLine();
+    }
+
+    public void printResponse(String response) {
+
     }
 
 }
