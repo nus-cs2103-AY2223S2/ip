@@ -11,7 +11,7 @@
 ## Prerequisite
 You will need Java 11 on your computer. (It is recommended to use Java 11) <br>
 If you already have Java JDK or JRE 11, you may **skip** this segment. <br>
-Otherwise, you can download Azul Java 11 from [here](https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=arm-64-bit&package=jdk-fx).
+Otherwise, you can download Azul Java 11 from [here](https://www.azul.com/downloads/?version=java-11-lts&package=jdk-fx).
 
 ## Quick Start
 Follow these simple steps and you'll never miss another event or deadline!
