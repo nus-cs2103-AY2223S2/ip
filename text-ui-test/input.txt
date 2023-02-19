@@ -1,0 +1,64 @@
+todo read book
+deadline return book /by 4450-10-10
+event life /from 0001-01-01 /to 4450-10-10
+list
+todo wake up tmr
+list
+mark 1
+list
+mark 3
+list
+mark 4
+unmark 4
+list
+
+some-random-command-that-shouldnt-be-there-smash-keyboard-qriowgbjue
+todo
+todo /
+todo /abc
+todo ////////////////////////////////////////
+todo /abc/
+todo /dupe/dupe
+todo /MAIN_INPUT NO_HANYA_TASK_01
+todo NO_HANYA_TASK_02 /sth sth
+todo NO_HANYA_TASK_03 /sth
+todo NO_HANYA_TASK_04 /sth/sthelse
+deadline
+deadline bleh /abc /efg
+deadline bleh /by 0000-00-00 0000
+deadline bleh /by 0001-01-99 0000
+deadline NO_HANYA_TASK_05 /by 0001-01-01
+deadline NO_HANYA_TASK_06 /!@#$%^&*()_+ QWERTYUIO /by 4450-10-10 1234
+event NO_HANYA_TASK_07/from 3350-3-5 /to 4450-10-10 1234
+delete 1
+list
+delete 10
+delete 4
+delete 4
+delete 5
+delete 1
+delete 1
+delete 1
+list
+delete -1
+delete 44.5
+delete qopwiehf
+list
+delete 1
+delete 1
+delete 1
+list
+delete 1
+delete -1
+delete 44.5
+delete qopwiehf
+list
+todo eat
+todo return book
+todo sleep
+todo buy book
+todo something to do about book
+find eat
+find book
+find no match
+bye

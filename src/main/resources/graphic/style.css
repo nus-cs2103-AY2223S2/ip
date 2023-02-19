@@ -1,0 +1,180 @@
+.root {
+    /* Override of default mordena css from https://gist.github.com/maxd/63691840fc372f22f470 */
+    /* Arrangement follows above as well */
+
+    -fx-base: rgb(188, 165, 192);
+    -fx-background: rgb(220, 179, 228);
+
+    /* Inside boxes */
+    -fx-control-inner-background: rgb(188, 165, 192);
+
+    /* Text colors */
+    -fx-dark-text-color: rgb(39, 39, 39);
+    -fx-mid-text-color: rgb(125, 125, 125);
+    -fx-light-text-color: rgb(232, 232, 232);
+
+    /* Highlight fill color */
+    -fx-accent: derive(-fx-base, -10%);
+
+    /* Highlight flow for focus */
+    -fx-focus-color: rgb(167, 138, 173);
+    -fx-faint-focus-color: rgba(167, 138, 173, 0.167);
+
+    -fx-color: -fx-base;
+
+    -fx-hover-base: ladder(
+        -fx-base,
+        derive(-fx-base, -2%) 20%,
+        derive(-fx-base, -5%) 35%,
+        derive(-fx-base, -10%) 50%
+    );
+
+    -fx-text-background-color: ladder(
+        -fx-background,
+        -fx-light-text-color 35%,
+        -fx-mid-text-color 36%,
+        -fx-mid-text-color 44%,
+        -fx-dark-text-color 45%
+    );
+
+    -fx-box-border: derive(-fx-color,-15%);
+
+    -fx-text-box-border: derive(-fx-background, -15%);
+
+    -fx-shadow-highlight-color: derive(-fx-color, -10%);
+
+    -fx-outer-border: derive(-fx-color, -10%);
+
+    -fx-inner-border: derive(-fx-color, -12%);
+    -fx-inner-border-horizontal: -fx-inner-border;
+    -fx-inner-border-bottomup: -fx-inner-border;
+
+    -fx-body-color: -fx-color;
+    -fx-body-color-bottomup: -fx-color;
+    -fx-body-color-to-right: -fx-color;
+
+    -fx-font-family: 'default'
+}
+
+/* =========== SCROLL PANE ================================================= */
+
+.scroll-pane {
+    -fx-color: rgb(187, 213, 212);
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3, 3, 2, 1;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: -fx-color;
+}
+
+/* =========== SCROLL BAR ================================================== */
+
+.scroll-bar .track {
+    -fx-background-color: rgb(187, 213, 212);
+    -fx-border-color: transparent;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button,
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgb(188, 165, 192);
+    -fx-background-radius: 5;
+}
+
+/* =========== SPEECH BUBBLE =============================================== */
+
+.speech-bubble {
+    -bubble-fill-color: rgb(198, 197, 134);
+}
+
+.speech-bubble > .main-speech-bubble-left,
+.speech-bubble > .speech-bubble-pointer-left,
+.speech-bubble > .main-speech-bubble-right,
+.speech-bubble > .speech-bubble-pointer-right {
+    -fx-background-color: -bubble-fill-color;
+}
+
+.speech-bubble > .main-speech-bubble-left {
+    -fx-background-radius: 10 10 10 0;
+}
+
+.speech-bubble > .speech-bubble-pointer-left {
+    -fx-shape: "M 100 0 L 100 100 L 10 100 C -5 100 -5 85 10 80 S 100 50 100 0 Z"
+}
+
+.speech-bubble > .main-speech-bubble-right {
+    -fx-background-radius: 10 10 0 10;
+}
+
+.speech-bubble > .speech-bubble-pointer-right {
+    -fx-shape: "M 0 0 L 0 100 L 90 100 C 105 100 105 85 90 80 S 0 50 0 0 Z"
+}
+
+/* =========== SCHEDULE ==================================================== */
+
+.title {
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+}
+
+.schedule-date-box {
+    -fx-color : -fx-background;
+}
+
+.schedule-date-box:odd {
+    -fx-background-color : derive(-fx-color, -5%);
+}
+
+.schedule-date-box:even {
+    -fx-background-color : derive(-fx-color, -10%);
+}
+
+.event-box,
+.deadline-box {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 1 1 0 1, 1, 2, 3;
+    -fx-background-radius : 3, 3, 2, 1;
+}
+
+.event-box {
+    -fx-base: rgb(187, 213, 212);
+    -fx-color: rgb(187, 213, 212);
+}
+
+.deadline-box {
+    -fx-base: rgb(217, 145, 140);
+    -fx-color: rgb(217, 145, 140);
+}
+
+.todo-label {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 1 1 0 1, 1, 2, 3;
+    -fx-background-radius : 10, 10, 9, 8;
+    -fx-color: rgb(189, 169, 212);
+}
+
+.event-box:complete,
+.deadline-box:complete,
+.todo-label:complete {
+    -fx-base: rgb(173, 216, 171);
+    -fx-color: rgb(173, 216, 171);
+}
+
+.event-box:hover,
+.deadline-box:hover {
+    -fx-color: -fx-hover-base;
+}
+
+@font-face {
+    font-family: 'default';
+    src: url("consolas.ttf") format('truetype');
+}

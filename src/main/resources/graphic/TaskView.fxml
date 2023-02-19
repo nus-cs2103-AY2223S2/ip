@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane maxHeight="400.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1150.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" styleClass="task-view">
+         <children>
+            <VBox VBox.vgrow="SOMETIMES">
+               <children>
+                  <Label styleClass="title" text="Schedule" />
+                  <VBox fx:id="scheduleDisplayArea" />
+               </children>
+            </VBox>
+            <VBox VBox.vgrow="SOMETIMES">
+               <children>
+                  <Label styleClass="title" text="Todo" />
+                  <VBox fx:id="todoDisplayArea" fillWidth="false" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="25.0" top="5.0" />
+         </padding>
+      </VBox>
+   </content>
+</ScrollPane>

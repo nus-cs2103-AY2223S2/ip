@@ -1,7 +1,8 @@
-# IDEA files
+# IDE files
 /.idea/
 /out/
 /*.iml
+/.vscode
 
 # Gradle build files
 /.gradle/
@@ -15,3 +16,6 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Program generated files
+SAVE_DATA

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<HBox alignment="BOTTOM_RIGHT" spacing="5.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="speech-bubble">
+         <children>
+            <Pane layoutX="7.0" layoutY="200.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="12.0" styleClass="speech-bubble-pointer-right" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <AnchorPane layoutX="16.0" layoutY="28.0" maxHeight="1.7976931348623157E308" maxWidth="600.0" minHeight="40.0" minWidth="30.0" styleClass="main-speech-bubble-right" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox fx:id="bubbleDisplayArea" alignment="CENTER" layoutX="242.0" layoutY="100.0" maxWidth="280.0" minHeight="20.0" minWidth="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="iconView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icon/neko.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</HBox>
