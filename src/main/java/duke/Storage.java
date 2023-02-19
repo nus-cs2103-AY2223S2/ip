@@ -25,33 +25,7 @@ public class Storage {
         if (save.exists()) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(save));
-                String line = reader.readLine();
-                String[] parmArr = line.split("\\|");
-                List<String> parm = Arrays.asList(parmArr);
-                while (line != null) {
-                    parmArr = line.split("\\|");
-                    parm = Arrays.asList(parmArr);
-                    CommandEnum command = CommandEnum.fromTag(parm.get(0));
-                    boolean isMark = parm.get(1) == "1";
-                    String description = parm.get(2);
-                    switch (command) {
-                    case TODO:
-                        list.add(new Todo(description, isMark));
-                        break;
-                    case DEADLINE:
-                        String date = parm.get(3);
-                        list.add(new Deadline(description, date, isMark));
-                        break;
-                    case EVENT:
-                        String from = parm.get(3);
-                        String to = parm.get(4);
-                        list.add(new Event(description, from, to, isMark));
-                        break;
-                    default:
-                        break;
-                    }
-                    line = reader.readLine();
-                }
+                writeTo(reader);
                 reader.close();
             } catch (Exception e) {
                 throw new DukeException("save file is blank");
@@ -59,6 +33,36 @@ public class Storage {
             return this.list;
         } else {
             throw new DukeException("save file is blank");
+        }
+    }
+
+    private void writeTo(BufferedReader reader) throws Exception {
+        String line = reader.readLine();
+        String[] parmArr = line.split("\\|");
+        List<String> parm = Arrays.asList(parmArr);
+        while (line != null) {
+            parmArr = line.split("\\|");
+            parm = Arrays.asList(parmArr);
+            CommandEnum command = CommandEnum.fromTag(parm.get(0));
+            boolean isMark = parm.get(1) == "1";
+            String description = parm.get(2);
+            switch (command) {
+            case TODO:
+                list.add(new Todo(description, isMark));
+                break;
+            case DEADLINE:
+                String date = parm.get(3);
+                list.add(new Deadline(description, date, isMark));
+                break;
+            case EVENT:
+                String from = parm.get(3);
+                String to = parm.get(4);
+                list.add(new Event(description, from, to, isMark));
+                break;
+            default:
+                break;
+            }
+            line = reader.readLine();
         }
     }
 
