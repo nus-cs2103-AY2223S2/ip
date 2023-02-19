@@ -1,5 +1,6 @@
 package tasks;
 
+import static tasks.Priority.LOW;
 import static tasks.TaskType.DEADLINE;
 
 import java.time.LocalDate;
@@ -18,7 +19,18 @@ public class Deadline extends Task {
      * @param by The deadline datetime of the task.
      */
     public Deadline(String description, LocalDate by) {
-        super(description, DEADLINE);
+        super(description, DEADLINE, LOW);
+        this.by = by;
+    }
+
+    /**
+     * Constructs a new Deadline task with the given description and deadline datetime.
+     *
+     * @param description The description of the task.
+     * @param by The deadline datetime of the task.
+     */
+    public Deadline(String description, LocalDate by, Priority priority) {
+        super(description, DEADLINE, priority);
         this.by = by;
     }
 
@@ -28,8 +40,8 @@ public class Deadline extends Task {
      * @param isDone The completion status of the task.
      * @param by The deadline datetime of the task.
      */
-    public Deadline(String description, boolean isDone, LocalDate by) {
-        super(description, isDone, DEADLINE);
+    public Deadline(String description, boolean isDone, LocalDate by, Priority priority) {
+        super(description, isDone, DEADLINE, priority);
         this.by = by;
     }
 

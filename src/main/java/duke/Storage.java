@@ -7,11 +7,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import tasks.Deadline;
 import tasks.Event;
+import tasks.Priority;
 import tasks.Task;
+import tasks.TaskComparator;
 import tasks.TaskType;
 import tasks.Todo;
 
@@ -67,25 +70,27 @@ public class Storage {
             TaskType type = getTaskType(strArr[0]);
             boolean isCompleted = Integer.parseInt(strArr[1]) == 1;
             String taskDesc = strArr[2];
+            Priority priority = Priority.getPriority(strArr[3]);
             // TODO: Handle error case when strArr.length < 2 after splitting by ' | '
             switch (type) {
             case TODO:
-                initTasks.add(new Todo(taskDesc, isCompleted));
+                initTasks.add(new Todo(taskDesc, isCompleted, priority));
                 break;
             case DEADLINE:
-                if (validator.isDateValid(strArr[3])) {
-                    LocalDate byDate = LocalDate.parse(strArr[3]);
-                    initTasks.add(new Deadline(taskDesc, isCompleted, byDate));
+                if (validator.isDateValid(strArr[4])) {
+                    LocalDate byDate = LocalDate.parse(strArr[4]);
+                    initTasks.add(new Deadline(taskDesc, isCompleted, byDate, priority));
                 }
                 break;
             case EVENT:
-                initTasks.add(new Event(taskDesc, isCompleted, strArr[3], strArr[4]));
+                initTasks.add(new Event(taskDesc, isCompleted, strArr[4], strArr[5], priority));
                 break;
             default:
-                initTasks.add(new Task(taskDesc, isCompleted, type));
+                initTasks.add(new Task(taskDesc, isCompleted, type, priority));
             }
             line = reader.readLine();
         }
+        Collections.sort(initTasks, new TaskComparator());
         return initTasks;
     }
 

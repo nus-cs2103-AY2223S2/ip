@@ -8,6 +8,7 @@ public class Task {
     protected String description;
     protected TaskType type;
     protected boolean isDone;
+    protected Priority priority;
 
     /**
      * Constructs a new Task instance with the given description and task type.
@@ -15,10 +16,11 @@ public class Task {
      * @param description the description of the task.
      * @param type the type of the task.
      */
-    public Task(String description, TaskType type) {
+    public Task(String description, TaskType type, Priority priority) {
         this.description = description;
         this.isDone = false;
         this.type = type;
+        this.priority = priority;
     }
 
     /**
@@ -28,10 +30,11 @@ public class Task {
      * @param isDone the status of the task.
      * @param type the type of the task.
      */
-    public Task(String description, boolean isDone, TaskType type) {
+    public Task(String description, boolean isDone, TaskType type, Priority priority) {
         this.description = description;
         this.isDone = isDone;
         this.type = type;
+        this.priority = priority;
     }
 
     /**
@@ -44,13 +47,22 @@ public class Task {
     }
 
     /**
+     * Returns a string label of the priority of the task.
+     *
+     * @return the string label of the priority of the task.
+     */
+    public String getPriorityLabel() {
+        return priority.getValue().toUpperCase();
+    }
+
+    /**
      * Returns a string representation of the task.
      *
      * @return the string representation of the task.
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] (" + getPriorityLabel() + ") " + this.description;
     }
 
     /**
@@ -59,7 +71,7 @@ public class Task {
      * @return the string representation of the task suitable for saving in a text file.
      */
     public String parseToSave() {
-        return (isDone ? 1 : 0) + " | " + description;
+        return (isDone ? 1 : 0) + " | " + description + " | " + getPriorityLabel();
     }
 
     /**
@@ -74,5 +86,13 @@ public class Task {
      */
     public void markAsNotDone() {
         this.isDone = false;
+    }
+
+    public Priority getPriority() {
+        return this.priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }

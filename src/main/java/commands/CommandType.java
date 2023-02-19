@@ -7,6 +7,8 @@ public enum CommandType {
     LIST("list"),
     MARK("mark"),
     UNMARK("unmark"),
+    PRIORITISE("prioritise"),
+    DEPRIORITISE("deprioritise"),
     DELETE("delete"),
     TODO("todo"),
     DEADLINE("deadline"),
