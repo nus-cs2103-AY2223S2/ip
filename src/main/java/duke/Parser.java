@@ -10,6 +10,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
+import duke.command.HelpCommand;
 
 /**
  * The Parser class helps to translate the user input to various commands
@@ -70,6 +71,9 @@ public class Parser {
                 }
                 String details = commandArray[1].strip();
                 return new FindCommand(details);
+            }
+            case "HELP": {
+                return new HelpCommand();
             }
             default: {
                 throw new DukeException("It's an INVALID COMMAND, follow the instruction and try again :-)");
