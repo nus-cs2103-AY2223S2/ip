@@ -45,7 +45,8 @@ public class Greeting extends Event {
         return new TaskList();
     }
 
-    public String greet() {
+    @Override
+    public String toString() {
         return "SHALL WE PLAY A GAME?";
     }
 }

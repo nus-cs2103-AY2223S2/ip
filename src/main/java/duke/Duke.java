@@ -1,13 +1,6 @@
 package duke;
 
 import duke.io.input.ui.ChatBot;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-
 
 public class Duke {
     /**
@@ -21,6 +14,4 @@ public class Duke {
         chatBot.beginChat();
         chatBot.endChat();
     }
-
-
 }

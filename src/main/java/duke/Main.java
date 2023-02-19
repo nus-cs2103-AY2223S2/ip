@@ -1,11 +1,9 @@
 package duke;
 
-
+import duke.io.input.ui.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import duke.io.input.ui.MainWindow;
 
 /**
  * A GUI for Duke using FXML.
@@ -16,10 +14,10 @@ public class Main extends Application {
     public void start(Stage stage) {
         MainWindow mainWindow = new MainWindow();
         stage.setScene(new Scene(mainWindow));
-        stage.setTitle("Dr. Zola");
-        stage.setMinWidth(398);
-        stage.setMinHeight(600);
-        stage.setResizable(false);
+        stage.setTitle("DaBeztSithLord");
+        stage.setMinWidth(700);
+        stage.setMinHeight(700);
+        stage.setResizable(true);
         stage.show();
         mainWindow.greet();
     }

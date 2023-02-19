@@ -25,32 +25,38 @@ public class ChatBot {
     private boolean usedByUser;
     private Event lastEvent;
 
+    /**
+     * Constructor of the chatBot class
+     *
+     */
 
     public ChatBot () {
         this.usedByUser = false;
         this.lastEvent = new Greeting();
     }
 
+    /**
+     * Greet the user when he opens Duke
+     *
+     */
+
     public void greetUser() {
         UserInterface.printLogo();
     }
 
-    /**
-     * Print a specified {@code String} input wrapped
-     * in a styled box.
-     *
-     * @param input the {@code String} being printed out
-     */
-
 
     /**
      * Duke begins interacting with user.
+     * Get user input to determine whether he wants to run Duke.
+     * Loop the part of code to get user input until a valid input is found.
+     * Print warning when user input is invalid.
+     *
      */
 
     public void beginChat() {
         Scanner sc = new Scanner(System.in);
         Greeting greeting = new Greeting();
-        System.out.println(UserInterface.printWithBracket(greeting.greet()));
+        System.out.println(UserInterface.printWithBracket(greeting.toString()));
         String isUsingDuke = sc.nextLine();
 
         while (!isUsingDuke.equals("YES") && !isUsingDuke.equals("NO")) {
@@ -74,6 +80,11 @@ public class ChatBot {
             lastEvent = currentEvent;
         }
     }
+
+    /**
+     * Ending Duke's interaction with user.
+     * Asking whether he wants to save the current progress
+     */
 
     public void endChat() {
         if (usedByUser) {

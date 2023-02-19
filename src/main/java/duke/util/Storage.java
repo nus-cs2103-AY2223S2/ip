@@ -1,10 +1,5 @@
 package duke.util;
 
-import duke.util.service.Deadline;
-import duke.util.service.ScheduledEvent;
-import duke.util.service.ToDo;
-import javafx.util.Pair;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,7 +7,16 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+import duke.util.service.Deadline;
+import duke.util.service.ScheduledEvent;
+import duke.util.service.ToDo;
+import javafx.util.Pair;
 
 /**
  * Load user's existing plan every duke's start up,
@@ -23,15 +27,18 @@ import java.util.*;
  */
 
 public class Storage {
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy");
 
-    private HashMap<String, TaskList> database;
+    private HashMap<String, TaskList> keywordDatabase;
     private HashMap<String, PriorityQueue<Pair<LocalDateTime, Task>>> taskScheduleOnDates;
+
     /**
      * Construct the {@code Storage} object with
      * empty database
      */
+
     public Storage() {
-        this.database = new HashMap<>();
+        this.keywordDatabase = new HashMap<>();
         this.taskScheduleOnDates = new HashMap<>();
     }
 
@@ -44,11 +51,11 @@ public class Storage {
         File savedFile = new File("MY_GRAND_PLAN.txt");
         System.out.println("[X] FILE CREATED");
         try {
-            FileWriter myWriter = new FileWriter("MY_GRAND_PLAN.txt", false);
+            FileWriter myWriter = new FileWriter(savedFile, false);
             for (int i = 0; i < taskList.getSize(); i++) {
                 Task currenttask = taskList.getTask(i);
                 myWriter.write(currenttask.getNature() + " " + currenttask.getStatus() + " "
-                        + currenttask.getAction() + " "+ currenttask.getTimeInfo() + '\n');
+                        + currenttask.getAction() + " " + currenttask.getTimeInfo() + '\n');
             }
             myWriter.close();
             System.out.println("[X] FINISHED WRITING");
@@ -64,11 +71,14 @@ public class Storage {
      * @return a {@code TaskList} with the user's
      *          existing Task
      */
+
+    //improve code quality
     public static TaskList loadProgress() {
         try {
             File previousProgress = new File("MY_GRAND_PLAN.txt");
             Scanner progressScanner = new Scanner(previousProgress);
             TaskList returnTaskList = new TaskList();
+
             while (progressScanner.hasNextLine()) {
                 String data = progressScanner.nextLine();
                 String[] availableTask = data.split(" ");
@@ -86,33 +96,32 @@ public class Storage {
                     for (int i = 2; i < availableTaskAsList.size(); i++) {
                         actionAndDate += availableTaskAsList.get(i) + " ";
                     }
+                    actionAndDate = actionAndDate.stripTrailing();
                     String[] deadlineInfo = actionAndDate.split(" /BY ");
                     List<String> deadlineInfoAsList = Arrays.asList(deadlineInfo);
                     String date = deadlineInfoAsList.get(1);
 
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy ");
-
                     returnTaskList.addTask(
-                            new Deadline(LocalDateTime.parse(date,format), deadlineInfoAsList.get(0), isDone));
+                            new Deadline(LocalDateTime.parse(date, DATE_FORMAT), deadlineInfoAsList.get(0), isDone));
                 } else {
                     String actionAndDate = "";
                     for (int i = 2; i < availableTaskAsList.size(); i++) {
                         actionAndDate += availableTaskAsList.get(i) + " ";
                     }
+                    actionAndDate = actionAndDate.stripTrailing();
 
                     String[] eventInfo = actionAndDate.split(" /FROM ");
                     List<String> eventInfoAsList = Arrays.asList(eventInfo);
 
                     String dateInfo = eventInfoAsList.get(1);
 
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy ");
-
                     String[] dateInfoAsArray = dateInfo.split(" /TO ");
                     List<String> dateInfoAsList = Arrays.asList(dateInfoAsArray);
 
                     returnTaskList.addTask(
-                            new ScheduledEvent(LocalDateTime.parse(dateInfoAsList.get(0), format),
-                                    LocalDateTime.parse(dateInfoAsList.get(1), format), eventInfoAsList.get(0), isDone));
+                            new ScheduledEvent(LocalDateTime.parse(dateInfoAsList.get(0), DATE_FORMAT),
+                                    LocalDateTime.parse(dateInfoAsList.get(1), DATE_FORMAT),
+                                    eventInfoAsList.get(0), isDone));
                 }
 
             }
@@ -131,12 +140,20 @@ public class Storage {
      */
 
     public TaskList getTaskWithKeywords(String keyword) {
-        if (this.database.containsKey(keyword)) {
-            return this.database.get(keyword);
+        if (this.keywordDatabase.containsKey(keyword)) {
+            return this.keywordDatabase.get(keyword);
         } else {
             return new TaskList();
         }
     }
+
+    /**
+     * Add the newly parsed {@code Task} to the keyword and schedule database
+     * to facilitate keyword searching and searching of scheduled events on a
+     * specified date
+     *
+     * @param task the {@code Task} to be added to database
+     */
 
     public Storage addToDatabase(Task task) {
         addTaskToSchedule(task);
@@ -163,47 +180,64 @@ public class Storage {
         }
 
         for (String keyword : toUpdateKeywordDatabase.split(" ")) {
-            if (this.database.containsKey(keyword)) {
-                TaskList currentList = this.database.get(keyword);
+            if (this.keywordDatabase.containsKey(keyword)) {
+                TaskList currentList = this.keywordDatabase.get(keyword);
                 currentList = currentList.addTask(task);
-                this.database.put(keyword, currentList);
+                this.keywordDatabase.put(keyword, currentList);
             } else {
                 TaskList newList = new TaskList();
                 newList = newList.addTask(task);
-                this.database.put(keyword, newList);
+                this.keywordDatabase.put(keyword, newList);
             }
         }
     }
 
+
+
     /**
-     * Remove a task from the database
+     * Remove a task from the keyword and schedule database
      *
      * @param task the task to remove from the
-     *                list of Tasks in database with assigned to that
+     *                list of Tasks in database assigned to a specified
      *                keyword
-     * @return a new {@code Storage} with the task removed from the database
+     * @return a new {@code Storage} with the task removed from the keyword and schedule database
      */
 
-    public Storage removeFromKeywordStorage(Task task) {
+    // modify to also removed tasks from schedule database
+
+    public Storage removeFromStorage(Task task) {
+        removeFromKeywordStorage(task);
+        removeFromScheduleStorage(task);
+        return this;
+    }
+
+    private void removeFromKeywordStorage(Task task) {
         String removedTask = task.toString();
         for (String keyword : removedTask.split(" ")) {
-            if (this.database.containsKey(keyword)) {
-                TaskList currentList = this.database.get(keyword);
-                int index = -1;
-                for (int i = 0; i < currentList.getSize(); i++) {
-                    if (currentList.getTask(i).toString().equals(task.toString())) {
-                        index = i;
-                        break;
-                    }
-                }
+            if (this.keywordDatabase.containsKey(keyword)) {
+                TaskList currentList = this.keywordDatabase.get(keyword);
+                int index = currentList.searchIndexOf(task);
                 if (index >= 0) {
                     currentList = currentList.removeTask(index);
                 }
-                this.database.put(keyword, currentList);
+                this.keywordDatabase.put(keyword, currentList);
             }
         }
-        return this;
     }
+
+    private void removeFromScheduleStorage(Task task) {
+
+    }
+
+
+
+    /**
+     * Asking the user whether he wants to save the current progress
+     * Works with CLI version of Duke
+     *
+     * @param listOfCurrentTasks the current list of tasks
+     *
+     */
 
     public static void saveProgressQuery(TaskList listOfCurrentTasks) {
         Scanner sc = new Scanner(System.in);
@@ -214,27 +248,69 @@ public class Storage {
         }
     }
 
+    /**
+     * Asking the user whether he wants to save the current progress
+     * Works with GUI version of Duke
+     *
+     * @param listOfCurrentTasks the current list of tasks
+     *
+     */
+
+    public static void saveProgressGUI(String userCommand, TaskList listOfCurrentTasks) {
+        if (userCommand.equals("YES")) {
+            saveProgress(listOfCurrentTasks);
+        }
+    }
+
     private void addTaskToSchedule(Task task) {
         List<LocalDateTime> eventDates = task.getDates();
+
         if (task.getNature().equals("D")) {
             LocalDateTime deadlineDate = eventDates.get(0);
             LocalDate convertedDate = deadlineDate.toLocalDate();
+
             String date = convertedDate.toString();
+            PriorityQueue<Pair<LocalDateTime, Task>> currentQueue;
+
             if (this.taskScheduleOnDates.containsKey(date)) {
-                PriorityQueue<Pair<LocalDateTime, Task>> currentQueue = this.taskScheduleOnDates.get(date);
-                currentQueue.add(new Pair<LocalDateTime, Task>(deadlineDate, task));
-                this.taskScheduleOnDates.put(date, currentQueue);
+                currentQueue = this.taskScheduleOnDates.get(date);
             } else {
-                PriorityQueue<Pair<LocalDateTime, Task>> currentQueue = new PriorityQueue<>(new DatetimeComparator());
-                currentQueue.add(new Pair<LocalDateTime, Task>(deadlineDate, task));
-                this.taskScheduleOnDates.put(date, currentQueue);
+                currentQueue = new PriorityQueue<>(new DatetimeComparator());
             }
+            currentQueue.add(new Pair<LocalDateTime, Task>(deadlineDate, task));
+            this.taskScheduleOnDates.put(date, currentQueue);
+
         } else if (task.getNature().equals("E")) {
 
+            LocalDateTime dateBeginUnformatted = eventDates.get(0);
+            LocalDate dateBeginFormatted = dateBeginUnformatted.toLocalDate();
+
+            LocalDateTime dateEndUnformatted = eventDates.get(1);
+            LocalDate dateEndFormatted = dateEndUnformatted.toLocalDate();
+
+            while (dateBeginFormatted.compareTo(dateEndFormatted) != 0) {
+                String searchDate = dateBeginFormatted.toString();
+                PriorityQueue<Pair<LocalDateTime, Task>> currentQueue;
+                if (this.taskScheduleOnDates.containsKey(searchDate)) {
+                    currentQueue = this.taskScheduleOnDates.get(searchDate);
+                } else {
+                    currentQueue =
+                            new PriorityQueue<>(new DatetimeComparator());
+                }
+                currentQueue.add(new Pair<LocalDateTime, Task>(dateBeginUnformatted, task));
+                this.taskScheduleOnDates.put(searchDate, currentQueue);
+                dateBeginFormatted = dateBeginFormatted.plusDays(1);
+            }
         } else {
             return;
         }
     }
+    /**
+     * Return a queue consisting of scheduled {@code Task} on a specified date
+     *
+     * @param searchDate the date to search for schedule
+     * @return a {@code PriorityQueue} with the scheduled tasks on the specified date
+     */
 
     public PriorityQueue<Pair<LocalDateTime, Task>> getTaskScheduleOnDates(String searchDate) {
         return this.taskScheduleOnDates.get(searchDate);

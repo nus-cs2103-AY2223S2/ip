@@ -26,13 +26,20 @@ public class Task {
         this.action = action;
     }
 
+    /**
+     * Constructs a task with the specified nature and action from the user.
+     *
+     * @param nature nature of the task as specified by the user:
+     *               ToDo, Deadline, ...
+     * @param action action of the task as specified by the user
+     * @param isDone whether a task is marked as done
+     */
+
     public Task (String nature, String action, boolean isDone) {
         this.nature = nature;
         this.isDone = isDone;
         this.action = action;
     }
-
-
 
     /**
      * Mark a task as done.
@@ -56,21 +63,51 @@ public class Task {
         return this;
     }
 
+    /**
+     * A dummy method for deadline and event child classes to override
+     *
+     */
+
     public String getTimeInfo () {
         return "";
     }
 
+    /**
+     * Return the marking status of an event
+     *
+     * @return the marking status of an event
+     */
     public boolean getStatus() {
         return isDone;
     }
+
+    /**
+     * Return the required action of an event in
+     * the form of {@code String}
+     *
+     * @return the required action of an event
+     */
 
     public String getAction() {
         return action;
     }
 
+    /**
+     * Return the nature of an event, whether it is
+     * TODO, DEADLINE, or EVENT
+     *
+     * @return the nature of an event
+     */
+
     public String getNature() {
         return nature;
     }
+
+    /**
+     * A dummy method for {@code ToDo}, {@code Deadline}, and {@code ScheduledEvent}
+     * child classes to override
+     *
+     */
 
     public List<LocalDateTime> getDates() {
         return List.of();

@@ -106,6 +106,24 @@ public class TaskList {
         return this;
     }
 
+    /**
+     * Return the index of a specified {@code Task} in the list of tasks
+     *
+     * @param task the {@code Task} to search index
+     * @return index of the specified {@code Task}
+     */
+
+    public int searchIndexOf(Task task) {
+        int index = -1;
+        for (int i = 0; i < this.getSize(); i++) {
+            if (this.getTask(i).toString().equals(task.toString())) {
+                index = i;
+                return index;
+            }
+        }
+        return index;
+    }
+
     @Override
     public String toString() {
         if (this.listTask.isEmpty()) {

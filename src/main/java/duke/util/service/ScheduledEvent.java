@@ -30,6 +30,14 @@ public class ScheduledEvent extends Task {
         this.dateEnd = dateEnd;
     }
 
+    /**
+     * Construct a {@code Deadline} with the action specified
+     * by the user, as well as the beginning date and end date of the action,
+     * denoted in the user input as the keywords "/FROM"
+     * and "/TO". The marked/ unmarked status also needs to be provided
+     *
+     */
+
     public ScheduledEvent(LocalDateTime dateBegin,
                           LocalDateTime dateEnd, String action, boolean isDone) {
         super("E", action, isDone);
@@ -37,9 +45,21 @@ public class ScheduledEvent extends Task {
         this.dateEnd = dateEnd;
     }
 
+    /**
+     * Return the beginning date and ending date of an event
+     * in the form of a list
+     *
+     * @return a list of {@code LocalDateTime} objects consiting of
+     *         the beginning date and ending date of the event
+     */
+
     public List<LocalDateTime> getDates() {
         return List.of(this.dateBegin, this.dateEnd);
     }
+
+    /**
+     * Return the timing of event in the form of a {@code String}
+     */
 
     @Override
     public String getTimeInfo() {
@@ -50,7 +70,6 @@ public class ScheduledEvent extends Task {
     }
 
     @Override
-
     public String toString() {
         return super.toString() + " (FROM: " + dateBegin.format(
                 DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy"))

@@ -2,18 +2,17 @@ package duke.io.input.ui;
 
 import java.io.IOException;
 
-import duke.io.input.ui.DialogBox;
-
+import duke.util.Storage;
 import duke.workflow.Event;
 import duke.workflow.Greeting;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.fxml.FXMLLoader;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -31,13 +30,16 @@ public class MainWindow extends AnchorPane {
 
     private ChatBot chatbot = new ChatBot();
 
-    private int runningDuke = -1;
+    private int firstTimeRunningDukeFlag = -1;
 
     private Event currentEvent;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Doraemon.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Vader.jpg"));
 
+    /**
+     * Construct a MainWindow class containingan AnchorPane, VBox, ScrollPane, TextField, and Button
+     */
     public MainWindow() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
@@ -50,6 +52,10 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Run when the GUI version of Duke is initialized
+     */
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -58,8 +64,7 @@ public class MainWindow extends AnchorPane {
 
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Greet the user when he opens Duke.
      */
 
     public void greet() {
@@ -70,6 +75,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage),
                 DialogBox.getDukeDialog(toPrintOut, dukeImage));
     }
+
+    /**
+     * Create two dialogs boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     * Output response based on whether the user wants to run Duke
+     */
 
     private int runDuke() {
         String isPlaying = userInput.getText();
@@ -100,11 +111,17 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+
     @FXML
     private void handleUserInput() {
-        if (this.runningDuke < 0) {
-            runningDuke = runDuke();
-        } else if (runningDuke > 0) {
+        getScene().getWindow().sizeToScene();
+        if (this.firstTimeRunningDukeFlag < 0) {
+            firstTimeRunningDukeFlag = runDuke();
+        } else if (firstTimeRunningDukeFlag > 0) {
             if (!this.currentEvent.isFinalEvent()) {
                 String input = userInput.getText();
                 userInput.clear();
@@ -113,11 +130,16 @@ public class MainWindow extends AnchorPane {
                         DialogBox.getUserDialog(input, userImage),
                         DialogBox.getDukeDialog(this.currentEvent.toString(), dukeImage));
             } else {
+                String saveProgressQuery = "SAVE YOUR GRAND PLAN FOR ANOTHER DAY? ";
+
                 String input = userInput.getText();
                 userInput.clear();
+
                 dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog("Sup Bro", dukeImage));
+                        DialogBox.getDukeDialog(saveProgressQuery, dukeImage),
+                        DialogBox.getUserDialog(input, userImage));
+
+                Storage.saveProgressGUI(input, this.currentEvent.getTaskList());
             }
         } else {
             return;

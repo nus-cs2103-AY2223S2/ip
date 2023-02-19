@@ -2,16 +2,15 @@ package duke.workflow;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 
 import duke.io.input.ui.UserInterface;
+import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Task;
 import duke.util.TaskList;
-import duke.util.Parser;
 import javafx.util.Pair;
 
 /**
@@ -42,10 +41,23 @@ public class DoTask extends Event {
         this.taskListFromCommand = new TaskList();
     }
 
+    /**
+     * Load saved tasks from previous use
+     *
+     * @param taskList list of saved task from previous use
+     */
+
     public void loadOldTasks(TaskList taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Parse saved tasks from previous use to current taks database,
+     * consisting of a keyword database to search for tasks using keyword,
+     * and a schedule database to search for scheduled tasks on a specified date
+     *
+     * @param oldTaskList list of saved task from previous use
+     */
     public void updateKeywordDatabase(TaskList oldTaskList) {
         for (int i = 0; i < oldTaskList.getSize(); i++) {
             Task taskToUpdate = oldTaskList.getTask(i);
@@ -62,8 +74,8 @@ public class DoTask extends Event {
     private void findTaskOnDate(String userInput) {
         LocalDate searchDate = Parser.parseDate(userInput);
         String searchDateAsString = searchDate.toString();
-        PriorityQueue<Pair<LocalDateTime, Task>> eventQueueOnDate
-                = this.storage.getTaskScheduleOnDates(searchDateAsString);
+        PriorityQueue<Pair<LocalDateTime, Task>> eventQueueOnDate =
+                this.storage.getTaskScheduleOnDates(searchDateAsString);
         TaskList scheduleOnDate = new TaskList();
         for (Pair<LocalDateTime, Task> pair : eventQueueOnDate) {
             scheduleOnDate = scheduleOnDate.addTask(pair.getValue());
@@ -74,6 +86,7 @@ public class DoTask extends Event {
     /**
      * Determines the next possible action after the user has entered an input.
      *
+     * @param userCommand command from user, gotten from commandline
      * @return a new event that follows from the last user input
      */
 
@@ -108,7 +121,7 @@ public class DoTask extends Event {
                 int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
                 this.removedTask = this.taskList.getTask(indexOfTask);
                 this.taskList = this.taskList.removeTask(indexOfTask);
-                this.storage = this.storage.removeFromKeywordStorage(this.removedTask);
+                this.storage = this.storage.removeFromStorage(this.removedTask);
             } else if (mainCommand.equals("FIND")) {
                 String[] keywordToFind = userCommand.split("FIND ");
                 List<String> keywords = Arrays.asList(keywordToFind);
@@ -120,6 +133,12 @@ public class DoTask extends Event {
         }
         return this;
     }
+
+    /**
+     * Return the list of current tasks.
+     *
+     * @return a {@code TaskList} consisting of current tasks
+     */
 
     public TaskList getTaskList() {
         return this.taskList;
