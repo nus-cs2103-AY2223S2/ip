@@ -22,9 +22,9 @@ public class Duke {
     }
 
     public void run() {
-        this.ui.greet();
+        this.ui.print_greet_msg();
         Scanner sc = new Scanner(System.in);
-        Parser.process_input(this.tasks, sc);
+        Parser.process_input(this.tasks, sc, this.ui);
         this.storage.save_to_file(this.tasks);
     }
 
