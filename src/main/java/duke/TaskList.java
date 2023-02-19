@@ -39,13 +39,13 @@ public class TaskList {
         for (Task task : tasks) {
             if (task instanceof Deadline) {
                 LocalDateTime date = Parser.getTime(((Deadline) task).getDeadlineTimeString());
-                if (!date.isAfter(remindLimit)) {
+                if (!date.isAfter(remindLimit) && !date.isBefore(today)) {
                     remindList.add(task);
                 }
             }
             if (task instanceof Event) {
                 LocalDateTime date = Parser.getTime(((Event) task).getStartTime());
-                if (!date.isAfter(remindLimit)) {
+                if (!date.isAfter(remindLimit) && !date.isBefore(today)) {
                     remindList.add(task);
                 }
             }
