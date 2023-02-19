@@ -9,13 +9,15 @@ public class TodoTest {
     @Test
     public void testToString() {
         Todo t = new Todo("test");
-        assertEquals("[T][ ] test", t.toString());
+        String correctTodo = "[T][ ] test \npriority: MEDIUM";
+        assertEquals(correctTodo, t.toString());
     }
 
     @Test
     public void testMark() {
         Todo t = new Todo("test");
         t.mark();
-        assertEquals("[T][X] test", t.toString());
+        String correctTodo = "[T][X] test \npriority: MEDIUM";
+        assertEquals(correctTodo, t.toString());
     }
 }

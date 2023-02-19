@@ -9,6 +9,7 @@ public class EventTest {
     @Test
     public void testToString() {
         Event t = new Event("test", "2pm", "9pm");
-        assertEquals("[E][ ] test (from: 2pm to: 9pm)", t.toString());
+        String correctEvent = "[E][ ] test (from: 2pm to: 9pm) \npriority: MEDIUM";
+        assertEquals(correctEvent, t.toString());
     }
 }
