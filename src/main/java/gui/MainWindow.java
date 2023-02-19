@@ -1,6 +1,7 @@
 package gui;
 
 import duke.Duke;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
+import java.util.Objects;
 
 import static java.lang.Thread.sleep;
 
@@ -61,9 +65,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        if (response == "Bye~ Hope to see you again soon:)") {
-            sleep(3000);
-            Platform.exit();
+        if (Objects.equals(response, "Bye~ Hope to see you again soon:)")) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(1.2));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
         }
         userInput.clear();
     }
