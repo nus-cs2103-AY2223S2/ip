@@ -1,5 +1,6 @@
 package meggy.gui;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -13,7 +14,7 @@ import meggy.Util;
 /** A chatbot GUI using FXML. */
 public class MainApplication extends Application {
     /** The chatbot in use. */
-    private final Meggy meggy = new Meggy(Util.DATA_FILE_PATH);
+    private final Meggy meggy = new Meggy(new File(Util.DATA_FILE_PATH));
 
     /**
      * Run the GUI. Creates views using FXML.

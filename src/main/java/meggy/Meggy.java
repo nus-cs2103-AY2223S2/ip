@@ -34,7 +34,7 @@ public class Meggy {
     private Consumer<String> notifMsgSender = System.out::println;
 
     /** Creates a chatbot agent instance. */
-    public Meggy(String storageFilePath) {
+    public Meggy(File storageFile) {
         tasks = new TaskList();
         cmdToJob = Map.of(
                 Resource.CMD_EXIT, s -> Resource.FAREWELL,
@@ -47,7 +47,7 @@ public class Meggy {
                 Resource.CMD_DEL, this::deleteTask,
                 Resource.CMD_FIND, this::find
         );
-        storage = new Storage(new File(storageFilePath));
+        storage = new Storage(storageFile);
     }
 
     /** Saves task list to storage file. Redirects {@link MeggyException} to {@code notifMsgSender} */

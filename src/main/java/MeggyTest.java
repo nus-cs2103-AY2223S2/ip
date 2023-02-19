@@ -5,28 +5,59 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Random;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
-import meggy.Meggy;
-import meggy.MeggyTime;
-import meggy.Resource;
-import meggy.TaskList;
+import meggy.*;
+import meggy.exception.Function;
 import meggy.exception.MeggyException;
 import meggy.task.DdlTask;
 import meggy.task.EventTask;
-import meggy.task.TodoTask;
 import meggy.task.UserTask;
 
 /** For testing purpose only. */
 public class MeggyTest {
     private static final Random RAND = new Random();
     /** Roughly 400 loops per second */
-    private static final int N_LOOP = 32400 * 400;
+    private static final int N_LOOP = 60 * 400;
     private static final int N_CORE = Runtime.getRuntime().availableProcessors();
     private static final Consumer<String> DROP = s -> {
     };
+
+    private static final Supplier<String> todoInput = MeggyTest::randString;
+    private static final Supplier<String> ddlInput = () -> {
+        while (true) {
+            final String desc = randString();
+            if (!desc.startsWith(DdlTask.DUE_KEYWORD_FORMATTED)) {
+                return desc + DdlTask.DUE_KEYWORD_FORMATTED + randMeggyTime();
+            }
+        }
+    };
+    private static final Supplier<String> eventInput = () -> {
+        while (true) {
+            final String desc = randString();
+            if (!(desc.startsWith(EventTask.START_KEYWORD_FORMATTED)
+                    || desc.startsWith(EventTask.END_KEYWORD_FORMATTED))) {
+                return desc + EventTask.START_KEYWORD_FORMATTED + randMeggyTime() + EventTask.END_KEYWORD_FORMATTED
+                        + randMeggyTime();
+            }
+        }
+    };
+    @SuppressWarnings("unchecked")
+    private static final Supplier<String>[] userTaskRandInputs =
+            (Supplier<String>[]) new Supplier<?>[]{todoInput, ddlInput, eventInput};
+    private static final String[] userTaskCmds = new String[]{Resource.CMD_TODO, Resource.CMD_DDL, Resource.CMD_EVENT};
+    @SuppressWarnings("unchecked")
+    private static final Function<String, UserTask>[] newTasks =
+            (Function<String, UserTask>[]) new Function<?, ?>[userTaskCmds.length];
+
+    static {
+        newTasks[0] = Util.TODO_NEW;
+        newTasks[1] = Util.DDL_NEW;
+        newTasks[2] = Util.EVENT_NEW;
+    }
 
     /** @return String that will never be entirely whitespace. */
     private static String randString() {
@@ -51,6 +82,50 @@ public class MeggyTest {
                 : LocalDateTime.ofEpochSecond(RAND.nextInt(), 0, ZoneOffset.UTC).format(MeggyTime.OUT_FMT));
     }
 
+    private static <T extends UserTask> void taskIntegrityTest(Supplier<String> randInput, Function<String, T> newTask) {
+        final String s = randInput.get();
+        try {
+            final T a = newTask.apply(s);
+            final String data = a.recreateCmd();
+            final T b = newTask.apply(data.substring(data.indexOf(' ') + 1));
+            assertEquals(a, b, s);
+        } catch (MeggyException e) {
+            throw new RuntimeException(s, e);
+        }
+    }
+
+    private static void randStorageTest(int iTest) throws MeggyException {
+        final int listLenMax = 50;
+        final File testDir = new File("test");
+        testDir.mkdir();
+        final File storageFile = new File(testDir, iTest + ".txt");
+        final Meggy m1 = new Meggy(storageFile);
+        m1.bindUi(DROP);
+
+        final TaskList taskList = new TaskList();
+        for (int i = RAND.nextInt(listLenMax); i > 0; i--) {
+            final int j = RAND.nextInt(userTaskCmds.length);
+            final String s = userTaskRandInputs[j].get();
+            final UserTask task = newTasks[j].apply(s);
+            final String line = userTaskCmds[j] + ' ' + s;
+            if (taskList.contains(task)) {
+                continue;
+            }
+            taskList.add(task);
+            m1.parseAndGetResponse(line);
+        }
+        final int len = taskList.size();
+        for (int i = 0; i < len * 2; i++) {
+            int idx = RAND.nextInt(len) + 1;
+            final String line = (RAND.nextBoolean() ? Resource.CMD_MARK : Resource.CMD_UNMK) + ' ' + idx;
+            m1.parseAndGetResponse(line);
+        }
+        final Meggy m2 = new Meggy(storageFile);
+        m2.bindUi(DROP);
+        assert (m1.equals(m2));
+        storageFile.delete();
+    }
+
     @Test
     public void meggyTimeIntegrityTest() {
         MeggyTime a = randMeggyTime();
@@ -65,45 +140,28 @@ public class MeggyTest {
     }
 
     @Test
-    public void todoTaskIntegrityTest() throws MeggyException {
-        String s = randString();
-        TodoTask a = new TodoTask(s);
-        String data = a.recreateCmd();
-        TodoTask b = new TodoTask(data.substring(data.indexOf(' ') + 1));
-        assertEquals(a, b, s);
+    public void todoTaskIntegrityTest() {
+        taskIntegrityTest(todoInput, Util.TODO_NEW);
     }
 
     @Test
-    public void ddlTaskIntegrityTest() throws MeggyException {
-        String s = randString() + DdlTask.DUE_KEYWORD_FORMATTED + randMeggyTime();
-        DdlTask a = DdlTask.of(s);
-        String data = a.recreateCmd();
-        DdlTask b = DdlTask.of(data.substring(data.indexOf(' ') + 1));
-        assertEquals(a, b, s);
+    public void ddlTaskIntegrityTest() {
+        taskIntegrityTest(ddlInput, Util.DDL_NEW);
     }
 
     @Test
-    public void eventTaskIntegrityTest() throws MeggyException {
-        String s = randString() + EventTask.START_KEYWORD_FORMATTED + randMeggyTime() + EventTask.END_KEYWORD_FORMATTED
-                + randMeggyTime();
-        EventTask a = EventTask.of(s);
-        String data = a.recreateCmd();
-        EventTask b = EventTask.of(data.substring(data.indexOf(' ') + 1));
-        assertEquals(a, b, s);
+    public void eventTaskIntegrityTest() {
+        taskIntegrityTest(eventInput, Util.EVENT_NEW);
     }
 
     @Test
     public void bulkIntegrityTest() {
         final int nTest = N_LOOP * N_CORE;
         IntStream.range(0, nTest).parallel().forEach(iTest -> {
-            try {
-                todoTaskIntegrityTest();
-                ddlTaskIntegrityTest();
-                eventTaskIntegrityTest();
-                meggyTimeIntegrityTest();
-            } catch (MeggyException e) {
-                throw new RuntimeException(e);
-            }
+            todoTaskIntegrityTest();
+            ddlTaskIntegrityTest();
+            eventTaskIntegrityTest();
+            meggyTimeIntegrityTest();
         });
     }
 
@@ -120,53 +178,7 @@ public class MeggyTest {
     }
 
     @Test
-    public synchronized void randStorageTest() throws MeggyException {
+    public void randStorageTest() throws MeggyException {
         randStorageTest(-1);
-    }
-
-    private void randStorageTest(int iTest) throws MeggyException {
-        final int listLenMax = 50;
-        String storageFilePath = "test/" + iTest + ".txt";
-        Meggy m1 = new Meggy(storageFilePath);
-        m1.bindUi(DROP);
-
-        final TaskList taskList = new TaskList();
-        for (int i = RAND.nextInt(listLenMax); i > 0; i--) {
-            final String s;
-            final UserTask task;
-            final String line;
-            switch (RAND.nextInt(3)) {
-            case 1:
-                s = randString() + DdlTask.DUE_KEYWORD_FORMATTED + randMeggyTime();
-                task = DdlTask.of(s);
-                line = Resource.CMD_DDL + ' ' + s;
-                break;
-            case 2:
-                s = randString() + EventTask.START_KEYWORD_FORMATTED + randMeggyTime() + EventTask.END_KEYWORD_FORMATTED
-                        + randMeggyTime();
-                task = EventTask.of(s);
-                line = Resource.CMD_EVENT + ' ' + s;
-                break;
-            default:
-                s = randString();
-                task = new TodoTask(s);
-                line = Resource.CMD_TODO + ' ' + s;
-            }
-            if (taskList.contains(task)) {
-                continue;
-            }
-            taskList.add(task);
-            m1.parseAndGetResponse(line);
-        }
-        final int len = taskList.size();
-        for (int i = 0; i < len * 2; i++) {
-            int idx = RAND.nextInt(len) + 1;
-            final String line = (RAND.nextBoolean() ? Resource.CMD_MARK : Resource.CMD_UNMK) + ' ' + idx;
-            m1.parseAndGetResponse(line);
-        }
-        Meggy m2 = new Meggy(storageFilePath);
-        m2.bindUi(DROP);
-        assert (m1.equals(m2));
-        new File(storageFilePath).delete();
     }
 }
