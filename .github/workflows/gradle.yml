@@ -30,6 +30,15 @@ jobs:
           java-version: '11'
           java-package: jdk+fx
 
-      - name: Build and check with Gradle
-        run: make compile
+      - name: Build and check with gradle
+        if: runner.os == 'macOS' || runner.os == 'Linux'
+        run: make run
+      
+      - name: Build and check with gradle
+        if: runner.os == 'Windows'
+        run: ./gradlew.bat build
+
+
+
+    
 
