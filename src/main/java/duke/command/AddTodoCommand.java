@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.*;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 public class AddTodoCommand extends Command {
     private String description;
 
@@ -6,7 +12,7 @@ public class AddTodoCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Todo todo = new Todo(description);
         tasks.add(todo);
         Ui.ShowAddMessage(todo, tasks.size());

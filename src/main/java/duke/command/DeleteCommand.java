@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.*;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DeleteCommand extends Command {
     private int taskNum;
 
@@ -6,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskNum < 1 || taskNum >= tasks.size() + 1) {
             throw new DukeException("\u2639 OOPS!!! The index to mark as done cannot be less than 0 or "
                     + "greater than the length of the list.");
