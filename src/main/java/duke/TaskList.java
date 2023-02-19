@@ -1,9 +1,10 @@
 package duke;
-import duke.task.*;
 import java.util.*;
 
+import duke.task.*;
+
 /**
- * stores and handles edits to current session task list 
+ * stores and handles edits to current session task list
  */
 public class TaskList {
     private static ArrayList<Task> list;
@@ -14,8 +15,8 @@ public class TaskList {
         this.list = list;
     }
     public ArrayList<Task> getList() {
-        return this.list; 
-    } 
+        return this.list;
+    }
     public String showList() {
         String response = "";
         int j = 0;
@@ -59,13 +60,13 @@ public class TaskList {
         return response;
     }
     public String find(String word) {
-    StringBuilder display = new StringBuilder();
-    for (int i = 0; i < this.list.size(); i++) {
-        Task curr = this.list.get(i);
-        if (curr.toString().toLowerCase().contains(word.toLowerCase())) {
-            display.append((curr) + ". " + curr.getStatusIcon() + "\n");
+        StringBuilder display = new StringBuilder();
+        for (int i = 0; i < this.list.size(); i++) {
+            Task curr = this.list.get(i);
+            if (curr.toString().toLowerCase().contains(word.toLowerCase())) {
+                display.append((curr) + ". " + curr.getStatusIcon() + "\n");
+            }
         }
+        return display.toString();
     }
-    return display.toString();
-    };
 }

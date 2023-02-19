@@ -59,5 +59,5 @@ public class Event extends Task {
         String[] parmArr = line.split("\\|");
         List<String> parm = Arrays.asList(parmArr);
         return this.getTag() + super.toString() + " (from:" + parm.get(0) + " to:" + parm.get(1) + ")";
-   }
+    }
 }

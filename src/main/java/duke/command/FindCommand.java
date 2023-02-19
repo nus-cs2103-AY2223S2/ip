@@ -1,8 +1,9 @@
 package duke.command;
+import java.util.List;
+
 import duke.*;
 import duke.task.*;
-import java.util.List;
-public class FindCommand extends Command { 
+public class FindCommand extends Command {
     private List<String> arg;
 
     public FindCommand(List<String> arg) {

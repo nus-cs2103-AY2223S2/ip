@@ -1,17 +1,15 @@
 package duke;
+
 import duke.command.Command;
-
-import java.util.List;
-
 /**
  * handles Ui interactions
  */
 public class Ui {
-    public Ui () {
-        //UI does not need to store anything 
-    } 
+    public Ui() {
+        //UI does not need to store anything
+    }
     public void printLogo() {
-        //CHECKSTYLE.OFF: checkStyleTest 
+        //CHECKSTYLE.OFF: checkStyleTest
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
@@ -39,7 +37,7 @@ public class Ui {
         }
     }
     public String showList(TaskList taskList) {
-       return taskList.showList();
+        return taskList.showList();
     }
     public void print(String word) {
         System.out.println(word);
