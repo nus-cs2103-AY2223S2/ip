@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "jarvis.frontend.Main"
+    mainClassName = "chad.frontend.Main"
 }
 
 shadowJar {
-    archiveBaseName = "jarvis"
+    archiveBaseName = "chad"
     archiveClassifier = null
 }
 
