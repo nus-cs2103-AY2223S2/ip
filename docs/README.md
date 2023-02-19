@@ -17,7 +17,7 @@ Tasks can be of three types:
 
 <br>
 
-All tasks have a status associated with them - done (`X`) and undone (` `).
+All tasks have a status associated with them - done `[X]`, and undone `[ ]`.
 > All tasks are set to be _undone_ by default. However, you can set the status of a task to be _done_.
 
 <br>
@@ -129,7 +129,7 @@ Marks a task denoted by the given task number as _done_.
 <br>
 
 Command format: `mark <task number>`
-> Use the [list](#2-listing-all-tasks-list) command to know the task numbers of each of the tasks.
+> :bulb:TIP: Use the [list](#2-listing-all-tasks-list) command to know the task numbers of each of the tasks.
 
 <br>
 
@@ -139,7 +139,7 @@ Marks a task denoted by the given task number as _undone_.
 <br>
 
 Command format: `unmark <task number>`
-> Use the [list](#2-listing-all-tasks-list) command to know the task numbers of each of the tasks.
+> :bulb:TIP: Use the [list](#2-listing-all-tasks-list) command to know the task numbers of each of the tasks.
 
 <br>
 
@@ -149,7 +149,7 @@ Deletes a task denoted by the given task number, from the list.
 <br>
 
 Command format: `delete <task number>`
-> Use the [list](#2-listing-all-tasks-list) command to know the task numbers of each of the tasks.
+> :bulb:TIP: Use the [list](#2-listing-all-tasks-list) command to know the task numbers of each of the tasks.
 
 <br>
 
@@ -179,14 +179,14 @@ Sets the priority of the task denoted by the task number, to the given priority.
 <br>
 
 Command format: `prioritize <task number> <high/medium/low>`
-> Use the [list](#2-listing-all-tasks-list) command to know the task numbers of each of the tasks.
+> :bulb:TIP: Use the [list](#2-listing-all-tasks-list) command to know the task numbers of each of the tasks.
 
 <br>
 
 ### 7. Storing the data
 Stores the list of the tasks in a text file, so that it can be retrieved when you close and open the application.
 
-> ❗WARNING: If the data file is modified to become of invalid form, Duke will erase all the data without any warning.
+> :exclamation:WARNING: If the data file is modified to become of invalid form, Duke will erase all the data without any warning.
 
 <br>
 
