@@ -125,7 +125,7 @@ public class Ui {
         if (this.getList().isEmpty()) {
             return emptyErr();
         }
-        if (num >= this.tList.size()) {
+        if (num >= this.tList.size() || num <= 0) {
            return ("Task no." + (num + 1) + " not found. Try again.");
         } else {
             this.tList.get(num).mark();
@@ -144,7 +144,7 @@ public class Ui {
         if (this.getList().isEmpty()) {
             return emptyErr();
         }
-        if (num >= this.tList.size()) {
+        if (num >= this.tList.size() || num <= 0) {
             return "Task no." + (num + 1) + " not found. Try again.";
         } else {
             this.tList.get(num).unmark();
@@ -276,7 +276,7 @@ public class Ui {
         if (this.getList().isEmpty()) {
             return emptyErr();
         }
-        if (num >= this.tList.size()) {
+        if (num >= this.tList.size() || num <= 0) {
             return "Task no." + (num + 1) + " not found. Try again.";
         } else {
             Task temp = this.tList.get(num);
@@ -333,7 +333,7 @@ public class Ui {
         if (s.equals("")) {
             return "Empty tag error!!";
         }
-        if (num >= this.tList.size()) {
+        if (num >= this.tList.size() || num <= 0) {
             return ("Task no." + (num + 1) + " not found. Try again.");
         } else {
             this.tList.get(num).tag(s);
