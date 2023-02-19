@@ -61,17 +61,4 @@ public class MainWindow {
         );
         userInput.clear();
     }
-
-    // /**
-    //  * Reshapes a given image into a circle image view
-    //  *
-    //  * @param image input image
-    //  * @return an imamge view in the shape of a circle
-    //  */
-    // private Circle reshapeImageToCircle(Image image) {
-    //     Circle circle = new Circle(0, 0, 45);
-    //     circle.setStroke(Color.AQUAMARINE);
-    //     circle.setFill(new ImagePattern(image));
-    //     return circle;
-    // }
 }
