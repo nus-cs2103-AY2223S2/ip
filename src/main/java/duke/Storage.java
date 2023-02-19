@@ -1,11 +1,5 @@
 package duke;
 
-import duke.InvalidDateFormatException;
-import task.Deadline;
-import task.Event;
-import task.TaskList;
-import task.ToDo;
-
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.nio.file.FileAlreadyExistsException;
@@ -29,7 +23,7 @@ public class Storage {
     }
 
     public File createStorageFile(TaskList list) {
-        File Task_Data = new File("task.Task Data.txt");
+        File Task_Data = new File("duke.Task Data.txt");
         try {
             Task_Data.createNewFile();
         } catch (FileAlreadyExistsException e){ // nothing should be done if the file already exists
@@ -45,7 +39,7 @@ public class Storage {
 
 
     public void updateTasksInFile (TaskList list) throws IOException {
-        PrintWriter logger = new PrintWriter("task.Task Data.txt");
+        PrintWriter logger = new PrintWriter("duke.Task Data.txt");
         for (int i = 0; i < list.getNumberOfTasks(); i++) {
             logger.write(list.getTaskAtIndex(i) + "\n");
         }

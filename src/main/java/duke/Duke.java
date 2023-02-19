@@ -1,7 +1,5 @@
 package duke;
 
-import task.TaskList;
-
 import java.io.IOException;
 import java.util.Scanner;
 public class Duke {

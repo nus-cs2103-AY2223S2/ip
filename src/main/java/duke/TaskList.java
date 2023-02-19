@@ -1,4 +1,4 @@
-package task;
+package duke;
 
 import java.util.ArrayList;
 import java.io.IOException;

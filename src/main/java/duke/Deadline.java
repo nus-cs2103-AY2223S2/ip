@@ -1,5 +1,4 @@
-package task;
-import duke.InvalidDateFormatException;
+package duke;
 
 
 import java.time.LocalDate;
@@ -28,6 +27,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedDate = deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
-        return (isDone? "[D][X] " : "[D][ ] ") + description + (". task.Deadline: "  + formattedDate);
+        return (isDone? "[D][X] " : "[D][ ] ") + description + (". duke.Deadline: "  + formattedDate);
     }
 }
