@@ -1,79 +1,89 @@
 package Duke;
 
+import Duke.Commands.*;
+import Duke.Exception.ProgramException;
+import Duke.Tasks.TaskList;
+
 /**
  * Class to handle commands given to Duke.
  * @author Bryan Juniano
  */
 
-public class Handler {
-    private enum Commands {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, EVENT, DEADLINE, FIND
-    }
-    public static Enum getCommand(String input){ //get the command
-        return Commands.valueOf(input.split(" ")[0].toUpperCase());
-    }
+public class Handler{
 
-    public static String[] getParameters(String input){ //get all tokens after the command
-        return input.split(" ", 2)[1].split(" ");
-    }
-
-    public static String[] parseParameters(Enum command, String[] parameters){ //get only the useful tokens
-        if(command.equals(Commands.MARK) || command.equals(Commands.UNMARK) || command.equals(Commands.DELETE) ||
-                command.equals(Commands.FIND)){
-            String[] cleanedParameters = new String[1];
-            cleanedParameters[0] = parameters[0];
-            return cleanedParameters;
+    public CommandList getCommand(String input) throws ProgramException {
+        try {
+            String stringCommand = input.split(" ")[0];
+            CommandList command = CommandList.valueOf(stringCommand.toUpperCase());
+            return command;
         }
-        else if(command.equals(Commands.TODO)){
-            String[] cleanedParameters = new String[1];
-            cleanedParameters[0] = parameters[0];
-            return cleanedParameters;
-
-        }
-        else if(command.equals(Commands.DEADLINE)){
-            String[] cleanedParameters = new String[2];
-            cleanedParameters[0] = parameters[0];
-            cleanedParameters[1] = parameters[2];
-            return cleanedParameters;
-
-        }
-        else if(command.equals(Commands.EVENT)){
-            String[] cleanedParameters = new String[3];
-            cleanedParameters[0] = parameters[0];
-            cleanedParameters[1] = parameters[2];
-            cleanedParameters[2] = parameters[4];
-            return cleanedParameters;
-        }
-        else{
-            return null;
+        catch (IllegalArgumentException e) {
+            throw new ProgramException("Command can't be recognized, did you spell it correctly?");
+        } catch (NullPointerException e) {
+            throw new ProgramException("Command needed!");
         }
     }
 
-    public String processCommand(String input, TaskList taskList){
-        Enum command = getCommand(input);
-        if (command.equals(Commands.BYE)) { // no parameters
-            return "bai";
-        } else if (command.equals(Commands.LIST)) {
-            return taskList.listTasks();
-        } else { //has parameters
-            String[] parameters = parseParameters(command,getParameters(input));
-            if (command.equals(Commands.MARK)) {
-                return taskList.markTask(Integer.parseInt(parameters[0]));
-            } else if (command.equals(Commands.UNMARK)) {
-                return taskList.unmarkTask(Integer.parseInt(parameters[0]));
-            } else if (command.equals(Commands.TODO)) {
-                return taskList.addTask(parameters[0]);
-            } else if (command.equals(Commands.DELETE)) {
-                return taskList.deleteTask(Integer.parseInt(parameters[0]));
-            } else if (command.equals(Commands.DEADLINE)) {
-                return taskList.addTask(parameters[0], (parameters[1]));
-            } else if (command.equals(Commands.EVENT)) {
-                return taskList.addTask(parameters[0], parameters[1],
-                        parameters[2]);
-            } else if (command.equals(Commands.FIND)) {
-                return taskList.findTasks(parameters[0]);
-            }
+    public int parseNumber(String input) throws ProgramException {
+        String parameters[] = input.split(" ");
+        if(parameters.length==1){
+            throw new ProgramException("Index needed!");
         }
-        return "";
+        else if(parameters.length>2){
+            throw new ProgramException("Too many parameters, pick just one!");
+        }
+        try{
+            int index = Integer.parseInt(parameters[1]);
+            return index;
+        }
+        catch (NumberFormatException e){
+            throw new ProgramException("Index must be an Integer!");
+        }
+
     }
+
+    public String parseToDo(String input) throws ProgramException{
+        return "1";
+    }
+
+    
+    public Command processCommand(String input, TaskList taskList) throws ProgramException {
+        Command c = null;
+        int index = 0;
+        CommandList command = getCommand(input);
+        switch (command) {
+            case LIST:
+                c = new ListCommand();
+                break;
+            case MARK:
+                index = parseNumber(input);
+                c = new MarkCommand(index);
+                break;
+            case UNMARK:
+                index = parseNumber(input);
+                c = new UnmarkCommand(index);
+                break;
+            case DELETE:
+                index = parseNumber(input);
+                c = new DeleteCommand(index);
+                break;
+            case DEADLINE:
+                c = new DeadlineCommand("2","2");
+                break;
+            case EVENT:
+                c = new EventCommand("2","2","2");
+                break;
+            case TODO:
+                c = new ToDoCommand("2");
+                break;
+            case BYE:
+                c = new ByeCommand();
+                break;
+            default:
+                //will never reach here, getCommand will throw an error if command is neither of the above
+                assert false;
+        }
+        return c;
+    }
+
 }

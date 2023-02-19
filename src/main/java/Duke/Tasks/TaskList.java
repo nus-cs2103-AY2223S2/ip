@@ -1,4 +1,5 @@
-package Duke;
+package Duke.Tasks;
+
 import java.util.ArrayList;
 
 /**
@@ -117,5 +118,14 @@ public class TaskList {
             return "Oops! Could not find any tasks matching your query";
         }
         return output;
+    }
+
+    public String tagTask(int index, ArrayList<String> tags){
+        this.taskList.get(index-1).setTags(tags);
+        return "Task " + index + " tagged.";
+    }
+    public String untagTask(int index, ArrayList<String> tags){
+        this.taskList.get(index-1).removeTags(tags);
+        return "Task " + index + " untagged.";
     }
 }

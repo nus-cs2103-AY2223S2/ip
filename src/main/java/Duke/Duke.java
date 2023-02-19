@@ -1,5 +1,7 @@
 package Duke;
-import java.util.Scanner;
+
+import Duke.Exception.ProgramException;
+import Duke.Tasks.TaskList;
 import javafx.scene.control.Label;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import Duke.Commands.Command;
 
 
 /**
@@ -30,6 +33,7 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private TaskList taskList = new TaskList();
     private Handler handler = new Handler();
+    private MessageLoader messageLoader = new MessageLoader();
 
     @Override
     public void start(Stage stage) {
@@ -80,7 +84,11 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        // more code to be added here later
+        Label welcomeText = new Label(messageLoader.getWelcomeMessage());
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeText, new ImageView(duke))
+        );
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -123,7 +131,13 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return handler.processCommand(input, taskList);
+        try {
+            Command userCommand = handler.processCommand(input, taskList);
+            return userCommand.run(taskList,messageLoader);
+        }
+        catch (ProgramException e){
+            return ("Error encountered!!!!");
+        }
     }
 
 }
