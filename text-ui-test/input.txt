@@ -1,0 +1,48 @@
+todo read book
+todo clean room and sweep floor
+todo
+deadline submit pop quiz /by 13/10/2023 12:30
+deadline learn java /by 13/10/2023 12:30
+deadline invalid deadline
+deadline invalid deadline /by
+deadline invalid deadline date /by 13/30/2023 12:30
+deadline invalid deadline time /by 13/10/2023 32:30
+event software engineering tutorial /from 13/10/2023 12:30 /to 13/10/2023 12:30
+event ai lecture /from 13/10/2023 12:30 /to 13/10/2023 12:30
+event invalid event /from today
+event invalid event /from /to
+event invalid event /to tomorrow
+event invalid event /from
+event invalid event
+event invalid event /to
+event invalid event date /from 13/30/2023 12:30 /to 13/10/2023 12:30
+event invalid event date /from 13/10/2023 12:30 /to 13/30/2023 12:30
+event invalid event time /from 13/10/2023 32:30 /to 13/10/2023 12:30
+event invalid event time /from 13/10/2023 12:30 /to 13/10/2023 32:30
+list
+mark 1
+list
+mark 6
+list
+unmark 1
+list
+unmark 6
+list
+mark 3
+list
+unmark 3
+list
+mark 1
+mark 1
+list
+unmark 1
+unmark 1
+list
+mark abc
+delete 6
+list
+delete 1
+list
+delete abc
+delete 10
+bye
