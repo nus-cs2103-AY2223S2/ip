@@ -8,9 +8,13 @@ import Duke.Tasks.Todo;
 
 import java.util.stream.Collectors;
 
+import Duke.Exceptions.CommandNotFoundException;
+import Duke.Exceptions.FileException;
 import Duke.Exceptions.NoDeadlineException;
 import Duke.Exceptions.NoDescriptionException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -24,6 +28,18 @@ public class TaskList {
     public TaskList() {
         this.taskList = new ArrayList<>(100);
         this.index = 0;
+    }
+
+    public TaskList(BufferedReader strTasks) throws FileException, CommandNotFoundException {
+        super();
+        String str;
+        try {
+            while ((str = strTasks.readLine()) != null) {
+                this.taskList.add(Task.strToTask(str));
+            }
+        } catch (IOException ioException) {
+            throw new FileException();
+        }
     }
 
     /**
@@ -45,6 +61,9 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
+    public void addToNewList(Task task) {
+        this.taskList.add(task);
+    }
 
     public String toFormattedString() {
         int count = 1;
@@ -93,14 +112,14 @@ public class TaskList {
             throw new NoDescriptionException("The description of a todo cannot be empty.");
         }
         Task newTodo = new Todo(input);
-        this.taskList.add(newTodo);
+//        this.taskList.add(newTodo);
         this.index++;
         String output = String.format(LINES +
                 "\tGot it. I've added this task:" +
                 "\t\t" + newTodo.toString() +
                 "\tNow you have " + this.index  + " tasks in the list." +
                 LINES);
-        System.out.println(output);
+//        System.out.println(output);
 //        System.out.println("\t--------------------------");
 //        System.out.println("\tGot it. I've added this task:");
 //        System.out.println("\t\t" + newTodo.toString());
@@ -133,12 +152,12 @@ public class TaskList {
         Task newDeadline = new Deadline(description, dueDate);
         this.taskList.add(newDeadline);
         this.index++;
-        String output = String.format(LINES +
-                "\tGot it. I've added this task:" +
-                "\t\t" + newDeadline.toString() +
-                "\tNow you have " + this.index  + " tasks in the list." +
-                LINES);
-        System.out.println(output);
+//        String output = String.format(LINES +
+//                "\tGot it. I've added this task:" +
+//                "\t\t" + newDeadline.toString() +
+//                "\tNow you have " + this.index  + " tasks in the list." +
+//                LINES);
+//        System.out.println(output);
 //        System.out.println("\t--------------------------");
 //        System.out.println("\tGot it. I've added this task:");
 //        System.out.println("\t\t" + newDeadline.toString());
@@ -150,7 +169,7 @@ public class TaskList {
     /**
      * Add task of Event type into the task list.
      *
-     * @param input A Duke.command by the user which contains task description, event starting
+     * @param input A Duke command by the user which contains task description, event starting
      *              date and event ending date.
      * @throws NoDeadlineException Return error message if there is no specified starting time or ending time.
      * @throws NoDescriptionException Return error message if there is no task description.
@@ -200,14 +219,14 @@ public class TaskList {
     public String list() {
         if (this.index == 0) {
             String output = String.format(LINES +
-                    "\tThere is no task in the list." +
+                    "\tThere is no task in the list." + "\n" +
                     LINES);
             System.out.println(output);
             return output;
 //            System.out.println("\tThere is no task in the list.");
         } else {
             String output = String.format(LINES +
-                    "\tHere are the tasks in your list:\n" +
+                    "\tHere are the tasks in your list:\n" + "\n" +
                     this.toFormattedString() +
                     LINES);
             System.out.println(output);
@@ -225,15 +244,15 @@ public class TaskList {
      *
      * @param input The index of the task that is done.
      */
-    public String mark(int input) {
+    public Task mark(int input) {
         Task currTask = this.taskList.get(input - 1);
         currTask.markDone();
-        String output = String.format(LINES +
-                "\tNice! I've marked this task as done:\n" +
-                "\t\t" + currTask.toString() +
-                LINES);
-        System.out.println(output);
-        return output;
+//        String output = String.format(LINES +
+//                "\tNice! I've marked this task as done:\n" +
+//                "\t\t" + currTask.toString() +
+//                LINES);
+//        System.out.println(output);
+        return currTask;
 //        System.out.println("\t--------------------------");
 //        System.out.println("\tNice! I've marked this task as done:");
 //        System.out.println("\t\t" + currTask.toString());
@@ -246,15 +265,15 @@ public class TaskList {
      *
      * @param input The index of the task that is not done yet.
      */
-    public String unmark(int input) {
+    public Task unmark(int input) {
         Task currTask = this.taskList.get(input - 1);
         currTask.markNotDone();
-        String output = String.format(LINES +
-                "\tNice! I've marked this task as not done yet:\n" +
-                "\t\t" + currTask.toString() +
-                LINES);
-        System.out.println(output);
-        return output;
+//        String output = String.format(LINES +
+//                "\tNice! I've marked this task as not done yet:\n" +
+//                "\t\t" + currTask.toString() +
+//                LINES);
+//        System.out.println(output);
+        return currTask;
 //        System.out.println("\t--------------------------");
 //        System.out.println("\tOK, I've marked this task as not done yet:");
 //        System.out.println("\t\t" + currTask.toString());
@@ -262,14 +281,21 @@ public class TaskList {
     }
 
     public void addTask(Task task, Storage storage) throws NoDescriptionException {
-        assert !task.isEmpty();
-        if (task.isEmpty) {
-            throw new NoDescriptionException();
+        assert !task.noDescription();
+        if (task.noDescription()) {
+            throw new NoDescriptionException("No description is provided, please try again");
         } else {
             this.taskList.add(task);
         }
-        storage.storeTasks(this.taskList);
+        storage.store(this);
     }
+
+    public Task remove(int index, Storage storage) {
+        Task output = this.taskList.remove(index);
+        storage.store(this);
+        return output;
+    }
+
     public ArrayList<Task> findRelevantTasks(String keywords) {
         if (keywords.trim().equals("")) {
             throw new NoDescriptionException("The description of a todo cannot be empty.");

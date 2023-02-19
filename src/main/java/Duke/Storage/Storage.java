@@ -1,20 +1,19 @@
 package Duke.Storage;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 import Duke.TaskList;
 import Duke.Tasks.Task;
-
 import Duke.Exceptions.DukeMainExceptions;
+import Duke.Exceptions.FileException;
 
 public class Storage {
     protected File file;
     protected String filePath;
     protected TaskList tasks;
+    protected BufferedReader content;
+    protected FileReader fileReader;
 
     /**
      * The constructor of Storage class. Use to create storage instance.
@@ -30,6 +29,15 @@ public class Storage {
             new File("data").mkdir();
             this.file.createNewFile();
         }
+    }
+
+    public BufferedReader load() {
+        assert this.fileReader != null && this.filePath != null && this.file != null;
+        if (this.content != null) {
+            return content;
+        }
+        this.content = new BufferedReader(this.fileReader);
+        return this.content;
     }
 
     /**
@@ -97,5 +105,20 @@ public class Storage {
             bw.append(currTask.printTask());
         }
         bw.close();
+    }
+
+    public void store(TaskList tasks) throws FileException {
+        try {
+            this.file.createNewFile();
+            FileWriter writer = new FileWriter(this.filePath);
+            for (int i = 0; i < tasks.getSize(); i++) {
+                Task task = tasks.getTask(i);
+                writer.write(task.toString() + "\n");
+            }
+            writer.close();
+        } catch (IOException ioException) {
+            throw new FileException();
+        }
+
     }
 }

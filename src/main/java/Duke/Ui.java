@@ -40,6 +40,12 @@ public class Ui {
         return output;
     }
 
+    public String printLoadingError() {
+        String output = "The directory is not found!";
+        System.out.println(output);
+        return output;
+    }
+
     public String printStoredTasks(TaskList taskList) {
         String output = String.format("File has been stored!\n%s",taskList.toFormattedString());
         System.out.println(output);
@@ -53,12 +59,17 @@ public class Ui {
         return output;
     }
 
+    public String printAllTasks(TaskList tasks) {
+        String output = tasks.toFormattedString();
+        System.out.println(output);
+        return output;
+    }
+
     /**
      * Say goodbye to the user when "bye" Duke.command detected.
      */
     public String bye() {
-        String output = String.format(LINES + "\tBye. Hope to see you again soon!"
-                + LINES);
+        String output = String.format("Bye. Hope to see you again soon!\n");
         System.out.println(output);
         return output;
     }

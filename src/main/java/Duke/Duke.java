@@ -41,14 +41,17 @@ public class Duke {
      * Execute the main program.
      */
     public void run() throws IOException {
-        ui.greet();
+//        ui.greet();
         String input;
         Scanner scanner = new Scanner(System.in);
         input = scanner.nextLine();
         while (!input.equals("bye")) {
-            parser.parse(input);
+//            parser.parse(input);
+            Command command = Parser.parse(input);
+            command.execute(this.taskList, this.storage, this.ui);
             input = scanner.nextLine();
         }
+
         ui.bye();
     }
 
@@ -60,8 +63,8 @@ public class Duke {
     public String getResponse(String input) throws IOException {
         if (this.taskList == null) {
             try {
-                taskList = new TaskList(storage.loadTasks());
-            } catch (DukeMainExceptions | IOException exception) {
+                taskList = new TaskList(storage.load());
+            } catch (DukeMainExceptions exception) {
                 System.out.println(exception.toString());
             }
         }
