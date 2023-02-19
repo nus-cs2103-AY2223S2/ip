@@ -6,11 +6,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
 <fx:root alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="CENTER" style="-fx-background-color: teal blue; -fx-background-radius: 10px;" text="Label" textFill="WHITE" wrapText="true">
+        <Label fx:id="dialog" alignment="CENTER" style="-fx-background-color: teal blue; -fx-background-radius: 5px;" text="Label" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Apple Braille Outline 8 Dot" size="12.0" />
          </font>
@@ -23,6 +24,7 @@
          <rotationAxis>
             <Point3D />
          </rotationAxis></Label>
+      <Region prefHeight="200.0" prefWidth="5.0" />
         <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 5 5 5 5; -fx-background-radius: 50;">
          <image>
             <Image url="@../../../../../../../../../Pictures/gym.jpeg" />
