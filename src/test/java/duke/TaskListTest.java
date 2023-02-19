@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
-    public void listTaskTest(){
+    public void listTaskTest() {
         TaskList tl = new TaskList(new ArrayList<>());
         assertEquals(new ArrayList<Task>(), tl.getTaskList());
     }

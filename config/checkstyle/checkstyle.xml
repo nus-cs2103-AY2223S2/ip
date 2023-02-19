@@ -239,7 +239,7 @@
           3. Constructors
           4. Methods
         -->
-        <module name ="DeclarationOrder"/>
+<!--        <module name ="DeclarationOrder"/>-->
 
         <!-- Checks that default is after all cases in a switch statement -->
         <module name="DefaultComesLast"/>

@@ -30,11 +30,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-javafx {
-    version = "19"
-    modules = [ 'javafx.controls' ]
-}
-
 test {
     useJUnitPlatform()
 
@@ -58,7 +53,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "duke.Duke"
     archiveClassifier = null
 }
 
