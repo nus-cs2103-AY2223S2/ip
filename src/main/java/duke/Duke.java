@@ -37,7 +37,7 @@ public class Duke extends Application {
             this.parser = new Parser(tasks, ui);
 //            this.isLoadedFromFile = true;
         } catch (DukeException e) {
-//            System.out.println(ui.showLoadingError());
+//            System.out.println(ui.getLoadingError());
             this.storage = new Storage(FILE_PATH);
             this.tasks = new TaskList();
             this.ui = new Ui();
@@ -117,29 +117,15 @@ public class Duke extends Application {
     }
 
     private void showInitMessage() {
-        Label initMessage = new Label(ui.showInitMessage());
+        Label initMessage = new Label(ui.getInitMessage());
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(initMessage, new ImageView(duke)));
     }
 
-    private void showLoadingError() {
-        Label initMessage = new Label(ui.showLoadingError());
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(initMessage, new ImageView(duke)));
-    }
-
-//    /**
-//     * Iteration 1:
-//     * Creates a label with the specified text and adds it to the dialog container.
-//     * @param text String containing text to add
-//     * @return a label with the specified text that has word wrap enabled.
-//     */
-//    private Label getDialogLabel(String text) {
-//        // You will need to import `javafx.scene.control.Label`.
-//        Label textToAdd = new Label(text);
-//        textToAdd.setWrapText(true);
-//
-//        return textToAdd;
+//    private void showLoadingError() {
+//        Label initMessage = new Label(ui.getLoadingError());
+//        dialogContainer.getChildren().add(
+//                DialogBox.getDukeDialog(initMessage, new ImageView(duke)));
 //    }
 
     private void handleUserInput() throws DukeException {
@@ -155,7 +141,7 @@ public class Duke extends Application {
     private String getResponse(String input) throws DukeException {
         if (input.equals("bye")) {
             storage.store(tasks);
-            return ui.showByeMessage();
+            return ui.getByeMessage();
         } else {
             return parser.parse(input);
         }
