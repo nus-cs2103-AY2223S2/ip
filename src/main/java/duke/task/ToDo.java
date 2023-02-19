@@ -20,9 +20,6 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         String toDoString = "T" + " | " + super.toString();
-        if (super.tag.toString().isEmpty()) {
-            toDoString += " | Tag: " + super.tag.toString();
-        }
         return toDoString;
     }
 }

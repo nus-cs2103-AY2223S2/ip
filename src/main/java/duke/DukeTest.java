@@ -76,4 +76,11 @@ public class DukeTest {
             assertEquals(testLines.get(i), inputLines.get(i));
         }
     }
+
+    @Test
+    public void testRegex() {
+        String testString = "The seller | is located in Bali | right now!\n";
+        String[] strings = testString.split("\\|");
+        assertEquals(3, strings.length);
+    }
 }

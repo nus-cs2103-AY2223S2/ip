@@ -59,7 +59,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String output = "[" + getStatusIcon() + "]" + " | " + this.description;
+        String output = "Tag: " + this.tag.toString() + "|" + "[" + getStatusIcon() + "]" + " | " + this.description;
         return output;
     }
 

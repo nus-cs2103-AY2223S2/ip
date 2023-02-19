@@ -30,9 +30,6 @@ public class Deadline extends Task {
     public String toString(){
         String deadlineString = "D" + " | " + super.toString()
                 + " (by: " + this.deadline.toString() + ")";
-        if (super.tag.toString().isEmpty()) {
-            deadlineString += " | Tag: " + super.tag.toString();
-        }
         return deadlineString;
     }
 

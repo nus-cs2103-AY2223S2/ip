@@ -46,9 +46,9 @@ public class TaskList {
             String[] arguments = line.split (" \\| ");
 
             //Checks if line has been segmented into exactly 4 sections
-            assert arguments.length >= 4 && arguments.length <= 5;
+            assert arguments.length == 4;
 
-            switch(arguments[1]) {
+            switch(arguments[2]) {
                 case "T":
                     storeTodoTask(arguments);
                     break;
@@ -68,11 +68,11 @@ public class TaskList {
      */
     private void storeTodoTask(String[] args) {
         Task taskToAdd = new ToDo(args[3].trim());
-        if (args[2].contains("X")) {
+        if (args[3].contains("X")) {
             taskToAdd.markAsDone();
         }
 
-        if (!args[4].trim().isEmpty()) {
+        if (!args[0].trim().isEmpty()) {
             Tag tagToAdd = new Tag(args[4].trim());
             taskToAdd.addTag(tagToAdd);
             tagLibrary.appendTag(tagToAdd);
