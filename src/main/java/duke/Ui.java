@@ -15,7 +15,8 @@ public class Ui {
 
     /**
      * Returns the String representation of the list of tasks
-     * @param taskList the list of tasks
+     * @param taskList taskList the list of tasks
+     * @param isMatchingList boolean representing whether the list is a keyword-matched list
      * @return the String representation of the list of tasks
      */
     private String getTaskList(TaskList taskList, boolean isMatchingList) {
@@ -85,12 +86,13 @@ public class Ui {
     /**
      * Returns a message to be shown on Task deletion
      * @param deletedTask the deleted Task
-     * @param len the length of the list of tasks after deletion
+     * @param taskList the list of tasks
      * @return the message to be shown on Task deletion
      */
-    public String getDeleteMessage(Task deletedTask, int len) {
+    public String getDeleteMessage(Task deletedTask, TaskList taskList) {
+        int len = taskList.size();
         return getFormatted("Noted. I've removed this task:\n" + deletedTask + "\nNow you have " +
-                len + " tasks in the list.");
+                len + " tasks in the list.\n\n") + getFormattedTaskList(taskList);
     }
 
     /**
@@ -118,12 +120,13 @@ public class Ui {
     /**
      * Returns a message to be shown after adding a Task to the list
      * @param task the Task added to the list
-     * @param len the length of the list of tasks after addition
+     * @param taskList the list of tasks
      * @return the message to be shown after adding a Task to the list
      */
-    public String getAddMessage(Task task, int len) {
+    public String getAddMessage(Task task, TaskList taskList) {
+        int len = taskList.size();
         return getFormatted("Got it. I've added this task:\n" + task +
-                "\nNow you have " + len + " tasks in the list.");
+                "\nNow you have " + len + " tasks in the list.\n\n") + getFormattedTaskList(taskList);
     }
 
 //    /**

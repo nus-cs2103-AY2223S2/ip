@@ -71,8 +71,7 @@ public class Parser {
      */
     private String delete(int index) {
         Task deletedTask = taskList.delete(index);
-        int len = taskList.size();
-        return ui.getDeleteMessage(deletedTask, len);
+        return ui.getDeleteMessage(deletedTask, taskList);
     }
 
     /**
@@ -139,6 +138,21 @@ public class Parser {
      * @return the Ui response to the input
      * @throws DukeException if an invalid command is entered
      */
+
+    private String add(String input) throws DukeException {
+        if (input.startsWith(TODO)) {
+            addTodo(input);
+        } else if (input.startsWith(DEADLINE)) {
+            addDeadline(input);
+        } else if (input.startsWith(EVENT)) {
+            addEvent(input);
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        int len = taskList.size();
+        Task t = taskList.get(len - 1);
+        return ui.getAddMessage(t, taskList);
+    }
     public String parse(String input) throws DukeException {
         if (input.equals(LIST)) {
             return showList();
@@ -154,18 +168,7 @@ public class Parser {
         } else if (input.startsWith(FIND)) {
             return find(input);
         } else {
-            if (input.startsWith(TODO)) {
-                addTodo(input);
-            } else if (input.startsWith(DEADLINE)) {
-                addDeadline(input);
-            } else if (input.startsWith(EVENT)) {
-                addEvent(input);
-            } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            int len = taskList.size();
-            Task t = taskList.get(len - 1);
-            return ui.getAddMessage(t, len);
+            return add(input);
         }
     }
 }
