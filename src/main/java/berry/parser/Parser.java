@@ -380,7 +380,7 @@ public class Parser {
         assert commandType == CommandType.TODO
                 || commandType == CommandType.DEADLINE
                 || commandType == CommandType.EVENT
-                || commandType == CommandType.FIND  : "Only todo, deadline and event has a description clause";
+                || commandType == CommandType.FIND : "Only todo, deadline and event has a description clause";
 
         String command = commandType.toString().toLowerCase();
         if (userInput.trim().endsWith(command)) {

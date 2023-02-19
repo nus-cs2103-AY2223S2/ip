@@ -1,18 +1,16 @@
 package berry.storage;
 
-import berry.exception.BerryException;
-import berry.exception.IllegalValueException;
-import berry.exception.IncorrectDateException;
-import berry.task.Task;
-import berry.task.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import berry.exception.IllegalValueException;
+import berry.exception.IncorrectDateException;
+import berry.task.Task;
+import berry.task.TaskList;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.

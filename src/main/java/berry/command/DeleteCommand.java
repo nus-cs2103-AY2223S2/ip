@@ -1,10 +1,10 @@
 package berry.command;
 
-import berry.task.TaskList;
-import berry.ui.Ui;
-import berry.storage.Storage;
 import berry.exception.BerryException;
 import berry.exception.IndexOutOfRangeException;
+import berry.storage.Storage;
+import berry.task.TaskList;
+import berry.ui.Ui;
 
 /**
  * Deletes a task identified by its last displayed index from the task list.

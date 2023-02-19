@@ -1,10 +1,12 @@
 package berry.command;
 
+import berry.storage.Storage;
 import berry.task.TaskList;
 import berry.ui.Ui;
-import berry.storage.Storage;
-import berry.exception.BerryException;
 
+/**
+ * Finds a task with the keywords given.
+ */
 public class FindCommand extends Command {
     private static String[] listOfKeywords;
 

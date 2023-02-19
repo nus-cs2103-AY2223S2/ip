@@ -1,7 +1,5 @@
 package berry.exception;
 
-import berry.Berry;
-
 /**
  * Signals that some given data is not acceptable and does not fulfil certain constraints.
  */

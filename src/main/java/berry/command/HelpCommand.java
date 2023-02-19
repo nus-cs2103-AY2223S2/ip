@@ -5,6 +5,9 @@ import berry.storage.Storage;
 import berry.task.TaskList;
 import berry.ui.Ui;
 
+/**
+ * Shows the help menu
+ */
 public class HelpCommand extends Command {
 
     /**
