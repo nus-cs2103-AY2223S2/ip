@@ -1,5 +1,8 @@
 package duke.tool;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +14,29 @@ import duke.exception.DukeCommandNotFoundException;
 import duke.exception.DukeEmptyTaskException;
 
 public class Parser {
+    private static DateTimeFormatter read_fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static DateTimeFormatter print_fmt = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
+    public static DateTimeFormatter getReadFormat() {
+        return read_fmt;
+    }
+
+    public static DateTimeFormatter getPrintFormat() {
+        return print_fmt;
+    }
+
+    public static String parse_date(String s) {
+        DateTimeFormatter read_fmt = getReadFormat();
+        DateTimeFormatter print_fmt = getPrintFormat();
+        try {
+            LocalDate lt = LocalDate.parse(s, read_fmt);
+            return lt.format(print_fmt);
+        } catch (DateTimeParseException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+
     public static void print(String str) {
         System.out.println(str);
     }
@@ -38,7 +64,7 @@ public class Parser {
                 try {
                     tid = Integer.parseInt(input.split(" ")[1]);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    print(e.toString());
+                    e.printStackTrace();
                     System.exit(1);
                 }
                 task = todos.get(tid - 1);
@@ -50,7 +76,7 @@ public class Parser {
                 try {
                     tid = Integer.parseInt(input.split(" ")[1]);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    print(e.toString());
+                    e.printStackTrace();
                     System.exit(1);
                 }
                 task = todos.get(tid - 1);
@@ -63,8 +89,9 @@ public class Parser {
                     input = input.split(trigger)[1];
                     content = input.split("/by")[0].strip();
                     ddl = input.split("/by")[1].strip();
+                    ddl = parse_date(ddl);
                 } catch (IndexOutOfBoundsException e) {
-                    print(e.toString());
+                    e.printStackTrace();
                     System.exit(1);
                 }
                 task = new Deadline(content, ddl);
@@ -82,9 +109,11 @@ public class Parser {
                 try {
                     content = input.split("/from")[0].strip();
                     from = input.split("/from")[1].split("/to")[0].strip();
+                    from = parse_date(from);
                     to = input.split("/from")[1].split("/to")[1].strip();
+                    to = parse_date(to);
                 } catch (IndexOutOfBoundsException e) {
-                    print(e.toString());
+                    e.printStackTrace();
                     System.exit(1);
                 }
                 task = new Event(content, from, to);
@@ -117,7 +146,7 @@ public class Parser {
                     print("\t" + task);
                     print("Now you have " + todos.size() + " tasks in the list.");
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    print(e.toString());
+                    e.printStackTrace();
                     System.exit(1);
                 }
                 break;
@@ -132,7 +161,7 @@ public class Parser {
             try {
                 switch_input(todos, input);
             } catch (Exception e) {
-                print(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
