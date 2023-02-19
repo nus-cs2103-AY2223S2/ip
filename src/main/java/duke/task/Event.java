@@ -93,7 +93,6 @@ public class Event extends Task {
                 this.to = LocalDateTime.of(LocalDate.parse(to, DateTimeFormatter.ofPattern(format)),
                         LocalDateTime.now().toLocalTime());
                 toHasTime = false;
-
             } catch (DateTimeException e) {
                 //Try next format
                 continue;

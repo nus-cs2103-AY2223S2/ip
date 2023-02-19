@@ -37,17 +37,27 @@ public class Parser {
             return new Unmark(input);
         } else if (isDelete(input, tasks.size())) {
             return new Delete(input);
+        } else if (isPriority(input)) {
+            return new PriorityCommand(input);
+        } else if (isToDo(input)) {
+            return new Add(input, "todo");
+        } else if (isDeadline(input)) {
+            return new Add(input, "deadline");
+        } else if (isEvent(input)) {
+            return new Add(input, "event");
         } else {
-            if (isToDo(input)) {
-                return new Add(input, "todo");
-            } else if (isDeadline(input)) {
-                return new Add(input, "deadline");
-            } else if (isEvent(input)) {
-                return new Add(input, "event");
-            } else {
-                throw new DukeException("Please input a valid command!");
-            }
+            throw new DukeException("Please input a valid command!");
         }
+    }
+
+    /**
+     * Checks if the user input is a priority command.
+     *
+     * @param input The input String.
+     * @return The boolean representing whether the user input is a priority command.
+     */
+    public boolean isPriority(String input) {
+        return input.startsWith("pget ") || input.startsWith("pset ");
     }
 
     /**

@@ -46,6 +46,16 @@ public class TaskList {
     }
 
     /**
+     * Adds a task to the TaskList at a specified index.
+     *
+     * @param index The specified index.
+     * @param task The task to be added.
+     */
+    public void add(int index, Task task) {
+        tasklist.add(index, task);
+    }
+
+    /**
      * Removes the task at the specified index in the TaskList and returns it.
      *
      * @param index The specified index.
