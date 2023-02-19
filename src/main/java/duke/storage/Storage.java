@@ -23,42 +23,6 @@ public class Storage {
     private static final Path DATA_PATH = Paths.get("data");
     private static final Path TASK_LIST_PATH = Paths.get("data", "duke.txt");
 
-    private ArrayList<Task> parseTaskList() throws IOException, DukeStorageException {
-        List<String> lines = Files.readAllLines(TASK_LIST_PATH);
-        ArrayList<Task> taskList = new ArrayList<>();
-
-        for (String line : lines) {
-            String[] parts = line.split(" \\| ");
-            String taskType = parts[0];
-            boolean isDone = parts[1].equals("1");
-            String description = parts[2];
-            Task newTask;
-
-            switch (taskType) {
-                case "T":
-                    newTask = new ToDo(description);
-                    break;
-                case "D":
-                    LocalDateTime dueDate = LocalDateTime.parse(parts[3]);
-                    newTask = new Deadline(description, dueDate);
-                    break;
-                case "E":
-                    LocalDateTime fromDate = LocalDateTime.parse(parts[3]);
-                    LocalDateTime toDate = LocalDateTime.parse(parts[4]);
-                    newTask = new Event(description, fromDate, toDate);
-                    break;
-                default:
-                    storeTaskList(new ArrayList<>()); // clear data file
-                    throw new DukeStorageException("Oops, something is wrong with the data file! :(\n");
-            }
-
-            taskList.add(newTask);
-            if (isDone) {
-                newTask.setDone();
-            }
-        }
-        return taskList;
-    }
     public ArrayList<Task> loadTaskList() {
         try {
             if (!Files.exists(DATA_PATH)) {
@@ -67,19 +31,73 @@ public class Storage {
             if (!Files.exists(TASK_LIST_PATH)) {
                 Files.createFile(TASK_LIST_PATH);
             }
+
             return parseTaskList();
 
-        } catch (DukeStorageException e) {
-            System.out.println(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private ArrayList<Task> parseTaskList() throws IOException {
+        try {
+            List<String> lines = Files.readAllLines(TASK_LIST_PATH);
+            ArrayList<Task> taskList = new ArrayList<>();
+
+            for (String line : lines) {
+                Task task = parseTask(line);
+                taskList.add(task);
+            }
+            return taskList;
+
+        } catch (DukeStorageException e) {
+            clearDataFile();
+            return new ArrayList<>();
+        }
+}
+
+    private Task parseTask(String line) throws DukeStorageException {
+        String[] parts = line.split(" \\| ");
+        String taskType = parts[0];
+        boolean isDone = parts[1].equals("1");
+        String description = parts[2];
+        Task task;
+
+        switch (taskType) {
+        case "T":
+            task = new ToDo(description);
+            break;
+        case "D":
+            LocalDateTime dueDate = LocalDateTime.parse(parts[3]);
+            task = new Deadline(description, dueDate);
+            break;
+        case "E":
+            LocalDateTime fromDate = LocalDateTime.parse(parts[3]);
+            LocalDateTime toDate = LocalDateTime.parse(parts[4]);
+            task = new Event(description, fromDate, toDate);
+            break;
+        default:
+            throw new DukeStorageException("Oops, something is wrong with the data file! :(\n");
         }
 
-        return new ArrayList<>();
+        if (isDone) {
+            task.setDone();
+        }
+       return task;
+    }
+
+    private void clearDataFile() throws IOException {
+        BufferedWriter bufferedWriter = Files.newBufferedWriter(TASK_LIST_PATH);
+        bufferedWriter.write("");
+        bufferedWriter.close();
     }
 
     public void storeTaskList(ArrayList<Task> taskList) throws DukeStorageException {
         try {
+            if (!Files.exists(TASK_LIST_PATH)) {
+                throw new DukeStorageException("File error: The data file does not exist!");
+            }
+
             BufferedWriter bufferedWriter = Files.newBufferedWriter(TASK_LIST_PATH);
             for (Task task : taskList) {
                 String line = task.getTaskState();
@@ -89,7 +107,7 @@ public class Storage {
             bufferedWriter.close();
 
         } catch (IOException e) {
-            throw new DukeStorageException("File Error: " + e.getMessage());
+            throw new DukeStorageException("File error: could not store tasks in data file!");
         }
     }
 }

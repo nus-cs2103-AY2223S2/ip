@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     private LocalDateTime dueDate;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d LLL uuuu, hh:mm a");
+    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE, d LLL uuuu, hh:mm a");
 
     /**
      * Creates a deadline object with the given task description and due-date.
@@ -32,7 +32,7 @@ public class Deadline extends Task {
     public String toString() {
 
         return "[D]" + super.toString()
-                + " (by: " + dueDate.format(formatter) + ")";
+                + " (by: " + dueDate.format(FORMATTER) + ")";
     }
 
     @Override

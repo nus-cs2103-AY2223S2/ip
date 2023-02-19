@@ -11,7 +11,7 @@ public class Event extends Task {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d LLL uuuu, hh:mm a");
+    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE, d LLL uuuu, hh:mm a");
 
     /**
      * Creates an event object with the given task description,
@@ -38,8 +38,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: " + startDateTime.format(formatter)
-                + " to: " + endDateTime.format(formatter) + ")";
+                + " (from: " + startDateTime.format(FORMATTER)
+                + " to: " + endDateTime.format(FORMATTER) + ")";
     }
 
     @Override
