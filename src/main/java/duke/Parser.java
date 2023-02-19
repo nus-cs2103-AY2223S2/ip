@@ -19,15 +19,13 @@ public class Parser {
     }
 
     /**
-     * Parses a string into a date that has the output format
+     * Parses a string into a date
      *
      * @param text text to parse
      * @return LocalDate in the output format
      */
     public LocalDate parseDate(String text) {
-        LocalDate dateInInputFormat = LocalDate.parse(text, inputFormat);
-        String dateInOutputFormat = dateInInputFormat.format(outputFormat);
-        return LocalDate.parse(dateInOutputFormat, outputFormat);
+        return LocalDate.parse(text, inputFormat);
     }
 
     /**
@@ -36,7 +34,7 @@ public class Parser {
      * @param date to be converted
      * @return string in input format
      */
-    public String dateToLogFormat(LocalDate date) {
-        return date.format(inputFormat);
+    public String dateToOutputFormat(LocalDate date) {
+        return date.format(outputFormat);
     }
 }

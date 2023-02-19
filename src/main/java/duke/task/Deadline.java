@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 public class Deadline extends Task {
     public static final Pattern PATTERN = Pattern.compile("(.+) /by (.+)");
     protected LocalDate by;
+    protected Parser parser;
+
 
     public static InvalidFormatException getInvalidFormatException() {
         return new InvalidFormatException("deadline name /by yyyy-MM-dd");
@@ -38,15 +40,16 @@ public class Deadline extends Task {
         super(description, isDone);
         this.by = parser.parseDate(by);
         classIcon = "D";
+        this.parser = parser;
     }
 
     @Override
     public String toString() {
-        return String.format("%s By: %s", super.toString(), by);
+        return String.format("%s By: %s", super.toString(), parser.dateToOutputFormat(by));
     }
 
     @Override
-    public String toString(Parser parser) {
-        return String.format("%s %s", super.toString(), parser.dateToLogFormat(by));
+    public String toStringLogFormat() {
+        return String.format("%s %s", super.toString(), by);
     }
 }

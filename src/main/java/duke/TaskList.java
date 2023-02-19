@@ -157,7 +157,6 @@ public class TaskList {
         int maxDigits = 1 + (int) Math.floor(Math.log10(tasks.size()));
         int index = 0;
         for (Task task : tasks) {
-
             output.append("\n");
             output.append(String.format("%" + maxDigits + "d", index + 1).replace(' ', '0'));
             output.append(task.toString());
@@ -184,7 +183,7 @@ public class TaskList {
     private void updateLogFile() throws IOException {
         LinkedList<String> texts = new LinkedList<>();
         for (Task t : tasks) {
-            texts.add(t.toString(parser));
+            texts.add(t.toStringLogFormat());
         }
         storage.update(texts);
     }

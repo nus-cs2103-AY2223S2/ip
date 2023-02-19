@@ -65,12 +65,11 @@ public abstract class Task {
     }
 
     /**
-     * The string representation of a task. Any dates are modified by the Parser
+     * The string representation of a task. Any dates are changed to chosen output format
      *
-     * @param parser to reformat dates
      * @return String representation of Task
      */
-    public String toString(Parser parser) {
+    public String toStringLogFormat() {
         return String.format("[%s][%s] %s", classIcon, getStatusIcon(), description);
     }
 

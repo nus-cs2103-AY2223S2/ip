@@ -13,6 +13,7 @@ public class Event extends Task {
     public static final Pattern PATTERN = Pattern.compile("(.+) /from (.+) /to (.+)");
     protected LocalDate to;
     protected LocalDate from;
+    protected Parser parser;
 
     public static InvalidFormatException getInvalidFormatException() {
         return new InvalidFormatException("event name /from yyyy-MM-dd /to yyyy-MM-dd");
@@ -31,19 +32,20 @@ public class Event extends Task {
         this.from = parser.parseDate(from);
         this.to = parser.parseDate(to);
         classIcon = "E";
+        this.parser = parser;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "%s From: %s To: %s", super.toString(), to, from);
+                "%s From: %s To: %s",
+                super.toString(),
+                parser.dateToOutputFormat(to),
+                parser.dateToOutputFormat(from));
     }
 
     @Override
-    public String toString(Parser parser) {
-        return String.format("%s %s %s",
-                super.toString(),
-                parser.dateToLogFormat(to),
-                parser.dateToLogFormat(from));
+    public String toStringLogFormat() {
+        return String.format("%s %s %s", super.toString(), to, from);
     }
 }
