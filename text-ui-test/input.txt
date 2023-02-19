@@ -1,0 +1,11 @@
+todo buy slippers
+list
+deadline move to new house /by next week
+event tutorial /from Wed 11pm /to 1am
+list
+mark 1
+mark 2
+list
+unmark 1
+list
+bye
