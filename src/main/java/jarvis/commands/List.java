@@ -21,6 +21,11 @@ public class List extends Command {
 
     @Override
     public String execute() {
+        //  Guard Clause:
+        if (tasks.size() == 0) {
+            return "You don't have any pending tasks, Boss.";
+        }
+
         StringBuilder res = new StringBuilder();
         res.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
