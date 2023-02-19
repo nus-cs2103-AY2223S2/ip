@@ -1,5 +1,4 @@
-D | 0 | CS3230 Programming Assignment | 17-02-2023 | High Priority
+D | 1 | CS3230 Programming Assignment | 17-02-2023 | High Priority
 E | 1 | Class Gathering | 12-2-2023 1600 | 12-2-2023 1900
-T | 0 | Buy groceries | Medium Priority
 E | 0 | SPhL | 08-07-2023 0900 | 08-07-2023 1300 | Awesome Event, Must Attend
 D | 0 | tP v1.2 | 17-2-2023 | High Priority
