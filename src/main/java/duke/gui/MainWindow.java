@@ -10,8 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.OutputStream;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -30,9 +28,19 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * {inheritDoc}
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showWelcomeMsg();
+    }
+
+    /**
+     * helper function to display welcome message to GUI
+     */
+    private void showWelcomeMsg() {
         String response = "Hello! I'm Duke!\n"
                 + "currently my functionality includes:\n"
                 + "bye\n"
