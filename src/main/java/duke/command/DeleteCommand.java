@@ -14,6 +14,12 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList list, Ui ui) {
+        try {
+            list.get(index);
+        }
+        catch (IndexOutOfBoundsException e) {
+            return ui.printOutOfBoundsMessage(list);
+        }
         String output = ui.printDeleteMessage(list.get(index), list);
         list.delete(index);
         return output;

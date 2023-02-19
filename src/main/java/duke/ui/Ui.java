@@ -48,4 +48,9 @@ public class Ui {
     public String printDuplicateTaskMessage() {
         return ("Oops, this task already exist!");
     }
+
+    public String printOutOfBoundsMessage(TaskList list) {
+        return ("There are " + list.size() + " tasks in the list, please choose " +
+                "a number from 1 to " + list.size() + "!");
+    }
 }

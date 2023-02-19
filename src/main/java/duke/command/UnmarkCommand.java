@@ -14,6 +14,12 @@ public class UnmarkCommand extends Command {
 
     @Override
     public String execute(TaskList list, Ui ui) {
+        try {
+            list.get(index);
+        }
+        catch (IndexOutOfBoundsException e) {
+            return ui.printOutOfBoundsMessage(list);
+        }
         list.unmark(index);
         return ui.printUnmarkMessage(list.get(index));
     }

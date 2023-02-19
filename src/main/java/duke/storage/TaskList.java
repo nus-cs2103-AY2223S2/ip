@@ -8,6 +8,7 @@ import java.util.ArrayList;
 /**
  * Represents list of tasks. A <code>TaskList</code> object corresponds to
  * the list of tasks that the user has recorded
+ *
  */
 
 import java.util.HashMap;
@@ -35,14 +36,15 @@ public class TaskList {
 
     public void removeFind(Task task) {
         for (Map.Entry<String, HashSet<Task>> set : map.entrySet()) {
-            if (set.getValue().contains(task)) {
-                set.getValue().remove(task);
-            }
+            set.getValue().remove(task);
         }
     }
     
     public String find(String word) {
         String output = "";
+        if (!map.containsKey(word)) {
+            return "";
+        }
         for (Task task: map.get(word)) {
             output += (task.toString() + "\n");
         }
@@ -89,7 +91,7 @@ public class TaskList {
      * @param num Index of the task to be deleted.
      */
     public void delete(int num) {
-        Task removed = list.remove(num - 1);
+        list.remove(num - 1);
     }
 
     /**
