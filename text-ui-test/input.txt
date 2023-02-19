@@ -1,0 +1,7 @@
+list
+todo research
+deadline TA /by 2022-10-22
+mark TA
+mark 2
+list
+bye
