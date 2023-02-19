@@ -24,11 +24,14 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     String javaFxVersion = '11'
 
+<<<<<<< HEAD
 //    implementation 'org.openjfx:javafx-controls:11'
 //    implementation 'org.openjfx:javafx-fxml:11'
 //    implementation 'org.openjfx:javafx-base:11'
 //    implementation 'org.openjfx:javafx-graphics:11'
 
+=======
+>>>>>>> branch-A-JavaDoc
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -58,7 +61,11 @@ test {
 }
 
 application {
+<<<<<<< HEAD
     mainClassName = "Duke.gui.Main"
+=======
+    mainClassName = "Duke"
+>>>>>>> branch-A-JavaDoc
 }
 
 shadowJar {
