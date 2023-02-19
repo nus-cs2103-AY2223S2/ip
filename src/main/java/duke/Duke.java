@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import duke.command.Command;
@@ -34,6 +35,12 @@ public class Duke {
     public String getResponse(String input) {
 
         try {
+            File saveDataFile = new File("savedata.txt");
+            if (saveDataFile.createNewFile()) {
+                FileWriter saveDataWriter = new FileWriter("savedata.txt");
+                saveDataWriter.write("1");
+                saveDataWriter.close();
+            };
             saveNo = Storage.getCurrentSaveNumber();
             File saveFile = new File("duke" + saveNo + ".txt");
             if (saveFile.createNewFile()) {
