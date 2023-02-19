@@ -4,7 +4,7 @@ package treebot.props;
 
 import java.time.LocalDateTime;
 
-public class EventProps<T> extends Props {
+public class EventProps extends Props {
 
 
     private LocalDateTime startDate;

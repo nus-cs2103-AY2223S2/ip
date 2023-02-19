@@ -132,7 +132,7 @@ public class Parser {
         return new DeadlineProps(taskDescription, deadline);
     }
 
-    private EventProps<LocalDateTime> parseEventProps(String fullCommand) throws TreeBotException {
+    private EventProps parseEventProps(String fullCommand) throws TreeBotException {
         String[] commandSplit = fullCommand.split("\\s+",2);
         assert commandSplit.length >= 2 : "Command is valid";
         String[] rangeSplit = commandSplit[1].split(" /from ", 2);
@@ -144,7 +144,7 @@ public class Parser {
         LocalDateTime end = dateTimeFormatter.format(startEndSplit[1]);
 
 
-        return new EventProps<LocalDateTime>(rangeSplit[0], start, end);
+        return new EventProps(rangeSplit[0], start, end);
     }
 
     private void checkTodoParameters(String fullCommand) throws TreeBotException {
