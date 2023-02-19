@@ -39,10 +39,6 @@ public class Ui {
         reply("Hello! I'm Duke\n What can I do for you?");
     }
 
-    public void signOff() {
-        reply("Bye. Hope to see you again!");
-    }
-
     public String readCommand() {
         return input.nextLine();
     }
