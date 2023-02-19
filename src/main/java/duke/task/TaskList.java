@@ -108,4 +108,29 @@ public class TaskList {
         Task taskToBeDeleted = tasks.remove(taskNumber - 1);
         return taskToBeDeleted;
     }
+
+    /**
+     * Finds the task description that contains the string.
+     * @param string The keyword to be matched onto the existing task lists.
+     * @param ui UI object that shows response to the user.
+     */
+    public void findTask(String string, UI ui) {
+        assert string != "" : "string must be non-empty.";
+        ArrayList<Task> searchResults = new ArrayList<>();
+        ArrayList<Integer> taskNumber = new ArrayList<>();
+        int num = 1;
+
+        for (Task task : tasks) {
+            if (task.getNameOfTask().contains(string)) {
+                searchResults.add(task);
+                taskNumber.add(num);
+            }
+            num++;
+        }
+        ui.printResponse("I have found these matching tasks in your list:");
+
+        for (int i = 0; i < searchResults.size(); i++) {
+            ui.printResponse(taskNumber.get(i) +". " + searchResults.get(i).toString());
+        }
+    }
 }
