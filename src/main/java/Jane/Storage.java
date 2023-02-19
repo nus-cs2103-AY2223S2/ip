@@ -1,5 +1,9 @@
 package jane;
 
+import jane.task.Deadline;
+import jane.task.Event;
+import jane.task.Todo;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -52,20 +56,24 @@ import java.util.List;
             boolean b = (i == 1);
             switch (line[0]) {
                 case "T":
-                    jane.task.Todo T = Parser.parserT(s, tasks.size());
+                    Todo T = Parser.parserT(s, tasks.size());
                     T.changeState(b);
                     tasks.add(T);
                     break;
                 case "D":
-                    jane.task.Deadline D = Parser.parserD(s, tasks.size());
+                    String in = "from " + s;
+                    Deadline D = Parser.parserD(in, tasks.size());
                     D.changeState(b);
                     tasks.add(D);
                     break;
                 case "E":
-                    jane.task.Event E = Parser.parserE(s, tasks.size());
+                    //there is a problem with the input need to find out what. the error is here lol
+                    Event E = Parser.parseFromStorageE(s, tasks.size());
                     E.changeState(b);
                     tasks.add(E);
                     break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + line[0]);
             }
 
         }

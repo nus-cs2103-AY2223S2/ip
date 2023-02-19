@@ -56,11 +56,20 @@ public class Parser {
             System.out.println("Please specify when event is");
         }
         String[] start = s[1].split(" ");
-        //input event is "event meeting /2019-02-03 10:30/12:40"
+        //input event is "event meeting |2019-02-03 10:30|12:40"
         LocalDateTime startE = LocalDateTime.parse(String.format("%sT%s", start[0], start[1]));
         //here I am assuming an event only lasts 1 day since the day it starts is the day it ends
         LocalDateTime end = LocalDateTime.parse(String.format("%sT%s", start[0], s[2]));
         jane.task.Event e = new jane.task.Event(count + 1, s[0], startE, end);
+        return e;
+    }
+
+    public static jane.task.Event parseFromStorageE(String output, int count) {
+        String s = output.substring(4);
+        String[] string = s.split("\\|");
+        LocalDateTime startE = LocalDateTime.parse(string[1]);
+        LocalDateTime end = LocalDateTime.parse( string[2]);
+        jane.task.Event e = new jane.task.Event(count+1, string[0], startE, end);
         return e;
     }
 }
