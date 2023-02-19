@@ -26,6 +26,7 @@ public class Duke {
         try {
             response = ui.parseIn(input, taskList, ui, storage);
             this.storage.save(taskList);
+            assert response instanceof String : "Response not a String";
             return response;
         } catch (Exception e) {
             return e.toString();

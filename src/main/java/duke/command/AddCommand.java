@@ -15,6 +15,7 @@ public class AddCommand extends Command {
         switch(this.command) {
             case TODO:
                 if (arg.size() == 0) {
+                    assert arg.size() > 0;
                     throw new DukeException("TASK MUST HAS DESCRIPSHUN MEOW");
                 }
                 String description = String.join(" ", arg);
