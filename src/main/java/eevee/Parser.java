@@ -3,6 +3,17 @@ package eevee;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+import eevee.command.Command;
+import eevee.command.MarkCommand;
+import eevee.command.AddToDoCommand;
+import eevee.command.FindCommand;
+import eevee.command.AddDeadlineCommand;
+import eevee.command.AddEventCommand;
+import eevee.command.DeleteCommand;
+import eevee.command.UnmarkCommand;
+import eevee.command.ExitCommand;
+import eevee.command.ListCommand;
+import eevee.command.HelpCommand;
 import eevee.exception.EeveeException;
 import eevee.exception.NoTaskToDeleteException;
 import eevee.exception.TaskNoContentException;
@@ -138,47 +149,59 @@ public class Parser {
     public static String getTypeOfCommand(String command) {
         return command.split(" ")[0];
     }
-    
-    public static String handleInput(String command, Ui ui, TaskList tasks, Storage storage) throws EeveeException,
-            IOException, IndexOutOfBoundsException, DateTimeParseException, TaskNoContentException,
-            NoTaskToDeleteException, TaskNoNameException {
+
+    /**
+     * Converts a String of command to a Command object
+     * @param command the user command
+     * @return a Command object
+     * @throws EeveeException if command is not recognised
+     */
+    public static Command getCommand(String command) throws EeveeException {
         String typeOfCommand = getTypeOfCommand(command);
         switch (typeOfCommand) {
         case "bye":
-            return ui.sayBye();
+            return new ExitCommand();
         case "help":
-            return ui.getHelp();
+            return new HelpCommand();
         case "list":
-            return ui.showTaskList(tasks);
+            return new ListCommand();
         case "mark":
-            Task markedTask = tasks.markTaskAsDone(getIndexFromCommand(command), storage);
-            assert markedTask.getTaskStatus() : "Task is wrongly marked.";
-            return ui.showMarkingTaskDone(markedTask);
+            return new MarkCommand(command);
         case "unmark":
-            Task unmarkedTask = tasks.markTaskAsUndone(getIndexFromCommand(command), storage);
-            assert !unmarkedTask.getTaskStatus() : "Task is wrongly marked.";
-            return ui.showMarkingTaskUndone(unmarkedTask);
-        case "todo":
-            Task newTodo = Parser.makeTodoFromCommand(command);
-            tasks.addTask(newTodo, storage);
-            return ui.showAddingNewTask(newTodo, tasks);
-        case "deadline":
-            Task newDeadline = Parser.makeDeadlineFromCommand(command);
-            tasks.addTask(newDeadline, storage);
-            return ui.showAddingNewTask(newDeadline, tasks);
-        case "event":
-            Task newEvent = Parser.makeEventFromCommand(command);
-            boolean canAddEvent = tasks.canAddTask(newEvent, storage);
-            return canAddEvent ? ui.showAddingNewTask(newEvent, tasks) : ui.showFailAddingNewTask(tasks);
+            return new UnmarkCommand(command);
         case "delete":
-            Task taskToDelete = tasks.deleteTask(getIndexFromCommand(command), storage);
-            return ui.showDeletingTask(taskToDelete, tasks);
+            return new DeleteCommand(command);
+        case "todo":
+            return new AddToDoCommand(command);
+        case "deadline":
+            return new AddDeadlineCommand(command);
+        case "event":
+            return new AddEventCommand(command);
         case "find":
-            String searchWord = Parser.getSearchWord(command);
-            TaskList tasksFound = tasks.makeTaskFinder(searchWord);
-            return ui.showFindingTask(tasksFound);
+            return new FindCommand(command);
         default:
             throw new EeveeException("Command not recognised.");
         }
+    }
+
+    /**
+     * Handles the Command by executing it
+     * @param command the Command to handle
+     * @param ui the Ui for output message
+     * @param tasks the TaskList containing the current tasks
+     * @param storage the Storage object for handling saving to hard drive
+     * @return a String to output to user
+     * @throws EeveeException if command is not recognised
+     * @throws IOException if something goes wrong when saving to hard drive
+     * @throws IndexOutOfBoundsException if the command is not in the correct format so command cannot be handled
+     * @throws DateTimeParseException if format of date and time given is wrong
+     * @throws TaskNoContentException if no content is given for the task
+     * @throws NoTaskToDeleteException if the index given to delete is out of bounds
+     * @throws TaskNoNameException if no name is given for the task
+     */
+    public static String handleCommand(Command command, Ui ui, TaskList tasks, Storage storage) throws EeveeException,
+            IOException, IndexOutOfBoundsException, DateTimeParseException, TaskNoContentException,
+            NoTaskToDeleteException, TaskNoNameException {
+        return command.execute(tasks, ui, storage);
     }
 }

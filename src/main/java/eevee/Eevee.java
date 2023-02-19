@@ -1,5 +1,6 @@
 package eevee;
 
+import eevee.command.Command;
 import eevee.exception.EeveeException;
 import eevee.exception.NoTaskToDeleteException;
 import eevee.exception.TaskNoContentException;
@@ -28,7 +29,9 @@ public class Eevee {
 
     protected String getResponse(String input) {
         try {
-            return Parser.handleInput(input, ui, tasks, storage);
+            Command newCommand = Parser.getCommand(input);
+            String output = Parser.handleCommand(newCommand, ui, tasks, storage);
+            return output;
         } catch (EeveeException | TaskNoContentException | NoTaskToDeleteException | TaskNoNameException e) {
             return e.getMessage();
         } catch (IndexOutOfBoundsException e) {
