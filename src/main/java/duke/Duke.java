@@ -18,7 +18,6 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
-
     /**
      * Constructor for Duke.
      */
