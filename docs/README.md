@@ -189,6 +189,3 @@ Task containing the string eat in its name will be returned.
 | Find task            | `find TASK_string` <br/> eg. find do                                                                                            |
  
 
-| testing |
-| ------- |
-| hello   |
