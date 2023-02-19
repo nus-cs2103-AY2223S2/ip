@@ -62,7 +62,7 @@ public class Command {
             case "find":
                 return findTasks(taskList);
             case "tag":
-                tagTask(taskList);
+                return tagTask(taskList);
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -195,8 +195,12 @@ public class Command {
         //Checks if argument is numeric
         assert Pattern.compile("\\d+").matcher(this.args).find();
 
-        taskList.removeTask(Integer.parseInt(this.args));
-        String deleteTaskMsg = "Deleted Task no. " + this.args;
+        int taskNumber = Integer.parseInt(this.args);
+        taskList.removeTask(taskNumber - 1);
+        String deleteTaskMsg = GUI.BORDERLINE
+                + "Deleted Task No.: "
+                + (taskNumber) + "\n"
+                + GUI.BORDERLINE;
         return deleteTaskMsg;
     }
 
@@ -227,11 +231,11 @@ public class Command {
     }
 
     private String tagTask(TaskList taskList) throws DukeException {
-        Pattern tagPattern = Pattern.compile("\\s+.\\d+");
-        Matcher matchTag = tagPattern.matcher(this.args);
+        Pattern tagPattern = Pattern.compile("[a-zA-Z]+.\\d+");
+        Matcher matchTag = tagPattern.matcher(this.args.trim());
         if (matchTag.find()) {
             String[] arguments = this.args.split(" ");
-            int index = Integer.parseInt(arguments[1]);
+            int index = Integer.parseInt(arguments[1]) - 1;
             Tag newTag = new Tag(arguments[0]);
             return taskList.addTagToTask(newTag, index);
         } else {

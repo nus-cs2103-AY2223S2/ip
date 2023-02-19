@@ -59,16 +59,31 @@ public class Task {
      */
     @Override
     public String toString() {
-        String output = "[" + getStatusIcon() + "]" + " | "  +this.description;
+        String output = "[" + getStatusIcon() + "]" + " | " + this.description;
         return output;
     }
 
+    /**
+     * Adds a tag to task
+     * @param tag tag to be added to task
+     */
     public void addTag(Tag tag){
         this.tag = tag;
     }
 
+    /**
+     * Removes tag from task
+     */
     public void removeTag(){
         TaskList.updateTagLibrary(this.tag);
         this.tag = new Tag("");
+    }
+
+    /**
+     * Checks if task has been tagged
+     * @return boolean value of whether the task is tagged or not
+     */
+    public boolean hasTag(){
+        return this.tag.toString() == "#";
     }
 }

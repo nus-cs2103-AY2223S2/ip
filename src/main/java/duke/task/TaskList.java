@@ -159,7 +159,9 @@ public class TaskList {
     public void removeTask(int index) throws DukeException {
         try {
             Task taskToRemove = storage.get(index);
-            taskToRemove.removeTag();
+            if (taskToRemove.hasTag()) {
+                taskToRemove.removeTag();
+            }
             storage.remove(index);
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid Index given!");
@@ -212,7 +214,7 @@ public class TaskList {
             taskToTag.addTag(tag);
             String addedTagMsg = GUI.BORDERLINE
                     + "Aight! I've tagged the following task with " + tag.toString() + ":\n"
-                    + taskToTag.toString() + "\n"
+                    + taskToTag + "\n"
                     + GUI.BORDERLINE;
             return addedTagMsg;
         } catch (IndexOutOfBoundsException err){
