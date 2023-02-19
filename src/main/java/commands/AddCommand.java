@@ -1,5 +1,7 @@
 package commands;
 
+import java.io.IOException;
+
 import nook.Storage;
 import nook.TaskList;
 import nook.Ui;
@@ -35,10 +37,14 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
-        list.addTask(task);
-        storage.saveListToFile(list, ui);
-        return "Got it, that will be 1000 bells- Just kidding!\n"
-                + "I'll add that task for you:\n" + task.toString() + "\n Now you have "
-                + list.getSize() + " tasks in the list.";
+        try {
+            list.addTask(task);
+            storage.saveListToFile(list, ui);
+            return "Got it, that will be 1000 bells- Just kidding!\n"
+                    + "I'll add that task for you:\n" + task.toString() + "\n Now you have "
+                    + list.getSize() + " tasks in the list.";
+        } catch (IOException e) {
+            return ui.getSavingError();
+        }
     }
 }

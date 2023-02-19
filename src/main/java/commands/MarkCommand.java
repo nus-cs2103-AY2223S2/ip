@@ -2,6 +2,8 @@ package commands;
 
 import static commands.CommandType.MARK;
 
+import java.io.IOException;
+
 import nook.Storage;
 import nook.TaskList;
 import nook.Ui;
@@ -41,22 +43,30 @@ public class MarkCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) {
         if (taskIndex >= list.getSize()) {
             return UNKNOWN_TASK_MESSAGE;
-        } else {
-            assert taskIndex > 0 : "Task Index cannot be less than 1";
-            Task currentTask = list.getTask(taskIndex);
-            String resultMessage = "";
-            if (this.getType().equals(MARK)) {
-                currentTask.markAsDone();
-                resultMessage = "Great job! I knew you could do it. Keep up the good work!\n"
-                        + "I've marked this task as done:\n"
-                        + currentTask.toString();
-            } else {
-                currentTask.markAsNotDone();
-                resultMessage = "Alright, I've marked this task as not done:\n"
-                        + currentTask.toString();
-            }
-            storage.saveListToFile(list, ui);
-            return resultMessage;
         }
+
+        assert taskIndex > 0 : "Task Index cannot be less than 1";
+
+        Task currentTask = list.getTask(taskIndex);
+        String resultMessage;
+
+        if (this.getType().equals(MARK)) {
+            currentTask.markAsDone();
+            resultMessage = "Great job! I knew you could do it. Keep up the good work!\n"
+                    + "I've marked this task as done:\n"
+                    + currentTask;
+        } else {
+            currentTask.markAsNotDone();
+            resultMessage = "Alright, I've marked this task as not done:\n"
+                    + currentTask;
+        }
+
+        try {
+            storage.saveListToFile(list, ui);
+        } catch (IOException e) {
+            return ui.getSavingError();
+        }
+
+        return resultMessage;
     }
 }
