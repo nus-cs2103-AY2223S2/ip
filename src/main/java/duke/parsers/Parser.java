@@ -63,8 +63,7 @@ public class Parser {
         case "find":
             return new FindCommand(requestContent);
 
-
-            default:
+        default:
             return new UnknownCommand();
         }
     }
