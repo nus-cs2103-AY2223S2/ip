@@ -1,14 +1,17 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import java.util.ArrayList;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+
 public class TaskListTest {
     @Test
-    public void addToDo_normalInput_() {
+    public void addToDo_normalInput() {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         try {
             taskList.addToDo("todo go shopping");
@@ -18,7 +21,6 @@ public class TaskListTest {
             String expectedResult = "[T][ ] go shopping";
             String actualResult = task.toString();
             assertEquals(expectedResult, actualResult);
-            
         } catch (DukeException e) {
             fail();
         }
@@ -34,5 +36,4 @@ public class TaskListTest {
             assertEquals(e.getMessage(), "Please enter task description");
         }
     }
-
 }
