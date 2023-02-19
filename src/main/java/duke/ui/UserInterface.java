@@ -1,16 +1,12 @@
 package duke.ui;
 
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-
 import duke.Duke;
 import duke.tasks.TaskList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -31,20 +27,17 @@ public class UserInterface extends AnchorPane {
 
     private Duke duke;
 
-    /** Creates a new UserInterface object. */
-    public UserInterface() {
-    }
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /** Prints a greeting message. */
     public void showGreeting() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Duke", null));
+        showMessage("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     /** Prints an exit message */
     public void showExitMessage() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Bye. Hope to see you again soon!", null));
+        showMessage("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -53,18 +46,13 @@ public class UserInterface extends AnchorPane {
      * @param message The message to be printed.
      */
     public void showMessage(String message) {
-
-    }
-
-    /** Prints the prompt symbol. */
-    public void showPrompt() {
-
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(message, dukeImage));
     }
 
     public void setDuke(Duke d) {
         duke = d;
-        // dialogContainer.getChildren().addAll(
-        // DialogBox.getDukeDialog(duke.getGreeting(), dukeImage));
+
     }
 
     /**
@@ -87,6 +75,12 @@ public class UserInterface extends AnchorPane {
 
     @FXML
     private void handleUserInput() {
+        String input = userInput.getText();
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage));
+
+        duke.run(input);
         userInput.clear();
     }
 }

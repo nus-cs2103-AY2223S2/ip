@@ -3,7 +3,6 @@ package duke;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.exceptions.IOException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -11,11 +10,7 @@ import duke.ui.UserInterface;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -29,12 +24,6 @@ public class Duke extends Application {
     private TaskList list;
     private Parser parser;
     private Storage storage;
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
     /** Creates a new Duke object. */
     public Duke() {
@@ -51,17 +40,29 @@ public class Duke extends Application {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setScene(scene);
+            ui = fxmlLoader.getController();
             fxmlLoader.<UserInterface>getController().setDuke(this);
+            stage.setScene(scene);
             stage.show();
+
+            ui.showGreeting();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void run(String input) {
+        try {
+            parser.parse(input).execute(list, ui, storage);
+        } catch (Exception e) {
+            ui.showMessage(e.getMessage());
         }
     }
 

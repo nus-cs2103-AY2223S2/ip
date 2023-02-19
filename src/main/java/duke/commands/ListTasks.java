@@ -18,6 +18,5 @@ public class ListTasks extends Command {
         String message = list.stream()
                 .map(t -> String.format("%d. %s", t.id(), t))
                 .collect(Collectors.joining("\n"));
-        ui.showMessage(message);
     }
 }

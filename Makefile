@@ -1,7 +1,8 @@
 .PHONY: run compile test
 
 run:
-	./gradlew run
+	./gradlew shadowJar
+	java -jar build/libs/duke.jar
 
 compile: 
 	./gradlew build
