@@ -1,12 +1,15 @@
 package duke;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
+
+
+
 
 public class UiTest {
     private final Ui ui = new Ui();

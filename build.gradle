@@ -69,7 +69,7 @@ test {
 }
 
 application {
-    mainClassName = "JavaFXUi"
+    mainClassName = "duke.Main"
 }
 
 shadowJar {
