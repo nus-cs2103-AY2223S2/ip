@@ -13,7 +13,8 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * Constructs a new Deadline task with the given description and deadline datetime.
+     * Constructs a new Deadline task with the given description,
+     * priority and deadline datetime.
      *
      * @param description The description of the task.
      * @param by The deadline datetime of the task.
@@ -28,6 +29,7 @@ public class Deadline extends Task {
      *
      * @param description The description of the task.
      * @param by The deadline datetime of the task.
+     * @param priority the priority of the event.
      */
     public Deadline(String description, LocalDate by, Priority priority) {
         super(description, DEADLINE, priority);
@@ -39,6 +41,7 @@ public class Deadline extends Task {
      * @param description The description of the task.
      * @param isDone The completion status of the task.
      * @param by The deadline datetime of the task.
+     * @param priority the priority of the task.
      */
     public Deadline(String description, boolean isDone, LocalDate by, Priority priority) {
         super(description, isDone, DEADLINE, priority);
