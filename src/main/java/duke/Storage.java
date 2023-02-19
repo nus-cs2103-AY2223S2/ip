@@ -32,7 +32,7 @@ public class Storage {
      */
     public void saveData(ArrayList<Task> tasks) throws IOException {
         File userData = new File("userData");
-        if (!userData.exists()) {
+        if (userData.exists() == false) {
             userData.mkdir();
         }
         File dukeTxt = new File(userData, "duke.txt");
@@ -61,7 +61,7 @@ public class Storage {
      */
     public void loadData(ArrayList<Task> tasks) throws IOException {
         File userData = new File("userData");
-        if (!userData.exists()) {
+        if (userData.exists() == false) {
             userData.mkdir();
         }
         File dukeTxt = new File(userData, "duke.txt");
