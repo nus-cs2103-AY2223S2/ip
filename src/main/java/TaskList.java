@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Data {
+public class TaskList {
     ArrayList<Task> data = new ArrayList<>();
 
     public void addEntry(Task task) {
@@ -22,9 +22,11 @@ public class Data {
     }
     public int getSize() { return this.data.size();}
 
-    public void printData() {
+    public String printData() {
+        String tasks = "";
         for (int i = 0; i < this.data.size(); i++) {
-            System.out.println((i+1) + ". " + this.data.get(i).toString());
+            tasks = (i+1) + ". " + this.data.get(i).toString() + "\n";
         }
+        return tasks;
     }
 }
