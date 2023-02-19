@@ -3,6 +3,7 @@
 Duke **is a chatbot designed to help you easily record and manage your daily tasks.**
 
 ### - Quick start
+
 ### - Features
 + **todo**
 + **deadline**
@@ -14,6 +15,7 @@ Duke **is a chatbot designed to help you easily record and manage your daily tas
 + **find**
 + **sort**
 + **bye**
+
 ### - GUI special improvement
 
 
