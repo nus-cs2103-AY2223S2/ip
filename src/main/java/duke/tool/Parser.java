@@ -1,8 +1,9 @@
 package duke.tool;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,8 +15,8 @@ import duke.exception.DukeCommandNotFoundException;
 import duke.exception.DukeEmptyTaskException;
 
 public class Parser {
-    private static DateTimeFormatter read_fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    private static DateTimeFormatter print_fmt = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter read_fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter print_fmt = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm a");
 
     public static DateTimeFormatter getReadFormat() {
         return read_fmt;
@@ -29,10 +30,11 @@ public class Parser {
         DateTimeFormatter read_fmt = getReadFormat();
         DateTimeFormatter print_fmt = getPrintFormat();
         try {
-            LocalDate lt = LocalDate.parse(s, read_fmt);
+            LocalDateTime lt = LocalDateTime.parse(s, read_fmt);
             return lt.format(print_fmt);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException | UnsupportedTemporalTypeException e) {
             e.printStackTrace();
+            print("please follow the standard datetime format: yyyy-MM-dd HH:mm");
         }
         return s;
     }
