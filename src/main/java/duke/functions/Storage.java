@@ -1,4 +1,5 @@
 package duke.functions;
+import duke.dukeexceptions.DukeException;
 import duke.dukeexceptions.TaskListEmpty;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -23,8 +24,40 @@ public class Storage {
      * @param filePath path of where the file is.
      */
     public Storage(String filePath) {
-        this.path = "./src/main/data/duke.txt";
+        File folder = new File("data");
+        try {
+            if (folder.exists()) {
+                System.out.println("    Data directory exists.");
+            } else {
+                System.out.println("    Data directory does not exist. Creating directory.");
+                if (folder.mkdir()) {
+                    System.out.println("    Data directory created.");
+                } else {
+                    throw new DukeException("    Data directory cannot be created.");
+                }
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        this.path = filePath;
         taskStrings = new ArrayList<String>();
+        File file = new File(filePath);
+
+        if (file.exists()) {
+            System.out.println("    Saved list exists.");
+        } else {
+            System.out.println("    Saved list does not exist. Creating list file.");
+            try {
+                if (file.createNewFile()) {
+                    System.out.println("    List file created.");
+                } else {
+                    throw new DukeException("    List file cannot be created.");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     /**

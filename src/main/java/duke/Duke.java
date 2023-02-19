@@ -13,7 +13,7 @@ public class Duke {
 
 
     public Duke() {
-        this("src/main/data/duke.txt");
+        this("data/duke.txt");
     }
 
     /**
