@@ -86,11 +86,6 @@ public class MeggyTime {
         return null;
     }
 
-    /** @return User-customized time string in square brackets or formatted date-time. */
-    public String toString() {
-        return formatted == null ? '[' + customized + ']' : formatted.format(OUT_FMT);
-    }
-
     /**
      * Two {@link MeggyTime} objects are equal iff they have same (equal or both null) formatted time and customized
      * time.
@@ -102,5 +97,10 @@ public class MeggyTime {
         }
         final MeggyTime other = (MeggyTime) o;
         return Objects.equals(formatted, other.formatted) && Objects.equals(customized, other.customized);
+    }
+
+    /** @return User-customized time string in square brackets or formatted date-time. */
+    public String toString() {
+        return formatted == null ? '[' + customized + ']' : formatted.format(OUT_FMT);
     }
 }

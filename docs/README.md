@@ -2,6 +2,7 @@
 
 Meggy is a command-line interactive task management `jar` program with GUI. It supports task addition, deletion, and
 lookup.
+![Ui](Ui.png)
 
 ## Getting started
 
@@ -235,8 +236,11 @@ need to save manually.
 
 Meggy data are saved as a text file `MeggyData.txt`. Advanced users are welcome to update data directly by editing that
 data file.
-
-If your changes to the data file makes its format invalid, Meggy will stop loading upon the first syntax error, give you
+<br>
+Changes to the data file during a Meggy session will not be kept once Meggy successfully executes a command that changes
+task list.
+<br>
+If your changes to the data file make its format invalid, Meggy will stop loading upon the first syntax error, give you
 a warning message, and only load the tasks already read.
 
 ## Command summary

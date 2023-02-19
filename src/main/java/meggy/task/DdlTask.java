@@ -53,6 +53,12 @@ public class DdlTask extends UserTask {
         return Resource.CMD_DDL + ' ' + args;
     }
 
+    /** @inheritDoc */
+    @Override
+    public String toString() {
+        return LABEL + super.toString() + " (by: " + due + ')';
+    }
+
     /** Two {@link DdlTask} objects are equal iff they have same (non-null) description and due time. */
     @Override
     public boolean equals(Object o) {
@@ -61,11 +67,5 @@ public class DdlTask extends UserTask {
         }
         final DdlTask other = (DdlTask) o;
         return due.equals(other.due) && desc.equals(other.desc);
-    }
-
-    /** @inheritDoc */
-    @Override
-    public String toString() {
-        return LABEL + super.toString() + " (by: " + due + ')';
     }
 }

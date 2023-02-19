@@ -10,7 +10,11 @@ import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
-import meggy.*;
+import meggy.Meggy;
+import meggy.MeggyTime;
+import meggy.Resource;
+import meggy.TaskList;
+import meggy.Util;
 import meggy.exception.Function;
 import meggy.exception.MeggyException;
 import meggy.task.DdlTask;
@@ -21,10 +25,11 @@ import meggy.task.UserTask;
 public class MeggyTest {
     private static final Random RAND = new Random();
     /** Roughly 400 loops per second */
-    private static final int N_LOOP = 60 * 400;
+    private static final int N_LOOP = 120 * 400;
     private static final int N_CORE = Runtime.getRuntime().availableProcessors();
     private static final Consumer<String> DROP = s -> {
     };
+    private static final File TEST_DIR = new File("test");
 
     private static final Supplier<String> todoInput = MeggyTest::randString;
     private static final Supplier<String> ddlInput = () -> {
@@ -57,6 +62,7 @@ public class MeggyTest {
         newTasks[0] = Util.TODO_NEW;
         newTasks[1] = Util.DDL_NEW;
         newTasks[2] = Util.EVENT_NEW;
+        TEST_DIR.mkdir();
     }
 
     /** @return String that will never be entirely whitespace. */
@@ -82,7 +88,8 @@ public class MeggyTest {
                 : LocalDateTime.ofEpochSecond(RAND.nextInt(), 0, ZoneOffset.UTC).format(MeggyTime.OUT_FMT));
     }
 
-    private static <T extends UserTask> void taskIntegrityTest(Supplier<String> randInput, Function<String, T> newTask) {
+    private static <T extends UserTask> void taskIntegrityTest(
+            Supplier<String> randInput, Function<String, T> newTask) {
         final String s = randInput.get();
         try {
             final T a = newTask.apply(s);
@@ -94,11 +101,8 @@ public class MeggyTest {
         }
     }
 
-    private static void randStorageTest(int iTest) throws MeggyException {
+    private static void randStorageTest(File storageFile) throws MeggyException {
         final int listLenMax = 50;
-        final File testDir = new File("test");
-        testDir.mkdir();
-        final File storageFile = new File(testDir, iTest + ".txt");
         final Meggy m1 = new Meggy(storageFile);
         m1.bindUi(DROP);
 
@@ -165,12 +169,13 @@ public class MeggyTest {
         });
     }
 
+
     @Test
     public void bulkStorageTest() {
         final int nTest = N_LOOP / 200 * N_CORE;
         IntStream.range(0, nTest).parallel().forEach(iTest -> {
             try {
-                randStorageTest(iTest);
+                randStorageTest(new File(TEST_DIR, iTest + ".txt"));
             } catch (MeggyException e) {
                 throw new RuntimeException(e);
             }
@@ -178,7 +183,7 @@ public class MeggyTest {
     }
 
     @Test
-    public void randStorageTest() throws MeggyException {
-        randStorageTest(-1);
+    public void storageTest() throws MeggyException {
+        randStorageTest(new File(TEST_DIR, ".txt"));
     }
 }
