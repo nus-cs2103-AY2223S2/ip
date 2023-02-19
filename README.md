@@ -7,7 +7,7 @@ Introducing Duke! Tasks made easier.
 ## Quick Start
 
 1. Download the `.jar` file from the Releases section
-2. Run java -jar duke.jar
+2. Run `java -jar duke.jar`
 
 ## Features
 
