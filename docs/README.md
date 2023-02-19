@@ -15,14 +15,14 @@ Open a command terminal, cd into the folder you put the jar file in, and use the
 Type the command in the command box and press Enter to execute it.
 
 ## Features 
--[Adding a Deadline task](#Adding a Deadline task)
--[Adding a Todo task](#Adding a Todo task)
--[Adding a Event task](#Adding a Event task)
--[Deleting a task](#Deleting a task)
--[Marking a Task](#Marking a Task)
--[Unmarking a Task](#Unmarking a Task)
--[List all tasks](#List all tasks)
--[List upcoming tasks](#List upcoming tasks)
+- [Adding a Deadline task](#Adding a Deadline task)
+- [Adding a Todo task](#Adding a Todo task)
+- [Adding a Event task](#Adding a Event task)
+- [Deleting a task](#Deleting a task)
+- [Marking a Task](#Marking a Task)
+- [Unmarking a Task](#Unmarking a Task)
+- [List all tasks](#List all tasks)
+- [List upcoming tasks](#List upcoming tasks)
 
 ### Adding a Deadline task : `deadline`
 Adds a deadline task to the to-do-list.
