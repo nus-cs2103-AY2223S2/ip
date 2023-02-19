@@ -11,11 +11,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-    public class Storage {
+/**
+ * to deal with load and updating the JaneList.txt
+ */
+public class Storage {
     private static final String currentD = Paths.get("").toAbsolutePath().toString();
     private static final Path dirPath = Paths.get(currentD, "data");
     private static final Path filePath = Paths.get(currentD, "data", "JaneList.txt");
-
+    /**
+     * Creates a directory to put the list
+     */
     public static void createDir() {
         try {
             if (Files.notExists(dirPath)) {
@@ -27,10 +32,11 @@ import java.util.List;
         }
 
     }
-        /**
-         * Creates JaneList.txt if it doesn't exist. Reads data from JaneList.txt otherwise
-         * @return ArrayList of all Tasks in duke.txt
-         */
+    /**
+     * Creates JaneList.txt if it doesn't exist. Reads data from JaneList.txt otherwise
+     * @return ArrayList of all Tasks in duke.txt
+     */
+    @SuppressWarnings("checkstyle:Indentation")
     public static ArrayList<jane.task.Task> loadList() {
         if (Files.notExists(filePath)) {
             try {
@@ -50,7 +56,7 @@ import java.util.List;
         assert lines != null;
         ArrayList<jane.task.Task> tasks = new ArrayList<>();
         for (String s : lines) {
-            //to separate each portion of the task eg D | task-name | deadline to easily see which type of task and deadline
+            // D | task-name | deadline to easily see which type of task and deadline
             String[] line = s.split("\\|");
             int i = Integer.parseInt(line[1]);
             boolean b = (i == 1);
@@ -77,7 +83,9 @@ import java.util.List;
         }
         return tasks;
     }
-    //Writes into JaneList.txt
+    /**
+     * Writes into JaneList.txt
+     */
     public static void updateList(ArrayList<jane.task.Task> tasks) {
         ArrayList<String> list = new ArrayList<>();
         assert !tasks.isEmpty();

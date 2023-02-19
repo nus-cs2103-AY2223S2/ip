@@ -10,8 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.Objects;
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -24,10 +22,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
 
-    private final Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/UserImg.png")));
-    private final Image janeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Jane.png")));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserImg.png"));
+    private final Image janeImage = new Image(this.getClass().getResourceAsStream("/images/Jane.png"));
 
     private TaskList tasks;
+
+    /**
+     * Shows text that will be displayed upon starting Launcher.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

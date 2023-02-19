@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Main class
+ */
 public class Main extends Application {
 
     private Jane j = new Jane();

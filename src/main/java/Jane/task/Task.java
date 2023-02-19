@@ -1,9 +1,16 @@
 package jane.task;
 
+/**
+ * Making a task
+ */
 public class Task {
-    public String description;
+    protected String description;
     protected boolean isDone;
     protected int num;
+    /**
+     * @param num is task ID
+     * @param description is task description (what to do)
+     */
     public Task(int num, String description) {
         this.num = num;
         this.description = description;
@@ -15,9 +22,11 @@ public class Task {
     public void changeState(boolean stat) {
         this.isDone = stat;
     }
-
+    public String getDesc() {
+        return this.description;
+    }
     public void changeNum() {
-        this.num -=1;
+        this.num -= 1;
     }
     public String save() {
         return this.toString();

@@ -2,9 +2,6 @@ package jane;
 
 import java.util.Scanner;
 
-
-
-
 public class Jane {
     public static void main(String[] args) throws JaneException {
         jane.Ui.start();

@@ -1,7 +1,11 @@
 package jane;
-
+/**
+ * Shows user interface starter
+ */
 public class Ui {
-    //Introduces itself
+    /**
+     * Introduction
+     */
     public static void start() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

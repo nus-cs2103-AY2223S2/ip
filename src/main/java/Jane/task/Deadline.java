@@ -1,10 +1,18 @@
 package jane.task;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Makes a deadline task
+ */
 public class Deadline extends Task {
     protected LocalDateTime deadline;
+    /**
+     * @param num is Deadline ID
+     * @param description is deadline description (what to do)
+     * @param deadline is the date that it is due
+     */
     public Deadline(int num, String description, LocalDateTime deadline) {
         super(num, description);
         this.deadline = deadline;

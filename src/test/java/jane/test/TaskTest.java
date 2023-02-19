@@ -6,7 +6,6 @@ import java.time.Month;
 
 import org.junit.jupiter.api.Test;
 
-import static java.util.Calendar.APRIL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
@@ -15,11 +14,11 @@ public class TaskTest {
     Deadline d = new Deadline(2, "meeting", testDate );
     @Test
     public void todoTestName() {
-        assertEquals(todo.description, "run");
+        assertEquals(todo.getDesc(), "run");
     }
     @Test
     public void deadlineTestName() {
-        assertEquals(d.description, "meeting");
+        assertEquals(d.getDesc(), "meeting");
     }
     @Test
     public void dummyTest(){
