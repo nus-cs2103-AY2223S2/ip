@@ -1,5 +1,38 @@
 # User Guide
 
+## Setup
+
+Go to [Releases](https://github.com/swxk19/ip/releases) page and retrieve latest release. Download `duke.jar` from the release.
+
+### Dependencies
+
+1. All OS: JRE/JDK
+2. Linux: x11, Wayland
+
+### Running
+
+First, move the `duke.jar` to and empty folder of your choice.
+
+1. Windows/MacOS: Double-click the file.
+2. Linux (Ubuntu 22.04):
+
+    1. Take note of dependencies
+    2. Open terminal
+    3. `cd` to the folder containing `duke.jar`
+    4. Run `sudo chdmod +x duke.jar`
+    5. Run `java -jar duke.jar`
+
+#### Troubleshooting
+
+##### Linux (Ubuntu 22.04)
+
+1. Run using `java -Djdk.gtk.version=2 -jar duke.jar` instead.
+
+**Further troubleshooting/Bug reporting:**
+
+1. Telegram [@kiseow](t.me/kiseow) (Help desk)
+2. [Create an issue ](https://github.com/swxk19/ip/issues)
+
 ## Features
 
 ### Add Tasks
@@ -22,6 +55,8 @@ View tasks based on a specified date.
 
 ### `todo` - Adds a "To Do" task
 
+---
+
 Adds a "To Do" task to the task list.
 
 ##### Format:
@@ -37,6 +72,8 @@ Adds a "To Do" task to the task list.
 > _Now you have <list_size> items in the list._
 
 ### `deadline` - Adds a "Deadline" task
+
+---
 
 Adds a "Deadline" task to the task list.
 
@@ -54,6 +91,8 @@ Adds a "Deadline" task to the task list.
 
 ### `event` - Adds an "Event" task
 
+---
+
 Adds a "Event" task to the task list.
 
 ##### Format:
@@ -69,6 +108,8 @@ Adds a "Event" task to the task list.
 > _Now you have <list_size> items in the list._
 
 ### `delete` - Removes a task
+
+---
 
 Removes a task from the task list.
 
@@ -88,6 +129,8 @@ Now you have <list_size> tasks in the list
 
 ### `list` - Displays the task list
 
+---
+
 Displays the task list
 
 ##### Format:
@@ -106,6 +149,8 @@ Here's your list:
 
 ### `mark` - Mark a task as complete
 
+---
+
 Mark a task as complete
 
 ##### Format:
@@ -122,6 +167,8 @@ Wonderful. You've completed this task:
 ```
 
 ### `unmark` - Mark a task as incomplete
+
+---
 
 Mark a task as incomplete
 
@@ -140,6 +187,8 @@ I've marked this task as incomplete:
 
 ### `find` - Search for task
 
+---
+
 Search for a task by it's name according to a specified keyword
 
 ##### Format:
@@ -156,6 +205,8 @@ Here's what I spotted:
 ```
 
 ### `view` - View tasks up to a date
+
+---
 
 View tasks which will end on a specified date or before.
 
@@ -174,6 +225,8 @@ Here's what you have on <end_date> or before:
 ```
 
 ### `bye` - Exits the program
+
+---
 
 Exits the program
 
