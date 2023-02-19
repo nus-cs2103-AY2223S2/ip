@@ -43,7 +43,8 @@ public class TaskList {
      */
     public String addList(Task task) {
         list.add(task);
-        return "added: " + task.getDescription() + "You have: " + list.size() + " task(s)\n";
+        return "added: " + task.getDescription() + "\n You have: " + list.size() + " task(s)\n";
+
     }
     /**
      * remeove task to list
@@ -53,7 +54,7 @@ public class TaskList {
     public String deleteTask(int i) {
         int index = i - 1;
         String response = "";
-        response = "removed: " + list.get(index).toString() + "You have: " + (list.size() - 1) + " task(s)\n";
+        response = "removed: " + list.get(index).toString() + "\n You have: " + (list.size() - 1) + " task(s)\n";
         list.remove(index);
         return response;
     }
