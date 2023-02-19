@@ -87,7 +87,8 @@ Here are the matching tasks in your list:
 
 ### Reminders for upcoming tasks
 
-Users can view upcoming tasks for the next 7 days by using the `remind` command. 
+Users can view upcoming tasks for the next 7 days by using the `remind` command.
+
 `list`
 
 ```
