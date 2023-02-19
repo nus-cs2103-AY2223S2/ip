@@ -58,19 +58,9 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (response.equals("bye")) {
-//            try {
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog(response, dukeImage)
-                );
-                userInput.clear();
-                System.exit(0);
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                System.out.println(e.getMessage());
-//            } finally {
-//
-//            }
+            userInput.clear();
+            System.exit(0);
+
         }
     }
 
