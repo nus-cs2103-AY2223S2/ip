@@ -1,0 +1,7 @@
+random
+todo
+todo return book
+deadline do homework /by wednesday
+event project meeting /from friday 4pm /to 6pm
+list
+bye

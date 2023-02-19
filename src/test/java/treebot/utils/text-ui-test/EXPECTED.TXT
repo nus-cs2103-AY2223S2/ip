@@ -1,0 +1,7 @@
+Hello, I'm a tree. How may I be of service?
+This command is invalid
+Task Description cannot be empty!
+1.[T][] return book
+2.[D][] do homework (by: wednesday)
+3.[E][] project meeting (from: friday 4pm to: 6pm)
+Thank you, i'll be rooting for you.
