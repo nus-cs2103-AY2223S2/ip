@@ -21,6 +21,7 @@ public class DeadlineCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert !input.isEmpty() : "Input to Deadline Command can't be empty";
         Deadline deadline = new Deadline(getDescription(), getDateTime());
         taskList.getTaskList().add(deadline);
         storage.store(taskList);

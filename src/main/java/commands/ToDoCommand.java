@@ -22,6 +22,7 @@ public class ToDoCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert !input.isEmpty() : "Input to ToDo Command can't be empty";
         Todo todo = new Todo(getDescription());
         taskList.getTaskList().add(todo);
         storage.store(taskList);
