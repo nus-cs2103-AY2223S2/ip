@@ -50,6 +50,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a string input to convert it to LocalDateTime object
+     * @param input String representation of a date and time.
+     * @return LocalDateTime object representing the date and time in the input string.
+     * @throws DukeException If string input is not in the valid date time format of dd/MM/yyyy HH:mm.
+     */
     public static LocalDateTime parseDateTime(String input) throws DukeException {
         try {
             return LocalDateTime.parse(input, INPUTFORMAT);
@@ -58,6 +64,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the string input to convert it to a AddDeadlineCommand.
+     * @param userInput String containing deadline description and due date and time.
+     * @return AddDeadlineCommand representing execution of adding a Deadline to the taskList
+     * @throws DukeException If input format of Deaaline is not compliant.
+     */
     public static Command parseDeadline(String userInput) throws DukeException {
         int byPos = userInput.indexOf(" /by ");
         if (byPos == -1) {

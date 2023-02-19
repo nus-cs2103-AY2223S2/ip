@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Command to gracefully close the application window.
+ */
 public class ExitCommand extends Command {
 
     @Override

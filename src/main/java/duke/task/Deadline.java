@@ -55,6 +55,12 @@ public class Deadline extends Task implements Comparable<Deadline> {
         return generatedDeadline;
     }
 
+    /**
+     * Compares current deadline with another deadline based on due date and time.
+     * @param otherDeadline other deadline task to be compared to.
+     * @return Zero if both Deadlines have the same due date and time, -1 if the current deadline is before
+     *     the otherDeadline and 1 if it is after the otherDeadline.
+     */
     @Override
     public int compareTo(Deadline otherDeadline) {
         if (this.by.isBefore(otherDeadline.by)) {
