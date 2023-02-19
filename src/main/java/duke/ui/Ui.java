@@ -10,6 +10,4 @@ public class Ui {
         print("Hello! I'm Duke\n" +
                 "     What can I do for you?");
     }
-
-    // TODO: replace all prints in parser with customized methods
 }
