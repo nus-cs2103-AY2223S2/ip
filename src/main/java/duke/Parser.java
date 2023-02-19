@@ -22,39 +22,35 @@ public class Parser {
      * @throws DukeException if input is not in the pre-determined commands.
      */
     public static Command parse(String command) throws DukeException {
-        try {
-            switch(command) {
-            case "bye":
-                return new ByeCommand();
-            case "list":
-                return new ListCommand();
-            default:
-                String[] commands = command.split(" ", 2);
-                String firstWord = commands[0].toLowerCase();
+        switch(command.toLowerCase()) {
+        case "bye":
+            return new ByeCommand();
+        case "list":
+            return new ListCommand();
+        default:
+            String[] commands = command.split(" ", 2);
+            String firstWord = commands[0].toLowerCase();
 
-                switch (firstWord) {
-                case "mark":
-                    int i = Integer.parseInt(command.replaceAll("mark ", "")) - 1;
-                    return new MarkCommand(i);
-                case "unmark":
-                    int j = Integer.parseInt(command.replaceAll("unmark ", "")) - 1;
-                    return new UnmarkCommand(j);
-                case "delete":
-                    return new DeleteCommand(command);
-                case "find":
-                    return new FindCommand(command);
-                case "todo":
-                    return new ToDoCommand(command);
-                case "deadline":
-                    return new DeadlineCommand(command);
-                case "event":
-                    return new EventCommand(command);
-                default:
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
-                }
+            switch (firstWord) {
+            case "mark":
+                int i = Integer.parseInt(command.replaceAll("mark ", "")) - 1;
+                return new MarkCommand(i);
+            case "unmark":
+                int j = Integer.parseInt(command.replaceAll("unmark ", "")) - 1;
+                return new UnmarkCommand(j);
+            case "delete":
+                return new DeleteCommand(command);
+            case "find":
+                return new FindCommand(command);
+            case "todo":
+                return new ToDoCommand(command);
+            case "deadline":
+                return new DeadlineCommand(command);
+            case "event":
+                return new EventCommand(command);
+            default:
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
             }
-        } catch (DukeException e) {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
         }
     }
 }
