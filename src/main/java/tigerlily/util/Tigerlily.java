@@ -34,4 +34,8 @@ public class Tigerlily {
             return ui.showError(e);
         }
     }
+
+    public boolean isBye() {
+        return parser.isBye();
+    }
 }

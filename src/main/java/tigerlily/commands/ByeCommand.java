@@ -20,7 +20,7 @@ public class ByeCommand implements Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             storage.updateTasks(taskList);
-            return ui.showGoodbye();
+            return ui.showBye();
         } catch (DukeExceptions e) {
             return ui.showError(e);
         }

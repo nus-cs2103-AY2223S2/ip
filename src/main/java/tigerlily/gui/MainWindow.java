@@ -1,4 +1,7 @@
-package tigerlily;
+// Referenced @wengYing227 for closing Tigerlily
+package tigerlily.gui;
+
+import static java.lang.Thread.sleep;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import javafx.stage.Stage;
+
 import tigerlily.util.Tigerlily;
 import tigerlily.util.Ui;
 
@@ -43,18 +49,29 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    public void showExit() {
+        Ui ui = new Ui();
+        dialogContainer.getChildren().add(DialogBox.getTigerlilyDialog(ui.showBye(), tigerlilyImage));
+        userInput.clear();
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
         String response = tigerlily.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getTigerlilyDialog(response, tigerlilyImage)
-        );
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
+                DialogBox.getTigerlilyDialog(response, tigerlilyImage));
         userInput.clear();
+
+        if(tigerlily.isBye()) {
+            showExit();
+            sleep(500);
+            Stage stage = (Stage) userInput.getScene().getWindow();
+            stage.close();
+        }
     }
 }

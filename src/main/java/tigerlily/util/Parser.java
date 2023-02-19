@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
+    private boolean isBye = false;
     public enum CommandType {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND, HELP}
 
     /**
@@ -40,6 +41,7 @@ public class Parser {
             CommandType command = CommandType.valueOf(input.split(" ")[0].toUpperCase());
             switch (command) {
             case BYE:
+                isBye = true;
                 return new ByeCommand();
             case LIST:
                 return new ListCommand();
@@ -104,5 +106,9 @@ public class Parser {
             newTask.unmarkDone();
         }
         return newTask;
+    }
+
+    public boolean isBye() {
+        return this.isBye;
     }
 }
