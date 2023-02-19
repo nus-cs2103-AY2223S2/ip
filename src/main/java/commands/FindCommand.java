@@ -2,15 +2,16 @@ package commands;
 
 import static commands.CommandType.FIND;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import nook.Storage;
+import nook.TaskList;
+import nook.Ui;
 
 /**
  * Represents the command that finds tasks using a specified keyword.
  */
 public class FindCommand extends Command {
-    private static final String RESULT_MESSAGE = "Here are the matching tasks in your list:\n ";
+    private static final String RESULT_MESSAGE = "Great, here are the matching tasks in your list.\n"
+           + "Take a look and let me know if you need help with anything else\n ";
     private String keyword;
     /**
      * Constructs a new FindCommand with the specified keyword to search the tasklist for.

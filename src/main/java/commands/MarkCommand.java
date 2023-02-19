@@ -2,9 +2,9 @@ package commands;
 
 import static commands.CommandType.MARK;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import nook.Storage;
+import nook.TaskList;
+import nook.Ui;
 import tasks.Task;
 
 /**
@@ -47,12 +47,12 @@ public class MarkCommand extends Command {
             String resultMessage = "";
             if (this.getType().equals(MARK)) {
                 currentTask.markAsDone();
-                resultMessage = "Great :D I knew you could do it! "
+                resultMessage = "Great job! I knew you could do it. Keep up the good work!\n"
                         + "I've marked this task as done:\n"
                         + currentTask.toString();
             } else {
                 currentTask.markAsNotDone();
-                resultMessage = "Alright, I've marked this task as not done\n"
+                resultMessage = "Alright, I've marked this task as not done:\n"
                         + currentTask.toString();
             }
             storage.saveListToFile(list, ui);

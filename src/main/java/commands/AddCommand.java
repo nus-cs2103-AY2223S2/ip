@@ -1,8 +1,8 @@
 package commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import nook.Storage;
+import nook.TaskList;
+import nook.Ui;
 import tasks.Task;
 
 /**
@@ -37,7 +37,7 @@ public class AddCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) {
         list.addTask(task);
         storage.saveListToFile(list, ui);
-        return "Got it. I've added this task:\n" + task.toString() + "\n Now you have "
+        return "Got it, that will be 1000 bells- Just kidding!\nI'll add that task for you:\n" + task.toString() + "\n Now you have "
                 + list.getSize() + " tasks in the list.";
     }
 }

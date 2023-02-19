@@ -2,9 +2,9 @@ package commands;
 
 import static commands.CommandType.BYE;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import nook.Storage;
+import nook.TaskList;
+import nook.Ui;
 
 /**
  * Represents the command that ends the conversation with Sirius.

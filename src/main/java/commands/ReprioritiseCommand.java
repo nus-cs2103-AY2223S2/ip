@@ -2,9 +2,9 @@ package commands;
 
 import static commands.CommandType.PRIORITISE;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import nook.Storage;
+import nook.TaskList;
+import nook.Ui;
 import tasks.Priority;
 import tasks.Task;
 
@@ -48,11 +48,11 @@ public class ReprioritiseCommand extends Command {
             String resultMessage = "";
             if (this.getType().equals(PRIORITISE)) {
                 currentTask.setPriority(Priority.getHigherPriority(currentPriority));
-                resultMessage = "Alright! Seems like this task needs more attention,"
+                resultMessage = "Alright, it looks like this task needs a bit more attention.\n"
                         + "I've prioritised this task for you:\n" + currentTask.toString();
             } else {
                 currentTask.setPriority(Priority.getLowerPriority(currentPriority));
-                resultMessage = "Alright! Seems like this task needs less attention,"
+                resultMessage = "Alright, it looks like this task doesn't require as much attention.\n"
                         + "I've decreased the priority of this task for you:\n" + currentTask.toString();
             }
             storage.saveListToFile(list, ui);
