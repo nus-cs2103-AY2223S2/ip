@@ -32,6 +32,7 @@ public class Deadline extends Task {
     public String encode() {
         return "deadline"
                 + " " + this.isDone
+                + " " + this.getPriority()
                 + " " + this.description
                 + " " + "/by: "
                 + " " + this.date;

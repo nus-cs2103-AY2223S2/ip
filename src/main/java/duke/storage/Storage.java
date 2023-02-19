@@ -70,34 +70,38 @@ public class Storage {
             scanner = new Scanner(this.file);
             while(scanner.hasNextLine()) {
                 String task = scanner.nextLine();
-                String encoded[] = task.split(" ", 3);
+                String encoded[] = task.split(" ", 4);
                 String taskType = encoded[0];
                 String isDone = encoded[1];
-                String parts = encoded[2];
+                String priority = encoded[2];
+                String parts = encoded[3];
 
                 switch (taskType) {
                     case "todo":
+                        // todo true 2 play
                         Task decodedTodo = new Todo(parts);
+                        decodedTodo.setPriority(Integer.parseInt(priority));
                         list.add(decodedTodo);
                         if (isDone.equals("true")) {
                             decodedTodo.markDone();
                         }
                         break;
                     case "deadline":
-                        // deadline true eat with me /by: 2023-12-20
+                        // deadline true 2 eat with me /by: 2023-12-20
 
                         String parts2[] = parts.split("/by:", 2);
                         String deadlineDescription = parts2[0].trim();
                         String dateString = parts2[1].trim();
                         LocalDate date = LocalDate.parse(dateString);
                         Task decodedDeadline = new Deadline(deadlineDescription, date);
+                        decodedDeadline.setPriority(Integer.parseInt(priority));
                         list.add(decodedDeadline);
                         if (isDone.equals("true")) {
                             decodedDeadline.markDone();
                         }
                         break;
                     case "event":
-                        //event false dancing festival /from: 2023-05-23 /to: 2023-12-20
+                        //event false 3 dancing festival /from: 2023-05-23 /to: 2023-12-20
                         String parts3[] = parts.split("/from:", 2);
                         String eventDescription = parts3[0].trim();
 
@@ -109,6 +113,7 @@ public class Storage {
                         LocalDate todate = LocalDate.parse(to);
 
                         Task decodedEvent = new Event(eventDescription, fromdate, todate);
+                        decodedEvent.setPriority(Integer.parseInt(priority));
                         list.add(decodedEvent);
                         if (isDone.equals("true")) {
                             decodedEvent.markDone();

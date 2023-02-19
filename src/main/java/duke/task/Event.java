@@ -48,6 +48,7 @@ public class Event extends Task {
     public String encode() {
         return "event"
                 + " " + this.isDone
+                + " " + this.getPriority()
                 + " " + this.description
                 + " " + "/from: " + this.from
                 + " " + "/to:" + this.to;

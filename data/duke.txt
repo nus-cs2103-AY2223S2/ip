@@ -1,6 +1,2 @@
-todo true play
-deadline false dance together /by:  2023-12-20
-todo true dance
-todo false play
-todo false cs2105 assignment
-deadline true hehe /by:  2023-12-02
+deadline false 2 scream /by:  2023-12-12
+todo true 1 cry

@@ -10,10 +10,12 @@ import java.util.ArrayList;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = Priority.MEDIUM;
     }
 
     /**
@@ -29,7 +31,7 @@ public abstract class Task {
      * @return String format of task
      */
     public String encode() {
-        return this.description + isDone;
+        return isDone + " " + this.getPriority() + " " + this.description;
     }
 
     /**
@@ -40,6 +42,42 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done duke.task with X
     }
 
+    /**
+     * Get priority status of the task
+     * @return int corresponding to LOW,MEDIUM, or HIGH (3,2,1)
+     */
+    public int getPriority() {
+        switch(this.priority) {
+            case LOW:
+                return 3;
+            case MEDIUM:
+                return 2;
+            case HIGH:
+                return 1;
+            default:
+                return -1;
+        }
+    }
+
+    /**
+     * Set new priority status of task
+     * @param newPriority
+     */
+    public void setPriority(int newPriority) {
+        switch (newPriority) {
+            case 1:
+                this.priority = Priority.HIGH;
+                break;
+            case 2:
+                this.priority = Priority.MEDIUM;
+                break;
+            case 3:
+                this.priority = Priority.LOW;
+                break;
+            default:
+                assert  false: "invalid priority";
+        }
+    }
     /**
      * Mark task as done
      */
@@ -59,7 +97,9 @@ public abstract class Task {
      * @return String of status and task description
      */
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "]"
+                + "[" + this.getPriority() + "] "
+                + this.description;
     }
 
 

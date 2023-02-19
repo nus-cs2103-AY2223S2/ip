@@ -24,6 +24,7 @@ public class Todo extends Task {
     public String encode() {
         return "todo"
                 + " " + this.isDone
+                + " " + this.getPriority()
                 + " " + this.description;
     }
 

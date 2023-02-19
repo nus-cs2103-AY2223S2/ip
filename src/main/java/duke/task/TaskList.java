@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.InvalidPriorityException;
 import duke.exceptions.TaskDoesNotExistException;
 
 import java.time.LocalDate;
@@ -47,7 +48,7 @@ public class TaskList {
 
         Task t = list.get(indexInt);
         t.markDone();
-        String str = "Nice! I've marked this duke.task as done:\n" + t.toString();
+        String str = "Nice! I've marked this task as done:\n" + t.toString();
         return str;
     }
 
@@ -62,7 +63,30 @@ public class TaskList {
 
         Task t = list.get(indexInt);
         t.markUndone();
-        String str = "Okay.. I've unmarked this duke.task:\n" + t.toString();
+        String str = "Okay.. I've unmarked this task:\n" + t.toString();
+        return str;
+    }
+
+    public String changePriority(String[] parts) throws TaskDoesNotExistException, InvalidPriorityException {
+        //split into task index and priority
+        String indexPriorityArr[] = parts[1].split(" ", 2);
+        int priority = Integer.parseInt(indexPriorityArr[1]);
+
+        //converting the index from String to Int
+        int indexInt = Integer.parseInt(indexPriorityArr[0]) - 1;
+
+        //in case the task index to mark exceeds current number of Tasks or neg number
+        if (indexInt + 1 > this.getListSize() || indexInt < 0) {
+            throw new TaskDoesNotExistException();
+        }
+
+        if (priority < 0 || priority > 3) {
+            throw new InvalidPriorityException();
+        }
+
+        Task t = list.get(indexInt);
+        t.setPriority(priority);
+        String str = "I've changed the priority of this task:\n" + t.toString();
         return str;
     }
 
