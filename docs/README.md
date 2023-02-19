@@ -1,12 +1,14 @@
 # User Guide
 
-Welcome to Duke! Duke manages your tasks and frees your mind of having to remember things you need to do. 
+Introducing Duke! Tasks made easier.
 
 ![UI](Ui.jpg)
 
 ## Quick Start
 
 ## Features
+
+## Usage
 
 ### Adding a todo task: `todo`
 
@@ -17,6 +19,16 @@ Format: `todo (DESCRIPTION)`
 Examples:
 * `todo Call mum`
 * `todo Homework`
+
+Expected outcome:
+
+Todo task will be added to the task-list
+
+```
+Got it. I've added this task:
+  [T][ ] Call mum
+Now you have 1 task in the list.
+```
 
 ### Adding a deadline task: `deadline`
 
@@ -32,6 +44,16 @@ Format: `deadline (DESCRIPTION) /by (DATE) (TIME)
 Examples:
 * `deadline Assignment 1 /by 2022-03-14 23:58`
 
+Expected outcome:
+
+Deadline task will be added to the task-list
+
+```
+Got it. I've added this task:
+  [D][ ] Assignment 1 (by: Mar 14, 2022 23:58)
+Now you have 2 tasks in the list.
+```
+
 ### Adding an event task: `event`
 
 Adds a event task to the task-list
@@ -42,6 +64,16 @@ Examples:
 * `event Party /from 7:30pm /to 9.30pm`
 * `event Orientation camp /from Saturday /to Tuesday`
 
+Expected outcome:
+
+Event task will be added to the task-list
+
+```
+Got it. I've added this task:
+  [E][ ] Party (from: 7:30pm to: 9.30pm)
+Now you have 3 tasks in the list.
+```
+
 ### Finding tasks: `find`
 
 Find tasks from the tasklist
@@ -50,6 +82,16 @@ Format: `find (DESCRIPTION)`
 
 Examples:
 * `find math`
+
+Expected outcome:
+
+All matching tasks will be listed out
+
+
+```
+Here are some tasks found!
+ [T][ ] Math homework
+```
 
 ### Marking tasks: `mark`
 
@@ -64,6 +106,15 @@ Format: `mark (INDEX)`
 Examples:
 * `mark 2`
 
+Expected outcome:
+
+The task with the specified index will be marked as done
+
+```
+Nice! I've marked this task as done
+  [E][X] Party (from: 7:30pm to: 9.30pm)
+```
+
 ### Unmarking tasks: `unmark`
 
 Mark a task as undone
@@ -76,6 +127,15 @@ Format: `unmark (INDEX)`
   
 Examples:
 * `unmark 2`
+
+Expected outcome:
+
+The task with the specified index will be marked as undone
+
+```
+Nice! I've marked this task as undone
+  [E][ ] Party (from: 7:30pm to: 9.30pm)
+```
 
 ### Deleting tasks: `delete`
 
@@ -90,24 +150,52 @@ Format: `delete (INDEX)`
 Examples:
 * `delete 2`
 
+Expected outcome:
+
+The task with the specified index will be deleted
+
+```
+Got it. Deleting this task:
+  [E][ ] Party (from: 7:30pm to: 9.30pm)
+Now you have 2 tasks in the list.
+```
+
 ### List tasks: `list`
 
 List out all the tasks
 
 Format: `list`
 
+Expected outcome:
+
+All the tasks would be listed
+
+```
+Here are all the tasks in the list!
+1. [T][ ] Call mum
+2. [D][ ] Assignment 1 (by: Mar 14, 2022 23:58)
+```
+
 ### Saving tasks: `save`
 
 Save a task
 
-Format: `save (SAVE_INDEX)`
+Format: `save (SAVE_INDEX) (SAVE_MSG)`
 
 ```
 * `SAVE_INDEX` can only be an integer from 1 to 3.
 ```
 
 Examples:
-* `save 1`
+* `save 1 John's Tasklist`
+
+Expected outcome:
+
+The tasklist is saved to the specified slot.
+
+```
+Saved to slot number 1!
+```
 
 ### Loading tasks: `load`
 
@@ -122,11 +210,30 @@ Format: `load (SAVE_INDEX)`
 Examples:
 * `load 1`
 
+Expected outcome:
+
+Loads the specified save file.
+
+```
+Loaded from slot number 1!
+```
+
 ### Showing saves: `showSaves`
 
 Show all the saves available.
 
 Format: `showSaves`
+
+Expected outcome:
+
+Lists out all the saves available
+
+```
+Here are the current save files!
+1. Tom's tasklist
+2. John's tasklist
+3. Tim's tasklist
+```
 
 ### Exit application: `bye`
 
