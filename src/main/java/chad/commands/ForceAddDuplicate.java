@@ -16,6 +16,6 @@ public class ForceAddDuplicate extends Command {
     @Override
     public String execute() {
         tasklist.add(task);
-        return "Okay, added this duplicate task.";
+        return "Alright then, I'll add this duplicate task.";
     }
 }

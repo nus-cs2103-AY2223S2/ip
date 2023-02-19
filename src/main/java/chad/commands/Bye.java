@@ -19,6 +19,6 @@ public class Bye extends Command {
     @Override
     public String execute() {
         tasklist.closeAndSave();
-        return "Bye. Hope to see you soon!\n";
+        return "Cheers, Boss, I'll see you soon!\n";
     }
 }

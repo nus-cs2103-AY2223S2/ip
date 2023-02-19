@@ -32,7 +32,7 @@ abstract class Make extends Command {
 
     public String duplicateFound(Task newTask, Task duplicate) {
         parser.handleDuplicates(newTask);
-        return "I've found a an existing task with the same name:\n"
+        return "Boss, I've found a an existing task with the same name:\n"
                 + duplicate
                 + "\nDo you still want to add this new task?\n"
                 + newTask;

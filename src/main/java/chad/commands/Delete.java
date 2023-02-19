@@ -25,7 +25,7 @@ public class Delete extends Command {
     public String execute() {
         assert (idx <= tasklist.getWholeList().size());
         Task t = tasklist.delete(idx - 1);
-        String res = "OK! I've deleted the following task: " + t.toString() + "\n";
+        String res = "Alright! I've deleted this task: " + t.toString() + "\n";
         return res;
     }
 }

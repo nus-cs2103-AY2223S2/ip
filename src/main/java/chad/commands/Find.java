@@ -41,7 +41,7 @@ public class Find extends Command {
                 res.append(p.getKey() + ". " + p.getValue() + "\n");
             }
         } else {
-            res.append("Sorry, I did not find any tasks matching your search keyword :-( .");
+            res.append("Too bad, Boss, I did not find any tasks matching your search keyword :-( .");
         }
         return res.toString();
     }
