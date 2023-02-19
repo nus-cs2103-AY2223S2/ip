@@ -11,7 +11,7 @@ import duke.ui.UserInterface;
 
 /**
  * Command to find tasks.
- * 
+ *
  * @author Samarth Verma
  */
 public class Find extends Command {
@@ -19,7 +19,7 @@ public class Find extends Command {
 
     /**
      * Creates a new Find command.
-     * 
+     *
      * @param keywords The keywords to search for.
      */
     public Find(String keywords) {

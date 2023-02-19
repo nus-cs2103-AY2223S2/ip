@@ -59,6 +59,11 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     *
+     * @param input The input to run.
+     */
     public void run(String input) {
         try {
             parser.parse(input).execute(list, ui, storage);
