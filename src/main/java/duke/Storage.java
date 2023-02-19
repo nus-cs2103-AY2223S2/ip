@@ -11,6 +11,10 @@ public class Storage {
     private ArrayList<Task> init;
     private String filePath;
 
+    private static final int INDEX_DEADLINE_BY = "by:".length() + 1;
+    private static final int INDEX_EVENT_FROM = "from:".length() + 1;
+    private static final int INDEX_EVENT_TO = "to:".length() + 1;
+
     /**
      * Parameterized constructor to create a Storage object
      * @param filePath the path of the file to be read from and written to
@@ -52,12 +56,12 @@ public class Storage {
             Todo t = new Todo(description, isDone);
             init.add(t);
         } else if (eventType == 'D') {
-            String by = arr[3].substring(4).trim();
+            String by = arr[3].substring(INDEX_DEADLINE_BY).trim();
             Deadline d = new Deadline(description, isDone, by);
             init.add(d);
         } else if (eventType == 'E') {
-            String from = arr[3].substring(6).trim();
-            String to = arr[4].substring(4).trim();
+            String from = arr[3].substring(INDEX_EVENT_FROM).trim();
+            String to = arr[4].substring(INDEX_EVENT_TO).trim();
             Event e = new Event(description, isDone, from, to);
             init.add(e);
         }
