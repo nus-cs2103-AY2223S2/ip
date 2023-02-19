@@ -98,11 +98,13 @@ public class TaskList {
 
         String[] timeParts = userCommandParts[1].split(" /to", 2);
 
-        if (timeParts.length < 1 || timeParts[0].trim().isEmpty()) {
+        boolean isEmptyStartDateTime = timeParts.length < 1 || timeParts[0].trim().isEmpty();
+        if (isEmptyStartDateTime) {
             throw new DukeInvalidArgumentException("Please provide start date/time after `/from` parameter");
         }
 
-        if (timeParts.length < 2 || timeParts[1].trim().isEmpty()) {
+        boolean isEmptyEndDateTime = timeParts.length < 2 || timeParts[1].trim().isEmpty();
+        if (isEmptyEndDateTime) {
             throw new DukeInvalidArgumentException("Please provide end date/time after `/to` parameter");
         }
 
