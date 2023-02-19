@@ -1,8 +1,0 @@
-todo borrow book
-deadline return book /by when I feel like it
-event project meeting /from life starts /to life ends
-mark 1
-mark 2
-unmark 1
-list
-bye
