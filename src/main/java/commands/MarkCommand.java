@@ -1,11 +1,11 @@
 package commands;
 
+import static commands.CommandType.MARK;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import tasks.Task;
-
-import static commands.CommandType.MARK;
 
 /**
  * Represents the command that toggles the completion status

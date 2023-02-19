@@ -5,6 +5,9 @@ import java.time.format.DateTimeParseException;
 
 import exceptions.DukeException;
 
+/**
+ * Represents the Validator that handles all input validations
+ */
 public class Validator {
     private static final String DATE_ERROR_MESSAGE = "Woah.. Error parsing date time for deadline task. "
             + "Please enter the by datetime in this format yyyy-mm-dd (e.g., 2023-10-15).";

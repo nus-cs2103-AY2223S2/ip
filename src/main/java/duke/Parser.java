@@ -4,6 +4,8 @@ import static commands.CommandType.DEADLINE;
 import static commands.CommandType.EVENT;
 import static commands.CommandType.TODO;
 
+import java.time.LocalDate;
+
 import commands.AddCommand;
 import commands.ByeCommand;
 import commands.Command;
@@ -16,9 +18,6 @@ import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
-
-import java.time.LocalDate;
-
 /**
  * Represents the Parser that helps to parse input commands
  * into recognisable commands that Sirius can execute

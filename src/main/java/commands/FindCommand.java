@@ -10,8 +10,8 @@ import duke.Ui;
  * Represents the command that finds tasks using a specified keyword.
  */
 public class FindCommand extends Command {
+    private static final String RESULT_MESSAGE = "Here are the matching tasks in your list:\n ";
     private String keyword;
-    private final static String RESULT_MESSAGE = "Here are the matching tasks in your list:\n ";
     /**
      * Constructs a new FindCommand with the specified keyword to search the tasklist for.
      *

@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import tasks.Deadline;
@@ -16,7 +18,8 @@ public class TaskTest {
 
     @Test
     public void initDeadlineTask() {
-        Deadline deadline = new Deadline("do that", "2023-03-03");
+        LocalDate date = LocalDate.parse("2023-03-03");
+        Deadline deadline = new Deadline("do that", date);
         String expectedOutput = "[D][ ] do that (by: Mar 3 2023)";
         assertEquals(expectedOutput, deadline.toString());
     }

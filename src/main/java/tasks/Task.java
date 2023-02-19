@@ -1,7 +1,5 @@
 package tasks;
 
-import static tasks.TaskType.DEFAULT;
-
 /**
  * Represents a task that a user can do/plans to do.
  * It has a description and a status (done or not done) of the task.
