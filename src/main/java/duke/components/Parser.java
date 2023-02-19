@@ -4,17 +4,7 @@ import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddToDoCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.MarkCommand;
-import duke.commands.RemindCommand;
-import duke.commands.UnmarkCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 
 /***
@@ -88,6 +78,9 @@ public class Parser {
             break;
         case "remind":
             ret = new RemindCommand(tokens);
+            break;
+        case "help":
+            ret = new HelpCommand(tokens);
             break;
         default:
             throw new DukeException("I'm sorry, I could not understand that command.");

@@ -41,18 +41,8 @@ public class MainWindow extends AnchorPane {
      * helper function to display welcome message to GUI
      */
     private void showWelcomeMsg() {
-        String response = "Hello! I'm Duke!\n"
-                + "currently my functionality includes:\n"
-                + "bye\n"
-                + "todo\n"
-                + "deadline\n"
-                + "event\n"
-                + "list\n"
-                + "mark\n"
-                + "unmark\n"
-                + "delete\n"
-                + "remind\n"
-                + "try typing a command! :D";
+        String response = "Hello! I'm Duke, your personal lightweight text-based task manager!\n"
+                + "type 'help' for additional instructions on how to use me!";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
         );
