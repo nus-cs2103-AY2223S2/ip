@@ -37,6 +37,7 @@ public class Response {
                 res += i + ". " + task.toString() + "\n";
                 i++;
             }
+            System.out.println(res);
             return res;
         } catch (DukeException e) {
             return e.toString();
