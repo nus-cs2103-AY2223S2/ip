@@ -42,6 +42,7 @@ public class MarkCommand extends Command {
         if (taskIndex >= list.getSize()) {
             return UNKNOWN_TASK_MESSAGE;
         } else {
+            assert taskIndex > 0 : "Task Index cannot be less than 1";
             Task currentTask = list.getTask(taskIndex);
             if (this.getType().equals(MARK)) {
                 currentTask.markAsDone();

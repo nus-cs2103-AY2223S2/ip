@@ -40,6 +40,7 @@ public class DeleteCommand extends Command {
         if (taskIndex >= list.getSize()) {
             return UNKNOWN_TASK_MESSAGE;
         } else {
+            assert taskIndex > 0 : "Task Index cannot be less than 1";
             Task toDelete = list.getTask(taskIndex);
             list.deleteTask(taskIndex);
             storage.saveListToFile(list, ui);
