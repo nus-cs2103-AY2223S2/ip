@@ -5,3 +5,19 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm duke.Duke
+What can I do for you?
+Got it. I've added this duke.task:
+[T][ ] read book
+Now you have 1 tasks in the list.
+Got it. I've added this duke.task:
+[D][ ] return book (by: June 6th)
+Now you have 2 tasks in the list.
+Got it. I've added this duke.task:
+[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+Now you have 3 tasks in the list.
+☹ OOPS!!! There are less than 10 tasks.
+Noted. I've removed this duke.task:
+[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+Now you have 2 tasks in the list.
+Bye. Hope to see you again soon! :^)
