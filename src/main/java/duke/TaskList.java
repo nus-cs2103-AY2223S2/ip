@@ -86,7 +86,7 @@ public class TaskList {
 
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            if (task.description.contains(keyword)) {
+            if (task.description.toLowerCase().contains(keyword.toLowerCase())) {
                 matchingTasks.add(task);
             }
         }

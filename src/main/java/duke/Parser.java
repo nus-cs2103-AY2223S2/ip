@@ -13,16 +13,16 @@ public class Parser {
     private static final String DELETE = "delete";
     private static final String FIND = "find";
 
-    private static final int INDEX_TODO_DESCRIPTION = TODO.length() + 1;
-    private static final int INDEX_DEADLINE_DESCRIPTION = DEADLINE.length() + 1;
-    private static final int INDEX_EVENT_DESCRIPTION = EVENT.length() + 1;
-    private static final int INDEX_DEADLINE_BY = "by".length() + 1;
-    private static final int INDEX_EVENT_FROM = "from".length() + 1;
-    private static final int INDEX_EVENT_TO = "to".length() + 1;
-    private static final int INDEX_MARK = MARK.length() + 1;
-    private static final int INDEX_UNMARK = UNMARK.length() + 1;
-    private static final int INDEX_DELETE = DELETE.length() + 1;
-    private static final int INDEX_FIND = FIND.length() + 1;
+    private static final int INDEX_TODO_DESCRIPTION = TODO.length();
+    private static final int INDEX_DEADLINE_DESCRIPTION = DEADLINE.length();
+    private static final int INDEX_EVENT_DESCRIPTION = EVENT.length();
+    private static final int INDEX_DEADLINE_BY = "by".length();
+    private static final int INDEX_EVENT_FROM = "from".length();
+    private static final int INDEX_EVENT_TO = "to".length();
+    private static final int INDEX_MARK = MARK.length();
+    private static final int INDEX_UNMARK = UNMARK.length();
+    private static final int INDEX_DELETE = DELETE.length();
+    private static final int INDEX_FIND = FIND.length();
 
     private TaskList taskList;
     private Ui ui;
@@ -83,7 +83,7 @@ public class Parser {
      * @throws DukeException if the description of the Todo is empty
      */
     private void addTodo(String task) throws DukeException {
-        String description = task.substring(INDEX_TODO_DESCRIPTION);
+        String description = task.substring(INDEX_TODO_DESCRIPTION).trim();
         if (description.trim().equals("")) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
@@ -129,7 +129,7 @@ public class Parser {
      * @return the Ui response containing the matching list of tasks in the list
      */
     private String find(String task) {
-        String keyword = task.substring(INDEX_FIND);
+        String keyword = task.substring(INDEX_FIND).trim();
         TaskList matchingTasks = taskList.find(keyword);
         return ui.getFormattedTaskList(matchingTasks, true);
     }
@@ -165,13 +165,13 @@ public class Parser {
         if (input.equals(LIST)) {
             return showList();
         } else if (input.startsWith(MARK)) {
-            int index = Integer.parseInt(input.substring(INDEX_MARK)) - 1;
+            int index = Integer.parseInt(input.substring(INDEX_MARK).trim()) - 1;
             return mark(index);
         } else if (input.startsWith(UNMARK)) {
-            int index = Integer.parseInt(input.substring(INDEX_UNMARK)) - 1;
+            int index = Integer.parseInt(input.substring(INDEX_UNMARK).trim()) - 1;
             return unmark(index);
         } else if (input.startsWith(DELETE)) {
-            int index = Integer.parseInt(input.substring(INDEX_DELETE)) - 1;
+            int index = Integer.parseInt(input.substring(INDEX_DELETE).trim()) - 1;
             return delete(index);
         } else if (input.startsWith(FIND)) {
             return find(input);
