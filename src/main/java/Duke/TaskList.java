@@ -6,12 +6,17 @@ import Duke.Tasks.Deadline;
 import Duke.Tasks.Event;
 import Duke.Tasks.Todo;
 
+<<<<<<< HEAD
 import java.util.stream.Collectors;
 
 import Duke.Exceptions.CommandNotFoundException;
 import Duke.Exceptions.FileException;
 import Duke.Exceptions.NoDeadlineException;
 import Duke.Exceptions.NoDescriptionException;
+=======
+import Exceptions.NoDeadlineException;
+import Exceptions.NoDescriptionException;
+>>>>>>> branch-A-CodingStandard
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -296,13 +301,5 @@ public class TaskList {
         return output;
     }
 
-    public ArrayList<Task> findRelevantTasks(String keywords) {
-        if (keywords.trim().equals("")) {
-            throw new NoDescriptionException("The description of a todo cannot be empty.");
-        }
-        return (ArrayList<Task>) this.taskList
-                .stream().filter(task -> task.toString().contains(keywords))
-                .collect(Collectors.toList());
 
-    }
 }
