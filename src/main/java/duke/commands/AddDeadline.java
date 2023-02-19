@@ -20,14 +20,7 @@ public class AddDeadline extends Command {
      *  description and the due_by date.
      */
     public AddDeadline(String input) {
-        try {
-            if (input.length() < 9) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty");
-            }
-            this.description = input.substring(9);
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
+        this.description = input;
     }
 
     /**
@@ -41,6 +34,8 @@ public class AddDeadline extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
+            assert (this.description.length() < 9) : ui.printEmptyTaskDescription();
+            this.description = this.description.substring(9);
             //splits the input using '/by', stores the split string in an arr of string
             String[] arrOfStr = description.split("/by ");
 
@@ -59,6 +54,8 @@ public class AddDeadline extends Command {
 
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
+        } catch (AssertionError a) {
+            return ui.showError(a.getMessage());
         }
 
     }

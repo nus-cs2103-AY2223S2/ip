@@ -1,5 +1,4 @@
 package duke.commands;
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -18,14 +17,7 @@ public class AddTodo extends Command {
      * of the task to the string.
      */
     public AddTodo(String input) {
-        try {
-            if (input.length() < 5) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty");
-            }
-            this.description = input.substring(5);
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
+        this.description = input;
     }
 
     /**
@@ -38,10 +30,15 @@ public class AddTodo extends Command {
      * @return
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            assert (this.description.length() < 5) : ui.printEmptyTaskDescription();
+            this.description = this.description.substring(5);
+        } catch (AssertionError a) {
+            return ui.showError(a.getMessage());
+        }
         Todo t = new Todo(this.description);
         tasks.add(t);
         storage.saveTaskList(tasks);
         return ui.printAddedTask(t, tasks.size());
-
     }
 }

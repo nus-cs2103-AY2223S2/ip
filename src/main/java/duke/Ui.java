@@ -84,6 +84,9 @@ public class Ui {
     public String printInvalidCommandError() {
         return "OOPS!!! I'm sorry, but I don't know what that means :(((((";
     }
+    public String printEmptyTaskDescription() {
+        return "OOPS!!! The description of a task cannot be empty";
+    }
     public void message() {
     }
 }

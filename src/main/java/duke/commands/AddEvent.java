@@ -17,15 +17,7 @@ public class AddEvent extends Command {
      * parts, the description, start and end of the event.
      */
     public AddEvent(String input) {
-        try {
-            if (input.length() < 6) {
-                throw new DukeException("OOPS!!! The description of an event cannot be empty");
-            }
-            this.description = input.substring(6);
-
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
+        this.description = input;
     }
 
     /**
@@ -38,6 +30,8 @@ public class AddEvent extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
+            assert (this.description.length() < 6) : ui.printEmptyTaskDescription();
+            this.description = this.description.substring(6);
             // Splitting the input into an array of strings using /from and /to to seperate the strings.
             String[] arrOfStr = this.description.split("/from|/to");
             if (arrOfStr.length < 3) {
@@ -58,6 +52,8 @@ public class AddEvent extends Command {
 
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
+        } catch (AssertionError a) {
+            return ui.showError(a.getMessage());
         }
     }
 }
