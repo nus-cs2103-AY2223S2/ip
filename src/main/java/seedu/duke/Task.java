@@ -1,10 +1,14 @@
 package seedu.duke;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class Task {
+/**
+ * Represents a task added by the user
+ */
+public abstract class Task implements Serializable {
 
     protected String task;
     protected Boolean isDone;
@@ -22,6 +26,7 @@ public abstract class Task {
         }
         this.task = task;
         this.isDone = false;
+        this.tags = new ArrayList<>();
     }
 
     public void mark() {
@@ -39,10 +44,16 @@ public abstract class Task {
     @Override
     public String toString() {
         String status = isDone ? "X" : " ";
-        String response = String.format("[%s][%s] %s", abbreviation, status, task);
+        String tags = this.tags.size() > 0 ? this.tags.toString() : "";
+        String response = String.format("[%s][%s] %s %s", abbreviation, status, task, tags);
         return response.trim();
     }
 
+    /**
+     * Returns true if the name of the task contains the substring
+     * @param search Substring to find
+     * @return true if the name of the task contains the substring
+     */
     public Boolean contains(String search) {
         Pattern pattern = Pattern.compile(search);
         Matcher matcher = pattern.matcher(task);
@@ -52,6 +63,4 @@ public abstract class Task {
     public void addTag(Tag tag) {
         this.tags.add(tag);
     }
-
-    public abstract String getBreakdown();
 }

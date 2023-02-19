@@ -11,7 +11,6 @@ public class Event extends Task {
     private String to;
 
     /**
-     *
      * @param parsed A hashmap containing the event name, from date, and to date
      * @throws DukeException Exception thrown when event name is empty
      */
@@ -25,9 +24,5 @@ public class Event extends Task {
     @Override
     public String toString() {
         return super.toString() + " (from: " + from + " to: " + to + ")";
-    }
-
-    public String getBreakdown() {
-        return "event " + task + " /from " + from + " /to " + to;
     }
 }

@@ -1,7 +1,12 @@
 package seedu.duke;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents the UI portion of application
+ * Responsible for processing inputs and performing functions based on user inputs
+ */
 public class Ui {
 
     public static void showError(Exception e) {
@@ -76,6 +81,11 @@ public class Ui {
             return response;
         }
         case("bye"): {
+            try {
+                Storage.saveList(ls);
+            } catch (IOException e) {
+                System.out.println("Error initializing stream");
+            }
             return "Bye!";
         }
         case("find"): {
@@ -93,7 +103,7 @@ public class Ui {
             return response;
         }
         case("tag"): {
-            int index = Integer.valueOf(chat.split(" ")[1]);
+            int index = Integer.valueOf(chat.split(" ")[1]) - 1;
             Tag tag = new Tag(chat.split(" ")[2]);
             Task task = ls.addTag(index, tag);
             String response = "Noted. I've added the tag to this task:\n";

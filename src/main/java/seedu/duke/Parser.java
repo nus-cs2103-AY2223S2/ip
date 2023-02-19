@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.Function;
 
+/**
+ * Responsible for parsing user inputs into individual components
+ */
 public class Parser {
 
     private static Function<String, HashMap<String, String>> todoParser = createTodoParser();
@@ -27,7 +30,9 @@ public class Parser {
             HashMap<String, String> parsed = new HashMap<>();
             for (String word : chat.split(" ")) {
                 if (waitingForKeyword < keywords.size() && word.equals(keywords.get(waitingForKeyword))) {
-                    parsed.put(currentKey, currentValue.trim());
+                    if (currentKey != "") {
+                        parsed.put(currentKey, currentValue.trim());
+                    }
                     currentKey = keywords.get(waitingForKeyword++);
                     currentValue = "";
                 } else {
@@ -35,7 +40,7 @@ public class Parser {
                 }
             }
             parsed.put(currentKey, currentValue.trim());
-            assert parsed.size() == keywords.size() - 1 : "Parser should be of length (keywords - 1)";
+            assert parsed.size() == keywords.size() : "Parser should be of length (keywords)";
             return parsed;
         };
     }
@@ -46,7 +51,6 @@ public class Parser {
      */
     private static Function<String, HashMap<String, String>> createTodoParser() {
         ArrayList<String> toParse = new ArrayList<>(Arrays.asList("todo"));
-        assert toParse.size() == 2 : "TodoParser should be of length 2";
         return createParser(toParse);
     }
 
@@ -56,7 +60,6 @@ public class Parser {
      */
     private static Function<String, HashMap<String, String>> createDeadlineParser() {
         ArrayList<String> toParse = new ArrayList<>(Arrays.asList("deadline", "/by"));
-        assert toParse.size() == 3 : "DeadlineParser should be of length 3";
         return createParser(toParse);
     }
 
@@ -66,7 +69,6 @@ public class Parser {
      */
     private static Function<String, HashMap<String, String>> createEventParser() {
         ArrayList<String> toParse = new ArrayList<>(Arrays.asList("event", "/from", "/to"));
-        assert toParse.size() == 4 : "EventParser should be of length 4";
         return createParser(toParse);
     }
 
@@ -75,22 +77,48 @@ public class Parser {
         return createParser(toParse);
     }
 
+    /**
+     * Parses input from user
+     * @param chat user input
+     * @return parsed input
+     */
     public static HashMap<String, String> parseTodo(String chat) {
-        return todoParser.apply(chat);
+        HashMap<String, String> parsed = todoParser.apply(chat);
+        assert parsed.size() == 1 : "Parsed should be of length 1";
+        return parsed;
     }
 
+    /**
+     * Parses input from user
+     * @param chat user input
+     * @return parsed input
+     */
     public static HashMap<String, String> parseDeadline(String chat) {
-        return deadlineParser.apply(chat);
+        HashMap<String, String> parsed = deadlineParser.apply(chat);
+        assert parsed.size() == 2 : "Parsed should be of length 2";
+        return parsed;
     }
 
+    /**
+     * Parses input from user
+     * @param chat user input
+     * @return parsed input
+     */
     public static HashMap<String, String> parseEvent(String chat) {
-        return eventParser.apply(chat);
+        HashMap<String, String> parsed = eventParser.apply(chat);
+        assert parsed.size() == 3 : "Parsed should be of length 3";
+        return parsed;
     }
 
     public static HashMap<String, String> parseTag(String chat) {
         return tagParser.apply(chat);
     }
 
+    /**
+     * Converts String to LocalDateTime
+     * @param by String inputted by user
+     * @return LocalDateTime generated
+     */
     public static LocalDateTime stringToDate(String by) {
         String[] date = by.split(" ")[0].split("/");
         int day = Integer.valueOf(date[0]);

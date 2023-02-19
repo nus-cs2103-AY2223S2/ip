@@ -1,22 +1,27 @@
 package seedu.duke;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TaskList {
+/**
+ * Represents the list of tasks created by the user.
+ */
+public class TaskList implements Serializable {
 
-    public ArrayList<Task> list = new ArrayList<>();
-    public ArrayList<Task> getList() {
-        return list;
-    }
+    private ArrayList<Task> list = new ArrayList<>();
 
-    public TaskList() {
-    }
+
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
+    public TaskList() {
+    }
 
+    public ArrayList<Task> getList() {
+        return list;
+    }
     /**
      * Using the chat of the user, creates a new ToDo object and adds it to the list
      * @param chat (String inputted by user)
@@ -57,10 +62,10 @@ public class TaskList {
     }
 
     /**
-     * Adds the given tag to the Task in the TaskList corresponding to the index provided
-     * @param index The Task to add the tag to
-     * @param tag The Tag to add to the Task
-     * @return The Task that had a Tag added to it
+     * Gives the task at the indicated index a tag
+     * @param index
+     * @param tag
+     * @return
      */
     public Task addTag(int index, Tag tag) {
         Task task = list.get(index);
