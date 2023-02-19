@@ -3,7 +3,7 @@ package nook;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import exceptions.DukeException;
+import exceptions.NookException;
 import tasks.Priority;
 
 /**
@@ -67,11 +67,11 @@ public class Validator {
      *
      * @param inputArr an array representation of the user's input line
      * @param task     string of the task type derived from commandType
-     * @throws DukeException
+     * @throws NookException
      */
-    public void validateDescription(String[] inputArr, String task) throws DukeException {
+    public void validateDescription(String[] inputArr, String task) throws NookException {
         if (isDescriptionEmpty(inputArr)) {
-            throw new DukeException(generateDescriptionErrorMessage(task));
+            throw new NookException(generateDescriptionErrorMessage(task));
         }
     }
 
@@ -80,11 +80,11 @@ public class Validator {
      * and throws a DukeException if it is unable to be parsed into LocalDate
      *
      * @param input string of the date to be parsed
-     * @throws DukeException
+     * @throws NookException
      */
-    public void validateDate(String input) throws DukeException {
+    public void validateDate(String input) throws NookException {
         if (!isDateValid(input)) {
-            throw new DukeException(DATE_ERROR_MESSAGE);
+            throw new NookException(DATE_ERROR_MESSAGE);
         }
     }
 
@@ -93,11 +93,11 @@ public class Validator {
      * and throws a DukeException if it is unable to be parsed into recognisable Priority
      *
      * @param input string of the priority to be parsed
-     * @throws DukeException
+     * @throws NookException
      */
-    public void validatePriority(String input) throws DukeException {
+    public void validatePriority(String input) throws NookException {
         if (!isPriorityValid(input)) {
-            throw new DukeException("Oops! If you want to set a priority, "
+            throw new NookException("Oops! If you want to set a priority, "
                     + "please enter values such as: low, medium, high");
         }
     }
