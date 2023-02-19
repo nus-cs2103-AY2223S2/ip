@@ -6,20 +6,24 @@ import java.util.Scanner;
 public class TextUi {
     private static final String GREET_MESSAGE =
             "I am Panda, your personal task manager. How may I assist you today?";
-    private static final String USER_INSTRUCTION = "" +
-            "TODO  :  Adds a task to task list    [ Format :  TODO_<TASK_DESCRIPTION> ]" + '\n' +
-            "LIST  :  List ALL tasks from task list     [ Format : LIST ]" + '\n' +
-            "MARK/UNMARK  :  Mark/Unmark a task from the task list    " +
-            "[ Format : MARK/UNMARK_<Task Number> ]" + '\n' +
-            "EVENT :  Adds an event from and to with specific date and time" + '\n' +
-            "            [ Format : EVENT_<EVENT_DESCRIPTION>_/<DATE_TIME_FROM>_/<DATE_TIME_TO> ] " +
-            "( DATE_TIME = YYYY-MM-DD HHMM )" + '\n' +
-            "DEADLINE  :  Adds a task with a deadline at specific date and time" + '\n' +
-            "            [ Format : DEADLINE_<TASK_DESCRIPTION>_/<DATE_TIME_BY> " +
-            "( DATE_TIME = YYYY-MM-DD HHMM )" + '\n' +
-            "DELETE  :  Remove task from task list    " +
-            "[ Format :  DELETE_<TASK_NUMBER> ]" +'\n' +
-            "BYE  :  Exits the app" + '\n';
+    private static final String USER_INSTRUCTION = 
+            "Here are what you can do : " + "\n" + '\n'
+                    + "TODO  :  Adds a task to task list" + '\n' 
+                    + "Example :  TODO (TASK_DESCRIPTION) " + '\n' + '\n'
+                    + "LIST  :  List ALL tasks from task list" + '\n'
+                    + "Example : LIST" + '\n' + '\n'
+                    + "MARK/UNMARK  :  Mark/Unmark a task from the task list" + '\n'
+                    + "Example : MARK/UNMARK (Task Number) " + '\n' + '\n'
+                    + "EVENT :  Adds an event from and to with specific date and time" + '\n'
+                    + "Example : EVENT (EVENT_DESCRIPTION) /(DATE_TIME_FROM) /(DATE_TIME_TO)" + '\n'
+                    + "[DATE_TIME = YYYY-MM-DD]" + '\n' + '\n'
+                    + "DEADLINE  :  Adds a task with a deadline at specific date and time" + '\n'
+                    + "Example : DEADLINE (TASK_DESCRIPTION) /(DATE_TIME_BY) " + '\n'
+                    + "[DATE_TIME = YYYY-MM-DD]" + '\n' + '\n'
+                    + "DELETE  :  Remove task from task list" + '\n'
+                    + "Example :  DELETE (TASK_NUMBER)" +'\n' + '\n'
+                    + "BYE  :  Exits the app" + '\n'
+                    + "Example : BYE";
 
     private static final String EXIT_MESSAGE =
             "It's great working with you! " + '\n'
@@ -90,6 +94,10 @@ public class TextUi {
         }
         taskList += "" + showTotalCountMessage(taskslist);
         return taskList;
+    }
+
+    public String showHelpMessage() {
+        return USER_INSTRUCTION;
     }
 
     public String showFindMessage() {
