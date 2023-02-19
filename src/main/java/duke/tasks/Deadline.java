@@ -6,7 +6,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
+/**
+ * Represents a deadline task that the user can input.
+ * Tag = D.
+ */
 public class Deadline extends Task{
 
     String tag = "D";
@@ -15,13 +18,18 @@ public class Deadline extends Task{
     public Deadline() {
         super.tag = tag;
     }
+
+    /**
+     * Constructor for initilising a deadline task.
+     * @param description The description of the deadline task.
+     */
     public Deadline(String description) {
         super.tag = tag;
         super.description = description;
     }
 
     @Override
-    public void genDscp(String input) throws InvalidDeadline {
+    public void formatDescription(String input) throws InvalidDeadline {
         String dscp = input.replace("deadline ", "");
         if (dscp.isBlank()) {
             throw new InvalidDeadline();

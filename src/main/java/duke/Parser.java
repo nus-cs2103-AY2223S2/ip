@@ -6,6 +6,10 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
+/**
+ * Deals with interpreting the user input and detect
+ * useful commands, then executes the commands.
+ */
 public class Parser {
     public TaskList data;
 
@@ -13,16 +17,28 @@ public class Parser {
         this.data = data;
     }
 
+    /**
+     * Returns the current list of tasks.
+     * @return list of tasks
+     */
     public TaskList getTaskList() {
         return this.data;
     }
+
+    /**
+     * Detects commands from incoming user input and executes
+     * accordingly, returning an appropriate response message to
+     * be printed out by the UI.
+     * @param input Input to be parsed.
+     * @return response message.
+     */
     public String parse(String input) {
         if (input.equals("bye")) {
             Storage.writeFile(data);
             return "Bye!";
         }
         if (input.equals("list")) {
-            return data.printData();
+            return data.toString();
         }
 
         if (input.contains("unmark")) {
@@ -57,7 +73,7 @@ public class Parser {
             Task todo = new ToDo();
             String description = input.replace("todo ", "");
             try {
-                todo.genDscp(description);
+                todo.formatDescription(description);
             } catch (DukeExceptions e){
                 return e.getMessage();
             }
@@ -69,7 +85,7 @@ public class Parser {
             Task event = new Event();
             String description = input.replace("event ", "");
             try {
-                event.genDscp(description);
+                event.formatDescription(description);
             } catch (DukeExceptions e) {
                 return e.getMessage();
             }
@@ -81,7 +97,7 @@ public class Parser {
             Task deadline = new Deadline();
             String description = input.replace("deadline ", "");
             try {
-                deadline.genDscp(description);
+                deadline.formatDescription(description);
             } catch (DukeExceptions e) {
                 return e.getMessage();
             }

@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Deals with the reading user inputs and responding to their inputs.
+ */
 public class Ui {
     Parser parser;
 
@@ -9,6 +12,9 @@ public class Ui {
         this.parser = parser;
     }
 
+    /**
+     * Prints response messages according to the user input.
+     */
     public void readInput() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

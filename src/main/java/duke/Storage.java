@@ -8,9 +8,13 @@ import duke.tasks.ToDo;
 import java.io.*;
 import java.util.ArrayList;
 
-/*
-* Saves data into file in the format of [T][B][Description], where T is type of task,
-* B is int representing bool isMarked, description is details of the task.
+/**
+ * Deals with loading and saving tasks to and from the local file.
+ * Saves data into file in the format of
+ * [T][B][Description], where
+ * - T is type of task
+ * - B is int representing bool isMarked
+ * - Description is details of the task.
  */
 public class Storage {
     private static final String FILE_NAME = "saved_data.txt";
@@ -45,6 +49,10 @@ public class Storage {
         return data;
     }
 
+    /**
+     * Writes a list of tasks into the local file.
+     * @param data List of tasks
+     */
     public static void writeFile(TaskList data) {
         ArrayList<String> save = new ArrayList<>();
         for (int i = 0; i < data.getSize(); i++) {
@@ -67,13 +75,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e);
         }
-    }
-
-    public static TaskList populateList() {
-        createFile();
-        ArrayList<String> savedData = readFile();
-        TaskList data = addEntry(savedData);
-        return data;
     }
 
     private static TaskList addEntry(ArrayList<String> savedData) {
@@ -104,4 +105,18 @@ public class Storage {
         }
         return data;
     }
+
+    /**
+     * Populates an empty TaskList with data read from an existing local file.
+     * Used to initialise data when program starts.
+     * @return The initialised list of tasks
+     */
+    public static TaskList populateList() {
+        createFile();
+        ArrayList<String> savedData = readFile();
+        TaskList data = addEntry(savedData);
+        return data;
+    }
+
+
 }

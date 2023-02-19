@@ -6,6 +6,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an Event task.
+ * Tag = E.
+ */
 public class Event extends Task {
 
     String tag = "E";
@@ -16,6 +20,10 @@ public class Event extends Task {
         super.tag = tag;
     }
 
+    /**
+     * Constructor for initialising of an event task.
+     * @param description The description of the event task.
+     */
     public Event(String description) {
         super.tag = tag;
         super.description = description;
@@ -23,7 +31,7 @@ public class Event extends Task {
 
     //KEEP ALL WORDS SEPARATED BY SPACES
     @Override
-    public void genDscp(String input) throws InvalidEvent {
+    public void formatDescription(String input) throws InvalidEvent {
         String dscp = input.replace("event ", "");
         if (dscp.isBlank()) {
             throw new InvalidEvent();
