@@ -1,10 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -43,7 +40,7 @@ public class Storage {
         try {
             File data = new File(filePath);
             Scanner sc = new Scanner(data);
-            readScanner(sc);
+            readFromStorage(sc);
         } catch (IOException e) {
             Ui.errorMessage(e);
         }
@@ -57,7 +54,7 @@ public class Storage {
         try {
             File data = new File(filePath);
             FileWriter writer = new FileWriter(data);
-            writeFromTasks(writer);
+            writeToStorage(writer);
             writer.close();
         } catch (IOException e) {
             Ui.errorMessage(e);
@@ -70,17 +67,18 @@ public class Storage {
      *
      * @param sc The Scanner reading from storage.
      */
-    public void readScanner(Scanner sc) {
+    public void readFromStorage(Scanner sc) {
         while (sc.hasNextLine()) {
             String Line = sc.nextLine();
             char Type = Line.charAt(0);
-            int isDone = Integer.parseInt(Character.toString(Line.charAt(2)));
+            char isDone = Line.charAt(2);
+            char priority = Line.charAt(4);
             if (Type == 'T') { // T 1 read book
-                readToDo(Line, isDone);
+                readToDo(Line, isDone, priority);
             } else if (Type == 'D') { // D 1 read book | June 12 4pm
-                readDeadline(Line, isDone);
+                readDeadline(Line, isDone, priority);
             } else if (Type == 'E') { // E 1 read book | June 12 4pm | June 13 4pm
-                readEvent(Line, isDone);
+                readEvent(Line, isDone, priority);
             }
         }
     }
@@ -90,24 +88,27 @@ public class Storage {
      *
      * @param writer The FileWriter writing into storage.
      */
-    public void writeFromTasks(FileWriter writer) throws IOException {
+    public void writeToStorage(FileWriter writer) throws IOException {
         while (!tasks.isEmpty()) {
             Task task = tasks.remove(0);
             String isDone = "";
             String writeTask = "";
 
-            if(task.isDone()) {
+            if (task.isDone()) {
                 isDone = "1";
             } else {
                 isDone = "0";
             }
+
             if (task instanceof ToDo) {
-                writeTask = "T " + isDone + " " + task.getDescription() + "\n";
+                writeTask = "T " + isDone + " " + task.getShortPriority() + " " + task.getDescription() + "\n";
             } else if (task instanceof Deadline) {
-                writeTask += "D " + isDone + " " + task.getDescription() + " | " + ((Deadline) task).getBy() + "\n";
+                writeTask += "D " + isDone + " " + task.getShortPriority() + " " +
+                        task.getDescription() + " | " + ((Deadline) task).getBy() + "\n";
             } else if (task instanceof Event) {
-                writeTask += "E " + isDone + " " + task.getDescription() + " | " + ((Event) task).getFrom() + " | "
-                        + ((Event) task).getTo() + "\n";
+                writeTask += "E " + isDone + " " + task.getShortPriority() + " " +
+                        task.getDescription() + " | " + ((Event) task).getFrom() + " | " +
+                        ((Event) task).getTo() + "\n";
             }
             writer.write(writeTask);
         }
@@ -118,13 +119,15 @@ public class Storage {
      *
      * @param Line The next line in the data.
      * @param isDone Status of the task being read.
+     * @param priority Priority of the task.
      */
-    public void readToDo(String Line, int isDone) {
-        String description = Line.substring(4);
+    public void readToDo(String Line, char isDone, char priority) {
+        String description = Line.substring(6);
         Task task = new ToDo(description);
-        if (isDone == 1) {
+        if (isDone == '1') {
             task.markAsDone();
         }
+        task.setPriority(Priority.priorityValue(priority));
         tasks.add(task);
     }
 
@@ -133,16 +136,18 @@ public class Storage {
      *
      * @param Line The next line in the data.
      * @param isDone Status of the task being read.
+     * @param priority Priority of the task.
      */
-    public void readDeadline(String Line, int isDone) {
+    public void readDeadline(String Line, char isDone, char priority) {
         int dividerIndex = Line.indexOf('|');
-        String description = Line.substring(4, dividerIndex - 1);
+        String description = Line.substring(6, dividerIndex - 1);
         String by = Line.substring(dividerIndex + 2);
         try {
             Task task = new Deadline(description, by);
-            if (isDone == 1) {
+            if (isDone == '1') {
                 task.markAsDone();
             }
+            task.setPriority(Priority.priorityValue(priority));
             tasks.add(task);
         } catch (DukeException e) {
             Ui.errorMessage(e);
@@ -154,18 +159,20 @@ public class Storage {
      *
      * @param Line The next line in the data.
      * @param isDone Status of the task being read.
+     * @param priority Priority of the task.
      */
-    public void readEvent(String Line, int isDone) {
+    public void readEvent(String Line, char isDone, char priority) {
         int firstDividerIndex = Line.indexOf('|');
         int lastDividerIndex = Line.lastIndexOf('|');
-        String description = Line.substring(4, firstDividerIndex - 1);
+        String description = Line.substring(6, firstDividerIndex - 1);
         String from = Line.substring(firstDividerIndex + 2, lastDividerIndex - 1);
         String to = Line.substring(lastDividerIndex + 2);
         try {
             Task task = new Event(description, from, to);
-            if (isDone == 1) {
+            if (isDone == '1') {
                 task.markAsDone();
             }
+            task.setPriority(Priority.priorityValue(priority));
             tasks.add(task);
         } catch (DukeException e) {
             Ui.errorMessage(e);

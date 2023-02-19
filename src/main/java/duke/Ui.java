@@ -17,16 +17,52 @@ public class Ui {
     public Ui() {
     }
 
+    /**
+     * Returns Duke's latest response to the GUI.
+     *
+     * @return Duke's response to GUI.
+     */
     public static String dukeResponse() {
         return response;
     }
+
+    /**
+     * Returns user most recent input for Duke.
+     *
+     * @return User most recent input.
+     */
     public static String getInput() {
         return input;
     }
 
+    /**
+     * Sets user most recent input from GUI.
+     *
+     * @param input User most recent input.
+     */
     public static void receiveInput(String input) {
         assert !input.isEmpty();
         Ui.input = input;
+    }
+
+    /**
+     * Prints priority of a task.
+     *
+     * @param task Task to be printed.
+     */
+    public static void getPriorityMessage(Task task) {
+        response = "";
+        response += "Priority of this task is: " + task.getPriority();
+    }
+
+    /**
+     * Prints new priority of a task.
+     *
+     * @param task Task to be printed.
+     */
+    public static void setPriorityMessage(Task task) {
+        response = "";
+        response += "Priority of this task has been set to: " + task.getPriority();
     }
 
     /**

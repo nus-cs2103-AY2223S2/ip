@@ -6,6 +6,7 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone = false;
+    protected Priority priority;
 
 
     /**
@@ -14,7 +15,29 @@ public class Task {
     public Task(String description) {
         assert !description.isEmpty();
         this.description = description;
+        this.priority = Priority.LOW;
         this.isDone = false;
+    }
+
+    /**
+     * Return the task's priority.
+     *
+     * @return String representation of the priority.
+     */
+    public String getPriority() {
+        return priority.toString();
+    }
+
+    /**
+     * Return the task's priority in short form.
+     *
+     * @return String representation of the priority in short form.
+     */
+    public String getShortPriority() {
+        return priority.shortString();
+    }
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     /**
@@ -65,6 +88,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription();
+        return "[" + getStatusIcon() + "]" + "[" + priority + "] " + getDescription();
     }
 }
