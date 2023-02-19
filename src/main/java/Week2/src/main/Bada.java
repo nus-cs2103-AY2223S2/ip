@@ -42,23 +42,6 @@ public class Bada extends Application {
     //assert tasklist.length() < 100 : "Task list is too long";
     static FileWriter fw;
 
-    static {
-        try {
-            fw = new FileWriter("saves/data.txt");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Writes information of the task on the file
-     * @param currtask Current task that user has entered
-     * It uses a file writer to write the data on the file according to the user's input.
-     * @throws IOException
-     */
-    public static void writeOn(Task currtask) throws IOException {
-        fw.write(currtask.toString() +System.lineSeparator());
-    }
     Ui ui = new Ui();
 
     /**

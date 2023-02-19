@@ -34,7 +34,6 @@ public class Event extends Task {
 
         String str1 = "Got it. I've added this task:";
         String str2 = current.toString();
-        Bada.writeOn(current);
 
         return str1 + "\n" + str2;
     }

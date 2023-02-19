@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "launcher.Launcher"
+    mainClassName = "Week2.src.main.Launcher"
 }
 
 shadowJar {

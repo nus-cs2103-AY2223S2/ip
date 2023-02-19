@@ -37,7 +37,6 @@ public class Todo extends Task {
         String str1 = "Got it. I've added this task:";
         String str2 = current.toString();
         String str3 = "Now you have " + tasklist.length() + " tasks in the list";
-        Bada.writeOn(current);
         return str1 + "\n" + str2 + "\n" + str3;
     }
 

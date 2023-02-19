@@ -23,7 +23,6 @@ public class Unmark {
 
         String str1 = "OK, I've marked this task as not done yet:";
         String str2 = "[ ]" + current.getContent();
-        Bada.writeOn(current);
 
         return str1 + "\n" + str2;
     }

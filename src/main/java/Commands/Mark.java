@@ -24,7 +24,6 @@ public class Mark {
 
         String str1 = "Nice! I've marked this task as done:";
         String str2 = "[X] " + current.getContent();
-        Bada.writeOn(current);
 
         return str1 + "\n" + str2;
     }
