@@ -115,6 +115,9 @@ public class Parser {
         case FindCommand.COMMAND:
             command = parseFindCommand(userInput);
             break;
+        case CheckDuplicateCommand.COMMAND:
+            command = new CheckDuplicateCommand();
+            break;
         default:
             throw new DukeException("I am sorry. I have failed to comprehend your command. Please try again.");
         }
