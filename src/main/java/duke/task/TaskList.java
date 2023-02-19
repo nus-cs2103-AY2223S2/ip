@@ -118,8 +118,8 @@ public class TaskList {
                 String todoDescription = parts[1];
                 Task t = new Todo(todoDescription);
                 this.list.add(t);
-                String str1 = "New todo added: " + todoDescription;
-                return str1;
+                String todoStr = "New todo added: " + todoDescription;
+                return todoStr;
 
             case "deadline":
                 //split into descrpition and time
@@ -132,8 +132,8 @@ public class TaskList {
                 LocalDate date = LocalDate.parse(time);
                 Task d = new Deadline(deadlineDescription, date);
                 list.add(d);
-                String str2 = "New deadline added: " + deadlineDescription;
-                return str2;
+                String deadlineStr = "New deadline added: " + deadlineDescription;
+                return deadlineStr;
 
             case "event":
                 //split into descrpition and time
@@ -150,8 +150,8 @@ public class TaskList {
 
                 Task e  = new Event(eventDescription, fromdate, todate);
                 this.list.add(e);
-                String str3 = "New event added: " + eventDescription;
-                return str3;
+                String eventStr = "New event added: " + eventDescription;
+                return eventStr;
 
         }
         return "error";
