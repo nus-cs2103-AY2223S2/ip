@@ -15,6 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
+/**
+ * A dialog box for the Miki JavaFX GUI.
+ */
 public class DialogBox extends HBox {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/bobu_40x40.png"));
     private final Image mikiImage = new Image(this.getClass().getResourceAsStream("/images/fuzuki_40x40.png"));
@@ -23,6 +26,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates a new <code>DialogBox</code>.
+     *
+     * @param text text contents of the <code>DialogBox</code>.
+     * @param pov quoted speaker of the <code>DialogBox</code>.
+     */
     public DialogBox(String text, Pov pov) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -57,6 +66,9 @@ public class DialogBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Quoted speakers for a <code>DialogBox</code>.
+     */
     public enum Pov {
         MIKI,
         USER

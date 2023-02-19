@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 import shigure.Gui;
 import shigure.fxcontrol.MainWindow;
 
+/**
+ * JavaFX launcher of the Miki project.
+ */
 public class MikiApp extends Application {
     @Override
     public void start(Stage stage) {

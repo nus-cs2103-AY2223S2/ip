@@ -5,7 +5,15 @@ import javafx.application.Platform;
 import shigure.Cli;
 import task.Parser;
 
+/**
+ * Initializer & execution entry-point of the Miki project.
+ */
 public class Init {
+    /**
+     * Main function of the Miki project.
+     *
+     * @param args command-line arguments from the initial program call.
+     */
     public static void main(String[] args) {
         assert args != null : "Program arguments should be non-null";
         boolean hasAsciiOnly = false;
@@ -29,7 +37,7 @@ public class Init {
             Cli cli = new Cli(hasAsciiOnly);
             Miki miki = new Miki(cli, hasNoAutoload);
             String cmdLine = "";
-            while (!Parser.isExitCommand(cmdLine)) {
+            while (!Parser.isExitString(cmdLine)) {
                 cmdLine = cli.readLine();
                 miki.respond(cmdLine);
             }

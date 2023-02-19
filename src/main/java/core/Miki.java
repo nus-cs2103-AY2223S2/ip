@@ -3,7 +3,6 @@ package core;
 import java.io.IOException;
 
 import command.Command;
-import command.ExceptionPrint;
 import command.RefreshTasks;
 import shigure.Ui;
 import storage.Storage;
@@ -20,6 +19,12 @@ public class Miki {
     private final TaskList tasks;
     private Command listFilter;
 
+    /**
+     * Creates a Miki core with the specified arguments.
+     *
+     * @param ui            UI for user interaction.
+     * @param hasNoAutoload whether this Miki shall not attempt an initial load from the auto-save path.
+     */
     public Miki(Ui ui, boolean hasNoAutoload) {
         this.ui = ui;
         storage = new Storage("./data/");
@@ -40,6 +45,11 @@ public class Miki {
         listFilter.run(tasks, ui, storage);
     }
 
+    /**
+     * Responds to a given user input.
+     *
+     * @param cmdLine input to respond to.
+     */
     public void respond(String cmdLine) {
         Command cmd = Parser.parse(cmdLine);
         ui.printUser(cmdLine);
@@ -48,7 +58,7 @@ public class Miki {
         ui.printDiv();
         ui.clearInput();
 
-        if (Parser.isListCommand(cmdLine) && !(cmd instanceof ExceptionPrint)) {
+        if (Parser.isListCommand(cmd)) {
             listFilter = cmd;
         } else {
             assert listFilter != null : "Task filter should be non-null";

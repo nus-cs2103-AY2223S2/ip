@@ -7,10 +7,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+/**
+ * A task display box for the Miki JavaFX GUI.
+ */
 public class TaskBox extends HBox {
     @FXML
     private Label task;
 
+    /**
+     * Creates a new <code>TaskBox</code>.
+     *
+     * @param text text contents of the <code>TaskBox</code>.
+     */
     public TaskBox(String text) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/TaskBox.fxml"));

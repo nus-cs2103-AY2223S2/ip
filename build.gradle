@@ -30,11 +30,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-javafx {
-    version = "11"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
 test {
     useJUnitPlatform()
 

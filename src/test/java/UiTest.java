@@ -1,3 +1,5 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
@@ -6,10 +8,9 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
+
 import shigure.Cli;
 import shigure.Ui;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UiTest {
     @Test

@@ -1,15 +1,16 @@
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
+
 import storage.Storage;
 import task.Event;
 import task.TaskList;
 import task.Todo;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StorageTest {
     @Test

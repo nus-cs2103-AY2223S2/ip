@@ -1,5 +1,8 @@
 package task;
 
+import static java.time.LocalDate.now;
+import static task.Task.DATE_IN_FMT;
+
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -27,9 +30,6 @@ import command.Unmark;
 import exception.MikiArgsException;
 import exception.NatDateParseException;
 import exception.TaskParseException;
-
-import static java.time.LocalDate.now;
-import static task.Task.DATE_IN_FMT;
 
 /**
  * A parser for Miki interactive command-line inputs.
@@ -316,6 +316,15 @@ public class Parser {
         return res;
     }
 
+    /**
+     * Parses a <code>LocalDateTime</code> from a <code>String</code> natural language expression.
+     *
+     * @param dateStr <code>String</code> representing a natural-language date.
+     * @param isLatestTiming whether to use the chronologically latest interpretation of <code>dateStr</code>, instead
+     *                       of the earliest interpretation.
+     * @return the <code>LocalDateTime</code> represented by <code>dateStr</code>
+     * @throws NatDateParseException if <code>dateStr</code> could not be parsed as a natural-language date.
+     */
     public static LocalDateTime parseDate(String dateStr, boolean isLatestTiming) throws NatDateParseException {
         try {
             return LocalDateTime.parse(dateStr, DATE_IN_FMT);
@@ -326,6 +335,7 @@ public class Parser {
         String cleanDateStr = dateStr.replace(",", "").replace("-", "");
         ArrayList<String> tokens = new ArrayList<>(Arrays.asList(cleanDateStr.split(" ")));
 
+        // Parses natural date items out of supplied String.
         int dayOfWeek = filterDayOfWeek(tokens);
         int dayOfMonth = filterDayOfMonth(tokens);
         int month = filterMonth(tokens);
@@ -342,6 +352,7 @@ public class Parser {
             }
         }
 
+        // Constructs a LocalDateTime by trying increasingly ambiguous combinations of natural date items.
         if (date != null) {
             return LocalDateTime.of(date, time != null ? time : altTime);
         }
@@ -434,18 +445,18 @@ public class Parser {
      * @param cmdLine input to parse.
      * @return <code>true</code> if <code>cmdLine</code> represents an exit command.
      */
-    public static boolean isExitCommand(String cmdLine) {
+    public static boolean isExitString(String cmdLine) {
         return cmdLine.split(" ")[0].equalsIgnoreCase("bye");
     }
 
-    public static boolean isListCommand(String cmdLine) {
-        switch (cmdLine.split(" ")[0].toLowerCase()) {
-        case "list":
-        case "find":
-            return true;
-        default:
-            return false;
-        }
+    /**
+     * Returns <code>true</code> if the supplied command is a task-list display command.
+     *
+     * @param cmd command to check.
+     * @return <code>true</code> if <code>cmd</code> represents a task-list display command.
+     */
+    public static boolean isListCommand(Command cmd) {
+        return cmd instanceof ListTasks || cmd instanceof Find;
     }
 
     /**

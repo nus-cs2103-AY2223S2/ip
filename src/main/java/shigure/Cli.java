@@ -13,9 +13,9 @@ public class Cli extends Ui {
     private final Scanner sc = new Scanner(System.in);
 
     /**
-     * Creates a new UI, optionally using ASCII-only versions of built-in <code>Strings</code>.
+     * Creates a new CLI, optionally using ASCII-only versions of built-in <code>Strings</code>.
      *
-     * @param isAsciiOnly whether this Ui shall operate in ASCII-only mode.
+     * @param isAsciiOnly whether this Cli shall operate in ASCII-only mode.
      */
     public Cli(boolean isAsciiOnly) {
         this.isAsciiOnly = isAsciiOnly;
@@ -44,7 +44,7 @@ public class Cli extends Ui {
     }
 
     /**
-     * Prints a line of output to the user interface,
+     * Prints a block of output to the user interface,
      * formatted with indentation for clarity.
      *
      * @param s <code>String</code> to be printed.

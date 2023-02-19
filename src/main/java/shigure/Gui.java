@@ -7,11 +7,21 @@ import javafx.util.Duration;
 import shigure.fxcontrol.DialogBox;
 import shigure.fxcontrol.MainWindow;
 
+/**
+ * A UI controller for Miki interactive GUI I/O.
+ */
 public class Gui extends Ui {
     private final MainWindow mainWindow;
     private final Stage stage;
     private final boolean isAsciiOnly;
 
+    /**
+     * Creates a new GUI.
+     *
+     * @param mainWindow <code>JavaFX</code> main window of the GUI.
+     * @param stage <code>JavaFX</code> stage of the GUI.
+     * @param isAsciiOnly whether this Cli shall operate in ASCII-only mode.
+     */
     public Gui(MainWindow mainWindow, Stage stage, boolean isAsciiOnly) {
         this.mainWindow = mainWindow;
         this.stage = stage;
