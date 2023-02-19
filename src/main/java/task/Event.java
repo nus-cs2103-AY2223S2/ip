@@ -77,12 +77,13 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return this.formatForUserToSee(this.isDone(), this.getName(), this.startDate, this.endDate);
+        return this.formatForUserToSee(this.isDone(), this.getName(),
+                this.startDate, this.endDate, this.getPriority());
     }
 
     private String formatForUserToSee(Boolean isDone, String taskName,
-                                      LocalDate startDate, LocalDate endDate) {
-        StringBuilder s = new StringBuilder("[E][");
+                                      LocalDate startDate, LocalDate endDate, PriorityLevel priorityLevel) {
+        StringBuilder s = new StringBuilder(priorityLevel.toString() + " [E][");
 
         if (isDone) {
             s.append("X");

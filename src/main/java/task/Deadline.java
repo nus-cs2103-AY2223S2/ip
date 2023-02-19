@@ -69,11 +69,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return this.formatForUserToSee(this.isDone(), this.getName(), this.endDate);
+        return this.formatForUserToSee(this.isDone(), this.getName(),
+                this.endDate, this.getPriority());
     }
 
-    private String formatForUserToSee(Boolean isDone, String taskName, LocalDate endDate) {
-        StringBuilder s = new StringBuilder("[E][");
+    private String formatForUserToSee(Boolean isDone, String taskName,
+                                      LocalDate endDate, PriorityLevel priorityLevel) {
+        StringBuilder s = new StringBuilder(priorityLevel.toString() + " [D][");
 
         if (isDone) {
             s.append("X");

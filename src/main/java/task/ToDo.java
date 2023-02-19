@@ -55,11 +55,11 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return this.formatForUserToSee(this.isDone(), this.getName());
+        return this.formatForUserToSee(this.isDone(), this.getName(), this.getPriority());
     }
 
-    private String formatForUserToSee(Boolean isDone, String taskName) {
-        StringBuilder s = new StringBuilder("[T][");
+    private String formatForUserToSee(Boolean isDone, String taskName, PriorityLevel priorityLevel) {
+        StringBuilder s = new StringBuilder(priorityLevel.toString() + " [T][");
 
         if (isDone) {
             s.append("X");

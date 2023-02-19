@@ -8,7 +8,7 @@ import task.Task;
 public class Ui {
 
     public static String getNoKeywordMessage() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "No idea what you are talking about";
     }
 
     public static String getGoodbyeMessage() {
@@ -50,7 +50,7 @@ public class Ui {
     }
 
     public static String getUnMarkMessageWithAttitude(Task unmarkedTask) {
-        return "\nOK, I've marked this task as undone:\n  " + unmarkedTask.getName() + "\n";
+        return "\nOK, I've marked this task as undone:\n  " + unmarkedTask + "\n";
     }
 
     public static String getAddTaskConfirmationWithAttitudeOf(Task taskAdded) {
