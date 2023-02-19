@@ -172,6 +172,11 @@ public class TaskHandler {
         return UIText.printFind(TaskList.getWordList());
 
     }
+
+    /**
+     * Reminds users of tasks for the next 7 days.
+     * @return A list of tasks with deadline or event start time less than 7 days from now.
+     */
     public String remindHandler() {
         TaskList.findReminders();
         List<Task> reminders = TaskList.getRemindList();

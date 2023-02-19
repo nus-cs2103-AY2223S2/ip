@@ -31,6 +31,11 @@ public class Parser {
         return date;
     }
 
+    /**
+     * Extracts the time from event and deadline tasks
+     * @param input String input of user
+     * @return Array of strings containing the time if input is an event or deadline task
+     */
     public static String[] extractArgsFromInput(String input) {
         String[] splitCommand = input.split(" ", 2);
         String type = splitCommand[0];
@@ -47,6 +52,18 @@ public class Parser {
         int index = Integer.parseInt(splitCommand[1]) - 1;
         return index;
     }
+
+    /**
+     *
+     * @param input String input of user
+     * @param handler current TaskHandler object being used
+     * @param ui current UIText object being used
+     * @param storage current storage being accessed
+     * @return A string that is displayed to the user in the gui.
+     * @throws UnknownInputException
+     * @throws EmptyContentException
+     * @throws InvalidTaskAccessException
+     */
 
     public static String execute(String input, TaskHandler handler, UIText ui, Storage storage)
             throws UnknownInputException, EmptyContentException, InvalidTaskAccessException {
