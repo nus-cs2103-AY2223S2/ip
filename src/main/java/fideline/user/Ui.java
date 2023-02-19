@@ -37,6 +37,8 @@ public class Ui {
      * @param list String representation of the list of existing tasks.
      */
     public String getListMsg(String list) {
+        assert !list.isEmpty() : "task list cannot be empty here";
+
         String listMsg = "here! your list:" + list;
         return listMsg;
     }
@@ -49,6 +51,9 @@ public class Ui {
      * @param taskCount The number of existing tasks currently.
      */
     public String getAddTaskMsg(String newTask, int taskCount) {
+        assert taskCount >= 1 : "cannot have less than 1 task after adding";
+        assert !newTask.isEmpty() : "task string cannot be empty";
+
         String addTaskMsg = "ok! i've added to your list:\n  "
                 + newTask + "\nwow! there "
                 + (taskCount == 1 ? "is " : "are ") + taskCount
@@ -64,6 +69,8 @@ public class Ui {
      * @param task String representation of the marked task.
      */
     public String getMarkMsg(String task) {
+        assert !task.isEmpty() : "task string cannot be empty";
+
         String markMsg = "nice work! i've taken note!:\n  " + task;
         return markMsg;
     }
@@ -75,6 +82,8 @@ public class Ui {
      * @param task
      */
     public String getUnmarkMsg(String task) {
+        assert !task.isEmpty() : "task string cannot be empty";
+
         String unmarkMsg = "uhh okay... i've unmarked your task:\n  " + task;
         return unmarkMsg;
     }
@@ -86,6 +95,8 @@ public class Ui {
      * @param task
      */
     public String getDeleteMsg(String task, int taskCount) {
+        assert taskCount >= 0 : "there cannot be negative tasks after deletion";
+
         String deleteMsg = "okay i've deleted this task:\n  " + task
                 + "\nnow there " + (taskCount == 1 ? "is " : "are ") + taskCount
                 + (taskCount == 1 ? " task " : " tasks ") + "in the list now!";
@@ -109,6 +120,8 @@ public class Ui {
      * @param error String explaining the issue.
      */
     public String getErrorMsg(String error) {
+        assert !error.isEmpty() : "error cannot be empty";
+
         String errorMsg = "hold up! " + error;
         return errorMsg;
     }
@@ -128,6 +141,8 @@ public class Ui {
      * @param list Formatted list of all tasks found.
      */
     public String getFindMsg(String list) {
+        assert !list.isEmpty() : "find message cannot be empty";
+
         String findMsg = "here is everything that matched:" + list;
         return findMsg;
     }
