@@ -20,9 +20,8 @@ public class Duke {
      * Constructor for class Duke.
      */
     public Duke() {
-        String filePath = "data/duke.txt";
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

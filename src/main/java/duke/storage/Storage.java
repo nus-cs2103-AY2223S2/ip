@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Stores the user tasks.
  */
 public class Storage {
-    protected String filePath;
+    private static final String filePath = "data.txt";
     protected File file;
     static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
@@ -29,10 +29,9 @@ public class Storage {
      * @param filePath the pathname string of the file to keep track of user things.
      * @throws DukeException If there was an error in finding or creating the file.
      */
-    public Storage(String filePath) throws DukeException {
+    public Storage() throws DukeException {
         try {
-            this.filePath = filePath;
-            this.file = new File(filePath);
+            this.file = new File(Storage.filePath);
             this.file.createNewFile();
         } catch (IOException e) {
             throw new DukeException("Unable to create file \"" + filePath + "\"");
