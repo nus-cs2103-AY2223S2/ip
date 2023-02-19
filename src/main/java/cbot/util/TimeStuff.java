@@ -43,8 +43,9 @@ public class TimeStuff {
             throws DateTimeParseException {
         for (String tForm : T_FORMS) {
             try {
+                String toUpper = str.toUpperCase();
                 String fullForm = dForm + tForm;
-                return LocalDateTime.parse(str, DateTimeFormatter.ofPattern(fullForm));
+                return LocalDateTime.parse(toUpper, DateTimeFormatter.ofPattern(fullForm));
             } catch (DateTimeParseException ignore) {
                 // no handling, continue to next tForm
             }
