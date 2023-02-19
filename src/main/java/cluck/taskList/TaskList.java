@@ -55,11 +55,11 @@ public class TaskList {
     }
 
     public String toSave() {
-        StringBuilder savedTasks = new StringBuilder();
-        for (Task t : taskList) {
-            savedTasks.append(t.makeSaveFormat());
+        StringBuilder toWrite = new StringBuilder();
+        for (Task task : taskList) {
+            toWrite.append(task.makeSaveFormat());
         }
-        return savedTasks.toString();
+        return toWrite.toString();
     }
 
     /**
@@ -75,7 +75,15 @@ public class TaskList {
         }
     }
 
+    public String toString() {
+        StringBuilder tasks = new StringBuilder();
+        for (Task task : taskList) {
+            tasks.append(task.toString());
+            tasks.append("\n");
+        }
+        return tasks.toString();
 
+    }
 
 
 }
