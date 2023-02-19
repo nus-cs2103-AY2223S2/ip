@@ -45,6 +45,10 @@ public class Parser {
      */
     public static String processCommand(String userCommand, Storage storage, TaskList tasks) throws DukeException {
 
+        assert userCommand != null : "userCommand parameter cannot be null";
+        assert storage != null : "storage parameter cannot be null";
+        assert tasks != null : "tasks parameter cannot be null";
+
         if (userCommand.isEmpty()) {
             throw new DukeInvalidCommandException("Please enter a command");
         }

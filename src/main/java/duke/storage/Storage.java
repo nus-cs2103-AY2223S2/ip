@@ -30,6 +30,7 @@ public class Storage {
         for (String line : lines) {
             String[] parts = line.split(" \\| ");
             assert parts.length >= 3 : "Malformed task string: " + line;
+
             String taskType = parts[0];
             boolean isDone = parts[1].equals("1");
             String description = parts[2];
