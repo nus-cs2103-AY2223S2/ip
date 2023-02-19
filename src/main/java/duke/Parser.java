@@ -1,9 +1,9 @@
 package duke;
 
+/**
+ * Class representing a Parser to parse user input.
+ */
 public class Parser {
-    private TaskList taskList;
-    private Ui ui;
-
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
@@ -23,6 +23,9 @@ public class Parser {
     private static final int INDEX_UNMARK = UNMARK.length() + 1;
     private static final int INDEX_DELETE = DELETE.length() + 1;
     private static final int INDEX_FIND = FIND.length() + 1;
+
+    private TaskList taskList;
+    private Ui ui;
 
     /**
      * Parameterized constructor to create a Parser
@@ -82,9 +85,9 @@ public class Parser {
     private void addTodo(String task) throws DukeException {
         String description = task.substring(INDEX_TODO_DESCRIPTION);
         if (description.trim().equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
-        assert description != null : "Description cannot be null";
+        assert (!description.equals("")) : "Description cannot be empty";
         taskList.add(new Todo(description));
     }
 
@@ -97,8 +100,8 @@ public class Parser {
         String description = arr[0].substring(INDEX_DEADLINE_DESCRIPTION).trim();
         String by = arr[1].substring(INDEX_DEADLINE_BY).trim();
 
-        assert description != null : "Description cannot be null";
-        assert by != null : "By cannot be null";
+        assert (!description.equals("")) : "Description cannot be empty";
+        assert (!by.equals("")) : "By cannot be empty";
 
         taskList.add(new Deadline(description, by));
     }
@@ -113,10 +116,9 @@ public class Parser {
         String description = arr[0].substring(INDEX_EVENT_DESCRIPTION).trim();
         String from = arr[1].substring(INDEX_EVENT_FROM).trim();
         String to = arr[2].substring(INDEX_EVENT_TO).trim();
-        
-        assert description != null : "Description cannot be null";
-        assert from != null : "From cannot be null";
-        assert to != null : "To cannot be null";
+        assert (!description.equals("")) : "Description cannot be empty";
+        assert (!from.equals("")) : "From cannot be empty";
+        assert (!to.equals("")) : "To cannot be empty";
 
         taskList.add(new Event(description, from, to));
     }
@@ -133,12 +135,11 @@ public class Parser {
     }
 
     /**
-     * Parses a single line of user input
+     * Adds a Task to the TaskList
      * @param input the String containing a single line of user input
-     * @return the Ui response to the input
+     * @return the Ui response on adding a Task
      * @throws DukeException if an invalid command is entered
      */
-
     private String add(String input) throws DukeException {
         if (input.startsWith(TODO)) {
             addTodo(input);
@@ -147,12 +148,19 @@ public class Parser {
         } else if (input.startsWith(EVENT)) {
             addEvent(input);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         int len = taskList.size();
         Task t = taskList.get(len - 1);
         return ui.getAddMessage(t, taskList);
     }
+
+    /**
+     * Parses a single line of user input
+     * @param input the String containing a single line of user input
+     * @return the Ui response to the input
+     * @throws DukeException if an invalid command is entered
+     */
     public String parse(String input) throws DukeException {
         if (input.equals(LIST)) {
             return showList();

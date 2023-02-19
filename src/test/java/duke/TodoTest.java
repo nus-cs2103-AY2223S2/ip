@@ -1,30 +1,29 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     private String description = "borrow book";
     private Todo t = new Todo(description);
     @Test
-    public void Test1() {
+    public void inputParsingTest() {
         assertEquals(t.toString(), "[T][ ] borrow book");
     }
     @Test
-    public void Test2() {
+    public void fileParsingTest() {
         assertEquals(t.toFile(), "T /0 /borrow book");
     }
 
     @Test
-    public void Test3() {
+    public void markAsDoneTest() {
         t.markAsDone();
         assertEquals(t.toString(), "[T][X] borrow book");
     }
 
     @Test
-    public void Test4() {
+    public void markAsUndoneTest() {
         t.markAsUndone();
         assertEquals(t.toString(), "[T][ ] borrow book");
     }

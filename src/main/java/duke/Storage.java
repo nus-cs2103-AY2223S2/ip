@@ -7,13 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class to handle storage.
+ */
 public class Storage {
-    private ArrayList<Task> init;
-    private String filePath;
-
     private static final int INDEX_DEADLINE_BY = "by:".length() + 1;
     private static final int INDEX_EVENT_FROM = "from:".length() + 1;
     private static final int INDEX_EVENT_TO = "to:".length() + 1;
+    private ArrayList<Task> init;
+    private String filePath;
 
     /**
      * Parameterized constructor to create a Storage object

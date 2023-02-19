@@ -1,53 +1,61 @@
 package duke;
 
+import java.util.Objects;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+/**
+ * Class representing an instance of Duke.
+ */
 public class Duke extends Application {
+    private static final String FILE_PATH = "./data/duke.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
-    private static final String FILE_PATH = "./data/duke.txt";
-//    private boolean isLoadedFromFile;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/DaUser.png")));
+    private Image duke = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
+    /**
+     * Default constructor to initialize Duke
+     */
     public Duke() {
         try {
             this.storage = new Storage(FILE_PATH);
             this.tasks = new TaskList(storage.load());
             this.ui = new Ui();
             this.parser = new Parser(tasks, ui);
-//            this.isLoadedFromFile = true;
         } catch (DukeException e) {
-//            System.out.println(ui.getLoadingError());
             this.storage = new Storage(FILE_PATH);
             this.tasks = new TaskList();
             this.ui = new Ui();
             this.parser = new Parser(tasks, ui);
-//            this.isLoadedFromFile = false;
         }
     }
 
     @Override
     public void start(Stage stage) {
+        assert user != null;
+        assert duke != null;
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -110,10 +118,6 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         showInitMessage();
-
-//        if (!isLoadedFromFile) {
-//            showLoadingError();
-//        }
     }
 
     private void showInitMessage() {
@@ -121,12 +125,6 @@ public class Duke extends Application {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(initMessage, new ImageView(duke)));
     }
-
-//    private void showLoadingError() {
-//        Label initMessage = new Label(ui.getLoadingError());
-//        dialogContainer.getChildren().add(
-//                DialogBox.getDukeDialog(initMessage, new ImageView(duke)));
-//    }
 
     private void handleUserInput() throws DukeException {
         Label userText = new Label(userInput.getText());
@@ -138,12 +136,16 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    private String getResponse(String input) throws DukeException {
-        if (input.equals("bye")) {
-            storage.store(tasks);
-            return ui.getByeMessage();
-        } else {
-            return parser.parse(input);
+    private String getResponse(String input) {
+        try {
+            if (input.equals("bye")) {
+                storage.store(tasks);
+                return ui.getByeMessage();
+            } else {
+                return parser.parse(input);
+            }
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Class representing a list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
@@ -73,6 +76,11 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Finds all tasks matching a specified keyword
+     * @param keyword the keyword to be matched
+     * @return a list of tasks containing all matching tasks
+     */
     public TaskList find(String keyword) {
         TaskList matchingTasks = new TaskList();
 
@@ -86,6 +94,10 @@ public class TaskList {
         return matchingTasks;
     }
 
+    /**
+     * Returns whether the TaskList is empty
+     * @return true if the TaskList is empty, false if it is not
+     */
     public boolean isEmpty() {
         return taskList.isEmpty();
     }

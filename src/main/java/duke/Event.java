@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class representing an Event.
+ */
 public class Event extends Task {
     protected String from;
     protected String to;
@@ -35,7 +38,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + " to: "+ this.to + ")";
+        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
     }
 
     /**
@@ -44,6 +47,6 @@ public class Event extends Task {
      */
     @Override
     public String toFile() {
-        return "E " + super.toFile() + " /from: " + this.from + " /to: "+ this.to;
+        return "E " + super.toFile() + " /from: " + this.from + " /to: " + this.to;
     }
 }

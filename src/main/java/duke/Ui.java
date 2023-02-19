@@ -1,7 +1,10 @@
 package duke;
 
+/**
+ * Class handling Ui responses to user interactions.
+ */
 public class Ui {
-    private final static String INDENT_LINE = "____________________________________________________________";
+    // private final static String INDENT_LINE = "____________________________________________________________";
 
     /**
      * Returns a given String in a format characteristic of the Ui
@@ -10,7 +13,7 @@ public class Ui {
      */
     private String getFormatted(String toDisplay) {
         return toDisplay;
-//        return INDENT_LINE + "\n" + toDisplay + "\n" + INDENT_LINE;
+        // return INDENT_LINE + "\n" + toDisplay + "\n" + INDENT_LINE;
     }
 
     /**
@@ -25,8 +28,8 @@ public class Ui {
         if (isMatchingList) {
             addString = " matching ";
         }
-        StringBuilder taskListStringBuilder = new StringBuilder("Here are the" + addString + "tasks in your list:\n");
-        
+        StringBuilder taskListStringBuilder = new StringBuilder("Here are the"
+                + addString + "tasks in your list:\n");
         for (int i = 0; i < taskList.size() - 1; i++) {
             taskListStringBuilder.append(i + 1).append(".").append(taskList.get(i)).append("\n");
         }
@@ -56,9 +59,6 @@ public class Ui {
      */
     public String getFormattedTaskList(TaskList taskList, boolean isMatchingList) {
         assert isMatchingList : "Should be a keyword-matched list";
-        if (!isMatchingList) {
-            return getFormattedTaskList(taskList);
-        }
 
         if (!taskList.isEmpty()) {
             return getFormatted(getTaskList(taskList, true));
@@ -91,8 +91,8 @@ public class Ui {
      */
     public String getDeleteMessage(Task deletedTask, TaskList taskList) {
         int len = taskList.size();
-        return getFormatted("Noted. I've removed this task:\n" + deletedTask + "\nNow you have " +
-                len + " tasks in the list.\n\n") + getFormattedTaskList(taskList);
+        return getFormatted("Noted. I've removed this task:\n" + deletedTask + "\nNow you have "
+                + len + " tasks in the list.\n\n") + getFormattedTaskList(taskList);
     }
 
     /**
@@ -102,8 +102,8 @@ public class Ui {
      * @return the message to be shown after marking a Task as done
      */
     public String getMarkMessage(Task task, int index) {
-        return getFormatted("Nice! I've marked this task as done:\n" +
-                (index + 1) + "." + task);
+        return getFormatted("Nice! I've marked this task as done:\n" + (index + 1)
+                + "." + task);
     }
 
     /**
@@ -113,8 +113,8 @@ public class Ui {
      * @return the message to be shown after marking a Task as undone
      */
     public String getUnmarkMessage(Task task, int index) {
-        return getFormatted("OK, I've marked this task as not done yet:\n" +
-                (index + 1) + "." + task);
+        return getFormatted("OK, I've marked this task as not done yet:\n" + (index + 1)
+                + "." + task);
     }
 
     /**
@@ -125,15 +125,7 @@ public class Ui {
      */
     public String getAddMessage(Task task, TaskList taskList) {
         int len = taskList.size();
-        return getFormatted("Got it. I've added this task:\n" + task +
-                "\nNow you have " + len + " tasks in the list.\n\n") + getFormattedTaskList(taskList);
+        return getFormatted("Got it. I've added this task:\n" + task
+                + "\nNow you have " + len + " tasks in the list.\n\n") + getFormattedTaskList(taskList);
     }
-
-//    /**
-//     * Returns the message to be shown if the file could not be loaded
-//     * @return the message to be shown if the file could not be loaded
-//     */
-//    public String getLoadingError() {
-//        return getFormatted("The file could not be loaded");
-//    }
 }
