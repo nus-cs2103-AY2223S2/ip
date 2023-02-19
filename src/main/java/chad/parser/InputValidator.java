@@ -1,13 +1,18 @@
 package chad.parser;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import chad.exception.DukeException;
 import chad.exception.InvalidArgumentException;
 import chad.exception.MissingArgumentException;
 import chad.storage.TaskList;
+import chad.task.Deadline;
+import chad.task.Event;
 import chad.task.Task;
+import chad.task.Todo;
 
 /**
  * Input validator class to process and clean the user's request.
@@ -193,4 +198,48 @@ public class InputValidator {
         return !filteredTasks.isEmpty();
     }
 
+    /**
+     * Function to decode saved data and insert it into task list.
+     * @param data Encoded data for each task in the storage.
+     * @param tasks Task list to store the decoded data.
+     */
+    public static void decodeSavedData(String data, TaskList tasks) {
+        try {
+            String[] args = data.split("\\|");
+            String taskType = args[0].strip();
+            String taskStatus = args[1].strip();
+            String taskDesc = args[2].strip();
+            Task task;
+            switch (taskType) {
+            case "T":
+                task = new Todo(taskDesc);
+                break;
+            case "D":
+                String dueDate = args[3].trim();
+                LocalDateTime formattedDueDate = DateTimeParser.parse(dueDate);
+                task = new Deadline(taskDesc, formattedDueDate);
+                break;
+            case "E":
+                String from = args[3].strip();
+                String to = args[4].strip();
+                LocalDateTime startDate = DateTimeParser.parse(from);
+                LocalDateTime endDate = DateTimeParser.parse(to);
+                task = new Event(taskDesc, startDate, endDate);
+                if (startDate.isAfter(endDate)) {
+                    throw new InvalidArgumentException("Your start date should be before your end date!");
+                }
+                break;
+            default:
+                task = null;
+                assert false : "Invalid data inserted into duke.txt file";
+                break;
+            }
+            if (taskStatus.equals("1")) {
+                task.markComplete();
+            }
+            tasks.add(task);
+        } catch (DukeException duke_error) {
+            duke_error.printStackTrace();
+        }
+    }
 }

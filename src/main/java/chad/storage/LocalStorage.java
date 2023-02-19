@@ -7,15 +7,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DateTimeException;
-import java.time.LocalDateTime;
 
-import chad.exception.DukeException;
 import chad.exception.InvalidArgumentException;
-import chad.parser.DateTimeParser;
-import chad.task.Deadline;
-import chad.task.Event;
+import chad.parser.InputValidator;
 import chad.task.Task;
-import chad.task.Todo;
 
 /**
  * Local storage to store the data from local file.
@@ -64,63 +59,13 @@ public class LocalStorage {
             String line = reader.readLine();
 
             while (line != null) {
-                try {
-                    String[] args = line.split("\\|");
-                    String taskType = args[0].strip();
-                    String taskStatus = args[1].strip();
-                    String taskDesc = args[2].strip();
-                    switch (taskType) {
-                    case "T":
-                        Todo todo = new Todo(taskDesc);
-                        if (taskStatus.equals("1")) {
-                            todo.markComplete();
-                        }
-                        tasks.add(todo);
-                        break;
-                    case "D":
-                        String dueDate = args[3].trim();
-                        try {
-                            LocalDateTime formattedDueDate = DateTimeParser.parse(dueDate);
-                            Deadline deadline = new Deadline(taskDesc, formattedDueDate);
-                            if (taskStatus.equals("1")) {
-                                deadline.markComplete();
-                            }
-                            tasks.add(deadline);
-                            break;
-                        } catch (DateTimeException error) {
-                            throw new InvalidArgumentException("Wrong date format! Please follow the format "
-                                    + "YYYY-MM-DD HHmm (e.g. 2000-01-01 2311)");
-                        }
-                    case "E":
-                        String from = args[3].strip();
-                        String to = args[4].strip();
-                        try {
-                            LocalDateTime startDate = DateTimeParser.parse(from);
-                            LocalDateTime endDate = DateTimeParser.parse(to);
-                            Event event = new Event(taskDesc, startDate, endDate);
-                            if (startDate.isAfter(endDate)) {
-                                throw new InvalidArgumentException("Your start date should be before your end date!");
-                            }
-                            if (taskStatus.equals("1")) {
-                                event.markComplete();
-                            }
-                            tasks.add(event);
-                            break;
-                        } catch (DateTimeException error) {
-                            throw new InvalidArgumentException("Wrong date format! Please follow the format "
-                                    + "YYYY-MM-DD HHmm (e.g. 2000-01-01 2311)");
-                        }
-                    default:
-                        assert false : "Invalid data inserted into duke.txt file";
-                        break;
-                    }
-                    line = reader.readLine();
-                } catch (DukeException duke_error) {
-                    duke_error.printStackTrace();
-                    break;
-                }
+                InputValidator.decodeSavedData(line, tasks);
+                line = reader.readLine();
             }
             reader.close();
+        } catch (DateTimeException d_err) {
+            throw new InvalidArgumentException("Wrong date format! Please follow the format "
+                    + "YYYY-MM-DD HHmm (e.g. 2000-01-01 2311)");
         } catch (IOException error) {
             error.printStackTrace();
         }
