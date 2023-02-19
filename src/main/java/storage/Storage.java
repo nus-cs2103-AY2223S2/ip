@@ -8,7 +8,12 @@ import java.util.LinkedList;
 
 import duke.DukeException;
 import duke.Ui;
-import task.*;
+import task.Deadline;
+import task.Event;
+import task.PriorityLevel;
+import task.Task;
+import task.TaskList;
+import task.ToDo;
 
 /**
  * Handles file operations.
@@ -89,6 +94,9 @@ public class Storage {
     private TaskList loadIntoTaskList(String[] allTasks) throws DukeException {
         LinkedList<Task> list = new LinkedList<>();
         for (String task : allTasks) {
+            if (task.isBlank()) {
+                continue;
+            }
             switch (task.charAt(0)) {
             case 'T':
                 list.add(new ToDo(this.getTaskName(task),
