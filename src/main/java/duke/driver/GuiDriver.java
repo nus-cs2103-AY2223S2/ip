@@ -29,9 +29,11 @@ public class GuiDriver {
 
             switch (command) {
             case LIST:
+                assert commandArgs.length == 0 : "list command should not have any arguments";
                 return processListCommand(taskList);
 
             case BYE:
+                assert commandArgs.length == 0 : "bye commmand should not have any arguments";
                 return "Bye. Hope to see you again soon!";
 
             // Process find commands
