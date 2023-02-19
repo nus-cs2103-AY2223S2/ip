@@ -13,11 +13,11 @@ public class Event extends Task {
     /**
      * The start date and time of the Event task.
      */
-    private Date start;
+    private final Date start;
     /**
      * The end date and time of the Event task.
      */
-    private Date end;
+    private final Date end;
     /**
      * Constructor for Event that takes a description, a string representation of the start time,
      * and a string representation of the end time as inputs.
@@ -42,15 +42,13 @@ public class Event extends Task {
      */
     @Override
     public String save() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[E]");
-        sb.append(super.toString());
-        sb.append(" (from: ");
-        sb.append(super.getReadFormat().format(this.start));
-        sb.append(" to: ");
-        sb.append(super.getReadFormat().format(this.end));
-        sb.append(")");
-        return sb.toString();
+        return "[E]" +
+                super.toString() +
+                " (from: " +
+                super.getReadFormat().format(this.start) +
+                " to: " +
+                super.getReadFormat().format(this.end) +
+                ")";
     }
     /**
      * Overridden toString() method for Event.
@@ -60,14 +58,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[E]");
-        sb.append(super.toString());
-        sb.append(" (from: ");
-        sb.append(super.getWriteFormat().format(this.start));
-        sb.append(" to: ");
-        sb.append(super.getWriteFormat().format(this.end));
-        sb.append(")");
-        return sb.toString();
+        return "[E]" +
+                super.toString() +
+                " (from: " +
+                super.getWriteFormat().format(this.start) +
+                " to: " +
+                super.getWriteFormat().format(this.end) +
+                ")";
     }
 }

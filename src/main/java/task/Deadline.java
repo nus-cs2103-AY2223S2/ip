@@ -14,7 +14,7 @@ public class Deadline extends Task {
     /**
      * The deadline date and time of the Deadline task.
      */
-    private Date deadline;
+    private final Date deadline;
 
     /**
      * Constructor for Deadline that takes a description and a string representation of the deadline as inputs.
@@ -38,12 +38,10 @@ public class Deadline extends Task {
      */
     @Override
     public String save() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[D]");
-        sb.append(super.toString()).append(" (by: ");
-        sb.append(super.getReadFormat().format(this.deadline));
-        sb.append(")");
-        return sb.toString();
+        return "[D]" +
+                super.toString() + " (by: " +
+                super.getReadFormat().format(this.deadline) +
+                ")";
     }
 
     /**
@@ -54,11 +52,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[D]");
-        sb.append(super.toString()).append(" (by: ");
-        sb.append(super.getWriteFormat().format(this.deadline));
-        sb.append(")");
-        return sb.toString();
+        return "[D]" +
+                super.toString() + " (by: " +
+                super.getWriteFormat().format(this.deadline) +
+                ")";
     }
 }

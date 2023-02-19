@@ -60,7 +60,7 @@ public enum Command {
                     i++;
                 }
                 assert strArr[i].equals("/by") || strArr[i].equals("(by:");
-                String description = sb.toString().substring(0, sb.length() - 1);
+                String description = sb.toString();
 
                 sb.setLength(0);
                 i++; // skip "/by" or "(by:"
@@ -69,8 +69,7 @@ public enum Command {
                     sb.append(" ");
                     i++;
                 }
-
-                String by = sb.toString().substring(0, sb.length() - 1);
+                String by = sb.toString();
 
                 Task deadline = new Deadline(description, by);
                 list.add(deadline);
@@ -103,7 +102,7 @@ public enum Command {
                     j++;
                 }
                 assert strArr[j].equals("/from") || strArr[j].equals("(from:");
-                String description = sb.toString().substring(0, sb.length() - 1);
+                String description = sb.toString();
 
                 sb.setLength(0);
                 j++; // skip "/from" or "(from:"
@@ -113,7 +112,7 @@ public enum Command {
                     j++;
                 }
                 assert strArr[j].equals("/to") || strArr[j].equals("to:");
-                String start = sb.toString().substring(0, sb.length() - 1);
+                String start = sb.toString();
 
                 sb.setLength(0);
                 j++; // skip "/to" or "to:"
@@ -122,7 +121,7 @@ public enum Command {
                     sb.append(" ");
                     j++;
                 }
-                String end = sb.toString().substring(0, sb.length() - 1);
+                String end = sb.toString();
                 Task event = new Event(description, start, end);
                 list.add(event);
                 return Ui.getAddedTaskMessage(event, list.getUncompletedSize());
@@ -198,7 +197,7 @@ public enum Command {
         @Override
         public String execute(String input) throws SundayException {
             try {
-                int index = Integer.parseInt(String.valueOf(input.substring(1))) - 1;
+                int index = Integer.parseInt(input.substring(1)) - 1;
                 Task deleted = list.delete(index);
                 return Ui.getDeletedTaskMessage(deleted, list.getUncompletedSize());
             } catch (NumberFormatException e) {
