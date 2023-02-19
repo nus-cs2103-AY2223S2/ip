@@ -1,29 +1,64 @@
-# User Guide
+# Duke User Guide
+Duke is a chat-bot style task manager here to serve your daily needs.
 
-## Features 
+## How to use Duke
 
-### Feature-ABC
 
-Description of the feature.
+## Features
+- Add task: todo, event, deadline
+- See all task  
 
-### Feature-XYZ
 
-Description of the feature.
+- Delete task
+- See all task  
+- Find specific task
+- Mark task  
+- Unmark task  
+- Set priority level  
+- Auto save to hard disk  
+- Auto load from hard disk  
 
 ## Usage
 
-### `Keyword` - Describe action
+### Add task
+There are 3 types of task depending on your needs.
 
-Describe the action and its outcome.
+1. `todo <task name>`  
+2. `deadline <task name> /by dd/mm/yyyy`  
+3. `event <task name> /from dd/mm/yyyy to dd/mm/yyyy`  
 
-Example of usage: 
+**Default parameter:**  
+- All task are unmark
+- All task are set to low priority
+<br>
 
-`keyword (optional arguments)`
 
-Expected outcome:
+### See all tasks
+`list`  
+<br>
 
-Description of the outcome.
 
-```
-expected output
-```
+### Delete task
+`delete <index>`  
+<br>
+>**index**: index as shown from `list`  
+<br>
+
+### Find task
+`find <keywords>`  
+<br>
+>**keywords**: words use to filter the list  
+<br>
+
+### Mark and Unmark Task
+`mark <index>`  
+`unmark <index>`  
+<br>
+>**index**: index as shown from `list`  
+<br>
+
+### Set task priority
+`set <index> h`: set to high  
+`set <index> m`: set to mid  
+`set <index> l`: set to low  
+
