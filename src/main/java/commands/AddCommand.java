@@ -68,36 +68,16 @@ public class AddCommand extends Command {
         if (this.params.size() == 0 || this.params.size() > 3) {
             throw new IllegalInputException("Wrong number of arguments to make a task!");
         }
-        Task addedTask = null;
+        Task addedTask;
         switch (this.taskType) {
         case TODO:
-            if (this.params.size() != 1) {
-                throw new IllegalInputException("Too many arguments for a todo!");
-            } else if (this.params.get(0).isEmpty()) {
-                throw new IllegalInputException("Cannot make a todo without a description!");
-            }
-            addedTask = new ToDo(this.params.get(0));
+            addedTask = makeTodo();
             break;
         case DEADLINE:
-            if (this.params.size() != 2) {
-                throw new IllegalInputException("Wrong number of arguments for a deadline!");
-            }
-            try {
-                addedTask = new Deadline(this.params.get(0), LocalDate.parse(this.params.get(1)));
-            } catch (DateTimeParseException e) {
-                throw new IllegalInputException("You have keyed in an invalid date");
-            }
+            addedTask = makeDeadline();
             break;
         case EVENT:
-            if (this.params.size() != 3) {
-                throw new IllegalInputException("Wrong number of arguments for an Event!");
-            }
-            try {
-                addedTask = new Event(this.params.get(0),
-                        LocalDate.parse(this.params.get(1)), LocalDate.parse(this.params.get(2)));
-            } catch (DateTimeParseException e) {
-                throw new IllegalInputException("You have keyed in an invalid date");
-            }
+            addedTask = makeEvent();
             break;
         default:
             throw new IllegalCommandException("Unable to add task");
@@ -113,6 +93,37 @@ public class AddCommand extends Command {
             ui.errorDisplay(e);
             e.printStackTrace();
         }
+    }
 
+    private Task makeTodo() throws IllegalInputException {
+        if (this.params.size() != 1) {
+            throw new IllegalInputException("Too many arguments for a todo!");
+        } else if (this.params.get(0).isEmpty()) {
+            throw new IllegalInputException("Cannot make a todo without a description!");
+        }
+        return new ToDo(this.params.get(0));
+    }
+
+    private Task makeDeadline() throws IllegalInputException {
+        if (this.params.size() != 2) {
+            throw new IllegalInputException("Wrong number of arguments for a deadline!");
+        }
+        try {
+            return new Deadline(this.params.get(0), LocalDate.parse(this.params.get(1)));
+        } catch (DateTimeParseException e) {
+            throw new IllegalInputException("You have keyed in an invalid date");
+        }
+    }
+
+    private Task makeEvent() throws IllegalInputException {
+        if (this.params.size() != 3) {
+            throw new IllegalInputException("Wrong number of arguments for an Event!");
+        }
+        try {
+            return new Event(this.params.get(0),
+                    LocalDate.parse(this.params.get(1)), LocalDate.parse(this.params.get(2)));
+        } catch (DateTimeParseException e) {
+            throw new IllegalInputException("You have keyed in an invalid date");
+        }
     }
 }

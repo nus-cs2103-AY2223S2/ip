@@ -57,9 +57,8 @@ public class Storage {
      * @throws FileNotFoundException when the file to load the text from is not found
      */
     public ArrayList<String> load() throws FileNotFoundException {
-        Scanner scanner = null;
         ArrayList<String> taskText = new ArrayList<>();
-        scanner = new Scanner(dataFile);
+        Scanner scanner = new Scanner(dataFile);
         while (scanner.hasNextLine()) {
             taskText.add(scanner.nextLine());
         }
