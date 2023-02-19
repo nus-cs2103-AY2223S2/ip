@@ -11,7 +11,7 @@ public class TagCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param command the task to be deleted.
+     * @param command the task to be tagged.
      */
     public TagCommand(String command) {
         this.command = command;
