@@ -21,6 +21,8 @@ import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.HBox;
 
+import javafx.scene.text.Font;
+
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
@@ -43,7 +45,10 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setFont(new Font("Calibri", 15));
+
         displayPicture.setImage(img);
+
     }
 
     /**
