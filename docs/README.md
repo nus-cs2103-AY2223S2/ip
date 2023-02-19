@@ -42,7 +42,7 @@ By typing in the `list` command, *Duke* will print out a list of current tasks *
 Command: `list`
 
 Expected outcome:
-```
+```text
 Here are the tasks in your list:
 1. [T][ ]: borrow book
 2. [D][X]: return book (by: Oct 15 2019 12:00)
@@ -51,7 +51,7 @@ Here are the tasks in your list:
 
 ---
 
-### Add new tasks
+### Add new Task
 
 ---
 
@@ -127,7 +127,6 @@ Expected outcome:
 1. [T][X] eat cake
 2. [T][ ] eat Double McSpicy
 3. [T][ ] do math assignment
-...
 ```
 
 This displays all tasks in the list that contain the keywords in
@@ -135,104 +134,56 @@ their descriptions.
 
 ---
 
-### `mark` - Mark task(s) as completed
+### `mark` - Mark Task as done
 
-Given an index, multiple indexes, a range of indexes, or a task description
-filter or a date on which tasks occur, marks those task(s) as completed.
+Given an index, mark the corresponding task as done.
 
-*Indexes* refer to the **numerical** index as indicated by the response to the
-[`list`](#list---view-all-tasks) command.
+*Index* refer to the **numerical** index as indicated by the response to the `list` command.
 
-Examples of usage:
-- Mark Individual task: `mark 1`
-- Mark Multiple tasks: `mark 1 3 5`
-- Mark Range of tasks: `mark 1 - 3` OR `mark 1-3` OR `mark 1 to 3`
-- Mark tasks occurring on a Date: `mark /on 2/2/23` OR `mark -o 2/2/23` OR
-  `mark --o 2/2/23`
-- Mark tasks containing a Description: `mark /contains desc` OR
-  `mark -c desc` OR `mark --c desc`
-- Mark All tasks: `mark /all` OR `mark -a` or `mark --a`
+#### Example
+
+`mark 1`
 
 Expected Outcome:
 ```text
-Got it. I've marked these {num_of_tasks} tasks as done:
-[T][X] Task XXX
-[D][X] Deadline YYY (by: Feb 02 2023 11:59PM)
-[E][X] Event ZZZ (from: Feb 02 2023 12:00PM to: Feb 02 2023 1:00 PM)
-...
+Nice! I've marked this task as done:
+[T][X]: borrow book
 ```
-
-Marks all the *specified* tasks in the storage as completed. If there are
-errors in the flags passed to the command, it will indicate them after
-listing the tasks successfully marked as completed.
 
 ---
 
-### `unmark` - Mark task(s) as ***NOT*** completed
+### `unmark` - Mark Task as undone
 
-Given an index, multiple indexes, a range of indexes, or a task description
-filter or a date on which tasks occur, marks those task(s) as **not**
-completed.
+Given an index, mark the corresponding task as undone.
 
-*Indexes* refer to the **numerical** index as indicated by the response to the
-[`list`](#list---view-all-tasks) command.
+*Index* refer to the **numerical** index as indicated by the response to the `list`command.
 
-Examples of usage:
-- Unmark Individual task: `unmark 1`
-- Unmark Multiple tasks: `unmark 1 3 5`
-- Unmark Range of tasks: `unmark 1 - 3` OR `unmark 1-3` OR `unmark 1 to 3`
-- Unmark tasks occurring on a Date: `unmark /on 2/2/23` OR `unmark -o 2/2/23`
-  OR `unmark --o 2/2/23`
-- Unmark tasks containing a Description: `unmark /contains desc` OR
-  `unmark -c desc` OR `unmark --c desc`
-- Unmark All tasks: `unmark /all` OR `unmark -a` or `unmark --a`
+#### Example
+`unmark 1`
 
 Expected Outcome:
 ```text
-Got it. I've marked these {num_of_tasks} tasks as not completed:
-[T][ ] Task XXX
-[D][ ] Deadline YYY (by: Feb 02 2023 11:59PM)
-[E][ ] Event ZZZ (from: Feb 02 2023 12:00PM to: Feb 02 2023 1:00 PM)
-...
+OK, I've marked this task as not done yet:
+[T][ ]: borrow book
 ```
-
-Marks all the *specified* tasks in the storage as not completed. If there are
-errors in the flags passed to the command, it will indicate them after
-listing the tasks successfully marked as not completed.
 
 ---
 
-### `delete` - Delete task(s)
+### `delete` - Delete Task
 
-Given an index, multiple indexes, a range of indexes, or a task description or
-a date on which those tasks occur, deletes those task(s).
+Given an index, delete the corresponding task.
 
-*Indexes* refer to the **numerical** index as indicated in the response to the
-[`list`](#list---view-all-tasks) command.
+*Index* refer to the **numerical** index as indicated in the response to the `list`command.
 
-Examples of usage:
-- Delete Individual task: `delete 1`
-- Delete Multiple tasks: `delete 1 3 5`
-- Delete Range of tasks: `delete 1 - 3` OR `delete 1-3` OR `delete 1 to 3`
-- Delete tasks occurring on a Date: `delete /on 2/2/23` OR `delete -o 2/2/23`
-  OR `delete --o 2/2/23`
-- Delete tasks containing a Description: `delete /contains desc` OR
-  `delete -c desc` OR `delete --c desc`
-- Delete All tasks: `delete /all` OR `delete -a` or `delete --a`
+#### Example
+`delete 1`
 
 Expected Outcome:
 ```text
-Got it. I've deleted these {num_of_tasks} tasks:
-[T][X] Task XXX
-[D][X] Deadline YYY (by: Feb 02 2023 11:59PM)
-[E][X] Event ZZZ (from: Feb 02 2023 12:00PM to: Feb 02 2023 1:00 PM)
-...
+Noted. I've removed this task:
+[T][ ]: borrow book
 Now you have {num_of_tasks} tasks in the list.
 ```
-
-Deletes all the *specified* tasks in the storage. If there are
-errors in the flags passed to the command, it will indicate them after listing
-the successfully deleted tasks.
 
 ---
 
@@ -250,4 +201,6 @@ Expected outcome:
 Bye~ Hope to see you again soon:)
 ```
 
+@@author lxz333-reused
+Reused from https://github.com/SeeuSim/ip/blob/master/docs/README.md with modifications.
 
