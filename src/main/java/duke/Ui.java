@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -36,7 +40,7 @@ public class Ui {
     }
 
     public static void showGreeting() {
-        System.out.println("Hello! I'm Duke\n\tWhat can I do for you?");
+        System.out.println("Hello! I'm duke.Duke\n\tWhat can I do for you?");
     }
 
     public static void showExit() {

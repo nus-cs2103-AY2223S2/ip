@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.*;
+import duke.task.Event;
+import duke.task.TaskList;
+
 import java.util.Date;
 public class AddEventCommand extends Command {
     private String description;
@@ -15,7 +21,7 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Event event;
         if (eventDate == null) {
             event = new Event(description, eventAt);
