@@ -8,7 +8,7 @@ compile:
 	./gradlew build
 
 test: 
-	cd text-ui-test; bash runtest.sh
+	./gradlew test
 
 checkstyle:
 	./gradlew checkstyleMain checkstyleTest

@@ -43,6 +43,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
+        assert stage != null : "Stage cannot be null";
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
