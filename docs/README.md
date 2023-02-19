@@ -52,7 +52,7 @@ Expected outcome: [D][ ] do work (by: Feb 3 2022)
 ### `event` - Adds event to the list
 Specify a task, the start date and time, and end date and time. 
 
-Example of usage: event do work |2022-02-03T10:30|T23:59
+Example of usage: event do work |2022-02-03 10:30|23:59
 
 Expected outcome: [E][] do work (from: Feb 3 2022 10:30 by: Feb 3 2022 23:59)
 
