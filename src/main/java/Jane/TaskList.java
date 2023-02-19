@@ -59,17 +59,17 @@ public class TaskList {
             } else if (output.equals("todo") || output.equals("deadline") || output.equals("event")) {
                 finalOutput.append("Please specify the task to be done :(((");
                 return finalOutput.toString();
-            } else if (output.startsWith("todo")) {
+            } else if (output.startsWith("todo") || output.startsWith("t ")) {
                 jane.task.Todo todo = jane.Parser.parserT(output, tasks.size());
                 tasks.add(todo);
                 finalOutput.append(todo);
                 return finalOutput.toString();
-            } else if (output.startsWith("deadline")) {
+            } else if (output.startsWith("deadline") || output.startsWith("d ")) {
                 jane.task.Deadline d = jane.Parser.parserD(output, tasks.size());
                 tasks.add(d);
                 finalOutput.append(d);
                 return finalOutput.toString();
-            } else if (output.startsWith("event")) {
+            } else if (output.startsWith("event") || output.startsWith("e ")) {
                 //here I am assuming an event only lasts 1 day since the day it starts is the day it ends
                 jane.task.Event e = jane.Parser.parserE(output, tasks.size() );
                 tasks.add(e);

@@ -13,8 +13,13 @@ public class Parser {
      * @throws JaneException if description given is empty
      */
     public static Todo parserT(String output, int count) {
-        String des = output.substring(5);
-        Todo todo = new Todo(count + 1, des);
+        if (output.startsWith("todo")) {
+            output = output.substring(5);
+        } else {
+            output = output.substring(2);
+        }
+
+        Todo todo = new Todo(count + 1, output);
         return todo;
     }
     /**
@@ -25,8 +30,12 @@ public class Parser {
      * @throws JaneException if description given is empty
      */
     public static jane.task.Deadline parserD(String output, int count) {
-        String des = output.substring(9);
-        String[] s = des.split("\\|");
+        if (output.startsWith("deadline")) {
+            output = output.substring(9);
+        } else {
+            output = output.substring(2);
+        }
+        String[] s = output.split("\\|");
         try {
             if (s.length == 1) {
                 throw new JaneException("Please specify when the deadline is :(((");
@@ -45,8 +54,12 @@ public class Parser {
      * @throws JaneException if description given is empty
      */
     public static jane.task.Event parserE(String output, int count) {
-        String des = output.substring(6);
-        String[] s = des.split("\\|");
+        if (output.startsWith("event")) {
+            output = output.substring(6);
+        } else {
+            output = output.substring(2);
+        }
+        String[] s = output.split("\\|");
         try {
             if (s.length == 1) {
                 throw new JaneException("Please specify when the event is :(((");
@@ -61,6 +74,19 @@ public class Parser {
         LocalDateTime end = LocalDateTime.parse(String.format("%sT%s", start[0], s[2]));
         jane.task.Event e = new jane.task.Event(count + 1, s[0], startE, end);
         return e;
+    }
+
+    public static Todo parseFromStorageT(String output, int count) {
+        output = output.substring(4);
+        Todo todo = new Todo(count + 1, output);
+        return todo;
+    }
+
+    public static jane.task.Deadline parseFromStorageD(String output, int count) {
+        String s = output.substring(4);
+        String[] string = s.split("\\|");
+        jane.task.Deadline d = new jane.task.Deadline(count + 1, string[0], LocalDateTime.parse(string[1]));
+        return d;
     }
 
     public static jane.task.Event parseFromStorageE(String output, int count) {

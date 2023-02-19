@@ -56,18 +56,16 @@ import java.util.List;
             boolean b = (i == 1);
             switch (line[0]) {
                 case "T":
-                    Todo T = Parser.parserT(s, tasks.size());
+                    Todo T = Parser.parseFromStorageT(s, tasks.size());
                     T.changeState(b);
                     tasks.add(T);
                     break;
                 case "D":
-                    String in = "from " + s;
-                    Deadline D = Parser.parserD(in, tasks.size());
+                    Deadline D = Parser.parseFromStorageD(s, tasks.size());
                     D.changeState(b);
                     tasks.add(D);
                     break;
                 case "E":
-                    //there is a problem with the input need to find out what. the error is here lol
                     Event E = Parser.parseFromStorageE(s, tasks.size());
                     E.changeState(b);
                     tasks.add(E);
