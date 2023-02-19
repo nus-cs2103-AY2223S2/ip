@@ -43,7 +43,7 @@ public class AddCommand extends Command implements IUndoable {
     String toResultString() {
         assert task != null : "Task should not be null";
         String opening = "I have added the following task:\n";
-        String subject = task.toString();
+        String subject =  task + "\n";
         String closing = "Now you have " + taskList.getSize() + " tasks in the list";
 
         return opening + subject + closing;

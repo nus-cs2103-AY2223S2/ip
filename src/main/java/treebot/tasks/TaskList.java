@@ -1,11 +1,13 @@
 package treebot.tasks;
 
+import treebot.interfaces.ITaskList;
+
 import java.util.ArrayList;
 
 /**
  * Represents a list of tasks to which operations can be performed.
  */
-public class TaskList {
+public class TaskList implements ITaskList {
 
     private ArrayList<Task> tasks;
 

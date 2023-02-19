@@ -1,5 +1,7 @@
 package treebot.commands;
 
+import treebot.interfaces.IStorage;
+import treebot.interfaces.ITaskList;
 import treebot.interfaces.IUndoable;
 import treebot.tasks.TaskList;
 import treebot.utils.Storage;
@@ -17,8 +19,8 @@ public abstract class Command {
 
     protected boolean isExitCommand = false;
 
-    protected TaskList taskList;
-    protected Storage storage;
+    protected ITaskList taskList;
+    protected IStorage storage;
     protected Deque<IUndoable> history;
 
     /**
@@ -41,7 +43,7 @@ public abstract class Command {
      * @param history
      * @return Command
      */
-    public Command injectContext(TaskList taskList, Storage storage, Deque<IUndoable> history) {
+    public Command injectContext(ITaskList taskList, IStorage storage, Deque<IUndoable> history) {
         this.taskList = taskList;
         this.storage = storage;
         this.history = history;

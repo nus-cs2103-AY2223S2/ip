@@ -4,7 +4,6 @@ import treebot.commands.Command;
 import treebot.exception.TreeBotException;
 
 import treebot.interfaces.IUndoable;
-import treebot.tasks.TaskFactory;
 import treebot.tasks.TaskList;
 import treebot.utils.Parser;
 import treebot.utils.Storage;
@@ -20,7 +19,7 @@ import java.util.Deque;
 public class TreeBot {
     private TaskList taskList;
     private Storage storage;
-    private Parser parser = new Parser(new TaskFactory());
+    private Parser parser = new Parser();
     private Deque<IUndoable> history = new ArrayDeque<>();
 
 
@@ -50,7 +49,6 @@ public class TreeBot {
             return e.getMessage();
         }
     }
-
     private void handleExitCommand(Command c) {
         if (!c.isExitCommand()) {
             return;
