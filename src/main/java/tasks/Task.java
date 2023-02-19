@@ -4,7 +4,7 @@ package tasks;
  * Represents a task that a user can do/plans to do.
  * It has a description and a status (done or not done) of the task.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected TaskType type;
     protected boolean isDone;

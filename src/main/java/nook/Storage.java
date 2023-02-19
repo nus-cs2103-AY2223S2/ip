@@ -68,14 +68,19 @@ public class Storage {
             line = line.trim();
             String[] strArr = line.split(" \\| ");
             TaskType type = getTaskType(strArr[0]);
-            boolean isCompleted = Integer.parseInt(strArr[1]) == 1;
-            String taskDesc = strArr[2];
-            Priority priority = Priority.getPriority(strArr[3]);
-            // TODO: Handle error case when strArr.length < 2 after splitting by ' | '
+            boolean isCompleted;
+            String taskDesc;
+            Priority priority;
+            if (strArr.length < 2) {
+                isCompleted = false;
+                taskDesc = strArr[0];
+                priority = Priority.LOW;
+            } else {
+                isCompleted = Integer.parseInt(strArr[1]) == 1;
+                taskDesc = strArr[2];
+                priority = Priority.getPriority(strArr[3]);
+            }
             switch (type) {
-            case TODO:
-                initTasks.add(new Todo(taskDesc, isCompleted, priority));
-                break;
             case DEADLINE:
                 if (validator.isDateValid(strArr[4])) {
                     LocalDate byDate = LocalDate.parse(strArr[4]);
@@ -86,7 +91,7 @@ public class Storage {
                 initTasks.add(new Event(taskDesc, isCompleted, strArr[4], strArr[5], priority));
                 break;
             default:
-                initTasks.add(new Task(taskDesc, isCompleted, type, priority));
+                initTasks.add(new Todo(taskDesc, isCompleted, priority));
             }
             line = reader.readLine();
         }
@@ -100,22 +105,18 @@ public class Storage {
      *
      * @param taskList the tasklist to save
      * @param ui the Ui to help inform the user of the error
+     * @throws IOException from file operations
      */
-    public void saveListToFile(TaskList taskList, Ui ui) {
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            FileWriter writer = new FileWriter(filePath, false);
-            List<Task> list = taskList.getTaskList();
-            for (Task t : list) {
-                writer.write(t.parseToSave() + "\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            // TODO: Better error handling needed, Throw error forward instead
-            ui.getSavingError();
+    public void saveListToFile(TaskList taskList, Ui ui) throws IOException {
+        if (!file.exists()) {
+            file.createNewFile();
         }
+        FileWriter writer = new FileWriter(filePath, false);
+        List<Task> list = taskList.getTaskList();
+        for (Task t : list) {
+            writer.write(t.parseToSave() + "\n");
+        }
+        writer.close();
     }
 
 }

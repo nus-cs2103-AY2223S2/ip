@@ -2,6 +2,8 @@ package commands;
 
 import static commands.CommandType.DELETE;
 
+import java.io.IOException;
+
 import nook.Storage;
 import nook.TaskList;
 import nook.Ui;
@@ -37,16 +39,20 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
-        if (taskIndex >= list.getSize()) {
-            return UNKNOWN_TASK_MESSAGE;
-        } else {
-            assert taskIndex > 0 : "Task Index cannot be less than 1";
-            Task toDelete = list.getTask(taskIndex);
-            list.deleteTask(taskIndex);
-            storage.saveListToFile(list, ui);
-            return "Okay, I've removed that task for you. It's no longer on your to-do list:\n"
-                    + toDelete.toString() + "\n Now you have "
-                    + list.getSize() + " tasks in the list.";
+        try {
+            if (taskIndex >= list.getSize()) {
+                return UNKNOWN_TASK_MESSAGE;
+            } else {
+                assert taskIndex > 0 : "Task Index cannot be less than 1";
+                Task toDelete = list.getTask(taskIndex);
+                list.deleteTask(taskIndex);
+                storage.saveListToFile(list, ui);
+                return "Okay, I've removed that task for you. It's no longer on your to-do list:\n"
+                        + toDelete.toString() + "\n Now you have "
+                        + list.getSize() + " tasks in the list.";
+            }
+        } catch (IOException e) {
+            return ui.getSavingError();
         }
     }
 }

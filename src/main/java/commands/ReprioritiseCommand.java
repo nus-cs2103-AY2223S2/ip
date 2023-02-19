@@ -2,6 +2,8 @@ package commands;
 
 import static commands.CommandType.PRIORITISE;
 
+import java.io.IOException;
+
 import nook.Storage;
 import nook.TaskList;
 import nook.Ui;
@@ -41,22 +43,31 @@ public class ReprioritiseCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) {
         if (taskIndex >= list.getSize()) {
             return UNKNOWN_TASK_MESSAGE;
-        } else {
-            assert taskIndex > 0 : "Task Index cannot be less than 1";
-            Task currentTask = list.getTask(taskIndex);
-            Priority currentPriority = currentTask.getPriority();
-            String resultMessage = "";
-            if (this.getType().equals(PRIORITISE)) {
-                currentTask.setPriority(Priority.getHigherPriority(currentPriority));
-                resultMessage = "Alright, it looks like this task needs a bit more attention.\n"
-                        + "I've prioritised this task for you:\n" + currentTask.toString();
-            } else {
-                currentTask.setPriority(Priority.getLowerPriority(currentPriority));
-                resultMessage = "Alright, it looks like this task doesn't require as much attention.\n"
-                        + "I've decreased the priority of this task for you:\n" + currentTask.toString();
-            }
-            storage.saveListToFile(list, ui);
-            return resultMessage;
         }
+
+        assert taskIndex > 0 : "Task Index cannot be less than 1";
+
+        Task currentTask = list.getTask(taskIndex);
+        Priority currentPriority = currentTask.getPriority();
+        String resultMessage;
+
+        if (this.getType().equals(PRIORITISE)) {
+            currentTask.setPriority(Priority.getHigherPriority(currentPriority));
+            resultMessage = "Alright, it looks like this task needs a bit more attention.\n"
+                    + "I've prioritised this task for you:\n" + currentTask;
+        } else {
+            currentTask.setPriority(Priority.getLowerPriority(currentPriority));
+            resultMessage = "Alright, it looks like this task doesn't require as much attention.\n"
+                    + "I've decreased the priority of this task for you:\n" + currentTask;
+        }
+
+        try {
+            storage.saveListToFile(list, ui);
+        } catch (IOException e) {
+            return ui.getSavingError();
+        }
+
+        return resultMessage;
     }
+
 }
