@@ -1,6 +1,8 @@
 package collections;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import exceptions.SundayException;
 import task.Task;
@@ -151,6 +153,13 @@ public class TaskList {
             }
         }
         return found;
+    }
+
+    /**
+     * Sorts the tasks in the list.
+     */
+    public void sort() {
+        Collections.sort(this.list);
     }
 
     /**
