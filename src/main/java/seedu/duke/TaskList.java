@@ -1,9 +1,10 @@
 package seedu.duke;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TaskList {
+public class TaskList implements Serializable {
 
     public ArrayList<Task> list = new ArrayList<>();
     public ArrayList<Task> getList() {

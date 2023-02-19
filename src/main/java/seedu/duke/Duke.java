@@ -9,7 +9,7 @@ public class Duke {
 
     public Duke() {
         if (Storage.saveExists()) {
-            Storage.loadSave(ls);
+            ls = Storage.loadSave();
         } else {
             Storage.createSave();
         }

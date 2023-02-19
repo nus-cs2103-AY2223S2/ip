@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Ui {
@@ -76,6 +77,11 @@ public class Ui {
             return response;
         }
         case("bye"): {
+            try {
+                Storage.saveList(ls);
+            } catch (IOException e) {
+                System.out.println("Error initializing stream");
+            }
             return "Bye!";
         }
         case("find"): {
@@ -93,7 +99,7 @@ public class Ui {
             return response;
         }
         case("tag"): {
-            int index = Integer.valueOf(chat.split(" ")[1]);
+            int index = Integer.valueOf(chat.split(" ")[1]) - 1;
             Tag tag = new Tag(chat.split(" ")[2]);
             Task task = ls.addTag(index, tag);
             String response = "Noted. I've added the tag to this task:\n";

@@ -1,13 +1,7 @@
 package seedu.duke;
 
+import java.io.*;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 
 
 public class Storage {
@@ -33,41 +27,20 @@ public class Storage {
      * Creates a new TaskList based on an existing save
      * @param ls The TaskList to be written to
      */
-    public static void loadSave(TaskList ls) {
-        BufferedReader r = null;
+    public static TaskList loadSave() {
         try {
-            r = new BufferedReader(new FileReader(save));
+            FileInputStream f = new FileInputStream(new File("./data/duke.txt"));
+            ObjectInputStream o = new ObjectInputStream(f);
+            TaskList loadedList = (TaskList) o.readObject();
+            return loadedList;
         } catch (FileNotFoundException e) {
-            System.out.println("Save file cannot be found");
-        }
-        String keyword;
-        String task;
-        try {
-            task = r.readLine();
-            while (task != null) {
-                keyword = task.split(" ")[0];
-                switch (keyword) {
-                case ("todo"): {
-                    ls.addToDo(task);
-                    break;
-                }
-                case ("deadline"): {
-                    ls.addDeadline(task);
-                    break;
-                }
-                case ("event"): {
-                    ls.addEvent(task);
-                    break;
-                }
-                default:
-                }
-                task = r.readLine();
-            }
+            System.out.println("File not found");
         } catch (IOException e) {
-            System.out.println(e);
-        } catch (DukeException e) {
-            System.out.println(e);
+            System.out.println("Error initializing stream");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -76,11 +49,9 @@ public class Storage {
      * @throws IOException When the save file cannot be written to
      */
     public static void saveList(TaskList ls) throws IOException {
-        ArrayList<Task> tasks = ls.getList();
-        BufferedWriter writer = new BufferedWriter(new FileWriter("./data/duke.txt"));
-        for (Task task : tasks) {
-            writer.write(task.getBreakdown() + "\n");
-        }
-        writer.close();
+        FileOutputStream f = new FileOutputStream(new File("./data/duke.txt"));
+        ObjectOutputStream o = new ObjectOutputStream(f);
+        o.writeObject(ls);
+        o.close();
     }
 }
