@@ -5,8 +5,6 @@ import tasks.Event;
 import tasks.Todo;
 import tasks.Task;
 
-import exceptions.BaymaxException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,62 +15,51 @@ import java.util.Scanner;
 
 public class Storage {
 
-    protected String filepath;
+    protected String filepath = "./data/Baymax.txt";
+    private final File file;
+    private final Scanner fileReader;
+    private final ArrayList<Task> myList;
 
-    public Storage(String filepath) {
-        this.filepath = filepath;
+    public Storage() throws FileNotFoundException {
+        file = new File(filepath);
+        fileReader = new Scanner(file);
+        myList = new ArrayList<>();
+        if (!file.isFile()) {
+            throw new FileNotFoundException();
+        }
     }
 
     /**
      * Stores the task list into the data file.
-     * @throws BaymaxException If there is an error in storing the task list.
+     * @throws FileNotFoundException If there is an error in storing the task list.
      */
-    public ArrayList<Task> load() throws BaymaxException {
-        ArrayList<Task> myList = new ArrayList<>();
-        try {
-            File file = new File(filepath);
-            if (!file.isFile()) {
-                throw new BaymaxException("File not found");
+    public TaskList load() {
+        while (fileReader.hasNextLine()) {
+            String data = fileReader.nextLine();
+            if (data.charAt(1) == 'T') {
+                Task todo = new Todo(data.substring(7));
+                if (isMarkedAsDone(data)) todo.markAsDone();
+                myList.add(todo);
             }
-            Scanner fileReader = new Scanner(file);
-            while (fileReader.hasNextLine()) {
-                String data = fileReader.nextLine();
-                if (data.charAt(1) == 'T') {
-                    Task todo = new Todo(data.substring(7));
-                    if (data.charAt(4) == 'X') {
-                        todo.markAsDone();
-                    }
-                    myList.add(todo);
-                }
-                if (data.charAt(1) == 'D') {
-                    String one = data.split(" " + "[(]" + "by: ")[0].substring(7);
-                    String two = data.split(" " + "[(]" + "by: ")[1];
-                    int l = two.length();
-                    two = two.substring(0, l - 1);
-                    Task deadline = new Deadline(one, two);
-                    if (data.charAt(4) == 'X') {
-                        deadline.markAsDone();
-                    }
-                    myList.add(deadline);
-                }
-                if (data.charAt(1) == 'E') {
-                    String one = data.split(" " + "[(]" + "from: ")[0].substring(7);
-                    String two = data.split(" " + "[(]" + "from: ")[1].split(" to: ")[0];
-                    String three = data.split(" " + "[(]" + "from: ")[1].split(" to: ")[1];
-                    int l = three.length();
-                    three = three.substring(0, l - 1);
-                    Task even = new Event(one, two, three);
-                    if (data.charAt(4) == 'X') {
-                        even.markAsDone();
-                    }
-                    myList.add(even);
-                }
-
+            if (data.charAt(1) == 'D') {
+                String one = data.split(" " + "[(]" + "by: ")[0].substring(7);
+                String two = data.split(" " + "[(]" + "by: ")[1];
+                two = two.substring(0, two.length() - 1);
+                Task deadline = new Deadline(one, two);
+                if (isMarkedAsDone(data)) deadline.markAsDone();
+                myList.add(deadline);
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            if (data.charAt(1) == 'E') {
+                String one = data.split(" " + "[(]" + "from: ")[0].substring(7);
+                String two = data.split(" " + "[(]" + "from: ")[1].split(" to: ")[0];
+                String three = data.split(" " + "[(]" + "from: ")[1].split(" to: ")[1];
+                three = three.substring(0, three.length() - 1);
+                Task event = new Event(one, two, three);
+                if (isMarkedAsDone(data)) event.markAsDone();
+                myList.add(event);
+            }
         }
-        return myList;
+        return new TaskList(myList);
     }
 
     /**
@@ -90,5 +77,9 @@ public class Storage {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Boolean isMarkedAsDone(String string) {
+        return string.charAt(4) == 'X';
     }
 }
