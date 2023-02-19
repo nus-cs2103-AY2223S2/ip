@@ -71,25 +71,7 @@ public class TaskList {
         }
     }
 
-    public void addSavedTask(String taskData) {
-        Task task = Task.buildTask(taskData.split("\\|"));
-        if (task == null) {
-            return;
-        }
-        taskList.add(task);
-    }
-    public void readSave(File savedFile) {
-        try {
-            Scanner savedFileScanner = new Scanner(savedFile);
-            while (savedFileScanner.hasNextLine()) {
-                this.addSavedTask(savedFileScanner.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            return;
-        }
-    }
+
 
     /**
      * Saves the current list of tasks into 'CluckSave.txt'.
