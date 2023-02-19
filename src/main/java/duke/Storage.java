@@ -82,6 +82,8 @@ public class Storage {
                 throw new DukeException("No saved tasks to load");
             }
 
+            assert (!init.isEmpty()) : "No tasks loaded"; // should not be executed if init is empty
+
             return init;
         } catch (FileNotFoundException e) {
             try {

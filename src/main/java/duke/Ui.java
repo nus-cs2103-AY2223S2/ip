@@ -18,6 +18,7 @@ public class Ui {
      * @return the String representation of the list of tasks
      */
     private String getTaskList(TaskList taskList) {
+        assert (!taskList.isEmpty()) : "TaskList is empty"; // ensure list is not empty
         String taskListString = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size() - 1; i++) {
             taskListString += (i + 1) + "." + taskList.get(i) + "\n";

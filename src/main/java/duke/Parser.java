@@ -63,6 +63,7 @@ public class Parser {
         if (description.trim().equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
+        assert description != null : "Description cannot be null";
         taskList.add(new Todo(description));
     }
 
@@ -74,6 +75,8 @@ public class Parser {
         String[] arr = task.split("/");
         String description = arr[0].substring(9).trim();
         String by = arr[1].substring(3).trim();
+        assert description != null : "Description cannot be null";
+        assert by != null : "By cannot be null";
         taskList.add(new Deadline(description, by));
     }
 
@@ -82,10 +85,14 @@ public class Parser {
      * @param task the String representing the Event to be added
      */
     private void addEvent(String task) {
+        assert task != null;
         String[] arr = task.split("/");
         String description = arr[0].substring(6).trim();
         String from = arr[1].substring(5).trim();
         String to = arr[2].substring(3).trim();
+        assert description != null : "Description cannot be null";
+        assert from != null : "From cannot be null";
+        assert to != null : "To cannot be null";
         taskList.add(new Event(description, from, to));
     }
 
