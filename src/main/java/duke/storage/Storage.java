@@ -12,7 +12,9 @@ import java.nio.file.Path;
 import duke.tasks.TaskList;
 
 
-
+/**
+ * A class to represent some commonly used methods for reading and writing from Storage.
+ */
 public class Storage {
     private static final Path STORAGE_PATH = Path.of("src/main/java/data", "Storage.ser");
     private static File storageFile = STORAGE_PATH.toFile();
@@ -34,7 +36,7 @@ public class Storage {
     /**
      * Reads from data/Storage.ser and return the saved {@code TaskList} or an empty
      * {@code TaskList} if Storage.ser is not found or corrupted.
-     * 
+     *
      * @return a {@code TaskList} instance
      */
     public static TaskList readTaskList() {
@@ -55,7 +57,7 @@ public class Storage {
     /**
      * Writes into data/Storage.ser if it already exists and creates a new Storage.ser before
      * writing if not found.
-     * 
+     *
      * @param taskList the {@code TaskList} instance to be written into Storage.ser
      */
     public static void writeTaskList(TaskList taskList) {

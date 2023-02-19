@@ -4,11 +4,17 @@ import java.time.LocalDate;
 
 import duke.date.DukeDate;
 
+/**
+ * A class to represent an Event.
+ */
 public class Event extends Task {
     private static final long serialVersionUID = 7664438936982546960L;
     private LocalDate from;
     private LocalDate to;
 
+    /**
+     * An {@code Event} constructor.
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = DukeDate.parseDateString(from);
@@ -16,6 +22,12 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Checks if this event is still incomplete and whether it lands on {@code dateString}.
+     *
+     * @param dateString
+     * @return Whether this task is
+     */
     public boolean checkIfEventActiveOnDate(String dateString) {
         LocalDate date = DukeDate.parseDateString(dateString);
         boolean isAfterStartingDate = date.isAfter(from);

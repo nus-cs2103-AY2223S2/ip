@@ -15,9 +15,9 @@ public class DukeDate {
 
     /**
      * Parses a {@code String} representation of date into a {@code LocalDate} instance.
-     * 
+     *
      * @param dateString
-     * @return A {@code LocalDate} instance.
+     * @return A {@code LocalDate} instance
      */
     public static LocalDate parseDateString(String dateString) {
         return LocalDate.parse(dateString, INPUT_DATE_FORMAT);
@@ -25,7 +25,7 @@ public class DukeDate {
 
     /**
      * Returns the String representation of the {@code LocalDate} instance.
-     * 
+     *
      * @param date
      * @return The {@code String} representation of the {@code date} instance in the format of MMM
      *         dd yyyy.

@@ -2,13 +2,16 @@ package duke.ui;
 
 import duke.tasks.Task;
 
+/**
+ * A class for adding indentation and printing messages to fit Duke's style.
+ */
 public class UiPrinter {
 
 
 
     /**
      * Adds a new line to all the string in textArray, joins them then returns the final string.
-     * 
+     *
      * @param textArray
      */
     public static String addLineBreak(String... textArray) {
@@ -23,7 +26,7 @@ public class UiPrinter {
     /**
      * Creates a message to signal that this task has been created and how many tasks are there in
      * the list.
-     * 
+     *
      * @param task
      * @param numTasks
      * @return

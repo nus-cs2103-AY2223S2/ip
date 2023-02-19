@@ -2,6 +2,7 @@ package duke.controller;
 
 import java.io.IOException;
 
+import duke.driver.GuiDriver;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import duke.driver.GuiDriver;
 
 
 /**
@@ -34,6 +34,9 @@ public class MainWindow extends AnchorPane {
             new Image(getClass().getResourceAsStream("/resources/images/Duke.png"));
 
 
+    /**
+     * MainWindow Controller which acts as the layout for other controllers.
+     */
     public MainWindow() {
         try {
             FXMLLoader fxmlLoader =
@@ -47,6 +50,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Intializes the controller by adding the greet dialog to the chat and setting the height
+     * property.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -86,7 +93,8 @@ public class MainWindow extends AnchorPane {
 
     private void exitIfByeCommand(String response) {
         boolean isByeCommand = response.equals("Bye. Hope to see you again soon!");
-        if (isByeCommand)
+        if (isByeCommand) {
             Platform.exit();
+        }
     }
 }
