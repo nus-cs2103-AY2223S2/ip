@@ -2,7 +2,8 @@
 Duke is a chat-bot style task manager here to serve your daily needs.
 
 ## How to use Duke
-
+1. Download the lastest version of duke.jar
+2. Run java -jar `duke.jar`
 
 ## Features
 - Add task: todo, event, deadline
