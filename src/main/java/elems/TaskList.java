@@ -41,6 +41,7 @@ public class TaskList {
      * @throws TaskListIndexOutOfBoundsException if the index given is out of bounds of the <code>TaskList</code>
      */
     public Task delete(int index) throws TaskListIndexOutOfBoundsException {
+        assert this.taskList != null;
         try {
             return this.taskList.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -56,6 +57,7 @@ public class TaskList {
      *      * all the <code>Tasks</code> in the <code>TaskList</code>
      */
     public String[] enumerate() {
+        assert this.taskList != null;
         int length = this.taskList.size();
         String[] taskStringList = new String[length];
         for (int i = 0; i < length; i++) {
@@ -65,6 +67,7 @@ public class TaskList {
     }
 
     public void addTask(Task newTask) {
+        assert this.taskList != null;
         this.taskList.add(newTask);
     }
 
@@ -74,6 +77,7 @@ public class TaskList {
      * @throws TaskListIndexOutOfBoundsException when the index is out of bounds of the <code>TaskList</code>
      */
     public void markTask(int index) throws TaskListIndexOutOfBoundsException {
+        assert this.taskList != null;
         try {
             Task mark = this.taskList.get(index - 1);
             mark.setDone();
@@ -88,6 +92,7 @@ public class TaskList {
      * @throws TaskListIndexOutOfBoundsException when an index is out of bounds of the given <code>TaskList</code>
      */
     public void unmarkTask(int index) throws TaskListIndexOutOfBoundsException {
+        assert this.taskList != null;
         try {
             Task unmark = this.taskList.get(index - 1);
             unmark.setNotDone();
@@ -118,6 +123,7 @@ public class TaskList {
      *     with descriptions that contain the given String search term
      */
     public String[] searchTaskDescription(String searchTerm) {
+        assert this.taskList != null;
         ArrayList<String> matchingItems = new ArrayList<>();
         for (Task current : this.taskList) {
             String currentDescription = current.getDescription();
