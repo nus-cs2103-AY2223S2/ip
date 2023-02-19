@@ -37,7 +37,15 @@ public class Duke extends Application {
         parser = new Parser();
         ui = new Ui();
         storage = new Storage();
-        storage.loadFromFile(new File("savedFile.txt"));
+        boolean isSaveFileCreated = savedFile.exists();
+        if (!isSaveFileCreated) {
+            try {
+                savedFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Error while creating save file: " + e);
+            }
+        }
+        storage.loadFromFile(savedFile);
         commandList = new TaskList();
         commandList.setTaskList(this.storage.getStorage());
         loadMainWindow(stage);
