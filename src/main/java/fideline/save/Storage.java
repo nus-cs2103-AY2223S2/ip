@@ -91,24 +91,36 @@ public class Storage {
         }
     }
 
+    public void markTask(int taskNum) throws DataFileInteractionException {
+        final char mark = 'X';
+        final int doneStatusPosition = 2;
+        editFileChar(taskNum - 1, doneStatusPosition, mark);
+    }
 
-    public void editTaskStatus(int taskNum, boolean isDone) throws DataFileInteractionException {
-        String newMark = (isDone ? "X" : " ");
+    public void unmarkTask(int taskNum) throws DataFileInteractionException {
+        final char unmark = ' ';
+        final int doneStatusPosition = 2;
+        editFileChar(taskNum - 1, doneStatusPosition, unmark);
+    }
+
+    public void editFileChar(int line, int charPosition, char newChar)
+            throws DataFileInteractionException {
         try {
-            int lineCounter = 1;
+            int lineCounter = 0;
             Scanner fileScan = new Scanner(dataFile);
             String dataString = "";
             while (fileScan.hasNext()) {
-                if (lineCounter != taskNum) {
+                if (lineCounter != line) {
                     dataString += fileScan.nextLine();
                 } else {
                     String s = fileScan.nextLine();
-                    dataString += s.substring(0, 2) + newMark
-                            + s.substring(3, s.length());
+                    dataString += s.substring(0, charPosition) + newChar
+                            + s.substring(charPosition + 1, s.length());
                 }
                 dataString += "\n";
                 lineCounter++;
             }
+            // remove last newline character
             dataString = dataString.substring(0, dataString.length() - 1);
             FileWriter fw = new FileWriter(dataFile);
             PrintWriter pw = new PrintWriter(fw);

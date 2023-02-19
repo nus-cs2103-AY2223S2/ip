@@ -28,13 +28,13 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute(TaskManager taskManager, Storage storage, Ui ui)
             throws DataFileInteractionException, InvalidArgumentException {
-        if (taskManager.checkTask(taskNum)) {
-            String s = taskManager.unmarkTask(taskNum);
-            storage.editTaskStatus(taskNum, false);
-            return ui.getUnmarkMsg(s);
-        } else {
-            throw new InvalidArgumentException("task! (the one given does not exist!)");
+        if (!taskManager.isValidTask(taskNum)) {
+            throw new InvalidArgumentException("task");
         }
+        String s = taskManager.getTaskString(taskNum);
+        taskManager.unmarkTask(taskNum);
+        storage.unmarkTask(taskNum);
+        return ui.getUnmarkMsg(s);
     }
 
 }

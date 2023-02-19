@@ -28,13 +28,13 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskManager taskManager, Storage storage, Ui ui)
             throws DataFileInteractionException, InvalidArgumentException {
-        if (taskManager.checkTask(taskNum)) {
-            String s = taskManager.markTask(taskNum);
-            storage.editTaskStatus(taskNum, true);
-            return ui.getMarkMsg(s);
-        } else {
-            throw new InvalidArgumentException("task! (the one given does not exist!)");
+        if (!taskManager.isValidTask(taskNum)) {
+            throw new InvalidArgumentException("task");
         }
+        String s = taskManager.getTaskString(taskNum);
+        taskManager.markTask(taskNum);
+        storage.markTask(taskNum);
+        return ui.getMarkMsg(s);
     }
 
 

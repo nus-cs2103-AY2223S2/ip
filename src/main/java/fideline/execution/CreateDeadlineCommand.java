@@ -1,6 +1,7 @@
 package fideline.execution;
 
 import fideline.exception.DataFileInteractionException;
+import fideline.exception.DuplicateTaskException;
 import fideline.save.Storage;
 import fideline.task.TaskManager;
 import fideline.user.Ui;
@@ -39,10 +40,14 @@ public class CreateDeadlineCommand extends Command {
      * @param ui          Handler for display messages to the user.
      */
     @Override
-    public String execute(TaskManager taskManager, Storage storage, Ui ui) throws DataFileInteractionException {
-        String taskString = taskManager.addDeadline(taskDescription, deadline);
-        storage.addLine("D| |" + taskDescription + "|" + deadline);
-        return ui.getAddTaskMsg(taskString, taskManager.getTaskCount());
+    public String execute(TaskManager taskManager, Storage storage, Ui ui)
+            throws DataFileInteractionException, DuplicateTaskException {
+        taskManager.addDeadline(taskDescription, deadline);
+        int taskNum = taskManager.getTaskCount();
+        String taskString = taskManager.getTaskString(taskNum);
+        String storageString = taskManager.getTaskStorageString(taskNum);
+        storage.addLine(storageString);
+        return ui.getAddTaskMsg(taskString, taskNum);
     }
 
 }

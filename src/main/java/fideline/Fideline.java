@@ -28,6 +28,8 @@ public class Fideline {
 
     private boolean isOn;
 
+    private boolean isLastCommandValid;
+
     /**
      * Boots up Fideline. Attempts to load existing saved data.
      *
@@ -63,8 +65,11 @@ public class Fideline {
         try {
             Command c = Parser.getCommand(userInput);
             isOn = !c.isExit();
-            return c.execute(taskManager, storage, ui);
+            String output = c.execute(taskManager, storage, ui);
+            isLastCommandValid = true;
+            return output;
         } catch (FidelineException e) {
+            isLastCommandValid = false;
             return ui.getErrorMsg(e.getMessage());
         }
     }
@@ -73,6 +78,8 @@ public class Fideline {
         return !isOn;
     }
 
-    // how to print intro
+    public boolean isLastCommandValid() {
+        return isLastCommandValid;
+    }
 
 }

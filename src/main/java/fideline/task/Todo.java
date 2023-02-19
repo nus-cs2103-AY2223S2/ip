@@ -18,7 +18,19 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String stringFormat = "[T]%s";
+        return String.format(stringFormat, super.toString());
     }
 
+    @Override
+    public String getStorageString() {
+        String stringFormat = "T|%s";
+        return String.format(stringFormat, super.getStorageString());
+    }
+
+    @Override
+    public boolean equals(Task task) {
+        boolean isTodo = task instanceof Todo;
+        return isTodo && super.equals(task);
+    }
 }

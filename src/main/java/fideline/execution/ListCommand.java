@@ -11,7 +11,6 @@ import fideline.user.Ui;
  * @author Fun Leon
  */
 
-
 public class ListCommand extends Command {
 
 
