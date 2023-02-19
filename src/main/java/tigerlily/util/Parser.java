@@ -1,4 +1,4 @@
-package tigerlily;
+package tigerlily.util;
 
 import tigerlily.commands.ByeCommand;
 import tigerlily.commands.Command;

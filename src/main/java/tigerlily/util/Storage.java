@@ -1,4 +1,4 @@
-package tigerlily;
+package tigerlily.util;
 
 import tigerlily.exceptions.DukeExceptions;
 import tigerlily.exceptions.InvalidFilePathException;

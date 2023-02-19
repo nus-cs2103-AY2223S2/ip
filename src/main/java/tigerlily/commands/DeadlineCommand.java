@@ -1,7 +1,7 @@
 package tigerlily.commands;
 
-import tigerlily.Storage;
-import tigerlily.Ui;
+import tigerlily.util.Storage;
+import tigerlily.util.Ui;
 
 import tigerlily.tasks.Deadline;
 import tigerlily.tasks.TaskList;

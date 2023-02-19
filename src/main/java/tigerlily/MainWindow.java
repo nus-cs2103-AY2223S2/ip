@@ -7,6 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import tigerlily.util.Tigerlily;
+import tigerlily.util.Ui;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
