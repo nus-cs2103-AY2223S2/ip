@@ -9,9 +9,19 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.UserInterface;
 
+/**
+ * Command to find tasks.
+ * 
+ * @author Samarth Verma
+ */
 public class Find extends Command {
     private List<String> keywords;
 
+    /**
+     * Creates a new Find command.
+     * 
+     * @param keywords The keywords to search for.
+     */
     public Find(String keywords) {
         this.keywords = Arrays.asList(keywords.split(" "));
 

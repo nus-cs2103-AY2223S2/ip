@@ -22,6 +22,10 @@ public class TaskList implements Iterable<Task> {
         nextId = 1;
     }
 
+    /**
+     * Creates a new TaskList.
+     * @param tasks The list of tasks.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
         nextId = tasks.size() + 1;
