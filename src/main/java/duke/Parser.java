@@ -21,6 +21,7 @@ public class Parser {
 
 
             String[] userInputComponents = userInput.split(" ");
+
             String requestType = userInputComponents[0];
             try {
                 Request request = Request.getRequest(requestType);
@@ -35,6 +36,10 @@ public class Parser {
                     }
 
                     case MARK: {
+                        if (userInputComponents.length != 2) {
+                            System.out.println("This request requires exactly one task number as the second argument!");
+                            return;
+                        }
                         int taskNumber = Integer.parseInt(userInputComponents[1]);
                         UI.horizontalLine();
                         list.markDone(taskNumber);
@@ -44,6 +49,10 @@ public class Parser {
                     }
 
                     case UNMARK: {
+                        if (userInputComponents.length != 2) {
+                            System.out.println("This request requires exactly one task number as the second argument!");
+                            return;
+                        }
                         int taskNumber = Integer.parseInt(userInputComponents[1]);
                         UI.horizontalLine();
                         list.markUndone(taskNumber);
@@ -55,7 +64,7 @@ public class Parser {
                     case TODO: {
                         try {
                             UI.horizontalLine();
-                            list.addTask(new ToDo(userInput.substring(5)));
+                            list.addTask(new ToDo(userInput.substring(5).strip()));
                             list.getTaskDetails();
                             UI.horizontalLine();
                         } catch (StringIndexOutOfBoundsException e) {
@@ -65,7 +74,7 @@ public class Parser {
                     }
                     case DEADLINE: {
                         String[] splitDeadline = userInput.split("/");
-                        String description = splitDeadline[0].substring(9);
+                        String description = splitDeadline[0].substring(9).strip();
                         String deadline = splitDeadline[1];
                         UI.horizontalLine();
                         list.addTask(new Deadline(description, deadline));
@@ -86,6 +95,10 @@ public class Parser {
                     }
 
                     case DELETE: {
+                        if (userInputComponents.length != 2) {
+                            System.out.println("You have to specify a task number to be deleted!");
+                            return;
+                        }
                         UI.horizontalLine();
                         list.deleteTask(Integer.parseInt(userInputComponents[1]));
                         UI.horizontalLine();

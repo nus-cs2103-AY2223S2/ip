@@ -34,6 +34,11 @@ public class TaskList {
 
     public void markDone(int taskNumber) {
 
+        if (numberOfTasks == 0) {
+            System.out.println("There are no tasks in your list!");
+            return;
+        }
+
         if (taskNumber > this.numberOfTasks || taskNumber <= 0) {
             System.out.println("Please enter a task number between 1 and the total number of tasks!");
             return;
@@ -57,6 +62,11 @@ public class TaskList {
 
 
     public void markUndone(int taskNumber) {
+
+
+        if (numberOfTasks == 0) {
+            System.out.println("There are no tasks in your task list!");
+        }
 
         if (taskNumber > this.numberOfTasks || taskNumber <= 0) {
             System.out.println("Please enter a task number between 1 and the total number of tasks!");
@@ -108,7 +118,7 @@ public class TaskList {
         if (numberOfTasks == 0) {
             System.out.println("You do not have any tasks at the moment!");
         } else if (taskNumber > numberOfTasks || taskNumber < 0) {
-            System.out.println("Please enter a valid task number!");
+            System.out.println("Please enter a task number between 1 and the total number of tasks!");
         } else {
             System.out.println("Noted! I have deleted this task: \n" + this.list.get(taskNumber - 1));
             boolean isDeletedDone = this.list.get(taskNumber - 1).isDone;
