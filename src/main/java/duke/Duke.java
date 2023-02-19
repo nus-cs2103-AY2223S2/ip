@@ -145,13 +145,23 @@ public class Duke extends Application {
         }
 
         String command = tokens[0];
-        return switch (command) {
-            case "list", "find" -> handleDisplayCommand(tokens);
-            case "mark", "unmark", "tag" -> handleEditCommand(tokens);
-            case "todo", "deadline", "event" -> handleAddCommand(tokens);
-            case "delete" -> handleDeleteCommand(tokens);
-            default -> handleUnknownCommand(tokens);
-        };
+        switch (command) {
+        case "list":
+        case "find":
+            return handleDisplayCommand(tokens);
+        case "mark":
+        case "unmark":
+        case "tag":
+            return handleEditCommand(tokens);
+        case "todo":
+        case "deadline":
+        case "event":
+            return handleAddCommand(tokens);
+        case "delete":
+            return handleDeleteCommand(tokens);
+        default:
+            return handleUnknownCommand(tokens);
+        }
     }
 
     /**

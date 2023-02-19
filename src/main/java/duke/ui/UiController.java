@@ -27,9 +27,7 @@ public class UiController {
      * Displays welcome message from Duke on GUI.
      */
     public void displayWelcomeMessage() {
-        String welcomeText = """
-                Welcome! My name is Duke.
-                How may I help?""";
+        String welcomeText = "Welcome! My name is Duke.\nHow may I help?";
         fxmlLoader.<MainWindow>getController().displayDukeDialog(welcomeText);
     }
 
