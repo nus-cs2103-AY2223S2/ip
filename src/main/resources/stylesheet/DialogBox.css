@@ -1,0 +1,12 @@
+.dialog {
+    -fx-font-family: sans-serif;
+    -fx-text-fill: #B22222;
+    -fx-padding: 5px;
+    -fx-border-width: 3;
+    -fx-border-radius: 10;
+    -fx-border-color: FFF380;
+}
+
+.displayPicture {
+    -fx-border-radius: 100;
+}
