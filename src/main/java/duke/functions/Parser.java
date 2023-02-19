@@ -36,27 +36,30 @@ public class Parser {
         String type;
 
         try {
-            if (inputArr[0].equals("bye")) {
+            if (inputArr[0].equals("bye") || inputArr[0].equals("B")) {
                 reply = "bye";
-            } else if (inputArr[0].equals("find")) {
+            } else if (inputArr[0].equals("find") || inputArr[0].equals("F")) {
                 reply = tasks.findTask(inputArr[1]);
-            } else if (inputArr[0].equals("list")) {
+
+            } else if (inputArr[0].equals("list") || inputArr[0].equals("L")) {
                 reply = tasks.printTasks();
-            } else if (inputArr[0].equals("mark")) {
+
+            } else if (inputArr[0].equals("mark") || inputArr[0].equals("M")) {
                 int index = Integer.valueOf(inputArr[1]) - 1;
                 reply = tasks.setTaskDone(index);
 
-            } else if (inputArr[0].equals("unmark")) {
+            } else if (inputArr[0].equals("unmark") || inputArr[0].equals("U")) {
                 int index = Integer.valueOf(inputArr[1]) - 1;
                 reply = tasks.setTaskNotDone(index);
 
-            } else if (inputArr[0].equals("delete")) {
+            } else if (inputArr[0].equals("delete") || inputArr[0].equals("D")) {
                 int index = Integer.valueOf(inputArr[1]) - 1;
                 Task task = tasks.deleteTask(index);
                 reply = task.removeTask();
 
-            } else if (inputArr[0].equals("todo")) {
+            } else if (inputArr[0].equals("todo") || inputArr[0].equals("TD")) {
                 input = input.replaceFirst("todo", "");
+                input = input.replaceFirst("TD", "");
                 if (input.equals("")) {
                     throw new Missing("");
                 }
@@ -67,9 +70,9 @@ public class Parser {
                 reply = newTask.toString();
                 storage.writeToFile(input, type);
 
-            } else if (inputArr[0].equals("deadline")) {
-
+            } else if (inputArr[0].equals("deadline") || inputArr[0].equals("DL")) {
                 input = input.replaceFirst("deadline", "");
+                input = input.replaceFirst("DL", "");
                 if (input.equals("")) {
                     throw new Missing("");
                 }
@@ -84,8 +87,10 @@ public class Parser {
                 tasks.addTask(newTask);
                 reply = newTask.toString();
                 storage.writeToFile(input, type);
-            } else if (inputArr[0].equals("event")) {
+
+            } else if (inputArr[0].equals("event") || inputArr[0].equals("EV")) {
                 input = input.replaceFirst("event", "");
+                input = input.replaceFirst("EV", "");
                 if (input.equals("")) {
                     throw new Missing("");
                 }
@@ -106,6 +111,7 @@ public class Parser {
                 tasks.addTask(newTask);
                 reply = newTask.toString();
                 storage.writeToFile(input, type);
+
             } else {
                 throw new WrongKeyWord("");
             }

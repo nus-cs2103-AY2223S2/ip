@@ -1,3 +1,6 @@
-D|F| go back to hall (by:Feb 1 2022 0300pm)
+D|T| go back to hall (by:Feb 1 2022 0300pm)
 T|T| return books
 T|F| go to botacs
+T|F| visit grandma's house
+D|F| submit my essay (by:Feb 1 2023 1159am)
+E|F| go to the zoo (from: Feb 1 2022 0800am to: Mar 29 2022 0800pm)

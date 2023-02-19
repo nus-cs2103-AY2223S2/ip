@@ -42,7 +42,6 @@ public class Storage {
 
                 String taskDetails = scanner.nextLine() + '\n';
                 this.taskStrings.add(taskDetails);
-                System.out.println(taskDetails);
                 String[] details = taskDetails.split("\\|");
 
                 String taskType = details[0];
@@ -88,7 +87,6 @@ public class Storage {
         try {
             FileWriter filewriter = new FileWriter(this.path, true);
             String text = type + "|" + "F" + "|" + input + '\n';
-//            filewriter.write(System.lineSeparator());
             filewriter.write(text);
             filewriter.close();
             this.taskStrings.add(text);
