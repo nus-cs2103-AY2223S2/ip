@@ -1,10 +1,10 @@
 public class Task {
-    String task;
-    String tag = "[ ]";
-    Boolean done = false;
+    String description;
+    String tag = " ";
+    boolean done = false;
 
     public void genDscp(String input) throws DukeExceptions {
-        this.task = input;
+        this.description = input;
     }
     public void mark() {
         this.done = true;
@@ -14,9 +14,15 @@ public class Task {
         this.done = false;
     }
 
+    public boolean isMarked() { return this.done;}
+
+    public String getTag() {return this.tag;}
+
+    public String getDescription() {return this.description;}
+
     @Override
     public String toString() {
         String mark = this.done ? "X" : " ";
-        return this.tag + "[" + mark + "] " + this.task;
+        return "[" + this.tag + "]" + "[" + mark + "] " + this.description;
     }
 }
