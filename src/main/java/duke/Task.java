@@ -3,9 +3,10 @@ package duke;
 /**
  * Abstract class representing a Task.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
+    protected PriorityLevel priorityLevel;
 
     /**
      * Constructor for a Task object.
@@ -14,6 +15,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priorityLevel = PriorityLevel.MEDIUM;
     }
 
     private String getStatusIcon() {
@@ -41,8 +43,8 @@ public abstract class Task {
      * @return A String representation of a Task taht can be saved into a file.
      */
     public String getFileRepresentation() {
-        return this.isDone + "|" + this.description;
-    };
+        return this.isDone + "|" + this.priorityLevel + "|" + this.description;
+    }
 
     /**
      * Returns a string representation of a Task.
@@ -51,7 +53,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "]" + "[" + this.priorityLevel + "] " + this.description;
     }
 
     /**
@@ -62,5 +64,20 @@ public abstract class Task {
      */
     public boolean doesDescriptionContain(String keyword) {
         return this.description.contains(keyword);
+    }
+
+    /**
+     * Sets the priority of a task.
+     *
+     * @param priorityLevel New priority level of the task.
+     */
+    public void setPriority(PriorityLevel priorityLevel) {
+        this.priorityLevel = priorityLevel;
+    }
+
+    @Override
+    public int compareTo(Task t) {
+        assert t.priorityLevel != null;
+        return t.priorityLevel.compareTo(this.priorityLevel);
     }
 }

@@ -30,7 +30,8 @@ Exits the program.
 
 ### Listing all tasks: `list`
 
-Shows a list of the saved tasks.
+Shows a list of the saved tasks in order of their priority.
+Tasks with highest priority will be shown at the top.
 
 > Format: `list`
 
@@ -117,6 +118,21 @@ Examples:
 
 - `list` followed by `unmark 2` unmarks the 2nd task in the task list as completed.
 
+### Set task priority: `priority`
+
+Sets the priority of a task.
+
+> Format: `unmark INDEX PRIORITY`
+- Sets the priority of the task at the specified `INDEX`.
+- The index refers to the index number shown in the displayed task list.
+- The index **must be a positive integer** 1, 2, 3, …
+- `PRIORITY` can be `[h]igh`, `[m]edium` or `[l]ow`.
+
+Examples:
+
+- `list` followed by `priority 2 h` sets the priority of the 2nd task in the task list to high.
+- `list` followed by `priority 2 low` sets the priority of the 2nd task in the task list to low.
+
 ### Saving the data
 
 nAkIri data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually 🙂
@@ -139,4 +155,5 @@ nAkIri data are saved in the hard disk automatically after any command that chan
 | Find     | `find KEYWORD`<br>eg. `find CS2103T`                                                                  |
 | Mark     | `mark INDEX`<br>eg. `mark 2`                                                                          |
 | Unmark   | `unmark INDEX`<br>eg. `unmark 2`                                                                      |
+| Priority | `priority INDEX PRIORITY`<br>eg. `priority 2 l`, `priority 2 high`                                    |
 | List     | `list`                                                                                                |

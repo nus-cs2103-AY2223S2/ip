@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,6 +81,7 @@ public class TaskList {
     public boolean isEmpty() {
         return this.taskList.size() == 0;
     }
+
     /**
      * Gets the underlying ArrayList for the TaskList.
      *
@@ -87,5 +89,12 @@ public class TaskList {
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
+    }
+
+    /**
+     * Sorts the ArrayList in place according to task priorities.
+     */
+    public void sort() {
+        Collections.sort(this.taskList);
     }
 }

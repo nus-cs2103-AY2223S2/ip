@@ -3,7 +3,7 @@ package duke.exceptions;
 /**
  * Exception used when user does not specify keywords where needed
  */
-public class MissingKeywordException extends DukeException {
+public class MissingKeywordException extends MissingArgumentException {
     /**
      * Constructor for a MissingKeywordException.
      */
