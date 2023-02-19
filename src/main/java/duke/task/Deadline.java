@@ -20,7 +20,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a Deadline object using only 1 String argument
+     * Creates a Deadline object, with default regex pattern
      *
      * @param input String formatted in log file format
      * @param parser To read the date
@@ -29,7 +29,22 @@ public class Deadline extends Task {
      * @throws InvalidFormatException if the input cannot be parsed
      */
     public static Deadline factoryMethod(String input, Parser parser, boolean isDone) throws InvalidFormatException{
-        Matcher m = Pattern.compile("(.+) (.+)").matcher(input);
+        return factoryMethod(input, parser, isDone, PATTERN);
+    }
+
+    /**
+     * Creates a Deadline object, with custom regex pattern
+     *
+     * @param input String formatted in log file format
+     * @param parser To read the date
+     * @param isDone To mark if task is done
+     * @return a Deadline object
+     * @throws InvalidFormatException if the input cannot be parsed
+     */
+    public static Deadline factoryMethod(String input, Parser parser, boolean isDone, Pattern pattern)
+            throws InvalidFormatException{
+
+        Matcher m = pattern.matcher(input);
         if (!m.find()) {
             throw getInvalidFormatException();
         }

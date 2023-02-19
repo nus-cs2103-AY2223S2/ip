@@ -4,6 +4,8 @@ import duke.exception.InvalidFormatException;
 
 import duke.Parser;
 
+import java.util.regex.Pattern;
+
 public abstract class Task {
     protected String classIcon;
     protected String description;
@@ -26,9 +28,9 @@ public abstract class Task {
         case 'T':
             return new Todo(text, isDone);
         case 'D':
-            return Deadline.factoryMethod(text, parser, isDone);
+            return Deadline.factoryMethod(text, parser, isDone, Pattern.compile("(.+) (.+)"));
         case 'E':
-            return Event.factoryMethod(text, parser, isDone);
+            return Event.factoryMethod(text, parser, isDone, Pattern.compile("(.+) (.+) (.+)"));
         default:
             throw getInvalidFormatException();
         }

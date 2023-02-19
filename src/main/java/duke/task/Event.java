@@ -18,9 +18,22 @@ public class Event extends Task {
     public static InvalidFormatException getInvalidFormatException() {
         return new InvalidFormatException("event name /from yyyy-MM-dd /to yyyy-MM-dd");
     }
+    /**
+     * Creates a Event object, with default regex pattern
+     *
+     * @param input String formatted in log file format
+     * @param parser To read the date
+     * @param isDone To mark if task is done
+     * @return a Deadline object
+     * @throws InvalidFormatException if the input cannot be parsed
+     */
+    public static Event factoryMethod(String input, Parser parser, boolean isDone) throws InvalidFormatException{
+        return factoryMethod(input, parser, isDone, PATTERN);
+    }
 
-    public static Event factoryMethod(String input, Parser parser, boolean isDone) throws InvalidFormatException {
-        Matcher m = Pattern.compile("(.+) (.+) (.+)").matcher(input);
+    public static Event factoryMethod(String input, Parser parser, boolean isDone, Pattern pattern)
+            throws InvalidFormatException {
+        Matcher m = pattern.matcher(input);
         if (!m.find()) {
             throw getInvalidFormatException();
         }
