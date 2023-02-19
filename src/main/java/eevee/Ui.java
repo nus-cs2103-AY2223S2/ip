@@ -7,7 +7,8 @@ public class Ui {
     public Ui() {}
 
     public String sayHello() {
-        return "EEVEE! How can I help you?";
+        return "EEVEE! I'm EeveeBot! How can I help you today?\n\n" +
+                "Type 'help' to see the list of commands you can use!";
     }
 
     public String sayBye() {
