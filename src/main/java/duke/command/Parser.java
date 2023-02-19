@@ -34,6 +34,9 @@ public class Parser {
                         case "deadline":
                         case "event":
                             return taskList.createTask(parts);
+                        default:
+                            assert false : "Command does not make sense";
+                            return "Sorry i'm not sure what you mean...";
                     }
                 }
             } catch (TaskDoesNotExistException e) {
@@ -44,7 +47,5 @@ public class Parser {
                 return str2;
             }
 
-            String str = "Sorry I'm not sure what you mean...";
-            return str;
     }
 }
