@@ -10,12 +10,12 @@ public class AddEventCommand extends Command {
     private String eventAt;
     private Date eventDate;
 
-    AddEventCommand(String description, String deadlineBy) {
+    public AddEventCommand(String description, String deadlineBy) {
         this.description = description;
         this.eventAt = deadlineBy;
     }
 
-    AddEventCommand(String description, Date deadlineDate) {
+    public AddEventCommand(String description, Date deadlineDate) {
         this.description = description;
         this.eventDate = deadlineDate;
     }

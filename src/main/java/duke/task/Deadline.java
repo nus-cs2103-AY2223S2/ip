@@ -8,12 +8,12 @@ public class Deadline extends Task {
     private String deadlineTime;
     private Date dueDate;
 
-    Deadline(String description, String deadlineTime) {
+    public Deadline(String description, String deadlineTime) {
         super(description);
         this.deadlineTime = deadlineTime;
     }
 
-    Deadline(String description, Date dueDate) {
+    public Deadline(String description, Date dueDate) {
         super(description);
         this.dueDate = dueDate;
     }

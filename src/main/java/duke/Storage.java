@@ -62,7 +62,7 @@ public class Storage {
         return tasks;
     }
 
-    void save(ArrayList<Task> list) throws DukeException {
+    public void save(ArrayList<Task> list) throws DukeException {
         try {
             File file = new File(filePath);
             file.getParentFile().mkdirs();

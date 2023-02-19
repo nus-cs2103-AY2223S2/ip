@@ -7,7 +7,7 @@ import duke.task.Todo;
 public class AddTodoCommand extends Command {
     private String description;
 
-    AddTodoCommand(String description) {
+    public AddTodoCommand(String description) {
         this.description = description;
     }
 

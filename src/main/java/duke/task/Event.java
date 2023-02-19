@@ -8,12 +8,12 @@ public class Event extends Task {
     private String eventTime;
     private Date eventDate;
 
-    Event(String description, String eventTime) {
+    public Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;
     }
 
-    Event(String description, Date eventDate) {
+    public Event(String description, Date eventDate) {
         super(description);
         this.eventDate = eventDate;
     }

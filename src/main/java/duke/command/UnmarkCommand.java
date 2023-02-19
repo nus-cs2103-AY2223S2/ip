@@ -6,7 +6,7 @@ import duke.task.TaskList;
 public class UnmarkCommand extends Command {
     private int taskNum;
 
-    UnmarkCommand(int taskNum) {
+    public UnmarkCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
