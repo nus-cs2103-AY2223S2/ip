@@ -15,7 +15,7 @@ import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
 import commands.ReprioritiseCommand;
-import exceptions.DukeException;
+import exceptions.NookException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Priority;
@@ -49,9 +49,9 @@ public class Parser {
      *
      * @param input User's input from the scanner
      * @return A command that represents the input
-     * @throws DukeException if the input command is not recognised
+     * @throws NookException if the input command is not recognised
      */
-    public static Command parse(String input) throws DukeException {
+    public static Command parse(String input) throws NookException {
         Validator validator = new Validator();
         String[] inputArr = input.split(" ", 2);
         CommandType commandType = getCommandType(inputArr[0]);
@@ -92,7 +92,7 @@ public class Parser {
             return new ByeCommand();
         default:
             assert commandType == CommandType.UNKNOWN : "Command type is not a declared type";
-            throw new DukeException(generateDefaultMessage());
+            throw new NookException(generateDefaultMessage());
         }
     }
 
@@ -100,7 +100,7 @@ public class Parser {
         return "Oh dear, I wasn't expecting that at all... What do you mean by that?";
     }
 
-    private static Todo generateTodo(Validator validator, String taskInput) throws DukeException {
+    private static Todo generateTodo(Validator validator, String taskInput) throws NookException {
         String[] todoInputArr = taskInput.split("/priority", 2);
         String todoDesc = todoInputArr[0].trim();
         if (todoInputArr.length == 2) {
@@ -112,7 +112,7 @@ public class Parser {
         return new Todo(todoDesc);
     }
 
-    private static Event generateEvent(String taskInput) throws DukeException {
+    private static Event generateEvent(String taskInput) throws NookException {
         Validator validator = new Validator();
         String[] eventInputArr = taskInput.split("/");
         String eventDesc = eventInputArr[0].trim();
@@ -127,7 +127,7 @@ public class Parser {
         return new Event(eventDesc, from, to);
     }
 
-    private static Deadline generateDeadline(String taskInput) throws DukeException {
+    private static Deadline generateDeadline(String taskInput) throws NookException {
         Validator validator = new Validator();
         String[] deadlineInputArr = taskInput.split("/");
         String deadlineDesc = deadlineInputArr[0].trim();

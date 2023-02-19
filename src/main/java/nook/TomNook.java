@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import commands.Command;
-import exceptions.DukeException;
+import exceptions.NookException;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
@@ -71,7 +71,7 @@ public class TomNook {
                 Command c = Parser.parse(commandInput);
                 ui.printOutput(c.execute(tasks, ui, storage));
                 isBye = c.isBye();
-            } catch (DukeException e) {
+            } catch (NookException e) {
                 ui.showExceptionError(e);
             } catch (DateTimeParseException e) {
                 ui.showDateTimeParseError();
@@ -101,7 +101,7 @@ public class TomNook {
                 delay.play();
             }
             return c.execute(tasks, ui, storage);
-        } catch (DukeException e) {
+        } catch (NookException e) {
             return ui.getExceptionError(e);
         }
     }
