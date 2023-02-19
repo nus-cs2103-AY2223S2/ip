@@ -3,6 +3,8 @@ package treebot.utils;
 import org.junit.jupiter.api.Test;
 import treebot.commands.Command;
 import treebot.exception.TreeBotException;
+import treebot.interfaces.ITaskList;
+import treebot.tasks.TaskListStubForSingleTask;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -114,15 +116,45 @@ public class ParserTest {
     void todo_normalInput_writtenCorrectly() {
         String input = "todo homework";
         try {
+            ITaskList testTaskList = new TaskListStubForSingleTask();
             Command c = new Parser().parse(input);
-
+            c.injectContext(testTaskList, new StorageStub(), null);
+            c.execute();
+            assertEquals(testTaskList.getPrintableTasks(), "[T][] homework");
 
         } catch (Exception e) {
             fail();
         }
+    }
 
+    @Test
+    void deadline_normalInput_writtenCorrectly() {
+        String input = "deadline do homework /by 5/7/1999 1800";
+        try {
+            ITaskList testTaskList = new TaskListStubForSingleTask();
+            Command c = new Parser().parse(input);
+            c.injectContext(testTaskList, new StorageStub(), null);
+            c.execute();
+            assertEquals(testTaskList.getPrintableTasks(), "[D][] do homework (by: Jul 5 1999 1800)");
 
+        } catch (Exception e) {
+            fail();
+        }
+    }
 
+    @Test
+    void event_normalInput_writtenCorrectly() {
+        String input = "event project meeting /from 5/7/1999 1800 /to 5/7/1999 1900";
+        try {
+            ITaskList testTaskList = new TaskListStubForSingleTask();
+            Command c = new Parser().parse(input);
+            c.injectContext(testTaskList, new StorageStub(), null);
+            c.execute();
+            assertEquals(testTaskList.getPrintableTasks(), "[E][] project meeting (from: Jul 5 1999 1800 to: Jul 5 1999 1900)");
+
+        } catch (Exception e) {
+            fail();
+        }
     }
 
 

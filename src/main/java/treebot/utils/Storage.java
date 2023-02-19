@@ -1,5 +1,6 @@
 package treebot.utils;
 
+import treebot.interfaces.IStorage;
 import treebot.tasks.Deadline;
 import treebot.tasks.Event;
 import treebot.tasks.Task;
@@ -18,7 +19,7 @@ import java.util.Scanner;
  * Represents a storage class that handles the reading and writing to the data text file
  * for data persistence.
  */
-public class Storage {
+public class Storage implements IStorage {
     private File f;
     private String filePath;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");

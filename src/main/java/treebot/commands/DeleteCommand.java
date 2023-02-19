@@ -25,7 +25,11 @@ public class DeleteCommand extends Command implements IUndoable {
     @Override
     public String execute() {
 
-        this.deletedTask = taskList.deleteTask(index);
+        try {
+            this.deletedTask = taskList.deleteTask(index);
+        } catch (IndexOutOfBoundsException e) {
+            return "Given index is out of range of taskList!!";
+        }
 
         try {
             storage.saveTasks(taskList.getArrayListCopy());
