@@ -1,7 +1,8 @@
 package utils;
 
 import org.junit.jupiter.api.Test;
-import tasks.Task;
+import treebot.tasks.Task;
+import treebot.utils.Storage;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

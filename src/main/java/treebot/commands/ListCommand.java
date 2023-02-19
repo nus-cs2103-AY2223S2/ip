@@ -16,6 +16,9 @@ public class ListCommand extends Command{
         assert taskList != null : "TaskList should not be null when listing tasks";
         String subject = taskList.getPrintableTasks();
 
-        return opening + subject;
+
+        return subject.isEmpty()
+            ? "You have no tasks at hand at the moment"
+            : opening + subject;
     }
 }
