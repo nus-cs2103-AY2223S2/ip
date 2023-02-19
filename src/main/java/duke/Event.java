@@ -11,7 +11,8 @@ public class Event extends Task {
     /**
      * initialises an event object with the given description
      * 
-     * @param description description of event
+     * @param description
+     *            description of event
      */
 
     public Event(String description) {
@@ -22,8 +23,10 @@ public class Event extends Task {
     /**
      * initialises an event object with the given description and deadline
      * 
-     * @param description description of event
-     * @param deadline    deadline of event
+     * @param description
+     *            description of event
+     * @param deadline
+     *            deadline of event
      */
 
     public Event(String description, LocalDate deadline) {

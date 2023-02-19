@@ -85,7 +85,6 @@ public class UI extends Application {
      * runs the user interface *
      * 
      */
-
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();

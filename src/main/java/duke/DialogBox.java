@@ -8,6 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Represents a DialogBox of containing either user input or response of duke
+ */
+
 public class DialogBox extends HBox {
 
     private Label text;
@@ -31,6 +35,8 @@ public class DialogBox extends HBox {
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
     }
+
+    
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);

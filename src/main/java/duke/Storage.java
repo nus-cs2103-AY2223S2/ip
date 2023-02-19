@@ -9,48 +9,46 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
 /**
- * Represents a storage system that read or stores information from hard disk to program
+ * Represents a storage system that read or stores information from hard disk to
+ * program
  */
+
 public class Storage {
     private String filePath;
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
-    }
-
+    /**
+     * Constructor for storage with a specific file path
+     */
     public Storage() {
         this.filePath = "./data";
     }
 
-
-    private void readTask(Scanner scanner,ArrayList<Task> toDoList) {
+    private void readTask(Scanner scanner, ArrayList<Task> toDoList) {
         String currentTaskInput = scanner.nextLine();
 
         String[] splitCurrentTaskInput = currentTaskInput.split("###");
-        
+
         String typeOfTask = splitCurrentTaskInput[0];
         boolean isMarked = splitCurrentTaskInput[1].equals("[X]");
 
         Task newTask;
 
         switch (typeOfTask) {
-            case "[E]":
-                newTask = new Event(splitCurrentTaskInput[2]);
-                
-                break;
-            case "[T]":
-                newTask = new Todo(splitCurrentTaskInput[2]);
-                
-                break;
-            case "[D]":
-                newTask = new Deadline(splitCurrentTaskInput[2]);
-                break;
+        case "[E]":
+            newTask = new Event(splitCurrentTaskInput[2]);
 
-            default:
-                return;
+            break;
+        case "[T]":
+            newTask = new Todo(splitCurrentTaskInput[2]);
+
+            break;
+        case "[D]":
+            newTask = new Deadline(splitCurrentTaskInput[2]);
+            break;
+
+        default:
+            return;
         }
 
         toDoList.add(newTask);
@@ -58,17 +56,18 @@ public class Storage {
             newTask.mark();
         }
 
-        if(splitCurrentTaskInput.length > 3){
-            LocalDate deadline = LocalDate.parse(splitCurrentTaskInput[3]);  
+        if (splitCurrentTaskInput.length > 3) {
+            LocalDate deadline = LocalDate.parse(splitCurrentTaskInput[3]);
             newTask.setDeadline(deadline);
         }
 
     }
 
     /**
-     * read tasks from hard disk to program
+     * read tasks from hard disk to arraylist of tasks
      * 
-     * @param toDoList ArrayList of all tasks
+     * @param toDoList
+     *            ArrayList of all tasks
      */
 
     public void readStorage(ArrayList<Task> toDoList) {
@@ -90,9 +89,10 @@ public class Storage {
     }
 
     /**
-     * stores tasks from program to hard disk
+     * Stores tasks from arraylist to hard disk
      * 
-     * @param toDoList ArrayList of all tasks
+     * @param toDoList
+     *            ArrayList of all tasks
      */
     public void writeToFile(TaskList toDoList) {
         try {

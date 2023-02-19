@@ -11,7 +11,8 @@ public class Deadline extends Task {
     /**
      * initialises an deadline object with the given description
      * 
-     * @param description description of deadline
+     * @param description
+     *            description of deadline
      */
 
     public Deadline(String description) {
@@ -22,8 +23,10 @@ public class Deadline extends Task {
     /**
      * initialises an task object with the given description and deadline
      * 
-     * @param description description of task
-     * @param deadline    deadline of deadline
+     * @param description
+     *            description of task
+     * @param deadline
+     *            deadline of deadline
      */
 
     public Deadline(String description, LocalDate deadline) {

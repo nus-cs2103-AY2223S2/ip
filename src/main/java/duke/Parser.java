@@ -14,49 +14,39 @@ import java.lang.StringBuilder;
 
 public class Parser {
 
-    /**
-     * check if input string has less than 2 words *
-     * 
-     * @param splitInput Array of words in input string
-     * @return true if splitInput < 2 else false
-     */
-
-    private static boolean checkDescription(String[] splitInput) {
-        return splitInput.length < 2;
+    private static boolean checkDescription(String[] inputTokens) {
+        return inputTokens.length < 2;
     }
 
-    /**
-     * convert input string to LocalDate type
-     * 
-     * @param splitInput Array of words in input string
-     * @return LocalDate object of parsed input string else null
-     */
-
-    private static LocalDate getDate(String[] splitInput) {
-        if (splitInput.length >= 4) {
-            if (splitInput[splitInput.length - 2].equals("/by")) {
-                try {
-                    // in form yyyy-mm-dd
-                    LocalDate taskDateTime = LocalDate
-                            .parse(splitInput[splitInput.length - 1]);
-                    return taskDateTime;
-                } catch (Exception e) {
-                    System.out.println("failed to read date");
-                }
-            }
+    private static LocalDate getDate(String[] inputTokens) {
+        if (!(inputTokens.length >= 4)) {
+            return null;
         }
-        return null;
+        if (!inputTokens[inputTokens.length - 2].equals("/by")) {
+            return null;
+        }
+        try {
+            // in form yyyy-mm-dd
+            LocalDate taskDateTime = LocalDate
+                    .parse(inputTokens[inputTokens.length - 1]);
+            return taskDateTime;
+        } catch (Exception e) {
+            System.out.println("failed to read date");
+            return null;
+        }
+
     }
 
     private String findTask(String input, TaskList toDoList) {
         StringBuilder response = new StringBuilder();
-
         String searchString = input.substring(("find").length() + 1);
         ArrayList<Task> foundTasks = toDoList.search(searchString);
+
         response.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < foundTasks.size(); i++) {
             response.append(i + 1 + "." + foundTasks.get(i).toString() + "\n");
         }
+
         return response.toString();
     }
 
@@ -65,8 +55,8 @@ public class Parser {
 
         response.append("Here are the upcoming deadlines");
         int counter = 1;
-        for (int i = 0; i < toDoList.size(); i++){
-            if(toDoList.get(i).isUpcomingDeadline()){
+        for (int i = 0; i < toDoList.size(); i++) {
+            if (toDoList.get(i).isUpcomingDeadline()) {
                 response.append(counter + 1 + "." + toDoList.get(i).toString() + "\n");
                 counter += 1;
             }
@@ -87,14 +77,14 @@ public class Parser {
         return response.toString();
     }
 
-    private String markTask(String[] splitInput, TaskList toDoList) throws DukeException {
+    private String markTask(String[] inputTokens, TaskList toDoList) throws DukeException {
         StringBuilder response = new StringBuilder();
 
-        if (checkDescription(splitInput)) {
+        if (checkDescription(inputTokens)) {
             throw new DukeException("OOPS!!! The value cannot be empty.");
         }
 
-        String taskNumMark = splitInput[1];
+        String taskNumMark = inputTokens[1];
         Task taskToMark;
 
         try {
@@ -113,15 +103,15 @@ public class Parser {
         return response.toString();
     }
 
-    private String unMarkTask(String[] splitInput, TaskList toDoList) throws DukeException {
+    private String unMarkTask(String[] inputTokens, TaskList toDoList) throws DukeException {
         StringBuilder response = new StringBuilder();
 
-        if (checkDescription(splitInput)) {
+        if (checkDescription(inputTokens)) {
             throw new DukeException("OOPS!!! The value cannot be empty.");
         }
 
         try {
-            String taskNumUnmark = splitInput[1];
+            String taskNumUnmark = inputTokens[1];
 
             Task taskToUnmark = toDoList.get(Integer.parseInt(taskNumUnmark) - 1);
 
@@ -138,22 +128,22 @@ public class Parser {
         return response.toString();
     }
 
-    private String createEvent(String[] splitInput, String input, TaskList toDoList) throws DukeException {
+    private String createEvent(String[] inputTokens, String input, TaskList toDoList) throws DukeException {
 
         StringBuilder response = new StringBuilder();
 
-        if (checkDescription(splitInput)) {
+        if (checkDescription(inputTokens)) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
         }
 
-        LocalDate taskDate = Parser.getDate(splitInput);
+        LocalDate taskDate = Parser.getDate(inputTokens);
         String eventDescription;
 
         if (taskDate == null) {
             eventDescription = input.substring(("event").length() + 1);
         } else {
 
-            eventDescription = String.join(" ", Arrays.copyOfRange(splitInput, 1, splitInput.length - 2));
+            eventDescription = String.join(" ", Arrays.copyOfRange(inputTokens, 1, inputTokens.length - 2));
         }
 
         Task newEvent = new Event(eventDescription, taskDate);
@@ -167,19 +157,19 @@ public class Parser {
 
     }
 
-    private String createDeadline(String[] splitInput, String input, TaskList toDoList) throws DukeException {
+    private String createDeadline(String[] inputTokens, String input, TaskList toDoList) throws DukeException {
         StringBuilder response = new StringBuilder();
 
-        if (checkDescription(splitInput)) {
+        if (checkDescription(inputTokens)) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
 
-        LocalDate taskDate = Parser.getDate(splitInput);
+        LocalDate taskDate = Parser.getDate(inputTokens);
         String deadlineDescription;
         if (taskDate == null) {
             deadlineDescription = input.substring(("deadline").length() + 1);
         } else {
-            deadlineDescription = String.join(" ", Arrays.copyOfRange(splitInput, 1, splitInput.length - 2));
+            deadlineDescription = String.join(" ", Arrays.copyOfRange(inputTokens, 1, inputTokens.length - 2));
         }
 
         Task newDeadline = new Deadline(deadlineDescription, taskDate);
@@ -192,19 +182,19 @@ public class Parser {
         return response.toString();
     }
 
-    private String createToDo(String[] splitInput, String input, TaskList toDoList) throws DukeException {
+    private String createToDo(String[] inputTokens, String input, TaskList toDoList) throws DukeException {
         StringBuilder response = new StringBuilder();
 
-        if (checkDescription(splitInput)) {
+        if (checkDescription(inputTokens)) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
-        LocalDate taskDate = Parser.getDate(splitInput);
+        LocalDate taskDate = Parser.getDate(inputTokens);
 
         String todoDescription;
         if (taskDate == null) {
             todoDescription = input.substring(("todo").length() + 1);
         } else {
-            todoDescription = String.join(" ", Arrays.copyOfRange(splitInput, 1, splitInput.length - 2));
+            todoDescription = String.join(" ", Arrays.copyOfRange(inputTokens, 1, inputTokens.length - 2));
         }
         Task newTodo = new Todo(todoDescription, taskDate);
         toDoList.add(newTodo);
@@ -215,15 +205,15 @@ public class Parser {
         return response.toString();
     }
 
-    private String deleteTask(String[] splitInput, String input, TaskList toDoList) throws DukeException {
+    private String deleteTask(String[] inputTokens, String input, TaskList toDoList) throws DukeException {
 
         StringBuilder response = new StringBuilder();
 
-        if (checkDescription(splitInput)) {
+        if (checkDescription(inputTokens)) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
         }
 
-        String taskDelete = splitInput[1];
+        String taskDelete = inputTokens[1];
 
         try {
             Task taskToDelete = toDoList.get(Integer.parseInt(taskDelete) - 1);
@@ -245,79 +235,82 @@ public class Parser {
     /**
      * parses Input and execute corresponding command
      * 
-     * @param input    User string input
-     * @param TaskList list of tasks
-     * @return true if the command requires saving to storage else false
-     * @throws DukeException If command cannot be understood
+     * @param input
+     *        User's string input
+     * @param toDoList
+     *        List of tasks
+     * @return Corresponding String response of Duke
+     * @throws DukeException
+     *         If command cannot be understood
      */
 
     public String parseInput(String input, TaskList toDoList) {
-        String[] splitInput = input.split(" ");
-        String command = splitInput[0];
+        String[] inputTokens = input.split(" ");
+        String command = inputTokens[0];
 
         switch (command) {
-            case "upcoming" :
-                return getUpComingDeadlines(toDoList);
+        case "upcoming":
+            return getUpComingDeadlines(toDoList);
 
-            case "find":
-                return findTask(input, toDoList);
+        case "find":
+            return findTask(input, toDoList);
 
-            case "list":
+        case "list":
 
-                return listTasks(toDoList);
+            return listTasks(toDoList);
 
-            case "mark":
+        case "mark":
 
-                try {
-                    return markTask(splitInput, toDoList);
-                } catch (DukeException e) {
+            try {
+                return markTask(inputTokens, toDoList);
+            } catch (DukeException e) {
 
-                    return e.getMessage();
-                }
+                return e.getMessage();
+            }
 
-            case "unmark":
+        case "unmark":
 
-                try {
-                    return unMarkTask(splitInput, toDoList);
-                } catch (DukeException e) {
+            try {
+                return unMarkTask(inputTokens, toDoList);
+            } catch (DukeException e) {
 
-                    return e.getMessage();
-                }
+                return e.getMessage();
+            }
 
-            case "event":
-                try {
-                    return createEvent(splitInput, input, toDoList);
-                } catch (DukeException e) {
+        case "event":
+            try {
+                return createEvent(inputTokens, input, toDoList);
+            } catch (DukeException e) {
 
-                    return e.getMessage();
-                }
+                return e.getMessage();
+            }
 
-            case "deadline":
-                try {
-                    return createDeadline(splitInput, input, toDoList);
-                } catch (DukeException e) {
-                    return e.getMessage();
-                }
+        case "deadline":
+            try {
+                return createDeadline(inputTokens, input, toDoList);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
 
-            case "todo":
-                try {
-                    return createToDo(splitInput, input, toDoList);
-                } catch (DukeException e) {
-                    return e.getMessage();
-                }
+        case "todo":
+            try {
+                return createToDo(inputTokens, input, toDoList);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
 
-            case "delete":
-                try {
-                    return deleteTask(splitInput, input, toDoList);
-                } catch (DukeException e) {
-                    return e.getMessage();
-                }
-            case "bye":
+        case "delete":
+            try {
+                return deleteTask(inputTokens, input, toDoList);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        case "bye":
 
-                return "goodbye";
+            return "goodbye";
 
-            default:
-                return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        default:
+            return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
     }

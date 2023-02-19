@@ -28,17 +28,19 @@ public class TaskList {
     /**
      * returns the task at a specific index in TaskList
      * 
-     * @param index index of task to retrieve
+     * @param index
+     *            index of task to retrieve
      * @return Task at the index
      */
-    public Task get(int index) throws IndexOutOfBoundsException{
+    public Task get(int index) throws IndexOutOfBoundsException {
         return this.tasks.get(index);
     }
 
     /**
      * adds task to TaskList
      * 
-     * @param task task to add to TaskList
+     * @param task
+     *            task to add to TaskList
      */
     public void add(Task task) {
         this.tasks.add(task);
@@ -47,7 +49,8 @@ public class TaskList {
     /**
      * remove the task at a specific index in TaskList
      * 
-     * @param index index of task to remove
+     * @param index
+     *            index of task to remove
      */
     public void remove(int index) {
         this.tasks.remove(index);
@@ -57,7 +60,7 @@ public class TaskList {
         ArrayList<Task> foundTasks = new ArrayList<Task>();
 
         for (int i = 0; i < this.tasks.size(); i++) {
-            if (tasks.get(i).contains(searchString)) {
+            if (tasks.get(i).shouldContains(searchString)) {
                 foundTasks.add(tasks.get(i));
             }
         }

@@ -16,7 +16,8 @@ public class Task {
     /**
      * initialises an task object with the given description
      * 
-     * @param description description of task
+     * @param description
+     *            description of task
      */
 
     public Task(String description) {
@@ -28,8 +29,10 @@ public class Task {
     /**
      * initialises an task object with the given description and deadline
      * 
-     * @param description description of task
-     * @param deadline    deadline of task
+     * @param description
+     *            description of task
+     * @param deadline
+     *            deadline of task
      */
 
     public Task(String description, LocalDate deadline) {
@@ -48,7 +51,7 @@ public class Task {
         return this.toString();
     }
 
-    public Boolean contains(String searchString) {
+    public Boolean shouldContains(String searchString) {
         return this.description.contains(searchString);
     }
 
