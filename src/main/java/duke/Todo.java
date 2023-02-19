@@ -11,7 +11,7 @@ public class Todo extends Task {
      * initialises an todo object with the given description
      * 
      * @param description
-     *            description of todo
+     *        description of todo
      */
 
     public Todo(String description) {
@@ -23,9 +23,9 @@ public class Todo extends Task {
      * initialises an todo object with the given description and deadline
      * 
      * @param description
-     *            description of todo
+     *        description of todo
      * @param deadline
-     *            deadline of todo
+     *        deadline of todo
      */
 
     public Todo(String description, LocalDate deadline) {
@@ -39,8 +39,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toFileSaveFormat() {
-        return "[T]###" + super.toFileSaveFormat();
+    public String getTaskFileSaveFormat() {
+        return "[T]###" + super.getTaskFileSaveFormat();
     }
 
 }

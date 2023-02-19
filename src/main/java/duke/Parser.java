@@ -235,10 +235,8 @@ public class Parser {
     /**
      * parses Input and execute corresponding command
      * 
-     * @param input
-     *        User's string input
-     * @param toDoList
-     *        List of tasks
+     * @param input User's string input
+     * @param toDoList List of tasks
      * @return Corresponding String response of Duke
      * @throws DukeException
      *         If command cannot be understood

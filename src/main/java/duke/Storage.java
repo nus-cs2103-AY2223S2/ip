@@ -66,8 +66,7 @@ public class Storage {
     /**
      * read tasks from hard disk to arraylist of tasks
      * 
-     * @param toDoList
-     *            ArrayList of all tasks
+     * @param toDoList ArrayList of all tasks
      */
 
     public void readStorage(ArrayList<Task> toDoList) {
@@ -91,14 +90,13 @@ public class Storage {
     /**
      * Stores tasks from arraylist to hard disk
      * 
-     * @param toDoList
-     *            ArrayList of all tasks
+     * @param toDoList ArrayList of all tasks
      */
     public void writeToFile(TaskList toDoList) {
         try {
             FileWriter saveFileWriter = new FileWriter(this.filePath + "/duke.txt", false);
             for (int i = 0; i < toDoList.size(); i++) {
-                saveFileWriter.write(toDoList.get(i).toFileSaveFormat() + "\n");
+                saveFileWriter.write(toDoList.get(i).getTaskFileSaveFormat() + "\n");
             }
 
             saveFileWriter.close();

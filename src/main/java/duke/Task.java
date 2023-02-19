@@ -14,7 +14,7 @@ public class Task {
     private LocalDate deadline;
 
     /**
-     * initialises an task object with the given description
+     * Initialises an task object with the given description
      * 
      * @param description
      *            description of task
@@ -27,12 +27,10 @@ public class Task {
     }
 
     /**
-     * initialises an task object with the given description and deadline
+     * Initialises an task object with the given description and deadline
      * 
-     * @param description
-     *            description of task
-     * @param deadline
-     *            deadline of task
+     * @param description description of task
+     * @param deadline deadline of task
      */
 
     public Task(String description, LocalDate deadline) {
@@ -89,7 +87,12 @@ public class Task {
         return doneString + " " + description + dateString;
     }
 
-    public String toFileSaveFormat() {
+    /**
+     * Returns the String representation of Task that will be stored in hard disk
+     * @return String Representation of Task in format to be saved in hard disk
+     * 
+     */
+    public String getTaskFileSaveFormat() {
         String doneString;
         if (isDone) {
             doneString = "[X]";
