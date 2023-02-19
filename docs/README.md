@@ -179,3 +179,9 @@ Expected outcome:
 ```
 Until next time... Better call Saul!
 ```
+
+### Exit Saul
+
+To exit the program, click the close button in the top-right corner of the window.
+Don't forget to tell Saul you're leaving first (`bye`) so that he remembers your tasks 
+for the next time you meet him!
