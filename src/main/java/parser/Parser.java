@@ -73,20 +73,34 @@ public class Parser {
             throw new UnknownTaskException(j); // will not reach here
         case BYE:
             return new ByeCommand();
-        default:
-            String[] commandDetails = new String[4];
-            commandDetails[0] = comm.toString();
-
-            String taskString = "";
-            for (int i = 1; i < commands.length; i++) {
-                taskString += commands[i] + " ";
-            }
-            String[] args = taskString.split("/");
-            for (int i = 0; i < args.length; i++) {
-                commandDetails[i + 1] = args[i];
-            }
-            return new AddCommand(commandDetails);
+        default: // add commands - todo, deadline or event
+            String[] taskDetails = Parser.parseTaskDetails(commands);
+            return new AddCommand(taskDetails);
         }
+    }
+
+    /**
+     * Parses user command to extract task name and dates as string values
+     *
+     * @param args user command
+     * @return array containing task name and dates
+     */
+    public static String[] parseTaskDetails(String[] args) {
+
+        String[] commandDetails = new String[4];
+        commandDetails[0] = args[0];
+
+        String taskArguments = "";
+        for (int i = 1; i < args.length; i++) {
+            taskArguments += args[i] + " ";
+        }
+        
+        String[] information = taskArguments.split("/");
+        for (int i = 0; i < information.length; i++) {
+            commandDetails[i + 1] = information[i];
+        }
+
+        return commandDetails;
     }
 
     /**
@@ -97,6 +111,7 @@ public class Parser {
      * @throws LoadTaskException
      */
     public static String stringToParsedDateString(String s) throws LoadTaskException {
+
         String[] dateTime = s.split(" ");
         String mIndex;
         try {
