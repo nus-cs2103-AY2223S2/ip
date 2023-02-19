@@ -4,14 +4,14 @@
 
 ### Feature-Add Task
 
-Add different types of Task, wich are:
+Add different types of Task, which are:
 + Todo
 + Deadline
 + Event
 
 ### Feature-Delete Task
 
-Remove the task that are done/unwanted
+Remove the tasks that are done/unwanted
 
 ### Feature-Mark Tasks
 
