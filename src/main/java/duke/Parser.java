@@ -7,10 +7,13 @@ import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.PriorityCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyBodyException;
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidIndexException;
+import duke.exceptions.InvalidPriorityException;
+import duke.exceptions.MissingArgumentException;
 import duke.exceptions.MissingIndexException;
 import duke.exceptions.MissingKeywordException;
 import duke.exceptions.UnknownCommandException;
@@ -67,9 +70,25 @@ public class Parser {
                 return parseDelete(args);
             case "find":
                 return parseFind(args);
+            case "priority":
+                return parsePriority(args);
             default:
                 throw new UnknownCommandException();
         }
+    }
+
+    /**
+     * Parses the "priority" command and returns the corresponding Command object.
+     *
+     * @param args Tokens of the command as strings
+     * @return The parsed Command object
+     * @throws DukeException if the command is unsuccessfully parsed.
+     */
+    private static Command parsePriority(Iterator<String> args) throws DukeException {
+        int idx = nextInt(args);
+        String priority = nextString(args).toLowerCase();
+        PriorityLevel priorityLevel = parsePriorityLevel(priority);
+        return new PriorityCommand(priorityLevel, idx);
     }
 
     /**
@@ -81,17 +100,7 @@ public class Parser {
      * @throws DukeException if the command is unsuccessfully parsed.
      */
     private static Command parseMark(Iterator<String> args, String cmdWord) throws DukeException {
-        if (!args.hasNext()) {
-            throw new MissingIndexException();
-        }
-
-        int idx;
-        try {
-            idx = Integer.parseInt(args.next());
-        } catch (NumberFormatException e) {
-            throw new InvalidIndexException();
-        }
-
+        int idx = nextInt(args);
         return new MarkCommand(cmdWord.equals("mark"), idx);
     }
 
@@ -122,7 +131,7 @@ public class Parser {
         if (name.length() == 0) {
             throw new EmptyBodyException();
         }
-        Date by = parseDate(copyUntilDelimiter(args));;
+        Date by = parseDate(copyUntilDelimiter(args));
         return new AddCommand(new Deadline(name, by));
     }
 
@@ -152,16 +161,7 @@ public class Parser {
      * @throws DukeException if the command is unsuccessfully parsed.
      */
     private static Command parseDelete(Iterator<String> args) throws DukeException {
-        if (!args.hasNext()) {
-            throw new MissingIndexException();
-        }
-
-        int idx;
-        try {
-            idx = Integer.parseInt(args.next());
-        } catch (NumberFormatException e) {
-            throw new InvalidIndexException();
-        }
+        int idx = nextInt(args);
         return new DeleteCommand(idx);
     }
 
@@ -270,6 +270,61 @@ public class Parser {
             return new Date(LocalDate.parse(arg, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         } else {
             throw new InvalidDateException();
+        }
+    }
+
+    /**
+     * Returns the next element of an iterator as an Integer if possible.
+     *
+     * @param args Iterator on Strings
+     * @return A string
+     * @throws DukeException if the iterator has no next
+     */
+    private static String nextString(Iterator<String> args) throws DukeException {
+        if (!args.hasNext()) {
+            throw new MissingArgumentException();
+        }
+        return args.next();
+    }
+
+    /**
+     * Returns the next element of an iterator as an Integer if possible.
+     *
+     * @param args Iterator on Strings
+     * @return an integer index
+     * @throws DukeException if there is nothing to parse or the first item is not an integer
+     */
+    private static int nextInt(Iterator<String> args) throws DukeException {
+        if (!args.hasNext()) {
+            throw new MissingIndexException();
+        }
+
+        try {
+            return Integer.parseInt(args.next());
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
+        }
+    }
+
+    /**
+     * Returns the corresponding PriorityLevel object for a string containing a priority level.
+     *
+     * @param priority A string possible containing a PriorityLevel.
+     * @return The corresponding PriorityLevel enum
+     */
+    public static PriorityLevel parsePriorityLevel(String priority) throws DukeException {
+        switch (priority) {
+            case "low":
+            case "l":
+                return PriorityLevel.LOW;
+            case "medium":
+            case "m":
+                return PriorityLevel.MEDIUM;
+            case "high":
+            case "h":
+                return PriorityLevel.HIGH;
+            default:
+                throw new InvalidPriorityException();
         }
     }
 }

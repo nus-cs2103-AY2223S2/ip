@@ -59,7 +59,8 @@ public class Storage {
             List<String> args = List.of(line.split("\\|"));
             String type = args.get(0);
             String isDone = args.get(1);
-            String description = args.get(2);
+            String priority = args.get(2);
+            String description = args.get(3);
 
             Task task;
             switch (type) {
@@ -67,12 +68,12 @@ public class Storage {
                     task = new Todo(description);
                     break;
                 case "deadline":
-                    Date by = Parser.parseDate(args.get(3));
+                    Date by = Parser.parseDate(args.get(4));
                     task = new Deadline(description, by);
                     break;
                 case "event":
-                    Date from = Parser.parseDate(args.get(3));
-                    Date to = Parser.parseDate(args.get(4));
+                    Date from = Parser.parseDate(args.get(4));
+                    Date to = Parser.parseDate(args.get(5));
                     task = new Event(description, from, to);
                     break;
                 default:
@@ -82,6 +83,9 @@ public class Storage {
             if (isDone.equals("true")) {
                 task.markAsDone();
             }
+
+            PriorityLevel priorityLevel = Parser.parsePriorityLevel(priority.toLowerCase());
+            task.setPriority(priorityLevel);
             tasks.add(task);
         }
         return tasks;

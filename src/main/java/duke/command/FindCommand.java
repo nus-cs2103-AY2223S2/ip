@@ -16,6 +16,7 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Storage storage) {
+        tasks.sort();
         List<Task> filtered = tasks.findAllTasksWithKeyword(this.keyword);
         if (filtered.size() == 0){
             this.setOutput("Can't find tasks with this keyword yo~");

@@ -18,6 +18,7 @@ public class ListCommand extends Command {
         }
 
         List<String> strings = new ArrayList<>();
+        tasks.sort();
         for (int i = 0; i < tasks.getSize(); i++) {
             strings.add((i + 1) + ": " + tasks.get(i));
         }
