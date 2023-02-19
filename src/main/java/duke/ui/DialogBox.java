@@ -41,6 +41,9 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setWrapText(true);
+
+        assert user == "duke" || user == "client" : "User must be duke or client";
+
         if (user == "duke") {
             dialog.setStyle("-fx-padding: 10; -fx-border-color:pink; -fx-background-color: white;");
         } else if (user == "client") {
