@@ -75,32 +75,24 @@ public class FileManager {
             char type = entry.charAt(0);
             int marked = Character.getNumericValue(entry.charAt(1));
             String description = entry.substring(2);
-            try {
-                if (type == 'T') {
-                    ToDo todo = new ToDo();
-                    todo.genDscp(description);
-                    if (marked == 1) {
-                        todo.mark();
-                    }
-                    data.addFileEntry(todo);
-                } else if (type == 'D') {
-                    Deadline deadline = new Deadline();
-                    deadline.genDscp(description);
-                    if (marked == 1) {
-                        deadline.mark();
-                    }
-                    data.addFileEntry(deadline);
-                } else {
-                    Event event = new Event();
-                    event.genDscp(description);
-                    if (marked == 1) {
-                        event.mark();
-                    }
-                    data.addFileEntry(event);
+            if (type == 'T') {
+                ToDo todo = new ToDo(description);
+                if (marked == 1) {
+                    todo.mark();
                 }
-
-            } catch (DukeExceptions e) {
-                System.out.println(e.getMessage());
+                data.addFileEntry(todo);
+            } else if (type == 'D') {
+                Deadline deadline = new Deadline(description);
+                if (marked == 1) {
+                    deadline.mark();
+                }
+                data.addFileEntry(deadline);
+            } else {
+                Event event = new Event(description);
+                if (marked == 1) {
+                    event.mark();
+                }
+                data.addFileEntry(event);
             }
         }
         return data;
