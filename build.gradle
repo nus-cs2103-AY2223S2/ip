@@ -41,9 +41,6 @@ repositories {
     mavenCentral()
 }
 
-checktyle {
-    toolVersion = '10.2'
-}
 
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
