@@ -185,9 +185,6 @@ public class Parser {
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Oops, that task number does not exist");
                 }
-            case "save":
-                storage.save(taskList);
-                return "Data was saved successfully!";
 
             case "find":
                 String keyword = input.substring(5);
