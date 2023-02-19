@@ -36,10 +36,9 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        this.setStyle("-fx-background-color: #7C90A0");
         dialog.setText(text);
         displayPicture.setImage(img);
-        Circle clip = new Circle(50, 50, 50);
+        Circle clip = new Circle(48, 48, 48);
         displayPicture.setClip(clip);
     }
 
