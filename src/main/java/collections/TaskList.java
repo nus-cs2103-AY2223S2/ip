@@ -2,7 +2,6 @@ package collections;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 import exceptions.SundayException;
 import task.Task;

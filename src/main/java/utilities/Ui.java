@@ -1,11 +1,11 @@
 package utilities;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
+
 import collections.TaskList;
 import exceptions.SundayException;
 import task.Task;
-
-import java.io.OutputStream;
-import java.io.PrintStream;
 
 /**
  * The Ui class is a user interface for the Sunday task manager.
@@ -80,8 +80,8 @@ public class Ui {
      * @return The message indicating that the task list is empty.
      */
     public static String getEmptyTaskListMessage() {
-        return "Your list is currently empty.\n" +
-                "Tell me what to note down and I'll remember it accordingly!\n";
+        return "Your list is currently empty.\n"
+                + "Tell me what to note down and I'll remember it accordingly!\n";
     }
 
     /**
@@ -92,9 +92,9 @@ public class Ui {
      * @return The message indicating that a task has been added to the task list.
      */
     public static String getAddedTaskMessage(Task task, int uncompletedSize) {
-        return "Got it. I've added this task:\n" +
-                "  " + task + "\n" +
-                "Now you have " + uncompletedSize + " task(s) in the list.\n";
+        return "Got it. I've added this task:\n"
+                + "  " + task + "\n"
+                + "Now you have " + uncompletedSize + " task(s) in the list.\n";
     }
 
     /**
@@ -105,9 +105,9 @@ public class Ui {
      * @return The message indicating that a task has been marked as complete.
      */
     public static String getMarkedTaskMessage(Task task, int uncompletedSize) {
-        return "Well Done! I've marked this task as done:\n" +
-                "  " + task + "\n" +
-                "Now you have " + uncompletedSize + " task(s) in the list.\n";
+        return "Well Done! I've marked this task as done:\n"
+                + "  " + task + "\n"
+                + "Now you have " + uncompletedSize + " task(s) in the list.\n";
     }
 
     /**
@@ -118,9 +118,9 @@ public class Ui {
      * @return The message indicating that a task has been unmarked.
      */
     public static String getUnmarkedTaskMessage(Task task, int uncompletedSize) {
-        return "OK, I've marked this task as not done yet:\n" +
-                "  " + task + "\n" +
-                "Now you have " + uncompletedSize + " task(s) in the list.\n";
+        return "OK, I've marked this task as not done yet:\n"
+                + "  " + task + "\n"
+                + "Now you have " + uncompletedSize + " task(s) in the list.\n";
     }
 
     /**
@@ -131,9 +131,9 @@ public class Ui {
      * @return The message indicating that a task has been deleted from the task list.
      */
     public static String getDeletedTaskMessage(Task task, int uncompletedSize) {
-        return "Noted. I've removed this task:\n" +
-                "  " + task + "\n" +
-                "Now you have " + uncompletedSize + " task(s) in the list.\n";
+        return "Noted. I've removed this task:\n"
+                + "  " + task + "\n"
+                + "Now you have " + uncompletedSize + " task(s) in the list.\n";
     }
 
     /**
