@@ -130,20 +130,26 @@ public class Parser {
             }
 
         case "delete":
+        try {
             int idx = Integer.parseInt(tokens[1]);
             c = new Delete(idx, tasklist);
 
             //  Executing here to catch IndexOutOfBoundsException.
             return c.execute();
+        } catch (IndexOutOfBoundsException ioobe) {
+            return "Please enter a valid index, Boss.";
+        } catch (NumberFormatException nfe) {
+            return "Please enter an index after \"delete\".";
+        }
 
         case "find":
-        try {
-            String searchKey = tokens[1];
-            c = new Find(searchKey, tasklist);
-            break;
-        } catch (IndexOutOfBoundsException ioobe) {
-            return "Please enter a search phrase after \"find\".";
-        }
+            try {
+                String searchKey = tokens[1];
+                c = new Find(searchKey, tasklist);
+                break;
+            } catch (IndexOutOfBoundsException ioobe) {
+                return "Please enter a search phrase after \"find\".";
+            }
         default:
             return "Boss, I'm sorry, but I don't understand :-(\n";
         }
