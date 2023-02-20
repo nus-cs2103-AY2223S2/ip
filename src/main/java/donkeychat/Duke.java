@@ -77,7 +77,7 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("DonkeyChat");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -103,7 +103,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
@@ -128,7 +128,7 @@ public class Duke extends Application {
 
         ui.displayIntro();
         dialogContainer.getChildren().add(
-        DialogBox.getDukeDialog(new Label(ui.getOutput()), new ImageView(duke))
+            DialogBox.getDukeDialog(new Label(ui.getOutput()), new ImageView(duke))
         );
         storage.loadSave(tasks);
     }
@@ -153,7 +153,7 @@ public class Duke extends Application {
     }
 
     private String getResponse(String input) {
-        if(!parser.parse(input,tasks,storage,ui)){
+        if (!parser.parse(input, tasks, storage, ui)) {
             mainStage.close();
         }
         return ui.getOutput();
