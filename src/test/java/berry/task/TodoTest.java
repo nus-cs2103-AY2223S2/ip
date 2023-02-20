@@ -10,12 +10,12 @@ public class TodoTest {
     @Test
     public void toString_checkTodoTask_success() throws IncorrectDateException {
         Todo todo = new Todo("some todo");
-        assertEquals("[T][ ] some todo", todo.toString());
+        assertEquals("[T][  ] some todo", todo.toString());
     }
 
     @Test
     public void interpretTaskToString_todoTask_success() throws IncorrectDateException {
         Todo todo = new Todo("some todo");
-        assertEquals("T |   | some todo", todo.interpretTaskToText());
+        assertEquals("T |    | some todo", todo.interpretTaskToText());
     }
 }

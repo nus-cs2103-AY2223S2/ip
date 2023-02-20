@@ -33,9 +33,9 @@ public class TaskListTest {
     @Test
     public void isIndexWithinRange_withinAndOutOfRange_checkCorrectly() throws IncorrectDateException {
         final String validDate = "2022-02-02";
-        final Todo todo = new Todo("some todo");
-        final Deadline deadline = new Deadline("some deadline", validDate);
-        final Event event = new Event("some event", validDate, validDate);
+        final Todo todo = new Todo("some task");
+        final Deadline deadline = new Deadline("some task", validDate);
+        final Event event = new Event("some task", validDate, validDate);
         final Task[] taskList = {todo, deadline, event};
 
         int[] indexesWithinRange = {1, 2, 3};

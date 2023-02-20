@@ -10,12 +10,12 @@ public class TaskTest {
     @Test
     public void markAndStatus_markAndUnmarkAll_correctStatus() throws IncorrectDateException {
         final String marked = "X";
-        final String unmarked = " ";
+        final String unmarked = "  ";
         final String someDate = "2022-02-02";
 
-        Todo todoTask = new Todo("some todo");
-        Deadline deadlineTask = new Deadline("some deadline", someDate);
-        Event eventTask = new Event("some event", someDate, someDate);
+        Todo todoTask = new Todo("some task");
+        Deadline deadlineTask = new Deadline("some task", someDate);
+        Event eventTask = new Event("some task", someDate, someDate);
 
         todoTask.markTaskAsDone();
         deadlineTask.markTaskAsDone();
