@@ -31,7 +31,7 @@ while still retaining the benefits of a traditional Graphical User Interface `GU
 
 ### Adding tasks
 
-#### Adding a `ToDo`
+#### Adding a ToDo
 
 ToDos are tasks without any date/time attached.
 
