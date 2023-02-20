@@ -30,6 +30,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND = "That's not a command, you egg!";
     public static final String MESSAGE_DESCRIPTION_MISSING = "Well, you gotta give it a name!";
     public static final String MESSAGE_DUEDATE_FLAG_MISSING = "You're missing the '/by' flag, bucko!";
+    public static final String MESSAGE_START_FLAG_MISSING = " You're missing the '/from' flag! Buhcawk!";
+    public static final String MESSAGE_END_FLAG_MISSING = " You're missing the '/to' flag! Buhcawk!";
+    public static final String MESSAGE_DATE_INVALID = "Your date's format is all clucked up!";
+    public static final String MESSAGE_DATE_MISSING = "Buh caw - You forgot to give me a date!";
 
     public static final String MESSAGE_LIST_DISPLAY = "Here are the tasks in your list:";
     public static final String MESSAGE_LIST_COUNT = "There are now %s items in your list!";

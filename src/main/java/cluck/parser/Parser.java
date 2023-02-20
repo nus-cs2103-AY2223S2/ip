@@ -4,10 +4,9 @@ import cluck.commands.*;
 import cluck.exceptions.IncorrectArgumentException;
 import cluck.exceptions.MissingArgumentException;
 import cluck.messages.Messages;
-import cluck.tasks.Deadline;
-import cluck.tasks.Event;
-import cluck.tasks.Task;
-import cluck.tasks.ToDo;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Parser class takes user input and parses it into commands
@@ -24,6 +23,7 @@ public class Parser {
     private static final String LIST_COMMAND = "list";
     private static final String MARK_TASK_COMMAND = "mark";
     private static final String UNMARK_TASK_COMMAND = "unmark";
+    private static final String DELETE_TASK_COMMAND = "delete";
 
     /**
      * Returns true if input is a number in string format, false otherwise.
@@ -43,6 +43,12 @@ public class Parser {
         return true;
     }
 
+    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+            "dd-MM-yyyy HH:mm");
+
+    protected static LocalDateTime interpretLocalDateTime(String input) {
+            return LocalDateTime.parse(input, formatter);
+    }
     /**
      * Takes the string input of the user and converts it into an executable command.
      *
@@ -79,6 +85,15 @@ public class Parser {
             taskIndex = Integer.parseInt(words[1]);
             return new UnmarkTaskCommand(taskIndex - 1);
 
+        case DELETE_TASK_COMMAND:
+            if (words.length == 1) {
+                throw new MissingArgumentException(Messages.MESSAGE_INDEX_MISSING);
+            } if (!isNumeric(words[1])) {
+                throw new IncorrectArgumentException(Messages.MESSAGE_INDEX_INVALID);
+            }
+            taskIndex = Integer.parseInt(words[1]);
+            return new DeleteTaskCommand(taskIndex - 1);
+
         case MAKE_TODO:
             if (words.length < 2) {
                 throw new MissingArgumentException(Messages.MESSAGE_DESCRIPTION_MISSING);
@@ -87,47 +102,30 @@ public class Parser {
 
         case MAKE_DEADLINE:
             String body = userInput.substring(9);
-            if (body.contains(DUE_DATE_FLAG)) {
-                String[] fields = body.split(" " + DUE_DATE_FLAG);
-                String description = fields[0];
-                String dueDate = fields[1];
-                Task currDeadline = new Deadline(description, dueDate);
-                toDoList.add(currDeadline);
-                System.out.println(Messages.MESSAGE_DEADLINE_ADDED + currDeadline.toString());
-                System.out.println(String.format(Messages.MESSAGE_LIST_COUNT, toDoList.size()));
-                break;
+            if (!body.contains(DUE_DATE_FLAG)) {
+                throw new MissingArgumentException(Messages.MESSAGE_DUEDATE_FLAG_MISSING);
             }
-            System.out.println("    You're missing the '/by' flag, bucko!");
-            break;
+            String[] fields = body.split(" " + DUE_DATE_FLAG);
+            if (fields.length < 2) {
+                throw new MissingArgumentException(Messages.MESSAGE_DATE_MISSING);
+            }
+            return new DeadlineCommand(fields[0], fields[1]);
 
         case MAKE_EVENT:
-            String substring = input.substring(6);
-            if (substring.contains(EVENT_START_FLAG) && substring.contains(EVENT_END_FLAG)) {
-                String[] fields = substring.split("\\s/\\w{2,4}\\s");
-                Task currEvent = new Event(fields[0], fields[1], fields[2]);
-                toDoList.add(currEvent);
-                System.out.println(Messages.MESSAGE_EVENT_ADDED + currEvent.toString());
-                System.out.println(String.format(Messages.MESSAGE_LIST_COUNT, toDoList.size()));
-                break;
+            String substring = userInput.substring(6);
+            if (!substring.contains(EVENT_START_FLAG)) {
+                throw new MissingArgumentException(Messages.MESSAGE_START_FLAG_MISSING);
             }
-            System.out.println("    You're missing the either the '/from' or '/to' flag, or both! Buhcock!");
-            break;
+            if (!substring.contains(EVENT_END_FLAG)) {
+                throw new MissingArgumentException(Messages.MESSAGE_END_FLAG_MISSING);
+            }
+            fields = substring.split("\\s/\\w{2,4}\\s");
+            if (fields.length < 3) {
+                throw new MissingArgumentException(Messages.MESSAGE_DATE_MISSING);
+            }
+            return new EventCommand(fields[0], fields[1], fields[2]);
 
-        case "delete":
-            if (words.length == 1) {
-                System.out.println(Messages.MESSAGE_INDEX_MISSING);
-            } else if (isNumeric(words[1])) {
-                Integer itemNumber = Integer.parseInt(words[1]);
-                if (itemNumber > toDoList.size() || itemNumber <= 0) {
-                    System.out.println(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
-                } else {
-                    System.out.println(Messages.MESSAGE_DELETE_SUCCESSFUL + "\n"
-                            + toDoList.get(itemNumber - 1).toString());
-                }
-            } else {
-                System.out.println(Messages.MESSAGE_INDEX_INVALID);
-            }
-            break;
+
 
         default:
             System.out.println(Messages.MESSAGE_INVALID_COMMAND);

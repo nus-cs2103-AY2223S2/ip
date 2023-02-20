@@ -54,14 +54,6 @@ public class TaskList {
         return task;
     }
 
-    public String toSave() {
-        StringBuilder toWrite = new StringBuilder();
-        for (Task task : taskList) {
-            toWrite.append(task.makeSaveFormat());
-        }
-        return toWrite.toString();
-    }
-
     /**
      * @param taskIndex index of task to be deleted.
      * @return return task if deletion was successful.
@@ -73,6 +65,18 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new TaskIndexOutOfBoundsException();
         }
+    }
+
+    public String toSave() {
+        StringBuilder toWrite = new StringBuilder();
+        for (Task task : taskList) {
+            toWrite.append(task.makeSaveFormat());
+        }
+        return toWrite.toString();
+    }
+
+    public int taskCount() {
+        return taskList.size();
     }
     public String toString() {
         StringBuilder tasks = new StringBuilder();

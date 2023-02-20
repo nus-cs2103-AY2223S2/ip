@@ -1,28 +1,28 @@
 package cluck.tasks;
 
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    protected String dueDate;
+    protected LocalDateTime dueDate;
 
     public Deadline(String description, String dueDate) {
         super(description);
-        this.dueDate = dueDate;
+        this.dueDate = interpretLocalDateTime(dueDate);
     }
 
     public Deadline(boolean isMarked, String description, String dueDate) {
         super(isMarked, description);
-        this.dueDate = dueDate;
+        this.dueDate = interpretLocalDateTime(dueDate);
     }
 
-    @Override
     public String makeSaveFormat() {
         return String.format("D|%1$s|%2$s\n", (this.isMarked ? "1" : "0"), this.description
-                + "|" + this.dueDate);
+                + "|" + this.dueDate.format(formatter));
     }
 
     @Override
     public String toString() {
-        return this.isMarked
-                ? String.format("[D][X] %1$s (by: %2$s)", this.description, this.dueDate)
-                : String.format("[D][ ] %1$s (by: %2$s)", this.description, this.dueDate);
+        return "[D]" + super.toString() + "by: "
+                + this.dueDate.format(formatter);
     }
 }
