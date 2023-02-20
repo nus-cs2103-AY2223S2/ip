@@ -64,17 +64,23 @@ public class CommandFactory {
 
         case MARK_UNDONE:
             try {
-                int unmarkIndex = Integer.parseInt(args[0]) - 1; // handle parseInt error
+                int unmarkIndex = Integer.parseInt(args[0]) - 1;
                 return new MarkUndoneCommand(taskModel, taskView, unmarkIndex);
             } catch (NumberFormatException e) {
                 throw new InvalidParameterError("Invalid number provided");
             }
 
         case CREATE_TODO:
+            assert args[0] != null;
             return new AddToDoCommand(taskModel, taskView, args[0]);
         case CREATE_DEADLINE:
+            assert args[0] != null;
+            assert args[1] != null;
             return new AddDeadlineCommand(taskModel, taskView, args[0], args[1]);
         case CREATE_EVENT:
+            assert args[0] != null;
+            assert args[1] != null;
+            assert args[2] != null;
             return new AddEventCommand(taskModel, taskView, args[0], args[1], args[2]);
         case DELETE_TASK:
             int indexToDelete = Integer.parseInt(args[0]) - 1;

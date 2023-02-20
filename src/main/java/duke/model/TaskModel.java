@@ -143,10 +143,13 @@ public class TaskModel implements Model {
      * @return The task at the supplied index.
      */
     public Task getTask(int index) {
+        // the index of task to get must be positive and less than the length of the list.
+        assert index >= 0 && index < tasks.size();
         return this.tasks.get(index);
     }
 
     public int getNumberOfTasks() {
+        assert tasks != null;
         return this.tasks.size();
     }
 
@@ -156,6 +159,9 @@ public class TaskModel implements Model {
      */
     public void deleteTask(Task task) {
         int indexToRemove = tasks.indexOf(task);
+        // since the command passes a task that *should* be in the model's task list,
+        // taskIndex should never be -1 (ie the task should always be in the list).
+        assert indexToRemove >= 0;
         this.tasks.remove(indexToRemove);
         writeToFile();
     }
@@ -166,7 +172,10 @@ public class TaskModel implements Model {
      */
     public void markTaskDone(Task task) {
         int taskIndex = tasks.indexOf(task);
-        tasks.get(taskIndex).markTaskDone();
+        // since the command passes a task that *should* be in the model's task list,
+        // taskIndex should never be -1 (ie the task should always be in the list).
+        assert taskIndex >= 0;
+        tasks.get(taskIndex).markTaskDone(); // handle out of bounds exception
         writeToFile();
     }
 
@@ -176,7 +185,10 @@ public class TaskModel implements Model {
      */
     public void markTaskUndone(Task task) {
         int taskIndex = tasks.indexOf(task);
-        tasks.get(taskIndex).markTaskUndone();
+        // since the command passes a task that *should* be in the model's task list,
+        // taskIndex should never be -1 (ie the task should always be in the list).
+        assert taskIndex >= 0;
+        tasks.get(taskIndex).markTaskUndone(); // handle out of bounds exception
         writeToFile();
     }
 
