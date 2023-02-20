@@ -27,6 +27,14 @@ public class Ui {
         }
     }
 
+    public static void showFind(ArrayList<Task> tasks) {
+        System.out.println("\tHere are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            int taskNum = i + 1;
+            System.out.printf("\t%d. %s\n", taskNum, tasks.get(i));
+        }
+    }
+
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
