@@ -18,7 +18,9 @@ Syntax: `list`
 
 Outcome: numbered of iists of tasks and status of whether each task is marked
 
-
+<br>
+<br>
+<br>
 
 ### `Todo`, `Deadline`, `Event` - Add task of specified type
 
