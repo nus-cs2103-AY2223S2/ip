@@ -66,6 +66,10 @@ public class TaskList {
         return taskStringList;
     }
 
+    /**
+     * Adds a new <code>Task</code> to the <code>TaskList</code>
+     * @param newTask The <code>Task</code> to be added.
+     */
     public void addTask(Task newTask) {
         assert this.taskList != null;
         this.taskList.add(newTask);
@@ -161,5 +165,12 @@ public class TaskList {
                 throw new StorageException("Corrupted data file!");
             }
         }
+    }
+
+    public void sortByDescription() {
+        this.taskList.sort(null);
+    }
+    public int getSize() {
+        return this.taskList.size();
     }
 }
