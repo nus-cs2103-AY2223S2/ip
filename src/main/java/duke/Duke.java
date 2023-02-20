@@ -40,7 +40,6 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
             createFile();
             tasks = new TaskList();
         }
@@ -58,7 +57,7 @@ public class Duke {
             } else if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
             } else {
-                throw new IOException();
+                ui.showLoadingError();
             }
         } catch (IOException e) {
             ui.showFileError();

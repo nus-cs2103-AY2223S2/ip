@@ -105,15 +105,18 @@ public class Storage {
     public Task readTask(String stringTask) throws DukeException {
         Task task;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a");
-        String taskInfo = stringTask.substring(TASK_INFO_INDEX);
+        String taskInfo;
         switch (stringTask.charAt(TASK_TYPE_INDEX)) {
         case 'T':
+            taskInfo = stringTask.substring(TASK_INFO_INDEX);
             task = loadTodo(taskInfo);
             break;
         case 'D':
+            taskInfo = stringTask.substring(TASK_INFO_INDEX);
             task = loadDeadline(taskInfo, format);
             break;
         case 'E':
+            taskInfo = stringTask.substring(TASK_INFO_INDEX);
             task = loadEvent(taskInfo, format);
             break;
         default:

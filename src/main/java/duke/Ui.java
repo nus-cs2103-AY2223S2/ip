@@ -93,7 +93,7 @@ public class Ui {
     public void showLoadingError() {
         message.append("Creating new file to store tasks due to a loading error ...");
         message.append("\nWARNING!!! Continuing with the program will reset the contents of ");
-        message.append("\nthe original file (if it exists).");
+        message.append("\nthe original file.");
         message.append("\nExit the program if you do not wish to continue (enter 'bye')");
     }
 
@@ -102,7 +102,7 @@ public class Ui {
      * when file or folder could not be created.
      */
     public void showFileError() {
-        message.append("Error occurred when creating the folder/file.");
+        message.append("\nError occurred when creating the folder/file.");
     }
 
     /**
