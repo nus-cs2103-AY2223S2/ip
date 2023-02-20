@@ -43,8 +43,6 @@ public class Parser {
             char query = input.charAt(input.length() - 1);
             int pos = Character.getNumericValue(query);
             //error check for pos exceeding size
-            int maxSize = data.getSize();
-            assert pos <= maxSize : "Exceeded";
             data.unmarkDone(pos - 1);
             String msg = "Unmarked:" + "\n" + data.getEntry(pos - 1).toString();
             return msg;
@@ -54,8 +52,6 @@ public class Parser {
             char query = input.charAt(input.length() - 1);
             int pos = Character.getNumericValue(query);
             //error check for pos exceeding size
-            int maxSize = data.getSize();
-            assert pos <= maxSize : "Exceeded";
             data.markDone(pos - 1);
             String msg = "Marked:" + "\n" + data.getEntry(pos - 1).toString();
             return msg;
@@ -65,8 +61,6 @@ public class Parser {
             char query = input.charAt(input.length() - 1);
             int pos = Character.getNumericValue(query);
             //error check for pos exceeding size
-            int maxSize = data.getSize();
-            assert pos <= maxSize : "Exceeded";
             Task del = data.getEntry(pos - 1);
             data.removeEntry(pos - 1);
             String msg = "Deleted:" + "\n" + del.toString();
