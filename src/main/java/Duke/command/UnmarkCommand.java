@@ -21,7 +21,7 @@ public class UnmarkCommand extends Command {
             Task task = tasks.unmark(this.index);
             return ui.printMarked(task);
         } catch (IndexOutOfBoundsException exception) {
-            throw new InvalidIndexException(1 + tasks.getSize());
+            throw new InvalidIndexException(tasks.getSize());
         }
     }
 }

@@ -281,6 +281,7 @@ public class TaskList {
     }
 
     public void addTask(Task task, Storage storage) throws NoDescriptionException {
+        //Implement assert feature into the code
         assert !task.noDescription();
         if (task.noDescription()) {
             throw new NoDescriptionException("No description is provided, please try again");

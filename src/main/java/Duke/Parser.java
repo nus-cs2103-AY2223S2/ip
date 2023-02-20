@@ -32,6 +32,7 @@ public class Parser {
      * @throws CommandNotFoundException
      */
     public static Command parse(String input) throws CommandNotFoundException, IOException {
+        //Implement assert feature into the code
         assert (input != null) : "The Duke.command cannot be null.";
         String[] splitCommand = input.split(" ");
         String command = splitCommand[0].toUpperCase();
