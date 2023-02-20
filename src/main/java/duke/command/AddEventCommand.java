@@ -47,7 +47,7 @@ public class AddEventCommand extends Command {
      * @param storage Storage to update when there is an update with the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Event event;
         if (eventDate == null) {
             event = new Event(description, eventAt);
@@ -55,7 +55,7 @@ public class AddEventCommand extends Command {
             event = new Event(description, eventDate);
         }
         tasks.add(event);
-        Ui.showAddMessage(event, tasks.size());
         storage.save(tasks.getAllTasks());
+        return Ui.showAddMessage(event, tasks.size());
     }
 }

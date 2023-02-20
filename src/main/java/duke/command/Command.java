@@ -17,7 +17,8 @@ public class Command {
      * @param ui UI of the application to interact with users.
      * @param storage Storage to update when there is an update with the task list.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return null;
     }
 
     /**

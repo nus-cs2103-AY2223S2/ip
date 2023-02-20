@@ -30,10 +30,10 @@ public class AddTodoCommand extends Command {
      * @param storage Storage to update when there is an update with the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Todo todo = new Todo(description);
         tasks.add(todo);
-        Ui.showAddMessage(todo, tasks.size());
         storage.save(tasks.getAllTasks());
+        return Ui.showAddMessage(todo, tasks.size());
     }
 }

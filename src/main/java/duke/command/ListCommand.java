@@ -16,7 +16,7 @@ public class ListCommand extends Command {
      * @param storage Storage to update when there is an update with the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Ui.showList(tasks.getAllTasks());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return Ui.showList(tasks.getAllTasks());
     }
 }

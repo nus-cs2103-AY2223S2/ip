@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.stage.Stage;
 import duke.command.Command;
 import duke.task.TaskList;
 
@@ -8,13 +9,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").runDuke();
-    }
-
-    private Duke(String filePath) {
-        storage = new Storage(filePath);
-        ui = new Ui();
+    public Duke(Stage stage) {
+        storage = new Storage("data/tasks.txt");
+        ui = new Ui(stage);
 
         try {
             tasks = new TaskList(storage.load());
@@ -30,13 +27,18 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
+                String Command = ui.readCommand();
+                Command c = Parser.parse(Command);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             }
         }
+    }
+
+    public String getResponse(String input) throws DukeException {
+        Command c = Parser.parse(input);
+        return c.execute(tasks, ui, storage);
     }
 }

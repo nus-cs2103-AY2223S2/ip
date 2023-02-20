@@ -28,8 +28,8 @@ public class FindCommand extends Command {
      * @param storage Storage to update when there is an update with the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filteredTasks = tasks.find(userInput);
-        Ui.showFind(filteredTasks.getAllTasks());
+        return Ui.showFind(filteredTasks.getAllTasks());
     }
 }

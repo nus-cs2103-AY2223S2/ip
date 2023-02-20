@@ -47,7 +47,7 @@ public class AddDeadlineCommand extends Command {
      * @param storage Storage to update when there is an update with the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Deadline deadline;
         if (dueDate == null) {
             deadline = new Deadline(description, deadlineTime);
@@ -55,7 +55,7 @@ public class AddDeadlineCommand extends Command {
             deadline = new Deadline(description, dueDate);
         }
         tasks.add(deadline);
-        Ui.showAddMessage(deadline, tasks.size());
         storage.save(tasks.getAllTasks());
+        return Ui.showAddMessage(deadline, tasks.size());
     }
 }
