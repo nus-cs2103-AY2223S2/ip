@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import commands.AddCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.ModifyCommand;
-import commands.VoidCommand;
+import commands.*;
 import dukeexceptions.IllegalCommandException;
 
 /**
@@ -24,6 +20,7 @@ public class Parser {
     private static final HashSet<String> voidKeywords = new HashSet<>(Arrays.asList("list",
             "bye", "forcequit", "find"));
     private static final HashSet<String> modifyKeywords = new HashSet<>(Arrays.asList("mark", "unmark"));
+    private static final HashSet<String> listModifyKeywords = new HashSet<>(Arrays.asList("sort"));
     private static final String COMMAND_SEPARATOR = " ";
     private static final String PARAM_SEPARATOR = "/";
 
@@ -52,6 +49,8 @@ public class Parser {
             parsedCommand = new VoidCommand(keyword, params);
         } else if (modifyKeywords.contains(keyword)) {
             parsedCommand = new ModifyCommand(keyword, params);
+        } else if (listModifyKeywords.contains(keyword)) {
+            parsedCommand = new ListModifyCommand(keyword, params);
         } else {
             throw new IllegalCommandException("You have entered an invalid command");
         }

@@ -3,7 +3,9 @@ package commands;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.Duke;
 import dukeexceptions.DukeException;
+import dukeexceptions.EmptyTaskListException;
 import dukeexceptions.IllegalCommandException;
 import dukeexceptions.IllegalInputException;
 import elems.Storage;
@@ -64,29 +66,34 @@ public class VoidCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (voidType) {
         case LIST:
+            if (tasks.getSize() == 0) {
+                throw new EmptyTaskListException("Trying to list an empty task list");
+            }
             String[] taskStringList = tasks.enumerate();
             int listSize = taskStringList.length;
-            String listOutput = new String();
+            StringBuilder listOutput = new StringBuilder();
             for (int i = 0; i < listSize; i++) {
-                listOutput += i + 1 + ":" + taskStringList[i] + "\n";
+                listOutput.append(i + 1).append(":").append(taskStringList[i]).append("\n");
             }
-            ui.dukeDisplay(listOutput);
+            ui.dukeDisplay(listOutput.toString());
             break;
         case FIND:
             if (this.params.size() > 2) {
                 throw new IllegalInputException("Only 1 word can be searched at a time");
             }
-            String[] foundTasks = tasks.searchTaskDescription(this.params.get(0));
-            String findOutput = "I have found the following tasks!\n";
-            for (int i = 0; i < foundTasks.length; i++) {
-                findOutput += i + 1 + ":" + foundTasks[i] + "\n";
+            if (tasks.getSize() == 0) {
+                throw new EmptyTaskListException("Trying to find something in an empty list");
             }
-            ui.dukeDisplay(findOutput);
+            String[] foundTasks = tasks.searchTaskDescription(this.params.get(0));
+            StringBuilder findOutput = new StringBuilder("I have found the following tasks!\n");
+            for (int i = 0; i < foundTasks.length; i++) {
+                findOutput.append(i + 1).append(":").append(foundTasks[i]).append("\n");
+            }
+            ui.dukeDisplay(findOutput.toString());
             break;
         case BYE:
             try {
                 storage.refreshStorage(tasks);
-                ui.dukeDisplay("Tasks saved successfully! Goodbye!");
                 System.exit(0);
             } catch (IOException e) {
                 ui.errorDisplay(e);
@@ -98,12 +105,10 @@ public class VoidCommand extends Command {
         case FORCEQUIT:
             try {
                 storage.refreshStorage(tasks);
-                ui.dukeDisplay("Tasks saved successfully! Exiting now!");
                 System.exit(0);
             } catch (IOException e) {
-                e.printStackTrace();
                 ui.errorDisplay(e);
-                ui.dukeDisplay("Tasks not saved, exiting now!");
+                e.printStackTrace();
                 System.exit(0);
             }
             break;

@@ -30,6 +30,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private static boolean isClosing = false;
 
     @Override
     public void start(Stage stage) {

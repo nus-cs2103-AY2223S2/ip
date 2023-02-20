@@ -4,7 +4,7 @@ package items;
  * An abstract class the represents the types of tasks that can be added to the list
  * @author clydelhui
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
     protected String taskType;
@@ -59,4 +59,8 @@ public abstract class Task {
     @Override
     public abstract String toString();
 
+    @Override
+    public int compareTo(Task o) {
+        return this.description.compareTo(o.getDescription());
+    }
 }
