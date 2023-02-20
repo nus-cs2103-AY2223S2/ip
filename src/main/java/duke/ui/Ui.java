@@ -60,7 +60,8 @@ public class Ui {
                 i++;
             }
         }
-        return output.toString();
+        return "Valid request:D. I've got this for you: \n\n"
+                + output;
     }
 
     /**
@@ -86,7 +87,7 @@ public class Ui {
     public String print_undone_msg(Task task) {
         String output;
         if (task.isNull()) {
-            output = "Unsuccessfully marked.";
+            output = "Unsuccessfully unmarked.";
             return output;
         }
         output = "OK, I've marked this task as not done yet: \n\t"
