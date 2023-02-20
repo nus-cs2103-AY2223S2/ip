@@ -18,14 +18,9 @@ public class Ui {
      */
     public static String showWelcome() {
         StringBuilder chunkOfText = new StringBuilder();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         chunkOfText.append(showLine());
         chunkOfText.append("\n");
-        chunkOfText.append("Hiii Im\n" + logo);
+        chunkOfText.append("Hiii Im Duke\n");
         chunkOfText.append("What can I do for you hmm?\n");
         chunkOfText.append(showLine());
         return chunkOfText.toString();

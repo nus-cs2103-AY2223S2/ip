@@ -1,6 +1,2 @@
-[T][ ] GAY
-[T][ ] YAY
-[T][ ] what
-[T][ ] deadline
-[T][ ] event
+[T][ ] return book
 [D][ ] return book (by: Jun 15 2019)
