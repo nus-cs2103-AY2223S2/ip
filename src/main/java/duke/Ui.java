@@ -1,39 +1,44 @@
 package duke;
 /** Handles the interface to interact with the user */
 public class Ui {
-    /** Prints DUKE to console to welcome user. */
-    public void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        reply("Hello! I'm Duke\nWhat can I do for you?");
+    private TaskList taskList;
+
+    public Ui(TaskList taskList) {
+        this.taskList = taskList;
     }
-    /** Format reply from Duke. */
-    public void reply(String s) {
-        System.out.println("\t"
-                + "____________________________________________________________");
-        System.out.println("\t" + s.replace("\n", "\n    "));
-        System.out.println("\t"
-                + "____________________________________________________________");
-    }
+
     /** Formats reply to tell user task has been added. */
-    public String formatAddTaskReply(TaskList taskList, Task task) {
+    public String formatAddTaskReply(Task task) {
         String formattedReply;
         assert taskList != null;
         assert task != null;
         formattedReply = String.format(
                 "Got it. I've added this task:\n\t%s\n"
                         + "Now you have %d task(s) in the list.",
-                task.toString(),
+                task,
                 taskList.getListSize());
         return formattedReply;
     }
 
-    public void printExitMessage() {
-        reply("Bye! Hope to see you again soon!");
+    public String formatDelTaskReply(Task task) {
+        String formattedReply;
+        formattedReply = String.format("I've deleted the task:\n%s",
+                task.toString());
+        return formattedReply;
     }
 
+    public String formatlistTasksReply() {
+        return String.format(
+                "Here are the tasks in your list:\n%s", taskList.getTaskList());
+    }
+
+    public String formatMarkTaskReply(Task task) {
+        return String.format(
+                "Nice! I've marked this task as done:\n%s", task.toString());
+    }
+
+    public String formatUnmarkTaskReply(Task task) {
+        return String.format(
+                "OK, I've marked this task as not done yet:\n%s", task.toString());
+    }
 }

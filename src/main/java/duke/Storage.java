@@ -15,6 +15,24 @@ public class Storage {
         this.taskList = taskList;
     }
 
+    /*
+    private Task createTask(String[] parsedTask, String taskType) {
+        Task task;
+
+        if (taskType.equals("T")) {
+            task = new Todo(taskName);
+        } else if (taskType.equals("D")) {
+            by = parsedTask[3];
+            task = new Deadline(taskName, by);
+        } else {
+            from = parsedTask[3];
+            to = parsedTask[4];
+            task = new Event(taskName, from, to);
+        }
+        return task;
+    }
+     */
+
     private Task parseTaskString(String taskString) {
         String taskType;
         String isDone;
