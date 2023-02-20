@@ -1,8 +1,8 @@
 package command;
 
-import shigure.Ui;
 import storage.Storage;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command printing the message of an <code>Exception</code>,

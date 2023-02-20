@@ -2,9 +2,9 @@ package command;
 
 import java.io.IOException;
 
-import shigure.Ui;
 import storage.Storage;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command loading the contents of a file to a <code>TaskList</code>.

@@ -2,9 +2,9 @@ package command;
 
 import java.util.ArrayList;
 
-import shigure.Ui;
 import storage.Storage;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command refreshing the UI with the contents of a <code>TaskList</code>.

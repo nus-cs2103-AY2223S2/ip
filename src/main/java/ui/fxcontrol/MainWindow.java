@@ -1,4 +1,4 @@
-package shigure.fxcontrol;
+package ui.fxcontrol;
 
 import core.Miki;
 import javafx.fxml.FXML;

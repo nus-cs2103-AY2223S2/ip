@@ -1,8 +1,8 @@
 package command;
 
-import shigure.Ui;
 import storage.Storage;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command containing an action on one or more Miki components.

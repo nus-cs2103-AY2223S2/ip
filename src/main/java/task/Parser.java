@@ -438,13 +438,14 @@ public class Parser {
     /**
      * Parses a <code>LocalDateTime</code> from a <code>String</code> natural language expression.
      *
-     * @param dateStr        <code>String</code> representing a natural-language date.
-     * @param isLatestTiming whether to use the chronologically latest interpretation of <code>dateStr</code>, instead
-     *                       of the earliest interpretation.
+     * @param dateStr                 <code>String</code> representing a natural-language date.
+     * @param useLatestInterpretation whether to use the chronologically latest interpretation of <code>dateStr</code>,
+     *                                instead of the chronologically earliest.
      * @return the <code>LocalDateTime</code> represented by <code>dateStr</code>
      * @throws NatDateParseException if <code>dateStr</code> could not be parsed as a natural-language date.
      */
-    public static LocalDateTime parseDate(String dateStr, boolean isLatestTiming) throws NatDateParseException {
+    public static LocalDateTime parseDate(String dateStr, boolean useLatestInterpretation)
+            throws NatDateParseException {
         try {
             return LocalDateTime.parse(dateStr, DATE_IN_FMT);
         } catch (DateTimeParseException ex) {
@@ -470,7 +471,7 @@ public class Parser {
         int year = filterYear(tokens);
         int residualDayOfMonth = filterResidualDayOfMonth(tokens);
 
-        LocalTime altTime = isLatestTiming ? LocalTime.MAX : LocalTime.MIN;
+        LocalTime altTime = useLatestInterpretation ? LocalTime.MAX : LocalTime.MIN;
         if (time != null && meridiem != NAT_NONE) {
             if (meridiem == 1) {
                 time = LocalTime.of(time.getHour() % 12 + 12, time.getMinute());
@@ -545,7 +546,9 @@ public class Parser {
                 relativeStep = ChronoUnit.FOREVER;
             }
             try {
-                date = isLatestTiming ? YearMonth.of(year, month).atEndOfMonth() : LocalDate.of(year, month, 1);
+                date = useLatestInterpretation
+                        ? YearMonth.of(year, month).atEndOfMonth()
+                        : LocalDate.of(year, month, 1);
                 return offsetDate(date, relativeStep, relativeModifier, time != null ? time : altTime);
             } catch (DateTimeException ex) {
                 // Do nothing
@@ -553,7 +556,7 @@ public class Parser {
         }
         if (year != NAT_NONE) {
             try {
-                date = isLatestTiming
+                date = useLatestInterpretation
                         ? LocalDate.of(year, 1, 1).with(TemporalAdjusters.lastDayOfYear())
                         : LocalDate.of(year, 1, 1);
                 return LocalDateTime.of(date, time != null ? time : altTime);

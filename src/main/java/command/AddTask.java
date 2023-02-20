@@ -1,9 +1,9 @@
 package command;
 
-import shigure.Ui;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command adding a <code>Task</code> to a <code>TaskList</code>.

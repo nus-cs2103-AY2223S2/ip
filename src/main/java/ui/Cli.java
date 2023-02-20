@@ -1,4 +1,4 @@
-package shigure;
+package ui;
 
 import java.util.Scanner;
 

@@ -2,8 +2,8 @@ package core;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import shigure.Cli;
 import task.Parser;
+import ui.Cli;
 
 /**
  * Initializer & execution entry-point of the Miki project.

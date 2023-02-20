@@ -8,8 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import shigure.Gui;
-import shigure.fxcontrol.MainWindow;
+import ui.Gui;
+import ui.fxcontrol.MainWindow;
 
 /**
  * JavaFX launcher of the Miki project.

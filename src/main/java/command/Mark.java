@@ -1,9 +1,9 @@
 package command;
 
 import exception.TaskListIndexException;
-import shigure.Ui;
 import storage.Storage;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command marking a <code>Task</code> at a specified index of a <code>TaskList</code> as complete.

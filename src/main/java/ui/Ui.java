@@ -1,4 +1,4 @@
-package shigure;
+package ui;
 
 /**
  * A UI controller for Miki user interaction.

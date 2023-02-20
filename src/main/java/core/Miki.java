@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import command.Command;
 import command.RefreshTasks;
-import shigure.Ui;
 import storage.Storage;
 import task.Parser;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * Core class of the Miki personal-task manager project.

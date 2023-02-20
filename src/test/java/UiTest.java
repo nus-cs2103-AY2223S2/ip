@@ -9,8 +9,8 @@ import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
 
-import shigure.Cli;
-import shigure.Ui;
+import ui.Cli;
+import ui.Ui;
 
 public class UiTest {
     @Test

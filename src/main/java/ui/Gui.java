@@ -1,11 +1,11 @@
-package shigure;
+package ui;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import shigure.fxcontrol.DialogBox;
-import shigure.fxcontrol.MainWindow;
+import ui.fxcontrol.DialogBox;
+import ui.fxcontrol.MainWindow;
 
 /**
  * A UI controller for Miki interactive GUI I/O.

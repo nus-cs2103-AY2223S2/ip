@@ -1,8 +1,8 @@
 package command;
 
-import shigure.Ui;
 import storage.Storage;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * A command printing the exit text, and invoking the UI to close if necessary.
