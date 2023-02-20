@@ -6,8 +6,9 @@ import duke.exceptions.InvalidTodo;
  * Represents a To Do task that the user can input.
  * Tag is T.
  */
-public class ToDo extends Task{
-    String tag = "T";
+public class ToDo extends Task {
+    private String tag = "T";
+
     public ToDo() {
         super.tag = tag;
     }

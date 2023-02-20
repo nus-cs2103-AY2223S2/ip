@@ -1,20 +1,18 @@
 package duke.duke;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-
-import java.io.IOException;
-import java.io.FileNotFoundException;
-
-import java.util.ArrayList;
 
 /**
  * Deals with loading and saving tasks to and from the local file.
@@ -62,18 +60,18 @@ public class Storage {
      * @param data List of tasks
      */
     public static void writeFile(TaskList data) {
-        ArrayList<String> save = new ArrayList<>();
+        ArrayList<String> savedTask = new ArrayList<>();
         for (int i = 0; i < data.getSize(); i++) {
             Task task = data.getEntry(i);
             String isMarked = task.isMarked() ? "1" : "0";
             String entry = task.getTag() + isMarked + task.getDescription();
-            save.add(entry);
+            savedTask.add(entry);
         }
 
         try {
             FileWriter fileWriter = new FileWriter(FILE_NAME);
             BufferedWriter writer = new BufferedWriter(fileWriter);
-            for (String entry : save) {
+            for (String entry : savedTask) {
                 writer.write(entry);
                 writer.newLine();
             }
@@ -104,12 +102,14 @@ public class Storage {
                     deadline.markDone();
                 }
                 data.addFileEntry(deadline);
-            } else {
+            } else if (type == 'E'){
                 Event event = new Event(description);
                 if (marked == 1) {
                     event.markDone();
                 }
                 data.addFileEntry(event);
+            } else {
+                assert type == 'T' || type == 'D' || type == 'E' : "Error saving: Invalid task";
             }
         }
         return data;

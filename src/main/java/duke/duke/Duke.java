@@ -4,21 +4,18 @@ package duke.duke;
  * The main driver class to run the Duke program
  */
 public class Duke {
-    private TaskList data;
-    private Ui ui;
+    private TaskList data = Storage.populateList();
+    private Parser parser;
 
-    /**
-     * Loads preexisting data into the program, then reads user inputs
-     * for commands.
-     */
-    public void run() {
-        this.data = Storage.populateList();
-        this.ui = new Ui(new Parser(data));
-        this.ui.readInput();
+    public Duke() {
+        this.parser = new Parser(data);
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return parser.parse(input);
     }
 }

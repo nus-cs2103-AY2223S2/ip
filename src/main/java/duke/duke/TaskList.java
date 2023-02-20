@@ -1,8 +1,8 @@
 package duke.duke;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 /**
  * Contains the task list of the program.
@@ -83,6 +83,19 @@ public class TaskList {
             }
         }
         return matches;
+    }
+
+    public ArrayList<Task> copy() {
+        ArrayList<Task> newList = new ArrayList<>();
+        for (int i = 0; i < this.getSize(); i++) {
+            Task curr = data.get(i);
+            newList.add(curr);
+        }
+        return newList;
+    }
+
+    public void revert(ArrayList<Task> newList) {
+        this.data = newList;
     }
 
     @Override

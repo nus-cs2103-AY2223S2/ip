@@ -1,18 +1,22 @@
 package duke.duke;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeExceptions;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import java.util.ArrayList;
+
 
 /**
  * Deals with detecting commands in user inputs and then executing them.
  */
 public class Parser {
-    public TaskList data;
+    private TaskList data;
+
+    private ArrayList<Task> stash;
 
     public Parser(TaskList data) {
         this.data = data;
@@ -42,7 +46,7 @@ public class Parser {
             int pos = Character.getNumericValue(query);
             //error check for pos exceeding size
             data.unmarkDone(pos - 1);
-            String msg = "Unmarked:" + "\n" + data.getEntry(pos-1).toString();
+            String msg = "Unmarked:" + "\n" + data.getEntry(pos - 1).toString();
             return msg;
         }
 
@@ -50,34 +54,39 @@ public class Parser {
             char query = input.charAt(input.length() - 1);
             int pos = Character.getNumericValue(query);
             //error check for pos exceeding size
-            data.markDone(pos-1);
-            String msg = "Marked:" + "\n" + data.getEntry(pos-1).toString();
+            data.markDone(pos - 1);
+            String msg = "Marked:" + "\n" + data.getEntry(pos - 1).toString();
             return msg;
         }
 
         if (input.contains("delete")) {
+            stash = data.copy();
             char query = input.charAt(input.length() - 1);
             int pos = Character.getNumericValue(query);
             //error check for pos exceeding size
-            Task del = data.getEntry(pos-1);
-            data.removeEntry(pos-1);
+            Task del = data.getEntry(pos - 1);
+            data.removeEntry(pos - 1);
             String msg = "Deleted:" + "\n" + del.toString();
             return msg;
         }
 
         if (input.contains("todo ")) {
+            stash = data.copy();
             Task todo = new ToDo();
             String description = input.replace("todo ", "");
             try {
                 todo.formatDescription(description);
-            } catch (DukeExceptions e){
+            } catch (DukeExceptions e) {
                 return e.getMessage();
             }
             data.addEntry(todo);
-            return String.format("Now you have %d tasks in the list", data.getSize());
+            String msg1 = "added: " + todo.getDescription();
+            String msg2 = String.format("Now you have %d tasks in the list", data.getSize());
+            return msg1 + "\n" + msg2;
         }
 
         if (input.contains("event ")) {
+            stash = data.copy();
             Task event = new Event();
             String description = input.replace("event ", "");
             try {
@@ -86,10 +95,13 @@ public class Parser {
                 return e.getMessage();
             }
             data.addEntry(event);
-            return String.format("Now you have %d tasks in the list", data.getSize());
+            String msg1 = "added: " + event.getDescription();
+            String msg2 = String.format("Now you have %d tasks in the list", data.getSize());
+            return msg1 + "\n" + msg2;
         }
 
         if (input.contains("deadline ")) {
+            stash = data.copy();
             Task deadline = new Deadline();
             String description = input.replace("deadline ", "");
             try {
@@ -97,9 +109,10 @@ public class Parser {
             } catch (DukeExceptions e) {
                 return e.getMessage();
             }
-
             data.addEntry(deadline);
-            return String.format("Now you have %d tasks in the list", data.getSize());
+            String msg1 = "added: " + deadline.getDescription();
+            String msg2 = String.format("Now you have %d tasks in the list", data.getSize());
+            return msg1 + "\n" + msg2;
         }
 
         if (input.contains("find ")) {
@@ -112,6 +125,11 @@ public class Parser {
                 matched += msg;
             }
             return matched;
+        }
+
+        if (input.equals("undo")) {
+            data.revert(stash);
+            return "Reverted";
         }
         return "I do not understand your instructions...";
     }
