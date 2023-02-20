@@ -2,7 +2,19 @@
 
 **Duke** is a command-based note-taking desktop app that allows you to quickly add, remove, and view your tasks.
 
-## Features
+## Quick Start
+
+1. Ensure you have Java 11 or above installed on your computer.
+
+2. Download the latest `duke.jar` from [here](https://github.com/filbertphang/ip/releases)
+
+3. Copy the file to the folder you want to use as the home folder for Duke.
+
+4. Open a command terminal, `cd` into the folder you put the jar file in, and run the application with `java -jar duke.jar`. A GUI similar to the below should appear in a few seconds.
+
+5. Type a command in the chat box and press "Enter" or press the "Send" button to execute it. See below for a list of possible commands.
+
+## Commands
 
 ### List all tasks: `list`
 
