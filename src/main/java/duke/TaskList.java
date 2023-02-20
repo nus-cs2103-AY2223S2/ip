@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.io.IOException;
 
+/**
+ * A TaskList represents a list that stores all the user's current tasks
+ */
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<Task>();
     private int numberOfTasks = 0;
@@ -10,15 +13,25 @@ public class TaskList {
     private int numberDone = 0;
 
 
-
+    /**
+     * A constructor for a Task List
+     */
     public TaskList() {
 
     }
 
+    /**
+     * A Method to get the number of Tasks currently in the TaskList object
+     * @return An integer that is the number of tasks currently in the TaskList
+     */
     public int getNumberOfTasks() {
         return this.list.size();
     }
 
+    /**
+     * Method to add a task to the TaskList object
+     * @param task The Task object to be added to the TastList object
+     */
     public void addTask(Task task) {
         this.list.add(task);
         System.out.println("Got it! I have added the following task: \n    " + task.toString());
@@ -26,12 +39,21 @@ public class TaskList {
         numberOfTasks++;
     }
 
+    /**
+     * Method to add a task when reading from the storage file. This does not print a message that a task has been
+     * added
+     * @param task The Task object to be added to the TaskList object when reading from the storage file
+     */
     public void addTaskWhenLoading(Task task) {
         this.list.add(task);
         numberUndone++;
         numberOfTasks++;
     }
 
+    /**
+     * Method to mark a task with the supplied index number as completed
+     * @param taskNumber The index number of the Task object in the TaskList object
+     */
     public void markDone(int taskNumber) {
 
         if (numberOfTasks == 0) {
@@ -60,7 +82,10 @@ public class TaskList {
     }
 
 
-
+    /**
+     * Method to mark a task with the supplied index number as incomplete
+     * @param taskNumber The index number of the Task object in the TaskList object
+     */
     public void markUndone(int taskNumber) {
 
 
@@ -87,6 +112,9 @@ public class TaskList {
         numberDone--;
     }
 
+    /**
+     * Method that prints all the tasks in the TaskList object
+     */
     public void printItems () {
         int numOfTasks = this.list.size();
         System.out.println("These are the tasks you have left to complete: ");
@@ -95,6 +123,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to print the total number of tasks, as well as the number of tasks that are completed, and the number of
+     * tasks that are yet to be completed
+     */
     public void getTaskDetails() {
         String pluralCheck = (numberOfTasks == 1 ? " task" : " tasks");
         System.out.println("You now have " + numberOfTasks +  pluralCheck + " in the list");
@@ -103,16 +135,31 @@ public class TaskList {
 
     }
 
+
+    /**
+     * Method to access a Task at a particular index in the TaskList object
+     * @param index The index of the Task in the TaskList object
+     * @return The Task object that was requested
+     * @throws IOException
+     */
     public Task getTaskAtIndex (int index) throws IOException {
        return this.list.get(index);
     }
 
+
+    /**
+     * Method to access the Task that was added last to the TaskList
+     * @return The latest Task object in the TaskList object
+     */
     public Task getLatestTask() {
         return this.list.get(this.list.size() - 1);
     }
 
 
-
+    /**
+     * Method to delete a Task from the TastList
+     * @param taskNumber An integer that represents the index of the Task in the TaskList
+     */
     public void deleteTask(int taskNumber) {
 
         if (numberOfTasks == 0) {
