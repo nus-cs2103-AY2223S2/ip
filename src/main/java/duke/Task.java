@@ -37,8 +37,11 @@ public class Task implements Serializable {
             return new Deadline(task);
         } else if (type.equals("event")) {
             return new Event(task);
+        } else if (type.equals("duration")) {
+            return new Duration(task);
         } else {
             assert false : "Should not allow creating " + type;
+            return null;
         }
     }
 
@@ -213,6 +216,28 @@ public class Task implements Serializable {
             }
             String name = super.isDone ? "[E][X] " + task + " (from: " + fromString +" to: " + toString + ")"
                     : "[E][ ] " + task + " (from: " + fromString +" to: " + toString + ")";
+            return name;
+        }
+    }
+
+    private class Duration extends Task {
+        private static final long serialVersionUID = -7531925916726747641L;
+        private String task;
+        private String duration;
+
+        public Duration(String task) throws DukeExceptions {
+            super(task);
+            String[] commands = task.split(" /needs ");
+            if (commands.length == 1) {
+                throw new DukeExceptions("OOPS!!! Looks like someone forget his/her duration :)\n Please use /needs to indicate duration");
+            }
+            this.task = commands[0];
+            this.duration = commands[1];
+        }
+
+        @Override
+        public String toString() {
+            String name = super.isDone ? "[D][X] " + task + " (needs: " + this.duration +")" : "[D][ ] " + task + " (needs: " + this.duration +")";
             return name;
         }
     }
