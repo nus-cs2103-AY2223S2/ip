@@ -7,8 +7,6 @@ import duke.exception.InvalidTaskNumberException;
 import duke.exception.NotANumberException;
 import duke.task.Task;
 
-import static java.lang.Integer.parseInt;
-
 /**
  * TaskList class that handles all the tasks
  */
@@ -52,18 +50,18 @@ public class TaskList {
     /**
      * Deletes the task from the tasklist
      *
-     * @param taskId Task number to be deleted
+     * @param taskIdString Task number to be deleted
      * @return output message of the deleting a task
      * @throws DukeException If task number is invalid
      */
-    public String deleteTask(String taskId) throws DukeException {
-        int taskNum;
+    public String deleteTask(String taskIdString) throws DukeException {
+        int taskNumber;
         try {
-            taskNum = Integer.parseInt(taskId);
+            taskNumber = Integer.parseInt(taskIdString);
         } catch (NumberFormatException e) {
             throw new NotANumberException("delete");
         }
-        Task task = getTask(taskNum);
+        Task task = getTask(taskNumber);
         tasks.remove(task);
         return ui.outputDeleteMsg(task, tasks.size());
     }
@@ -72,18 +70,18 @@ public class TaskList {
      * Mark or unmark a task
      *
      * @param isDone whether the task is done
-     * @param taskId id of the task
+     * @param taskIdString id of the task
      * @return output message of the changing the mark status of a task
      * @throws DukeException If task number is invalid
      */
-    public String changeMarkStatus(boolean isDone, String taskId) throws DukeException {
-        int taskNum;
+    public String changeMarkStatus(boolean isDone, String taskIdString) throws DukeException {
+        int taskNumber;
         try {
-            taskNum = Integer.parseInt(taskId);
+            taskNumber = Integer.parseInt(taskIdString);
         } catch (NumberFormatException e) {
             throw new NotANumberException("mark");
         }
-        Task taskToMark = getTask(taskNum);
+        Task taskToMark = getTask(taskNumber);
         taskToMark.setIsDone(isDone);
         return ui.outputMarkMsg(isDone, taskToMark);
     }
@@ -98,8 +96,8 @@ public class TaskList {
     public Task getTask(int taskNumber) throws InvalidTaskNumberException {
         assert taskNumber >= 1 : "Task number inputs should be 1 or more";
         try {
-            int taskNo = taskNumber - 1;
-            return tasks.get(taskNo);
+            int pos = taskNumber - 1;
+            return tasks.get(pos);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException();
         }
