@@ -33,7 +33,7 @@ public class EventCommand extends Command {
         String[] detailArray = DETAILS.split("/");
         String description = detailArray[0].strip();
         String from = detailArray[1].strip();
-        String to = detailArray[1].strip();
+        String to = detailArray[2].strip();
         Task event = new Event(description, from, to);
         tasksList.addToTaskList(event);
         storage.saveToFile(tasksList.getList());

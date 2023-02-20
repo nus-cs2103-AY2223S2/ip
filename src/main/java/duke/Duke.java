@@ -61,8 +61,4 @@ public class Duke {
             return ui.showErrorMessage(e.getMessage());
         }
     }
-
-    public String getGreetMessage() {
-        return ui.showGreetMessage();
-    }
 }

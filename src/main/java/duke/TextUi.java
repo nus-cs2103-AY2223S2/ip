@@ -37,7 +37,7 @@ public class TextUi {
     private static final String DELETE_TASK_MESSAGE =
             "NOTED. I've removed this task from your task list :";
     private static final String FIND_TASK_MESSAGE =
-            "Here are some similar tasks I have found in your task list:";
+            "Here are some similar tasks:";
 
     private static final String TOTAL_COUNT_START_MESSAGE =
             "Now you have ";
@@ -100,8 +100,14 @@ public class TextUi {
         return USER_INSTRUCTION;
     }
 
-    public String showFindMessage() {
-        return FIND_TASK_MESSAGE;
+    public String showFindMessage(TaskList tasksList, String keyword) {
+        String foundTasks = FIND_TASK_MESSAGE + '\n';
+        for (Task task: tasksList.getList()) {
+            if (task.toString().contains(keyword)) {
+                foundTasks += "" + task;
+            }
+        }
+        return foundTasks;
     }
 
     public String showLoadingError() {
