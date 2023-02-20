@@ -2,6 +2,7 @@ package duke;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
+import duke.command.DeleteAllCommand;
 import duke.command.EndCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
@@ -48,6 +49,9 @@ public class Parser {
         case "event":
             return new EventCommand(content);
         case "delete":
+            if (content.equals("all")) {
+                return new DeleteAllCommand();
+            }
             int deleteIdx = Integer.parseInt(content);
             return new DeleteCommand(deleteIdx);
         case "guide":

@@ -1,5 +1,6 @@
 package duke;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -11,6 +12,7 @@ import duke.task.ToDo;
  */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
+    private HashSet<String> tasksHashSet = new HashSet<>();
 
     /**
      * Class constructor of Storage.
@@ -30,9 +32,14 @@ public class TaskList {
         if (isEmpty(title)) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
+
         ToDo newTask = new ToDo(title);
+        if (tasksHashSet.contains(newTask.toString())) {
+            throw new DukeException("The task already exists!");
+        }
         String res = "";
         tasks.add(newTask);
+        tasksHashSet.add(newTask.toString());
         res += "Got it. I've added this task:\n";
         res += newTask + "\n";
         res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
@@ -51,8 +58,12 @@ public class TaskList {
             throw new DukeException("The description and deadline of a deadline cannot be empty.");
         }
         Deadline newTask = new Deadline(title, deadline);
+        if (tasksHashSet.contains(newTask.toString())) {
+            throw new DukeException("The task already exists!");
+        }
         String res = "";
         tasks.add(newTask);
+        tasksHashSet.add(newTask.toString());
         res += "Got it. I've added this task:\n";
         res += newTask + "\n";
         res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
@@ -72,8 +83,12 @@ public class TaskList {
             throw new DukeException("The description and duration of an event cannot be empty.");
         }
         Event newTask = new Event(title, fromDateTime, toDateTime);
+        if (tasksHashSet.contains(newTask.toString())) {
+            throw new DukeException("The task already exists!");
+        }
         String res = "";
         tasks.add(newTask);
+        tasksHashSet.add(newTask.toString());
         res += "Got it. I've added this task:";
         res += newTask + "\n";
         res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
@@ -102,9 +117,22 @@ public class TaskList {
         String res = "";
         Task removedTask = tasks.get(index);
         tasks.remove(index);
+        tasksHashSet.remove(removedTask.toString());
         res += "Noted. I've removed this task:\n";
         res += removedTask.toString() + "\n";
         res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
+        return res;
+    }
+
+    /**
+     * Deletes all the tasks in the TaskList.
+     * @return the message that indicates the deletion of the tasks.
+     */
+    public String deleteAll() {
+        tasks.clear();
+        tasks.add(new ToDo("zeroth"));
+        tasksHashSet.clear();
+        String res = "Noted. I've removed all the tasks\n";
         return res;
     }
 
@@ -130,7 +158,7 @@ public class TaskList {
         taskIndexes.add(0);
         res += "Here are the matching tasks in your list:\n";
         for (int i = 1; i < tasks.size(); i++) {
-            if (tasks.get(i).getTask().contains(target)) {
+            if (tasks.get(i).getTitle().contains(target)) {
                 foundTasks.add(tasks.get(i));
                 taskIndexes.add(i);
             }

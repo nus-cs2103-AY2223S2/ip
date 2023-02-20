@@ -6,14 +6,14 @@ package duke.task;
  */
 public abstract class Task {
     private boolean isDone;
-    private String task;
+    private String title;
 
     /**
      * Class constructor of Task.
      * @param title the title of the Task.
      */
     public Task(String title) {
-        this.task = title;
+        this.title = title;
     }
 
     /**
@@ -42,8 +42,8 @@ public abstract class Task {
      * Returns this Task.
      * @return this Task
      */
-    public String getTask() {
-        return this.task;
+    public String getTitle() {
+        return this.title;
     }
 
     /**
@@ -52,7 +52,7 @@ public abstract class Task {
      */
     public String toString() {
         String mark = this.isDone ? "X" : " ";
-        return "[" + mark + "] " + this.task;
+        return "[" + mark + "] " + this.title;
     }
 
     /**
@@ -61,6 +61,6 @@ public abstract class Task {
      */
     public String toTxtString() {
         String mark2 = this.isDone ? "1" : "0";
-        return "|" + mark2 + "|" + this.task;
+        return "|" + mark2 + "|" + this.title;
     }
 }
