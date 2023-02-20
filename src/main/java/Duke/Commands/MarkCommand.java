@@ -11,7 +11,9 @@ public class MarkCommand extends Command {
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
-        return taskList.markTask(index);
+        String message = taskList.markTask(index);
+        saver.save(taskList);
+        return message;
 
     }
 }

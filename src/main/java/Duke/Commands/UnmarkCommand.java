@@ -11,7 +11,9 @@ public class UnmarkCommand extends Command {
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
-        return taskList.unmarkTask(index);
+        String message = taskList.unmarkTask(index);
+        saver.save(taskList);
+        return message;
 
     }
 }

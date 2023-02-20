@@ -11,6 +11,8 @@ public class FindCommand extends Command{
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
-        return taskList.findTasks(query);
+        String message = taskList.findTasks(query);
+        saver.save(taskList);
+        return message;
     }
 }

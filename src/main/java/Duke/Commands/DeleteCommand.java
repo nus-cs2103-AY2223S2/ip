@@ -11,6 +11,8 @@ public class DeleteCommand extends Command{
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
-        return taskList.deleteTask(index);
+        String message = taskList.deleteTask(index);
+        saver.save(taskList);
+        return message;
     }
 }

@@ -43,7 +43,7 @@ public abstract class Task {
     }
 
     public String getTags() {
-        String output = "";
+        String output = "tags: ";
         for(int i = 0; i< tags.size(); i++) {
             output+="[" + tags.get(i)+"] ";
         }
@@ -71,10 +71,10 @@ public abstract class Task {
     @Override
     public String toString() {
         if(this.isDone) {
-            return "[X] " + this.name + " " + this.getTags();
+            return "[X] " + this.name + "\n" + this.getTags();
         }
         else {
-            return "[ ] " + this.name + " " + this.getTags();
+            return "[ ] " + this.name + "\n" + this.getTags();
         }
     }
 }

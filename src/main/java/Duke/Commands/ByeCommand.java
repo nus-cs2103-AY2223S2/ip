@@ -7,6 +7,7 @@ import Duke.Tasks.TaskList;
 public class ByeCommand extends Command {
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
+        saver.save(taskList);
         return messageLoader.getGoodbyeMessage();
     }
 }

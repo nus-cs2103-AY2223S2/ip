@@ -4,6 +4,7 @@ import Duke.Commands.*;
 import Duke.Exception.ProgramException;
 import Duke.Tasks.TaskList;
 
+import java.util.Collections;
 import java.util.ArrayList;
 
 /**
@@ -30,9 +31,6 @@ public class Handler{
         String parameters[] = input.split(" ");
         if(parameters.length==1){
             throw new ProgramException("Index needed!");
-        }
-        else if(parameters.length>2){
-            throw new ProgramException("Too many parameters, pick only one!");
         }
         try{
             int index = Integer.parseInt(parameters[1]);
@@ -99,9 +97,20 @@ public class Handler{
         return parameters;
     }
 
+    public ArrayList<String> parseTags(String input) throws ProgramException{
+        ArrayList<String> tags = new ArrayList<>();
+        String parameters[] = input.split(" ",3);
+        if(parameters.length<3){
+            throw new ProgramException("Missing info! I need the index of the task and the tags.");
+        }
+        parameters = parameters[2].split(" ");
+        Collections.addAll(tags,parameters);
+        return tags;
+    }
 
     public Command processCommand(String input, TaskList taskList) throws ProgramException {
         Command c = null;
+        ArrayList<String> tags = new ArrayList<>();
         String content = null;
         String[] parameters = null;
         int index = 0;
@@ -141,6 +150,11 @@ public class Handler{
                 break;
             case BYE:
                 c = new ByeCommand();
+                break;
+            case TAG:
+                tags = parseTags(input);
+                index = parseNumber(input,taskList);
+                c = new TagCommand(index,tags);
                 break;
             default:
                 //will never reach here, getCommand will throw an error if command is neither of the above

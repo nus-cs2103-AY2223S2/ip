@@ -11,7 +11,9 @@ public class ToDoCommand extends Command {
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
-        return taskList.addTask(this.name);
+        String message = taskList.addTask(this.name);
+        saver.save(taskList);
+        return message;
     }
 
 }

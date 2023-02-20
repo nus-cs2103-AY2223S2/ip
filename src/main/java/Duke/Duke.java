@@ -2,6 +2,7 @@ package Duke;
 
 import Duke.Exception.ProgramException;
 import Duke.Tasks.TaskList;
+import Duke.graphics.DialogBox;
 import javafx.scene.control.Label;
 import javafx.application.Application;
 import javafx.scene.Scene;

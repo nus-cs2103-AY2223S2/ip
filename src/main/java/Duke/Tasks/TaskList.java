@@ -80,33 +80,81 @@ public class TaskList {
     }
 
     public Task ToDoFromSave(String data) throws ProgramException{
-        String parameters[] = data.split(" ",2);
+        String parameters[] = data.split("] ",2);
         if(parameters.length!=2){
             throw new ProgramException("Save file data corrupted.");
         }
-        Task task = new ToDo(parameters[1]);
-        if(parameters[0].equals("[X]")){
+        String name = parameters[1];
+        Task task = new ToDo(name.strip());
+        if(parameters[0].equals("[X")){
             task.mark();
-        } else if(parameters[0].equals("[ ]")) {
+        } else if(parameters[0].equals("[ ")) {
             task.unMark();
         } else {
             throw new ProgramException("Save file data corrupted.");
         }
-        return new ToDo(parameters[1]);
-
-    }
-    public Task EventfromSave(String data) throws ProgramException{
-        String parameters[] = data.split(" ", 2);
-        Task task = new ToDo(parameters[1]);
         return task;
 
     }
-    public Task DeadlinefromSave(String data) throws ProgramException{
-        String parameters[] = data.split(" ", 2);
-        Task task = new ToDo(parameters[1]);
+    public Task EventFromSave(String data) throws ProgramException{
+        String parameters[] = data.split("] ",2);
+        Boolean isdone = null;
+        if(parameters.length!=2){
+            throw new ProgramException("Save file data corrupted.");
+        }
+
+        if(parameters[0].equals("[X")){
+            isdone = true;
+        } else if(parameters[0].equals("[ ")) {
+            isdone = false;
+        } else {
+            throw new ProgramException("Save file data corrupted.");
+        }
+
+        parameters = parameters[1].split("from: ", 2);
+        if(parameters.length!=2){
+            throw new ProgramException("Save file data corrupted.");
+        }
+        String name = parameters[0].strip();
+        parameters = parameters[1].split("to: ", 2);
+        if(parameters.length!=2){
+            throw new ProgramException("Save file data corrupted.");
+        }
+        String start = parameters[0].strip();
+        String end = parameters[1].strip();
+        Task task = new Event(name,start,end);
+        if(isdone){
+            task.mark();
+        }
         return task;
 
     }
+    public Task DeadlineFromSave(String data) throws ProgramException{
+        String parameters[] = data.split("] ",2);
+        Boolean isdone = null;
+        if(parameters.length!=2){
+            throw new ProgramException("Save file data corrupted.");
+        }
+        if(parameters[0].equals("[X")){
+            isdone = true;
+        } else if(parameters[0].equals("[ ")) {
+            isdone = false;
+        } else {
+            throw new ProgramException("Save file data corrupted.");
+        }
+        parameters = parameters[1].split("by: ", 2);
+        if(parameters.length!=2){
+            throw new ProgramException("Save file data corrupted.");
+        }
+        String name = parameters[0].strip();
+        String end = parameters[1].strip();
+        Task task = new Deadline(name,end);
+        if(isdone){
+            task.mark();
+        }
+        return task;
+    }
+
     public void fromSave(String saveData) throws ProgramException {
         ArrayList saveTaskList = new ArrayList<>();
         String data[] = saveData.split("\n");
@@ -116,11 +164,11 @@ public class TaskList {
             String parameters[] = data[i].split(" ",2);
             String type = parameters[0];
             if(type.equals("[T]")) {
-                ToDoFromSave(parameters[1]);
+                saveTaskList.add(ToDoFromSave(parameters[1]));
             } else if(type.equals("[D]")) {
-                DeadlinefromSave(parameters[1]);
-            } else if(type.equals("E")) {
-                EventfromSave(parameters[1]);
+                saveTaskList.add(DeadlineFromSave(parameters[1]));
+            } else if(type.equals("[E]")) {
+                saveTaskList.add(EventFromSave(parameters[1]));
             } else {
                 throw new ProgramException("Save file data corrupted.");
             }
@@ -128,8 +176,8 @@ public class TaskList {
 
         }
         this.taskList = saveTaskList;
-
     }
+
     public String findTasks(String query){
         int matches = 0;
         String output = "Here are your matching tasks:\n";
