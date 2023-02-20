@@ -29,15 +29,6 @@ public class TaskList {
     }
 
     /**
-     * Read the tasks' information stored in the hard disk file.
-     *
-     * @param tasks an ArrayList of duke.Task Object encapsulating the tasks list from hard disk file.
-     */
-    public void readTasksFile(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    /**
      * Add the task argument into the task list.
      *
      * @param newTask a duke.Task object encapsulating the new task being added.
@@ -46,7 +37,7 @@ public class TaskList {
         int size = tasks.size();
         tasks.add(newTask);
         Storage.writeFile(tasks);
-        return Ui.getAddTaskMessage(newTask, size);
+        return Ui.getAddTaskMessage(newTask, size + 1);
     }
 
     /**
@@ -86,7 +77,7 @@ public class TaskList {
         Task target = tasks.get(index);
         tasks.remove(index);
         Storage.writeFile(tasks);
-        return Ui.getDeleteTaskMessage(target, size);
+        return Ui.getDeleteTaskMessage(target, size - 1);
     }
 
     /**
