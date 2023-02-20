@@ -17,6 +17,11 @@ public class TaskList {
         this.ui = ui;
     }
 
+    public TaskList() {
+        this.list = new ArrayList<>();
+        this.ui = new Ui();
+    }
+
     public boolean isEmpty() {
         return this.list.isEmpty();
     }
@@ -25,7 +30,7 @@ public class TaskList {
         return this.list.iterator();
     }
 
-    public void addItem(Task task) {
+    public void addTask(Task task) {
         this.list.add(task);
         ui.printAddedMessage(task);
         printSize();

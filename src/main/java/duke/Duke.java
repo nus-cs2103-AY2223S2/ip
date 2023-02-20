@@ -55,13 +55,13 @@ public class Duke {
                 actionEnum = ui.readCommand();
                 switch (actionEnum) {
                     case TODO:
-                        taskList.addItem(ToDo.createToDo(ui));
+                        taskList.addTask(ToDo.createToDo(ui));
                         break;
                     case DEADLINE:
-                        taskList.addItem(Deadline.createDeadline(ui));
+                        taskList.addTask(Deadline.createDeadline(ui));
                         break;
                     case EVENT:
-                        taskList.addItem(Event.createEvent(ui));
+                        taskList.addTask(Event.createEvent(ui));
                         break;
                     case MARK:
                         taskList.mark();
