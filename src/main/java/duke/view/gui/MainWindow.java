@@ -32,7 +32,6 @@ public class MainWindow extends AnchorPane {
 
     public void registerInputEventListener(InputEventListener listener) {
         this.listener = listener;
-//        System.out.println("listener has been set: " + (listener == null));
     }
 
     /**
@@ -42,10 +41,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-//        String response = duke.getResponse(input);
         dialogContainer.getChildren().add(
                 DialogBox.getUserDialog(input, userImage)
-//                DialogBox.getDukeDialog(response, dukeImage)
         );
         this.listener.onInputEvent(input);
         userInput.clear();
