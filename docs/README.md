@@ -14,6 +14,9 @@ A task can be marked as done with a 'X'
 
 A task can be marked as undone
 
+### Find tasks by keyword
+All tasks which contains the given keyword will be shown 
+
 ### Sort
 The list of tasks can be sorted in alphabetical order
 
