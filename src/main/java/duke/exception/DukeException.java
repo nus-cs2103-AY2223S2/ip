@@ -10,6 +10,9 @@ public class DukeException extends Exception {
 
     /**
      * Handles exception to missing time input for deadline and event.
+     *
+     * @param command Command entered by user.
+     * @throws DukeException if missing time input.
      */
     public static void missingTimingException(String command) throws DukeException {
         if (command.startsWith("deadline") && !command.contains("/by")) {
@@ -30,6 +33,9 @@ public class DukeException extends Exception {
     /**
      * Handles exception to missing index input of task when marking/
      * unmarking/ deleting task.
+     *
+     * @param command Command entered by user.
+     * @throws DukeException if missing index input.
      */
     public static void missingIndexException(String command) throws DukeException {
         if (command.equals("mark")) {
@@ -49,7 +55,13 @@ public class DukeException extends Exception {
 
     /**
      * Handles exception to invalid index input of task when marking/
-     * unmarking/ deleting task. This occurs when
+     * unmarking/ deleting task.
+     * This occurs when index input is more or less than number of
+     * existing tasks.
+     *
+     * @param command Command entered by user.
+     * @param taskSize Total number of tasks.
+     * @throws DukeException if wrong index input.
      */
     public static void invalidIndexException(String command, int taskSize) throws DukeException {
         if (command.startsWith("mark") || command.startsWith("unmark") ||command.startsWith("delete")) {
@@ -74,6 +86,9 @@ public class DukeException extends Exception {
 
     /**
      * Handles exception to missing command keyword.
+     *
+     * @param command Command entered by user.
+     * @throws DukeException if invalid command input.
      */
     public static void invalidCommandException(String command) throws DukeException {
         if (!command.startsWith("event") || !(command.startsWith("deadline")) ||
@@ -86,6 +101,9 @@ public class DukeException extends Exception {
 
     /**
      * Handles exception to missing task description.
+     *
+     * @param command Command entered by user.
+     * @throws DukeException if missing command information.
      */
     public static void emptyCommandException(String command) throws DukeException {
         if (command.equals("todo")) {
