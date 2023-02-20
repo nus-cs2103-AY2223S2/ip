@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,7 +23,15 @@ public class MainApp extends Application {
             AnchorPane ap = fxmlLoader.load();
             assert ap != null : "Anchor pane failed to load";
             Scene scene = new Scene(ap);
+
             stage.setScene(scene);
+            stage.setX(1000);
+            stage.setY(50);
+            stage.setResizable(false);
+            stage.setTitle("Duke");
+            stage.getIcons().add(new Image(MainApp.class.getResourceAsStream("/images/DukeIcon.png")));
+
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
