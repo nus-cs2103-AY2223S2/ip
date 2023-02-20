@@ -30,6 +30,7 @@ public class Duke {
 
     /**
      * Helper function to initialize ChadGPT's context.
+     * Loads the existing contact's and tasks. 
      *
      * @param filepath1 Relative filepath of ChadGPT's task storage.
      * @param filepath2 Relative filepath of ChadGPT's contacts storage.
