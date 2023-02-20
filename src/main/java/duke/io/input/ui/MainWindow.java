@@ -158,6 +158,11 @@ public class MainWindow extends AnchorPane {
                         DialogBox.getUserDialog(input, userImage));
 
                 Storage.saveProgressGui(input, this.currentEvent.getTaskList());
+                if (input.equals("YES")) {
+                    dialogContainer.getChildren().addAll(
+                            DialogBox.getDukeDialog("[X] FILE CREATED", dukeImage),
+                            DialogBox.getDukeDialog("[X] FILE SAVED", dukeImage));
+                }
             }
         } else {
             return;
