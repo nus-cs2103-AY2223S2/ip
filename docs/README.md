@@ -2,37 +2,32 @@
 Tigerlily, a to-do list chatbot, aims at helping to ogranize your life better.
 ![image](readme.png)
 
------
 ## Using Tigerlily
-### 1. `deadline` - Add a Deadline
+## 1. `deadline` - Add a Deadline
 
 Adds a Deadline to Tigerlily
 
 Format: 
 
-`deadline [description] /by [due date]`
+`deadline [description] /by [yyyy-mm-dd]`
 
 Example:
 
 `deadline bake cake /by 2023-02-14`
 
------
-
-### 2. `event` - Add an Event
+## 2. `event` - Add an Event
 
 Adds an Event to Tigerlily
 
 Format:
 
-`event [description] /from [start time] /by [end time]`
+`event [description] /from [yyyy-mm-dd hh:mm] /by [yyyy-mm-dd hh:mm]`
 
 Example: 
 
 `event bake sale /from 2023-02-14 14:00 /to 2023-02-14 16:00`
 
------
-
-### 3. `todo` - Add a ToDo
+## 3. `todo` - Add a ToDo
 
 Adds a ToDo to Tigerlily
 
@@ -44,9 +39,7 @@ Example:
 
 `todo buy ingredients`
 
------
-
-### 4. `find` - Find Tasks
+## 4. `find` - Find Tasks
 
 Finds Tasks related to query word
 
@@ -66,9 +59,7 @@ here are the task(s) which match your query:
 2. [E][] bake sale (from: 14/02/2023 14:00 to 16:00)
 ```
 
------
-
-### 5. `list` - List Tasks
+## 5. `list` - List Tasks
 
 Lists all Tasks in Tigerlily
 
@@ -85,9 +76,7 @@ here's your list:
 3. [T][] buy ingredients
 ```
 
------
-
-### 6. `delete` - Delete a Task
+## 6. `delete` - Delete a Task
 
 Deletes a specified Task from Tigerlily
 
@@ -107,9 +96,7 @@ okay, this task has been removed: [D][] bake cake (by:
 the list now has 2 task(s) left
 ```
 
------
-
-### 7. `mark` - Mark a Task as Completed
+## 7. `mark` - Mark a Task as Completed
 
 Marks corresponding Task as completed
 
@@ -128,9 +115,7 @@ well done! you've completed this task: [D][X] bake cake (by:
 14 February 2023)
 ```
 
------
-
-### 8. `unmark` - Unmark a Task as Completed
+## 8. `unmark` - Unmark a Task as Completed
 
 Marks corresponding Task as completed
 
@@ -149,9 +134,7 @@ oops...this task is now marked as not done yet: [D][] bake cake (by:
 14 February 2023)
 ```
 
------
-
-### 9. `help` - Get Help
+## 9. `help` - Get Help
 
 Displays guide for Tigerlily users on possible commands
 
@@ -159,9 +142,7 @@ Format:
 
 `help`
 
------
-
-### 10. `bye` - Exit Tigerlily
+## 10. `bye` - Exit Tigerlily
 
 Exits Tigerlily and saves all updates made
 

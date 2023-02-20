@@ -50,8 +50,8 @@ public class Ui {
 
     public String showHelp() {
         return "here is a list of instructions Tigerlily can handle:\n\n" +
-                "❀ deadline [description] /by [deadline due] - creates a new Deadline\n" +
-                "❀ event [description] /from [event start] /to [event end] - creates a new Event\n" +
+                "❀ deadline [description] /by [yyyy-mm-dd] - creates a new Deadline\n" +
+                "❀ event [description] /from [yyyy-mm-dd hh:mm] /to [yyyy-mm-dd hh:mm] - creates a new Event\n" +
                 "❀ todo [description] - creates a new ToDo\n\n" +
                 "❀ find [query] - finds Tasks related to the query\n" +
                 "❀ list - lists out all Tasks in TaskList\n\n" +
