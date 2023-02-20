@@ -36,7 +36,7 @@ public class Ui {
         return "Here are the commands to use:\n"
                 + "todo <description>: adds a todo task\n"
                 + "deadline <description> /by <date>: adds a deadline task\n"
-                + "event <description> /at <date>: adds an event task\n"
+                + "event <description> /from <from> /to <to>: adds an event task\n"
                 + "mark <task number>: marks a task as done\n"
                 + "unmark <task number>: marks a task as not done\n"
                 + "delete <task number>: deletes a task\n"

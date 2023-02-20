@@ -36,12 +36,12 @@ public class TaskList {
             Task t = dukeList.get(n);
             if (isDone) {
                 t.markAsDone();
-                return "Nice! I've marked this task as done:\n"
-                        + "  [" + t.getStatusIcon() + "] " + t.description;
+                return "Nice! I've marked this task as done:\n "
+                        + t.toString();
             } else {
                 t.unMark();
-                return "OK, I've marked this task as not done yet:\n"
-                        + "  [" + t.getStatusIcon() + "] " + t.description;
+                return "OK, I've marked this task as not done yet:\n "
+                        + t.toString();
             }
         } catch (IndexOutOfBoundsException e) {
             return "The index you mentioned does not exist";
@@ -73,7 +73,7 @@ public class TaskList {
             Task t = dukeList.get(i - 1);
             String[] s = t.description.split(" ");
             for (int j = 0; j < s.length; j++) {
-                if (s[j].equals(keyword)) {
+                if (s[j].toLowerCase().equals(keyword.toLowerCase())) {
                     str += "\n" + i + ". " + t.toString();
                     break;
                 }

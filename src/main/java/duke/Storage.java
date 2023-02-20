@@ -23,6 +23,7 @@ public class Storage {
             FileWriter writer = new FileWriter(filePath, false);
             for (Task t: dukeList) {
                 if (t instanceof Deadline) {
+                    System.out.println(((Deadline) t).by);
                     writer.write("D | " + t.getStatusIcon() + " | " + t.description + " |by " + ((Deadline) t).by
                             + System.lineSeparator());
                 }
@@ -67,7 +68,7 @@ public class Storage {
                     }
                     if (str.startsWith("D")) {
                         Deadline d = new Deadline(str.substring(8, str.indexOf(" |b")),
-                                str.substring(str.indexOf(" |b") + 4));
+                                str.substring(str.indexOf(" |by ") + 5));
                         if (str.startsWith("D | X")) {
                             d.markAsDone();
                         }

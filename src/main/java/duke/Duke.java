@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
@@ -53,7 +54,6 @@ public class Duke extends Application {
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
@@ -65,7 +65,7 @@ public class Duke extends Application {
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(400.0, 800.0);
 
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -123,6 +123,9 @@ public class Duke extends Application {
         assert !input.equals("") : "Input cannot be empty\n";
         String str = Parser.parse(input, tasks);
         storage.writeToFile(tasks.getDukeList());
+        if (input.equals("bye")) {
+            System.exit(0);
+        }
         return str;
     }
 }
