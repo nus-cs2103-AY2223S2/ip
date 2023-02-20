@@ -25,39 +25,38 @@ public class Storage {
      */
     public Storage(String filePath) {
         File folder = new File("data");
+        File file = new File(filePath);
         try {
             if (folder.exists()) {
-                System.out.println("    Data directory exists.");
+                System.out.println("Data directory exists.");
             } else {
-                System.out.println("    Data directory does not exist. Creating directory.");
                 if (folder.mkdir()) {
-                    System.out.println("    Data directory created.");
+                    System.out.println("Data directory created.");
                 } else {
-                    throw new DukeException("    Data directory cannot be created.");
+                    throw new DukeException("Data directory cannot be created.");
                 }
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
 
+
+        try {
+            if (file.exists()) {
+                System.out.println("Saved list exists.");
+            } else {
+                if (file.createNewFile()) {
+                    System.out.println("List file created.");
+                } else {
+                    throw new DukeException("List file cannot be created.");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         this.path = filePath;
         taskStrings = new ArrayList<String>();
-        File file = new File(filePath);
-
-        if (file.exists()) {
-            System.out.println("    Saved list exists.");
-        } else {
-            System.out.println("    Saved list does not exist. Creating list file.");
-            try {
-                if (file.createNewFile()) {
-                    System.out.println("    List file created.");
-                } else {
-                    throw new DukeException("    List file cannot be created.");
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
     }
 
     /**

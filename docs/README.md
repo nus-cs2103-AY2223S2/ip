@@ -18,12 +18,16 @@ Able to mark and unmark tasks upon completion
 Recognises shorter commands when executing commands
 
 ## Usage
-___
+
+***
+***
 ### `todo TASK_DESC` or `TD TASK_DESC` - Adds a task
 
-Adds the name of the task into the List. Replace `TASK_DESC` with the name of the task.`TASK_DESC` cannot be empty.
+<br> Adds the name of the task into the List.
+<br> Replace `TASK_DESC` with the name of the task.`TASK_DESC` cannot be empty.
 
-Example of usage: 
+
+Example of usage:
 
 `todo eat cookies` or
 `TD eat cookies`
@@ -37,13 +41,15 @@ Got it. I've added this task:
 	[T][ ] eat cookies
 Now you have 1 tasks in the list.
 ```
-
+***
+***
 
 ### `deadline TASK_DESC /by END_DATETIME` or `DL TASK_DESC /by END_DATETIME` - Adds a task with a deadline
 
-Adds the name of the task with a dateline into the List. 
-Replace `TASK_DESC` with the name of the task. `TASK_DESC` cannot be empty.
-Replace `END_DATETIME` with the date and time of the deadline. `END_DATETIME` cannot be empty. `END_DATETIME` has to be in the format `YYYY-MM-DD HHMM`. 
+<br> Adds the name of the task with a dateline into the List.
+<br> Replace `TASK_DESC` with the name of the task. `TASK_DESC` cannot be empty.
+<br> Replace `END_DATETIME` with the date and time of the deadline. `END_DATETIME` cannot be empty. `END_DATETIME` has to be in the format `YYYY-MM-DD HHMM`. 
+
 
 Example of usage:
 
@@ -60,13 +66,16 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-
+***
+***
 ### `event TASK_DESC /from START_DATETIME /to END_DATETIME` or `EV TASK_DESC /from START_DATETIME /to END_DATETIME` - Adds a task with a timeframe - start and end
 
-Adds the name of the task with a timeframe into the List. 
-Replace `TASK_DESC` with the name of the task. `TASK_DESC` cannot be empty.
-Replace `START_DATETIME` with the date and time of the deadline. `START_DATETIME` cannot be empty. `START_DATETIME` has to be in the format `YYYY-MM-DD HHMM`.
-Replace `END_DATETIME` with the date and time of the deadline. `END_DATETIME` cannot be empty. `END_DATETIME` has to be in the format `YYYY-MM-DD HHMM`.
+Adds the name of the task with a timeframe into the List.
+
+<br> Replace `TASK_DESC` with the name of the task. `TASK_DESC` cannot be empty.
+<br> Replace `START_DATETIME` with the date and time of the deadline. `START_DATETIME` cannot be empty. `START_DATETIME` has to be in the format `YYYY-MM-DD HHMM`.
+<br> Replace `END_DATETIME` with the date and time of the deadline. `END_DATETIME` cannot be empty. `END_DATETIME` has to be in the format `YYYY-MM-DD HHMM`.
+
 
 Example of usage:
 
@@ -83,7 +92,8 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-
+***
+***
 ### `list` or `L` - Lists all tasks
 
 List all the tasks that have been added in order of addition.
@@ -102,9 +112,13 @@ The task will be sucessfully added
 3.[E][]stock up cookies (from:Mar 12023 1159pm to:Mar 2 2023 1159pm)
 ```
 
+***
+***
 ### `mark TASK_ID` or `M TASK_ID` - Marks the completion of a task
 
-Marks a task as specified by `TASK_ID` as done.`TASK_ID` can be viewed using `list` command.`TASK_ID` must be a valid ID.
+<br> Marks a task as specified by `TASK_ID` as done.
+<br> `TASK_ID` can be viewed using `list` command.`TASK_ID` must be a valid ID.
+
 
 Example of usage:
 
@@ -121,9 +135,13 @@ NOM NOM NOM! I've marked this task as done:
 Now you have 3 tasks in the list
 ```
 
+***
+***
 ### `unmark TASK_ID` or `U TASK_ID` - Unmarks the completion of a task
 
-Unmark a task as specified by `TASK_ID` as done.`TASK_ID` can be viewed using `list` command.`TASK_ID` must be a valid ID.
+<br> Unmark a task as specified by `TASK_ID` as done.
+<br> `TASK_ID` can be viewed using `list` command.`TASK_ID` must be a valid ID.
+
 
 Example of usage:
 
@@ -140,9 +158,13 @@ NOM NOM NOM! I've marked this task as not done yet:
 Now you have 3 tasks in the list
 ```
 
+***
+***
 ### `delete TASK_ID` or `D TASK_ID` - Deletes a task from the List as specified by `TASK_ID`
 
-Deletes a task as specified by `TASK_ID`.`TASK_ID` can be viewed using `list` command.`TASK_ID` must be a valid ID.
+<br> Deletes a task as specified by `TASK_ID`.
+<br> `TASK_ID` can be viewed using `list` command.`TASK_ID` must be a valid ID.
+
 
 Example of usage:
 
@@ -159,6 +181,8 @@ Noted I've removed this task:
 Now you have 2 tasks in the list
 ```
 
+***
+***
 ### `find TASK_STRING` or `F TASK_STRING` - Finds a particular task name
 
 Finds all tasks containing the string given in `TASK_STRING`.
@@ -177,15 +201,15 @@ Task containing the string eat in its name will be returned.
 
 ###Command Summary
 
-| Command              | Examples                                                                                                                        |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| Add task             | `todo TASK_DESC` <br/> eg.todo eat cookies                                                                                      |
-| Add deadline         | `deadline TASK_DESC /by END_DATETIME` <br/> eg.deadline buy cookies /by 02/03/2023 2000                                         |
-| Add event            | `event TASK_DESC /from START_DATETIME /to END_DATETIME` <br/> eg.event clear cookies /from 02/03/2023 2000 /to eat cookies 2200 |
-| List                 | `list`                                                                                                                          |
-| Mark as completed    | `mark TASK_ID` <br/> eg. mark 1                                                                                                 |
-| Mark as not complete | `unmark TASK_ID` <br/> eg. unmark 1                                                                                             |
-| Delete task          | `delete TASK_ID` <br/> eg. delete 1                                                                                             |
-| Find task            | `find TASK_string` <br/> eg. find do                                                                                            |
+| Command              | Examples                                                                                                                         |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| Add task             | `todo TASK_DESC` <br/> eg. todo eat cookies                                                                                      |
+| Add deadline         | `deadline TASK_DESC /by END_DATETIME` <br/> eg. deadline buy cookies /by 02/03/2023 2000                                         |
+| Add event            | `event TASK_DESC /from START_DATETIME /to END_DATETIME` <br/> eg. event clear cookies /from 02/03/2023 2000 /to eat cookies 2200 |
+| List                 | `list`                                                                                                                           |
+| Mark as completed    | `mark TASK_ID` <br/> eg. mark 1                                                                                                  |
+| Mark as not complete | `unmark TASK_ID` <br/> eg. unmark 1                                                                                              |
+| Delete task          | `delete TASK_ID` <br/> eg. delete 1                                                                                              |
+| Find task            | `find TASK_string` <br/> eg. find do                                                                                             |
  
 

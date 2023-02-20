@@ -36,6 +36,28 @@ public class ToDo extends Task {
     }
 
     /**
+     * Returns the status and name of the Task.
+     *
+     * @return a string to state the Task as done.
+     */
+    @Override
+    public String setDone() {
+        super.setDone();
+        return ("NOM NOM NOM! I've marked this task as done:\n" + this.status());
+    }
+
+    /**
+     * Returns the status and name of the uncompleted Task.
+     *
+     * @return a string to state Task is not done.
+     */
+    @Override
+    public String setNotDone() {
+        super.setNotDone();
+        return ("NOM NOM NOM! I've marked this task as not done yet:\n" + this.status());
+    }
+
+    /**
      * Returns the updates on removal.
      *
      * @return string regarding removal of a ToDo.
