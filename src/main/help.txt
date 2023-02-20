@@ -67,7 +67,7 @@ List of Commands
 10. Exiting the program: bye
 
       Exits the program.
-      Format: exit
+      Format: bye
 
 
 

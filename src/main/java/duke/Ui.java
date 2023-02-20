@@ -42,7 +42,7 @@ public class Ui {
         message.append(s);
         for (int i = 1; i <= listOfTasks.size(); i++) {
             Task task = listOfTasks.get(i - 1);
-            message.append("\n" + i + "." + task);
+            message.append("\n" + i + ". " + task);
         }
     }
 
