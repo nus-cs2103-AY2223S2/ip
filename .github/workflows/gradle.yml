@@ -32,7 +32,7 @@ jobs:
 
       - name: Build and check with gradle
         if: runner.os == 'macOS' || runner.os == 'Linux'
-        run: ./gradle build
+        run: ./gradlew build
       
       - name: Build and check with gradle
         if: runner.os == 'Windows'
