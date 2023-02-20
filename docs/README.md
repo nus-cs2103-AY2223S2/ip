@@ -1,6 +1,14 @@
 # User Guide
 CookieBot is a desktop CLI application for keeping track of the status of various tasks, including tasks with deadlines
 
+#Quick start
+
+1) Ensure that you have Java 11 installed on the computer.
+2) Download Duke.jar from here.
+3) Open the command terminal and `cd` into the folder where Duke.java is in and use `java -jar Duke.jar` command to run the application.
+
+
+
 ## User Guide
 ___
 ##Features:
