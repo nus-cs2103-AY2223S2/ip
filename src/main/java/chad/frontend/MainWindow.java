@@ -72,7 +72,7 @@ public class MainWindow extends AnchorPane {
                 }
             };
             //  Wait 2s before closing.
-            delay.schedule(exit, 2000);
+            delay.schedule(exit, 1500);
         }
     }
 }
