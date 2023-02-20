@@ -175,7 +175,7 @@ unmark 1
 
 Expected outcome:
 
-The task with the index will be marked as done with a cross
+The task with the index will be marked as undone with a cross
 ```
 Ok, I've marked this task as not done yet:
 [E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
