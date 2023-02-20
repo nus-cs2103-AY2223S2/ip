@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a Task.
+ * Task information are stored here.
+ */
 public class Task {
     protected final int taskNumber;
     protected final boolean taskStatus;
@@ -17,6 +21,9 @@ public class Task {
         this.totalNumOfTasks = totalNumOfTasks;
     }
 
+    /**
+     * Prints that task is marked as done when task is done.
+     */
     public void markAsDone() {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Nice! I've marked this task as done:\n" +
@@ -24,6 +31,9 @@ public class Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints that task is marked as not done when task is unmarked.
+     */
     public void unmarkAsUndone() {
         System.out.println("\t____________________________________________________________" +
                 "\n\t OK, I've marked this task as not done yet:\n" +
@@ -31,6 +41,9 @@ public class Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints that task is deleted.
+     */
     public void printDelete(List<Task> allTasks) {
         int allTaskSize = allTasks.size() - 1;
         System.out.println("\t____________________________________________________________" +
@@ -39,14 +52,23 @@ public class Task {
                 "\n\t Now you have " + allTaskSize + " tasks in the list.");
     }
 
+    /**
+     * Gets task number.
+     */
     public int getTaskNumber() {
         return this.taskNumber;
     }
 
+    /**
+     * Gets type of task: Todo, Deadline, Event.
+     */
     public String getTaskType() {
         return "";
     }
 
+    /**
+     * Gets whether task is done.
+     */
     public String getTaskStatus() {
         if (!this.taskStatus) {
             return "[ ]";
@@ -55,6 +77,9 @@ public class Task {
         }
     }
 
+    /**
+     * Gets task.
+     */
     public String getTask() {
         return this.task;
     }
@@ -75,6 +100,10 @@ public class Task {
         return null;
     }
 
+    /**
+     * To override equals such that same type of object can pass Junit
+     * test.
+     */
     @Override
     public boolean equals(Object o) {
         return getClass() == o.getClass();

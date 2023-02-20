@@ -5,6 +5,9 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents task type of event.
+ */
 public class Event extends Task {
     private final String taskType;
     private final LocalDateTime eventStartTime;
@@ -20,6 +23,9 @@ public class Event extends Task {
         this.eventEndTime = eventEndTime;
     }
 
+    /**
+     * Prints that task is marked as done when task is done.
+     */
     @Override
     public void markAsDone() {
         System.out.println("\t____________________________________________________________" +
@@ -31,6 +37,9 @@ public class Event extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints that task is marked as not done when task is unmarked.
+     */
     @Override
     public void unmarkAsUndone() {
         System.out.println("\t____________________________________________________________" +
@@ -42,6 +51,9 @@ public class Event extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints task information when added to task list.
+     */
     public void printEventTask() {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Got it. I've added this task:" +
@@ -52,6 +64,9 @@ public class Event extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints that task is deleted.
+     */
     @Override
     public void printDelete(List<Task> allTasks) {
         int newTotalNumOfTasks = allTasks.size() - 1;
@@ -67,21 +82,33 @@ public class Event extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Returns that this is an event task type.
+     */
     @Override
     public String getTaskType() {
         return this.taskType;
     }
 
+    /**
+     * Get the starting time of event.
+     */
     @Override
     public LocalDateTime getEventStartTime() {
         return this.eventStartTime;
     }
 
+    /**
+     * Get the ending time of event.
+     */
     @Override
     public LocalDateTime getEventEndTime() {
         return this.eventEndTime;
     }
 
+    /**
+     * Get the date of event.
+     */
     @Override
     public LocalDate getDate() {
         return this.eventStartTime.toLocalDate();

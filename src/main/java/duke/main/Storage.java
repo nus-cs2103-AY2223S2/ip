@@ -7,6 +7,10 @@ import java.time.format.DateTimeFormatter;
 import java.nio.file.Paths;
 import duke.task.*;
 
+/**
+ * Loads previous task list and saves updated task list to a file on
+ * hard disk.
+ */
 public class Storage {
 
     private final String filePath;
@@ -17,6 +21,9 @@ public class Storage {
         this.filePathParent = Paths.get(filePath).getParent().toString();
     }
 
+    /**
+     * Load previous task list if it exists.
+     */
     public List<Task> loadTxtFile() throws IOException {
 
         List<Task> allTasks = new ArrayList<>();
@@ -66,6 +73,10 @@ public class Storage {
         return allTasks;
     }
 
+    /**
+     * Saves the updated task list to existing file on hard disk.
+     * If file does not exist, create a new one.
+     */
     public void saveListToFile(String command, Task task, TaskList taskList) throws IOException {
         File file3 = new File(this.filePathParent);
         if (!file3.exists()) {

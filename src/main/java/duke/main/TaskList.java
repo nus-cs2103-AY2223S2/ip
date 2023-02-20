@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import duke.task.*;
 
+/**
+ * Keeps track of and updates the list of tasks.
+ */
 public class TaskList {
 
     private List<Task> allTasks;
@@ -17,6 +20,9 @@ public class TaskList {
         this.allTasks = allTasks;
     }
 
+    /**
+     * Updates relevant task's status as done.
+     */
     public Task markTaskAsDone(Task oldTask, int taskIndex) {
         if (oldTask.getTaskType().equals("[T]")) {
             Todo todo = new Todo(oldTask.getTaskNumber(),
@@ -41,6 +47,9 @@ public class TaskList {
         return oldTask;
     }
 
+    /**
+     * Updates relevant task's status as undone.
+     */
     public Task unmarkTaskAsUndone(Task oldTask, int taskIndex) {
         if (oldTask.getTaskType().equals("[T]")) {
             Todo todo = new Todo(oldTask.getTaskNumber(),
@@ -62,22 +71,38 @@ public class TaskList {
         return oldTask;
     }
 
+    /**
+     * Delete task from task list.
+     */
+
     public void deleteTask(int taskIndex) {
         this.allTasks.remove(taskIndex);
     }
 
+    /**
+     * Adds task to task list.
+     */
     public void addTask(Task task) {
         this.allTasks.add(task);
     }
 
+    /**
+     * Show all tasks.
+     */
     public List<Task> getAllTasks() {
         return this.allTasks;
     }
 
+    /**
+     * Get a specific task based on its index.
+     */
     public Task getTask(int index) {
         return this.allTasks.get(index);
     }
 
+    /**
+     * Get total number of tasks.
+     */
     public int getNumberOfTask() {
         return this.allTasks.size();
     }

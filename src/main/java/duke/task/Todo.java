@@ -1,6 +1,9 @@
 package duke.task;
 import java.util.List;
 
+/**
+ * Represents task type of event.
+ */
 public class Todo extends Task {
     private final String taskType;
 
@@ -9,6 +12,9 @@ public class Todo extends Task {
         this.taskType = "[T]";
     }
 
+    /**
+     * Prints that task is marked as done when task is done.
+     */
     @Override
     public void markAsDone() {
         System.out.println("\t____________________________________________________________" +
@@ -17,6 +23,9 @@ public class Todo extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints that task is marked as not done when task is unmarked.
+     */
     @Override
     public void unmarkAsUndone() {
         System.out.println("\t____________________________________________________________" +
@@ -25,6 +34,9 @@ public class Todo extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints task information when added to task list.
+     */
     public void printToDoTask() {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Got it. I've added this task:" +
@@ -33,6 +45,9 @@ public class Todo extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints that task is deleted.
+     */
     @Override
     public void printDelete(List<Task> allTasks) {
         int newTotalNumOfTasks = allTasks.size() - 1;
@@ -43,6 +58,9 @@ public class Todo extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Returns that this is a todo task type.
+     */
     @Override
     public String getTaskType() {
         return this.taskType;

@@ -5,6 +5,9 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents task type of deadline.
+ */
 public class Deadline extends Task {
     private final String taskType;
     private final LocalDateTime taskDeadline;
@@ -17,6 +20,9 @@ public class Deadline extends Task {
         this.taskDeadline = taskDeadline;
     }
 
+    /**
+     * Prints that task is marked as done when task is done.
+     */
     @Override
     public void markAsDone() {
         System.out.println("\t____________________________________________________________" +
@@ -26,6 +32,9 @@ public class Deadline extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints that task is marked as not done when task is unmarked.
+     */
     @Override
     public void unmarkAsUndone() {
         System.out.println("\t____________________________________________________________" +
@@ -35,6 +44,9 @@ public class Deadline extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints task information when added to task list.
+     */
     public void printDeadlineTask() {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Got it. I've added this task:" +
@@ -44,6 +56,9 @@ public class Deadline extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints that task is deleted.
+     */
     @Override
     public void printDelete(List<Task> allTasks) {
         int newTotalNumOfTasks = allTasks.size() - 1;
@@ -57,16 +72,25 @@ public class Deadline extends Task {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Returns that this is a deadline task type.
+     */
     @Override
     public String getTaskType() {
         return this.taskType;
     }
 
+    /**
+     * Get task deadline.
+     */
     @Override
     public LocalDateTime getDeadline() {
         return this.taskDeadline;
     }
 
+    /**
+     * Get date of task deadline.
+     */
     @Override
     public LocalDate getDate() {
         return this.taskDeadline.toLocalDate();
