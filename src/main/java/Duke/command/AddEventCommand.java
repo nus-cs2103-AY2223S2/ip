@@ -7,11 +7,17 @@ import Duke.Storage.Storage;
 import Duke.Tasks.Event;
 import Duke.TaskList;
 import Duke.Ui;
+
 public class AddEventCommand extends Command {
     private final String description;
     private final String startingTime;
     private final String endingTime;
 
+    /**
+     * Constructor that uses to create Event instance.
+     * @param input The information of the task which includes event description,
+     *              event starting time and event ending time.
+     */
     public AddEventCommand(String input) {
         String[] splitDesWithFrom = input.split(" /from ", 2);
         this.description = splitDesWithFrom[0].trim();

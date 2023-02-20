@@ -3,7 +3,6 @@ package Duke;
 import Duke.Tasks.Task;
 
 public class Ui {
-    private static final String LINES = "\t--------------------------\n";
     public Ui() {
     }
 

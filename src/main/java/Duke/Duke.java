@@ -1,14 +1,12 @@
 package Duke;
 
+import Duke.command.Command;
+import Duke.Exceptions.CommandNotFoundException;
 import Duke.Exceptions.DukeMainExceptions;
 import Duke.Storage.Storage;
-import Duke.command.Command;
-
-import Duke.Exceptions.CommandNotFoundException;
 
 import java.io.IOException;
 import java.util.Scanner;
-
 
 public class Duke {
     private TaskList taskList;
@@ -28,7 +26,6 @@ public class Duke {
         storage = new Storage(filePath);
         ui = new Ui();
         parser = new Parser(taskList, storage);
-
 
         try {
             taskList = storage.loadTasks();
@@ -55,7 +52,8 @@ public class Duke {
         ui.bye();
     }
 
-    public static void main(String[] args) throws CommandNotFoundException, IOException {
+    public static void main(String[] args)
+            throws CommandNotFoundException, IOException {
         new Duke("data/duke.txt").run();
 
     }
