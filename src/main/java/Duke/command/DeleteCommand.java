@@ -18,10 +18,10 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) throws
             DukeMainExceptions, InvalidIndexException {
         try {
-            Task task = tasks.remove(this.selectedIndex, storage);
-            return ui.printDeletedTask(task);
+//            Task task = tasks.remove(this.selectedIndex - 1, storage);
+            return tasks.delete(selectedIndex - 1);
         } catch (IndexOutOfBoundsException exception) {
-            throw new InvalidIndexException(1 + tasks.getSize());
+            throw new InvalidIndexException(tasks.getSize() + 1);
         }
     }
 }

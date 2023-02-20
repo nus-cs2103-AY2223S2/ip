@@ -1,2 +1,2 @@
-[T][ ] hi
-[T][ ] bye
+[T][ ] study for Midterm
+[D][ ] CS2103T (FEBRUARY 20 2022)

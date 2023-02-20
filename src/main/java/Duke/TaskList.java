@@ -83,19 +83,14 @@ public class TaskList {
      */
 
     public String  delete(int input) {
-        Task currTask = this.taskList.get(input - 1);
+        Task currTask = this.taskList.get(input);
         this.taskList.remove(input);
         this.index--;
         String output = String.format(LINES +
-                "\tNoted. I've removed this task:" +
-                "\t\t" + currTask.toString() +
-                "\tNow you have " + this.index + " tasks in the list." +
+                "\tNoted. I've removed this task:\n" +
+                "\t" + currTask.toString() +
+                "\n\tNow you have " + this.index + " tasks in the list.\n" +
                 LINES);
-//        System.out.println("\t--------------------------");
-//        System.out.println("\tNoted. I've removed this task:");
-//        System.out.println("\t\t" + currTask.toString());
-//        System.out.println("\tNow you have " + this.index + " tasks in the list.");
-//        System.out.println("\t--------------------------");
         System.out.println(output);
         return output;
     }
@@ -111,19 +106,12 @@ public class TaskList {
             throw new NoDescriptionException("The description of a todo cannot be empty.");
         }
         Task newTodo = new Todo(input);
-//        this.taskList.add(newTodo);
         this.index++;
         String output = String.format(LINES +
                 "\tGot it. I've added this task:" +
                 "\t\t" + newTodo.toString() +
                 "\tNow you have " + this.index  + " tasks in the list." +
                 LINES);
-//        System.out.println(output);
-//        System.out.println("\t--------------------------");
-//        System.out.println("\tGot it. I've added this task:");
-//        System.out.println("\t\t" + newTodo.toString());
-//        System.out.println("\tNow you have " + this.index + " tasks in the list.");
-//        System.out.println("\t--------------------------");
         return newTodo;
     }
 
@@ -151,17 +139,6 @@ public class TaskList {
         Task newDeadline = new Deadline(description, dueDate);
         this.taskList.add(newDeadline);
         this.index++;
-//        String output = String.format(LINES +
-//                "\tGot it. I've added this task:" +
-//                "\t\t" + newDeadline.toString() +
-//                "\tNow you have " + this.index  + " tasks in the list." +
-//                LINES);
-//        System.out.println(output);
-//        System.out.println("\t--------------------------");
-//        System.out.println("\tGot it. I've added this task:");
-//        System.out.println("\t\t" + newDeadline.toString());
-//        System.out.println("\tNow you have " + this.index  + " tasks in the list.");
-//        System.out.println("\t--------------------------");
         return newDeadline;
     }
 
@@ -290,11 +267,15 @@ public class TaskList {
         storage.store(this);
     }
 
-    public Task remove(int index, Storage storage) {
-        Task output = this.taskList.remove(index);
-        storage.store(this);
-        return output;
-    }
+    public ArrayList<Task> findRelevantTasks(String keywords) {
+        if (keywords.trim().equals("")) {
+            throw new NoDescriptionException("The description of a todo cannot be empty.");
+        }
+        return (ArrayList<Task>) this.taskList
+                .stream().filter(task -> task.toString().contains(keywords))
+                .collect(Collectors.toList());
 
+
+    }
 
 }

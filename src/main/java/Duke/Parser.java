@@ -4,8 +4,10 @@ import Duke.command.*;
 import Duke.Exceptions.CommandNotFoundException;
 import Duke.Exceptions.InvalidIndexException;
 import Duke.Storage.Storage;
+import Duke.Tasks.Task;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Parser {
     private static TaskList t;
@@ -44,15 +46,20 @@ public class Parser {
             cmd = new ListCommand();
             break;
         case "MARK":
-            t.mark(Integer.parseInt(splitCommand[1]));
-            cmd = new MarkCommand(Integer.parseInt(splitCommand[1]));
+            try {
+                cmd = new MarkCommand(Integer.parseInt(splitCommand[1]));
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidIndexException();
+            }
             break;
         case "UNMARK":
-            t.unmark(Integer.parseInt(splitCommand[1]));
-            cmd = new UnmarkCommand(Integer.parseInt(splitCommand[1]));
+            try {
+                cmd = new UnmarkCommand(Integer.parseInt(splitCommand[1]));
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidIndexException();
+            }
             break;
         case "DELETE":
-            t.delete(Integer.parseInt(splitCommand[1]));
             try {
                 int index = Integer.parseInt(input.substring(7));
                 cmd = new DeleteCommand(index);
