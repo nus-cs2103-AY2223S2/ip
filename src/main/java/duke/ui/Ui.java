@@ -36,7 +36,7 @@ public class Ui {
      * @return Response to the user.
      */
     public String showResponse() {
-        return response.toString();
+        return response.toString() + "\n";
     }
 
     /**
@@ -65,7 +65,7 @@ public class Ui {
         int len = messages.length;
         for (int i = 0; i < len; i++) {
             String indentedMessage = INDENTATION + messages[i];
-            response.append(indentedMessage + "\n");
+            response = response.append(indentedMessage + "\n");
             System.out.println(indentedMessage);
         }
     }
@@ -119,8 +119,7 @@ public class Ui {
      */
     public void showMarkingDone(Task task) {
         String message = "Nice! I've marked this task as done:";
-        addToResponseMessage(message);
-        addToResponseMessage("  " + task);
+        addToResponseMessage(message, "  " + task);
     }
 
     /**
@@ -130,8 +129,7 @@ public class Ui {
      */
     public void showUnmarkingDone(Task task) {
         String message = "OK, I've marked this task as not done yet:";
-        addToResponseMessage(message);
-        addToResponseMessage("  " + task);
+        addToResponseMessage(message, "  " + task.toString());
     }
 
     /**

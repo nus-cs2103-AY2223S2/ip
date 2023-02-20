@@ -23,8 +23,9 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         int taskNumber = Character.getNumericValue(tokens[1].charAt(0));
+        assert taskNumber >= 1 : "taskNumber is positive";
         tasks.unmark(taskNumber, storage);
-        ui.showUnmarkingDone(tasks.get(taskNumber));
+        ui.showUnmarkingDone(tasks.get(taskNumber - 1));
     }
 
     @Override

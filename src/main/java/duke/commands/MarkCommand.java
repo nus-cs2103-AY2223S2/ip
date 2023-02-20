@@ -23,6 +23,7 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         int taskNumber = Character.getNumericValue(tokens[1].charAt(0));
+        assert taskNumber >= 1 : "taskNumber is positive";
         tasks.mark(taskNumber, storage);
         ui.showMarkingDone(tasks.get(taskNumber - 1));
     }

@@ -78,7 +78,7 @@ public class TaskList {
      * @param storage Storage in the disk.
      */
     public void mark(int taskNumber, Storage storage) {
-        assert taskNumber >= 0 : "taskNumber is non-negative";
+        assert taskNumber >= 1 : "taskNumber is positive";
         Task task = tasks.get(taskNumber - 1);
         task.markAsDone();
         try {
@@ -95,7 +95,7 @@ public class TaskList {
      * @param storage Storage in the disk.
      */
     public void unmark(int taskNumber, Storage storage) {
-        assert taskNumber >= 0 : "taskNumber is non-negative";
+        assert taskNumber >= 1 : "taskNumber is positive";
         Task task = tasks.get(taskNumber - 1);
         task.markAsNotDone();
         try {
@@ -112,7 +112,7 @@ public class TaskList {
      * @param storage Storage in the disk.
      */
     public Task deleteTask(int taskNumber, Storage storage) {
-        assert taskNumber >= 0 : "taskNumber is non-negative";
+        assert taskNumber >= 1 : "taskNumber is positive";
         Task task = tasks.remove(taskNumber - 1);
         try {
             storage.writeTasksToFile(this);
