@@ -122,7 +122,7 @@ public abstract class Task {
         this.isChecked = false;
         String s = isPrevMarked
                     ? "Okay... Being unproductive I see...: \n    " + this
-                    : "This task \n    " + this + "\n hasn't been done! Did you not know?!";
+                    : "This task \n    " + this + "\n hasn't been done! How can you not know?!";
         return s;
     }
 
