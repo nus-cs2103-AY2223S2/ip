@@ -36,7 +36,7 @@ public abstract class Task {
     }
 
     /**
-     * Get a string representation of a date using the date formatter.
+     * Gets a string representation of a date using the date formatter.
      *
      * @param date The date to be formatted
      * @return The formatted string representation of that date
