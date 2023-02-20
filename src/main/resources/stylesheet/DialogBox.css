@@ -4,6 +4,7 @@
     -fx-border-width: 3;
     -fx-border-radius: 10;
     -fx-border-color: FFF380;
+    -fx-font-family: "Arial";
 }
 
 .displayPicture {
