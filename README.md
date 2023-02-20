@@ -2,7 +2,7 @@
 
 Need a simple, straightforward way to record your daily tasks? Duke is for you!
 
-##Duke commands
+## Duke commands
 1. Todo {task name}
 - Insert a todo.
 2. Deadline {task name} by {date: mm-dd-yyyy}
