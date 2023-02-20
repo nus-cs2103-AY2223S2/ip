@@ -48,16 +48,16 @@ test {
 }
 
 application {
-    mainClassName = "duke.Launcher"
+    mainClassName = "chagee.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "chagee"
     archiveClassifier = null
 }
 
 checkstyleMain
-    .exclude('duke/driver/GuiDriver.java','duke/parser/DukeParser.java')
+    .exclude('chagee/driver/GuiDriver.java','chagee/parser/ChageeParser.java')
 
 run{
     standardInput = System.in
