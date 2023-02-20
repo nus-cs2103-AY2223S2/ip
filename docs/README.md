@@ -100,6 +100,27 @@ Noted. I've removed this task.
 Now you have 0 task(s) in the list.
 ```
 
+### `find` - find by keyword 
+
+Find all tasks which contains the keyword input 
+
+Example of usage: 
+```
+find [keyword]
+```
+
+```
+find project
+```
+
+Expected outcome:
+
+All tasks which contains the keyword input will be returned as a list
+```
+Tasks:
+1.[E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
+```
+
 
 
 
