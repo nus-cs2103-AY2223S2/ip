@@ -43,6 +43,7 @@ public class Duke {
                 ui.showErrorMessage(e.getMessage());
             }
         }
+        System.exit(0);
     }
 
     /**
