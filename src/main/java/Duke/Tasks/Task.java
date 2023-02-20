@@ -18,6 +18,10 @@ public class Task {
         return this.description.contains(keywords);
     }
 
+    public boolean isDueSoon() {
+        return false;
+    }
+
     public static Task strToTask(String strTask) throws CommandNotFoundException {
         assert strTask != null;
         Task result;

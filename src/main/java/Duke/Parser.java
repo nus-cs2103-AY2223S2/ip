@@ -91,6 +91,9 @@ public class Parser {
             System.out.println(filteredTasks);
             cmd = new FindCommand(splitDescription);
             break;
+        case "REMIND":
+            cmd = new ReminderCommand();
+            break;
         default:
             throw new CommandNotFoundException("I'm sorry, but I don't know what that means :-(");
         }

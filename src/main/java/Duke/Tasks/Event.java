@@ -33,7 +33,7 @@ public class Event extends Task {
      * @return Return true if the task is not done yet and
      *         the event is one week from now.
      */
-    public boolean isComingSoon() {
+    public boolean isDueSoon() {
         if (this.isComplete) {
             return false;
         } else {
