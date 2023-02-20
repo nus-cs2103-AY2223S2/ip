@@ -32,6 +32,11 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();
+        if (list.getSize() == 0) {
+            return "Wow, you're all caught up on your tasks for now! "
+                    + "Don't forget to add new ones as they come up, though. "
+                    + "It's always good to stay on top of things.";
+        }
         sb.append(LIST_LABEL + "\n ");
         sb.append(list.toString());
         return sb.toString();
