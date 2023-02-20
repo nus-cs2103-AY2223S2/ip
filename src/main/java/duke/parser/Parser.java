@@ -131,7 +131,7 @@ public class Parser {
 
         LocalDate by;
         try {
-             by = LocalDate.parse(description.substring(description.indexOf(" /by ") + 5),
+            by = LocalDate.parse(description.substring(description.indexOf(" /by ") + 5),
                     DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             description = description.substring(9, description.indexOf(" /by "));
         } catch (Exception e) {

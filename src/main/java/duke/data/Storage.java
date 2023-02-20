@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,10 +19,11 @@ import duke.task.ToDo;
  */
 public class Storage {
     /** Path Object represents the default storing file path in hard disk */
-    private static final Path STORING_FILE_PATH = Paths.get(".", ".", ".", "data", "duke.txt");
+    private static final Path STORING_FILE_PATH =
+            java.nio.file.Paths.get(System.getProperty("user.dir"), "Duke.txt");
     /** Path Object represents the temporary storing file path in the hard disk */
     private static final Path TEMPORARY_STORING_FILE_PATH =
-            Paths.get(".", ".", ".", "data", "temp_duke.txt");
+            java.nio.file.Paths.get(System.getProperty("user.dir"), "DukeTemp.txt");
     private final TaskList taskList;
 
     /**
