@@ -6,6 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
+/**
+ * An Event represents a type of task that can be added by the user. It has both a start and end date/time
+ */
+
 public class Event extends Task {
     String startDayTime;
     String endDayTime;
@@ -20,6 +24,13 @@ public class Event extends Task {
     DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
 
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
+    /**
+     * Constructor for an event, which has both a start date/time and an end date/time
+     * @param startTime A String containing both the starting date and time of the event
+     * @param endTime A String containing both the ending date and time of the event
+     * @param description A brief description of the event
+     */
 
     public Event(String startTime, String endTime, String description) {
         super(description);

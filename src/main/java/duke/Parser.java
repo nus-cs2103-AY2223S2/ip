@@ -3,18 +3,37 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * A Parser has the methods that decode the requests entered by the user and executes the relevant methods that
+ * facilitate the requests of the user
+ */
 public class Parser {
     Storage storage;
 
+    /**
+     * Constructor for the Parser, which takes in a Storage object to facilitate the updating of the storage
+     * file each time there is a task executed
+     * @param storage The storage object the handles storing of the tasks to a file so that it could be retrieved
+     *                for subsequent uses of the bot
+     */
     public Parser(Storage storage) {
         this.storage = storage;
     }
 
-
+    /**
+     * This method interprets the user input and calls the relevant methods to facilitate the request of the user
+     * @param userInput the String entered by the user specifying their request
+     * @param list the TaskList object that stores all the user's tasks
+     * @throws IOException
+     */
     public void parseAndExecute(String userInput, TaskList list) throws IOException {
 
 
             String[] userInputComponents = userInput.split(" ");
+            if (userInputComponents.length == 0 || userInput ==) {
+                System.out.println("Your request cannot be empty! Please re-enter your request");
+                return;
+            }
 
             String requestType = userInputComponents[0];
             try {
@@ -104,7 +123,7 @@ public class Parser {
 
                 }
             } catch (DukeException e) {
-                System.out.println("Invalid duke.Duke duke.Request; please re-enter your request!");
+                System.out.println("Invalid Duke Request; please re-enter your request!");
             }
 
 

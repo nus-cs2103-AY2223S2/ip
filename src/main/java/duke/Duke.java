@@ -2,6 +2,10 @@ package duke;
 
 import java.io.IOException;
 import java.util.Scanner;
+
+/**
+ * This is the main class that serves as the entry point into the application
+ */
 public class Duke {
 
     private Storage storage;
@@ -9,6 +13,9 @@ public class Duke {
     private UI ui;
     private TaskList list;
 
+    /**
+     * Constructor for a Duke object
+     */
     public Duke () {
         ui = new UI();
         list = new TaskList();
@@ -16,6 +23,11 @@ public class Duke {
         parser = new Parser(storage);
     }
 
+
+    /**
+     * Method to start the interactive process of obtaining the user input and performing the
+     * tasks requested by the user
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         ui.printWelcome();
