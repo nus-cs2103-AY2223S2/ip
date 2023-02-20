@@ -24,12 +24,9 @@ Tasks added to the list can be stored and loaded when the program starts
 
 ### `bye` - exit the program
 
-
-Describe the action and its outcome.
 Exit the program 
 
-Example of usage: 
-Format: 
+Example of usage:  
 `bye`
 
 Expected outcome:
