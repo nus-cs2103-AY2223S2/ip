@@ -1,6 +1,7 @@
 package ui;
 
 import duke.Duke;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -69,6 +70,13 @@ public class MainWindow {
         if (input.equalsIgnoreCase("bye")) {
             inputContainer.getChildren().clear();
 
+            // @@James_D @@joytqt-1202-reused
+            // Closes the window after 10 seconds
+            PauseTransition delay = new PauseTransition();
+            delay.setDuration(javafx.util.Duration.seconds(10));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
+            // @@James_D
         }
     }
 }
