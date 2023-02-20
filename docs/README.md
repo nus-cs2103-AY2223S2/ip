@@ -42,7 +42,9 @@ Returns a string 'bye' as output before closing the program window
 Add a task which has a deadline to the list of tasks
 
 Example of usage: 
-'deadline return book /by 2019-06-15`
+```
+deadline return book /by 2019-06-15`
+```
 
 Expected outcome:
 
