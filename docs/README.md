@@ -57,7 +57,7 @@ Deletes a task from Kal's task list according to the specified index
 
 Format: `delete {INDEX}`
 - `{INDEX}` is 1-indexed
-- `{INDEX}` must fall within the bounds of the task list
+- `{INDEX}` must fall within the bounds of the task list, ie. 0 < `{INDEX}` <= size of task list
 
 Example(s) of usage:
 - `delete 1`
@@ -79,7 +79,7 @@ Marks a task as complete according to the specified index
 
 Format: `mark {INDEX}`
 - `{INDEX}` is 1-indexed
-- `{INDEX}` must fall within the bounds of the task list
+- `{INDEX}` must fall within the bounds of the task list, ie. 0 < `{INDEX}` <= size of task list
 
 Example(s) of usage:
 - `mark 1`
@@ -92,7 +92,7 @@ Marks a task as incomplete according to the specified index
 
 Format: `unmark {INDEX}`
 - `{INDEX}` is 1-indexed
-- `{INDEX}` must fall within the bounds of the task list
+- `{INDEX}` must fall within the bounds of the task list, ie. 0 < `{INDEX}` <= size of task list
 
 Example(s) of usage:
 - `unmark 2`
