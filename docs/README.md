@@ -56,18 +56,20 @@ Got it. I've added this task:
 Now you have 1 task(s) in the list.
 ```
 
-### `Keyword` - Describe action
+### `event` - create a task with its start time and end time 
 
-Describe the action and its outcome.
+Add a task which has a start time and end time to the list of tasks.
 
 Example of usage: 
-
-`keyword (optional arguments)`
-
+```
+event project meeting /from 2019-06-15 /to 2019-06-19
+```
 Expected outcome:
 
-Description of the outcome.
+Task with the stipulated start and end time will be added to the list of tasks
 
 ```
-expected output
+Got it. I've added this task: 
+[E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
+Now you have 1 task(s) in the list. 
 ```
