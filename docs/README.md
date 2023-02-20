@@ -44,6 +44,6 @@ Deletes the task with the given index
 Format: `delete all`<br>
 Deletes all the tasks
 
-### Closing Duke: bye
+### Closing DOggi: bye
 Format: `bye`<br>
 Closes Duke
