@@ -30,7 +30,6 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
-    private static boolean isClosing = false;
 
     @Override
     public void start(Stage stage) {
@@ -83,6 +82,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         Ui ui = new Ui(dialogContainer, user, duke, userInput);
+        ui.welcome();
         Storage storage = new Storage("data.txt", ui);
         TaskList taskList = new TaskList(storage, ui);
         Parser parser = new Parser();

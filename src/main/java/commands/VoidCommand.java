@@ -3,7 +3,6 @@ package commands;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.Duke;
 import dukeexceptions.DukeException;
 import dukeexceptions.EmptyTaskListException;
 import dukeexceptions.IllegalCommandException;
@@ -85,11 +84,15 @@ public class VoidCommand extends Command {
                 throw new EmptyTaskListException("Trying to find something in an empty list");
             }
             String[] foundTasks = tasks.searchTaskDescription(this.params.get(0));
-            StringBuilder findOutput = new StringBuilder("I have found the following tasks!\n");
-            for (int i = 0; i < foundTasks.length; i++) {
-                findOutput.append(i + 1).append(":").append(foundTasks[i]).append("\n");
+            if (foundTasks.length == 0) {
+                ui.dukeDisplay("Sorry, no tasks match the given search term :(");
+            } else {
+                StringBuilder findOutput = new StringBuilder("I have found the following tasks!\n");
+                for (int i = 0; i < foundTasks.length; i++) {
+                    findOutput.append(i + 1).append(":").append(foundTasks[i]).append("\n");
+                }
+                ui.dukeDisplay(findOutput.toString());
             }
-            ui.dukeDisplay(findOutput.toString());
             break;
         case BYE:
             try {

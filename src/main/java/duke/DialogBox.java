@@ -8,11 +8,18 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-
+/**
+ * Represents a Dialog Box in the Duke Ui
+ */
 public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Creates a new dialog box
+     * @param l The given label for the dialog box
+     * @param iv The given image view for the dialog box
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
