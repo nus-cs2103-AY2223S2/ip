@@ -139,6 +139,27 @@ Tasks:
 2.[D][ ] return book (by: Jun 15 2019)
 ```
 
+### `mark` - mark an existing task
+
+Set the status of a task to done
+
+Example of usage: 
+```
+mark [index]
+```
+
+```
+mark 1
+```
+
+Expected outcome:
+
+The task with the index will be marked as done with a cross
+```
+Nice! I've marked this task as done: 
+[E][X] project meeting (from: Jun 15 2019 to: Jun 19 2019)
+```
+
 
 
 
