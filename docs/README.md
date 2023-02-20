@@ -9,7 +9,9 @@ CookieBot is a desktop CLI application for keeping track of the status of variou
 
 
 ## User Guide
-___
+
+***
+
 ##Features:
 
 ### Keep track of different tasks
@@ -55,7 +57,7 @@ Now you have 1 tasks in the list.
 
 <br> Adds the name of the task with a dateline into the List.
 <br> Replace `TASK_DESC` with the name of the task. `TASK_DESC` cannot be empty.
-<br> Replace `END_DATETIME` with the date and time of the deadline. `END_DATETIME` cannot be empty. `END_DATETIME` has to be in the format `YYYY-MM-DD HHMM`. 
+<br> Replace `END_DATETIME` with the date and time of the deadline. `END_DATETIME` cannot be empty. `END_DATETIME` has to be in the format `DD/MM/YYYY HHMM`. 
 
 
 Example of usage:
@@ -80,8 +82,8 @@ Now you have 1 tasks in the list.
 Adds the name of the task with a timeframe into the List.
 
 <br> Replace `TASK_DESC` with the name of the task. `TASK_DESC` cannot be empty.
-<br> Replace `START_DATETIME` with the date and time of the deadline. `START_DATETIME` cannot be empty. `START_DATETIME` has to be in the format `YYYY-MM-DD HHMM`.
-<br> Replace `END_DATETIME` with the date and time of the deadline. `END_DATETIME` cannot be empty. `END_DATETIME` has to be in the format `YYYY-MM-DD HHMM`.
+<br> Replace `START_DATETIME` with the date and time of the deadline. `START_DATETIME` cannot be empty. `START_DATETIME` has to be in the format `DD/MM/YYYY HHMM`.
+<br> Replace `END_DATETIME` with the date and time of the deadline. `END_DATETIME` cannot be empty. `END_DATETIME` has to be in the format `DD/MM/YYYY HHMM`.
 
 
 Example of usage:

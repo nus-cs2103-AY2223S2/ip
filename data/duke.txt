@@ -1,3 +1,3 @@
-T|F| eat cookies
-E|T| stock up cookies (from: Mar 1 2023 1159pm to: Mar 2 2023 1159pm)
-T|F| hello
+T|F| go toilet
+E|F| go home ( from: Feb 1 2023 0800pm to: Feb 2 2023 1200pm )
+D|F| go home ( by: Feb 1 2023 1200pm )

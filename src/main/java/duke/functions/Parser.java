@@ -84,7 +84,7 @@ public class Parser {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
                 LocalDateTime dateTime = LocalDateTime.parse(taskDate[1], formatter);
                 String dateTimeString = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
-                input = taskDate[0] + "(by:" + dateTimeString + ")";
+                input = taskDate[0] + "( by: " + dateTimeString + " )";
                 newTask = new Deadline(input + '\n');
                 type = "D";
 
@@ -106,8 +106,8 @@ public class Parser {
 
                 String fromString = fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
                 String toString = toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
-                input = taskDate2[0] + "(from: " + fromString + " ";
-                input = input + "to: " + toString + ")";
+                input = taskDate2[0] + "( from: " + fromString + " ";
+                input = input + "to: " + toString + " )";
 
                 newTask = new Event(input + '\n');
                 type = "E";
