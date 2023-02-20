@@ -54,8 +54,8 @@ public class Ui {
     public static String getHelpResponse() {
         String helpResponse = "This is a list of my features and commands that you can use:\n"
                 + "1. todo [task name]: add a To Do task to the list.\n"
-                + "2. deadline [task name] \\by [yyyy-MM-dd] : add a Deadline task to the list.\n"
-                + "3. event [task name] \\from [yyyy-MM-dd] \\to [yyyy-MM-dd] : add an event task to the list.\n"
+                + "2. deadline [task name] /by [yyyy-MM-dd] : add a Deadline task to the list.\n"
+                + "3. event [task name] /from [yyyy-MM-dd] /to [yyyy-MM-dd] : add an event task to the list.\n"
                 + "4. list : to display the task list currently in order.\n"
                 + "5. mark [task number] : to mark a task with the number from the list order.\n"
                 + "6. unmark [task number] : to unmark a task with the number from the list order.\n"

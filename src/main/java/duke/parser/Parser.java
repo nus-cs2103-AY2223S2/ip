@@ -128,9 +128,17 @@ public class Parser {
             String responseMessage = "The description of a deadline cannot be empty.\n";
             throw new DukeException(responseMessage);
         }
-        LocalDate by = LocalDate.parse(description.substring(description.indexOf(" /by ") + 5),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        description = description.substring(9, description.indexOf(" /by "));
+
+        LocalDate by;
+        try {
+             by = LocalDate.parse(description.substring(description.indexOf(" /by ") + 5),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            description = description.substring(9, description.indexOf(" /by "));
+        } catch (Exception e) {
+            String responseMessage = "You are adding a Deadline task with wrong format :(. Type \"help\""
+                    + "to see more about my command syntax.";
+            throw new DukeException(responseMessage);
+        }
         return new Deadline(description, by);
     }
 
@@ -139,11 +147,20 @@ public class Parser {
             String responseMessage = "The description of an event cannot be empty:\n";
             throw new DukeException(responseMessage);
         }
-        LocalDate start = LocalDate.parse(description.substring(description.indexOf(" /from ") + 7,
-                description.indexOf(" /to ")), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        LocalDate end = LocalDate.parse(description.substring(description.indexOf(" /to ") + 5),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        description = description.substring(6, description.indexOf(" /from "));
+
+        LocalDate start;
+        LocalDate end;
+        try {
+            start = LocalDate.parse(description.substring(description.indexOf(" /from ") + 7,
+                    description.indexOf(" /to ")), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            end = LocalDate.parse(description.substring(description.indexOf(" /to ") + 5),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            description = description.substring(6, description.indexOf(" /from "));
+        } catch (Exception e) {
+            String responseMessage = "You are adding an event task with wrong format :(. Type \"help\""
+                    + "to see more about my command syntax.";
+            throw new DukeException(responseMessage);
+        }
         return new Event(description, start, end);
     }
 
