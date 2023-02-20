@@ -3,6 +3,7 @@ package Duke.Tasks;
 import Duke.Exception.ProgramException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Class representing an array of tasks.
@@ -155,24 +156,43 @@ public class TaskList {
         return task;
     }
 
+    public ArrayList<String> tagsFromSave(String data) throws ProgramException{
+        ArrayList<String> tags = new ArrayList<>();
+        String[] parameters = data.split(" ",2);
+        if(parameters.length!=2) {
+            throw new ProgramException("Save file data corrupted.");
+        } else if(!parameters[0].equals("tags:")) {
+            System.out.println(parameters[0]);
+            throw new ProgramException("Save file data corrupted.");
+        }
+        parameters = parameters[1].split(" ");
+        Collections.addAll(tags,parameters);
+    }
+
     public void fromSave(String saveData) throws ProgramException {
         ArrayList saveTaskList = new ArrayList<>();
         String data[] = saveData.split("\n");
+        ArrayList tags = new ArrayList();
+        Task task = null;
         this.numTasks = 0;
-        for(int i = 0; i<data.length; i++){
-            if(data[i].equals("")) continue;
-            String parameters[] = data[i].split(" ",2);
+        for(int i = 0; i<data.length/2; i++){
+            if(data[i*2].equals("")) continue;
+            String parameters[] = data[i*2].split(" ",2);
             String type = parameters[0];
             if(type.equals("[T]")) {
-                saveTaskList.add(ToDoFromSave(parameters[1]));
+                task = ToDoFromSave(parameters[1]);
             } else if(type.equals("[D]")) {
-                saveTaskList.add(DeadlineFromSave(parameters[1]));
+                task = DeadlineFromSave(parameters[1]);
             } else if(type.equals("[E]")) {
-                saveTaskList.add(EventFromSave(parameters[1]));
+                task = EventFromSave(parameters[1]);
             } else {
                 throw new ProgramException("Save file data corrupted.");
             }
-
+            tags = tagsFromSave(data[i*2+1]);
+            if(tags.size() != 0) {
+                task.setTags(tags);
+            }
+            saveTaskList.add(task);
 
         }
         this.taskList = saveTaskList;
