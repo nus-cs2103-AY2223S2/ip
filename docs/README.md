@@ -42,16 +42,15 @@ Returns a string 'bye' as output before closing the program window
 Add a task which has a deadline to the list of tasks
 
 Example of usage: 
-'
-
-`keyword (optional arguments)`
+'deadline return book /by 2019-06-15`
 
 Expected outcome:
-
-Description of the outcome.
+Task with the stipulated deadline will be added to the list of tasks
 
 ```
-expected output
+Got it. I've added this task: 
+[D][ ] return book (by: Jun 15 2019)
+Now you have 1 task(s) in the list.
 ```
 
 ### `Keyword` - Describe action
