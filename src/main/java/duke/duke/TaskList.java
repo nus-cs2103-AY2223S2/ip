@@ -37,7 +37,6 @@ public class TaskList {
     public Task getEntry(int pos) {
         return this.data.get(pos);
     }
-<<<<<<< HEAD:src/main/java/duke/TaskList.java
 
     /**
      * Removes an existing entry at a given position in the list of entries.
@@ -51,25 +50,18 @@ public class TaskList {
      * Marks an existing entry at a given position to be done.
      * @param pos Position of Task to be marked.
      */
-    public void mark(int pos) {
-        this.data.get(pos).mark();
+    public void markDone(int pos) {
+        this.data.get(pos).markDone();
     }
 
     /**
      * Unmarks an existing entry at a given position to be undone.
      * @param pos Position of Task to be unmarked.
      */
-    public void unmark(int pos) {
-        this.data.get(pos).unmark();
-=======
-    public void removeEntry(int pos) { this.data.remove(pos);}
-    public void markDone(int pos) { this.data.get(pos).markDone(); }
     public void unmarkDone(int pos) {
         this.data.get(pos).unmarkDone();
->>>>>>> branch-A-CodingStandard:src/main/java/duke/duke/TaskList.java
     }
 
-<<<<<<< HEAD:src/main/java/duke/TaskList.java
     /**
      * Returns the size of the current list of tasks.
      * @return size of task list.
@@ -78,13 +70,26 @@ public class TaskList {
         return this.data.size();
     }
 
-=======
->>>>>>> branch-A-CodingStandard:src/main/java/duke/duke/TaskList.java
+    /**
+     * Finds all entries that contain a given keyword.
+     * @param key Keyword to be matched
+     * @return An Arraylist of matched entries
+     */
+    public ArrayList<Task> findEntry(String key) {
+        ArrayList<Task> matches = new ArrayList<>();
+        for (int i = 0; i < this.getSize(); i++) {
+            if (this.data.get(i).getDescription().contains(key)) {
+                matches.add(this.data.get(i));
+            }
+        }
+        return matches;
+    }
+
     @Override
     public String toString() {
         String tasks = "";
         for (int i = 0; i < this.data.size(); i++) {
-            tasks = (i+1) + ". " + this.data.get(i).toString() + "\n";
+            tasks += (i + 1) + ". " + this.data.get(i).toString() + "\n";
         }
         return tasks;
     }

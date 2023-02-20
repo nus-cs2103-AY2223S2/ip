@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 import duke.exceptions.DukeExceptions;
 import duke.tasks.Deadline;
@@ -8,6 +8,9 @@ import duke.tasks.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * Deals with detecting commands in user inputs and then executing them.
+ */
 public class Parser {
     public TaskList data;
 
@@ -18,20 +21,27 @@ public class Parser {
     public TaskList getTaskList() {
         return this.data;
     }
+
+    /**
+     * Parses a user input to detect commands, and then executing them,
+     * and finally returns an appropriate response message.
+     * @param input User input.
+     * @return A response message.
+     */
     public String parse(String input) {
         if (input.equals("bye")) {
             Storage.writeFile(data);
             return "Bye!";
         }
         if (input.equals("list")) {
-            return data.printData();
+            return data.toString();
         }
 
         if (input.contains("unmark")) {
             char query = input.charAt(input.length() - 1);
             int pos = Character.getNumericValue(query);
             //error check for pos exceeding size
-            data.unmark(pos-1);
+            data.unmarkDone(pos - 1);
             String msg = "Unmarked:" + "\n" + data.getEntry(pos-1).toString();
             return msg;
         }
@@ -40,7 +50,7 @@ public class Parser {
             char query = input.charAt(input.length() - 1);
             int pos = Character.getNumericValue(query);
             //error check for pos exceeding size
-            data.mark(pos-1);
+            data.markDone(pos-1);
             String msg = "Marked:" + "\n" + data.getEntry(pos-1).toString();
             return msg;
         }
@@ -59,37 +69,37 @@ public class Parser {
             Task todo = new ToDo();
             String description = input.replace("todo ", "");
             try {
-                todo.genDscp(description);
+                todo.formatDescription(description);
             } catch (DukeExceptions e){
                 return e.getMessage();
             }
             data.addEntry(todo);
-            return String.format("Now you have %d duke.tasks in the list", data.getSize());
+            return String.format("Now you have %d tasks in the list", data.getSize());
         }
 
         if (input.contains("event ")) {
             Task event = new Event();
             String description = input.replace("event ", "");
             try {
-                event.genDscp(description);
+                event.formatDescription(description);
             } catch (DukeExceptions e) {
                 return e.getMessage();
             }
             data.addEntry(event);
-            return String.format("Now you have %d duke.tasks in the list", data.getSize());
+            return String.format("Now you have %d tasks in the list", data.getSize());
         }
 
         if (input.contains("deadline ")) {
             Task deadline = new Deadline();
             String description = input.replace("deadline ", "");
             try {
-                deadline.genDscp(description);
+                deadline.formatDescription(description);
             } catch (DukeExceptions e) {
                 return e.getMessage();
             }
 
             data.addEntry(deadline);
-            return String.format("Now you have %d duke.tasks in the list", data.getSize());
+            return String.format("Now you have %d tasks in the list", data.getSize());
         }
 
         if (input.contains("find ")) {
