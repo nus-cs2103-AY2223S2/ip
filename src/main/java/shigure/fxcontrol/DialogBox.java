@@ -30,7 +30,7 @@ public class DialogBox extends HBox {
      * Creates a new <code>DialogBox</code>.
      *
      * @param text text contents of the <code>DialogBox</code>.
-     * @param pov quoted speaker of the <code>DialogBox</code>.
+     * @param pov  quoted speaker of the <code>DialogBox</code>.
      */
     public DialogBox(String text, Pov pov) {
         try {

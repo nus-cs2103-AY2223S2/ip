@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ import exception.TaskParseException;
  * A parser for Miki interactive command-line inputs.
  */
 public class Parser {
+    private static final int NAT_NONE = -5719;
     private static final List<String> DAY_NAMES =
             Arrays.asList("mon", "tue", "wed", "thu", "fri", "sat", "sun");
     private static final List<String> MONTH_NAMES =
@@ -120,7 +122,7 @@ public class Parser {
     }
 
     private static int filterDayOfWeek(ArrayList<String> args) {
-        int res = -1;
+        int res = NAT_NONE;
         int matches = 0;
         for (int i = 0; i < args.size(); i++) {
             if (args.get(i).length() < 3) {
@@ -135,13 +137,95 @@ public class Parser {
             }
         }
         if (matches != 1) {
-            return -1;
+            return NAT_NONE;
+        }
+        return res;
+    }
+
+    private static int filterRelativeDay(ArrayList<String> args) {
+        int res = NAT_NONE;
+        int matches = 0;
+        for (int i = 0; i < args.size(); i++) {
+            if (args.get(i).length() < 3) {
+                continue;
+            }
+            String trunc = args.get(i).substring(0, 3).toLowerCase();
+            switch (trunc) {
+            case "yst":
+            case "yes":
+                res = -1;
+                matches++;
+                args.remove(i);
+                i--;
+                break;
+            case "tdy":
+            case "tod":
+                res = 0;
+                matches++;
+                args.remove(i);
+                i--;
+                break;
+            case "tmr":
+            case "tom":
+                res = 1;
+                matches++;
+                args.remove(i);
+                i--;
+                break;
+            default:
+                // Do nothing
+            }
+        }
+        if (matches != 1) {
+            return NAT_NONE;
+        }
+        return res;
+    }
+
+    private static int filterRelativeModifier(ArrayList<String> args) {
+        int res = NAT_NONE;
+        int matches = 0;
+        for (int i = 0; i < args.size(); i++) {
+            if (args.get(i).length() < 3) {
+                continue;
+            }
+            String trunc = args.get(i).substring(0, 3).toLowerCase();
+            switch (trunc) {
+            case "lst":
+            case "las":
+            case "prv":
+            case "pre":
+                res = -1;
+                matches++;
+                args.remove(i);
+                i--;
+                break;
+            case "ths":
+            case "thi":
+                res = 0;
+                matches++;
+                args.remove(i);
+                i--;
+                break;
+            case "nxt":
+            case "nex":
+                res = 1;
+                matches++;
+                args.remove(i);
+                i--;
+                break;
+            default:
+                // Do nothing
+            }
+        }
+        if (matches != 1) {
+            return NAT_NONE;
         }
         return res;
     }
 
     private static int filterMonth(ArrayList<String> args) {
-        int res = -1;
+        int res = NAT_NONE;
         int matches = 0;
         for (int i = 0; i < args.size(); i++) {
             if (args.get(i).length() < 3) {
@@ -156,13 +240,13 @@ public class Parser {
             }
         }
         if (matches != 1) {
-            return -1;
+            return NAT_NONE;
         }
         return res;
     }
 
     private static int filterMeridiem(ArrayList<String> args) {
-        int res = -1;
+        int res = NAT_NONE;
         int matches = 0;
         for (int i = 0; i < args.size(); i++) {
             if (args.get(i).length() < 2) {
@@ -181,7 +265,7 @@ public class Parser {
             }
         }
         if (matches != 1) {
-            return -1;
+            return NAT_NONE;
         }
         return res;
     }
@@ -190,13 +274,25 @@ public class Parser {
         LocalTime res = null;
         int matches = 0;
         for (int i = 0; i < args.size(); i++) {
-            if (args.get(i).contains(":")) {
-                String[] parts = args.get(i).split(":");
-                if (parts.length != 2) {
-                    continue;
+            if (args.get(i).contains(":")
+                    || args.get(i).toLowerCase().contains("am")
+                    || args.get(i).toLowerCase().contains("pm")) {
+                String cur = args.get(i).toLowerCase();
+                int meridiem = NAT_NONE;
+                if (cur.contains("am")) {
+                    cur = cur.replace("am", "");
+                    meridiem = 0;
                 }
+                if (cur.contains("pm")) {
+                    cur = cur.replace("pm", "");
+                    meridiem = 1;
+                }
+                String[] parts = cur.split(":");
                 try {
-                    res = LocalTime.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+                    res = LocalTime.of(Integer.parseInt(parts[0]), parts.length > 1 ? Integer.parseInt(parts[1]) : 0);
+                    if (meridiem == 1) {
+                        res = LocalTime.of(res.getHour() % 12 + 12, res.getMinute());
+                    }
                 } catch (NumberFormatException | DateTimeException ex) {
                     continue;
                 }
@@ -252,7 +348,7 @@ public class Parser {
     }
 
     private static int filterYear(ArrayList<String> args) {
-        int res = -1;
+        int res = NAT_NONE;
         int matches = 0;
         for (int i = 0; i < args.size(); i++) {
             if (args.get(i).length() == 4) {
@@ -267,13 +363,13 @@ public class Parser {
             }
         }
         if (matches != 1) {
-            return -1;
+            return NAT_NONE;
         }
         return res;
     }
 
     private static int filterDayOfMonth(ArrayList<String> args) {
-        int res = -1;
+        int res = NAT_NONE;
         int matches = 0;
         for (int i = 0; i < args.size(); i++) {
             if (args.get(i).length() < 2) {
@@ -292,13 +388,13 @@ public class Parser {
             }
         }
         if (matches != 1) {
-            return -1;
+            return NAT_NONE;
         }
         return res;
     }
 
     private static int filterResidualDayOfMonth(ArrayList<String> args) {
-        int res = -1;
+        int res = NAT_NONE;
         int matches = 0;
         for (int i = 0; i < args.size(); i++) {
             try {
@@ -311,15 +407,38 @@ public class Parser {
             i--;
         }
         if (matches != 1) {
-            return -1;
+            return NAT_NONE;
         }
         return res;
+    }
+
+    private static LocalDateTime offsetDate(LocalDate date, ChronoUnit step, int amount, LocalTime time) {
+        if (amount != NAT_NONE) {
+            switch (step) {
+            case DAYS:
+                date = date.plusDays(amount);
+                break;
+            case WEEKS:
+                date = date.plusWeeks(amount);
+                break;
+            case MONTHS:
+                date = date.plusMonths(amount);
+                break;
+            case YEARS:
+                date = date.plusYears(amount);
+                break;
+            case FOREVER:
+            default:
+                // Do nothing
+            }
+        }
+        return LocalDateTime.of(date, time);
     }
 
     /**
      * Parses a <code>LocalDateTime</code> from a <code>String</code> natural language expression.
      *
-     * @param dateStr <code>String</code> representing a natural-language date.
+     * @param dateStr        <code>String</code> representing a natural-language date.
      * @param isLatestTiming whether to use the chronologically latest interpretation of <code>dateStr</code>, instead
      *                       of the earliest interpretation.
      * @return the <code>LocalDateTime</code> represented by <code>dateStr</code>
@@ -332,13 +451,19 @@ public class Parser {
             // Do nothing
         }
 
-        String cleanDateStr = dateStr.replace(",", "").replace("-", "");
+        String cleanDateStr = dateStr.replace(",", " ")
+                .replace("-", " ")
+                .replace("/", " ")
+                .replace("\\", " ")
+                .replaceAll("\\s+", " ");
         ArrayList<String> tokens = new ArrayList<>(Arrays.asList(cleanDateStr.split(" ")));
 
         // Parses natural date items out of supplied String.
         int dayOfWeek = filterDayOfWeek(tokens);
         int dayOfMonth = filterDayOfMonth(tokens);
         int month = filterMonth(tokens);
+        int relativeDay = filterRelativeDay(tokens);
+        int relativeModifier = filterRelativeModifier(tokens);
         LocalTime time = filterTime(tokens);
         int meridiem = filterMeridiem(tokens);
         LocalDate date = filterDate(tokens);
@@ -346,69 +471,87 @@ public class Parser {
         int residualDayOfMonth = filterResidualDayOfMonth(tokens);
 
         LocalTime altTime = isLatestTiming ? LocalTime.MAX : LocalTime.MIN;
-        if (time != null && meridiem > -1) {
+        if (time != null && meridiem != NAT_NONE) {
             if (meridiem == 1) {
                 time = LocalTime.of(time.getHour() % 12 + 12, time.getMinute());
             }
         }
 
-        // Constructs a LocalDateTime by trying increasingly ambiguous combinations of natural date items.
+        // Constructs a LocalDateTime by trying combinations of natural date items, in increasing order of ambiguity.
         if (date != null) {
             return LocalDateTime.of(date, time != null ? time : altTime);
         }
-        if (dayOfMonth > -1) {
-            if (year < 0) {
+        if (relativeDay != NAT_NONE) {
+            date = now().plusDays(relativeDay);
+            return LocalDateTime.of(date, time != null ? time : altTime);
+        }
+        if (dayOfMonth != NAT_NONE) {
+            ChronoUnit relativeStep = ChronoUnit.MONTHS;
+            if (year == NAT_NONE) {
                 year = now().getYear();
+            } else {
+                relativeStep = ChronoUnit.FOREVER;
             }
-            if (month < 0) {
+            if (month == NAT_NONE) {
                 month = now().getMonthValue();
+            } else {
+                relativeStep = ChronoUnit.YEARS;
             }
             try {
                 date = LocalDate.of(year, month, dayOfMonth);
-                return LocalDateTime.of(date, time != null ? time : altTime);
+                return offsetDate(date, relativeStep, relativeModifier, time != null ? time : altTime);
             } catch (DateTimeException ex) {
                 // Do nothing
             }
         }
-        if (residualDayOfMonth > -1 && month > -1) {
-            if (year < 0) {
+        if (residualDayOfMonth != NAT_NONE && month != NAT_NONE) {
+            ChronoUnit relativeStep = ChronoUnit.YEARS;
+            if (year == NAT_NONE) {
                 year = now().getYear();
+            } else {
+                relativeStep = ChronoUnit.FOREVER;
             }
             try {
                 date = LocalDate.of(year, month, residualDayOfMonth);
-                return LocalDateTime.of(date, time != null ? time : altTime);
+                return offsetDate(date, relativeStep, relativeModifier, time != null ? time : altTime);
             } catch (DateTimeException ex) {
                 // Do nothing
             }
         }
-        if (dayOfWeek > -1) {
+        if (dayOfWeek != NAT_NONE) {
             date = now().with(DayOfWeek.of(dayOfWeek));
-            return LocalDateTime.of(date, time != null ? time : altTime);
+            return offsetDate(date, ChronoUnit.WEEKS, relativeModifier, time != null ? time : altTime);
         }
-        if (residualDayOfMonth > -1) {
-            if (year < 0) {
+        if (residualDayOfMonth != NAT_NONE) {
+            ChronoUnit relativeStep = ChronoUnit.MONTHS;
+            if (year == NAT_NONE) {
                 year = now().getYear();
+            } else {
+                relativeStep = ChronoUnit.FOREVER;
             }
             month = now().getMonthValue();
             try {
                 date = LocalDate.of(year, month, residualDayOfMonth);
-                return LocalDateTime.of(date, time != null ? time : altTime);
+                return offsetDate(date, relativeStep, relativeModifier, time != null ? time : altTime);
             } catch (DateTimeException ex) {
                 // Do nothing
             }
         }
-        if (month > -1) {
-            if (year < 0) {
+        if (month != NAT_NONE) {
+            ChronoUnit relativeStep = ChronoUnit.YEARS;
+            if (year == NAT_NONE) {
                 year = now().getYear();
+            } else {
+                relativeStep = ChronoUnit.FOREVER;
             }
             try {
                 date = isLatestTiming ? YearMonth.of(year, month).atEndOfMonth() : LocalDate.of(year, month, 1);
-                return LocalDateTime.of(date, time != null ? time : altTime);
+                return offsetDate(date, relativeStep, relativeModifier, time != null ? time : altTime);
             } catch (DateTimeException ex) {
                 // Do nothing
             }
         }
-        if (year > -1) {
+        if (year != NAT_NONE) {
             try {
                 date = isLatestTiming
                         ? LocalDate.of(year, 1, 1).with(TemporalAdjusters.lastDayOfYear())

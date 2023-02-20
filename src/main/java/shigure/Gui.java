@@ -18,8 +18,8 @@ public class Gui extends Ui {
     /**
      * Creates a new GUI.
      *
-     * @param mainWindow <code>JavaFX</code> main window of the GUI.
-     * @param stage <code>JavaFX</code> stage of the GUI.
+     * @param mainWindow  <code>JavaFX</code> main window of the GUI.
+     * @param stage       <code>JavaFX</code> stage of the GUI.
      * @param isAsciiOnly whether this Cli shall operate in ASCII-only mode.
      */
     public Gui(MainWindow mainWindow, Stage stage, boolean isAsciiOnly) {

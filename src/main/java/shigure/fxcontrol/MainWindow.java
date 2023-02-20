@@ -65,7 +65,7 @@ public class MainWindow extends AnchorPane {
      * Adds a new <code>DialogBox</code> to the dialog panel.
      *
      * @param text text contents of the <code>DialogBox</code>.
-     * @param pov quoted speaker of the <code>DialogBox</code>.
+     * @param pov  quoted speaker of the <code>DialogBox</code>.
      */
     public void addDialog(String text, DialogBox.Pov pov) {
         dialogContainer.getChildren().add(new DialogBox(text, pov));

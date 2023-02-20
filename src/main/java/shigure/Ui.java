@@ -10,7 +10,7 @@ public abstract class Ui {
     public abstract void printDiv();
 
     /**
-     * If automatic internal line dividers are enabled, prints a line divider.
+     * Prints a line divider if automatic internal line dividers are enabled.
      */
     public abstract void printAutoDiv();
 

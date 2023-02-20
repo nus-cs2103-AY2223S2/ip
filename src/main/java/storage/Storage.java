@@ -19,20 +19,6 @@ import task.Todo;
  * A storage handler for reading and writing to a filesystem.
  */
 public class Storage {
-    /**
-     * Thrown when a file could not be parsed as a valid Miki save file.
-     */
-    public static class MikiLoadException extends Exception {
-        /**
-         * Constructs a <code>MikiLoadException</code> with the specified detail message.
-         *
-         * @param message the detail message.
-         */
-        protected MikiLoadException(String message) {
-            super(message);
-        }
-    }
-
     private final String dataPath;
 
     /**
@@ -150,6 +136,20 @@ public class Storage {
             throw new MikiLoadException("this file is corrupted...");
         } finally {
             br.close();
+        }
+    }
+
+    /**
+     * Thrown when a file could not be parsed as a valid Miki save file.
+     */
+    public static class MikiLoadException extends Exception {
+        /**
+         * Constructs a <code>MikiLoadException</code> with the specified detail message.
+         *
+         * @param message the detail message.
+         */
+        protected MikiLoadException(String message) {
+            super(message);
         }
     }
 }
