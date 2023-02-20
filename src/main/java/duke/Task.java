@@ -5,6 +5,7 @@ public class Task {
     protected boolean isDone = false;
 
     public Task (String description) {
+
         this.description = description;
     }
 
@@ -12,11 +13,12 @@ public class Task {
         return new Task(description);
     }
 
-    public void mark() {
+    public void setMarked() {
         this.isDone = true;
     }
 
-    public void unmark() {
+    public void setUnmarked() {
+
         this.isDone = false;
     }
 

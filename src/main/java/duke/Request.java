@@ -14,6 +14,7 @@ public enum Request {
     private String name;
 
     Request (String name) {
+
         this.name = name;
     }
 

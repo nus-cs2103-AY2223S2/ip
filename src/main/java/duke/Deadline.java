@@ -9,10 +9,10 @@ import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
 
-    String deadlineString;
-    LocalDate deadline;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
-    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+    private String deadlineString;
+    private LocalDate deadline;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+    private DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
 
     public Deadline(String description, String deadlineString) throws InvalidDateFormatException {
         super(description);

@@ -22,7 +22,7 @@ public class Storage {
 
     }
 
-    public File createStorageFile(TaskList list) {
+    private File createStorageFile(TaskList list) {
         File Task_Data = new File("duke.Task Data.txt");
         try {
             Task_Data.createNewFile();
@@ -46,7 +46,7 @@ public class Storage {
         logger.close();
     }
 
-    public void loadTaskData (File taskDataFile, TaskList list) throws StorageFileFormatException {
+    private void loadTaskData (File taskDataFile, TaskList list) throws StorageFileFormatException {
         try {
             Scanner scanner = new Scanner(taskDataFile);
 
