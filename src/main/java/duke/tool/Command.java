@@ -35,10 +35,10 @@ public class Command {
         Task task = new Task();
         try {
             task = this.tasks.get(tid - 1);
+            task.markAsDone();
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-        task.markAsDone();
         return ui.print_done_msg(task);
     }
 
@@ -51,10 +51,10 @@ public class Command {
         Task task = new Task();
         try {
             task = tasks.get(tid - 1);
+            task.markAsNotDone();
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-        task.markAsNotDone();
         return ui.print_undone_msg(task);
     }
 
@@ -69,7 +69,9 @@ public class Command {
             return ui.print_custom_msg("Duplicate tasks detected! \n\t")
                     + ui.print_task_list(dupTasks);
         }
-        tasks.add(task);
+        if (!(task.isNull())) {
+            tasks.add(task);
+        }
         return ui.print_add_msg(task, tasks.size());
     }
 
@@ -82,10 +84,10 @@ public class Command {
         Task task = new Task();
         try {
             task = tasks.get(tid - 1);
+            tasks.remove(task);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-        tasks.remove(task);
         return ui.print_remove_msg(task, tasks.size());
     }
 
