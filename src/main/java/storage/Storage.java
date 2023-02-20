@@ -1,5 +1,9 @@
 package storage;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -96,7 +100,7 @@ public class Storage {
      * @param arrayList an arraylist of tasks that need to be stored in duke.txt
      * @throws IOException if the file duke.txt is not found.
      */
-    public void update_data(ArrayList<Task> arrayList){
+    public void update_data(ArrayList<Task> arrayList) {
         try {
             System.out.println();
             FileInputStream inputStream = new FileInputStream(this.dataAddress);
@@ -118,9 +122,11 @@ public class Storage {
         }
     }
 
-    public void undo(){
+    /**
+     * undo the previous command by the user by updating the data stored in the storage
+     */
+    public void undo() {
         try {
-            System.out.println();
             FileInputStream inputStream = new FileInputStream(this.prevDataAddress);
             FileOutputStream outputStream = new FileOutputStream(this.dataAddress);
             int i;

@@ -2,17 +2,12 @@ package duke;
 
 import java.util.ArrayList;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import parser.Parser;
 import storage.Storage;
-import ui.UI;
 import task.Task;
+import ui.UI;
 
 /**
  * Duke.Duke is a program that help user track list of tasks, it can take in todos, deadline and events tasks and allow
@@ -21,7 +16,7 @@ import task.Task;
  * @version 1.0
  * @since 0.0
  */
-public class Duke{
+public class Duke {
     private Storage storage;
     private UI ui;
     private Response response;
@@ -30,9 +25,9 @@ public class Duke{
      * Initialises Duke program
      */
     public Duke() {
-            this.storage = new Storage("duke.txt");
-            this.ui = new UI();
-            this.response = new Response();
+        this.storage = new Storage("duke.txt");
+        this.ui = new UI();
+        this.response = new Response();
     }
 
     /**

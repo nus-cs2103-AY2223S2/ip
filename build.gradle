@@ -15,7 +15,7 @@ javafx {
     modules = [ 'javafx.controls' ]
 }
 
-mainClassName = 'duke.DukeNew.java'
+mainClassName = 'duke.Duke.java'
 repositories {
     mavenCentral()
 }

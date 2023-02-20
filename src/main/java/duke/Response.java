@@ -1,4 +1,5 @@
 package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -67,7 +68,8 @@ public class Response {
             currTask.markAsDone();
             taskList.set(num - 1, currTask);
             storage.update_data(taskList);
-            return "Good Job Shin-Chan! I've marked this task as done\n" + currTask.getStatusIcon() + " " + currTask.getDes();
+            return "Good Job Shin-Chan! I've marked this task as done\n"
+                    + currTask.getStatusIcon() + " " + currTask.getDes();
         } catch (IndexOutOfBoundsException err1) {
             String errMsg = "The task number that Shin-Chan have keyed in is invalid..";
             return errMsg;
