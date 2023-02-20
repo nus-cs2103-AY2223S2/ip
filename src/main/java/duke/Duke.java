@@ -30,7 +30,7 @@ public class Duke extends Application {
     private TaskList taskList = new TaskList();
     private Parser parser = new Parser();
     private Storage storage = new Storage(taskList);
-    private Ui ui = new Ui();
+    private Ui ui = new Ui(taskList);
 
     @Override
     public void start(Stage stage) {
@@ -130,59 +130,25 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    private String getResponse(String userInput) {
-        String[] parsedCommand;
-        String formattedReply;
-        int taskIndex;
-        try {
-            parsedCommand = parser.parseCommand(userInput);
-            switch (parsedCommand[0]) {
-                case "todo":
-                    Task newTodo = new Todo(parsedCommand[1]);
-                    taskList.addTask(newTodo);
-                    formattedReply = ui.formatAddTaskReply(taskList, newTodo);
-                    break;
-                case "deadline":
-                    Task newDeadline = new Deadline(parsedCommand[1], parsedCommand[2]);
-                    taskList.addTask(newDeadline);
-                    formattedReply = ui.formatAddTaskReply(taskList, newDeadline);
-                    break;
-                case "event":
-                    Task newEvent = new Event(parsedCommand[1], parsedCommand[2], parsedCommand[3]);
-                    taskList.addTask(newEvent);
-                    formattedReply = ui.formatAddTaskReply(taskList, newEvent);
-                    break;
-                case "list":
-                    formattedReply = String.format(
-                            "Here are the tasks in your list:\n%s", taskList.getTaskList());
-                    break;
-                case "delete":
-                    taskIndex = Integer.parseInt(parsedCommand[1]);
-                    formattedReply = String.format("I've deleted the task:\n%s",
-                            taskList.getTask(taskIndex - 1));
-                    taskList.delTask(taskIndex);
-                    break;
-                case "mark":
-                    taskIndex = Integer.parseInt(parsedCommand[1]);
-                    taskList.markTask(taskIndex - 1);
-                    formattedReply = String.format(
-                            "Nice! I've marked this task as done:\n%s", taskList.getTask(taskIndex - 1));
-                    break;
-                case "unmark":
-                    taskIndex = Integer.parseInt(parsedCommand[1]);
-                    taskList.unmarkTask(taskIndex - 1);
-                    formattedReply = String.format(
-                            "OK, I've marked this task as not done yet:\n%s", taskList.getTask(taskIndex - 1));
-                    break;
-                case "find":
-                    formattedReply = String.format(
-                            "Here are the matching tasks in your list:\n%s",
-                            taskList.findTasks(parsedCommand[1]));
-                    break;
-                default:
+    /*
+    Abstracting out getResponse
+    1. make "Command" class with the method "execute"
+    - execute takes in parsedCommand
+    - Returns the formatted reply
+        - abstract each case (SLAP)
+        - if not valid, throw the error
 
-                    throw new InvalidCommandException("Sorry, I don't understand that command, try again.");
-            }
+    command constructor given tasklist
+     */
+    private String getResponse(String userInput) {
+        String[] parsedCommandString;
+        Command command;
+        String formattedReply;
+
+        try {
+            parsedCommandString = parser.parseCommand(userInput);
+            command = new Command(ui, taskList, parsedCommandString);
+            formattedReply = command.execute();
         } catch (InvalidCommandException e) {
             formattedReply = e.getMessage();
         }

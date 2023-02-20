@@ -14,6 +14,11 @@ public class TaskList {
         return this.taskList.get(taskIndex);
     }
 
+    public Task getLatestTask() {
+        int lastTaskIndex = this.getListSize() - 1;
+        return this.taskList.get(lastTaskIndex);
+    }
+
     public void addTask(Task newTask) {
         taskList.add(newTask);
     }
@@ -45,7 +50,6 @@ public class TaskList {
         for (int i = 0; i < taskList.size(); i++) {
             taskIndex = i + 1;
             taskName = taskList.get(i).toString();
-            System.out.println(taskName);
             sb.append(String.format("%d. %s\n", taskIndex, taskName));
         }
         return sb.toString();
