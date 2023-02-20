@@ -1,5 +1,9 @@
+package duke;
+
+import duke.exceptions.DukeyException;
+
 import java.time.LocalDate;
-import java.util.Scanner;
+
 
 public class Event extends Task {
     private static final String TYPE = "[E]";
@@ -18,10 +22,10 @@ public class Event extends Task {
         this.end = end;
     }
 
-    public static Event createEvent(Ui ui) throws DukeyException{
-        String eventName = ui.readTaskName("Event");
-        LocalDate eventStart = ui.readTime("Event start time");
-        LocalDate eventEnd = ui.readTime("Event end time");
+    public static Event createEvent(Ui ui) throws DukeyException {
+        String eventName = ui.readTaskName("duke.Event");
+        LocalDate eventStart = ui.readTime("duke.Event start time");
+        LocalDate eventEnd = ui.readTime("duke.Event end time");
         return new Event(eventName, eventStart, eventEnd);
     }
 

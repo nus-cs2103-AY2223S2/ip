@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exceptions.DukeyException;
+
 import java.time.LocalDate;
 
 public class Parser {
@@ -54,7 +58,7 @@ public class Parser {
     public String parseTaskName(String input) throws DukeyException{
         input = input.strip();
         if (checkIfEmpty(input)) {
-            throw new DukeyException("Error! Task name cannot be empty!");
+            throw new DukeyException("Error! duke.Task name cannot be empty!");
         }
         return input;
     }

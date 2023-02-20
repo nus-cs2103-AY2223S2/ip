@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exceptions.DukeyException;
+
 import static java.lang.Integer.parseInt;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

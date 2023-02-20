@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exceptions.DukeyException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,7 +47,7 @@ public class Ui {
 
 
     public String getTaskNumber() {
-        this.print("Task number: ");
+        this.print("duke.Task number: ");
         return this.readLine();
     }
 
@@ -105,12 +109,12 @@ public class Ui {
     }
 
     public void printMarkedMessage(int taskNumber, Task taskToMark) {
-        this.printLine("DukeyList: Task number " + (taskNumber + 1) + " has been marked as done!");
+        this.printLine("DukeyList: duke.Task number " + (taskNumber + 1) + " has been marked as done!");
         this.printTask(taskNumber, taskToMark);
     }
 
     public void printUnmarkedMessage(int taskNumber, Task taskToUnmark) {
-        this.printLine("DukeyList: Task number " + (taskNumber + 1) + " has been unmarked.");
+        this.printLine("DukeyList: duke.Task number " + (taskNumber + 1) + " has been unmarked.");
         this.printTask(taskNumber, taskToUnmark);
     }
 

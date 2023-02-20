@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exceptions.DukeyException;
+
 import java.time.LocalDate;
 
 public class Deadline extends Task {
@@ -15,8 +19,8 @@ public class Deadline extends Task {
     }
 
     public static Deadline createDeadline(Ui ui) throws DukeyException {
-        String deadlineName = ui.readTaskName("Deadline");
-        LocalDate deadlineTime = ui.readTime("Deadline");
+        String deadlineName = ui.readTaskName("duke.Deadline");
+        LocalDate deadlineTime = ui.readTime("duke.Deadline");
 
         return new Deadline(deadlineName, deadlineTime);
 

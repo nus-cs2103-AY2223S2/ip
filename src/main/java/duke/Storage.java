@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exceptions.DukeyException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

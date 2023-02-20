@@ -1,4 +1,6 @@
-import java.util.Scanner;
+package duke;
+
+import duke.exceptions.DukeyException;
 
 public class ToDo extends Task {
     private static final String TYPE = "[T]";
@@ -13,7 +15,7 @@ public class ToDo extends Task {
 
 
     public static ToDo createToDo(Ui ui) throws DukeyException {
-        String toDoName = ui.readTaskName("ToDo");
+        String toDoName = ui.readTaskName("duke.ToDo");
         return new ToDo(toDoName);
     }
 
