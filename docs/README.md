@@ -123,6 +123,7 @@ The task will be sucessfully added
 
 ***
 ***
+
 ### `mark TASK_ID` or `M TASK_ID` - Marks the completion of a task
 
 <br> Marks a task as specified by `TASK_ID` as done.
@@ -208,6 +209,21 @@ Task containing the string eat in its name will be returned.
 1.[T][]eat cookies
 ```
 
+***
+***
+### `bye` or `B` - Terminates the application
+
+Terminates the application.
+
+Example of usage:
+
+`Bye` or `B`
+
+Expected outcome:
+
+The app closes.
+
+
 ###Command Summary
 
 | Command              | Examples                                                                                                                         |
@@ -220,5 +236,6 @@ Task containing the string eat in its name will be returned.
 | Mark as not complete | `unmark TASK_ID` <br/> eg. unmark 1                                                                                              |
 | Delete task          | `delete TASK_ID` <br/> eg. delete 1                                                                                              |
 | Find task            | `find TASK_string` <br/> eg. find do                                                                                             |
+| Bye                  | `bye` <br/> eg. bye                                                                                                              |
  
 
