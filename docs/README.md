@@ -17,7 +17,7 @@ Duke Task Reminder is an application that can help you manage your daily tasks.
 
 
 ## Installation
-1. download the file from [here]()
+1. download the file from [here](https://github.com/dunliang0513/ip/releases/download/A-Release/Duke_Task_Reminder.jar)
 2. run the command below in your terminal
 ```dtd
 java -jar Duke Task Reminder.jar
