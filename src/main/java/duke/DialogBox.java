@@ -11,9 +11,9 @@ import javafx.scene.text.Font;
 public class DialogBox extends HBox {
 
     // user images
-    private static final Image USER_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/red.png"));
+    private static final Image USER_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/v2.png"));
     private static final Image DUKE_IMAGE = new Image(
-            DialogBox.class.getResourceAsStream("/images/cyan.png"));
+            DialogBox.class.getResourceAsStream("/images/maurice.png"));
 
     // javafx component default settings
     private static final int FONT_SIZE = 16;
