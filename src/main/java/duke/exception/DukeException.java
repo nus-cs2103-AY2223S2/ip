@@ -1,9 +1,16 @@
 package duke.exception;
+
+/**
+ * Handles all exceptions.
+ */
 public class DukeException extends Exception {
     DukeException(String message) {
         super(message);
     }
 
+    /**
+     * Handles exception to missing time input for deadline and event.
+     */
     public static void missingTimingException(String command) throws DukeException {
         if (command.startsWith("deadline") && !command.contains("/by")) {
             throw new DukeException("\t____________________________________________________________" +
@@ -20,6 +27,10 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * Handles exception to missing index input of task when marking/
+     * unmarking/ deleting task.
+     */
     public static void missingIndexException(String command) throws DukeException {
         switch (command) {
             case "mark":
@@ -37,6 +48,10 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * Handles exception to invalid index input of task when marking/
+     * unmarking/ deleting task. This occurs when
+     */
     public static void invalidIndexException(String command, int taskSize) throws DukeException {
         if (command.startsWith("mark") || command.startsWith("unmark")
                 ||command.startsWith("delete")) {
@@ -59,6 +74,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * Handles exception to missing command keyword.
+     */
     public static void invalidCommandException(String command) throws DukeException {
         if (!command.startsWith("event") || !(command.startsWith("deadline")) ||
                 !command.startsWith("todo") || command.startsWith("mark") ||
@@ -69,6 +87,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * Handles exception to missing task description.
+     */
     public static void emptyCommandException(String command) throws DukeException {
         switch (command) {
             case "todo":

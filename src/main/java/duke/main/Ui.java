@@ -5,10 +5,16 @@ import java.util.List;
 import java.util.Scanner;
 import duke.task.*;
 
+/**
+ * Prints responses to commands.
+ */
 public class Ui {
 
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Prints greeting message when app is started.
+     */
     public void printGreetingMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -22,6 +28,9 @@ public class Ui {
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Prints a list of current tasks.
+     */
     public void printCommandList(List<Task> allTasks) {
         DateTimeFormatter dateTimeFormatter1 =
                 DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
@@ -49,6 +58,9 @@ public class Ui {
         System.out.println("\t____________________________________________________________");
     }
 
+    /**
+     * Prints a list of deadlines or events happening on this day.
+     */
     public void printDeadlineOrEventsOnDay(LocalDate dateTime, TaskList allTasks) {
         DateTimeFormatter dateTimeFormatter1 =
                 DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
@@ -79,16 +91,25 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints exit message when app is terminated.
+     */
     public void printByeMessage() {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Bye. Hope to see you again soon!" +
                 "\n\t____________________________________________________________");
     }
 
+    /**
+     * Reads command from user.
+     */
     public String getCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Print any file loading error message.
+     */
     public void showLoadingError(String message) {
         System.out.println(message);
     }

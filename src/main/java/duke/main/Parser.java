@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import duke.exception.DukeException;
 import duke.task.*;
 
+/**
+ * Understands what the command is asking for.
+ */
 public class Parser {
 
     public void parse(String command, Ui ui, TaskList allTasks, Storage storage) {
