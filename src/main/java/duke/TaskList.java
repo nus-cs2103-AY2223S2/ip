@@ -26,10 +26,20 @@ public class TaskList {
     }
     public int getSize() { return this.data.size();}
 
+    public ArrayList<Task> findEntry(String key) {
+        ArrayList<Task> matches = new ArrayList<>();
+        for (int i = 0; i < this.getSize(); i++) {
+            if (this.data.get(i).getDescription().contains(key)) {
+                matches.add(this.data.get(i));
+            }
+        }
+        return matches;
+    }
+
     public String printData() {
         String tasks = "";
         for (int i = 0; i < this.data.size(); i++) {
-            tasks = (i+1) + ". " + this.data.get(i).toString() + "\n";
+            tasks += (i+1) + ". " + this.data.get(i).toString() + "\n";
         }
         return tasks;
     }

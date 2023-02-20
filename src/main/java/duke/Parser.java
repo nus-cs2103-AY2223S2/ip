@@ -6,6 +6,8 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
+import java.util.ArrayList;
+
 public class Parser {
     public TaskList data;
 
@@ -88,6 +90,18 @@ public class Parser {
 
             data.addEntry(deadline);
             return String.format("Now you have %d duke.tasks in the list", data.getSize());
+        }
+
+        if (input.contains("find ")) {
+            String key = input.replace("find ", "");
+            ArrayList<Task> matches = this.data.findEntry(key);
+            String matched = "";
+
+            for (int i = 0; i < matches.size(); i++) {
+                String msg = String.format("%d. %s\n", i + 1, matches.get(i).toString());
+                matched += msg;
+            }
+            return matched;
         }
         return "I do not understand your instructions...";
     }
