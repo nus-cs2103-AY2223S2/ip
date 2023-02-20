@@ -1,8 +1,9 @@
-package Tasks;
+package cluck.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 
 public abstract class Task {
     protected String description; // name of the task
@@ -35,6 +36,35 @@ public abstract class Task {
     }
 
     public abstract String makeSaveFormat();
+
+    public static Task buildTaskFromSave(String savedTask) {
+        String[] savedTaskFields = savedTask.split("\\|");
+        boolean isMarked;
+
+        if (savedTaskFields[1].equals("1")) {
+            isMarked = true;
+        } else if (savedTaskFields[1].equals("0")) {
+            isMarked = false;
+        } else {
+            System.out.println("Corrupted data found, skipping corrupted data.");
+            return null;
+        }
+
+        switch (savedTaskFields[0]) {
+            case "E":
+                return new Event(isMarked, savedTaskFields[2], savedTaskFields[3], savedTaskFields[4]);
+
+            case "D":
+                return new Deadline(isMarked, savedTaskFields[2], savedTaskFields[3]);
+
+            case "T":
+                return new ToDo(isMarked, savedTaskFields[2]);
+
+            default:
+                System.out.println("Corrupted data found, skipping corrupted data.");
+                return null;
+        }
+    }
 
     @Override
     public String toString() {
