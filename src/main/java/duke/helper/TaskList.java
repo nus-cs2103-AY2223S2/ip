@@ -84,9 +84,9 @@ public class TaskList {
      * @throws NotANumberException Throws when task number is not a number
      */
     public Task getTask(String taskNumber, String type) throws InvalidTaskNumberException, NotANumberException {
+        assert Integer.parseInt(taskNumber) >= 1 : "Task number inputs should be 1 or more";
         try {
             int taskNo = Integer.parseInt(taskNumber) - 1;
-            assert taskNo >= 0 : "Task number should be 1 or more";
             return tasks.get(taskNo);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException();
