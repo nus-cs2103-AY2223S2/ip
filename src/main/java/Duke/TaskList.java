@@ -1,5 +1,6 @@
 package Duke;
 
+
 import Duke.Exceptions.CommandNotFoundException;
 import Duke.Exceptions.FileException;
 import Duke.Exceptions.NoDeadlineException;
@@ -294,13 +295,5 @@ public class TaskList {
         return output;
     }
 
-    public ArrayList<Task> findRelevantTasks(String keywords) {
-        if (keywords.trim().equals("")) {
-            throw new NoDescriptionException("The description of a todo cannot be empty.");
-        }
-        return (ArrayList<Task>) this.taskList
-                .stream().filter(task -> task.toString().contains(keywords))
-                .collect(Collectors.toList());
 
-    }
 }

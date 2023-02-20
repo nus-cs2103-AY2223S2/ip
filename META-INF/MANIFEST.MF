@@ -1,3 +1,7 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Main-Class: Duke.Duke
+=======
+Main-Class: Duke
+>>>>>>> branch-A-JavaDoc
 
