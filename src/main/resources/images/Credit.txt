@@ -1,0 +1,3 @@
+All images used are taken from https://www.flaticon.com/
+DukeIcon.png : <a href="https://www.flaticon.com/free-icons/apple" title="apple icons">Apple icons created by Freepik - Flaticon</a>
+UserIcon.png : <a href="https://www.flaticon.com/free-icons/cloudy" title="cloudy icons">Cloudy icons created by Freepik - Flaticon</a>
