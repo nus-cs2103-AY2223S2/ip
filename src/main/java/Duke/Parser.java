@@ -80,7 +80,6 @@ public class Parser {
             t.addEvent(splitDescription);
             cmd = new AddEventCommand(splitDescription);
             break;
-<<<<<<< HEAD
         case "FIND":
             splitDescription = input.split(" ", 2).length == 2
                     ? input.split(" ", 2)[1]
@@ -89,8 +88,9 @@ public class Parser {
             System.out.println(filteredTasks);
             cmd = new FindCommand(splitDescription);
             break;
-=======
->>>>>>> branch-A-CodingStandard
+        case "REMIND":
+            cmd = new ReminderCommand();
+            break;
         default:
             throw new CommandNotFoundException("I'm sorry, but I don't know what that means :-(");
         }

@@ -11,6 +11,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public boolean isDueSoon() {
+        return false;
+    }
+
     /**
      * Print the task into the specific file.
      *
