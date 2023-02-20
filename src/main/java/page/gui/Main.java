@@ -25,7 +25,9 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("Page: Thy Medieval Assistant");
-            fxmlLoader.<MainWindow>getController().setPage(page);
+            MainWindow controller = fxmlLoader.<MainWindow>getController();
+            controller.setPage(page);
+            controller.showGreeting();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

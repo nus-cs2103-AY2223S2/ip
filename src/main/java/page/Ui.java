@@ -31,15 +31,6 @@ public class Ui {
     }
 
     /**
-     * Returns the next line of user input.
-     *
-     * @return Next line of user input.
-     */
-    public String readInput() {
-        return scanner.nextLine();
-    }
-
-    /**
      * Returns the current Quest Log.
      *
      * @param questLog Quest Log to be printed.
@@ -118,16 +109,10 @@ public class Ui {
     }
 
     /**
-     * Returns a warning to the user that their input is invalid.
-     *
-     * @return Invalid Input warning.
+     * Returns an acknowledgement that the quest has been edited.
+     * @param q The edited quest.
+     * @return The acknowledgement message.
      */
-    public String showInvalidInputWarning() {
-        String text = "My apologies, I cannot decipher your arcane incantations. "
-                + "Type 'help' for the list of commands I can understand.";
-        return text;
-    }
-
     public String showQuestEdited(Quest q) {
         return "Quest Edited!\n" + q.toString();
     }
@@ -140,13 +125,16 @@ public class Ui {
     public String showHelpMessage() {
         String helpText = "type 'help' to show this help text!\n"
                 + "type 'todo someTask' to add the task to the Quest Log.\n"
-                + "type 'deadline someDeadline /by someTime' to add a task with deadline someTime.\n"
+                + "type 'deadline someDeadline /by byTime' to add a deadline that ends by byTime.\n"
                 + "type 'event someEvent /from startTime /to endTime' "
                 + "to add an event lasting from startTime to endTime.\n"
                 + "type 'log' to show the current Quest Log.\n"
                 + "type 'complete 1' to mark the 1st quest as complete.\n"
                 + "type 'incomplete 2' to mark the 2nd quest as incomplete.\n"
                 + "type 'delete 3' to delete the 3rd quest.\n"
+                + "type 'find someKeyword' to find all quests containing someKeyword.\n"
+                + "type 'edit 4 newDescription /by newTime' to edit the 4th quest,"
+                + " using the same syntax as you would to add a new quest. (all fields optional)\n"
                 + "type 'bye' to exit.";
         return helpText;
     }

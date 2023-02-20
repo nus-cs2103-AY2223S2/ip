@@ -1,6 +1,17 @@
 package page;
 
-import page.command.*;
+import page.command.Command;
+import page.command.CommandBye;
+import page.command.CommandComplete;
+import page.command.CommandDeadline;
+import page.command.CommandDelete;
+import page.command.CommandEdit;
+import page.command.CommandEvent;
+import page.command.CommandFind;
+import page.command.CommandHelp;
+import page.command.CommandIncomplete;
+import page.command.CommandLog;
+import page.command.CommandTodo;
 
 
 /**
@@ -91,12 +102,11 @@ public class Parser {
         if (hasNoSplit(splitWithTo)) {
             throw new PageException("Sorry, please include a /to time after the /from time!");
         }
-        else {
-            String description = splitWithFrom[0];
-            String fromDateTime = splitWithTo[0];
-            String toDateTime = splitWithTo[1];
-            return new CommandEvent(description, fromDateTime, toDateTime);
-        }
+
+        String description = splitWithFrom[0];
+        String fromDateTime = splitWithTo[0];
+        String toDateTime = splitWithTo[1];
+        return new CommandEvent(description, fromDateTime, toDateTime);
     }
 
     private CommandComplete parseComplete(String input) throws PageException {

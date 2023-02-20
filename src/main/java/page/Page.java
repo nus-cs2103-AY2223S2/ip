@@ -11,6 +11,7 @@ public class Page {
     private Ui ui;
     private Storage storage;
     private QuestLog questLog;
+    private boolean isExit;
 
     /**
      * Constructs a Page object that saves/loads data from the given file path.
@@ -27,11 +28,21 @@ public class Page {
             System.out.println(ui.showErrorMessage(e));
             this.questLog = new QuestLog();
         }
+        this.isExit = false;
+    }
+
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public String showGreeting() {
+        return ui.showGreeting();
     }
 
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input);
+            isExit = c.isExit();
             return c.execute(ui, storage, questLog);
         } catch (PageException e) {
             return ui.showErrorMessage(e);

@@ -37,6 +37,13 @@ public class MainWindow extends AnchorPane {
         this.page = page;
     }
 
+    public void showGreeting() {
+        String welcome = page.showGreeting();
+        dialogContainer.getChildren().add(
+                DialogBox.getPageDialog(welcome, pageImage)
+        );
+    }
+
     /**
     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
     * the dialog container. Clears the user input after processing.
@@ -50,7 +57,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getPageDialog(response, pageImage)
         );
         userInput.clear();
-        if (input.equals("bye")) {
+        if (page.isExit()) {
             Platform.exit();
         }
     }
