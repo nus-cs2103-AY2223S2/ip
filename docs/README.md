@@ -1,6 +1,6 @@
-# :sparkles: Saturday User Guide :sparkles:
+# Saturday User Guide
 
-## :trophy: Features 
+## Features 
 
 ### Task Creation
 
@@ -30,9 +30,9 @@ Our Ui design approach emphasizes simplicity and functionality over unnecessary 
 or visual elements. It features a clean and uncluttered layout, with only the essential elements
 to improve usability and user experience as it reduces cognitive load and eliminates distractions.
 
-## :technologist: Usage
+## Usage
 
-### :wave: `hello` - Say hello to Saturday
+### `hello` - Say hello to Saturday
 
 The `hello` command serves as an initializer for Saturday.
 
@@ -55,7 +55,7 @@ It appears we haven't met!
 Start typing away your tasks and I'll note them down accordingly :)
 ```
 
-### :page_with_curl: `list` - View your list of tasks
+### `list` - View your list of tasks
 
 The `list` command alerts Saturday to display your current list of tasks.
 
@@ -77,7 +77,7 @@ Here's everything I've noted down for you:
 5. [T][] Check email for updates on NOC
 ```
 
-### :alarm_clock: `deadline` - Create a Deadline task
+### `deadline` - Create a Deadline task
 
 Use the `deadline` command to create a new Deadline task.
 
@@ -100,7 +100,7 @@ Got it. I've added this task:
 Now you have 1 task(s) in the list.
 ```
 
-### :tickets: `event` - Create an Event task
+### `event` - Create an Event task
 
 Use the `event` command to create a new Event task.
 
@@ -123,7 +123,7 @@ Got it. I've added this task:
 Now you have 1 task(s) in the list.
 ```
 
-### :memo: `todo` - Create a Todo task
+### `todo` - Create a Todo task
 
 Use the `todo` command to create a new Todo task.
 
@@ -142,7 +142,7 @@ Got it. I've added this task:
 Now you have 1 task(s) in the list.
 ```
 
-### :white_check_mark: `mark` - Mark a task as complete
+### `mark` - Mark a task as complete
 
 Use the `mark` command to mark a task in the list as complete.
 
@@ -161,7 +161,7 @@ Well Done! I've marked this task as done:
 Now you have 0 task(s) in the list.
 ```
 
-### :negative_squared_cross_mark: `unmark` - Unmark a task as complete
+### `unmark` - Unmark a task as complete
 
 Use the `unmark` command to mark a task in the list as in progress.
 
@@ -180,7 +180,7 @@ OK, I've marked this task as not done yet:
 Now you have 1 task(s) in the list.
 ```
 
-### :no_good: `delete` - Delete a task from the list
+### `delete` - Delete a task from the list
 
 Use the `delete` command to remove a task from the list.
 
@@ -199,7 +199,7 @@ Noted. I've removed this task:
 Now you have 0 task(s) in the list.
 ```
 
-### :detective: `find` - Search with a keyword
+### `find` - Search with a keyword
 
 Use the `find` command to search for tasks that contain a certain keyword.
 
@@ -218,7 +218,7 @@ Here are the task(s) I've found:
 2. [T][X] Finalise DJ setlist
 ```
 
-### :magic_wand: `sort` - Sort the list of tasks
+### `sort` - Sort the list of tasks
 
 Use the `sort` command to sort the tasks in alphabetical order.
 
@@ -239,7 +239,7 @@ Here's everything I've noted down for you:
 5. [T][X] Finalise DJ setlist
 ```
 
-### :wave: `bye` - Say goodbye to Saturday
+### `bye` - Say goodbye to Saturday
 
 The `bye` command to serves as the terminator for Saturday.
 
