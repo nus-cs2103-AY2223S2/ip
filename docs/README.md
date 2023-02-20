@@ -1,5 +1,7 @@
 # User Guide
 
+<img src="Ui.png" style="align:right"/>
+
 * [Features](#features)
 * [Usage](#usage)
     * [List](#list---lists-all-tasks)
@@ -8,8 +10,7 @@
     * [Delete Tasks](#delete---deletes-a-task-at-a-specified-index)
     * [Search](#find-check---searches-through-task-list)
     * [Exit](#bye---say-bye-to-duke)
-    
-<img src="Ui.png" style="align:right"/>
+
 
 ## Features 
 
