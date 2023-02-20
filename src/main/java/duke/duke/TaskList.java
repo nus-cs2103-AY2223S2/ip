@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 import duke.tasks.Task;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Contains the task list of the program.
  */
 public class TaskList {
-    ArrayList<Task> data = new ArrayList<>();
+    private ArrayList<Task> data = new ArrayList<>();
 
     /**
      * Adds a task into the existing list of tasks.
@@ -37,6 +37,7 @@ public class TaskList {
     public Task getEntry(int pos) {
         return this.data.get(pos);
     }
+<<<<<<< HEAD:src/main/java/duke/TaskList.java
 
     /**
      * Removes an existing entry at a given position in the list of entries.
@@ -60,8 +61,15 @@ public class TaskList {
      */
     public void unmark(int pos) {
         this.data.get(pos).unmark();
+=======
+    public void removeEntry(int pos) { this.data.remove(pos);}
+    public void markDone(int pos) { this.data.get(pos).markDone(); }
+    public void unmarkDone(int pos) {
+        this.data.get(pos).unmarkDone();
+>>>>>>> branch-A-CodingStandard:src/main/java/duke/duke/TaskList.java
     }
 
+<<<<<<< HEAD:src/main/java/duke/TaskList.java
     /**
      * Returns the size of the current list of tasks.
      * @return size of task list.
@@ -70,6 +78,8 @@ public class TaskList {
         return this.data.size();
     }
 
+=======
+>>>>>>> branch-A-CodingStandard:src/main/java/duke/duke/TaskList.java
     @Override
     public String toString() {
         String tasks = "";

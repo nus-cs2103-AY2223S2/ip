@@ -11,9 +11,8 @@ import java.time.format.DateTimeParseException;
  * Tag = D.
  */
 public class Deadline extends Task{
-
-    String tag = "D";
-    protected LocalDateTime by;
+    private String tag = "D";
+    private LocalDateTime by;
 
     public Deadline() {
         super.tag = tag;
@@ -44,6 +43,7 @@ public class Deadline extends Task{
         } catch (DateTimeParseException e) {
             throw new InvalidDeadline("Please enter the deadline correctly");
         }
+
         String formattedBy = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
         String description = String.format("%s (by: %s)", input.substring(0, byId - 1), formattedBy);
         super.description = description;

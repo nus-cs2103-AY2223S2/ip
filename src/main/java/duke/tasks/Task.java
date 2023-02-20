@@ -8,6 +8,7 @@ import duke.exceptions.DukeExceptions;
  * as well as whether it is done.
  */
 public class Task {
+<<<<<<< HEAD
     String description;
     String tag = " ";
     boolean isDone = false;
@@ -39,6 +40,23 @@ public class Task {
      * Returns whether the task is done.
      * @return True if task is done and false otherwise.
      */
+=======
+    protected String description;
+    protected String tag = " ";
+    protected boolean isDone = false;
+
+    public void formatDescription(String input) throws DukeExceptions {
+        this.description = input;
+    }
+    public void markDone() {
+        this.isDone = true;
+    }
+
+    public void unmarkDone() {
+        this.isDone = false;
+    }
+
+>>>>>>> branch-A-CodingStandard
     public boolean isMarked() { return this.isDone;}
 
     /**

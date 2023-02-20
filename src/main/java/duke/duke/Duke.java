@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 /**
  * The main driver class to run the Duke program
