@@ -23,8 +23,9 @@ public class TreeBot {
     private Deque<IUndoable> history = new ArrayDeque<>();
 
 
-    public TreeBot(String filePath) {
-        storage = new Storage(filePath);
+    public TreeBot() throws TreeBotException {
+        storage = new Storage();
+
         try {
             taskList = new TaskList(storage.loadTasks());
         } catch (FileNotFoundException e) {

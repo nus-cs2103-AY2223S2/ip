@@ -8,10 +8,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import treebot.exception.TreeBotException;
 import treebot.ui.MainWindow;
 
 public class Main extends Application {
-    private TreeBot treeBot = new TreeBot("data/treebot.txt");
+    private TreeBot treeBot;
+
+    public Main() {
+        try {
+            treeBot = new TreeBot();
+        } catch (TreeBotException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     @Override
     public void start(Stage stage) {

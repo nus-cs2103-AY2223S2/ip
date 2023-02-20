@@ -11,18 +11,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import treebot.exception.TreeBotException;
+import treebot.interfaces.IStorage;
 import treebot.tasks.Deadline;
 import treebot.tasks.Event;
 import treebot.tasks.Task;
 import treebot.tasks.Todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class StorageTest {
     @Test
     void loadTask_loadsSuccessfullyFromDataTextFile() {
-        Storage testStorage = new Storage("src/test/data/testData.txt");
+
+
+
         try {
+            Storage testStorage = new Storage("src/test/data", "testData.txt");
             ArrayList<Task> loadedTasks = testStorage.loadTasks();
 
             assertEquals("[T][] do homework", loadedTasks.get(0).toString());
@@ -33,23 +39,28 @@ public class StorageTest {
 
         } catch (FileNotFoundException e) {
             // file exists since this is test data
+        } catch (TreeBotException e) {
+            fail();
         }
 
     }
     @Test
     void saveTask_saveSuccessfullyToDataTextFile() {
 
+
         final String testFilePath = "src/test/data/testData-save.txt";
-        clearTextFile(testFilePath);
-        File file = new File(testFilePath);
-        assert file.length() == 0 : "File is cleared before testing";
-        Storage testSaveStorage =  new Storage(testFilePath);
 
         try {
+            clearTextFile(testFilePath);
+            File file = new File(testFilePath);
+            assert file.length() == 0 : "File is cleared before testing";
+            Storage testSaveStorage =  new Storage("src/test/data", "testData-save.txt");
             testSaveStorage.saveTasks(getDummyTaskListState());
 
         } catch (IOException e) {
             // file exists
+        } catch (TreeBotException e) {
+            fail();
         }
 
         try {
@@ -64,6 +75,35 @@ public class StorageTest {
         }
 
     }
+
+    @Test
+    void constructStorage_fileDoesNotExist_handledCorrectly() {
+        try {
+            Storage storage = new Storage("src/test/data", "somerandomname");
+            File f = new File("src/test/data/somerandomname");
+            assertEquals(true, f.exists());
+            f.delete();
+        } catch (TreeBotException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void constructStorage_folderDoesNotExist_handledCorrectly() {
+        try {
+            Storage storage = new Storage("src/test/data/moreData", "somerandomname");
+            File dir = new File("src/test/data/moreData");
+            assertEquals(true, dir.isDirectory() && dir.exists());
+            File f = new File("src/test/data/moreData/somerandomname");
+            assertEquals(true, f.exists());
+            f.delete();
+            dir.delete();
+        } catch (TreeBotException e) {
+            fail();
+        }
+    }
+
+
 
     ArrayList<Task> getDummyTaskListState() {
         Todo todoTask = new Todo("do homework");
@@ -102,6 +142,7 @@ public class StorageTest {
             // file exists
         }
     }
+
 
 
 }

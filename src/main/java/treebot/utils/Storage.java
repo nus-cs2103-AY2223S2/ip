@@ -1,5 +1,6 @@
 package treebot.utils;
 
+import treebot.exception.TreeBotException;
 import treebot.interfaces.IStorage;
 import treebot.tasks.Deadline;
 import treebot.tasks.Event;
@@ -21,17 +22,57 @@ import java.util.Scanner;
  */
 public class Storage implements IStorage {
     private File f;
-    private String filePath;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     /**
-     * Class constructor with a given file path to the text file.
+     * Constructs a default <code>Storage</code> object.
+     * @throws TreeBotException
+     */
+    public Storage() throws TreeBotException {
+
+        if (!new File("data").exists()) {
+            new File("data").mkdir();
+        }
+
+        if (!new File("data/treebot.txt").exists()) {
+            try {
+                File f = new File("data/treebot.txt");
+                f.createNewFile();
+                this.f = f;
+            } catch (IOException e) {
+                throw new TreeBotException("Something went wrong with writing data storage");
+            }
+
+        } else {
+            this.f = new File("data/treebot.txt");
+        }
+
+    }
+
+    /**
+     * Class constructor with a given file path to the directory and the filename for the text file.
      * @param filePath
      */
-    public Storage(String filePath)  {
-        this.f = new File(filePath);
-        this.filePath = filePath;
+    public Storage(String filePath, String fileName) throws TreeBotException {
+        if (!new File(filePath).exists()) {
+            new File(filePath).mkdirs();
+        }
+
+        if (!new File(filePath + "/" + fileName).exists()) {
+            try {
+                File f = new File(filePath + "/" + fileName);
+                f.createNewFile();
+                this.f = f;
+            } catch (IOException e) {
+                throw new TreeBotException("Something went wrong with writing data storage");
+            }
+
+        } else {
+            this.f = new File(filePath + "/" + fileName);
+        }
     }
+
+
 
     /**
      * Loads the tasks in the text file and converts them into an ArrayList of Task.
@@ -55,7 +96,7 @@ public class Storage implements IStorage {
      * @throws IOException
      */
     public void saveTasks(ArrayList<Task> taskListState) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+        FileWriter fw = new FileWriter(f);
         for (Task task : taskListState) {
             fw.write(task.toStorageFormatString() + System.lineSeparator());
         }

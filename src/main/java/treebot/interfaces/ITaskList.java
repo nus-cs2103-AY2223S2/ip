@@ -4,6 +4,9 @@ import treebot.tasks.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents an interface for a list of tasks.
+ */
 public interface ITaskList {
 
     ArrayList<Task> getArrayListCopy();

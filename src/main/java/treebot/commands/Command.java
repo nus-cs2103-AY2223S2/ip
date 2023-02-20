@@ -59,6 +59,10 @@ public abstract class Command {
                 && this.storage != null;
     }
 
+    /**
+     * Checks whether the command is an ExitCommand.
+     * @return boolean on whether this command is an ExitCommand.
+     */
     public boolean isExitCommand() {
         return isExitCommand;
     }
