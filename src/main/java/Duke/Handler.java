@@ -26,7 +26,7 @@ public class Handler{
         }
     }
 
-    public int parseNumber(String input) throws ProgramException {
+    public int parseNumber(String input, TaskList taskList) throws ProgramException {
         String parameters[] = input.split(" ");
         if(parameters.length==1){
             throw new ProgramException("Index needed!");
@@ -36,6 +36,9 @@ public class Handler{
         }
         try{
             int index = Integer.parseInt(parameters[1]);
+            if(index>taskList.size()){
+                throw new ProgramException("Index out of bounds!");
+            }
             return index;
         }
         catch (NumberFormatException e){
@@ -58,12 +61,15 @@ public class Handler{
             throw new ProgramException("Missing info! I need the task description and the end time");
         }
         parameters = parameters[1].split("/by");
+        if(parameters.length<2){
+            throw new ProgramException("Bad format! /by command needed to set the deadline!");
+        }
         if(parameters.length>2){
             throw new ProgramException("Bad format! Use /by only as a command!");
         }
-        for(int i = 0; i< parameters.length; i++){
-            parameters[i] = parameters[i].strip();
-        }
+        String name = parameters[0].strip();
+        String end = parameters[1].strip();
+        parameters = new String[]{name, end};
         return parameters;
     }
 
@@ -72,33 +78,49 @@ public class Handler{
         if(parameters.length==1){
             throw new ProgramException("Missing info! I need the task description, start and end time");
         }
-        throw new ProgramException("Bad format!");
-        return "1";
+        parameters = parameters[1].split("/from");
+        if(parameters.length<2){
+            throw new ProgramException("Bad format! /from command needed to set the deadline!");
+        }
+        if(parameters.length>2){
+            throw new ProgramException("Bad format! Use /from only as a command!");
+        }
+        String name = parameters[0].strip();
+        parameters = parameters[1].split("/to");
+        if(parameters.length<2){
+            throw new ProgramException("Bad format! /to command needed to set the deadline!");
+        }
+        if(parameters.length>2){
+            throw new ProgramException("Bad format! Use /to only as a command!");
+        }
+        String start = parameters[0].strip();
+        String end = parameters[1].strip();
+        parameters = new String[]{name,start, end};
+        return parameters;
     }
 
 
     public Command processCommand(String input, TaskList taskList) throws ProgramException {
         Command c = null;
         String content = null;
-        String start = null;
-        String end = null;
         String[] parameters = null;
         int index = 0;
+        input = input.strip();
         CommandList command = getCommand(input);
         switch (command) {
             case LIST:
                 c = new ListCommand();
                 break;
             case MARK:
-                index = parseNumber(input);
+                index = parseNumber(input,taskList);
                 c = new MarkCommand(index);
                 break;
             case UNMARK:
-                index = parseNumber(input);
+                index = parseNumber(input,taskList);
                 c = new UnmarkCommand(index);
                 break;
             case DELETE:
-                index = parseNumber(input);
+                index = parseNumber(input,taskList);
                 c = new DeleteCommand(index);
                 break;
             case DEADLINE:
@@ -106,7 +128,8 @@ public class Handler{
                 c = new DeadlineCommand(parameters[0],parameters[1]);
                 break;
             case EVENT:
-                c = new EventCommand("2","2","2");
+                parameters = parseEvent(input);
+                c = new EventCommand(parameters[0],parameters[1],parameters[2]);
                 break;
             case TODO:
                 content = parseToDo(input);

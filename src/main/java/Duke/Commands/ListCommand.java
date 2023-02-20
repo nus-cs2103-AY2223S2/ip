@@ -6,7 +6,6 @@ import Duke.Tasks.TaskList;
 public class ListCommand extends Command {
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader) {
-        taskList.listTasks();
-        return null;
+        return taskList.listTasks();
     }
 }

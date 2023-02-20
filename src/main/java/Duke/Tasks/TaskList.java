@@ -15,6 +15,11 @@ public class TaskList {
         this.taskList = new ArrayList<>();
         this.numTasks = 0;
     }
+
+    public int size(){
+        return this.numTasks;
+    }
+
     public String processTask(Task task){
         this.taskList.add(task);
         this.numTasks +=1;

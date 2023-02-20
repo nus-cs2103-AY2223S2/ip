@@ -10,7 +10,7 @@ public class MarkCommand extends Command {
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader) {
-        taskList.unmarkTask(index);
+        taskList.markTask(index);
         return null;
     }
 }
