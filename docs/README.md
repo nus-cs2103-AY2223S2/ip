@@ -2,28 +2,29 @@
 
 ## Features 
 
-### Feature-ABC
+### Record your tasks
 
-Description of the feature.
+Record your tasks as a todo, deadline, or event!
 
-### Feature-XYZ
+### Save and load
 
-Description of the feature.
+When you exit Duke, Duke will automatically save your tasks, and load it when you open Duke again.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `List` - Get your current tasks
 
-Describe the action and its outcome.
+Duke will list out all your current tasks, complete or incomplete
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
 
-Description of the outcome.
+
 
 ```
-expected output
+1. [T][X] Do homework
+2. [D][] Finish assignment (by 23/02/2023)
 ```
