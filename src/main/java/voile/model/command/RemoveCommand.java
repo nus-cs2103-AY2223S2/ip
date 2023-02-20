@@ -3,14 +3,25 @@ package voile.model.command;
 import voile.model.task.Task;
 import voile.model.task.TaskList;
 
+/**
+ * Represents a command that removes a {@code Task} from the {@code TaskList}.
+ */
 public class RemoveCommand extends Command {
 
     private int index;
 
+    /**
+     * Creates a new {@code RemoveCommand} instance.
+     *
+     * @param index index of the {@code Task} to be removed
+     */
     public RemoveCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList list) {
         Task task = list.remove(index);

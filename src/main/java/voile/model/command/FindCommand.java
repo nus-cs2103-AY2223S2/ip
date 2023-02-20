@@ -5,14 +5,25 @@ import java.util.stream.Collectors;
 
 import voile.model.task.TaskList;
 
+/**
+ * Represents a command that finds all {@code Task}s whose descriptions contain the given keyword.
+ */
 public class FindCommand extends Command {
 
     private String keyword;
 
+    /**
+     * Creates a new {@code FindCommand} instance.
+     *
+     * @param keyword the keyword to find later
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList list) {
         String content = list.stream()

@@ -6,8 +6,14 @@ import java.util.stream.Collectors;
 import voile.model.task.DeadlineTask;
 import voile.model.task.TaskList;
 
+/**
+ * Represents a command that sorts groups of {@code Task}s.
+ */
 public class SortCommand extends Command {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList list) {
         String content = list.stream()

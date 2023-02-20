@@ -17,7 +17,7 @@ import voile.model.command.UnmarkCommand;
 import voile.model.task.DeadlineTask;
 import voile.model.task.EventTask;
 import voile.model.task.TodoTask;
-import voile.util.VoileUtils;
+import voile.util.Conversions;
 
 public class CommandParserTest {
     private static final Class<VoileRuntimeException> EXPECTED_EXCEPTION_CLASS =
@@ -32,11 +32,15 @@ public class CommandParserTest {
         assertEquals(parseCommand("list"), new ListCommand());
         assertEquals(parseCommand("bye"), new ExitCommand());
         assertEquals(parseCommand("todo eat"), new AddCommand(new TodoTask("eat")));
-        assertEquals(parseCommand("deadline homework --by 2023-01-01"), new AddCommand(
-                new DeadlineTask("homework", VoileUtils.parseDate("2023-01-01").get())));
+        assertEquals(parseCommand("deadline homework --by 2023-01-01"),
+                new AddCommand(new DeadlineTask(
+                        "homework",
+                        Conversions.parseDate("2023-01-01").get())));
         assertEquals(parseCommand("event survive --from 2023-01-01 --to 2023-10-10"),
-                new AddCommand(new EventTask("survive", VoileUtils.parseDate("2023-01-01").get(),
-                        VoileUtils.parseDate("2023-10-10").get())));
+                new AddCommand(new EventTask(
+                        "survive",
+                        Conversions.parseDate("2023-01-01").get(),
+                        Conversions.parseDate("2023-10-10").get())));
         assertEquals(parseCommand("mark 10"), new MarkCommand(10));
         assertEquals(parseCommand("unmark 10"), new UnmarkCommand(10));
         assertEquals(parseCommand("delete 10"), new RemoveCommand(10));

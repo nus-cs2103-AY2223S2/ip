@@ -21,7 +21,7 @@ import voile.model.task.DeadlineTask;
 import voile.model.task.EventTask;
 import voile.model.task.Task;
 import voile.model.task.TodoTask;
-import voile.util.VoileUtils;
+import voile.util.Conversions;
 import voile.util.container.Pair;
 
 /**
@@ -42,7 +42,7 @@ public class CommandParser {
             ApplicativeParser.skipWhitespaces().takeNext(ApplicativeParser.parseNonWhitespaces());
 
     private static final ApplicativeParser<LocalDate> DATE_PARSER =
-            NEXT_NON_WHITESPACES_PARSER.optionalMap(VoileUtils::parseDate);
+            NEXT_NON_WHITESPACES_PARSER.optionalMap(Conversions::parseDate);
 
     private static final ApplicativeParser<LocalDate> DAY_PARSER =
             NEXT_NON_WHITESPACES_PARSER
@@ -51,7 +51,7 @@ public class CommandParser {
                         String tail = input.substring(1).toLowerCase();
                         return head + tail;
                     })
-                    .optionalMap(VoileUtils::parseDay);
+                    .optionalMap(Conversions::parseDay);
 
     private static final ApplicativeParser<LocalDate> DATE_OR_DAY_PARSER =
             DATE_PARSER
@@ -61,12 +61,12 @@ public class CommandParser {
 
     private static final ApplicativeParser<Integer> INT_PARSER =
             NEXT_NON_WHITESPACES_PARSER
-                    .optionalMap(VoileUtils::parseInt)
+                    .optionalMap(Conversions::parseInt)
                     .throwIfFail("incorrect format for an integer argument");
 
     private static final ApplicativeParser<Keyword> KEYWORD_PARSER =
             NEXT_NON_WHITESPACES_PARSER
-                    .optionalMap(Keyword::findKeyword)
+                    .optionalMap(Conversions::parseKeyword)
                     .throwIfFail("unknown command");
 
     private static final ApplicativeParser<Optional<Keyword>> OPTIONAL_KEYWORD_PARSER =

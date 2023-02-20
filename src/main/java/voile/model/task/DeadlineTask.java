@@ -3,7 +3,7 @@ package voile.model.task;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import voile.util.VoileUtils;
+import voile.util.Conversions;
 
 /**
  * Represents a deadline task in the application.
@@ -32,7 +32,8 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), VoileUtils.showDate(deadline));
+        return String.format("[D]%s (by: %s)", super.toString(),
+                Conversions.showDate(deadline));
     }
 
     @Override

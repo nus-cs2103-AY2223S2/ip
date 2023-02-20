@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import voile.common.exception.VoileIllegalArgumentException;
-import voile.util.VoileUtils;
+import voile.util.Conversions;
 
 /**
  * Represents an event task in the application.
@@ -39,8 +39,8 @@ public class EventTask extends Task {
         return String.format(
                 "[E]%s (from: %s to: %s)",
                 super.toString(),
-                VoileUtils.showDate(startTime),
-                VoileUtils.showDate(endTime));
+                Conversions.showDate(startTime),
+                Conversions.showDate(endTime));
     }
 
     @Override

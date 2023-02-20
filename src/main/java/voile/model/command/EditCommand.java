@@ -5,16 +5,28 @@ import java.util.Objects;
 import voile.model.task.Task;
 import voile.model.task.TaskList;
 
+/**
+ * Represents a command that edits a {@code Task}'s description.'
+ */
 public class EditCommand extends Command {
 
     private int index;
     private String newDescription;
 
+    /**
+     * Creates a new {@code EditCommand} instance.
+     *
+     * @param index index of the {@code Task} to be edited
+     * @param newDescription the new description of that {@code Task}
+     */
     public EditCommand(int index, String newDescription) {
         this.index = index;
         this.newDescription = newDescription;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList list) {
         Task task = list.get(index);

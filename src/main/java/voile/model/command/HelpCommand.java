@@ -4,6 +4,9 @@ import java.util.Optional;
 
 import voile.model.task.TaskList;
 
+/**
+ * Represents a command that shows help message.
+ */
 public class HelpCommand extends Command {
 
     private static final String DEFAULT_HELP_MESSAGE = String.join("\n",
@@ -105,47 +108,54 @@ public class HelpCommand extends Command {
             "Usage: bye",
             "Exit the application.");
 
-    private static String getHelpMessage(Keyword keyword) {
-        switch (keyword) {
-        case HELP:
-            return HELP_COMMAND_HELP_MESSAGE;
-        case LIST:
-            return LIST_COMMAND_HELP_MESSAGE;
-        case TODO:
-            return TODO_COMMAND_HELP_MESSAGE;
-        case DEADLINE:
-            return DEADLINE_COMMAND_HELP_MESSAGE;
-        case EVENT:
-            return EVENT_COMMAND_HELP_MESSAGE;
-        case MARK:
-            return MARK_COMMAND_HELP_MESSAGE;
-        case UNMARK:
-            return UNMARK_COMMAND_HELP_MESSAGE;
-        case DELETE:
-            return DELETE_COMMAND_HELP_MESSAGE;
-        case CLEAR:
-            return CLEAR_COMMAND_HELP_MESSAGE;
-        case FIND:
-            return FIND_COMMAND_HELP_MESSAGE;
-        case EDIT:
-            return SET_DESCRIPTION_HELP_MESSAGE;
-        case SORT:
-            return SORT_DEADLINES_HELP_MESSAGE;
-        case BYE:
-            return BYE_COMMAND_HELP_MESSAGE;
-        }
-        throw new RuntimeException("should not reach here");
-    }
-
     private Optional<Keyword> keyword;
 
+    /**
+     * Creates a new {@code HelpCommand} instance.
+     *
+     * @param keyword an {@code Optional} that may contain the keyword
+     */
     public HelpCommand(Optional<Keyword> keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList list) {
-        return keyword.map(HelpCommand::getHelpMessage).orElse(DEFAULT_HELP_MESSAGE);
+        return keyword.map(keyword -> {
+            switch (keyword) {
+            case HELP:
+                return HELP_COMMAND_HELP_MESSAGE;
+            case LIST:
+                return LIST_COMMAND_HELP_MESSAGE;
+            case TODO:
+                return TODO_COMMAND_HELP_MESSAGE;
+            case DEADLINE:
+                return DEADLINE_COMMAND_HELP_MESSAGE;
+            case EVENT:
+                return EVENT_COMMAND_HELP_MESSAGE;
+            case MARK:
+                return MARK_COMMAND_HELP_MESSAGE;
+            case UNMARK:
+                return UNMARK_COMMAND_HELP_MESSAGE;
+            case DELETE:
+                return DELETE_COMMAND_HELP_MESSAGE;
+            case CLEAR:
+                return CLEAR_COMMAND_HELP_MESSAGE;
+            case FIND:
+                return FIND_COMMAND_HELP_MESSAGE;
+            case EDIT:
+                return SET_DESCRIPTION_HELP_MESSAGE;
+            case SORT:
+                return SORT_DEADLINES_HELP_MESSAGE;
+            case BYE:
+                return BYE_COMMAND_HELP_MESSAGE;
+            default:
+                throw new RuntimeException("should not reach here");
+            }
+        }).orElse(DEFAULT_HELP_MESSAGE);
     }
 
     @Override

@@ -6,8 +6,14 @@ import java.util.stream.Collectors;
 import voile.model.task.Task;
 import voile.model.task.TaskList;
 
+/**
+ * Represents a command that lists all {@code Task}s in the {@code TaskList} with their indicies.
+ */
 public class ListCommand extends Command {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList list) {
         String content = list.stream().map(new Function<Task, String>() {

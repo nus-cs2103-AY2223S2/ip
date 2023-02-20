@@ -5,14 +5,25 @@ import java.util.Objects;
 import voile.model.task.Task;
 import voile.model.task.TaskList;
 
+/**
+ * Represents a command that adds a new {@code Task}.
+ */
 public class AddCommand extends Command {
 
     private Task task;
 
+    /**
+     * Creates a {@code AddCommand} instance.
+     *
+     * @param task the task to be added
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList list) {
         list.add(task);
