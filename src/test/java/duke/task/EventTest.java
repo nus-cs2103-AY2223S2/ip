@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.tool.Parser;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
+
+import duke.tool.Parser;
 
 public class EventTest {
     @Test
