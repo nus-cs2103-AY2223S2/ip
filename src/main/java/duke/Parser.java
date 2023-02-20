@@ -153,7 +153,7 @@ public class Parser {
         tasks.findTask(ui, description);
     }
 
-    private void parseHelpCommand() throws DukeException {
+    private void parseHelpCommand() {
         ui.showHelpPage();
     }
 }
