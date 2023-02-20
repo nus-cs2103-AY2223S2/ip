@@ -1,45 +1,46 @@
-# DUKE
+# 🤖 DUKE User Guide 👽
+
+## Introduction
+DUKE is a project that is based on the CS2103T Duke Individual Project that helps you keep track of all your tasks. 
 
 ## Features
+* Add 3 types of tasks ( `ToDo` , `Deadline` and `Event` ).
+* `mark` or `unmark` tasks.
+* `delete` unwanted tasks.
+* `list` all your tasks.
+* Search for tasks with keywords using `find`.
+* Change where data is saved using `change_file_location`.
 
-### Feature-ABC
+### Create Tasks
 
-Description of the feature.
+Use the `todo`, `deadline` or `event` commands to add tasks. 
+* `ToDo` tasks require only a description (any characters after the `todo` command will be treated as a description.
 
-### Feature-XYZ
+For example, `todo read a book`.
+* `deadline` tasks require a description followed by a date and time. 
 
-Description of the feature.
+For example, `deadline do laundry /by 2023-02-12 18:00`.
+* `Event` tasks require a description, start date and time and an end date and time. 
 
-### Feature-ABC
+For example `event birthday party /from 2023-02-12 18:00 /to 2023-02-12 21:00`.
 
-Description of the feature.
+### Mark and Unmark task
+to mark or unmark a tast as done simply use `mark` or `unmark` commands followed by the number of the task respectively. For example, "mark 1".
 
-### Feature-XYZ
+### Delete tasks
+use the `delete` command followed by the number of the task in the list to remove it.
 
-Description of the feature.
+### List all current tasks
+Use the `list` command do view all current task in the task list.
 
-### Feature-ABC
+### Find task using keyword
+Use the `find` command followed by keywords to search for task with matching descriptions to your keyword.
 
-Description of the feature.
 
-### bye
+### Change file storing location
+Use `change_file_location` command to change where the files will be stored on your device. The files are independent and will not overwrite each other.
 
-To exit and save all current data,
+### Exiting the program - `bye`
+This command closes the program and saves the current list into your locla storage.
 
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage:
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
+## 🤖 Have fun using DUKE! 👽
