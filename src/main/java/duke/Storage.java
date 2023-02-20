@@ -29,12 +29,14 @@ public class Storage {
 
     }
 
+
     /**
      * Method to create a file that will store all the tasks created by the user
      * @param list The TaskList Object that will store all the tasks created by the user
      * @return The File object that was created for storage purposes
      */
-    public File createStorageFile(TaskList list) {
+    private File createStorageFile(TaskList list) {
+
         File Task_Data = new File("duke.Task Data.txt");
         try {
             Task_Data.createNewFile();
@@ -61,13 +63,16 @@ public class Storage {
         logger.close();
     }
 
+
     /**
      * Method that reads the storage file and adds the tasks to the TaskList object that stores all the user tasks.
      * @param taskDataFile The file from which the stored tasks will be read
      * @param list The TaskList Object that stores all the user's tasks
      * @throws StorageFileFormatException
      */
-    public void loadTaskData (File taskDataFile, TaskList list) throws StorageFileFormatException {
+
+    private void loadTaskData (File taskDataFile, TaskList list) throws StorageFileFormatException {
+
         try {
             Scanner scanner = new Scanner(taskDataFile);
 
@@ -107,7 +112,7 @@ public class Storage {
                         list.markDone(list.getNumberOfTasks());
                     }
                 } else {
-
+                    System.out.println("There is an error in the format of the Storage File");
                 }
             }
             scanner.close();

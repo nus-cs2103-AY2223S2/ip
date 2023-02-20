@@ -29,16 +29,18 @@ public class Task {
     /**
      * Method that marks a task as completed
      */
-    public void mark() {
+    public void setMarked() {
         this.isDone = true;
     }
 
     /**
      * Method that marks a task is incomplete
      */
-    public void unmark() {
-        this.isDone = false;
-    }
+    public void setUnmarked() {
+            this.isDone = false;
+        }
+
+
 
     @Override
     public String toString() {

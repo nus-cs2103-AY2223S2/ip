@@ -11,17 +11,17 @@ import java.time.format.FormatStyle;
  */
 
 public class Event extends Task {
-    String startDayTime;
-    String endDayTime;
+    private String startDayTime;
+    private String endDayTime;
 
-    String deadlineString;
-    LocalDate startDate;
-    LocalDate endDate;
-    LocalTime startTime;
-    LocalTime endTime;
+    private String deadlineString;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
-    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+    private DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
 
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 

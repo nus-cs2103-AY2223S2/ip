@@ -26,6 +26,7 @@ public enum Request {
      * @param name The name of the constant
      */
     Request (String name) {
+
         this.name = name;
     }
 

@@ -72,7 +72,7 @@ public class TaskList {
             System.out.println("This task has already been marked as done!");
             return;
         } else {
-            toBeMarked.mark();
+            toBeMarked.setMarked();
         }
         System.out.println("Great! I have marked this task as done!");
         System.out.println(list.get(indexAdjustedTaskNumber));
@@ -104,7 +104,7 @@ public class TaskList {
             System.out.println("This task is already marked as undone!");
             return;
         } else {
-            toBeUnmarked.unmark();
+            toBeUnmarked.setUnmarked();
         }
         System.out.println("Noted. I have marked this task as undone!");
         System.out.println(list.get(indexAdjustedTaskNumber));
