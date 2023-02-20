@@ -1,44 +1,36 @@
 # User Guide
 
+[](/ip/docs/Ui.png)
+
 ## Features 
 
-### Add Tasks
-
-Add tasks to your task list to track
-
-Types of tasks that can be added:
-- Todo : simple task with just a description
-- Deadline: task with a deadline to complete by
-- Event: task that spans over 2 dates
-
-### Delete Tasks
-
-Delete tasks that are already in the task list
-
-### List Tasks
-
-Lists tasks that are current in the task list
+### Reminders
+Upon launching the application, Duke will remind you of the deadline tasks that are due on the current day, and the event tasks that span over the current day.
+To get this list of tasks again, either scroll up or use the []`Check` command](### `Check` - search using date) with today's date.
 
 ## Usage
 
 ### `List` - Lists all tasks
-Lists all statuses of tasks that are currently in the task list
+Lists all statuses of tasks that are currently in the overall task list
 Syntax: `list`
 Outcome: numbered of iists of tasks and status of whether each task is marked
 
 ### `Todo`, `Deadline`, `Event` - Add task of specified type
 Adds a Todo, Deadline or Event task to the task list
 
+#### `Todo` - add task of type todo
 Adds a new simple task with just a description
 Syntax: `Todo <description>`
 Example: `Todo read notes`
 Outcome: task with description "read notes" is added into task list
 
+#### `Deadline` - add task of type deadline
 Adds a new task with a description and a deadline to complete by
 Syntax: `Deadline <description> /<yyyy-MM-ddThh:mm>`
 Example: `Deadline cs2103 iP Submission /2023-02-17T23:59`
 Outcome: task with description "cs2103 iP Submission" and deadline of 17 Feb 2023, 11:59pm is added into the task list
 
+#### `Event` - add task of type event
 Adds a new task with a description that spans over 2 dates
 Syntax: `Event <description> /<yyyy-MM-ddThh:mm> /<yyyy-MM-ddThh:mm>`
 Example: `Event iP Extension /2023-02-18T00:00 /2023-02-20T23:59`
@@ -47,19 +39,21 @@ Outcome: task with description "iP Extension" spanning from 18 Feb 2023, 12am to
 ### `Mark`, `Unmark` - Mark task of specified index as completed or not completed
 Marks task in task list as complete or incomplete
 
-Marks an existing task at specified index of task list as complete.
+#### `Mark` - mark task as complete
+Marks an existing task at specified index of the overall task list as complete.
 Prompt differs if the task was already marked as complete before this command.
 Syntax: `Mark <index>`
 Example: `List` followed by `Mark 1`
 Outcome: task at index 1 of the task list is marked as complete. separate prompt for if the task was already marked as complete.
+
 <details>
     <summary> If task was previously marked as **incomplete** </summary>
 
-U - `List`
-> Currently, your list has 3 tasks.
+> Current list:
 >        1) [T] [ ] todo
 >        2) [D] [ ] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
 >        3) [E] [ ] event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM )
+
 U - `Mark 1`
 > This task is marked as done:
 >        [T] [X] todo
@@ -69,11 +63,11 @@ U - `Mark 1`
 <details>
     <summary> If task was previously marked as **complete** </summary>
 
-U - `List`
-> Currently, your list has 3 tasks.
+> Current list:
 >        1) [T] [X] todo
 >        2) [D] [ ] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
 >        3) [E] [ ] event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM )
+
 U - `Mark 1`
 > This task 
 >        [T] [X] todo
@@ -81,19 +75,21 @@ U - `Mark 1`
 
 </details>
 
-Unmarks an existing task at specified index of task list as incomplete.
+#### `Unmark` - mark as incomplete
+Unmarks an existing task at specified index of the overall task list as incomplete.
 Prompt differs if the task was already marked as incomplete before this command.
 Syntax: `Unmark <index>`
-Example: `List` followed by `Unmark 2`
+Example: `Unmark 2`
 Outcome: task at index 2 of the task list is marked as incomplete. separate prompt for if the task was already marked as incomplete.
+
 <details>
     <summary> If task was previously marked as **incomplete** </summary>
 
-U - `List`
-> Currently, your list has 3 tasks.
+> Current list:
 >        1) [T] [ ] todo
 >        2) [D] [ ] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
 >        3) [E] [ ] event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM )
+
 U - `Unmark 2`
 > This task 
 >       [D] [ ] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
@@ -104,26 +100,61 @@ U - `Unmark 2`
 <details>
     <summary> If task was previously marked as **complete** </summary>
 
-U - `List`
-> Currently, your list has 3 tasks.
+> Current list:
 >        1) [T] [ ] todo
 >        2) [D] [X] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
 >        3) [E] [ ] event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM )
+
 U - `Unmark 2`
 > Okay... Being unproductive I see...:
 >        [D] [ ] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
 
 </details>
 
+### `Delete` - Deletes a task at a specified index
+Deletes an existing task from the current task list
+Syntax: `Delete <index>`
+Example: `Delete 3`
+Outcome: deletes task at index 3 of the overall list
 
-Example of usage: 
+> Current list:
+>        1) [T] [ ] todo
+>        2) [D] [X] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
+>        3) [E] [ ] event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM )
 
-`keyword (optional arguments)`
+U - `Delete 3`
+> The following task has been removed: 
+>        [E] [ ] event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM )
+> Currently, your list has 2 tasks.
 
-Expected outcome:
+### `Find`, `Check` - Searches through task list
+Searches through the task list and returns a list of tasks that match the search term
 
-Description of the outcome.
+#### `Check` - search using date
+Searches for tasks that are due on a date (deadline task) and span over a specific date (event task)
+Syntax: `Check <yyyy-MM-dd>`
+Example: `Check 2023-02-12`
+Outcome: finds all deadline tasks that are due on 12 FEB 2023 and all event tasks that start on or before 12 FEB 2023 and end on or after 12 FEB 2023
 
-```
-expected output
-```
+#### `Find` - search using description
+Searches for tasks that contain a specific search term in the task description
+Syntax: `Find <search term>`
+Example: `Find famil`
+Outcome: finds all tasks that contain the term "famil" (case sensitive)
+
+> Current list:
+>        1) [T] [ ] get family to use Duke
+>        2) [D] [X] homework ( by: 17 FEB 2023, FRI, 11:59PM )
+>        3) [E] [ ] families connect event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM )
+
+U - `Find famil`
+> You have 1 task containing the following search term:
+>        famil
+> 
+>        1) [T] [ ] get family to use Duke
+>        2) [E] [ ] families connect event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM )
+
+### `Bye` - say bye to duke :(
+Ends current session
+Syntax: `Bye`
+Outcome: Duke will be sad to see you leave but duke knows you will return
