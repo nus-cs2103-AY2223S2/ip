@@ -27,12 +27,17 @@ public class FileSystem {
      */
     public FileSystem(String relFilePath) {
         String dirPath = relFilePath.split("/")[0];
+
+        //@@author diatbbin-reused
+        //Reused from https://github.com/4ndrelim/ip/blob/master/src/main/java/duke/storage/FileManagement.java
+        //with modifications
         File dir = new File(dirPath);
         file = new File(relFilePath);
 
         try {
             dir.mkdirs();
             file.createNewFile();
+        //@@author
         } catch (IOException | SecurityException e) {
             System.out.println(e);
         }
