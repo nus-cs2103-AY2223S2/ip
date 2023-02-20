@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.util.Comparator;
-
 /**
  * The class Task encapsulates a task.
  * All objects of class Task have a description on what the task is about.

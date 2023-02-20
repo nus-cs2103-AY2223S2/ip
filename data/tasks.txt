@@ -1,5 +1,1 @@
-[D][ ] return book (by: Jun 15 2019)
-[E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
-[T][ ] borrow book
-[T][ ] join sports club
 [T][ ] read book

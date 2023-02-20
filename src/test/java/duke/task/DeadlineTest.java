@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTest {
+
     @Test
     public void toStringTest() {
         Task t = new Deadline("return book ", "2019-06-15");
