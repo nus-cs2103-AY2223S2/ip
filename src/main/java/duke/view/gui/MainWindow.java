@@ -10,8 +10,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 // Solution adapted from:
-// Jeffrey Lum. "JavaFX tutorial part 4 – Using FXML", SE Education.org
-// https://se-education.org/guides/tutorials/javaFxPart4.html
+// damithc. "JavaFX tutorial part 4 – Using FXML." SE-EDU, 3 Feb 2022,
+// https://se-education.org/guides/tutorials/javaFxPart4.html. MIT License. Retrieved on 20 Feb 2023.
+// License: MIT License (https://opensource.org/licenses/MIT)
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */

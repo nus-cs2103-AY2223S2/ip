@@ -15,8 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 // Solution adapted from:
-// Jeffrey Lum. "JavaFX tutorial part 3 – Interacting with the user", SE Education.org
-// https://se-education.org/guides/tutorials/javaFxPart3.html
+// damithc. "JavaFX tutorial part 3 – Interacting with the user." SE-EDU, 16 Jul 2022,
+// https://se-education.org/guides/tutorials/javaFxPart4.html. MIT License. Retrieved on 20 Feb 2023.
+// License: MIT License (https://opensource.org/licenses/MIT)
 
 /**
  * An example of a custom control using FXML.
