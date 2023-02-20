@@ -1,10 +1,10 @@
-# Saturday User Guide
+# Sunday User Guide
 
 ## Features 
 
 ### Task Creation
 
-Saturday allows users to create 3 different types of tasks:
+Sunday allows users to create 3 different types of tasks:
 * Todos
 * Deadlines
 * Events
@@ -14,7 +14,7 @@ a start and end date and time if the task is an Event.
 
 ### Task Listing
 
-Saturday can list all tasks that are currently saved in the user's list of tasks.
+Sunday can list all tasks that are currently saved in the user's list of tasks.
 
 ### Task Completion
 
@@ -32,11 +32,11 @@ to improve usability and user experience as it reduces cognitive load and elimin
 
 ## Usage
 
-### `hello` - Say hello to Saturday
+### `hello` - Say hello to Sunday
 
-The `hello` command serves as an initializer for Saturday.
+The `hello` command serves as an initializer for Sunday.
 
-This is the **first command** that should be given on every startup. It will request Saturday to attempt
+This is the **first command** that should be given on every startup. It will request Sunday to attempt
 to fetch the saved list of tasks from the previous session, if any.
 
 Example of usage: 
@@ -45,8 +45,8 @@ Example of usage:
 
 Expected outcome:
 
-Saturday will greet the user with a welcome message and state if a save file was successfully loaded.
-Here's an example of Saturday's response to a new user:
+Sunday will greet the user with a welcome message and state if a save file was successfully loaded.
+Here's an example of Sunday's response to a new user:
 
 ```
 Hi! I'm Sunday, pleasure to meet you!
@@ -57,7 +57,7 @@ Start typing away your tasks and I'll note them down accordingly :)
 
 ### `list` - View your list of tasks
 
-The `list` command alerts Saturday to display your current list of tasks.
+The `list` command alerts Sunday to display your current list of tasks.
 
 Example of usage:
 
@@ -89,7 +89,7 @@ Example of usage:
 
 Expected outcome:
 
-Saturday will create and show the created Deadline task along with the number of
+Sunday will create and show the created Deadline task along with the number of
 uncompleted tasks currently in the list of tasks.
 
 The due date is shown in the format _"E, MMM dd yyyy, h:mm aa"_
@@ -112,7 +112,7 @@ Example of usage:
 
 Expected outcome:
 
-Saturday will create and show the created Event task along with the number of
+Sunday will create and show the created Event task along with the number of
 uncompleted tasks currently in the list of tasks.
 
 The event start and end dates are shown in the format _"E, MMM dd yyyy, h:mm aa"_
@@ -133,7 +133,7 @@ Example of usage:
 
 Expected outcome:
 
-Saturday will create and show the created Todo task along with the number of
+Sunday will create and show the created Todo task along with the number of
 uncompleted tasks currently in the list of tasks.
 
 ```
@@ -152,7 +152,7 @@ Example of usage:
 
 Expected outcome:
 
-Saturday will mark and show the completed task along with the number of
+Sunday will mark and show the completed task along with the number of
 uncompleted tasks currently in the list of tasks.
 
 ```
@@ -171,7 +171,7 @@ Example of usage:
 
 Expected outcome:
 
-Saturday will unmark and show the in progress task along with the number of
+Sunday will unmark and show the in progress task along with the number of
 uncompleted tasks currently in the list of tasks.
 
 ```
@@ -190,7 +190,7 @@ Example of usage:
 
 Expected outcome:
 
-Saturday will delete and show the deleted task along with the number of
+Sunday will delete and show the deleted task along with the number of
 uncompleted tasks currently in the list of tasks.
 
 ```
@@ -209,7 +209,7 @@ Example of usage:
 
 Expected outcome:
 
-Saturday will search and show a list of tasks that contains the specified keyword
+Sunday will search and show a list of tasks that contains the specified keyword
 along with the number of uncompleted tasks currently in the list of tasks.
 
 ```
@@ -228,7 +228,7 @@ Example of usage:
 
 Expected outcome:
 
-Saturday will sort the tasks in the list in alphabetical order of their descriptions and list them.
+Sunday will sort the tasks in the list in alphabetical order of their descriptions and list them.
 
 ```
 Here's everything I've noted down for you:
@@ -239,11 +239,11 @@ Here's everything I've noted down for you:
 5. [T][X] Finalise DJ setlist
 ```
 
-### `bye` - Say goodbye to Saturday
+### `bye` - Say goodbye to Sunday
 
-The `bye` command to serves as the terminator for Saturday.
+The `bye` command to serves as the terminator for Sunday.
 
-This is the **final command** that will request Saturday to save the current list of tasks and close itself.
+This is the **final command** that will request Sunday to save the current list of tasks and close itself.
 
 Example of usage:
 
@@ -251,7 +251,7 @@ Example of usage:
 
 Expected outcome:
 
-Saturday will save the current list of tasks and close itself.
+Sunday will save the current list of tasks and close itself.
 
 ```
 Okay, I've save your list for the next session!
