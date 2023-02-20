@@ -1,24 +1,34 @@
-# Duke project template
+# Nook
+> "Time is money, after all. The more you get done, the more you'll earn!" - Tom Nook
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Tom Nook, the seasoned manager of Animal Crossing islands, has now turned his attention to assisting you with managing your tasks in the Nook app. With his expertise and guidance, you can tackle your to-do list with ease and efficiency.
 
-## Setting up in Intellij
+Nook is an app that helps you manage your time. It's,
+- text-based
+- easy to use
+- ~~FAST~~ SUPER FAST to use
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## In order to use it..
+1. Download the JAR file from [here](https://github.com/kimberlybp/ip/releases/download/A-Release/ip.jar)
+2. Double-click it
+3. Refer to this User Guide for the commands
+4. **Let Tom Nook handle the rest!** 😎
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Features
+- [x] List all your tasks
+- [x] Manage Todos, Deadlines and Events
+- [x] Set Priorities for your Tasks
+
+### Devs feel free and play around with the code!
+Here's a preview of the `main` method: 
+```java
+// For GUI
+public static void main(String[] args) {
+    Application.launch(Main.class, args);
+}
+
+// For CLI
+public static void main(String[] args) {
+    new TomNook(PATH).run();
+}
+```
