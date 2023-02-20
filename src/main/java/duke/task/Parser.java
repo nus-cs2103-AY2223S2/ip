@@ -63,7 +63,6 @@ public class Parser {
     public static void splitDeadlineCommand(String[] tempArr) {
         String[] temp2;
         temp2 = tempArr[1].split("/by ");
-        System.out.println(temp2[0]);
         temp2[1] = temp2[1].replace("/", "-");
         arr = new String[tempArr.length + temp2.length - 1];
         arr[0] = tempArr[0];

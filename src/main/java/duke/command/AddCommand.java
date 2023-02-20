@@ -80,8 +80,51 @@ public class AddCommand extends Command {
      * @return Task object
      */
     public Task addToDo(TaskList tasks, Storage storage) {
+
+        if (isTaskDescNotValid()) {
+            return null;
+        }
+
         Task task = new Todo(taskDesc);
         return task;
+    }
+
+    /**
+     * Checks if the task description passed in is valid.
+     * @return boolean
+     */
+    public boolean isTaskDescNotValid() {
+        if (taskDesc.isBlank()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if the deadline passed in is valid.
+     * @return boolean
+     */
+    public boolean isDeadlineNotValid() {
+        if (deadlineDue.isBlank()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the from and by passed in is valid.
+     * @return boolean
+     */
+    public boolean isFromByNotValid() {
+        if (from.isBlank() || by.isBlank()) {
+            return true;
+        }
+
+        if (from.substring(5).isBlank() || by.substring(3).isBlank()) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -92,6 +135,11 @@ public class AddCommand extends Command {
      */
     public Task addDeadline(TaskList tasks, Storage storage) {
         Task task = null;
+
+        if (isDeadlineNotValid() || isTaskDescNotValid()) {
+            return null;
+        }
+
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
             LocalDateTime dueDate = LocalDateTime.parse(deadlineDue, formatter);
@@ -110,6 +158,11 @@ public class AddCommand extends Command {
      * @return Task object
      */
     public Task addEvent(TaskList tasks, Storage storage) {
+
+        if (isFromByNotValid() || isTaskDescNotValid()) {
+            return null;
+        }
+
         Task task = new Event(taskDesc, from.substring(5), by.substring(3));
         return task;
     }
@@ -138,6 +191,10 @@ public class AddCommand extends Command {
             break;
         default:
             break;
+        }
+
+        if (task == null) {
+            return ui.showInvalidCommandMsg();
         }
 
         try {

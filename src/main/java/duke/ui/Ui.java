@@ -201,7 +201,7 @@ public class Ui {
         String currStr = "That was a hard word... but here's the matching tasks in your list:\n";
         int counter = 1;
         for (int i = 0; i < tasklist.size(); i++) {
-            currStr = currStr + counter + "." + tasklist.get(i);
+            currStr = currStr + counter + "." + tasklist.get(i) + "\n";
         }
         return showLine() + currStr + showLine();
     }

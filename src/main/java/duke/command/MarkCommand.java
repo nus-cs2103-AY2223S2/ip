@@ -35,6 +35,9 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        if (taskNum == 0) {
+            return ui.showError("No task 0 here!");
+        }
         if (taskNum - 1 >= tasks.getLength()) {
             return ui.showNonExistentTask(tasks.getLength());
         } else {

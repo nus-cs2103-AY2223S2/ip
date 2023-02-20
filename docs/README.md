@@ -148,7 +148,7 @@ Expected outcome:
 Here are the matching tasks in your list:
 1.[E][ ] bfast with friends (from: tues 9am to: tues 10am)
 ````
-### help - Show the commands available
+### `help` - Show the commands available
 Display all the commands that the users can use and how to use the commands
 
 Example of usage: `help`
@@ -168,7 +168,7 @@ These are the commands ShinChan recognise given his age:
 - bye: shinchan pangkang!
 ````
 
-### bye - Exits the program
+### `bye` - Exits the program
 Exits the program using command `bye`. It will saves all the tasks in a local text file called tasks.txt which can be 
 found in a folder called data 
 
