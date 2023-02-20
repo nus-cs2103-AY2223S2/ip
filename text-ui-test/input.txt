@@ -1,0 +1,13 @@
+todo An initial task!
+deadline Submit an assignment /by Tuesday, 2023
+todo H
+list
+mark 3
+list
+event A class? /from February 2021 /to 2025
+deadline Such Much /by tomorrow
+mark 1
+mark 4
+unmark 1
+list
+bye

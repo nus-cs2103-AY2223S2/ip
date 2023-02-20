@@ -22,3 +22,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+   
+# Acknowledgements
+- Values.java (4-9): Logo art generated on https://patorjk.com/software/taag/#p=display&f=Graffiti&t=PixlBot
+- Values.java (15-17): Color support obtained from https://stackoverflow.com/a/45444716
