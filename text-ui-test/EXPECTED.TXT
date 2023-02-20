@@ -1,3 +1,4 @@
+________________________________________
 Hello from
  ____        _        
 |  _ \ _   _| | _____ 
@@ -5,3 +6,153 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+It's a pleasure to serve you!
+________________________________________
+________________________________________
+This task is added to your list: 
+[T][ ] play games
+Now you have 1 tasks in the list.
+________________________________________
+________________________________________
+This task is added to your list: 
+[D][ ] do homework (by: Monday evening 11pm)
+Now you have 2 tasks in the list.
+________________________________________
+________________________________________
+Here are all of your tasks: 
+1. [T][ ] play games
+2. [D][ ] do homework (by: Monday evening 11pm)
+________________________________________
+________________________________________
+This task is added to your list: 
+[E][ ] group project (from: Sept 2nd 10am to: 12pm)
+Now you have 3 tasks in the list.
+________________________________________
+________________________________________
+This task is added to your list: 
+[E][ ] module registration (from: Monday 10am to: Wednesday 12pm)
+Now you have 4 tasks in the list.
+________________________________________
+________________________________________
+Nice! You have completed this task: 
+ [D][X] do homework (by: Monday evening 11pm)
+________________________________________
+________________________________________
+Nice! You have completed this task: 
+ [E][X] group project (from: Sept 2nd 10am to: 12pm)
+________________________________________
+________________________________________
+Well, you have not finished this task yet: 
+ [D][ ] do homework (by: Monday evening 11pm)
+________________________________________
+________________________________________
+This task is added to your list: 
+[T][ ] sleep
+Now you have 5 tasks in the list.
+________________________________________
+________________________________________
+This task is added to your list: 
+[D][ ] codecrunch (by: Sunday)
+Now you have 6 tasks in the list.
+________________________________________
+________________________________________
+Nice! You have completed this task: 
+ [T][X] play games
+________________________________________
+________________________________________
+Here are all of your tasks: 
+1. [T][X] play games
+2. [D][ ] do homework (by: Monday evening 11pm)
+3. [E][X] group project (from: Sept 2nd 10am to: 12pm)
+4. [E][ ] module registration (from: Monday 10am to: Wednesday 12pm)
+5. [T][ ] sleep
+6. [D][ ] codecrunch (by: Sunday)
+________________________________________
+________________________________________
+DukeException: OOPS!!! Description of todo not found.
+________________________________________
+________________________________________
+DukeException: OOPS!!! Description of deadline not found.
+________________________________________
+________________________________________
+DukeException: OOPS!!! Description of event not found.
+________________________________________
+________________________________________
+Sorry, but I don't know what you means.
+________________________________________
+________________________________________
+Here are all of your tasks: 
+1. [T][X] play games
+2. [D][ ] do homework (by: Monday evening 11pm)
+3. [E][X] group project (from: Sept 2nd 10am to: 12pm)
+4. [E][ ] module registration (from: Monday 10am to: Wednesday 12pm)
+5. [T][ ] sleep
+6. [D][ ] codecrunch (by: Sunday)
+________________________________________
+________________________________________
+DukeException: Deadline of the task not specified.
+________________________________________
+________________________________________
+DukeException: No valid deadline specified.
+________________________________________
+________________________________________
+DukeException: Event time not specified completely.
+________________________________________
+________________________________________
+DukeException: Event time not specified completely.
+________________________________________
+________________________________________
+DukeException: No valid event time specified.
+________________________________________
+________________________________________
+DukeException: No valid event time specified.
+________________________________________
+________________________________________
+Here are all of your tasks: 
+1. [T][X] play games
+2. [D][ ] do homework (by: Monday evening 11pm)
+3. [E][X] group project (from: Sept 2nd 10am to: 12pm)
+4. [E][ ] module registration (from: Monday 10am to: Wednesday 12pm)
+5. [T][ ] sleep
+6. [D][ ] codecrunch (by: Sunday)
+________________________________________
+________________________________________
+DukeException: You have not specified the index of the marking.
+________________________________________
+________________________________________
+DukeException: You are referring to an invalid index.
+________________________________________
+________________________________________
+Sorry, but I don't know what you means.
+________________________________________
+________________________________________
+DukeException: You are referring to an invalid index.
+________________________________________
+________________________________________
+Here are all of your tasks: 
+1. [T][X] play games
+2. [D][ ] do homework (by: Monday evening 11pm)
+3. [E][X] group project (from: Sept 2nd 10am to: 12pm)
+4. [E][ ] module registration (from: Monday 10am to: Wednesday 12pm)
+5. [T][ ] sleep
+6. [D][ ] codecrunch (by: Sunday)
+________________________________________
+________________________________________
+Ok, I will remove this task for you: 
+[E][X] group project (from: Sept 2nd 10am to: 12pm)
+Now you have 5 tasks in the list.
+________________________________________
+________________________________________
+DukeException: You are referring to an invalid index.
+________________________________________
+________________________________________
+Here are all of your tasks: 
+1. [T][X] play games
+2. [D][ ] do homework (by: Monday evening 11pm)
+3. [E][ ] module registration (from: Monday 10am to: Wednesday 12pm)
+4. [T][ ] sleep
+5. [D][ ] codecrunch (by: Sunday)
+________________________________________
+________________________________________
+Goodbye. Hope you have a nice day!
+________________________________________

@@ -1,0 +1,43 @@
+todo play games
+deadline meeting /by 02/05/2023
+event project /from 1/03/2022 /to 25/12/2023
+event group project /from 02/03/2020 /to 05/04/2020
+todo being happy
+mark 2
+list
+search 02/05/2023
+find
+find project
+find nothing
+deadline do homework /by Monday evening 11pm
+list
+event group project /from Sept 2nd 10am /to 12pm
+event module registration /from Monday 10am /to Wednesday 12pm
+mark 2
+mark 3
+unmark 2
+todo sleep
+deadline codecrunch /by Sunday
+mark 1
+list
+todo
+deadline
+event
+blahh blah
+list
+deadline do something
+deadline do something /by
+event do something
+event do something /from A
+event something /from A /to
+event something /from /to BBB
+list
+mark
+unmark 100
+
+mark -3
+list
+delete 3
+delete -100
+list
+bye
