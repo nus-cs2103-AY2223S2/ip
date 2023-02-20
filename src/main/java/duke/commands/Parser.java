@@ -27,6 +27,7 @@ public class Parser {
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_BYE = "bye";
     private static final int COMMAND_INDEX = 0;
+    private static final int BEGINNING_INDEX = 0;
     private static final int DESCRIPTION_INDEX = 1;
     private static final int FIND_KEYWORD_INDEX = 1;
     private static final int FROM_INDEX = 0;
@@ -102,6 +103,13 @@ public class Parser {
         String to = getTime(endIndex);
         return new String[]{from, to};
     }
+
+    private int getEditIndex() {
+        if (command.length() > 0) {
+            return Character.getNumericValue(command.charAt(command.length() - 1)) - 1;
+        }
+        return Parser.BEGINNING_INDEX;
+    }
     
     /**
      * Interprets the command stored internally within the class.
@@ -110,7 +118,7 @@ public class Parser {
      * @throws DukeException when command is invalid.
      */
     public Command process() throws DukeException {
-        int editIndex = Character.getNumericValue(command.charAt(command.length() - 1)) - 1;
+        int editIndex = this.getEditIndex();
         String description = this.getTaskName();
         switch (commandArr[Parser.COMMAND_INDEX]) {
         case Parser.COMMAND_FIND:
@@ -124,6 +132,7 @@ public class Parser {
         case Parser.COMMAND_TODO:
             try {
                 checkLength(description);
+                assert !description.isEmpty() : "task description empty. exception throwing not working";
             } catch (DukeException ex) {
                 throw ex;
             }

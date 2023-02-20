@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,6 +34,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(Ui.getWelcome(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -41,13 +45,7 @@ public class MainWindow extends AnchorPane {
 
     private void catchTermination() {
         if (duke.hasTerminated()) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                DialogBox.getDukeDialog(e.getMessage(), dukeImage);
-            } finally {
-                Platform.exit();
-            }
+            Platform.exit();
         }
     }
 
@@ -59,7 +57,6 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         this.catchTermination();
 
-        assert false : "Testing assertions are enabled";
         String input = userInput.getText();
         String response = duke.getResponse(input);
         assert !response.isEmpty() : "Response string empty";

@@ -9,34 +9,37 @@ import duke.dukeexception.DukeException;
 public class Ui {
     private static final String WELCOME = "Hello! Welcome to Duke. Let's start task tracking!";
     private static final String GOODBYE = "Auf Wiedersehen!";
-    private static final int START = 0;
-    private static final int INCREMENT = 1;
 
     /**
-     * Prints the current list of tasks.
+     * Retrieves the welcome message.
      *
-     * @param tasks The current list of tasks to be printed.
+     * @return a string representing the welcome message.
      */
-    public void printList(TaskList tasks) {
-        String res = "";
-        for (int i = Ui.START; i < tasks.size(); i++) {
-            res += String.format("%d.%s\n", i + Ui.INCREMENT, tasks.get(i));
-        }
-        System.out.println(res);
+    public static String getWelcome() {
+        return Ui.WELCOME;
+    }
+
+    /**
+     * Retrieves the farewell message.
+     *
+     * @return a string representing the farewell message.
+     */
+    public static String getGoodbye() {
+        return Ui.GOODBYE;
     }
 
     /**
      * Prints a welcome message.
      */
     public void printWelcome() {
-        System.out.println(WELCOME);
+        System.out.println(Ui.WELCOME);
     }
 
     /**
      * Prints a farewell message.
      */
     public void printGoodbye() {
-        System.out.println(GOODBYE);
+        System.out.println(Ui.GOODBYE);
     }
 
     /**
@@ -45,7 +48,7 @@ public class Ui {
      * @param command The command to be described.
      */
     public void printCommandMessage(Command command) {
-        System.out.println(command.getResponseOutput());
+        System.out.println(command);
     }
 
     /**

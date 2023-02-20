@@ -38,4 +38,9 @@ public class Add extends Command {
                 + "%s\n",
                 this.task.toString());
     }
+
+    @Override
+    public String toString() {
+        return this.getResponseOutput();
+    }
 }
