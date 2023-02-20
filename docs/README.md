@@ -235,3 +235,12 @@ Expected outcome:
 > 
 > type a command without any parameters to learn more about the command!
 
+### `bye`
+
+Command to exit Duke. Use this command to also save current task list to disk for persistent task data between usage sessions.
+
+## Frequently Asked Questions (F.A.Q)
+
+>My tasks that I gave to Duke aren't showing up in subsequent usage sessions
+- always exit the Duke application by using the `bye` command, as this command simultaneously saves the tasks handed to Duke while exiting for persistent user data.
+- although an option, do not exit the Duke application using the cross in the top right corner of the program if you have not saved your data! 
