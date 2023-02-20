@@ -4,7 +4,7 @@ package kal.kalexception;
  * This class handles exceptions pertaining to invalid commands.
  */
 public class InvalidCommandException extends KalException {
-    private static final String MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String MESSAGE = "meow... I'm trying to understand but my cat brain just can't";
 
     /**
      * Creates an InvalidCommandException object using its default message.
