@@ -9,9 +9,11 @@
 
 ## Quick Start Guide
 1. Download the latest Chad version from (here)[https://github.com/fahim-tazz/ip/releases].
-2. Go to your `Downloads` folder and double click on `chad.jar`.
-3. Type in commands to use Chad.
-4. Enjoy!
+2. Open your Terminal/Command Prompt.
+3. Type `cd Downloads` (or wherever the `chad.jar` file is stored).
+4. Type in `java -jar chad.jar`.
+5. Type in commands to use Chad.
+6. Enjoy!
 
 ---
 
