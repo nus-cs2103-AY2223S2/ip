@@ -121,6 +121,24 @@ Tasks:
 1.[E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
 ```
 
+### `list` - show all tasks 
+
+Display all tasks in the tasklist 
+
+Example of usage: 
+```
+list
+```
+
+Expected outcome:
+
+All tasks will be returned as a list
+```
+Tasks:
+1.[E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
+2.[D][ ] return book (by: Jun 15 2019)
+```
+
 
 
 
