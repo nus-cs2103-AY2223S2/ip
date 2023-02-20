@@ -37,6 +37,9 @@ public class MainWindow extends AnchorPane {
         this.page = page;
     }
 
+    /**
+     * Shows the greeting message.
+     */
     public void showGreeting() {
         String welcome = page.showGreeting();
         dialogContainer.getChildren().add(
