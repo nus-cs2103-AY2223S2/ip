@@ -12,6 +12,7 @@ import commands.Command;
 import commands.CommandType;
 import commands.DeleteCommand;
 import commands.FindCommand;
+import commands.HelpCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
 import commands.ReprioritiseCommand;
@@ -61,6 +62,8 @@ public class Parser {
         switch (commandType) {
         case LIST:
             return new ListCommand();
+        case HELP:
+            return new HelpCommand();
         case MARK:
         case UNMARK:
             index = Integer.parseInt(inputArr[1]) - 1;
