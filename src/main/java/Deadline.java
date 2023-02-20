@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Deadline extends Task {
     private static final String TYPE = "[D]";
@@ -15,21 +14,11 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    public static Deadline createDeadline(Scanner scanner) throws DukeyException {
-        System.out.print("Deadline task name: ");
-        String deadlineName = scanner.nextLine();
-        if (deadlineName.equals("")) {
-            throw new DukeyException("Error!! Deadline task name cannot be empty!!");
-        }
-        System.out.print("Deadline: ");
-        String deadlineTime = scanner.nextLine();
-        if (deadlineTime.equals(""))  {
-            throw new DukeyException("Error!! Deadline time cannot be empty!!");
-        }
+    public static Deadline createDeadline(Ui ui) throws DukeyException {
+        String deadlineName = ui.readTaskName("Deadline");
+        LocalDate deadlineTime = ui.readTime("Deadline");
 
-        LocalDate deadline = DukeyTime.getDateFromString(deadlineTime);
-
-        return new Deadline(deadlineName.strip(), deadline);
+        return new Deadline(deadlineName, deadlineTime);
 
     }
 
@@ -45,7 +34,7 @@ public class Deadline extends Task {
         try {
             deadline = DukeyTime.getDateFromString(deadlineString);
         } catch (DukeyException e) {
-            e.printMessage();
+            e.getMessage();
         }
 
         return new Deadline(name, deadline, isMarked);

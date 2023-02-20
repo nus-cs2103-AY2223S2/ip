@@ -4,10 +4,6 @@ public class DukeyException extends Exception {
         super(message);
     }
 
-    public void printMessage() {
-        System.out.println(this.getMessage());
-        System.out.println("__________________________(-o-)__________________________");
-    }
 
 
 

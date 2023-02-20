@@ -18,25 +18,11 @@ public class Event extends Task {
         this.end = end;
     }
 
-    public static Event createEvent(Scanner scanner) throws DukeyException{
-        System.out.print("Event name: ");
-        String eventName = scanner.nextLine();
-        if (eventName.equals("")) {
-            throw new DukeyException("Error! Event name cannot be empty!");
-        }
-        System.out.print("Event start: ");
-        String eventStartString = scanner.nextLine();
-        if (eventStartString.equals("")) {
-            throw new DukeyException("Error! Please provide a start time!");
-        }
-        System.out.print("Event end: ");
-        String eventEndString = scanner.nextLine();
-        if (eventEndString.equals("")) {
-            throw new DukeyException("Error! Please provide an end time!");
-        }
-
-        return new Event(eventName, DukeyTime.getDateFromString(eventStartString),
-                DukeyTime.getDateFromString(eventEndString));
+    public static Event createEvent(Ui ui) throws DukeyException{
+        String eventName = ui.readTaskName("Event");
+        LocalDate eventStart = ui.readTime("Event start time");
+        LocalDate eventEnd = ui.readTime("Event end time");
+        return new Event(eventName, eventStart, eventEnd);
     }
 
     public static Event createEventFromLog(String[] logStringArray) {
@@ -51,7 +37,7 @@ public class Event extends Task {
             start = DukeyTime.getDateFromString(startString);
             end = DukeyTime.getDateFromString(endString);
         } catch (DukeyException e) {
-            e.printMessage();
+            e.getMessage();
         }
         return new Event(name, start, end, isMarked);
     }

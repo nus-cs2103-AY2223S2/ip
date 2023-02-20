@@ -12,12 +12,8 @@ public class ToDo extends Task {
     }
 
 
-    public static ToDo createToDo(Scanner scanner) throws DukeyException {
-        System.out.print("Todo task name: ");
-        String toDoName = scanner.nextLine();
-        if (toDoName.equals("")) {
-            throw new DukeyException("Error!! ToDo name cannot be empty!");
-        }
+    public static ToDo createToDo(Ui ui) throws DukeyException {
+        String toDoName = ui.readTaskName("ToDo");
         return new ToDo(toDoName);
     }
 

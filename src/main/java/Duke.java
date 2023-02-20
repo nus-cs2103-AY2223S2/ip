@@ -1,159 +1,107 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 
 public class Duke {
-    public static final String BYE_MESSAGE = "Goodbye!! Please return to Dukey again soon!! :)";
+    private Ui ui;
+    private Storage storage;
+    private TaskList taskList;
+
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        this.taskList = new TaskList(ui);
+    }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Welcome welcome!");
-        initiateDukeyList();
-        //echo();
+        Duke duke = new Duke("DukeySave.txt");
+        duke.initiateDukeyList();
+
     }
 
 
-    public static void echo() {
-        System.out.println("Start by typing something and Dukey will echo!! Type bye to exit!! ");
-        Scanner scanner = new Scanner(System.in);
+    public void echo() {
         while (true) {
-            String input = scanner.nextLine();
+            String input = ui.readEchoInput();
             if (input.equals("bye")) {
                 break;
             }
-            System.out.println("Dukey: " + input);
-            if (input.equals("Bye")) {
-                System.out.println("Dukey: Did you mean 'bye'? Type 'bye' to exit!!");
-            }
+            ui.echo(input);
         }
-        System.out.println("\nDukey: " + BYE_MESSAGE);
-        scanner.close();
+        ui.printGoodbyeMessage();
 
     }
 
 
-    public static void initiateDukeyList() {
-        File f = DukeyFile.openFile();
-        TaskList.printInstruction();
-        TaskList itemList = new TaskList();
+    public void initiateDukeyList() {
+        ui.printWelcomeMessage();
+        ui.printInstruction();
         try {
-            itemList.initiate(f);
+            taskList.initiate(storage);
         } catch (FileNotFoundException e) {
-            System.out.println("No saved list found, starting new list.");
+            ui.printExceptionMessage(new DukeyException("No saved list found, starting new list."));
         }
 
-        Scanner scanner = new Scanner(System.in);
+        boolean stillRunning = true;
+        boolean forceStop = false;
 
-        while (true) {
-            System.out.println("_________________________________________________________");
-            System.out.print("Dukey command: ");
-            String input = scanner.nextLine();
-            //add a new todo
-            if (input.strip().equals("todo")) {
-                try {
-                    itemList.addItem(ToDo.createToDo(scanner));
-                } catch(DukeyException e) {
-                    e.printMessage();
+        while (stillRunning && !forceStop) {
+            ui.printLnBreak();
+            ActionEnum actionEnum = ActionEnum.BYE;
+            try {
+                actionEnum = ui.readCommand();
+                switch (actionEnum) {
+                    case TODO:
+                        taskList.addItem(ToDo.createToDo(ui));
+                        break;
+                    case DEADLINE:
+                        taskList.addItem(Deadline.createDeadline(ui));
+                        break;
+                    case EVENT:
+                        taskList.addItem(Event.createEvent(ui));
+                        break;
+                    case MARK:
+                        taskList.mark();
+                        break;
+                    case UNMARK:
+                        taskList.unmark();
+                        break;
+                    case DELETE:
+                        taskList.delete();
+                        break;
+                    case LIST:
+                        taskList.readList();
+                        break;
+                    case CLEARLIST:
+                        taskList.clearList();
+                        break;
+                    case SAVE:
+                        taskList.save(storage);
+                        break;
+                    case CLEARSAVE:
+                        taskList.clearSave(storage);
+                        break;
+                    case BYE:
+                        stillRunning = false;
+                        break;
+                    case FORCESTOP:
+                        forceStop = true;
+                        break;
                 }
-                continue;
+            } catch (DukeyException e) {
+                ui.printExceptionMessage(e);
             }
 
-            //add a new deadline
-            if (input.strip().equals("deadline")) {
-                try {
-                    itemList.addItem(Deadline.createDeadline(scanner));
-                } catch (DukeyException e) {
-                    e.printMessage();
-                }
-                continue;
+            if (!stillRunning) {
+                taskList.save(storage);
+                ui.printGoodbyeMessage();
             }
-
-            //add a new event
-            if (input.strip().equals("event")) {
-                try {
-                    itemList.addItem(Event.createEvent(scanner));
-                } catch (DukeyException e) {
-                    e.printMessage();
-                }
-                continue;
-            }
-
-            //mark
-            if (input.strip().equals("mark")) {
-                try {
-                    itemList.mark(scanner);
-                } catch (DukeyException e) {
-                    e.printMessage();
-                }
-                continue;
-            }
-
-            //unmark
-            if (input.strip().equals("unmark")) {
-                try {
-                    itemList.unmark(scanner);
-                } catch (DukeyException e) {
-                    e.printMessage();
-                }
-                continue;
-            }
-
-            //delete
-            if (input.equals("delete")) {
-                try {
-                    itemList.delete(scanner);
-                } catch (DukeyException e) {
-                    e.printMessage();
-                }
-                continue;
-            }
-
-            //exit
-            if (input.equals("bye")) {
-                itemList.save(f);
-                System.out.println("DukeyList: " + BYE_MESSAGE);
-                break;
-            }
-
-            //list
-            if (input.equals("list")) {
-                itemList.readList();
-                continue;
-            }
-
-            //save
-            if (input.equals("save")) {
-                itemList.save(f);
-                continue;
-            }
-
-            //clearlist
-            if (input.equals("clearList")) {
-                itemList.clearList();
-                continue;
-            }
-
-            //clearSave
-            if (input.equals("clearSave")) {
-                DukeyFile.clearFile(f);
-                continue;
-            }
-
-            //forceStop
-            if (input.equals("forceStop")) {
-                break;
-            }
-
-            System.out.println("Error! Unknown command. Try again!");
 
         }
-        scanner.close();
+
+
+
 
     }
 
