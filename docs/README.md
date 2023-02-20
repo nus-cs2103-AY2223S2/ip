@@ -1,9 +1,9 @@
-# Tigerlily ❀
-Tigerlily is a to-do list chatbot, aimed at helping to ogranize your life better.
-
+# Tigerlily
+Tigerlily, a to-do list chatbot, aims at helping to ogranize your life better.
 ![image](readme.png)
 
-## How to use Tigerlily
+-----
+## Using Tigerlily
 ### 1. `deadline` - Add a Deadline
 
 Adds a Deadline to Tigerlily
@@ -15,6 +15,8 @@ Format:
 Example:
 
 `deadline bake cake /by 2023-02-14`
+
+-----
 
 ### 2. `event` - Add an Event
 
@@ -28,6 +30,8 @@ Example:
 
 `event bake sale /from 2023-02-14 14:00 /to 2023-02-14 16:00`
 
+-----
+
 ### 3. `todo` - Add a ToDo
 
 Adds a ToDo to Tigerlily
@@ -39,6 +43,8 @@ Format:
 Example: 
 
 `todo buy ingredients`
+
+-----
 
 ### 4. `find` - Find Tasks
 
@@ -60,6 +66,8 @@ here are the task(s) which match your query:
 2. [E][] bake sale (from: 14/02/2023 14:00 to 16:00)
 ```
 
+-----
+
 ### 5. `list` - List Tasks
 
 Lists all Tasks in Tigerlily
@@ -76,6 +84,8 @@ here's your list:
 2. [E][] bake sale (from: 14/02/2023 14:00 to 16:00)
 3. [T][] buy ingredients
 ```
+
+-----
 
 ### 6. `delete` - Delete a Task
 
@@ -97,6 +107,8 @@ okay, this task has been removed: [D][] bake cake (by:
 the list now has 2 task(s) left
 ```
 
+-----
+
 ### 7. `mark` - Mark a Task as Completed
 
 Marks corresponding Task as completed
@@ -115,6 +127,8 @@ Expected outcome:
 well done! you've completed this task: [D][X] bake cake (by:
 14 February 2023)
 ```
+
+-----
 
 ### 8. `unmark` - Unmark a Task as Completed
 
@@ -135,6 +149,8 @@ oops...this task is now marked as not done yet: [D][] bake cake (by:
 14 February 2023)
 ```
 
+-----
+
 ### 9. `help` - Get Help
 
 Displays guide for Tigerlily users on possible commands
@@ -142,6 +158,8 @@ Displays guide for Tigerlily users on possible commands
 Format:
 
 `help`
+
+-----
 
 ### 10. `bye` - Exit Tigerlily
 
