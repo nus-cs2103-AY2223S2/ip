@@ -28,7 +28,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void shouldCorrectlyParseSomeCommand() {
+    public void parseCommand_validInput_shouldReturn() {
         assertEquals(parseCommand("list"), new ListCommand());
         assertEquals(parseCommand("bye"), new ExitCommand());
         assertEquals(parseCommand("todo eat"), new AddCommand(new TodoTask("eat")));
@@ -48,7 +48,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void shouldThrowForEmptyDescription() {
+    public void parseCommand_emptyDescription_shouldThrow() {
         assertThrows(EXPECTED_EXCEPTION_CLASS, () -> parseCommand("todo"));
         assertThrows(EXPECTED_EXCEPTION_CLASS,
                 () -> parseCommand("deadline --by 2023-01-01"));
@@ -58,7 +58,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void shouldThrowForInvalidIntArgument() {
+    public void parseCommand_invalidInt_shouldThrow() {
         assertThrows(EXPECTED_EXCEPTION_CLASS, () -> parseCommand("mark 10v"));
         assertThrows(EXPECTED_EXCEPTION_CLASS, () -> parseCommand("delete 10v"));
     }
