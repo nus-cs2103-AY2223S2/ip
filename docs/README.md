@@ -28,6 +28,10 @@ Able to mark and unmark tasks as done or undone
 
 Supports easy update of tasks without needing for a re-entry
 
+### Find tasks
+
+Supports easy search of added tasks
+
 ## Usage
 
 ### `todo TASK_DESC` - Adds a task
