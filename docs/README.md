@@ -2,7 +2,11 @@
 Duke is an **simple interactive application for managing your to-do list, tasks, schedules, etc**
 
 ## Features 
-
+- Adding/Deleting tasks with 3 different types
+- Marking/unmarking a task in the list
+- Finding tasks based on a keyword
+- Seeing an in-app help message to get used to the application.
+- 
 ### Adding a ToDo task
 Adds a To do task to your list in chatbot.
 
@@ -21,7 +25,7 @@ Examples:
 - `deadline CS2103T week 3 quizz /by 2023-01-17`
 - `deadline CA1 essay /by 2023-03-12`
 
-## Adding an Event task
+### Adding an Event task
 Adds an Event task to your list in chatbot.
 
 Format: `event [task name] /from [yyyy-MM-dd] /to [yyyy-MM-dd]`
