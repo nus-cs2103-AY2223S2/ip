@@ -6,11 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.*;
 
 import javafx.util.Pair;
 
@@ -152,8 +148,6 @@ public class Storage {
         }
     }
 
-
-
     /**
      * Remove a task from the keyword and schedule database
      *
@@ -163,8 +157,6 @@ public class Storage {
      * @return a new {@code Storage} with the task removed from the keyword and schedule database
      */
 
-    // modify to also removed tasks from schedule database
-
     public Storage removeFromStorage(Task task) {
         removeFromKeywordStorage(task);
         removeFromScheduleStorage(task);
@@ -172,7 +164,8 @@ public class Storage {
     }
 
     private void removeFromKeywordStorage(Task task) {
-        String removedTask = task.toString();
+        String removedTask = task.getNature() +
+                " " + task.getAction() + " " + task.getTimeInfo();
         for (String keyword : removedTask.split(" ")) {
             if (this.keywordDatabase.containsKey(keyword)) {
                 TaskList currentList = this.keywordDatabase.get(keyword);
@@ -180,13 +173,52 @@ public class Storage {
                 if (index >= 0) {
                     currentList = currentList.removeTask(index);
                 }
-                this.keywordDatabase.put(keyword, currentList);
+
+                if (currentList.getSize() > 0) {
+                    this.keywordDatabase.put(keyword, currentList);
+                } else {
+                    this.keywordDatabase.remove(keyword);
+                }
             }
         }
     }
 
     private void removeFromScheduleStorage(Task task) {
+        List<LocalDateTime> datesOfTasks = task.getDates();
+        if (datesOfTasks.size() > 1) { //EVENT
+            List<LocalDateTime> listOfDate = new ArrayList<>();
+            LocalDateTime dateBegin = datesOfTasks.get(0);
+            LocalDateTime dateEnd = datesOfTasks.get(1);
 
+            while (dateBegin.compareTo(dateEnd) < 0) {
+                listOfDate.add(dateBegin);
+                dateBegin = dateBegin.plusDays(1);
+            }
+            datesOfTasks = listOfDate;
+        }
+
+        for (LocalDateTime date : datesOfTasks) {
+            String searchDate = date.toLocalDate().toString();
+            assert taskScheduleOnDates.containsKey(searchDate);
+
+            PriorityQueue<Pair<LocalDateTime, Task>> scheduleOnDate = taskScheduleOnDates.get(searchDate);
+            Pair<LocalDateTime, Task> deletedPair = new Pair<>(datesOfTasks.get(0), task);
+
+            for (Pair<LocalDateTime, Task> pair : scheduleOnDate) {
+                if (pair.getKey().equals(datesOfTasks.get(0)) &&
+                        pair.getValue().toString().equals(task.toString())) {
+                    deletedPair = pair;
+                    break;
+                }
+            }
+            scheduleOnDate.remove(deletedPair);
+
+            if (scheduleOnDate.size() == 0) {
+                taskScheduleOnDates.remove(searchDate);
+            } else {
+                taskScheduleOnDates.put(searchDate, scheduleOnDate);
+            }
+        }
     }
 
 
@@ -225,7 +257,7 @@ public class Storage {
     private void addTaskToSchedule(Task task) {
         List<LocalDateTime> eventDates = task.getDates();
 
-        if (task.getNature().equals("D")) {
+        if (task.getNature().equals("DEADLINE")) {
             LocalDateTime deadlineDate = eventDates.get(0);
             LocalDate convertedDate = deadlineDate.toLocalDate();
 
@@ -240,7 +272,7 @@ public class Storage {
             currentQueue.add(new Pair<LocalDateTime, Task>(deadlineDate, task));
             this.taskScheduleOnDates.put(date, currentQueue);
 
-        } else if (task.getNature().equals("E")) {
+        } else if (task.getNature().equals("EVENT")) {
 
             LocalDateTime dateBeginUnformatted = eventDates.get(0);
             LocalDate dateBeginFormatted = dateBeginUnformatted.toLocalDate();
@@ -248,8 +280,9 @@ public class Storage {
             LocalDateTime dateEndUnformatted = eventDates.get(1);
             LocalDate dateEndFormatted = dateEndUnformatted.toLocalDate();
 
-            while (dateBeginFormatted.compareTo(dateEndFormatted) != 0) {
+            while (dateBeginFormatted.compareTo(dateEndFormatted) <= 0) {
                 String searchDate = dateBeginFormatted.toString();
+                System.out.println(searchDate);
                 PriorityQueue<Pair<LocalDateTime, Task>> currentQueue;
                 if (this.taskScheduleOnDates.containsKey(searchDate)) {
                     currentQueue = this.taskScheduleOnDates.get(searchDate);
@@ -273,6 +306,10 @@ public class Storage {
      */
 
     public PriorityQueue<Pair<LocalDateTime, Task>> getTaskScheduleOnDates(String searchDate) {
-        return this.taskScheduleOnDates.get(searchDate);
+        if (this.taskScheduleOnDates.containsKey(searchDate)) {
+            return this.taskScheduleOnDates.get(searchDate);
+        } else {
+            return new PriorityQueue<>();
+        }
     }
 }
