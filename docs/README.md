@@ -72,7 +72,7 @@ Got it. I've added this task:
 Now I have 3 tasks in the list.
 ```
 
-### `duration description /need start time` - Add task with duration
+### `duration description /needs start time` - Add task with duration
 
 Add a task with the given description and duration.
 
