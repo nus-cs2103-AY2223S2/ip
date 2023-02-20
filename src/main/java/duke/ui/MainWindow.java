@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ *
  */
 public class MainWindow extends AnchorPane {
 
@@ -27,8 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Corgi.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Teddy.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     @FXML
     public void initialize() {
@@ -40,11 +40,6 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getUi().print_greet_msg(), dukeImage));
     }
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.
-     * Duke's reply and then appends them to the dialog container.
-     * Clears the user input after processing.
-     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -65,7 +60,7 @@ public class MainWindow extends AnchorPane {
     private void closeDuke() {
         userInput.setOnAction(null);
         sendButton.setOnAction(null);
-        PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
         delay.setOnFinished(event -> System.exit(0));
         delay.play();
     }

@@ -35,20 +35,17 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         Rectangle rectangle = new Rectangle(
-                displayPicture.getFitWidth() / 1.3, displayPicture.getFitHeight() / 1.3
+                displayPicture.getFitWidth() / 1.4, displayPicture.getFitHeight() / 1.4
         );
         rectangle.setArcWidth(100);
         rectangle.setArcHeight(100);
         rectangle.setStroke(Color.BLUEVIOLET);
-        rectangle.setStrokeWidth(5);
+        rectangle.setStrokeWidth(6);
         displayPicture.setClip(rectangle);
         displayPicture.setPreserveRatio(true);
         displayPicture.setImage(img);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
