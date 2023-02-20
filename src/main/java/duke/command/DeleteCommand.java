@@ -29,6 +29,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (deleteIdx < 1 || deleteIdx >= tasks.size()) {
+            throw new DukeException("The task with the given index does not exist.");
+        }
         String res = tasks.delete(deleteIdx);
         return res;
     }

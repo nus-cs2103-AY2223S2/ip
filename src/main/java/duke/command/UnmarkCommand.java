@@ -29,11 +29,11 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.unmarkIdx >= tasks.size()) {
+        if (unmarkIdx < 1 || unmarkIdx >= tasks.size()) {
             throw new DukeException(
                 "The task with the given index does not exist.");
         }
-        String res = tasks.getTask(this.unmarkIdx).unmark();
+        String res = tasks.getTask(unmarkIdx).unmark();
         return res;
     }
 

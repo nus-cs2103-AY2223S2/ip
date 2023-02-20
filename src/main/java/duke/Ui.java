@@ -17,8 +17,8 @@ public class Ui {
     /**
      * Prints the greeting message.
      */
-    public String greeting() {
-        return "Hello from Duke!";
+    public static String greeting() {
+        return "Woof! What would you want to do today?\nPlease enter 'guide' for help!";
     }
 
     /**
@@ -40,7 +40,7 @@ public class Ui {
      * Prints the user guide for different commands of Duke.
      */
     public String showGuide() {
-        String guide = "";
+        String guide = "Woof! You can try these commands \n\n";
         guide += "list\n";
         guide += "todo (content)\n";
         guide += "deadline (content) /by (dd/MM/yyyy HH:mm)\n";
@@ -48,6 +48,7 @@ public class Ui {
         guide += "mark (index)\n";
         guide += "unmark (index)\n";
         guide += "delete (index)\n";
+        guide += "delete all\n";
         guide += "bye\n";
         return guide;
     }
@@ -55,7 +56,7 @@ public class Ui {
     /**
      * Prints the farewell message.
      */
-    public String end() {
-        return "Bye. Hope to see you again soon!";
+    public static String end() {
+        return "Woof! Hope to see you again soon!";
     }
 }

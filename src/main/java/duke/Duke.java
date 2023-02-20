@@ -39,7 +39,6 @@ public class Duke {
             res += c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             res += ui.showError(e);
-        } finally {
         }
         try {
             storage.writeToFile(tasks.toTxtString());
