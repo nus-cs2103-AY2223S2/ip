@@ -1,8 +1,10 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.time.LocalDateTime;
+
+import java.util.List;
+
 
 public class Task {
     protected final int taskNumber;
@@ -18,25 +20,25 @@ public class Task {
     }
 
     public void markAsDone() {
-        System.out.println("\t____________________________________________________________" +
-                "\n\t Nice! I've marked this task as done:\n" +
-                "\t  " + "[X]" + " " + this.task +
-                "\n\t____________________________________________________________");
+        System.out.println("\t____________________________________________________________"
+                + "\n\t Nice! I've marked this task as done:\n"
+                + "\t  " + "[X]" + " " + this.task
+                + "\n\t____________________________________________________________");
     }
 
     public void unmarkAsUndone() {
-        System.out.println("\t____________________________________________________________" +
-                "\n\t OK, I've marked this task as not done yet:\n" +
-                "\t  " + "[ ]" + " " + this.task +
-                "\n\t____________________________________________________________");
+        System.out.println("\t____________________________________________________________"
+                + "\n\t OK, I've marked this task as not done yet:\n"
+                + "\t  " + "[ ]" + " " + this.task
+                + "\n\t____________________________________________________________");
     }
 
     public void printDelete(List<Task> allTasks) {
         int allTaskSize = allTasks.size() - 1;
-        System.out.println("\t____________________________________________________________" +
-                "\n\t Noted. I've removed this task:" + "\n\t   " +
-                this.getTaskStatus() + " " + this.task +
-                "\n\t Now you have " + allTaskSize + " tasks in the list.");
+        System.out.println("\t____________________________________________________________"
+                + "\n\t Noted. I've removed this task:" + "\n\t   "
+                + this.getTaskStatus() + " " + this.task
+                + "\n\t Now you have " + allTaskSize + " tasks in the list.");
     }
 
     public int getTaskNumber() {

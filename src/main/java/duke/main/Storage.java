@@ -1,10 +1,15 @@
 package duke.main;
+
 import java.io.*;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
+
 import java.nio.file.Paths;
+
 import duke.task.*;
 
 public class Storage {
@@ -82,15 +87,15 @@ public class Storage {
             String content = "T / " + task.getTaskStatus() + " / " + task.getTask() + "\n";
             buffer.write(content);
         } else if (command.startsWith("deadline")) {
-            String content = "D / " + task.getTaskStatus() + " / " +
-                    task.getTask() + " / " +
-                    task.getDeadline().format(dateTimeFormatter1) + "\n";
+            String content = "D / " + task.getTaskStatus() + " / "
+                    + task.getTask() + " / "
+                    + task.getDeadline().format(dateTimeFormatter1) + "\n";
             buffer.write(content);
         } else if (command.startsWith("event")) {
-            String content = "E / " + task.getTaskStatus() + " / " +
-                    task.getTask() + " / " +
-                    task.getEventStartTime().format(dateTimeFormatter1) + "-" +
-                    task.getEventEndTime().format(dateTimeFormatter1) + "\n";
+            String content = "E / " + task.getTaskStatus() + " / "
+                    + task.getTask() + " / "
+                    + task.getEventStartTime().format(dateTimeFormatter1) + "-"
+                    + task.getEventEndTime().format(dateTimeFormatter1) + "\n";
             buffer.write(content);
         } else if (command.startsWith("mark")) {
             FileReader file2 = new FileReader(file);
@@ -104,14 +109,14 @@ public class Storage {
             if (task.getTaskType().equals("[T]")) {
                 unchangedTasks = unchangedTasks + "T / [X] / " + task.getTask() + "\n";
             } else if (task.getTaskType().equals("[D]")) {
-                unchangedTasks = unchangedTasks + "D / [X] / " +
-                        task.getTask() + " / " +
-                        task.getDeadline().format(dateTimeFormatter1) + "\n";
+                unchangedTasks = unchangedTasks + "D / [X] / "
+                        + task.getTask() + " / "
+                        + task.getDeadline().format(dateTimeFormatter1) + "\n";
             } else if (task.getTaskType().equals("[E]")) {
-                unchangedTasks = unchangedTasks + "E / [X] / " +
-                        task.getTask() + " / " +
-                        task.getEventStartTime().format(dateTimeFormatter1) + "-" +
-                        task.getEventEndTime().format(dateTimeFormatter1) + "\n";
+                unchangedTasks = unchangedTasks + "E / [X] / "
+                        + task.getTask() + " / "
+                        + task.getEventStartTime().format(dateTimeFormatter1) + "-"
+                        + task.getEventEndTime().format(dateTimeFormatter1) + "\n";
             }
             bufferedReader.readLine();
             for (int i = taskIndex + 1; i <= taskList.getNumberOfTask(); i++) {
@@ -133,14 +138,14 @@ public class Storage {
             if (task.getTaskType().equals("[T]")) {
                 unchangedTasks = unchangedTasks + "T / [ ] / " + task.getTask() + "\n";
             } else if (task.getTaskType().equals("[D]")) {
-                unchangedTasks = unchangedTasks + "D / [ ] / " +
-                        task.getTask() + " / " +
-                        task.getDeadline().format(dateTimeFormatter1) + "\n";
+                unchangedTasks = unchangedTasks + "D / [ ] / "
+                        + task.getTask() + " / "
+                        + task.getDeadline().format(dateTimeFormatter1) + "\n";
             } else if (task.getTaskType().equals("[E]")) {
-                unchangedTasks = unchangedTasks + "E / [ ] / " +
-                        task.getTask() + " / " +
-                        task.getEventStartTime().format(dateTimeFormatter1) + "-" +
-                        task.getEventEndTime().format(dateTimeFormatter1) + "\n";
+                unchangedTasks = unchangedTasks + "E / [ ] / "
+                        + task.getTask() + " / "
+                        + task.getEventStartTime().format(dateTimeFormatter1) + "-"
+                        + task.getEventEndTime().format(dateTimeFormatter1) + "\n";
             }
             bufferedReader.readLine();
             for (int i = taskIndex + 1; i <= taskList.getNumberOfTask(); i++) {

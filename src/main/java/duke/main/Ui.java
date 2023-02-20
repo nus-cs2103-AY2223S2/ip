@@ -1,8 +1,11 @@
 package duke.main;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 import java.util.Scanner;
+
 import duke.task.*;
 
 public class Ui {
@@ -16,10 +19,10 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("\t____________________________________________________________" +
-                "\n\t Hello! I'm Duke\n" +
-                "\t What can I do for you?" +
-                "\n\t____________________________________________________________");
+        System.out.println("\t____________________________________________________________"
+                + "\n\t Hello! I'm Duke\n"
+                + "\t What can I do for you?"
+                + "\n\t____________________________________________________________");
     }
 
     public void printCommandList(List<Task> allTasks) {
@@ -32,17 +35,13 @@ public class Ui {
             Task task = allTasks.get(i);
             String time = "";
             if (task.getTaskType().equals("[D]")) {
-                time = " (by: " +
-                        task.getDeadline().format(dateTimeFormatter1) + ")";
+                time = " (by: "
+                        + task.getDeadline().format(dateTimeFormatter1) + ")";
             } else if (task.getTaskType().equals("[E]")) {
-                time = " (from: " +
-                        task.getEventStartTime().format(dateTimeFormatter1)
-                        + " to: "
-                        + task.getEventEndTime().format(dateTimeFormatter1)
-                        + ")";
+                time = " (from: " + task.getEventStartTime().format(dateTimeFormatter1)
+                        + " to: " + task.getEventEndTime().format(dateTimeFormatter1) + ")";
             }
-            System.out.println("\t " + numbering + "." +
-                    task.getTaskType() + task.getTaskStatus() + " "
+            System.out.println("\t " + numbering + "." + task.getTaskType() + task.getTaskStatus() + " "
                     + task.getTask() + time);
         }
 
@@ -58,31 +57,29 @@ public class Ui {
         for (int i = 0; i < allTasks.getNumberOfTask(); i++) {
             Task task = allTasks.getTask(i);
             String time = "";
-            if (task.getTaskType().equals("[D]") &&
-                    task.getDate().equals(dateTime)) {
-                time = " (by: " +
-                        task.getDeadline().format(dateTimeFormatter1) + ")";
-            } else if (task.getTaskType().equals("[E]") &&
-                    task.getDate().equals(dateTime)) {
-                time = " (from: " +
-                        task.getEventStartTime().format(dateTimeFormatter1)
+            if (task.getTaskType().equals("[D]") && task.getDate().equals(dateTime)) {
+                time = " (by: "
+                        + task.getDeadline().format(dateTimeFormatter1) + ")";
+            } else if (task.getTaskType().equals("[E]") && task.getDate().equals(dateTime)) {
+                time = " (from: "
+                        + task.getEventStartTime().format(dateTimeFormatter1)
                         + " to: "
                         + task.getEventEndTime().format(dateTimeFormatter1)
                         + ")";
             } else {
                 continue;
             }
-            System.out.println("\t " + numbering + "." +
-                    task.getTaskType() + task.getTaskStatus() + " "
+            System.out.println("\t " + numbering + "."
+                    + task.getTaskType() + task.getTaskStatus() + " "
                     + task.getTask() + time);
             numbering += 1;
         }
     }
 
     public void printByeMessage() {
-        System.out.println("\t____________________________________________________________" +
-                "\n\t Bye. Hope to see you again soon!" +
-                "\n\t____________________________________________________________");
+        System.out.println("\t____________________________________________________________"
+                + "\n\t Bye. Hope to see you again soon!"
+                + "\n\t____________________________________________________________");
     }
 
     public String getCommand() {
