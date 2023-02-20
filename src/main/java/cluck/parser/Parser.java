@@ -19,7 +19,7 @@ import cluck.messages.Messages;
 
 /**
  * Parser class takes user input and parses it into commands
- * that can be executed by Cluck in other packages.
+ * that can be executed by Cluck.
  */
 public class Parser {
     private static final String MAKE_DEADLINE = "deadline";
@@ -55,7 +55,10 @@ public class Parser {
     /**
      * Takes the string input of the user and converts it into an executable command.
      *
-     * @return subtype of Command interface
+     * @param userInput takes userInput from Ui class and parses it into a command.
+     * @return subtype of Command interface.
+     * @throws MissingArgumentException if either flags, descriptions, or task indexes are missing
+     * @throws IncorrectArgumentException if index given is not a number or out of the task list range
      */
     public static Command commandFactory(String userInput) throws MissingArgumentException, IncorrectArgumentException {
         String[] words = userInput.split(" ");

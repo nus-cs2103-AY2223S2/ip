@@ -11,13 +11,15 @@ import cluck.ui.Ui;
 
 
 public class Cluck {
-    private TaskList taskList;
-    private Ui ui;
+    private final TaskList taskList;
+    private final Ui ui;
     private boolean isRunning = true;
-    private Storage storage;
+    private final Storage storage;
 
     /**
      * Cluck class contains tasklist, User interface and parser needed.
+     *
+     * @param filePath path of saved path as String
      */
     public Cluck(String filePath) {
         this.ui = new Ui();
