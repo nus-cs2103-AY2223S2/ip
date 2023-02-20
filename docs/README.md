@@ -38,7 +38,8 @@ Eg. deadline Finish CS2100 Quiz /by 2021-01-02
 ```
 
 Expected output:
-```Got it. I've added this task: 
+```
+Got it. I've added this task: 
 [D][] Finish CS2100 Quiz (02/01/2021)
 Priority:
 Now you have 2 tasks in the list.
@@ -51,7 +52,8 @@ event <description> /from <start> /to <end>
 Eg. event Industry Talk /from 03/06/2021 2pm /to 03/06/2021 4pm
 ```
 Expected output:
-```Got it. I've added this task: 
+```
+Got it. I've added this task: 
 [E][] Industry Talk (from: 03/06/2021 2pm to: 03/06/2021 4pm)
 Priority:
 Now you have 3 tasks in the list.
@@ -64,7 +66,8 @@ Command:
 `list`
 
 Expected output:
-```Here are the tasks in your list: 
+```
+Here are the tasks in your list: 
 1. [T][] Read Book
 Priority:
 2. [D][] CS2100 Quiz (02/01/2021)
