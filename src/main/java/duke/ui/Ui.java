@@ -39,7 +39,6 @@ public class Ui {
 
     /**
      * Closes scanner object.
-     *
      */
     public void close() {
         sc.close();

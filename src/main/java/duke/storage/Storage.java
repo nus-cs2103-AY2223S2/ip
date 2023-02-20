@@ -34,6 +34,11 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Saves the user's existing contacts into a .txt file.
+     *
+     * @param contactList List of contacts to be saved from the user.
+     */
 
     public void saveContacts(ContactList contactList) {
         try {
@@ -137,6 +142,11 @@ public class Storage {
         return tasklist;
     }
 
+    /**
+     * Loads an existing user's contacts into the contact list.
+     *
+     * @return The list of user's existing contacts.
+     */
     public ContactList loadContacts() {
         ContactList contactList = new ContactList(100);
         try {
