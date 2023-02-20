@@ -98,6 +98,19 @@ public class Parser {
                         UI.horizontalLine();
                         break;
                     }
+
+                    case FIND: {
+                        if (userInputComponents.length != 2) {
+                            System.out.println("You have to enter a keyword to find a task with a match!");
+                            return;
+                        }
+                        String keyword = userInputComponents[1].strip();
+                        UI.horizontalLine();
+                        list.findTask(keyword);
+                        UI.horizontalLine();
+                        break;
+
+                    }
                     default: {
                         System.out.println("You may have accidentally entered in an invalid command. Please re-enter!");
                     }
