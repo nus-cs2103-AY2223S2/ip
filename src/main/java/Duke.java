@@ -1,8 +1,66 @@
-import java.util.*;
+import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 public class Duke {
-    public static Scanner sc = new Scanner(System.in);
+
     public static ArrayList<Task> lst = new ArrayList<Task>();
+
+    public static File dataDir = new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "lists");
+    public static File fileAddress = new File(System.getProperty("user.dir") + System.getProperty("file.separator")
+            + "lists" + System.getProperty("file.separator") + "taskList.txt");
+
+    public static Scanner sc = new Scanner(System.in);
+
+    public static void checkFile() {
+        try {
+            if (!dataDir.exists()) {
+                dataDir.mkdir();
+            }
+            if (!fileAddress.exists()) {
+                fileAddress.createNewFile();
+            }
+        } catch(IOException e) {
+            System.out.println("Something is wrong with the universe");
+        }
+
+    }
+    public static void loadData() {
+        try {
+            Scanner sf = new Scanner(fileAddress);
+            while (sf.hasNext()) {
+                add_to_list(sf.nextLine());
+            }
+        } catch(IOException e) {
+            System.out.println("Something is wrong with the universe");
+        } catch(InvalidCommandException e) {
+            System.out.println("Something is wrong with the universe");
+        } catch(NoDescriptionException e) {
+            System.out.println("Something is wrong with the universe");
+        }
+
+    }
+
+    public static void storeData() {
+        try {
+            FileWriter fb = new FileWriter(fileAddress);
+            fb.write("");
+            fb.close();
+
+            FileWriter fw = new FileWriter(fileAddress, true);
+
+            for(int i = 0; i < lst.size(); i++) {
+                fw.write(lst.get(i).toString() + "\n");
+            }
+
+            fw.close();
+        } catch(IOException e) {
+            System.out.println("Something is wrong with the universe");
+        }
+
+    }
     public static void add_to_list(String str) throws InvalidCommandException, NoDescriptionException{
 
         if((str.split(" ", 2).length == 1)) {
@@ -58,10 +116,12 @@ public class Duke {
         else if((str.split(" ", 2)[0]).equals("mark")) {
             mark(lst.get(Integer.parseInt((str.split(" ", 2)[1])) - 1));
             reply();
+            storeData();
         }
         else if((str.split(" ", 2)[0]).equals("unmark")) {
             unmark(lst.get(Integer.parseInt((str.split(" ", 2)[1])) - 1));
             reply();
+            storeData();
         }
         else if((str.split(" ", 2)[0]).equals("delete")) {
             System.out.println("Noted. I've removed this task:");
@@ -69,10 +129,12 @@ public class Duke {
             lst.remove(Integer.parseInt((str.split(" ", 2)[1])) - 1);
             System.out.println("Now you have " + lst.size() + " tasks in the list.");
             reply();
+            storeData();
         }
         else {
             try {
                 add_to_list(str);
+                storeData();
             }
             catch(InvalidCommandException e) {
                 System.out.println("the command is invalid");
@@ -87,6 +149,8 @@ public class Duke {
     public static void main(String[] args) {
         String welcome_msg = "Hello my name is Thanos, my hobbies are helping people maintain their schedule and " +
                 "destroying galaxies.";
+        checkFile();
+        loadData();
         System.out.println(welcome_msg);
         reply();
     }
