@@ -46,11 +46,11 @@ public class MainWindow extends AnchorPane {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                     "/view/MainWindow.fxml"));
-            fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
             fxmlLoader.load();
         } catch (IOException exception) {
-            exception.printStackTrace();;
+            exception.printStackTrace();
         }
     }
 
@@ -73,6 +73,8 @@ public class MainWindow extends AnchorPane {
         Greeting greeting = new Greeting();
         String response = UserInterface.printGuiLogo();
         String toPrintOut = greeting.toString();
+        System.out.println(DialogBox.getDukeDialog(response, dukeImage));
+        System.out.println("I ran");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage),
                 DialogBox.getDukeDialog(toPrintOut, dukeImage));
@@ -120,7 +122,6 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void handleUserInput() {
-        getScene().getWindow().sizeToScene();
         if (this.firstTimeRunningDukeFlag < 0) {
             firstTimeRunningDukeFlag = runDuke();
 
@@ -157,7 +158,6 @@ public class MainWindow extends AnchorPane {
                         DialogBox.getUserDialog(input, userImage));
 
                 Storage.saveProgressGui(input, this.currentEvent.getTaskList());
-                System.exit(0);
             }
         } else {
             return;
