@@ -42,11 +42,11 @@ public class TaskList {
      *
      * @param newTask a duke.Task object encapsulating the new task being added.
      */
-    public void addTask(Task newTask) {
+    public String addTask(Task newTask) {
         int size = tasks.size();
         tasks.add(newTask);
         Storage.writeFile(tasks);
-        Ui.getAddTaskMessage(newTask, size);
+        return Ui.getAddTaskMessage(newTask, size);
     }
 
     /**
@@ -54,12 +54,12 @@ public class TaskList {
      *
      * @param command User input specifying which task to mark.
      */
-    public void mark(String command) {
+    public String mark(String command) {
         int index = Integer.valueOf(command.substring(5)) - 1;
         Task target = tasks.get(index);
         target.mark();
         Storage.writeFile(tasks);
-        Ui.getMarkTaskMessage(target);
+        return Ui.getMarkTaskMessage(target);
     }
 
     /**
@@ -67,12 +67,12 @@ public class TaskList {
      *
      * @param command User input specifying which task to unmark.
      */
-    public void unmark(String command) {
+    public String unmark(String command) {
         int index = Integer.valueOf(command.substring(7)) - 1;
         Task target = tasks.get(index);
         target.unmark();
         Storage.writeFile(tasks);
-        Ui.getUnmarkTaskMessage(target);
+        return Ui.getUnmarkTaskMessage(target);
     }
 
     /**
@@ -80,13 +80,13 @@ public class TaskList {
      *
      * @param command User input specifying which task to delete.
      */
-    public void delete(String command) {
+    public String delete(String command) {
         int index = Integer.valueOf(command.substring(7)) - 1;
         int size = tasks.size();
         Task target = tasks.get(index);
-        Ui.getDeleteTaskMessage(target, size);
         tasks.remove(index);
         Storage.writeFile(tasks);
+        return Ui.getDeleteTaskMessage(target, size);
     }
 
     /**
@@ -94,10 +94,10 @@ public class TaskList {
      *
      * @param command User input specifying which task keyword to find.
      */
-    public void find(String command) {
+    public String find(String command) {
         String keyWord = command.substring(5);
         Predicate<Task> keyWordFilter = task -> (task.getDescription().contains(keyWord));
         Stream<Task> resultedTasks = tasks.stream().filter(keyWordFilter);
-        Ui.getFindTaskMessage(resultedTasks);
+        return Ui.getFindTaskMessage(resultedTasks);
     }
 }

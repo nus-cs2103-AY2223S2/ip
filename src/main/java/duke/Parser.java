@@ -7,53 +7,48 @@ import java.time.format.DateTimeFormatter;
  * duke.Parser class encapsulates the logic implementation of the chatbot.
  */
 public class Parser {
-    public Parser() {}
+    public Parser() {
+    }
 
     /**
-     * Handles the input from the user and do the corresponding actions.
-     * Checks for some incorrect input format.
+     * Handles the input from the user, do the corresponding actions and return the response.
      *
      * @param command The input from user.
      * @param taskList A duke.TaskList object encapsulate all tasks' information.
-     * @return Returns true if the input is bot terminating command ("bye"), false otherwise.
+     * @return Returns A message responsed by chatbot for the argument user input.
      * @throws DukeException If the user input is not in the right format.
      */
-    public boolean handleInput(String command, TaskList taskList) throws DukeException {
+    public String doAndGetResponse(String command, TaskList taskList) throws DukeException {
         if (command.equals("bye")) {
-            return true;
+            return Ui.getOutroMessage();
         } else if (command.equals("list")) {
-            Ui.displayTasks(taskList);
-            return false;
+            return Ui.getTaskListMessage(taskList);
         }
 
         if (command.startsWith("mark ")) {
-            taskList.mark(command);
-            return false;
+            return taskList.mark(command);
         } else if (command.startsWith("unmark ")) {
-            taskList.unmark(command);
-            return false;
+            return taskList.unmark(command);
         } else if (command.startsWith("delete ")) {
-            taskList.delete(command);
-            return false;
+            return taskList.delete(command);
         } else if (command.startsWith("find ")) {
-            taskList.find(command);
-            return false;
+            return taskList.find(command);
         }
 
         String description = command;
         Task newTask = new Task(command);
-        String exceptionMessage = "";
+        String responseMessage = "";
 
         if (command.startsWith("todo")) {
             if (description.length() <= 5) {
-                exceptionMessage = "The description of a todo cannot be empty.\n";
-                throw new DukeException(exceptionMessage);
+                responseMessage = "The description of a todo cannot be empty.\n";
+                throw new DukeException(responseMessage);
             }
             newTask = new ToDo(description.substring(5));
         } else if (command.startsWith("deadline")) {
             if (description.length() <= 9) {
-                exceptionMessage = "The description of a deadline cannot be empty.\n";
-                throw new DukeException(exceptionMessage);
+                responseMessage = "The description of a deadline cannot be empty.\n";
+                throw new DukeException(responseMessage);
             }
             LocalDate by = LocalDate.parse(description.substring(description.indexOf(" /by ") + 5),
                     DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -61,8 +56,8 @@ public class Parser {
             newTask = new Deadline(description, by);
         } else if (command.startsWith("event")) {
             if (description.length() <= 6) {
-                exceptionMessage = "The description of an event cannot be empty:\n";
-                throw new DukeException(exceptionMessage);
+                responseMessage = "The description of an event cannot be empty:\n";
+                throw new DukeException(responseMessage);
             }
             LocalDate start = LocalDate.parse(description.substring(description.indexOf(" /from ") + 7,
                     description.indexOf(" /to ")), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -71,12 +66,14 @@ public class Parser {
             description = description.substring(6, description.indexOf(" /from "));
             newTask = new Event(description, start, end);
         } else {
-            exceptionMessage = "I'm sorry, but I don't know what that means :-(\n";
-            throw new DukeException(exceptionMessage);
+            responseMessage = "I'm sorry, but I don't know what that means :-(\n";
+            throw new DukeException(responseMessage);
         }
         if (!taskList.contains(newTask)) {
-            taskList.addTask(newTask);
+            responseMessage = taskList.addTask(newTask);
+        } else {
+            responseMessage = "This task is already existed.";
         }
-        return false;
+        return responseMessage;
     }
 }

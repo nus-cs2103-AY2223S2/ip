@@ -7,37 +7,34 @@ import java.util.stream.Stream;
  * duke.Ui class represents User interface when using the chatbox.
  */
 public class Ui {
-    private static final String DIVIDER_LINE = "____________________________________________________\n";
-
     public Ui() {
     }
 
     /**
-     * Prints the welcoming message.
+     * Returns the starting message of the chatbot.
+     *
+     * @return The starting message of the chatbot.
      */
-    public void start() {
-        reply("Hello! I'm duke.Duke\n What can I do for you?" + "\n");
-    }
-
-    public static void displayOutro() {
-        reply("Bye. Hope to see you again soon!" + "\n");
+    public static String getIntroMessage() {
+        return "Hello! I'm Duke\n What can I do for you?";
     }
 
     /**
-     * Returns an UI formatted message from the string argument.
+     * Returns the outro message of the chatbot.
      *
-     * @param command A string message need to put in the write UI formatted message.
+     * @return The outro message of the chatbot.
      */
-    public static void reply(String command) {
-        System.out.println(DIVIDER_LINE + command + DIVIDER_LINE);
+    public static String getOutroMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Prints the tasks list stored in the bot.
      *
      * @param taskList A duke.TaskList Object encapsulating the all tasks in the chatbot.
+     * @return The message of the chatbot to list all tasks.
      */
-    public static void displayTasks(TaskList taskList) {
+    public static String getTaskListMessage(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         String tasksList = "";
         Task currentTask;
@@ -45,7 +42,7 @@ public class Ui {
             currentTask = tasks.get(i);
             tasksList += i + 1 + "." + currentTask.toString() + "\n";
         }
-        reply("Here are the tasks in your list:\n" + tasksList);
+        return "Here are the tasks in your list:\n" + tasksList;
     }
 
     /**
@@ -53,29 +50,32 @@ public class Ui {
      *
      * @param newTask The new task being added.
      * @param size The current size of task list.
+     * @return The message from chatbot after adding a task.
      */
-    public static void getAddTaskMessage(Task newTask, int size) {
-        reply("Got it. I've added this task:\n  "
+    public static String getAddTaskMessage(Task newTask, int size) {
+        return "Got it. I've added this task:\n  "
                 + newTask
-                + "\nNow you have " + size + " tasks in the list\n");
+                + "\nNow you have " + size + " tasks in the list";
     }
 
     /**
      * Prints a message corresponding to the marking action of the argument task.
      *
      * @param target The task being marked.
+     * @return The message of the chatbot after marking a task.
      */
-    public static void getMarkTaskMessage(Task target) {
-        reply("Nice! I've marked this task as above:\n  " + target + "\n");
+    public static String getMarkTaskMessage(Task target) {
+        return "Nice! I've marked this task as above:\n  " + target;
     }
 
     /**
      * Prints a message corresponding to the unmarking action of the argument task.
      *
      * @param target The task being unmarked.
+     * @return The message of the chatbot after unmarking a task.
      */
-    public static void getUnmarkTaskMessage(Task target) {
-        reply("OK, I've marked this task as not done yet:\n  " + target + "\n");
+    public static String getUnmarkTaskMessage(Task target) {
+        return "OK, I've marked this task as not done yet:\n  " + target;
     }
 
     /**
@@ -83,10 +83,11 @@ public class Ui {
      *
      * @param target The duke.Task being deleted from the list.
      * @param size The current size of task list.
+     * @return The message of the chatbot after deleting a task.
      */
-    public static void getDeleteTaskMessage(Task target, int size) {
-        reply("Noted. I've removed this task:\n"
-                + target + "\nNow you have " + size + " task(s) in the list\n");
+    public static String getDeleteTaskMessage(Task target, int size) {
+        return "Noted. I've removed this task:\n"
+                + target + "\nNow you have " + size + " task(s) in the list";
 
     }
 
@@ -94,11 +95,11 @@ public class Ui {
      * Prints a message corresponding to the finding action with the list of task found.
      *
      * @param resultedTasks An Stream of Task object encapsulating all tasks found.
+     * @return The message of the chatbot after finding tasks by a keyword
      */
-    public static void getFindTaskMessage(Stream<Task> resultedTasks) {
+    public static String getFindTaskMessage(Stream<Task> resultedTasks) {
         Stream<String> searchResult = resultedTasks.map((task) -> task.toString());
         String listingResultMessage = searchResult.reduce("", (result, element) -> result + element + "\n");
-        reply("Here are the matching tasks in your list:\n"
-                + listingResultMessage);
+        return "Here are the matching tasks in your list:\n" + listingResultMessage;
     }
 }
