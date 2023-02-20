@@ -19,8 +19,8 @@ public class Deadline extends Task {
     }
 
     public static Deadline createDeadline(Ui ui) throws DukeyException {
-        String deadlineName = ui.readTaskName("duke.Deadline");
-        LocalDate deadlineTime = ui.readTime("duke.Deadline");
+        String deadlineName = ui.readTaskName("Deadline");
+        LocalDate deadlineTime = ui.readTime("Deadline");
 
         return new Deadline(deadlineName, deadlineTime);
 

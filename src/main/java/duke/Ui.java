@@ -163,7 +163,7 @@ public class Ui {
         printLine("To mark a task as done: 'mark'");
         printLine("To unmark a task: 'unmark'");
         printLine("To delete a task: 'delete'");
-        printLine("To clear the list: 'clearList");
+        printLine("To clear the list: 'clearList'");
         printLine("To save the list: 'save'");
         printLnBreak();
     }

@@ -23,9 +23,9 @@ public class Event extends Task {
     }
 
     public static Event createEvent(Ui ui) throws DukeyException {
-        String eventName = ui.readTaskName("duke.Event");
-        LocalDate eventStart = ui.readTime("duke.Event start time");
-        LocalDate eventEnd = ui.readTime("duke.Event end time");
+        String eventName = ui.readTaskName("Event");
+        LocalDate eventStart = ui.readTime("Event start time");
+        LocalDate eventEnd = ui.readTime("Event end time");
         return new Event(eventName, eventStart, eventEnd);
     }
 

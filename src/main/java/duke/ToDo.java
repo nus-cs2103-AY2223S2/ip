@@ -15,7 +15,7 @@ public class ToDo extends Task {
 
 
     public static ToDo createToDo(Ui ui) throws DukeyException {
-        String toDoName = ui.readTaskName("duke.ToDo");
+        String toDoName = ui.readTaskName("ToDo");
         return new ToDo(toDoName);
     }
 
