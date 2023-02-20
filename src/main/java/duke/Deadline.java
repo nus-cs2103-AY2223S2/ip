@@ -7,21 +7,23 @@ public class Deadline extends Task {
 
     protected LocalDate date;
 
-    protected LocalTime time = null;
+    protected LocalTime time;
 
     /**
      * constructs a deadline task.
      *
      * @param description describe the deadline
      * @param by deadline of this task
-     * @throws EmptyDescriptionException
+     * @throws EmptyDescriptionException if task description is empty.
      */
-    public Deadline(String description, String by) throws EmptyDescriptionException {
+    public Deadline(String description, String by) throws EmptyDescriptionException, IndexOutOfBoundsException {
         super(description);
         String[] str = by.split(" ");
         this.date = LocalDate.parse(str[0], DateTimeFormatter.ofPattern("MMM-dd-yyyy"));
         if (str.length == 2) {
             this.time = LocalTime.parse(str[1], DateTimeFormatter.ofPattern("HHmm"));
+        } else {
+            throw new IndexOutOfBoundsException();
         }
     }
 

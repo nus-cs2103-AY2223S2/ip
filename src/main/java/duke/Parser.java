@@ -29,7 +29,7 @@ public class Parser {
                 try {
                     return command.deadlineCommand();
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("change date format to: MMM-dd-yyyy");
+                    throw new DukeException("change dateTime format to: MMM-dd-yyyy HHmm");
                 }
             } else if (cmd.startsWith("event") || cmd.startsWith("e ")) {
                 return command.eventCommand();

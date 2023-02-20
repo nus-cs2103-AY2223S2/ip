@@ -44,7 +44,7 @@ public class Command {
             task.markAsDone();
             return UI.showMarked(task);
         } catch (IndexOutOfBoundsException e) {
-            return "No such index, try again!";
+            return UI.showIndexError();
         }
     }
 
@@ -61,7 +61,7 @@ public class Command {
             task.unmark();
             return UI.showUnmarked(task);
         } catch (IndexOutOfBoundsException e) {
-            return "No such index, try again!";
+            return UI.showIndexError();
         }
     }
 
@@ -94,11 +94,15 @@ public class Command {
         } else if (INPUT.startsWith("d ")) {
             str = INPUT.substring(2);
         }
-        String description = str.split("/by")[0];
-        String dateAndTime = str.split("/by ")[1];
-        Deadline deadline = new Deadline(description, dateAndTime);
-        LIST.add(deadline);
-        return UI.showAdd(deadline) + UI.showTaskSize(LIST.size());
+        try {
+            String description = str.split("/by")[0];
+            String dateAndTime = str.split("/by ")[1];
+            Deadline deadline = new Deadline(description, dateAndTime);
+            LIST.add(deadline);
+            return UI.showAdd(deadline) + UI.showTaskSize(LIST.size());
+        } catch (IndexOutOfBoundsException e) {
+            return "your command seems off... try adding a date and time.\n";
+        }
     }
 
     /**
@@ -113,13 +117,17 @@ public class Command {
         } else if (INPUT.startsWith("e ")) {
             str = INPUT.substring(2);
         }
-        String description = str.split("/from")[0];
-        String temp = str.split("/from")[1];
-        String from = temp.split("/to")[0];
-        String to = temp.split("/to")[1];
-        Event event = new Event(description, from, to);
-        LIST.add(event);
-        return UI.showAdd(event) + UI.showTaskSize(LIST.size());
+        try {
+            String description = str.split("/from")[0];
+            String temp = str.split("/from")[1];
+            String from = temp.split("/to")[0];
+            String to = temp.split("/to")[1];
+            Event event = new Event(description, from, to);
+            LIST.add(event);
+            return UI.showAdd(event) + UI.showTaskSize(LIST.size());
+        } catch (IndexOutOfBoundsException e) {
+            return "your command seems off... try adding a start time and end time.\n";
+        }
     }
 
     /**
@@ -133,10 +141,9 @@ public class Command {
         try {
             Task removedTask = LIST.get(index);
             LIST.remove(index);
-            return UI.showDelete(removedTask) + "your tasklist has been updated:\n"
-                    + UI.showTaskList(LIST);
+            return UI.showDelete(removedTask) + UI.showTaskList(LIST);
         } catch (IndexOutOfBoundsException e) {
-            return "No such index, try again!";
+            return UI.showIndexError();
         }
     }
 

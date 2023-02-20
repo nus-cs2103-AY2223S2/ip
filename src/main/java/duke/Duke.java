@@ -36,7 +36,6 @@ public class Duke {
 
     /**
      * constructs a Duke object.
-     * @param filePath file path leading to data directory to be accessed.
      */
     public Duke(String filePath) {
         ui = new Ui();
