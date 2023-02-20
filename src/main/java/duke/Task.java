@@ -237,7 +237,7 @@ public class Task implements Serializable {
 
         @Override
         public String toString() {
-            String name = super.isDone ? "[D][X] " + task + " (needs: " + this.duration +")" : "[D][ ] " + task + " (needs: " + this.duration +")";
+            String name = super.isDone ? "[Du][X] " + task + " (needs: " + this.duration +")" : "[Du][ ] " + task + " (needs: " + this.duration +")";
             return name;
         }
     }
