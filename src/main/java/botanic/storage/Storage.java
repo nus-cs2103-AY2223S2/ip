@@ -49,7 +49,7 @@ public class Storage {
             dir.mkdirs();
         }
         //create file if it does not already exist
-        //Solution adapted from https://www.w3schools.com/java/java_files_create.asp
+        //Solution below adapted from https://www.w3schools.com/java/java_files_create.asp
         try {
             myFile = new File(filePath);
             if (!myFile.exists()) {
@@ -71,7 +71,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             createFile();
-            //Solution adapted from https://www.w3schools.com/java/java_files_read.asp
+            //Solution below adapted from https://www.w3schools.com/java/java_files_read.asp
             Scanner sc = new Scanner(myFile);
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
@@ -107,6 +107,7 @@ public class Storage {
      * @param input The input to write into file.
      */
     private void writeUsingFileWriter(FileWriter fileWriter, String input) {
+        //Solution below adapted from https://www.w3schools.com/java/java_files_create.asp
         try {
             fileWriter.write(input + "\n");
         } catch (IOException e) {
@@ -122,7 +123,7 @@ public class Storage {
      */
     public void writeToFile(Task... tasks) {
         try {
-            //Solution adapted from https://www.w3schools.com/java/java_files_create.asp
+            //Solution below adapted from https://www.w3schools.com/java/java_files_create.asp
             FileWriter fileWriter = new FileWriter(filePath);
             Arrays.stream(tasks)
                     .map(t -> t.formatForStorage())

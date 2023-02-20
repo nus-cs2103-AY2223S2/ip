@@ -23,13 +23,13 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     private Botanic botanic;
 
-    //UserIcon.png taken from https://www.flaticon.com/free-icon/sun_4478387?related_id=4478387&origin=pack
+    //UserIcon.png is taken from https://www.flaticon.com/free-icon/sun_4478387?related_id=4478387&origin=pack
     //Attribution for UserIcon.png:
     // <a href="https://www.flaticon.com/free-icons/cloudy" title="cloudy icons">
     // Cloudy icons created by Freepik - Flaticon</a>
     private Image userImage = new Image(getClass()
             .getResourceAsStream("/images/UserIcon.png"));
-    //BotanicIcon.png taken from https://www.flaticon.com/free-icon/apple_4478115
+    //BotanicIcon.png is taken from https://www.flaticon.com/free-icon/apple_4478115
     //Attribution for BotanicIcon.png:
     // <a href="https://www.flaticon.com/free-icons/apple" title="apple icons">
     // Apple icons created by Freepik - Flaticon</a>
