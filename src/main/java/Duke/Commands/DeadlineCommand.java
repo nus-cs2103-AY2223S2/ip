@@ -12,8 +12,9 @@ public class DeadlineCommand extends Command {
         this.name = name;
         this.end = end;
     }
+
     @Override
-    public String run(TaskList taskList, MessageLoader messageLoader , Saver saver) {
+    public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
         String message = taskList.addTask(this.name,this.end);
         saver.save(taskList);
         return message;

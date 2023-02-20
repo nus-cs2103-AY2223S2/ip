@@ -3,7 +3,6 @@ package Duke.Tasks;
 import Duke.Exception.ProgramException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Class representing an array of tasks.
@@ -25,8 +24,8 @@ public class TaskList {
 
     public String processTask(Task task){
         this.taskList.add(task);
-        this.numTasks +=1;
-        return "Task added. You now have:" + this.numTasks + " task(s).";
+        this.numTasks += 1;
+        return "Erectin a task. You now have:" + this.numTasks + " task(s).";
     }
     public String addTask(String name){
         Task task = new ToDo(name);
@@ -48,28 +47,28 @@ public class TaskList {
     }
     public String listTasks(){
         String output = "";
-        for(int i = 0; i<taskList.size(); i++){
+        for(int i = 0; i < taskList.size(); i++){
             output += taskList.get(i) + "\n";
         }
         if(output.equals("")){
-            output += "oops! You have no tasks at the moment.";
+            output += "Hold up son, you ain't got any tasks yet.";
         }
         return output;
     }
     public String markTask(int index){
-        this.taskList.get(index-1).mark();
-        return "Task " + index + " marked.";
+        this.taskList.get(index - 1).mark();
+        return "Alrighty Then! Task " + index + " marked.";
     }
 
     public String unmarkTask(int index){
-        this.taskList.get(index-1).unMark();
-        return "Task " + index + " unmarked.";
+        this.taskList.get(index - 1).unMark();
+        return "Alrighty Then! Task " + index + " unmarked.";
     }
 
     public String deleteTask(int index){
-        this.taskList.remove(index-1);
+        this.taskList.remove(index - 1);
         this.numTasks -= 1;
-        return "Task " + index + " deleted.";
+        return "Alrighty Then! Task " + index + " deleted.";
     }
 
     public String toSave(){
@@ -167,7 +166,7 @@ public class TaskList {
         }
         parameters[1] = parameters[1].replace("[","").replace("]","");
         parameters = parameters[1].split(" ");
-        for(int i = 0; i< parameters.length; i++){
+        for(int i = 0; i < parameters.length; i++){
             if(!parameters[i].strip().equals("")){
                 tags.add(parameters[i]);
             }
@@ -181,8 +180,8 @@ public class TaskList {
         ArrayList tags = new ArrayList();
         Task task = null;
         this.numTasks = 0;
-        for(int i = 0; i<data.length/2; i++){
-            if(data[i*2].equals("")) continue;
+        for(int i = 0; i < data.length/2; i++){
+            if(data[i * 2].equals("")) continue;
             String parameters[] = data[i*2].split(" ",2);
             String type = parameters[0];
             if(type.equals("[T]")) {
@@ -194,7 +193,7 @@ public class TaskList {
             } else {
                 throw new ProgramException("Save file data corrupted.");
             }
-            tags = tagsFromSave(data[i*2+1]);
+            tags = tagsFromSave(data[i * 2 + 1]);
             if(tags.size() != 0) {
                 task.setTags(tags);
             }
@@ -215,17 +214,17 @@ public class TaskList {
             }
         }
         if(matches == 0){
-            return "Oops! Could not find any tasks matching your query.";
+            return "Dag Nabbit! I couldn't find any tasks.";
         }
         return output;
     }
 
     public String tagTask(int index, ArrayList<String> tags){
-        this.taskList.get(index-1).setTags(tags);
-        return "Task " + index + " tagged.";
+        this.taskList.get(index - 1).setTags(tags);
+        return "Alrighty then! Task " + index + " tagged.";
     }
     public String untagTask(int index, ArrayList<String> tags){
-        this.taskList.get(index-1).removeTags(tags);
-        return "Task " + index + " untagged.";
+        this.taskList.get(index - 1).removeTags(tags);
+        return "Alrighty then! Task " + index + " untagged.";
     }
 }

@@ -9,6 +9,7 @@ public class FindCommand extends Command{
     public FindCommand(String query) {
         this.query = query;
     }
+
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
         String message = taskList.findTasks(query);
