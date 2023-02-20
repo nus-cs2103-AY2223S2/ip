@@ -31,7 +31,7 @@ public class VoileGui extends Application {
         MainWindow mainWindow = new MainWindow(model);
         Scene scene = new Scene(mainWindow);
         Image icon = new Image(getClass().getResourceAsStream("/images/Icon.jpg"));
-        stage.setTitle("Duke");
+        stage.setTitle("Voile");
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
