@@ -2,7 +2,9 @@ package duke;
 
 import java.util.Objects;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,12 +16,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Class representing an instance of Duke.
  */
 public class Duke extends Application {
     private static final String FILE_PATH = "./data/duke.txt";
+    private static final int PAUSE_DURATION = 500;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -54,8 +58,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        assert user != null;
-        assert duke != null;
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -121,12 +123,15 @@ public class Duke extends Application {
     }
 
     private void showInitMessage() {
+        assert duke != null;
         Label initMessage = new Label(ui.getInitMessage());
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(initMessage, new ImageView(duke)));
     }
 
     private void handleUserInput() throws DukeException {
+        assert user != null;
+        assert duke != null;
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -140,6 +145,7 @@ public class Duke extends Application {
         try {
             if (input.equals("bye")) {
                 storage.store(tasks);
+                exitApp();
                 return ui.getByeMessage();
             } else {
                 return parser.parse(input);
@@ -147,5 +153,11 @@ public class Duke extends Application {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    private void exitApp() {
+        PauseTransition exitPause = new PauseTransition(Duration.millis(PAUSE_DURATION));
+        exitPause.setOnFinished(event -> Platform.exit());
+        exitPause.play();
     }
 }
