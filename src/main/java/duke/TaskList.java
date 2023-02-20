@@ -133,6 +133,21 @@ public class TaskList {
 
     }
 
+    public void findTask(String keyword) {
+        int index = 1;
+        for (Task task : list) {
+            if (task.description.toUpperCase().contains(keyword.toUpperCase())) {
+                System.out.println(index + " " + task.toString());
+                index++;
+            }
+        }
+        if (index == 1) {
+            System.out.println("There seem to be no tasks matching the keyword");
+        }
+    }
+
+
+
   }
 
 

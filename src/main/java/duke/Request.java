@@ -9,6 +9,8 @@ public enum Request {
     UNMARK("unmark"),
     LIST("list"),
     DELETE("delete"),
+
+    FIND("find"),
     HELP("help");
 
     private String name;
