@@ -195,6 +195,24 @@ Meow-k. I've updated the description of this task:
 	[T][ ] Pet dog
 ```
 
+### `find TASK_DESCRIPTION` - Finds tasks matching the provided descriptor
+
+Finds all tasks containing the `TASK_DESCRIPTION` by string pattern matching.
+`TASK_DESCRIPTION` cannot be empty.
+
+Example of usage: 
+
+`find dog`
+
+Expected outcome:
+
+Returns all the tasks matching the given `TASK_DESCRIPTION`.
+
+```
+Here are the matching tasks in your list:
+	1.[T][ ] Pet dog
+```
+
 ## FAQ
 
 **Q:** How do I transfer my data to another Computer?
@@ -212,3 +230,4 @@ Action | Format, Examples
 **Mark as Undone** | `unmark TASK_ID` <br> e.g., `unmark 1`
 **Delete task** | `delete TASK_ID` <br> e.g., `delete 1`
 **Update task** | `update TASK_ID TASK_DESCRIPTION` <br> e.g., `update 1 Pet dog`
+**Find task** | `find TASK_DESCRIPTION` <br> e.g., `find dog`
