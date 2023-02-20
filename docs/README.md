@@ -1,29 +1,36 @@
 # User Guide
 
-## Features 
+Duke is a command-based task manager that makes your life easier 
+by keeping track of your todos, deadlines as well as events, so that
+you can live stress free.
 
-### Feature-ABC
 
-Description of the feature.
+## Features
 
-### Feature-XYZ
+### Adding tasks
 
-Description of the feature.
+You can add three kinds of tasks:
+* To-do
+* Events
+* Deadlines
 
-## Usage
+### Deleting tasks
 
-### `Keyword` - Describe action
+Delete tasks that are no longer necessary (or just don't want to see anymore).
 
-Describe the action and its outcome.
+### Mark & Unmark
 
-Example of usage: 
+Mark a task as completed when you are done, or unmark it if you think you need to something more.
 
-`keyword (optional arguments)`
+### List
 
-Expected outcome:
+Display all tasks being tracked in an easy to understand way.
 
-Description of the outcome.
+### Find:
 
-```
-expected output
-```
+Displays all tasks matching a given search key.
+
+### Natural Language
+Input date and times as natural language.
+
+

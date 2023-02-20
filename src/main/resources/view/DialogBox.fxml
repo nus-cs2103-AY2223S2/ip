@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" focusTraversable="false" scaleShape="false" style="-fx-border-color: pink; -fx-background-color: white; -fx-padding: 10;" text="Label" wrapText="true">
+            <font>
+                <Font name="Arial" size="12.0" />
+            </font></Label>
+        <Rectangle arcHeight="6.0" arcWidth="6.0" fill="#0000FF" height="84.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="14.0" />
+        <ImageView fx:id="displayPicture" fitHeight="103.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true" />
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>
