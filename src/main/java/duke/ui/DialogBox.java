@@ -16,6 +16,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * Represents a dialog box that contains user and duke response texts.
+ */
 public class DialogBox extends HBox {
 
     @FXML

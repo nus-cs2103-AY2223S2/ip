@@ -1,9 +1,9 @@
 package duke.tool;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Constructs a command class that handles all changes to the task list.
@@ -13,6 +13,11 @@ public class Command {
     private ArrayList<Task> tasks;
     private final Ui ui;
 
+    /**
+     * Constructs a command object.
+     * @param tasks The list of tasks to operate upon.
+     * @param ui The user interface object for printing.
+     */
     public Command(ArrayList<Task> tasks, Ui ui) {
         assert ui != null : "Unable to accept null user interface";
         this.tasks = tasks;
@@ -32,7 +37,7 @@ public class Command {
             e.printStackTrace();
         }
         task.markAsDone();
-        return ui.print_mark_as_done_msg(task);
+        return ui.print_done_msg(task);
     }
 
     /**
@@ -48,7 +53,7 @@ public class Command {
             e.printStackTrace();
         }
         task.markAsNotDone();
-        return ui.print_mask_as_undone_msg(task);
+        return ui.print_undone_msg(task);
     }
 
     /**
@@ -56,9 +61,9 @@ public class Command {
      * @param task The task to add.
      * @return The successful or unsuccessful ui notification message.
      */
-    public String add_task_to_list(Task task) {
+    public String add_task(Task task) {
         tasks.add(task);
-        return ui.print_add_task_msg(task, tasks.size());
+        return ui.print_add_msg(task, tasks.size());
     }
 
     /**
@@ -74,28 +79,28 @@ public class Command {
             e.printStackTrace();
         }
         tasks.remove(task);
-        return ui.print_remove_task_msg(task, tasks.size());
+        return ui.print_remove_msg(task, tasks.size());
     }
 
     /**
      * Find the task that contains match string from the task list.
-     * @param match_str The string to match with.
+     * @param matchStr The string to match with.
      * @return The contents of tasks found.
      */
-    public String find_tasks(String match_str) {
+    public String find_tasks(String matchStr) {
         // TODO: use Java streams to rewrite.
-        assert match_str != null : "Please provide a match string";
-        if (match_str.isBlank()) {
+        assert matchStr != null : "Please provide a match string";
+        if (matchStr.isBlank()) {
             return "";
         }
-        ArrayList<Task> matched_tasks = new ArrayList<>();
+        ArrayList<Task> matchedTasks = new ArrayList<>();
         String description;
         for (Task task : tasks) {
             description = task.toString();
-            if (description.contains(match_str)) {
-                matched_tasks.add(task);
+            if (description.contains(matchStr)) {
+                matchedTasks.add(task);
             }
         }
-        return ui.print_task_list(matched_tasks);
+        return ui.print_task_list(matchedTasks);
     }
 }

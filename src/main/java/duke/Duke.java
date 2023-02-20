@@ -1,13 +1,14 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.task.Task;
-import duke.ui.Ui;
-import duke.tool.Storage;
-import duke.tool.Parser;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.tool.Parser;
+import duke.tool.Storage;
+import duke.ui.Ui;
+
 
 /**
  * Represents a task manager bot class.

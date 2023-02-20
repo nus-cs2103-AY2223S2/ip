@@ -1,11 +1,11 @@
 package duke.tool;
 
-import duke.task.Task;
-
+import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Represents a storage class that handles saving and loading to disk jobs.
@@ -16,19 +16,19 @@ public class Storage {
 
     /**
      * Constructs a storage object.
-     * @param dir_name The name of a local directory to write. Defaults to "data".
-     * @param file_name The name of a file within the directory to write into. Defaults to "tolist.txt"
+     * @param dirName The name of a local directory to write. Defaults to "data".
+     * @param fileName The name of a file within the directory to write into. Defaults to "tolist.txt"
      */
-    public Storage(String dir_name, String file_name) {
-        assert ((dir_name != null) && (file_name != null)) : "please provide a valid path to save task list";
-        if (dir_name.isBlank()) {
-            dir_name = "data";
+    public Storage(String dirName, String fileName) {
+        assert ((dirName != null) && (fileName != null)) : "please provide a valid path to save task list";
+        if (dirName.isBlank()) {
+            dirName = "data";
         }
-        if (file_name.isBlank()) {
-            file_name = "todo_list.txt";
+        if (fileName.isBlank()) {
+            fileName = "todo_list.txt";
         }
-        this.dir = new File(dir_name);
-        this.file = new File(file_name);
+        this.dir = new File(dirName);
+        this.file = new File(fileName);
     }
 
     public static void print(String str) {
@@ -40,25 +40,22 @@ public class Storage {
      * @param tasks The list of tasks to write.
      */
     public void save_to_file(ArrayList<Task> tasks) {
-        try {
-            if (!this.dir.exists()){
-                while (!this.dir.mkdirs()) {
-                    print(this.dir.getName() + " created\n");
-                }
+        if (!this.dir.exists()) {
+            while (!this.dir.mkdirs()) {
+                print(this.dir.getName() + " created\n");
             }
-
+        }
+        try {
             if (this.file.createNewFile()) {
                 print(this.file.getName() + " created\n");
             }
-
-            FileWriter fw = new FileWriter(this.file, false);
             if (tasks.isEmpty()) {
                 return;
-            } else {
-                for (Task t : tasks) {
-                    String desc = t.toString() + "\n";
-                    fw.write(desc);
-                }
+            }
+            FileWriter fw = new FileWriter(this.file, false);
+            for (Task t : tasks) {
+                String desc = t + "\n";
+                fw.write(desc);
             }
             fw.close();
         } catch (IOException e) {

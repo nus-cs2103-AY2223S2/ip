@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import duke.task.Task;
 
+/**
+ * Represents the user interface class that handles all message construction and printing.
+ */
 public class Ui {
 
     /**
@@ -19,8 +22,8 @@ public class Ui {
      * @return A message string.
      */
     public String print_greet_msg() {
-        return "Hello! I'm Duke\n" +
-                "     What can I do for you?";
+        return "Hello! I'm Duke\n"
+                + "     What can I do for you?";
     }
 
     /**
@@ -55,7 +58,7 @@ public class Ui {
      * @param task The task to mark as done.
      * @return A message string.
      */
-    public String print_mark_as_done_msg(Task task) {
+    public String print_done_msg(Task task) {
         String output = "";
         if (task.isNull()) {
             output = "Unsuccessfully marked.";
@@ -70,13 +73,14 @@ public class Ui {
      * @param task The task to mark as not done.
      * @return A message string.
      */
-    public String print_mask_as_undone_msg(Task task) {
+    public String print_undone_msg(Task task) {
         String output = "";
         if (task.isNull()) {
             output = "Unsuccessfully marked.";
             return output;
         }
-        output = "OK, I've marked this task as not done yet: \n\t" + task;
+        output = "OK, I've marked this task as not done yet: \n\t"
+                + task;
         return output;
     }
 
@@ -85,14 +89,17 @@ public class Ui {
      * @param task The task to add.
      * @return A message string.
      */
-    public String print_add_task_msg(Task task, int size) {
+    public String print_add_msg(Task task, int size) {
         String output = "";
         if (task.isNull()) {
             output = "Unsuccessfully added.";
             return output;
         }
-        output = "Got it. I've added this task: \n\t" + task +
-                "\nNow you have " + size + " tasks in the list.";
+        output = "Got it. I've added this task: \n\t"
+                + task
+                + "\nNow you have "
+                + size
+                + " tasks in the list.";
         return output;
     }
 
@@ -101,14 +108,15 @@ public class Ui {
      * @param task The task to remove.
      * @return A message string.
      */
-    public String print_remove_task_msg(Task task, int size) {
+    public String print_remove_msg(Task task, int size) {
         String output = "";
         if (task.isNull()) {
             output = "Unsuccessfully removed.";
             return output;
         }
-        output = "Noted. I've removed this task: \n\t" + task +
-                "\nNow you have " + size + " tasks in the list.";
+        output = "Noted. I've removed this task: \n\t"
+                + task
+                + "\nNow you have " + size + " tasks in the list.";
         return output;
     }
 }

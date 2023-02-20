@@ -7,13 +7,13 @@ import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.ui.Ui;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.exception.DukeCommandNotFoundException;
 import duke.exception.DukeEmptyTaskException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.ui.Ui;
 
 /**
  * Constructs a (static) parser that parses user input strings.
@@ -59,14 +59,14 @@ public class Parser {
      * @return Parsed string returned as the matching string.
      * @throws DukeEmptyTaskException Indicates that match string is not found
      */
-    public static String parse_task_match_string(String input) throws DukeEmptyTaskException {
-        String match_str;
+    public static String parse_match_string(String input) throws DukeEmptyTaskException {
+        String matchStr;
         try {
-            match_str = input.split(" ")[1].strip();
+            matchStr = input.split(" ")[1].strip();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeEmptyTaskException();
         }
-        return match_str;
+        return matchStr;
     }
 
     /**
@@ -91,12 +91,13 @@ public class Parser {
      * @return Constructed Deadline object from the parsed contents.
      */
     public static Deadline parse_deadline(String trigger, String input) {
-        String content, ddl;
+        String content;
+        String deadline;
         try {
             input = input.split(trigger)[1];
             content = input.split("/by")[0].strip();
-            ddl = parse_date(input.split("/by")[1].strip());
-            return new Deadline(content, ddl);
+            deadline = parse_date(input.split("/by")[1].strip());
+            return new Deadline(content, deadline);
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
@@ -111,7 +112,9 @@ public class Parser {
      * @throws DukeEmptyTaskException Indicates that task description is not found
      */
     public static Event parse_event(String trigger, String input) throws DukeEmptyTaskException {
-        String content, from, to;
+        String content;
+        String fromTime;
+        String toTime;
         if (input.split(trigger).length == 1) {
             throw new DukeEmptyTaskException();
         } else {
@@ -119,9 +122,9 @@ public class Parser {
         }
         try {
             content = input.split("/from")[0].strip();
-            from = parse_date(input.split("/from")[1].split("/to")[0].strip());
-            to = parse_date(input.split("/from")[1].split("/to")[1].strip());
-            return new Event(content, from, to);
+            fromTime = parse_date(input.split("/from")[1].split("/to")[0].strip());
+            toTime = parse_date(input.split("/from")[1].split("/to")[1].strip());
+            return new Event(content, fromTime, toTime);
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
@@ -166,49 +169,50 @@ public class Parser {
      * @throws DukeCommandNotFoundException Indicates when user-provided instruction cannot be catered.
      * @throws DukeEmptyTaskException Indicates when user fails to provide a concrete task description.
      */
-    public static String switch_input(ArrayList<Task> tasks, String input, Ui ui) throws DukeCommandNotFoundException, DukeEmptyTaskException {
+    public static String switch_input(ArrayList<Task> tasks, String input, Ui ui)
+            throws DukeCommandNotFoundException, DukeEmptyTaskException {
         String trigger = input.split(" ")[0];
         Command command = new Command(tasks, ui);
         int tid;
         Task task;
         String output;
         switch (trigger) {
-            case "bye":
-                output = ui.print_bye_msg();
-                break;
-            case "list":
-                output = ui.print_task_list(tasks);
-                break;
-            case "mark":
-                tid = parse_task_id(input);
-                output = command.mark_as_done(tid);
-                break;
-            case "unmark":
-                tid = parse_task_id(input);
-                output = command.mark_as_undone(tid);
-                break;
-            case "deadline":
-                task = parse_deadline(trigger, input);
-                output = command.add_task_to_list(task);
-                break;
-            case "event":
-                task = parse_event(trigger, input);
-                output = command.add_task_to_list(task);
-                break;
-            case "todo":
-                task = parse_todo(trigger, input);
-                output = command.add_task_to_list(task);
-                break;
-            case "delete":
-                tid = parse_delete_task_id(trigger, input);
-                output = command.delete_task(tid);
-                break;
-            case "find":
-                String match_str = parse_task_match_string(input);
-                output = command.find_tasks(match_str);
-                break;
-            default:
-                throw new DukeCommandNotFoundException();
+        case "bye":
+            output = ui.print_bye_msg();
+            break;
+        case "list":
+            output = ui.print_task_list(tasks);
+            break;
+        case "mark":
+            tid = parse_task_id(input);
+            output = command.mark_as_done(tid);
+            break;
+        case "unmark":
+            tid = parse_task_id(input);
+            output = command.mark_as_undone(tid);
+            break;
+        case "deadline":
+            task = parse_deadline(trigger, input);
+            output = command.add_task(task);
+            break;
+        case "event":
+            task = parse_event(trigger, input);
+            output = command.add_task(task);
+            break;
+        case "todo":
+            task = parse_todo(trigger, input);
+            output = command.add_task(task);
+            break;
+        case "delete":
+            tid = parse_delete_task_id(trigger, input);
+            output = command.delete_task(tid);
+            break;
+        case "find":
+            String matchStr = parse_match_string(input);
+            output = command.find_tasks(matchStr);
+            break;
+        default:
+            throw new DukeCommandNotFoundException();
         }
         return output;
     }
