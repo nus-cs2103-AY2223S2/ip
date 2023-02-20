@@ -1,6 +1,6 @@
 # User Guide for Kal, Your Calendar Pal
 ## Introduction
-> "Don't forget stuff like I always do" - Jia-Ao Shi, _Kal Developer_
+> "Don't forget stuff like I always do" - Jia-Ao Shi, _Kal Developer_ <
 Kal is a cat-themed calendar helper that helps you keep track of your tasks!
 
 ## Installation
