@@ -20,7 +20,8 @@ public class Storage {
      */
     public void writeToFile(ArrayList<Task> dukeList) {
         try {
-            FileWriter writer = new FileWriter(filePath, false);
+            String basePath = new File("").getAbsolutePath();
+            FileWriter writer = new FileWriter(basePath.concat(filePath), false);
             for (Task t: dukeList) {
                 if (t instanceof Deadline) {
                     System.out.println(((Deadline) t).by);
@@ -37,7 +38,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred while writing to file");
         }
     }
 
@@ -49,10 +50,11 @@ public class Storage {
      */
     public ArrayList<Task> readFile() throws DukeException {
         ArrayList<Task> dukeList = new ArrayList<>();
-        File f = new File(filePath);
+        String basePath = new File("").getAbsolutePath();
+        File f = new File(basePath.concat(filePath));
         if (f.exists()) {
             try {
-                Scanner s = new Scanner(new File(filePath));
+                Scanner s = new Scanner(new File(basePath.concat(filePath)));
                 //new FileWriter(filePath, false).close();
                 while (s.hasNextLine()) {
                     String str = s.nextLine();
@@ -86,18 +88,18 @@ public class Storage {
                 s.close();
             } catch (IOException e) {
                 e.printStackTrace();
-                System.out.println("An error occurred.");
+                System.out.println("An error occurred while reading File.");
             }
 
         } else {
             try {
-                String basePath = new File("").getAbsolutePath();
                 File dir = new File(basePath.concat("/data"));
-                File c = new File(filePath);
+                File c = new File(basePath.concat(filePath));
                 dir.mkdir();
                 c.createNewFile();
             } catch (IOException d) {
                 System.out.println("Error while creating file");
+                d.printStackTrace();
             }
         }
         return dukeList;

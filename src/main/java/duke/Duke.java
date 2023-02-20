@@ -28,7 +28,7 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
-        storage = new Storage("data/tasks.txt");
+        storage = new Storage("/data/tasks.txt");
         ui = new Ui();
         parser = new Parser();
         try {
