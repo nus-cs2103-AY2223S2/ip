@@ -92,7 +92,7 @@ Example: `List` followed by `Mark 1`
 Outcome: task at index 1 of the task list is marked as complete. separate prompt for if the task was already marked as complete.
 
 <details>
-    <summary> If task was previously marked as **incomplete** </summary>
+    <summary> If task was previously marked as <b>incomplete</b> </summary>
 
 > Current list: <br>
 >        1) [T] [ ] todo <br>
@@ -106,7 +106,7 @@ U - `Mark 1`
 </details>
 
 <details>
-    <summary> If task was previously marked as **complete** </summary>
+    <summary> If task was previously marked as <b>complete</b> </summary>
 
 > Current list: <br>
 >        1) [T] [X] todo <br>
@@ -133,7 +133,7 @@ Example: `Unmark 2`
 Outcome: task at index 2 of the task list is marked as incomplete. separate prompt for if the task was already marked as incomplete.
 
 <details>
-    <summary> If task was previously marked as **incomplete** </summary>
+    <summary> If task was previously marked as <b>incomplete</b> </summary>
 
 > Current list: <br>
 >        1) [T] [ ] todo <br>
@@ -148,7 +148,7 @@ U - `Unmark 2`
 </details>
 
 <details>
-    <summary> If task was previously marked as **complete** </summary>
+    <summary> If task was previously marked as <b>complete</b> </summary>
 
 > Current list: <br>
 >        1) [T] [ ] todo <br>
