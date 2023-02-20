@@ -14,7 +14,6 @@
 
 ### Feature - Adding Tasks
 *Adds a task into the list*
-
 #### Usage - Todo
 Command:
 ```
