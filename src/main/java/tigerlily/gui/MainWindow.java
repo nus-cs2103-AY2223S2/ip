@@ -1,4 +1,3 @@
-// Referenced @wengYing227 for closing Tigerlily
 package tigerlily.gui;
 
 import static java.lang.Thread.sleep;
@@ -67,11 +66,16 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getTigerlilyDialog(response, tigerlilyImage));
         userInput.clear();
 
+
+        //@@author cetigerlily-reused
+        //Reused from https://github.com/wengYing227/ip/blob/master/src/main/java/duke/gui/MainWindow.java
+        // with minor modifications
         if(tigerlily.isBye()) {
             showExit();
             sleep(500);
             Stage stage = (Stage) userInput.getScene().getWindow();
             stage.close();
         }
+        //@@author
     }
 }

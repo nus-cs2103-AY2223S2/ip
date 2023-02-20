@@ -1,7 +1,2 @@
-T | 0 | buy tea
-T | 1 | buy cookies
 E | 0 | bake sale | 2023-02-14 14:00 to 2023-02-14 16:00
-T | 0 | sleep
-D | 0 | bake cake | 2023-02-10
-T | 0 | drink matcha
-E | 0 | valentine's day | 2023-02-14 00:00 to 2023-02-14 23:59
+T | 0 | buy ingredients

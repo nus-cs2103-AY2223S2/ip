@@ -23,6 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("tigerlily");
             fxmlLoader.<MainWindow>getController().setTigerlily(tigerlily);
             fxmlLoader.<MainWindow>getController().showStartUp();
             stage.show();
