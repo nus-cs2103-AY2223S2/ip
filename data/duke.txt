@@ -1,3 +1,4 @@
 D | X | return book | 12/06/2023
 E | X | project meeting | 12/06/2023 1400 | 12/06/2024 1700
 T |   | join sports club
+E | X | dinner | 12/12/2023 1340 | 13/12/3223 1345

@@ -14,6 +14,7 @@ import duke.task.Task;
 import duke.task.Event;
 import duke.task.Deadline;
 import duke.task.ToDo;
+import duke.parser.Parser;
 
 public class Storage {
     private static String path;
@@ -29,6 +30,7 @@ public class Storage {
 
 
     public static TaskList loadData() throws IOException {
+        Parser logic = new Parser();
         TaskList list = new TaskList();
         if (!dataFolder.exists()) {
             System.out.println("The data folder is not found, creating new data folder");
@@ -62,47 +64,28 @@ public class Storage {
                 switch (type) {
                     case "D": {
                         String[] deadline = currLine[3].split(" ");
-                        String[] date = deadline[0].split("/");
-                        for (int i = 0; i < date.length; i++) {
-                            if (date[i].length() < 2) {
-                                date[i] = "0" + date[i];
-                            }
-                        }
-                        String newDate = date[2] + "-" + date[1] + "-" + date[0];
+                        String date = logic.formatDate(deadline[0].split("/"));
                         String remarks = " | " + currLine[3];
                         if (deadline.length == 1) {
-                            newTask = new Deadline(description, newDate, remarks);
+                            newTask = new Deadline(description, date, remarks);
                         } else {
-                            String[] time = deadline[1].split("");
-                            String newTime = time[0] + time[1] + ":" + time[2] + time[3];
-                            newTask = new Deadline(description, newDate, newTime, remarks);
+                            String time = logic.formatTime(deadline[1].split(""));
+                            newTask = new Deadline(description, date, time, remarks);
                         }
                         break;
                     }
                     case "E": {
                         String[] start = currLine[3].split(" ");
                         String[] end = currLine[4].split(" ");
-                        String[] startDate = start[0].split("/");
-                        String[] endDate = end[0].split("/");
-                        for (int i = 0; i < startDate.length; i++) {
-                            if (startDate[i].length() < 2) {
-                                startDate[i] = "0" + startDate[i];
-                            }
-                            if (endDate[i].length() < 2) {
-                                endDate[i] = "0" + endDate[i];
-                            }
-                        }
-                        String newStartDate = startDate[2] + "-" + startDate[1] + "-" + startDate[0];
-                        String newEndDate = endDate[2] + "-" + endDate[1] + "-" + endDate[0];
+                        String startDate = logic.formatDate(start[0].split("/"));
+                        String endDate = logic.formatDate(end[0].split("/"));
                         String remarks = " | " + currLine[3] + " | " + currLine[4];
                         if (start.length > 1) {
-                            String[] startTime = start[1].split("");
-                            String newStartTime = startTime[0] + startTime[1] + ":" + startTime[2] + startTime[3];
-                            String[] endTime = end[1].split("");
-                            String newEndTime = endTime[0] + endTime[1] + ":" + endTime[2] + endTime[3];
-                            newTask = new Event(description, newStartDate, newEndDate, newStartTime, newEndTime, remarks);
+                            String startTime = logic.formatTime(start[1].split(""));
+                            String endTime = logic.formatTime(end[1].split(""));
+                            newTask = new Event(description, startDate, endDate, startTime, endTime, remarks);
                         } else {
-                            newTask = new Event(description, newStartDate, newEndDate, remarks);
+                            newTask = new Event(description, startDate, endDate, remarks);
                         }
                         break;
                     }

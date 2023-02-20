@@ -91,6 +91,7 @@ public class TaskList {
      * @param num Index of the task to be deleted.
      */
     public void delete(int num) {
+        removeFind(list.get(num - 1));
         list.remove(num - 1);
     }
 
