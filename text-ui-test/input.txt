@@ -1,0 +1,20 @@
+list
+todo
+todo sleep
+todo eat
+todo earn money
+deadline homework /by 2023-10-10
+go to sleep
+please
+event World Cup! /from 2022-11 /to 2022-12
+MESSI!!
+event /from 156
+delete 1
+mark 1
+mark 1
+unmark 1
+unmark 100
+todo MESSI!
+mark 2
+delete 10b10
+bye

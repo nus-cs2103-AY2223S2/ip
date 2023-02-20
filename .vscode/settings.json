@@ -1,0 +1,24 @@
+{
+  "java.completion.importOrder": [
+    "#",
+    "java",
+    "javax",
+    "org",
+    "com",
+    ""
+  ],
+  "java.settings.url": ".vscode/vscode-java.prefs",
+  "java.format.settings.url": ".vscode/eclipse-java-google-style.xml",
+  "java.project.sourcePaths": ["src/main/java", "src/test/java", ""],
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "[java]": {
+    "editor.detectIndentation": false,
+    "editor.rulers": [100],
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.trimAutoWhitespace": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "java.inlayHints.parameterNames.enabled": "none",
+  "css.validate": false
+}
