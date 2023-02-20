@@ -115,7 +115,7 @@ public class Parser {
 
     private TodoProps parseTodoProps(String fullCommand) {
         assert fullCommand.split("\\s+", 2).length >= 2 : "Command is valid";
-        String taskDescription = fullCommand.split("\\s+")[1];
+        String taskDescription = fullCommand.split("\\s+", 2)[1];
         return new TodoProps(taskDescription);
     }
 

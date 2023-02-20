@@ -133,13 +133,13 @@ public class ParserTest {
 
     @Test
     void todo_normalInput_writtenCorrectly() {
-        String input = "todo homework";
+        String input = "todo read book and do homework";
         try {
             ITaskList testTaskList = new TaskListStubForSingleTask();
             Command c = new Parser().parse(input);
             c.injectContext(testTaskList, new StorageStub(), null);
             c.execute();
-            assertEquals("[T][] homework", testTaskList.getPrintableTasks());
+            assertEquals("[T][] read book and do homework", testTaskList.getPrintableTasks());
 
         } catch (Exception e) {
             fail();
