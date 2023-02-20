@@ -131,7 +131,7 @@ public class Storage {
             }
             fr.close();
             fw.close();
-            // clear current storage of archived tasks
+            // clear current storage of already archived tasks
             FileWriter fw2 = new FileWriter(currentTasks.file);
             fw2.write("");
             fw2.close();

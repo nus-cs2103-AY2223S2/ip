@@ -73,7 +73,7 @@ public class TaskList {
      * @return the string representation of the task list that was deleted.
      */
     public String deleteAllTasks() {
-        String message = taskList.toString();
+        String message = this.toString();
         this.taskList.clear();
         return message;
     }
