@@ -20,7 +20,7 @@ The list of tasks can be sorted in alphabetical order
 ## Save a task
 Tasks added to the list can be stored and loaded when the program starts
 
-##Usage
+## Usage
 
 ### `Keyword` - Describe action
 
