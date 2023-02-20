@@ -16,6 +16,7 @@ public class TaskList {
 
     /**
      * Adds provided task to list.
+     *
      * @param toAdd Task to be added to list.
      */
     public void addTask(Task toAdd) {
@@ -24,6 +25,7 @@ public class TaskList {
 
     /**
      * Returns task at provided index.
+     *
      * @param i Index at which task is fetched in the list.
      * @return Task at index provided.
      */
@@ -33,6 +35,7 @@ public class TaskList {
 
     /**
      * Returns current number of tasks in list.
+     *
      * @return Number of tasks in list.
      */
     public int getSize() {
@@ -41,6 +44,7 @@ public class TaskList {
 
     /**
      * Removes the task at the provided index from the list.
+     *
      * @param i Index at which task is removed from the list.
      */
     public void removeAtIndex(int i) {

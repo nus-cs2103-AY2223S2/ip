@@ -13,9 +13,10 @@ public class Event extends Task {
 
     /**
      * Creates a new Deadline task.
+     *
      * @param description Description of the task.
-     * @param from From date for the task.
-     * @param to To date for the task.
+     * @param from        From date for the task.
+     * @param to          To date for the task.
      */
     public Event(String description, String from, String to) {
         this(description, false, from, to);
