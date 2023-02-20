@@ -1,7 +1,13 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 /**
  * Represents an event.
@@ -11,8 +17,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     private String desc;
-    private LocalDate from;
-    private LocalDate to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     /**
      * Creates a new Event.
@@ -24,10 +30,24 @@ public class Event extends Task {
      */
     public Event(int id, String description, String from, String to) {
         super(id);
+
+        List<Date> fromDates = new PrettyTimeParser().parse(from);
+        List<Date> toDates = new PrettyTimeParser().parse(to);
+
         desc = description;
-        // TODO: Handle invalid dates.
-        this.from = LocalDate.parse(from);
-        this.to = LocalDate.parse(to);
+        
+        if(fromDates.size() == 0 || toDates.size() == 0) {
+            throw new IllegalArgumentException("Unable to parse 'from' or 'to' date.");
+        } else {
+            this.from = convertDateToLocalDateTime(fromDates.get(0));
+            this.to = convertDateToLocalDateTime(toDates.get(0));
+        }
+    }
+
+    private LocalDateTime convertDateToLocalDateTime(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
     }
 
     @Override
@@ -39,8 +59,8 @@ public class Event extends Task {
     public String toString() {
         String isDone = isCompleted() ? "X" : " ";
         return String.format("[E][%s] %s (from: %s to %s)", isDone, description(),
-                from.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
-                to.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                from.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm a")),
+                to.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm a")));
     }
 
     @Override
