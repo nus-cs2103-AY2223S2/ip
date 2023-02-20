@@ -268,6 +268,8 @@ the data of your previous Meggy home folder.
 User Guide format and structure based
 on [AB3](https://raw.githubusercontent.com/se-edu/addressbook-level3/master/docs/UserGuide.md)
 <br>
+Font made by [frozenpandaman](https://frozenpandaman.github.io/inkling.html)
+<br>
 Meggy icon cropped
 from [Fandom Wiki](https://supermarioglitchy4.fandom.com/wiki/Meggy_Spletzer?file=Og+meggy+render+by+superwarriorofficial+de2n7b6.png)
 <br>
