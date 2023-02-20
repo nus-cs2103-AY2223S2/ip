@@ -15,10 +15,10 @@ public class ToDo extends Task {
      */
 
     public ToDo(String action) {
-        super("T", action);
+        super("TODO", action);
     }
 
     public ToDo(String action, boolean isDone) {
-        super("T", action, isDone);
+        super("TODO", action, isDone);
     }
 }

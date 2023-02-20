@@ -116,7 +116,7 @@ public class Task {
     @Override
     public String toString() {
         String toPrintOut = "";
-        toPrintOut += "[" + this.nature + "]";
+        toPrintOut += "[" + this.nature.charAt(0) + "]";
         if (this.isDone) {
             toPrintOut += "[X] ";
         } else {

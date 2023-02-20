@@ -6,16 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-import duke.util.service.Deadline;
-import duke.util.service.ScheduledEvent;
-import duke.util.service.ToDo;
 import javafx.util.Pair;
 
 /**
@@ -27,8 +23,6 @@ import javafx.util.Pair;
  */
 
 public class Storage {
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy");
-
     private HashMap<String, TaskList> keywordDatabase;
     private HashMap<String, PriorityQueue<Pair<LocalDateTime, Task>>> taskScheduleOnDates;
 
@@ -54,7 +48,7 @@ public class Storage {
             FileWriter myWriter = new FileWriter(savedFile, false);
             for (int i = 0; i < taskList.getSize(); i++) {
                 Task currenttask = taskList.getTask(i);
-                myWriter.write(currenttask.getNature() + " " + currenttask.getStatus() + " "
+                myWriter.write(currenttask.getStatus() + " " + currenttask.getNature() + " "
                         + currenttask.getAction() + " " + currenttask.getTimeInfo() + '\n');
             }
             myWriter.close();
@@ -72,7 +66,6 @@ public class Storage {
      *          existing Task
      */
 
-    //improve code quality
     public static TaskList loadProgress() {
         try {
             File previousProgress = new File("MY_GRAND_PLAN.txt");
@@ -81,49 +74,24 @@ public class Storage {
 
             while (progressScanner.hasNextLine()) {
                 String data = progressScanner.nextLine();
-                String[] availableTask = data.split(" ");
-                List<String> availableTaskAsList = Arrays.asList(availableTask);
-                boolean isDone = Boolean.parseBoolean(availableTaskAsList.get(1));
-                String natureOfTask = availableTaskAsList.get(0);
-                if (natureOfTask.equals("T")) {
-                    String action = "";
-                    for (int i = 2; i < availableTaskAsList.size(); i++) {
-                        action += availableTaskAsList.get(i) + " ";
-                    }
-                    returnTaskList.addTask(new ToDo(action, isDone));
-                } else if (natureOfTask.equals("D")) {
-                    String actionAndDate = "";
-                    for (int i = 2; i < availableTaskAsList.size(); i++) {
+                String[] availableTaskArray = data.split(" ");
+                List<String> availableTaskAsList = Arrays.asList(availableTaskArray);
+
+                boolean isDone = Boolean.parseBoolean(availableTaskArray[0]);
+
+                String actionAndDate = "";
+                for (int i = 1; i < availableTaskAsList.size(); i++) {
                         actionAndDate += availableTaskAsList.get(i) + " ";
-                    }
-                    actionAndDate = actionAndDate.stripTrailing();
-                    String[] deadlineInfo = actionAndDate.split(" /BY ");
-                    List<String> deadlineInfoAsList = Arrays.asList(deadlineInfo);
-                    String date = deadlineInfoAsList.get(1);
-
-                    returnTaskList.addTask(
-                            new Deadline(LocalDateTime.parse(date, DATE_FORMAT), deadlineInfoAsList.get(0), isDone));
-                } else {
-                    String actionAndDate = "";
-                    for (int i = 2; i < availableTaskAsList.size(); i++) {
-                        actionAndDate += availableTaskAsList.get(i) + " ";
-                    }
-                    actionAndDate = actionAndDate.stripTrailing();
-
-                    String[] eventInfo = actionAndDate.split(" /FROM ");
-                    List<String> eventInfoAsList = Arrays.asList(eventInfo);
-
-                    String dateInfo = eventInfoAsList.get(1);
-
-                    String[] dateInfoAsArray = dateInfo.split(" /TO ");
-                    List<String> dateInfoAsList = Arrays.asList(dateInfoAsArray);
-
-                    returnTaskList.addTask(
-                            new ScheduledEvent(LocalDateTime.parse(dateInfoAsList.get(0), DATE_FORMAT),
-                                    LocalDateTime.parse(dateInfoAsList.get(1), DATE_FORMAT),
-                                    eventInfoAsList.get(0), isDone));
                 }
 
+                actionAndDate = actionAndDate.stripTrailing();
+                Task parsedTask = Parser.parseTask(actionAndDate);
+
+                if (isDone) {
+                    parsedTask = parsedTask.markDone();
+                }
+
+                returnTaskList.addTask(parsedTask);
             }
             progressScanner.close();
             return returnTaskList;
@@ -168,16 +136,8 @@ public class Storage {
      */
 
     private void addToKeywordStorage(Task task) {
-        String toUpdateKeywordDatabase = "";
-        if (task.getNature().equals("T")) {
-            toUpdateKeywordDatabase = "TODO " + task.getAction();
-        } else if (task.getNature().equals("D")) {
-            toUpdateKeywordDatabase = "DEADLINE " + task.getAction()
-                    + " " + task.getTimeInfo();
-        } else {
-            toUpdateKeywordDatabase = "EVENT " + task.getAction()
-                    + " " + task.getTimeInfo();
-        }
+        String toUpdateKeywordDatabase = task.getNature() +
+                " " + task.getAction() + " " + task.getTimeInfo();
 
         for (String keyword : toUpdateKeywordDatabase.split(" ")) {
             if (this.keywordDatabase.containsKey(keyword)) {

@@ -25,7 +25,7 @@ public class ScheduledEvent extends Task {
 
     public ScheduledEvent(LocalDateTime dateBegin,
                           LocalDateTime dateEnd, String action) {
-        super("E", action);
+        super("EVENT", action);
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
     }
@@ -40,7 +40,7 @@ public class ScheduledEvent extends Task {
 
     public ScheduledEvent(LocalDateTime dateBegin,
                           LocalDateTime dateEnd, String action, boolean isDone) {
-        super("E", action, isDone);
+        super("EVENT", action, isDone);
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
     }
@@ -64,9 +64,9 @@ public class ScheduledEvent extends Task {
     @Override
     public String getTimeInfo() {
         return " /FROM " + dateBegin.format(
-                DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy"))
+                DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"))
                 + " /TO " + dateEnd.format(
-                        DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy"));
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
     }
 
     @Override

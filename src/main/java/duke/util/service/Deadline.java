@@ -20,7 +20,7 @@ public class Deadline extends Task {
      * with the keyword "/BY".
      */
     public Deadline(LocalDateTime deadline, String action) {
-        super("D", action);
+        super("DEADLINE", action);
         this.deadline = deadline;
     }
     /**
@@ -31,7 +31,7 @@ public class Deadline extends Task {
      */
 
     public Deadline(LocalDateTime deadline, String action, boolean isDone) {
-        super("D", action, isDone);
+        super("DEADLINE", action, isDone);
         this.deadline = deadline;
     }
 
@@ -42,7 +42,7 @@ public class Deadline extends Task {
     @Override
     public String getTimeInfo() {
         return "/BY " + deadline.format(
-                DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy"));
+                DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
     }
 
     /**
