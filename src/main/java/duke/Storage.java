@@ -107,11 +107,12 @@ public class Storage {
                     String endDate = parts [5];
                     LocalDate start = Parser.parseFile(startDate);
                     LocalDate end = Parser.parseFile(endDate);
-                    task = new Event(parts[2], start, end);
+                    task = new Event(parts[3], start, end);
                     break;
                 default:
                     throw new DukeException("Error parsing file, unexpected task type");
                 }
+
                 if (Integer.parseInt(parts[1].trim()) == 1) {
                     task.markDone();
                 } else if (Integer.parseInt(parts[1].trim()) == 0) {
@@ -130,5 +131,4 @@ public class Storage {
         }
         return tasks;
     }
-
 }

@@ -2,6 +2,9 @@ package task;
 
 import java.time.LocalDate;
 
+import duke.Parser;
+
+
 /**
  * The Deadline class extends the Task class and represents a deadline task.
  * It extends the `Task` class and contains additional information
@@ -48,6 +51,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return TASKSYMBOL + super.toString() + "(" + dueDate + ")";
+        return TASKSYMBOL + super.toString() + " (" + Parser.getPrettierDate(dueDate) + ")";
     }
 }

@@ -29,7 +29,7 @@ public class AddCommand implements Command {
     @Override
     public String execute(Ui ui, Tasklist list, Storage storage) {
         list.add(this.newTask);
-        return ui.getAddReply(this.newTask);
+        return ui.getAddReply(this.newTask, list.size());
     }
 
 }

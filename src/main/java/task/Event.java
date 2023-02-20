@@ -2,6 +2,8 @@ package task;
 
 import java.time.LocalDate;
 
+import duke.Parser;
+
 /**
  * The `Event` class represents an event task in the to-do list.
  * It extends the `Task` class and contains additional information
@@ -50,6 +52,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return TASKSYMBOL + super.toString() + "(" + startDetails + " : " + endDetails + ")";
+        return TASKSYMBOL + super.toString() + "(" + Parser.getPrettierDate(startDetails)
+                + " to " + Parser.getPrettierDate(endDetails) + ")";
     }
 }

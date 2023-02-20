@@ -1,0 +1,4 @@
+.dialog-box {
+    -fx-max-height: Infinity;
+    -fx-max-width: Infinity;
+}

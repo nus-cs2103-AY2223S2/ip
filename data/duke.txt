@@ -1,5 +1,6 @@
-T | 1 | 0 | lol
-D | 0 | 1 | deadline buy food | 2022-12-22 | Yum
-T | 0 | 0 |  shit
-T | 0 | 0 |  eat shit
-D | 1 | 0 | deadline pass shit | 2023-02-12
+T | 1 | 1 |  Brush teeth | food
+D | 1 | 1 | Submit CS2103T | 2023-02-12 | finally
+E | 0 | 1 |  Music festival  | 2023-12-22 | 2023-12-23 | again
+T | 0 | 0 |  work
+T | 0 | 0 |  task
+D | 0 | 0 | task | 2023-12-22

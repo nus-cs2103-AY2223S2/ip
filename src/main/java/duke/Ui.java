@@ -55,9 +55,10 @@ public class Ui {
      * @param addedTask The added task.
      * @return A string representation of the reply.
      */
-    public String getAddReply(Task addedTask) {
+    public String getAddReply(Task addedTask, int listSize) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("WHAT A BOTHER! Whatever...I've added this task:\n " + addedTask.toString());
+        stringBuilder.append("Boy now you have " + listSize + " tasks in the list.");
         return stringBuilder.toString();
     }
 
@@ -74,11 +75,7 @@ public class Ui {
         }
 
         stringBuilder.append("I dug out the WHOLE BEDROOM and found want you wanted NOW LEAVE:\n");
-        String[] taskLines = tasklist.toString().split("\n");
-
-        for (int i = 1; i <= taskLines.length; i++) {
-            stringBuilder.append(i).append(". ").append(taskLines[i]).append("\n");
-        }
+        stringBuilder.append(tasklist);
         return stringBuilder.toString();
     }
 
@@ -123,12 +120,21 @@ public class Ui {
         return "Hope I never see your face here again!";
     }
 
+    /**
+     * Returns a string that includes a tag reply and the string representation of a Task object after execution of tag.
+     * @param taggedTask The Task object that has been tagged.
+     * @return A string that includes a message and the string representation of the tagged task.
+     */
     public String getTagReply(Task taggedTask) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("You want me to what? Tag? Fine.\n").append(taggedTask.toString());
         return stringBuilder.toString();
     }
 
+    /**
+     * Closes the window if the response matches user interface's exit reply.
+     * @param response The response to check.
+     */
     public void closeWindow(String response) {
         if (response.equals("Hope I never see your face here again!")) {
             Timeline delayExit = new Timeline(new KeyFrame(Duration.seconds(1), e -> {

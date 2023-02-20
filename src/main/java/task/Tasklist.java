@@ -44,6 +44,16 @@ public class Tasklist {
     }
 
     /**
+     * Adds a task to the task list and without saving the updated task list.
+     *
+     * @param task the task to add to the task list
+     */
+    public void addWithoutSaving(Task task) {
+        assert task != null;
+        this.list.add(task);
+    }
+
+    /**
      * Marks a task in the task list as done and saves the updated task list to the backend.
      *
      * @param index the index of the task to mark as done
@@ -107,7 +117,7 @@ public class Tasklist {
         for (int i = 0; i < this.list.size(); i++) {
             Task task = this.list.get(i);
             if (task.contains(keyword)) {
-                matchedList.add(task);
+                matchedList.addWithoutSaving(task);
             }
         }
         return matchedList;
@@ -130,7 +140,7 @@ public class Tasklist {
         String stringTasklist;
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 1; i <= list.size(); i++) {
-            stringBuilder.append(this.getTask(i));
+            stringBuilder.append(i).append(". ").append(this.getTask(i));
             if (i != list.size()) {
                 stringBuilder.append("\n");
             }

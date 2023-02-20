@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.shape.Rectangle;
 
 
 /**
@@ -34,9 +36,8 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        configureFlexTextBox(text, img);
 
-        dialog.setText(text);
-        displayPicture.setImage(img);
     }
 
     /**
@@ -58,4 +59,23 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
+    /**
+     * Configures a flexible text box that always allows the full list to be displayed.
+     * @param text The text to display in the text box.
+     * @param img The image to display in the text box.
+     */
+    public void configureFlexTextBox(String text, Image img) {
+        dialog.setText(text);
+        displayPicture.setImage(img);
+        Rectangle box = new Rectangle(300, 100);
+        Label labelText = new Label(text);
+
+        box.heightProperty().bind(labelText.heightProperty());
+        box.widthProperty().bind(labelText.widthProperty());
+
+        dialog.setMinHeight(labelText.getHeight());
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+    }
+
 }

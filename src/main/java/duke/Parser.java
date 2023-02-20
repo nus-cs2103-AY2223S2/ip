@@ -71,8 +71,7 @@ public class Parser {
             if (startIndex >= input.length()) {
                 throw new DukeException("Fill in the description of a deadline.");
             }
-            int detailIndex = input.lastIndexOf("deadline");
-            String taskFullDetails = input.substring(detailIndex);
+            String taskFullDetails = input.substring(startIndex);
             String[] splitDetails = taskFullDetails.split("/by ");
             if (splitDetails.length < 2) {
                 throw new DukeException("Please specify the deadline.");
@@ -86,8 +85,7 @@ public class Parser {
             if (startIndex >= input.length()) {
                 throw new DukeException("Fill in the description for this event .");
             }
-            int detailIndex = input.lastIndexOf("event");
-            String taskFullDetails = input.substring(detailIndex);
+            String taskFullDetails = input.substring(startIndex);
             String[] splitDescriptionAndDuration = taskFullDetails.split("/from");
             String[] splitStartAndEnd = splitDescriptionAndDuration[1].split("/to");
             if (splitDescriptionAndDuration.length < 2) {
@@ -124,6 +122,11 @@ public class Parser {
         } catch (DateTimeParseException dtpe) {
             throw new DukeException("An error occurred while parsing date: " + dtpe.getMessage());
         }
+    }
+
+    public static String getPrettierDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        return date.format(formatter);
     }
 
 }
