@@ -31,13 +31,16 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (taskNum < 1 || taskNum >= tasks.size() + 1) {
+        boolean isSmallerThanOne = taskNum < 1;
+        boolean isGreaterThanSize = taskNum > tasks.size() + 1;
+        if (isSmallerThanOne || isGreaterThanSize) {
             throw new DukeException("\u2639 OOPS!!! The index to mark as done cannot be less than 0 or "
                     + "greater than the length of the list.");
         }
 
         Task deletedTask = tasks.get(taskNum - 1);
         tasks.delete(taskNum - 1);
+        assert (tasks.size() == taskNum - 1) : "Tasks size should be equal to previous tasks size - 1";
         storage.save(tasks.getAllTasks());
         return Ui.showDeleteMessage(deletedTask, tasks.size());
     }
