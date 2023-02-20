@@ -73,6 +73,9 @@ public class Parser {
         case "find":
             parseFindCommand();
             break;
+        case "help":
+            parseHelpCommand();
+            break;
         default:
             ui.showUnknownError();
         }
@@ -148,5 +151,9 @@ public class Parser {
     private void parseFindCommand() {
         String description = command.substring(5);
         tasks.findTask(ui, description);
+    }
+
+    private void parseHelpCommand() throws DukeException {
+        ui.showHelpPage();
     }
 }
