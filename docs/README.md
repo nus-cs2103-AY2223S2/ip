@@ -6,7 +6,7 @@
 
 ### Reminders
 Upon launching the application, Duke will remind you of the deadline tasks that are due on the current day, and the event tasks that span over the current day.
-To get this list of tasks again, either scroll up or use the [`Check` command](#-check---search-using-date) with today's date.
+To get this list of tasks again, either scroll up or use the [`Check` command](#check---search-using-date) with today's date.
 
 ## Usage
 
