@@ -22,6 +22,26 @@ Tasks added to the list can be stored and loaded when the program starts
 
 ## Usage
 
+### `bye` - exit the program
+
+
+Describe the action and its outcome.
+Exit the program 
+
+Example of usage: 
+Format: 
+`bye`
+
+Expected outcome:
+'bye'
+
+Description of the outcome.
+Returns a string 'bye' as output before closing the program window
+
+```
+"Byeee! Hope to see you again! Signing off, duke."
+```
+
 ### `Keyword` - Describe action
 
 Describe the action and its outcome.
