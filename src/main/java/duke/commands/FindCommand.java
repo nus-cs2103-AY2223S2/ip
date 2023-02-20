@@ -42,7 +42,7 @@ public class FindCommand extends Command {
         } else {
             String res = "These are the " + out.size() + " tasks I found:";
             for (int i = 0; i < out.size(); i++) {
-                res += "\n" + i + 1 + ". " + out.get(i);
+                res += "\n" + String.valueOf(i + 1) + ". " + out.get(i);
             }
             return res;
         }
