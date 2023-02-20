@@ -1,7 +1,7 @@
 # User Guide
 
-## **\*\*\*LEVEL 10 CLEARANCE REQUIRED\*\*\***
-UNAUTHORIZED PERSONNEL LEAVE IMMEDIATELY
+# **\*\*\*LEVEL 10 CLEARANCE REQUIRED\*\*\***
+## UNAUTHORIZED PERSONNEL LEAVE IMMEDIATELY
 
 Product is the first successful test of an experiment to incorporate the mind of the great Sith Lord Darth Vader into normal software. Hydra scientists have been able to infest a simple, text-based task logging application called Duke with the Dark Side Energy, thereby relieving personnel of remedial jobs like remembering tasks, allowing Hydra to focus on taking over the world. Product is offered with both CLI and GUI versions.
 
@@ -38,6 +38,7 @@ java -jar Duke.jar GUI
 Add a To-Do task to the list of tasks.
 
 Format: `TODO {action}`
+
 **`action`** cannot be empty
 
 Example: `TODO DRINK WATER`
@@ -50,9 +51,11 @@ Add a task with deadline to the list of tasks.
 Format: `DEADLINE {action} /BY {deadline}`
 
 **`action`** cannot be empty
+
 **`deadline`** must be of format `dd-MM-yyyy HHmm`
 
 Example: `DEADLINE SUBMIT HW /BY 20-02-2023 2359`
+
 Add a Deadline task to the list of tasks with the action *SUBMIT HW* and deadline *20-02-2023 2359*
 
 ### `EVENT`: Add an Event task
@@ -62,9 +65,11 @@ Add an Event task to the list of tasks.
 Format: `EVENT {action} /FROM {date_begin} /TO {date_end}`
 
 **`action`** cannot be empty
+
 **`date_begin`** and **`date_end`** must be of format `dd-MM-yyyy HHmm`
 
 Example: `EVENT BINGE MOVIES /FROM 20-02-2023 2359 /TO 24-02-2023 2300`
+
 Add an Event to the list of tasks with the action *BINGE MOVIES*, date_begin *20-02-2023 2359*, and date_end *24-02-2023 2300*
 
 ### `LIST`: List all tasks
