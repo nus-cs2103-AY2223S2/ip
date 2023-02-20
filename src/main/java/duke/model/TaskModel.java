@@ -27,6 +27,9 @@ public class TaskModel implements Model {
     private final File dataDir;
     private final File tasksFile;
 
+    /**
+     * Model that stores the task list. It is also responsible for saving and loading tasks (on startup) from the disk.
+     */
     public TaskModel() {
         this.dataDir = new File(dataDirPath);
         if (!dataDir.exists()) {

@@ -14,6 +14,10 @@ public class CommandFactory {
     private final View taskView;
 
     private final CommandEventListener exitEventListener;
+
+    /**
+     * An enum of all the commands that can be created by the CommandFactory.
+     */
     public enum CommandType {
         GREET, BYE, LIST, MARK_DONE, MARK_UNDONE, CREATE_TODO,
         CREATE_DEADLINE, CREATE_EVENT, DELETE_TASK, FIND,

@@ -9,7 +9,6 @@ import duke.interfaces.Command;
 import duke.interfaces.Model;
 import duke.interfaces.View;
 import duke.model.Task;
-import duke.model.TaskModel;
 
 /**
  * Command for adding a deadline to the task list.
@@ -20,8 +19,6 @@ public class AddDeadlineCommand implements Command {
     private final View taskView;
     private final String todoDescription;
     private final LocalDateTime deadline;
-
-    private static final String addedTaskMessage = "Got it. I've added this task:\n  ";
 
     /**
      * Instantiates a command which creates the deadline on execution.

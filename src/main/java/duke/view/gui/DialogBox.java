@@ -14,6 +14,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+// Solution adapted from:
+// Jeffrey Lum. "JavaFX tutorial part 3 – Interacting with the user", SE Education.org
+// https://se-education.org/guides/tutorials/javaFxPart3.html
+
 /**
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label

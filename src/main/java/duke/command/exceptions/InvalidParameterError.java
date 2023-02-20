@@ -8,7 +8,7 @@ import duke.exceptions.CommandException;
 public class InvalidParameterError extends CommandException {
     /**
      * Instantiate an InvalidParameterError with a specific error message.
-     * @param errorMessage: the error message to be displayed to the user.
+     * @param errorMessage the error message to be displayed to the user.
      */
     public InvalidParameterError(String errorMessage) {
         super(errorMessage);

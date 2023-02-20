@@ -3,8 +3,6 @@ import duke.command.exceptions.CommandExecutionError;
 import duke.interfaces.Command;
 import duke.interfaces.Model;
 import duke.interfaces.View;
-import duke.model.TaskModel;
-import duke.view.cli.TaskView;
 
 /**
  * Command to mark a task as undone.

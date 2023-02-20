@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import duke.interfaces.View;
 import duke.model.Task;
-import duke.view.gui.DukeGui;
 
 /**
  * Class that handles displaying task model information to the user, and receiving user input.
@@ -15,10 +14,6 @@ public class TaskView implements View {
     private List<Task> displayedTaskList;
     public TaskView() {
         this.sc = new Scanner(System.in);
-    }
-    private DukeGui gui;
-    public void registerGui(DukeGui gui) {
-        this.gui = gui;
     }
     /**
      * Get the task at the supplied index from the list of displayed tasks.
@@ -39,10 +34,9 @@ public class TaskView implements View {
     @Override
     public void showMessage(String string) {
         System.out.println("calling gui show message");
-        gui.showMessage(string);
-//        System.out.println("____________________________________________________________");
-//        System.out.println(string);
-//        System.out.println("____________________________________________________________");
+        System.out.println("____________________________________________________________");
+        System.out.println(string);
+        System.out.println("____________________________________________________________");
     }
 
     /**

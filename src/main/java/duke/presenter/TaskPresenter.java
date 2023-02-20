@@ -3,7 +3,11 @@ package duke.presenter;
 import duke.command.CommandFactory;
 import duke.command.exceptions.CommandExecutionError;
 import duke.exceptions.CommandException;
-import duke.interfaces.*;
+import duke.interfaces.Command;
+import duke.interfaces.CommandEventListener;
+import duke.interfaces.Model;
+import duke.interfaces.Presenter;
+import duke.interfaces.View;
 import duke.presenter.exceptions.ParserError;
 
 /**
@@ -25,6 +29,10 @@ public class TaskPresenter implements Presenter {
         this.parser = new InputParser(commandFactory);
     }
 
+    /**
+     * A method to greet the user, displays a greeting message to the task view.
+     * @throws CommandException If greet command fails to execute.
+     */
     public void greetUser() throws CommandException {
         Command greetCommand = commandFactory.createCommand(CommandFactory.CommandType.GREET);
         greetCommand.execute();

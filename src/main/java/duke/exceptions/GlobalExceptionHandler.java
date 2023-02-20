@@ -11,10 +11,12 @@ public class GlobalExceptionHandler {
         this.taskView = taskView;
     }
 
+    /**
+     * Handle DukeExceptions by printing their message to the view.
+     * @param exception The exception to be handled.
+     */
     public void handleException(DukeException exception) {
         // determine if exception is recoverable or not
-        if (exception instanceof PresenterException | exception instanceof CommandException) {
-            taskView.showError(exception.getMessage());
-        }
+        taskView.showError(exception.getMessage());
     }
 }

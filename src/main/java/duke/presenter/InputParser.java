@@ -7,7 +7,6 @@ import duke.command.CommandFactory;
 import duke.command.CommandFactory.CommandType;
 import duke.command.exceptions.InvalidParameterError;
 import duke.interfaces.Command;
-import duke.interfaces.CommandEventListener;
 import duke.presenter.exceptions.InvalidInputError;
 import duke.presenter.exceptions.ParserError;
 import duke.presenter.exceptions.UnsupportedCommandError;
