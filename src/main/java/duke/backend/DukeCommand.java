@@ -61,7 +61,7 @@ public enum DukeCommand {
     public static DukeCommand getCommand(String input) {
         for (DukeCommand c : DukeCommand.values()) {
             if (c.getCommand().equals(input.split(" ")[0])) {
-                if (c != LIST && c != BYE) {
+                if (c != LIST && c != BYE && c != ARCHIVE) {
                     c.setDescription(input.split(" ", 2)[1].trim());
                 }
                 return c;
@@ -79,6 +79,9 @@ public enum DukeCommand {
     public String execute(TaskList taskList, Storage storage, Storage archiveStorage) {
         switch (this) {
         case ARCHIVE:
+            if (taskList.isEmpty()) {
+                return ResponseGenerator.printNoTasksToArchive();
+            }
             try {
                 archiveStorage.archive(storage);
                 return ResponseGenerator.printTasksArchived(taskList);

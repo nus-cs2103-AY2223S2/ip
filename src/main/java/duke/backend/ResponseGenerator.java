@@ -103,4 +103,8 @@ public class ResponseGenerator {
     public static String printTasksArchived(TaskList taskList) {
         return "Archived the following tasks:\n" + taskList.deleteAllTasks();
     }
+
+    public static String printNoTasksToArchive() {
+        return "No tasks to archive.";
+    }
 }
