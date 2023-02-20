@@ -71,10 +71,10 @@ public abstract class Task {
     @Override
     public String toString() {
         if(this.isDone) {
-            return "[X] | " + this.name + " | " + this.getTags();
+            return "[X] " + this.name + " " + this.getTags();
         }
         else {
-            return "[ ] | " + this.name + " | " + this.getTags();
+            return "[ ] " + this.name + " " + this.getTags();
         }
     }
 }
