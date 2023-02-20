@@ -30,9 +30,7 @@ Example of usage:
 `bye`
 
 Expected outcome:
-'bye'
 
-Description of the outcome.
 Returns a string 'bye' as output before closing the program window
 
 ```
