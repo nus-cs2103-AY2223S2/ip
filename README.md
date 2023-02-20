@@ -19,6 +19,8 @@ Nook is an app that helps you manage your time. It's,
 - [x] Manage Todos, Deadlines and Events
 - [x] Set Priorities for your Tasks
 
+### [User Guide](https://github.com/kimberlybp/ip/blob/A-Release/docs/README.md)
+
 ### Devs feel free and play around with the code!
 Here's a preview of the `main` method: 
 ```java
