@@ -1,43 +1,51 @@
 package duke;
 
+import duke.exceptions.CommandException;
+import duke.interfaces.InputEventListener;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.GlobalExceptionHandler;
 import duke.interfaces.CommandEventListener;
-import duke.interfaces.Presenter;
 import duke.model.TaskModel;
 import duke.presenter.TaskPresenter;
-import duke.view.cli.TaskView;
+import duke.view.gui.DukeGui;
+import javafx.application.Platform;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * The main class containing Duke's event loop.
  */
 public class Duke {
-    private boolean isTerminated;
-    private Duke() {
-        this.isTerminated = false;
-    }
-    private void exit() {
-        this.isTerminated = true;
-    }
-    public static void main(String[] args) throws DukeException {
-        Duke duke = new Duke();
+    public static void main(String[] args) throws Exception {
+        DukeGui dukeGui = new DukeGui();
         TaskModel taskModel = new TaskModel();
-        TaskView taskView = new TaskView();
-        GlobalExceptionHandler exceptionHandler = new GlobalExceptionHandler(taskView);
-        CommandEventListener exitEventListener = command -> {
-            if (command.equalsIgnoreCase("bye")) {
-                // cleanup code here
-                duke.exit();
-            }
-        };
+        dukeGui.setTasks(taskModel.getTasks(), false);
 
-        Presenter presenter = new TaskPresenter(taskModel, taskView, exitEventListener);
-        while (!duke.isTerminated) {
+        GlobalExceptionHandler exceptionHandler = new GlobalExceptionHandler(dukeGui);
+        CommandEventListener exitEventListener = command -> {
+            dukeGui.stop();
+        };
+        TaskPresenter presenter = new TaskPresenter(taskModel, dukeGui, exitEventListener);
+        InputEventListener inputEventListener = input -> {
             try {
-                presenter.handleInput(taskView.getUserInput());
+                presenter.handleInput(input);
             } catch (DukeException e) {
                 exceptionHandler.handleException(e);
             }
-        }
+        };
+        dukeGui.registerInputEventListener(inputEventListener);
+        dukeGui.init();
+        Platform.startup(() -> {
+            // create primary stage
+            Stage stage = new Stage();
+            try {
+                dukeGui.start(stage);
+                presenter.greetUser();
+            } catch (IOException | CommandException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }

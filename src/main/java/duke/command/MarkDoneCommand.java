@@ -2,16 +2,16 @@ package duke.command;
 
 import duke.command.exceptions.CommandExecutionError;
 import duke.interfaces.Command;
-import duke.model.TaskModel;
-import duke.view.cli.TaskView;
+import duke.interfaces.Model;
+import duke.interfaces.View;
 
 /**
  * Command to mark a task done.
  */
 public class MarkDoneCommand implements Command {
     private static final String MARKED_DONE_MESSAGE = "Nice! I've marked this task as done:\n";
-    private final TaskModel taskModel;
-    private final TaskView taskView;
+    private final Model taskModel;
+    private final View taskView;
     private final int taskIndex;
 
     /**
@@ -20,7 +20,7 @@ public class MarkDoneCommand implements Command {
      * @param taskModel Model that stores the task list.
      * @param index Index of task to mark as done.
      */
-    MarkDoneCommand(TaskView taskView, TaskModel taskModel, int index) {
+    MarkDoneCommand(Model taskModel, View taskView, int index) {
         this.taskIndex = index;
         this.taskView = taskView;
         this.taskModel = taskModel;

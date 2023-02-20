@@ -3,12 +3,8 @@ package duke.presenter;
 import duke.command.CommandFactory;
 import duke.command.exceptions.CommandExecutionError;
 import duke.exceptions.CommandException;
-import duke.interfaces.Command;
-import duke.interfaces.CommandEventListener;
-import duke.interfaces.Presenter;
-import duke.model.TaskModel;
+import duke.interfaces.*;
 import duke.presenter.exceptions.ParserError;
-import duke.view.cli.TaskView;
 
 /**
  * The presenter in Duke's architecture, mediates between the view and model.
@@ -17,18 +13,19 @@ import duke.view.cli.TaskView;
  */
 public class TaskPresenter implements Presenter {
     private final InputParser parser;
-
+    private final CommandFactory commandFactory;
     /**
      * Creates the presenter for the application.
      * @param taskModel Model that stores the list of tasks.
      * @param taskView The current view.
      * @param exitEventListener CommandEventListener to listen for the exit command from the user.
-     * @throws CommandException If an error occurs while executing the greet command.
      */
-    public TaskPresenter(TaskModel taskModel, TaskView taskView, CommandEventListener exitEventListener)
-            throws CommandException {
-        CommandFactory commandFactory = new CommandFactory(taskModel, taskView);
-        this.parser = new InputParser(exitEventListener, commandFactory);
+    public TaskPresenter(Model taskModel, View taskView, CommandEventListener exitEventListener) {
+        this.commandFactory = new CommandFactory(taskModel, taskView, exitEventListener);
+        this.parser = new InputParser(commandFactory);
+    }
+
+    public void greetUser() throws CommandException {
         Command greetCommand = commandFactory.createCommand(CommandFactory.CommandType.GREET);
         greetCommand.execute();
     }

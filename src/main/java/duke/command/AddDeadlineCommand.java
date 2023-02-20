@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import duke.command.exceptions.InvalidParameterError;
 import duke.command.utils.DateTimeStringParser;
 import duke.interfaces.Command;
+import duke.interfaces.Model;
 import duke.interfaces.View;
 import duke.model.Task;
 import duke.model.TaskModel;
@@ -15,7 +16,7 @@ import duke.model.TaskModel;
  */
 public class AddDeadlineCommand implements Command {
     private static final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n  ";
-    private final TaskModel taskModel;
+    private final Model taskModel;
     private final View taskView;
     private final String todoDescription;
     private final LocalDateTime deadline;
@@ -30,7 +31,7 @@ public class AddDeadlineCommand implements Command {
      * @param deadline The deadline, formatted as d/MMM/yyyy HH:mm, time is optional and defaults to 23:59
      * @throws InvalidParameterError if deadline is formatted improperly.
      */
-    AddDeadlineCommand(View taskView, TaskModel taskModel, String todoDescription, String deadline)
+    AddDeadlineCommand(Model taskModel, View taskView, String todoDescription, String deadline)
             throws InvalidParameterError {
         this.todoDescription = todoDescription;
         this.taskView = taskView;
@@ -47,5 +48,6 @@ public class AddDeadlineCommand implements Command {
         Task newTask = this.taskModel.createTask(todoDescription, deadline);
         taskView.showMessage(ADDED_TASK_MESSAGE + newTask.toString()
             + String.format("\nNow you have %d tasks in the list.", taskModel.getNumberOfTasks()));
+        taskView.setTasks(taskModel.getTasks(), true);
     }
 }

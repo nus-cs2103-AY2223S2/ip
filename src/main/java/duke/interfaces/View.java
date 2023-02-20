@@ -9,13 +9,9 @@ import duke.model.Task;
  * It displays the tasks data and allows users to interact with the task list stored in the model.
  */
 public interface View {
+    Task getDisplayedTask(int index);
+    int getNumDisplayedTasks();
     void showMessage(String string);
-    /**
-     * Gets the user's input.
-     *
-     * @return the user's input
-     */
-    String getUserInput();
 
     /**
      * Shows an error message to the user.
@@ -28,5 +24,5 @@ public interface View {
      *
      * @param tasks the list of tasks to display
      */
-    void renderTasks(List<Task> tasks);
+    void setTasks(List<Task> tasks, boolean renderToScreen);
 }

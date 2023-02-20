@@ -7,7 +7,7 @@ import duke.interfaces.View;
  * A command that greets the user.
  */
 public class GreetingCommand implements Command {
-    private static final String GREETING_MESSAGE = "Greetings, human. I am TARS, the most advanced chatbot\n"
+    private static final String GREETING_MESSAGE = "Greetings, human. I am TARS, the most advanced chatbot"
             + " you'll ever have the pleasure of interacting with.";
     private final View taskView;
 

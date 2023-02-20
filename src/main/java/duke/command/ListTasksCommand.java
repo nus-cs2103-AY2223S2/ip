@@ -6,15 +6,15 @@ import java.time.LocalTime;
 import duke.command.exceptions.InvalidParameterError;
 import duke.command.utils.DateTimeStringParser;
 import duke.interfaces.Command;
-import duke.model.TaskModel;
-import duke.view.cli.TaskView;
+import duke.interfaces.Model;
+import duke.interfaces.View;
 
 /**
  * A command that lists all tasks. Optionally, this command can list all tasks due before a time.
  */
 public class ListTasksCommand implements Command {
-    private final TaskModel taskModel;
-    private final TaskView taskView;
+    private final Model taskModel;
+    private final View taskView;
 
     private LocalDateTime offset = null;
 
@@ -23,7 +23,7 @@ public class ListTasksCommand implements Command {
      * @param taskModel The model that stores the task list.
      * @param taskView The current view.
      */
-    ListTasksCommand(TaskModel taskModel, TaskView taskView) {
+    ListTasksCommand(Model taskModel, View taskView) {
         this.taskModel = taskModel;
         this.taskView = taskView;
     }
@@ -36,7 +36,7 @@ public class ListTasksCommand implements Command {
      * @throws InvalidParameterError If the time offset is improperly formatted.
      */
 
-    ListTasksCommand(TaskModel taskModel, TaskView taskView, String timeOffset) throws InvalidParameterError {
+    ListTasksCommand(Model taskModel, View taskView, String timeOffset) throws InvalidParameterError {
         this.taskModel = taskModel;
         this.taskView = taskView;
         LocalTime defaultTime = LocalTime.MAX;
@@ -50,9 +50,9 @@ public class ListTasksCommand implements Command {
     @Override
     public void execute() {
         if (offset != null) {
-            taskView.renderTasks(taskModel.getTasksOn(offset));
+            taskView.setTasks(taskModel.getTasksOn(offset), true);
         } else {
-            taskView.renderTasks(taskModel.getTasks());
+            taskView.setTasks(taskModel.getTasks(), true);
         }
     }
 }

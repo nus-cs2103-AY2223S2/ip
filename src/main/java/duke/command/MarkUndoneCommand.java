@@ -1,6 +1,8 @@
 package duke.command;
 import duke.command.exceptions.CommandExecutionError;
 import duke.interfaces.Command;
+import duke.interfaces.Model;
+import duke.interfaces.View;
 import duke.model.TaskModel;
 import duke.view.cli.TaskView;
 
@@ -9,8 +11,8 @@ import duke.view.cli.TaskView;
  */
 public class MarkUndoneCommand implements Command {
     private static final String MARKED_UNDONE_MESSAGE = "OK, I've marked this task as not done yet:\n";
-    private final TaskModel taskModel;
-    private final TaskView taskView;
+    private final Model taskModel;
+    private final View taskView;
     private final int taskIndex;
 
     /**
@@ -19,7 +21,7 @@ public class MarkUndoneCommand implements Command {
      * @param taskModel Model that stores the task list.
      * @param index Index of task to mark as undone.
      */
-    MarkUndoneCommand(TaskView taskView, TaskModel taskModel, int index) {
+    MarkUndoneCommand(Model taskModel, View taskView, int index) {
         this.taskIndex = index;
         this.taskView = taskView;
         this.taskModel = taskModel;

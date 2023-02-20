@@ -51,7 +51,7 @@ public class TaskViewTest {
     public void testRenderTasks() {
         TaskView view = new TaskView();
         List<Task> tasks = Arrays.asList(new ToDo("Task 1"), new ToDo("Task 2"));
-        view.renderTasks(tasks);
+        view.setTasks(tasks, true);
         assertEquals("____________________________________________________________\n" +
                 "Here are the tasks in your list:\n" +
                 "1. [T][ ] Task 1\n" +

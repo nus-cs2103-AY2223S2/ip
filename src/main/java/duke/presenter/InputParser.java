@@ -17,11 +17,9 @@ import duke.presenter.exceptions.UnsupportedCommandError;
  * @author jayanth
  */
 public class InputParser {
-    private final CommandEventListener exitEventListener;
     private final CommandFactory commandFactory;
 
-    InputParser(CommandEventListener exitEventListener, CommandFactory commandFactory) {
-        this.exitEventListener = exitEventListener;
+    InputParser(CommandFactory commandFactory) {
         this.commandFactory = commandFactory;
     }
 
@@ -146,7 +144,6 @@ public class InputParser {
     }
 
     private Command handleByeCommand() throws InvalidParameterError {
-        exitEventListener.onCommandEvent("bye");
         return commandFactory.createCommand(CommandType.BYE);
     }
 }

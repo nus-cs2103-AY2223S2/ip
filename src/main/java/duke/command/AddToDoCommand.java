@@ -1,16 +1,16 @@
 package duke.command;
 
 import duke.interfaces.Command;
+import duke.interfaces.Model;
 import duke.interfaces.View;
 import duke.model.Task;
-import duke.model.TaskModel;
 
 /**
  * A command that adds a todo when executed.
  */
 public class AddToDoCommand implements Command {
     private static final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n  ";
-    private final TaskModel taskModel;
+    private final Model taskModel;
     private final View taskView;
     private final String todoDescription;
 
@@ -20,7 +20,7 @@ public class AddToDoCommand implements Command {
      * @param taskModel The model that stores the task list.
      * @param todoDescription A description of the todo.
      */
-    AddToDoCommand(View taskView, TaskModel taskModel, String todoDescription) {
+    AddToDoCommand(Model taskModel, View taskView, String todoDescription) {
         this.todoDescription = todoDescription;
         this.taskView = taskView;
         this.taskModel = taskModel;
@@ -34,5 +34,6 @@ public class AddToDoCommand implements Command {
         Task newTask = this.taskModel.createTask(todoDescription);
         taskView.showMessage(ADDED_TASK_MESSAGE + newTask.toString()
             + String.format("\nNow you have %d tasks in the list.", taskModel.getNumberOfTasks()));
+        taskView.setTasks(taskModel.getTasks(), false);
     }
 }
