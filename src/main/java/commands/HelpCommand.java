@@ -1,10 +1,10 @@
 package commands;
 
+import static commands.CommandType.HELP;
+
 import nook.Storage;
 import nook.TaskList;
 import nook.Ui;
-
-import static commands.CommandType.HELP;
 
 /**
  * Represents the command that provides user with link to the user guide.
@@ -31,7 +31,7 @@ public class HelpCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) {
         return "Ah, here's the user guide link you'll need to get started with"
                 + " the commands I can recognize and assist you with:\n\n"
-                + userGuideLink +"\n\nIt should provide all the information "
+                + userGuideLink + "\n\nIt should provide all the information "
                 + "you need to navigate and use the app with ease.";
     }
 }

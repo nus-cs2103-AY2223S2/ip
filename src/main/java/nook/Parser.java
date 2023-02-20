@@ -144,7 +144,8 @@ public class Parser {
         }
     }
 
-    private static Deadline generateDeadline(String[] taskInputArr, String task, Validator validator) throws NookException {
+    private static Deadline generateDeadline(String[] taskInputArr, String task, Validator validator)
+            throws NookException {
         try {
             validator.validateDescription(taskInputArr, task);
             String taskInput = taskInputArr[1];
