@@ -15,9 +15,9 @@ Shinsoo is a desktop app for task management, optimized for use via a Command Li
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest addressbook.jar from here.
+2. Download the latest duke.jar from [here](https://github.com/zm-l/ip/releases).
 3. Copy the file to the folder you want to use as the home folder for your task management app.
-4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar addressbook.jar command to run the application.
+4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar duke.jar command to run the application.
 A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 ![QuickStart](https://user-images.githubusercontent.com/97417244/219500881-c5149da1-acb7-4177-bce3-500b0b7576d9.png)
 5. Type the command in the command box and press Enter to execute it.
