@@ -7,7 +7,7 @@ public class Messages {
 
     public static final String GREETING_MESSAGE = String.join("\n",
             "Welcome to Voile, the Magic Library.",
-            "I'm Patchouli Knowledge, the librarian.",
-            "Use 'help' if you need any support");
+            "I'm Patchouli, the librarian.",
+            "If you need my support, type 'help'.");
 
 }

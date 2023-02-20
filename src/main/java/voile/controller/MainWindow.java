@@ -28,16 +28,34 @@ public class MainWindow extends GridPane implements FxmlComponent {
     private TextField userInput;
 
     private Model model;
-    private Image userImage = new Image(getClass().getResourceAsStream("/images/Reimu.jpg"));
-    private Image dukeImage = new Image(getClass().getResourceAsStream("/images/Patchouli.jpg"));
+    private Image reimuImage = new Image(getClass().getResourceAsStream("/images/Reimu.jpg"));
+    private Image patchouliImage =
+            new Image(getClass().getResourceAsStream("/images/Patchouli.jpg"));
 
+    /**
+     * Creates a new {@code MainWindow} with the given model.
+     *
+     * @param model the model to generate responses from inputs
+     */
     public MainWindow(Model model) {
         loadFxml("/view/MainWindow.fxml");
+        this.model = model;
+    }
+
+    /**
+     * Initializes the {@code MainWindow}.
+     */
+    @FXML
+    public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.prefWidthProperty().bind(widthProperty());
         controlBar.prefWidthProperty().bind(widthProperty());
-        this.model = model;
+        DialogBox patchouliBox = new DialogBox(Messages.GREETING_MESSAGE, patchouliImage);
+        patchouliBox.prefWidthProperty().bind(dialogContainer.widthProperty());
+        patchouliBox.flip();
+        dialogContainer.getChildren().add(patchouliBox);
     }
+
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and
@@ -54,12 +72,12 @@ public class MainWindow extends GridPane implements FxmlComponent {
         if (result.isExit()) {
             Platform.exit();
         }
-        DialogBox userBox = new DialogBox(input, userImage);
-        DialogBox dukeBox = new DialogBox(result.getMessage(), dukeImage);
-        userBox.prefWidthProperty().bind(dialogContainer.widthProperty());
-        dukeBox.prefWidthProperty().bind(dialogContainer.widthProperty());
-        dukeBox.flip();
-        dialogContainer.getChildren().addAll(userBox, dukeBox);
+        DialogBox reimuBox = new DialogBox(input, reimuImage);
+        DialogBox patchouliBox = new DialogBox(result.getMessage(), patchouliImage);
+        reimuBox.prefWidthProperty().bind(dialogContainer.widthProperty());
+        patchouliBox.prefWidthProperty().bind(dialogContainer.widthProperty());
+        patchouliBox.flip();
+        dialogContainer.getChildren().addAll(reimuBox, patchouliBox);
         userInput.clear();
     }
 }
