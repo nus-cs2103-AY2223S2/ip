@@ -80,7 +80,9 @@ public class Parser {
                 return e.getMessage();
             }
             data.addEntry(todo);
-            return String.format("Now you have %d tasks in the list", data.getSize());
+            String msg1 = "added: " + todo.getDescription();
+            String msg2 = String.format("Now you have %d tasks in the list", data.getSize());
+            return msg1 + "\n" + msg2;
         }
 
         if (input.contains("event ")) {
@@ -93,7 +95,9 @@ public class Parser {
                 return e.getMessage();
             }
             data.addEntry(event);
-            return String.format("Now you have %d tasks in the list", data.getSize());
+            String msg1 = "added: " + event.getDescription();
+            String msg2 = String.format("Now you have %d tasks in the list", data.getSize());
+            return msg1 + "\n" + msg2;
         }
 
         if (input.contains("deadline ")) {
@@ -105,9 +109,10 @@ public class Parser {
             } catch (DukeExceptions e) {
                 return e.getMessage();
             }
-
             data.addEntry(deadline);
-            return String.format("Now you have %d tasks in the list", data.getSize());
+            String msg1 = "added: " + deadline.getDescription();
+            String msg2 = String.format("Now you have %d tasks in the list", data.getSize());
+            return msg1 + "\n" + msg2;
         }
 
         if (input.contains("find ")) {
