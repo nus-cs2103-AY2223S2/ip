@@ -30,11 +30,11 @@ public class Deadline extends Task {
 
     @Override
     public void formatDescription(String input) throws InvalidDeadline {
-        String dscp = input.replace("deadline ", "");
-        if (dscp.isBlank()) {
+        String dscption = input.replace("deadline ", "");
+        if (dscption.isBlank()) {
             throw new InvalidDeadline();
         }
-        int byId = dscp.indexOf("/by");
+        int byId = dscption.indexOf("/by");
         if (byId == -1) {
             throw new InvalidDeadline();
         }

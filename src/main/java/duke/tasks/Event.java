@@ -34,13 +34,13 @@ public class Event extends Task {
     //KEEP ALL WORDS SEPARATED BY SPACES
     @Override
     public void formatDescription(String input) throws InvalidEvent {
-        String dscp = input.replace("event ", "");
-        if (dscp.isBlank()) {
+        String dscption = input.replace("event ", "");
+        if (dscption.isBlank()) {
             throw new InvalidEvent();
         }
 
-        int fromId = dscp.indexOf("/from");
-        int toId = dscp.indexOf(("/to"));
+        int fromId = dscption.indexOf("/from");
+        int toId = dscption.indexOf(("/to"));
         if (fromId == -1 || toId == -1) {
             throw new InvalidEvent();
         }
