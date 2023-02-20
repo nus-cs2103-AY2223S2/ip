@@ -1,8 +1,20 @@
 # User Guide
 
-![](Ui.png)
+* [Features](#features)
+* [Usage](#usage)
+    * [List](#list---lists-all-tasks)
+    * [Add Tasks](#todo,-deadline,-event---add-task-of-specified-type)
+    * [Mark Tasks](#mark-unmark---mark-task-of-specified-index-as-completed-or-not-completed)
+    * [Delete Tasks](#delete---deletes-a-task-at-a-specified-index)
+    * [Search](#find-check---searches-through-task-list)
+    * [Exit](#bye---say-bye-to-duke)
+    
+<img src="Ui.png" style="align:right"/>
 
 ## Features 
+
+### Keep track of tasks
+Use Duke to keep track of your many tasks in life!
 
 ### Reminders
 Upon launching the application, Duke will remind you of the deadline tasks that are due on the current day, and the event tasks that span over the current day.
