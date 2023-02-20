@@ -131,7 +131,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Chad chad;
+    private static Chad chad;
 
     public static void exit() {
         Platform.exit();
@@ -152,6 +152,12 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        chad.getResponse("bye");
+        super.stop();
     }
 
     public static void main(String[] args) {
