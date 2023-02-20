@@ -2,17 +2,18 @@
 > "What gets measured gets managed." - Peter Drucker [(source)](https://static.store.tax.thomsonreuters.com/static/relatedresource/CMJ--15-01%20sample-article.pdf) 
 > 
 > 
+
 Duke Task Reminder is an application that can help you manage your daily tasks. 
 
-![image](/Ui.png)
+![image](https://dunliang0513.github.io/ip/Ui.png)
 ## Features
 
 ### Duke Task Reminder currently supports the following features:
-- [X] Managing tasks/deadlines/events
-- [X] List all the tasks/events/deadlines recorded inside the task list.
-- [X] Delete the tasks/events/deadlines.
-- [X] Remind the user when there is an upcoming deadline/event.
-- [X] Search the related tasks/events/deadlines using specific keywords.
+- [X]  Managing tasks/deadlines/events
+- [X]  List all the tasks/events/deadlines recorded inside the task list.
+- [X]  Delete the tasks/events/deadlines.
+- [X]  Remind the user when there is an upcoming deadline/event.
+- [X]  Search the related tasks/events/deadlines using specific keywords.
 
 
 
@@ -20,9 +21,10 @@ Duke Task Reminder is an application that can help you manage your daily tasks.
 1. download the file from [here](https://github.com/dunliang0513/ip/releases/download/A-Release/Duke_Task_Reminder.jar)
 2. run the command below in your terminal
 ```dtd
-java -jar Duke Task Reminder.jar
+java -jar Duke_Task_Reminder.jar
 ```
 3. can start adding your task/event/deadline
+
 
 ## How to Use
 ### 1. Creating a todo task: `todo`
