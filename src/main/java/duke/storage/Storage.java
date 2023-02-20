@@ -56,7 +56,6 @@ public class Storage {
         String lines = Files.readAllLines(filePath).get(lineNumber);
         String[] lineArray = lines.split(endOfFilePath);
         int lengthOfLineArray = lineArray.length;
-
         for (int i = 0; i < lengthOfLineArray; i++) {
             lineArray[i] = lineArray[i].trim();
         }
