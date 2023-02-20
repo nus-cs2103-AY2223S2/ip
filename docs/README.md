@@ -1,4 +1,4 @@
-# **BOTanic**
+# **BOTanic** 🍎
 
 > “You were meant for greater things." 📈
 
@@ -17,33 +17,33 @@ Don't waste your time remembering tasks, let Duke do it for you. 👍 It is
 
 ### Add tasks
 
-Categorize your tasks into ToDo, Deadline or Event tasks and add them into your task list.
+* Categorize your tasks into ToDo, Deadline or Event tasks and add them into your task list.
 
 ### List out tasks
 
-Get an overview of all the tasks in your list.
+* Get an overview of all the tasks in your list.
 
 ### Mark tasks as done
 
-Mark your tasks as done when you have completed them.
+* Mark your tasks as done when you have completed them.
 
 ### Unmark tasks
 
-Marked the wrong task as done? Don't worry, just unmark them.
+* Marked the wrong task as done? Don't worry, just unmark them.
 
 ### Delete tasks
 
-Delete tasks that you no longer need.
+* Delete tasks that you no longer need.
 
 ### Find tasks using names
 
-Find tasks with names that matches exactly or partially with the given keyword.
+* Find tasks with names that matches exactly or partially with the given keyword.
 
 ### Find tasks using dates
 
-Find tasks with dates that matches exactly with the given date.
+* Find tasks with dates that matches exactly with the given date.
 
-## Usage
+## Usage 📱
 
 ### `todo {TASK_NAME}` - Add a ToDo task
 
@@ -105,17 +105,15 @@ Find tasks with dates that matches exactly with the given date.
 - Stores data into hard drive
 - TIP: Simply exiting the program using the window exit button would save the date too!
 
-### `Keyword` - Describe action
 
 ## **Try this** ⬇️
 ```
 todo buy book
 list
 ```
-
 ## Potential Upcoming Features 😉
-[ ] Reminders
-[ ] Sorting the tasks
+- [ ] Reminders
+- [ ] Sorting the tasks
 
 ## Program's main method [^1]
 ```
