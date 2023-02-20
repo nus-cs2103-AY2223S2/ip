@@ -62,7 +62,8 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
+        assert scene != null;
+        assert FILE_NAME != null;
         stage.setScene(scene);
         stage.show();
 
@@ -154,6 +155,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        assert "" != input;
         return "Duke heard: " + input;
     }
 
