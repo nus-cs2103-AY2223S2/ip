@@ -21,11 +21,15 @@ public class UnmarkCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        Task task = taskList.getTaskList().get(getIndex(input) - 1);
-        task.markAsNotDone();
-        storage.store(taskList);
-        return ui.unmarkMessage(task);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException {
+        try {
+            Task task = taskList.getTaskList().get(getIndex(input) - 1);
+            task.markAsNotDone();
+            storage.store(taskList);
+            return ui.unmarkMessage(task);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**

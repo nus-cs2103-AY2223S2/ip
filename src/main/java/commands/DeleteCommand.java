@@ -21,11 +21,16 @@ public class DeleteCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        Task task = taskList.getTaskList().get(getIndex() - 1);
-        taskList.getTaskList().remove(getIndex() - 1);
-        storage.store(taskList);
-        return ui.deleteMessage(task);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException {
+        try {
+            Task task = taskList.getTaskList().get(getIndex() - 1);
+            taskList.getTaskList().remove(getIndex() - 1);
+            storage.store(taskList);
+            return ui.deleteMessage(task);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
+        }
+
     }
 
     /**

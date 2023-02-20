@@ -12,7 +12,10 @@ public class HelpCommand implements Command {
         this.input = input;
     }
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.showHelp();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException {
+        if (input.trim().equals("help")) {
+            return ui.showHelp();
+        }
+        throw new IllegalArgumentException();
     }
 }

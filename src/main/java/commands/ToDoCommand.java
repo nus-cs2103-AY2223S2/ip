@@ -6,6 +6,8 @@ import baymax.Ui;
 
 import tasks.Todo;
 
+import java.time.format.DateTimeParseException;
+
 public class ToDoCommand implements Command {
     private String input;
 
@@ -21,12 +23,18 @@ public class ToDoCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException {
         assert !input.isEmpty() : "Input to ToDo Command can't be empty";
-        Todo todo = new Todo(getDescription());
-        taskList.getTaskList().add(todo);
-        storage.store(taskList);
-        return ui.newToDoMessage(todo);
+        try {
+            Todo todo = new Todo(getDescription());
+            taskList.getTaskList().add(todo);
+            storage.store(taskList);
+            return ui.newToDoMessage(todo);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**

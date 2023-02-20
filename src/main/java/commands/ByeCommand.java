@@ -19,7 +19,10 @@ public class ByeCommand implements Command{
      * @param storage The storage.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.exitMessage();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException{
+        if (input.trim().equals("bye")) {
+            return ui.exitMessage();
+        }
+        throw new IllegalArgumentException();
     }
 }

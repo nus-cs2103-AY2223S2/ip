@@ -6,6 +6,8 @@ import baymax.Ui;
 
 import tasks.Event;
 
+import java.time.format.DateTimeParseException;
+
 public class EventCommand implements Command {
     private String input;
 
@@ -21,12 +23,19 @@ public class EventCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException{
         assert !input.isEmpty() : "Input to Event Command can't be empty";
-        Event event = new Event(getDescription(), getStartDateTime(), getEndDateTime());
-        taskList.getTaskList().add(event);
-        storage.store(taskList);
-        return ui.newEventMessage(event);
+        try {
+            Event event = new Event(getDescription(), getStartDateTime(), getEndDateTime());
+            taskList.getTaskList().add(event);
+            storage.store(taskList);
+            return ui.newEventMessage(event);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
+        }
+
     }
 
     /**

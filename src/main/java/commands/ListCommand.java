@@ -19,7 +19,10 @@ public class ListCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.printList(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException{
+        if (input.trim().equals("list")) {
+            return ui.printList(taskList);
+        }
+        throw new IllegalArgumentException();
     }
 }

@@ -6,6 +6,8 @@ import baymax.Ui;
 
 import tasks.Deadline;
 
+import java.time.format.DateTimeParseException;
+
 public class DeadlineCommand implements Command {
     private String input;
 
@@ -21,12 +23,18 @@ public class DeadlineCommand implements Command {
      * @param storage The storage.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException {
         assert !input.isEmpty() : "Input to Deadline Command can't be empty";
-        Deadline deadline = new Deadline(getDescription(), getDateTime());
-        taskList.getTaskList().add(deadline);
-        storage.store(taskList);
-        return ui.newDeadlineMessage(deadline);
+        try {
+            Deadline deadline = new Deadline(getDescription(), getDateTime());
+            taskList.getTaskList().add(deadline);
+            storage.store(taskList);
+            return ui.newDeadlineMessage(deadline);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -34,7 +42,7 @@ public class DeadlineCommand implements Command {
      *
      * @return The description of the deadline.
      */
-    public String getDescription() {
+    public String getDescription() throws IllegalArgumentException {
         return input.split(" ", 2)[1].split(" /by ", 2)[0];
     }
 
