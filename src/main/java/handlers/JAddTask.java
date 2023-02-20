@@ -25,6 +25,9 @@ public final class JAddTask implements IHandler {
         this.ts = ts;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String take(String s) {
         if (!ALL_PATTERN.matcher(s).matches()) {
@@ -53,6 +56,9 @@ public final class JAddTask implements IHandler {
                 ts.getTaskCount());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canTake(String s) {
         return ALL_PATTERN.matcher(s).matches();

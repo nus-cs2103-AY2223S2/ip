@@ -8,7 +8,7 @@ import types.IContainer;
 import types.data.Task;
 
 /**
- * A singleton class to host tasks instance-wide.
+ * Hosts all the tasks.
  */
 public final class TaskList {
     private final ArrayList<Task> tasks = new ArrayList<>(50);

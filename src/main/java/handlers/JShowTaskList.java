@@ -14,10 +14,17 @@ public final class JShowTaskList implements IHandler {
     private static final Pattern PATTERN = Pattern.compile("list");
     private final TaskList ts;
 
+    /**
+     * Constructs the command runner.
+     * @param ts Task storage to use.
+     */
     public JShowTaskList(TaskList ts) {
         this.ts = ts;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String take(String s) {
         assert Objects.nonNull(ts);
@@ -29,6 +36,9 @@ public final class JShowTaskList implements IHandler {
         return sb.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canTake(String s) {
         return PATTERN.matcher(s).matches();

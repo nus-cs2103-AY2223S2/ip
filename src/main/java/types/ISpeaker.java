@@ -1,7 +1,7 @@
 package types;
 
 /**
- * An abstraction for output layer.
+ * Abstracts output layer.
  */
 public interface ISpeaker {
     /**

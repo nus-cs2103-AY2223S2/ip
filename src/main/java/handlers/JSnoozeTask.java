@@ -10,16 +10,23 @@ import types.data.Task;
 import utilities.DateTimeParser;
 
 /**
- * Command to snooze a task.
+ * Snoozes a task.
  */
 public class JSnoozeTask implements IHandler {
     private static final Pattern PATTERN = Pattern.compile("snooze ([0-9]*) /by (.*)");
     private final TaskList ts;
 
+    /**
+     * Constructs the command runner.
+     * @param ts Task storage to use.
+     */
     public JSnoozeTask(TaskList ts) {
         this.ts = ts;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String take(String s) {
         Matcher m = PATTERN.matcher(s);
@@ -40,6 +47,9 @@ public class JSnoozeTask implements IHandler {
         return "Noted. I've rescheduled it.";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canTake(String s) {
         return PATTERN.matcher(s).matches();

@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import utilities.DateTimeParser;
 
 /**
- * Deadline data type.
+ * Represents the Deadline data type.
  */
 public class Deadline extends Task {
     protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -27,6 +27,10 @@ public class Deadline extends Task {
         return new Deadline(n, d);
     }
 
+    /**
+     * Reschedules the deadline to a new date/time.
+     * @param newBefore New due.
+     */
     public void reschedule(LocalDateTime newBefore) {
         before = newBefore;
     }

@@ -54,6 +54,9 @@ public class FileContainer implements IContainer<Task> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void add(Task record) {
         try {
@@ -64,6 +67,9 @@ public class FileContainer implements IContainer<Task> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void flush() {
         assert file.canWrite();
@@ -74,6 +80,9 @@ public class FileContainer implements IContainer<Task> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void push(List<Task> records) {
         assert file.canWrite();
@@ -89,6 +98,9 @@ public class FileContainer implements IContainer<Task> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Task> fetch() {
         throw new UnsupportedOperationException("This is just for show!");

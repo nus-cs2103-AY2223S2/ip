@@ -3,7 +3,7 @@ package speakers;
 import types.ISpeaker;
 
 /**
- * A class to print to terminal.
+ * Prints output to stdout.
  */
 public class StdOut implements ISpeaker {
     /**

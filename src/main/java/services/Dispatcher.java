@@ -7,7 +7,7 @@ import types.IHandler;
 import utilities.CommandHelper;
 
 /**
- * A singleton class to execute all handlers.
+ * Dispatches commands.
  */
 public final class Dispatcher {
     private final ArrayList<IHandler> handlerRegistry = new ArrayList<>();
@@ -92,7 +92,7 @@ public final class Dispatcher {
     /**
      * Broadcasts desired string with the speaker registry inside.
      * Provided as a proxy method for convenience.
-     * @param s
+     * @param s String to output.
      */
     public void broadcast(String s) {
         speakerRegistry.broadcast(s);

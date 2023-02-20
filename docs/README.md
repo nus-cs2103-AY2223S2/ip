@@ -84,3 +84,11 @@ Example of usage:
 ### `(un)mark <Number>` - (un)Mark a Task
 
 Declare a task as incomplete or completed.
+
+### `snooze <Number> /by <Date\Time String>` - postpone an deadline
+
+Postpones the Deadline with specified task number to a new date.
+
+Example of usage:
+
+`snooze 1 /by 2023-03-01`

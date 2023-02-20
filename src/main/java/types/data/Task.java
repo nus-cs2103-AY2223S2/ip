@@ -1,7 +1,7 @@
 package types.data;
 
 /**
- * Task data type.
+ * Represents the Task data type.
  */
 public abstract class Task {
     protected String name;

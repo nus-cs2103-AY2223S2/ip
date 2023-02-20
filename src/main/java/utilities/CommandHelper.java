@@ -8,7 +8,7 @@ import services.SpeakerRegistry;
 import types.IHandler;
 
 /**
- * A helper class to deal with Handlers.
+ * Helps to deal with Handlers.
  */
 public final class CommandHelper {
     /**

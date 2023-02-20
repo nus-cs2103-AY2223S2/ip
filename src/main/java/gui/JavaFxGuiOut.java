@@ -55,6 +55,9 @@ public class JavaFxGuiOut extends Application implements ISpeaker {
         stage.setMinWidth(WINDOW_WIDTH);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(WINDOW_FXML_PATH));
@@ -67,6 +70,10 @@ public class JavaFxGuiOut extends Application implements ISpeaker {
         initWindow(primaryStage);
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void speak(String s) {
         dialogContainer.getChildren().add(DialogueBox.ofTach(s));

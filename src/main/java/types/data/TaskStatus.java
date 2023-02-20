@@ -1,7 +1,7 @@
 package types.data;
 
 /**
- * Completion status of any task.
+ * Represents the completion status of any task.
  */
 public enum TaskStatus {
     COMPLETED, INCOMPLETE

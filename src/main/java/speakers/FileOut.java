@@ -3,7 +3,7 @@ package speakers;
 import types.ISpeaker;
 
 /**
- * A class to print into file. Not implemented yet.
+ * Prints output into som file. Not implemented.
  */
 public class FileOut implements ISpeaker {
     /**

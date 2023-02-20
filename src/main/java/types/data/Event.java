@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import utilities.DateTimeParser;
 
 /**
- * Event data type.
+ * Represents the Event data type.
  */
 public class Event extends Task {
     private final LocalDateTime start;

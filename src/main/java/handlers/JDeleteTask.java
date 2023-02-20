@@ -19,6 +19,9 @@ public class JDeleteTask implements IHandler {
         this.ts = ts;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String take(String s) {
         assert Objects.nonNull(ts);
@@ -37,6 +40,9 @@ public class JDeleteTask implements IHandler {
                 ts.getTaskCount());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canTake(String s) {
         return PATTERN.matcher(s).matches();

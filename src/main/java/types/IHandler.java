@@ -1,7 +1,7 @@
 package types;
 
 /**
- * An abstraction of commands or exception catchers
+ * Abstracts commands or exception catchers
  * that requires some action to certain strings.
  */
 public interface IHandler {

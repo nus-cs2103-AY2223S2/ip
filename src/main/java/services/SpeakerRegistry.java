@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import types.ISpeaker;
 
 /**
- * A singleton class to hold all possible output locations.
+ * Holds all output locations.
  */
 public final class SpeakerRegistry {
     private final ArrayList<ISpeaker> speakerRegistry = new ArrayList<>(1);

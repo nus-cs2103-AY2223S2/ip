@@ -10,15 +10,23 @@ import types.IHandler;
 import types.data.Task;
 
 /**
- * Command to find a task.
+ * Finds a specific task.
  */
 public class JFind implements IHandler {
     private static final Pattern PATTERN = Pattern.compile("find (.*)");
     private final TaskList ts;
 
+    /**
+     * Constructs the command runner.
+     * @param ts Task storage to use.
+     */
     public JFind(TaskList ts) {
         this.ts = ts;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String take(String s) {
         Matcher m = PATTERN.matcher(s);
@@ -40,6 +48,9 @@ public class JFind implements IHandler {
         return sb.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canTake(String s) {
         return PATTERN.matcher(s).matches();

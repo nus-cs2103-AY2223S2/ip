@@ -8,16 +8,23 @@ import services.TaskList;
 import types.IHandler;
 
 /**
- * Command to mark a task as completed.
+ * Marks a task as completed.
  */
 public final class JMarkTask implements IHandler {
     private static final Pattern PATTERN = Pattern.compile("(un)?mark ([0-9]*)");
     private final TaskList ts;
 
+    /**
+     * Constructs the command runner.
+     * @param ts Task storage to use.
+     */
     public JMarkTask(TaskList ts) {
         this.ts = ts;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String take(String s) {
         Matcher m = PATTERN.matcher(s);
@@ -34,6 +41,9 @@ public final class JMarkTask implements IHandler {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canTake(String s) {
         return PATTERN.matcher(s).matches();
