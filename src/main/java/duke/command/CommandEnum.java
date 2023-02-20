@@ -7,6 +7,7 @@ public enum CommandEnum {
     DELETE("delete", ""),
     MARK("mark", ""),
     FIND("find", ""),
+    UNDO("undo", ""),
     SOMETHINGELSE("", ""),
     UNMARK("unmark", "");
     private final String description;

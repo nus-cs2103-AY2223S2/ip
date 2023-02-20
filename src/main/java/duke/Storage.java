@@ -44,7 +44,7 @@ public class Storage {
             parmArr = line.split("\\|");
             parm = Arrays.asList(parmArr);
             CommandEnum command = CommandEnum.fromTag(parm.get(0));
-            boolean isMark = parm.get(1) == "1";
+            boolean isMark = parm.get(1).equals("1");
             String description = parm.get(2);
             switch (command) {
             case TODO:

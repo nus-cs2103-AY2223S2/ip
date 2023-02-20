@@ -8,11 +8,25 @@ import duke.task.*;
  */
 public class TaskList {
     private static ArrayList<Task> list;
+    private static ArrayList<Task> prevList;
+    private int markOrListCommand; //last action was mark = 1, last action was a list action = 0
+    private int markedTask;
+    private boolean isMark;
+    
     public TaskList() {
         this.list = new ArrayList<>();
+        this.prevList = list;
     }
     public TaskList(ArrayList<Task> list) {
         this.list = list;
+        this.prevList = list;
+    }
+    private void logList() {
+        this.prevList = new ArrayList<>(list);
+    }
+    private void logMark(int i, boolean b) {
+        this.markedTask = i;
+        this.isMark = !b;
     }
     public ArrayList<Task> getList() {
         return this.list;
@@ -33,6 +47,8 @@ public class TaskList {
      * @param b boolean whether it is to be marked or un mark
      */
     public String markTask(int i, boolean b) {
+        logMark(i, b);
+        markOrListCommand = 1;
         int index = i - 1;
         list.get(index).markTask(b);
         return "Marked/Unmarked the task, task is in the state:\n" + "  " + list.get(index);
@@ -43,6 +59,8 @@ public class TaskList {
      * @param task task to be added to list
      */
     public String addList(Task task) {
+        markOrListCommand = 0;
+        logList();
         list.add(task);
         return "added: " + task.getDescription() + "\n You have: " + list.size() + " task(s)\n";
 
@@ -53,6 +71,8 @@ public class TaskList {
      * @param i task to be added to list
      */
     public String deleteTask(int i) {
+        markOrListCommand = 0;
+        logList();
         int index = i - 1;
         String response = "";
         response = "removed: " + list.get(index).toString() + "\n You have: " + (list.size() - 1) + " task(s)\n";
@@ -69,4 +89,12 @@ public class TaskList {
         }
         return display.toString();
     }
+    public String undo() {
+        if (markOrListCommand == 0) {
+            this.list = new ArrayList<>(this.prevList);
+        } else {
+            markTask(markedTask, isMark);
+        }
+        return "Previous command undone (at most only most recent command can be undone)";
+    } 
 }
