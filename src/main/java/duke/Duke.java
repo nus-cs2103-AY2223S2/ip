@@ -38,6 +38,7 @@ public class Duke {
     }
 
     private String handleListCommand() {
+        tasks.setIsLastListFind(false);
         return tasks.toString();
     }
 
@@ -63,6 +64,7 @@ public class Duke {
     }
 
     private String handleFindCommand(String searchString) {
+        tasks.setIsLastListFind(true);
         return ui.getFindTaskMessage(tasks.findTasks(searchString));
     }
 

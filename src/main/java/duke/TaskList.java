@@ -15,6 +15,8 @@ import tasks.ToDo;
  */
 public class TaskList {
     private final ArrayList<Task> taskList;
+    private final ArrayList<Integer> foundTasksIndexes = new ArrayList<>();
+    private boolean isLastListFind = false;
 
     /**
      * Constructs a new task list wrapper.
@@ -84,21 +86,35 @@ public class TaskList {
     }
 
     private boolean isIndexOutOfRange(int index) {
-        return index - 1 >= this.size() || index < 0;
+        int size;
+        if (!this.isLastListFind) {
+            size = this.size();
+        } else {
+            size = this.foundTasksIndexes.size();
+        }
+        return index >= size || index < 0;
+    }
+
+    private boolean isNumberOutOfRange(int number) {
+        return this.isIndexOutOfRange(number - 1);
     }
 
     /**
-     * Gets a task by its index.
+     * Gets a task by its number.
      *
-     * @param taskNumber Index of the task.
+     * @param taskNumber Number of the task.
      * @return The requested task.
-     * @throws TaskNotFoundException if task index is out of range.
+     * @throws TaskNotFoundException if task number is out of range.
      */
     public Task getTask(int taskNumber) throws TaskNotFoundException {
-        if (this.isIndexOutOfRange(taskNumber)) {
+        if (this.isNumberOutOfRange(taskNumber)) {
             throw new TaskNotFoundException();
         }
-        return this.taskList.get(taskNumber - 1);
+        if (!isLastListFind) {
+            return this.taskList.get(taskNumber - 1);
+        } else {
+            return this.taskList.get(this.foundTasksIndexes.get(taskNumber - 1));
+        }
     }
 
     /**
@@ -117,24 +133,25 @@ public class TaskList {
      * @throws TaskNotFoundException if task index is out of range.
      */
     public void deleteTask(int taskNumber) throws TaskNotFoundException {
-        if (this.isIndexOutOfRange(taskNumber)) {
+        if (this.isNumberOutOfRange(taskNumber)) {
             throw new TaskNotFoundException();
         }
-        this.taskList.remove(taskNumber - 1);
+
+        this.taskList.remove(this.getTask(taskNumber));
     }
 
     /**
      * Marks a task as complete or uncomplete.
      *
      * @param taskNumber Index of the task.
-     * @param done       Whether to mark the task as complete or uncomplete.
+     * @param isDone     Whether to mark the task as complete or uncomplete.
      * @throws TaskNotFoundException if task index is out of range.
      */
-    public void setDone(int taskNumber, boolean done) throws TaskNotFoundException {
-        if (this.isIndexOutOfRange(taskNumber)) {
+    public void setDone(int taskNumber, boolean isDone) throws TaskNotFoundException {
+        if (this.isNumberOutOfRange(taskNumber)) {
             throw new TaskNotFoundException();
         }
-        this.taskList.get(taskNumber - 1).setDone(done);
+        this.getTask(taskNumber).setDone(isDone);
     }
 
     /**
@@ -144,13 +161,25 @@ public class TaskList {
      * @return List of tasks matching the search string.
      */
     public ArrayList<Task> findTasks(String searchString) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.match(searchString)) {
-                matchingTasks.add(task);
+        this.setIsLastListFind(true);
+        this.foundTasksIndexes.clear();
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (this.taskList.get(i).match(searchString)) {
+                this.foundTasksIndexes.add(i);
+                foundTasks.add(this.taskList.get(i));
             }
         }
-        return matchingTasks;
+        return foundTasks;
+    }
+
+    /**
+     * Sets the value of isFind.
+     *
+     * @param isFind Whether the last list command was list or find.
+     */
+    public void setIsLastListFind(boolean isFind) {
+        this.isLastListFind = isFind;
     }
 
     /**

@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * A custom control using FXML.
@@ -27,6 +28,7 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
+            this.setMinHeight(Region.USE_PREF_SIZE);
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
