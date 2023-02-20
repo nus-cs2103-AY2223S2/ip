@@ -18,6 +18,9 @@ public class Parser {
     public boolean parse(String currInput, TaskList taskList, Storage storage, Ui ui) {
         String[] splitInput = currInput.split(" ", 2);
         String currCommand = splitInput[0];
+        assert taskList != null : "taskList must not be null!";
+        assert storage != null : "storage must not be null!";
+        assert ui != null : "ui must not be null!";
         Integer taskIndex;
         try {
             switch (currCommand) {

@@ -81,6 +81,7 @@ public class Ui {
     }
 
     public String getOutput() {
+        assert nextOutputString != "" : "Ui output string should not be empty!";
         String cacheString = nextOutputString;
         nextOutputString = "";
         return cacheString;
