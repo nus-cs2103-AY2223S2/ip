@@ -21,6 +21,7 @@ public class VoileCli {
             CliController.handleUserInput();
             shouldExit = CliController.shouldExit();
         }
+        CliController.bye();
         Storage.writeTaskList(model.getTaskList());
     }
 }

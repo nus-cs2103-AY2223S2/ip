@@ -51,7 +51,14 @@ public class CliController {
      * Prints the greeting message when the application starts.
      */
     public static void greet() {
-        echo("Hello! I'm Duke\nWhat can I do for you?");
+        echo(Messages.GREETING_MESSAGE);
+    }
+
+    /**
+     * Prints the goodbye message when the application exits.
+     */
+    public static void bye() {
+        echo(Messages.GOODBYE_MESSAGE);
     }
 
     /**
