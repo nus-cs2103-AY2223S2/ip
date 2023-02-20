@@ -11,6 +11,7 @@
 3. Copy the file to the folder you want to use as the home folder for Duke.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and run the application with `java -jar duke.jar`. A GUI similar to the below should appear in a few seconds.
+
 ![UI Screenshot](Ui.png)
 
 5. Type a command in the chat box and press "Enter" or press the "Send" button to execute it. See below for a list of possible commands.
