@@ -3,8 +3,8 @@ package Duke.command;
 import Duke.Exceptions.DukeMainExceptions;
 import Duke.Exceptions.InvalidIndexException;
 import Duke.Storage.Storage;
-import Duke.Tasks.Task;
 import Duke.TaskList;
+import Duke.Tasks.Task;
 import Duke.Ui;
 
 public class MarkCommand extends Command {
@@ -21,7 +21,7 @@ public class MarkCommand extends Command {
             Task task = tasks.mark(this.index);
             return ui.printMarked(task);
         } catch (IndexOutOfBoundsException exception) {
-            throw new InvalidIndexException(1 + tasks.getSize());
+            throw new InvalidIndexException(tasks.getSize());
         }
     }
 

@@ -2,9 +2,10 @@ package Duke.Tasks;
 
 import Duke.Exceptions.InvalidDateFormatExceptions;
 
+import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeParseException;
+
 
 public class Event extends Task {
     protected String startingTime;
@@ -12,7 +13,8 @@ public class Event extends Task {
     protected LocalDate localStartingDate;
     protected LocalDate localEndingDate;
 
-    public Event(String description, String startingTime, String endingTime) throws DateTimeParseException {
+    public Event(String description, String startingTime, String endingTime)
+            throws DateTimeParseException {
         super(description);
         this.startingTime = startingTime;
         this.endingTime = endingTime;
@@ -56,7 +58,8 @@ public class Event extends Task {
      */
     @Override
     public String printTask() {
-        return String.format("E | %d | %s | %s-%s ", isComplete ? 1 : 0, description, startingTime, endingTime);
+        return String.format("E | %d | %s | %s-%s ", isComplete ? 1 : 0,
+                description, startingTime, endingTime);
     }
 
     @Override

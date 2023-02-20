@@ -1,11 +1,10 @@
 package Duke;
 
+import Duke.command.*;
+import Duke.Exceptions.CommandNotFoundException;
 import Duke.Exceptions.InvalidIndexException;
 import Duke.Storage.Storage;
 import Duke.Tasks.Task;
-
-import Duke.Exceptions.CommandNotFoundException;
-import Duke.command.*;
 
 import java.io.IOException;
 import java.util.ArrayList;

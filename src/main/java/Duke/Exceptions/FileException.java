@@ -1,13 +1,13 @@
 package Duke.Exceptions;
 
 public class FileException extends DukeMainExceptions {
-    private static final String ERRORMSG = "There is an error in importing the file";
+    private static final String ERROR_MESSAGE = "There is an error in importing the file";
 
     public FileException() {
-        super(ERRORMSG);
+        super(ERROR_MESSAGE);
     }
     @Override
     public String toString() {
-        return ERRORMSG;
+        return ERROR_MESSAGE;
     }
 }

@@ -1,13 +1,12 @@
 package Duke.Tasks;
 
 
+import Duke.Exceptions.InvalidDateFormatExceptions;
+
 import java.time.LocalDate;
 import java.time.Period;
 
-import Duke.Exceptions.InvalidDateFormatExceptions;
-
 public class Deadline extends Task {
-
     protected String dueDate;
     protected LocalDate localDate;
 

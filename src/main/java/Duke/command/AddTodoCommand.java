@@ -9,6 +9,10 @@ import Duke.Ui;
 public class AddTodoCommand extends Command {
     private final String description;
 
+    /**
+     * Constructor that uses to create Todo instance.
+     * @param description The description of the todo task.
+     */
     public AddTodoCommand(String description) {
         this.description = description;
     }

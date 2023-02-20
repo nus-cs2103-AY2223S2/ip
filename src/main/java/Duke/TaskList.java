@@ -1,21 +1,19 @@
 package Duke;
 
-import Duke.Storage.Storage;
-import Duke.Tasks.Task;
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.Todo;
-
-import java.util.stream.Collectors;
-
 import Duke.Exceptions.CommandNotFoundException;
 import Duke.Exceptions.FileException;
 import Duke.Exceptions.NoDeadlineException;
 import Duke.Exceptions.NoDescriptionException;
+import Duke.Storage.Storage;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.Task;
+import Duke.Tasks.Todo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private ArrayList<Task> taskList;
