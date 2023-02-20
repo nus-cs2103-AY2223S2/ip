@@ -26,6 +26,14 @@ public class Storage {
      * @throws FileNotFoundException If data file does not exist.
      */
     public TaskList load() throws FileNotFoundException {
+        if (!new File(filePath).exists()) {
+            new File(filePath).getParentFile().mkdirs();
+            try {
+                new File(filePath).createNewFile();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
         ArrayList<String> rawData = new ArrayList<>();

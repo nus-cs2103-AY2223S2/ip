@@ -1,10 +1,11 @@
 package duke;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class FormatCheckerTest {
     @Test
-    public void isCorrectDateInputTest(){
+    public void isCorrectDateInputTest() {
         assertEquals(true, FormatChecker.isCorrectDateInput("01/11/2001 12:00"));
         assertEquals(false, FormatChecker.isCorrectDateInput("01/11/200112:00"));
         assertEquals(false, FormatChecker.isCorrectDateInput("01.11.2001 12:00"));
@@ -20,7 +21,7 @@ public class FormatCheckerTest {
     }
 
     @Test
-    public void isCorrectDeadlineCmd_wrongFormat(){
+    public void isCorrectDeadlineCmd_wrongFormat() {
         assertEquals(false, FormatChecker.isCorrectDeadlineCmd("task1/by 01/11/2001 12:00"));
         assertEquals(false, FormatChecker.isCorrectDeadlineCmd("task1 /by01/11/2001 12:00"));
         assertEquals(false, FormatChecker.isCorrectDeadlineCmd("task1 /by 01/11/200112:00"));
@@ -40,7 +41,7 @@ public class FormatCheckerTest {
 
 
     @Test
-    public void isCorrectEventCmd_wrongFormat(){
+    public void isCorrectEventCmd_wrongFormat() {
         assertEquals(false, FormatChecker.isCorrectEventCmd("task1/from 01/11/2001 12:00 /to 02/11/2001 12:00"));
         assertEquals(false, FormatChecker.isCorrectEventCmd("task1 /from01/11/2001 12:00 /to 02/11/2001 12:00"));
         assertEquals(false, FormatChecker.isCorrectEventCmd("task1 /from 01/11/200112:00 /to 02/11/2001 12:00"));

@@ -2,6 +2,7 @@
 
 Woof!
 DOggi is a friendly chatbot dog software that helps you manage your tasks.
+<sub>DOggi extends Duke</sub>
 
 ## Features
 

@@ -1,4 +1,4 @@
-package duke.GUI;
+package duke.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 
 /**
  * This control represents a dialog box consisting of an ImageView and a label containing text.

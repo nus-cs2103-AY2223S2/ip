@@ -1,8 +1,8 @@
 package duke;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
 import duke.command.DeleteAllCommand;
+import duke.command.DeleteCommand;
 import duke.command.EndCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
