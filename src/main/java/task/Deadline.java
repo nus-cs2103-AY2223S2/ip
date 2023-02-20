@@ -38,10 +38,10 @@ public class Deadline extends Task {
      */
     @Override
     public String save() {
-        return "[D]" +
-                super.toString() + " (by: " +
-                super.getReadFormat().format(this.deadline) +
-                ")";
+        return "[D]"
+                + super.toString()
+                + " (by: " + super.getReadFormat().format(this.deadline)
+                + ")";
     }
 
     /**
@@ -52,9 +52,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" +
-                super.toString() + " (by: " +
-                super.getWriteFormat().format(this.deadline) +
-                ")";
+        return "[D]"
+                + super.toString()
+                + " (by: " + super.getWriteFormat().format(this.deadline)
+                + ")";
     }
 }

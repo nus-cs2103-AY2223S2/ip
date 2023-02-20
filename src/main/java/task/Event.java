@@ -42,13 +42,13 @@ public class Event extends Task {
      */
     @Override
     public String save() {
-        return "[E]" +
-                super.toString() +
-                " (from: " +
-                super.getReadFormat().format(this.start) +
-                " to: " +
-                super.getReadFormat().format(this.end) +
-                ")";
+        return "[E]"
+                + super.toString()
+                + " (from: "
+                + super.getReadFormat().format(this.start)
+                + " to: "
+                + super.getReadFormat().format(this.end)
+                + ")";
     }
     /**
      * Overridden toString() method for Event.
@@ -58,12 +58,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" +
-                super.toString() +
-                " (from: " +
-                super.getWriteFormat().format(this.start) +
-                " to: " +
-                super.getWriteFormat().format(this.end) +
-                ")";
+        return "[E]"
+                + super.toString()
+                + " (from: "
+                + super.getWriteFormat().format(this.start)
+                + " to: "
+                + super.getWriteFormat().format(this.end)
+                + ")";
     }
 }

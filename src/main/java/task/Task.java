@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
  *
  * @author Tan Yan-Hao Joshua
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
 
     /**
      * The description of the Task.
@@ -93,6 +93,18 @@ public abstract class Task {
 
     public boolean match(String keyword) {
         return this.description.contains(keyword);
+    }
+
+    /**
+     * Returns the int value after comparing the descriptions of
+     * 2 tasks.
+     *
+     * @param otherTask The other task being compared with.
+     * @return The int value representing the comparison result.
+     */
+    @Override
+    public int compareTo(Task otherTask) {
+        return this.description.compareTo(otherTask.description);
     }
 
     /**

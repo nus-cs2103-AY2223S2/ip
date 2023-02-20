@@ -60,7 +60,8 @@ public enum Command {
                     sb.append(" ");
                     i++;
                 }
-                String description = sb.toString();
+                assert strArr[i].equals("/by") || strArr[i].equals("(by:");
+                String description = sb.substring(0, sb.length() - 1);
 
                 sb.setLength(0);
                 i++; // skip "/by" or "(by:"
@@ -69,7 +70,7 @@ public enum Command {
                     sb.append(" ");
                     i++;
                 }
-                String by = sb.toString();
+                String by = sb.substring(0, sb.length() - 1);
 
                 Task deadline = new Deadline(description, by);
                 list.add(deadline);
@@ -101,7 +102,8 @@ public enum Command {
                     sb.append(" ");
                     j++;
                 }
-                String description = sb.toString();
+                assert strArr[j].equals("/from") || strArr[j].equals("(from:");
+                String description = sb.substring(0, sb.length() - 1);
 
                 sb.setLength(0);
                 j++; // skip "/from" or "(from:"
@@ -110,7 +112,8 @@ public enum Command {
                     sb.append(" ");
                     j++;
                 }
-                String start = sb.toString();
+                assert strArr[j].equals("/to") || strArr[j].equals("to:");
+                String start = sb.substring(0, sb.length() - 1);
 
                 sb.setLength(0);
                 j++; // skip "/to" or "to:"
@@ -119,7 +122,7 @@ public enum Command {
                     sb.append(" ");
                     j++;
                 }
-                String end = sb.toString();
+                String end = sb.substring(0, sb.length() - 1);
                 Task event = new Event(description, start, end);
                 list.add(event);
                 return Ui.getAddedTaskMessage(event, list.getUncompletedSize());
@@ -141,6 +144,7 @@ public enum Command {
         @Override
         public String execute(String input) throws SundayException {
             try {
+                assert !input.substring(1).isEmpty();
                 String description = input.substring(1);
                 Task toDo = new ToDo(description);
                 list.add(toDo);
@@ -205,12 +209,30 @@ public enum Command {
         }
     },
 
+    /**
+     * Finds a list tasks given a keyword from the task list.
+     */
     FIND("find") {
         @Override
         public String execute(String input) {
             String keyword = input.substring(1);
             TaskList found = list.find(keyword);
             return Ui.getListFoundMessage(found);
+        }
+    },
+
+    /**
+     * Sorts the list of tasks in alphabetical order.
+     */
+    SORT("sort") {
+        @Override
+        public String execute(String input) {
+            if (list.isEmpty()) {
+                return Ui.getEmptyTaskListMessage();
+            } else {
+                list.sort();
+                return Ui.getTaskListMessage(list);
+            }
         }
     },
 
