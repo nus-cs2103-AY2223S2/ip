@@ -1,5 +1,7 @@
 # Duke
 
+![build workflow](https://github.com/vsamarth/ip/actions/workflows/gradle.yml/badge.svg)
+
 **Duke** ensures that you keep track of your todos and deadlines so that you
 are not scrambling at the last minute to complete them.
 
