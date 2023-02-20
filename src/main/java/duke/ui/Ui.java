@@ -16,14 +16,14 @@ public class Ui {
                 + "  ________________________________\n";
         System.out.println(introduction);
 
-        return "  Yo Great to see you!";
+        return "Yo Great to see you!";
     }
 
     /**
      * Prints the exit message.
      */
     public static void outro() {
-        String bye = "  Bye! have a great day";
+        String bye = "Bye! have a great day";
         System.out.println(bye);
     }
 

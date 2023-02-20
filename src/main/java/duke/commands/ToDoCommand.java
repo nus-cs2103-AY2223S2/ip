@@ -25,8 +25,8 @@ public class ToDoCommand extends Command {
         tasks.addToDo(newToDo);
 
         String reply = "Got it. I've added this task:\n"
-                + "    " + newToDo.toString()
-                + "  Now you have " + tasks.getLen() + " tasks in the list.\n";
+                + "  " + newToDo.toString()
+                + "Now you have " + tasks.getLen() + " tasks in the list.\n";
         System.out.print(reply);
         return reply;
     }

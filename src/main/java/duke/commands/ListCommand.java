@@ -13,7 +13,7 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) {
-        String reply = "  Here are the tasks in your list:\n";
+        String reply = "Here are the tasks in your list:\n";
         Ui.displayMessage(reply);
         reply += tasks.list();
         return reply;

@@ -38,9 +38,9 @@ public class EventCommand extends Command {
 
         Event newEvent = new Event(description, from, to);
         tasks.addEvent(newEvent);
-        String reply = "  Got it. I've added this task:\n"
-                + "    " + newEvent.toString()
-                + "  Now you have " + tasks.getLen() + " tasks in the list.\n";
+        String reply = "Got it. I've added this task:\n"
+                + "  " + newEvent.toString()
+                + "Now you have " + tasks.getLen() + " tasks in the list.\n";
         System.out.print(reply);
 
         return reply;

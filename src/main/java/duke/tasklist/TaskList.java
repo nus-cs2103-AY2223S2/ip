@@ -43,7 +43,7 @@ public class TaskList {
         String result = "";
         for (int i = 0; i < this.len; i++) {
             int index = i + 1;
-            result += "  " + index + ". " + list[i].toString();
+            result += + index + ". " + list[i].toString();
         }
         System.out.print(result);
         return result;
@@ -57,8 +57,8 @@ public class TaskList {
      */
     public String setDone(int index) {
         this.list[index].setDone();
-        String reply = "  Nice! I've marked this task as done:\n"
-                + "    " + list[index].toString();
+        String reply = "Nice! I've marked this task as done:\n"
+                + "  " + list[index].toString();
         System.out.print(reply);
         return reply;
     }
@@ -71,8 +71,8 @@ public class TaskList {
      */
     public String setNotDone(int index) {
         this.list[index].setNotDone();
-        String reply = "  OK, I've marked this task as not done:\n"
-                + "    " + list[index].toString();
+        String reply = "OK, I've marked this task as not done:\n"
+                + "  " + list[index].toString();
         System.out.print(reply);
         return reply;
     }
@@ -145,9 +145,9 @@ public class TaskList {
 
         this.len--;
 
-        String reply = "  Noted. I've removed this task:\n"
-                + "    " + deletedTask.toString()
-                + "  Now you have " + this.len + " tasks in the list.\n";
+        String reply = "Noted. I've removed this task:\n"
+                + "  " + deletedTask.toString()
+                + "Now you have " + this.len + " tasks in the list.\n";
         System.out.print(reply);
         return reply;
 

@@ -33,9 +33,9 @@ public class DeadlineCommand extends Command {
         Deadline newDeadline = new Deadline(description, by);
         tasks.addDeadline(newDeadline);
 
-        String reply = "  Got it. I've added this task:\n"
-                + "    " + newDeadline.toString()
-                + "  Now you have " + tasks.getLen() + " tasks in the list.\n";
+        String reply = "Got it. I've added this task:\n"
+                + "  " + newDeadline.toString()
+                + "Now you have " + tasks.getLen() + " tasks in the list.\n";
         System.out.print(reply);
         return reply;
 
