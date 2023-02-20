@@ -28,7 +28,7 @@ public class MakeTodo extends Make {
             return duplicateFound(t, duplicate);
         }
 
-        tasklist.add(t);
+        super.tasklist.add(t);
         return "Added this new Todo: \n" + t;
     }
 
