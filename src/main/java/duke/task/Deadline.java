@@ -41,4 +41,8 @@ public class Deadline extends Task {
         return "D | " + super.getTaskString()
                 + " | " + dueDate;
     }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
 }

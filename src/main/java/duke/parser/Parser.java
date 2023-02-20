@@ -59,6 +59,8 @@ public class Parser {
         // Single word commands
         if (userCommand.equals("list")) {
             return tasks.printTaskList();
+        } else if (userCommand.equals("sort")) {
+            return tasks.sortByDeadline();
         }
 
         // Multi-word commands

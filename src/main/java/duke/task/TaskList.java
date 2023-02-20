@@ -323,4 +323,24 @@ public class TaskList {
             return result.toString();
         }
     }
+
+    /**
+     * Returns the list of tasks sorted by chronological order if it is a deadline,
+     * and preserves the relative order otherwise.
+     *
+     * @return The list of tasks sorted chronologically according to deadlines.
+     */
+    public String sortByDeadline() {
+        TASKS.sort((t1, t2) -> {
+            if (t1 instanceof Deadline && t2 instanceof Deadline) {
+                Deadline d1 = (Deadline) t1;
+                Deadline d2 = (Deadline) t2;
+                return d1.getDueDate().compareTo(d2.getDueDate());
+            } else {
+                return 0;
+            }
+        });
+
+        return printTaskList();
+    }
 }
