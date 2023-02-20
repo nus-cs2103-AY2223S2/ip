@@ -7,4 +7,10 @@ public class Event extends Task {
         this.start = start;
         this.end = end;
     }
+
+    @Override
+    public String toString() {
+        return "[E] " + "[" + this.getStatusIcon() + "] " + this.description + " From: " + this.start + " To: " + this.end;
+    }
+
 }

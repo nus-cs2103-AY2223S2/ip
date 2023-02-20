@@ -6,4 +6,10 @@ public class Deadline extends Task {
         super(description);
         this.deadline = deadline;
     }
+
+    @Override
+    public String toString() {
+        return "[D] " + "[" + this.getStatusIcon() + "] " + this.description + " By: " + this.deadline;
+    }
+
 }
