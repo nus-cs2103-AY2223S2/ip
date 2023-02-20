@@ -21,17 +21,16 @@ import duke.interfaces.Model;
  */
 
 public class TaskModel implements Model {
-    private static final String taskStorePath = "./data/tasks.ser";
-    private final String dataDirPath = "./data";
+    private static final String TASK_STORE_PATH = "./data/tasks.ser";
+    private static final String DATA_DIR_PATH = "./data";
     private final ArrayList<Task> tasks;
-    private final File dataDir;
     private final File tasksFile;
 
     /**
      * Model that stores the task list. It is also responsible for saving and loading tasks (on startup) from the disk.
      */
     public TaskModel() {
-        this.dataDir = new File(dataDirPath);
+        File dataDir = new File(DATA_DIR_PATH);
         if (!dataDir.exists()) {
             try {
                 dataDir.mkdir();
@@ -40,7 +39,7 @@ public class TaskModel implements Model {
             }
         }
 
-        this.tasksFile = new File(taskStorePath);
+        this.tasksFile = new File(TASK_STORE_PATH);
         if (tasksFile.exists() && tasksFile.length() > 0) {
             try {
                 ObjectInputStream in = new ObjectInputStream(new FileInputStream(tasksFile));
@@ -129,13 +128,13 @@ public class TaskModel implements Model {
      */
     public List<Task> getTasksOn(LocalDateTime time) {
         // only deadlines and events
-        List<Task> res = new ArrayList<>();
+        List<Task> matchingTasks = new ArrayList<>();
         for (Task task : this.tasks) {
             if (task.isDueOn(time)) {
-                res.add(task);
+                matchingTasks.add(task);
             }
         }
-        return res;
+        return matchingTasks;
     }
 
     /**
@@ -144,7 +143,7 @@ public class TaskModel implements Model {
      * @return The task at the supplied index.
      */
     public Task getTask(int index) {
-        return this.tasks.get(index); // out of bounds exception
+        return this.tasks.get(index);
     }
 
     public int getNumberOfTasks() {
@@ -167,7 +166,7 @@ public class TaskModel implements Model {
      */
     public void markTaskDone(Task task) {
         int taskIndex = tasks.indexOf(task);
-        tasks.get(taskIndex).markTaskDone(); // handle out of bounds exception
+        tasks.get(taskIndex).markTaskDone();
         writeToFile();
     }
 
@@ -177,7 +176,7 @@ public class TaskModel implements Model {
      */
     public void markTaskUndone(Task task) {
         int taskIndex = tasks.indexOf(task);
-        tasks.get(taskIndex).markTaskUndone(); // handle out of bounds exception
+        tasks.get(taskIndex).markTaskUndone();
         writeToFile();
     }
 
@@ -186,12 +185,12 @@ public class TaskModel implements Model {
      * @param subStr The string to search for.
      */
     public List<Task> findTasks(String subStr) {
-        List<Task> res = new ArrayList<>();
+        List<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.descriptionContains(subStr)) {
-                res.add(task);
+                matchingTasks.add(task);
             }
         }
-        return res;
+        return matchingTasks;
     }
 }

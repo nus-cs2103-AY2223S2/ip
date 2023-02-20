@@ -82,7 +82,6 @@ public class CommandFactory {
         case FIND:
             return new FindTaskCommand(taskModel, taskView, args[0]);
         default:
-            // in case we add more to CommandType and forget to add here
             return null;
         }
     }

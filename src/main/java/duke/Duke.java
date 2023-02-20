@@ -28,10 +28,16 @@ public class Duke {
         dukeGui.setTasks(taskModel.getTasks(), false);
 
         GlobalExceptionHandler exceptionHandler = new GlobalExceptionHandler(dukeGui);
+
+        // a command event listener to listen for the bye command and do cleanup before exiting
         CommandEventListener exitEventListener = command -> {
-            dukeGui.stop();
+            if (command.equalsIgnoreCase("bye")) {
+                dukeGui.stop();
+            }
         };
         TaskPresenter presenter = new TaskPresenter(taskModel, dukeGui, exitEventListener);
+
+        // create an input event listener that the gui calls to process the commands
         InputEventListener inputEventListener = input -> {
             try {
                 presenter.handleInput(input);
