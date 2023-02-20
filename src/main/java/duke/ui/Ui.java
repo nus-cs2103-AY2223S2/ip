@@ -1,8 +1,11 @@
-package duke;
+package duke.ui;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import duke.data.TaskList;
+import duke.parser.Parser;
+import duke.task.Task;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -14,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * duke.Ui class represents User interface when using the chatbox.
+ * duke.ui.Ui class represents User interface when using the chatbox.
  */
 public class Ui {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -44,6 +47,26 @@ public class Ui {
     }
 
     /**
+     * Display a in-app help page.
+     *
+     * @return The response message for the help command.
+     */
+    public static String getHelpResponse() {
+        String helpResponse = "This is a list of my features and commands that you can use:\n"
+                + "1. todo [task name]: add a To Do task to the list.\n"
+                + "2. deadline [task name] \\by [yyyy-MM-dd] : add a Deadline task to the list.\n"
+                + "3. event [task name] \\from [yyyy-MM-dd] \\to [yyyy-MM-dd] : add an event task to the list.\n"
+                + "4. list : to display the task list currently in order.\n"
+                + "5. mark [task number] : to mark a task with the number from the list order.\n"
+                + "6. unmark [task number] : to unmark a task with the number from the list order.\n"
+                + "7. delete [task number] : to delete a task with the number from the list order.\n"
+                + "8. find [keyword] : find any tasks contain that keyword.\n"
+                + "9. bye : to end our sweet sweet conversation <3.\n"
+                + "10. help : to see a list of commands which you are seeing right neowwwww.\n";
+        return helpResponse;
+    }
+
+    /**
      * Returns the outro message of the chatbot.
      *
      * @return The outro message of the chatbot.
@@ -55,7 +78,7 @@ public class Ui {
     /**
      * Prints the tasks list stored in the bot.
      *
-     * @param taskList A duke.TaskList Object encapsulating the all tasks in the chatbot.
+     * @param taskList A duke.data.TaskList Object encapsulating the all tasks in the chatbot.
      * @return The message of the chatbot to list all tasks.
      */
     public static String getTaskListMessage(TaskList taskList) {
@@ -108,7 +131,7 @@ public class Ui {
     /**
      * Prints a message corresponding to the deleting action of the argument task.
      *
-     * @param target The duke.Task being deleted from the list.
+     * @param target The duke.task.Task being deleted from the list.
      * @param size   The current size of task list.
      * @return The message of the chatbot after deleting a task.
      */

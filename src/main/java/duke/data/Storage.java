@@ -1,4 +1,4 @@
-package duke;
+package duke.data;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -10,8 +10,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 /**
- * duke.Storage class encapsulates the whole storing, reading process of chatbot.
+ * duke.storage.Storage class encapsulates the whole storing, reading process of chatbot.
  */
 public class Storage {
     /** Path Object represents the default storing file path in hard disk */
@@ -22,7 +27,7 @@ public class Storage {
     private final TaskList taskList;
 
     /**
-     * Initializes a new duke.Storage object and try to read the storing file in hard disk, if there is not
+     * Initializes a new duke.storage.Storage object and try to read the storing file in hard disk, if there is not
      * a file existed then create a new one.
      */
     public Storage(TaskList taskList) {

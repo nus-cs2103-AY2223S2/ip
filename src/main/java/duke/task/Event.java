@@ -1,27 +1,27 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class duke.Event is a subclass of duke.Task, encapsulate details
+ * Class duke.task.Event is a subclass of duke.task.Task, encapsulate details
  * about a type of user's tasks which happen during a period
  * of time.
  *
  * @author hhchinh2002
  */
 public class Event extends Task {
-    // The starting time of the duke.Event
+    // The starting time of the duke.task.Event
     private LocalDate start;
-    //The ending time of the duke.Event
+    //The ending time of the duke.task.Event
     private LocalDate end;
 
     /**
-     * Creates an duke.Event task object with given description and starting, ending time
+     * Creates an duke.task.Event task object with given description and starting, ending time
      *
-     * @param description The description for the duke.Event task
-     * @param start The starting time of the duke.Event
-     * @param end The ending time fo the duke.Event
+     * @param description The description for the duke.task.Event task
+     * @param start The starting time of the duke.task.Event
+     * @param end The ending time fo the duke.task.Event
      */
     public Event(String description, LocalDate start, LocalDate end) {
         super(description);

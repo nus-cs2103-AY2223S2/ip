@@ -1,15 +1,23 @@
-package duke;
+package duke.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.data.TaskList;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.ui.DialogBox;
+import duke.ui.Ui;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 /**
- * duke.Parser class encapsulates the logic implementation of the chatbot.
+ * duke.parser.Parser class encapsulates the logic implementation of the chatbot.
  */
 public class Parser {
     private TaskList taskList;
@@ -63,6 +71,8 @@ public class Parser {
             return Ui.getOutroMessage();
         } else if (command.equals("list")) {
             return Ui.getTaskListMessage(taskList);
+        } else if (command.equals("help")) {
+            return Ui.getHelpResponse();
         }
 
         //2nd check for interactive command related to task

@@ -1,5 +1,9 @@
 package duke;
 
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.parser.Parser;
+import duke.ui.Ui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 
 /**
  * Class duke.Duke implements a chatbot encapsulates user's tasks and show it

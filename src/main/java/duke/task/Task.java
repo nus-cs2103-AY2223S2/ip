@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Class Tasks encapsulate details
@@ -11,7 +11,7 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Creates a duke.Task object with given description
+     * Creates a duke.task.Task object with given description
      *
      * @param description The description for the task
      */

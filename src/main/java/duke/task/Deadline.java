@@ -1,10 +1,10 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class DeadLine is a subclass of duke.Task, encapsulate details
+ * Class DeadLine is a subclass of duke.task.Task, encapsulate details
  * about a type of user's tasks which has a deadline.
  *
  * @author hhchinh2002
@@ -14,7 +14,7 @@ public class Deadline extends Task {
     private LocalDate by;
 
     /**
-     * Creates a duke.Deadline task with given description and deadline time
+     * Creates a duke.task.Deadline task with given description and deadline time
      *
      * @param description The description for the task
      * @param by The deadline of the task

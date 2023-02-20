@@ -1,11 +1,14 @@
-package duke;
+package duke.data;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import duke.task.Task;
+import duke.ui.Ui;
+
 /**
- * duke.TaskList class encapsulates the information of the tasks keyed in the chatbot by the user.
+ * duke.data.TaskList class encapsulates the information of the tasks keyed in the chatbot by the user.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -17,7 +20,7 @@ public class TaskList {
     /**
      * Returns true if the task argument is in the task list and false otherwise.
      *
-     * @param task a duke.Task object encapsulate the task we are checking.
+     * @param task a duke.task.Task object encapsulate the task we are checking.
      * @return Returns true if the task argument is in the task list and false otherwise.
      */
     public boolean contains(Task task) {
@@ -31,7 +34,7 @@ public class TaskList {
     /**
      * Add the task argument into the task list.
      *
-     * @param newTask a duke.Task object encapsulating the new task being added.
+     * @param newTask a duke.task.Task object encapsulating the new task being added.
      */
     public String addTask(Task newTask) {
         int size = tasks.size();
@@ -47,7 +50,7 @@ public class TaskList {
      */
     public String mark(String command) {
         int index = Integer.valueOf(command.substring(5)) - 1;
-        assert index >=0;
+        assert index >= 0;
         Task target = tasks.get(index);
         assert target != null;
         target.mark();
