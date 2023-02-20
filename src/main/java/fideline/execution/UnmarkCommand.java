@@ -31,8 +31,8 @@ public class UnmarkCommand extends Command {
         if (!taskManager.isValidTask(taskNum)) {
             throw new InvalidArgumentException("task");
         }
-        String s = taskManager.getTaskString(taskNum);
         taskManager.unmarkTask(taskNum);
+        String s = taskManager.getTaskString(taskNum);
         storage.unmarkTask(taskNum);
         return ui.getUnmarkMsg(s);
     }

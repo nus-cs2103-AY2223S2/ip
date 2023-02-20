@@ -31,8 +31,8 @@ public class MarkCommand extends Command {
         if (!taskManager.isValidTask(taskNum)) {
             throw new InvalidArgumentException("task");
         }
-        String s = taskManager.getTaskString(taskNum);
         taskManager.markTask(taskNum);
+        String s = taskManager.getTaskString(taskNum);
         storage.markTask(taskNum);
         return ui.getMarkMsg(s);
     }
