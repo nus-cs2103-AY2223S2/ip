@@ -226,7 +226,6 @@ Tasks:
 4.[T][ ] join sports club
 ```
 
-E
 
 
 
