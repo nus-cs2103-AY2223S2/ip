@@ -1,6 +1,4 @@
 package duke.commands;
-import duke.ui.Ui;
-import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
 /**
@@ -26,6 +24,10 @@ public abstract class Command {
      * @param tasks the task list
      */
     public abstract String execute(TaskList tasks);
+
+    public String getTag() {
+        return this.tag;
+    }
 
     /**
      * Checks if the command is an exit command which terminates the program.

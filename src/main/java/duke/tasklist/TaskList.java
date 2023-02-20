@@ -45,6 +45,7 @@ public class TaskList {
             int index = i + 1;
             result += "  " + index + ". " + list[i].toString();
         }
+        System.out.print(result);
         return result;
     }
 
@@ -56,8 +57,10 @@ public class TaskList {
      */
     public String setDone(int index) {
         this.list[index].setDone();
-        return "  Nice! I've marked this task as done:\n"
+        String reply = "  Nice! I've marked this task as done:\n"
                 + "    " + list[index].toString();
+        System.out.print(reply);
+        return reply;
     }
 
     /**
@@ -68,8 +71,10 @@ public class TaskList {
      */
     public String setNotDone(int index) {
         this.list[index].setNotDone();
-        return "  OK, I've marked this task as not done:\n"
+        String reply = "  OK, I've marked this task as not done:\n"
                 + "    " + list[index].toString();
+        System.out.print(reply);
+        return reply;
     }
 
     /**
@@ -140,9 +145,11 @@ public class TaskList {
 
         this.len--;
 
-        return "  Noted. I've removed this task:\n"
+        String reply = "  Noted. I've removed this task:\n"
                 + "    " + deletedTask.toString()
                 + "  Now you have " + this.len + " tasks in the list.\n";
+        System.out.print(reply);
+        return reply;
 
     }
 

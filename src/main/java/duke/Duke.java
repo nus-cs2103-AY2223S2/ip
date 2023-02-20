@@ -21,7 +21,7 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        this.taskList = storage.loadFile();
+        loadFile();
     }
 
     /**
@@ -37,8 +37,13 @@ public class Duke {
             String fullCommand = sc.nextLine();
             try {
                 ui.showLine();
-                Command c = Parser.parse(fullCommand);
+                Command c = Parser.parse(fullCommand, this.storage);
                 c.execute(taskList);
+
+                if(c.getTag() == "CHANGE_FILE_LOCATION") {
+                    loadFile();
+                }
+
                 isExit = c.isExit();
             } catch (DukeExceptions exceptions) {
                 ui.showError(exceptions);
@@ -50,6 +55,10 @@ public class Duke {
         storage.save(taskList);
     }
 
+    public void loadFile(){
+        this.taskList = storage.loadFile();
+    }
+
     /**
      * Parses, executes and return a string response to a request by the user
      *
@@ -57,8 +66,14 @@ public class Duke {
      */
     public String getResponse(String request) {
         try {
-            Command com = Parser.parse(request);
+            Command com = Parser.parse(request, this.storage);
             String response = com.execute(this.taskList);
+
+            //load task list from new filepath
+            if(com.getTag() == "CHANGE_FILE_LOCATION") {
+                loadFile();
+            }
+
             if (com.isExit()) {
                 storage.save(this.taskList);
             }

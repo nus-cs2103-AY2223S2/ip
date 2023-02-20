@@ -23,7 +23,7 @@ public class Ui {
      * Prints the exit message.
      */
     public static void outro() {
-        String bye = "  Bye! have a great day\n";
+        String bye = "  Bye! have a great day";
         System.out.println(bye);
     }
 

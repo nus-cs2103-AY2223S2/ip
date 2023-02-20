@@ -14,7 +14,7 @@ import duke.tasks.Task;
  */
 public class Storage {
     private File file;
-    private final String path;
+    private String path;
     private Ui ui;
 
     /**
@@ -86,5 +86,17 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public String changeFileLocation(String fileLocation, TaskList taskList) {
+        //save current taskList to current file
+        save(taskList);
+
+        //change filepath
+        this.path = fileLocation;
+        fileSetup();
+        String successReply = "File Location change was successful";
+        System.out.println(successReply);
+        return successReply;
     }
 }

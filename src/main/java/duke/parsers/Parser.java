@@ -3,6 +3,7 @@ package duke.parsers;
 import duke.commands.*;
 import duke.dukeexceptions.DukeExceptions;
 import duke.dukeexceptions.MissingArgumentException;
+import duke.storage.Storage;
 
 /**
  * Deals with making sense of the user command.
@@ -15,7 +16,7 @@ public class Parser {
      * @param fullCommand content to be parsed
      * @return A corresponding command.
      */
-    public static Command parse(String fullCommand) throws DukeExceptions {
+    public static Command parse(String fullCommand, Storage storage) throws DukeExceptions {
         String[] splitStr = fullCommand.split(" ");
         String requestContent = fullCommand.split(" ", 2).length == 2
                 ? fullCommand.split(" ", 2)[1]
@@ -62,6 +63,9 @@ public class Parser {
 
         case "find":
             return new FindCommand(requestContent);
+
+        case "change_file_location":
+            return new ChangeFileLocationCommand(requestContent, storage);
 
         default:
             return new UnknownCommand();
