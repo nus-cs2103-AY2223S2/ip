@@ -35,6 +35,7 @@ public class Deadline extends Task {
             throw new InvalidDeadline();
         }
         int byId = dscp.indexOf("/by");
+        assert byId != -1 : "wrong format";
         if (byId == -1) {
             throw new InvalidDeadline();
         }

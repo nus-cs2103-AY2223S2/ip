@@ -41,6 +41,9 @@ public class Event extends Task {
 
         int fromId = dscp.indexOf("/from");
         int toId = dscp.indexOf(("/to"));
+        assert fromId != -1 : "wrong format";
+        assert toId != -1 : "wrong format";
+
         if (fromId == -1 || toId == -1) {
             throw new InvalidEvent();
         }
