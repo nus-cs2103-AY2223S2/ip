@@ -1,7 +1,46 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+ ---------------------------------------------------------
+                                            | |
+                                 _ __  _   _| | _____
+                                | '_ \| | | | |/ / _ \
+                                | .__/ \__,_|_|\_\___|
+                                | |
+                                |_|
+ ---------------------------------------------------------
+Welcome to PUKE, the worst program in existence
+Input a command
+____________________________________________________________
+Me add your task to list:
+        [T][ ] borrow book
+You currently have 1 tracked tasks
+____________________________________________________________
+____________________________________________________________
+Me add your task to list:
+        [D][ ] return book (by: Sunday)
+You currently have 2 tracked tasks
+____________________________________________________________
+____________________________________________________________
+Me add your task to list:
+        [E][ ] project meeting  (from: Mon 2pm to 4pm)
+You currently have 3 tracked tasks
+____________________________________________________________
+____________________________________________________________
+Me add your task to list:
+        [D][ ] do homework (by: no idea :-p)
+You currently have 4 tracked tasks
+____________________________________________________________
+Your current tracked tasks:
+1.[T][ ] borrow book
+2.[D][ ] return book (by: Sunday)
+3.[E][ ] project meeting  (from: Mon 2pm to 4pm)
+4.[D][ ] do homework (by: no idea :-p)
+Toggled state:
+ [X] project meeting
+Your current tracked tasks:
+1.[T][ ] borrow book
+2.[D][ ] return book (by: Sunday)
+3.[E][X] project meeting  (from: Mon 2pm to 4pm)
+4.[D][ ] do homework (by: no idea :-p)
+Exiting program
+Goodbye!
+
 
