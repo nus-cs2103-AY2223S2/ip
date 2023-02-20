@@ -73,3 +73,30 @@ Got it. I've added this task:
 [E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
 Now you have 1 task(s) in the list. 
 ```
+
+### `delete` - delete a task 
+
+Delete a task at its given index. 
+
+Example of usage: 
+```
+delete [index]
+```
+
+```
+delete 1
+```
+
+Expected outcome:
+
+Task with the given index will be removed from the list
+
+```
+Noted. I've removed this task. 
+[E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
+Now you have 0 task(s) in the list.
+```
+
+
+
+
