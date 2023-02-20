@@ -137,6 +137,9 @@ public class TaskList {
         int index = 1;
         for (Task task : list) {
             if (task.description.toUpperCase().contains(keyword.toUpperCase())) {
+                if (index == 1) {
+                    System.out.println("Here are the tasks matching the given keyword:");
+                }
                 System.out.println(index + " " + task.toString());
                 index++;
             }
