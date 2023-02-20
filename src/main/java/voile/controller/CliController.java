@@ -55,13 +55,6 @@ public class CliController {
     }
 
     /**
-     * Prints the goodbye message when the application exits.
-     */
-    public static void bye() {
-        echo(Messages.GOODBYE_MESSAGE);
-    }
-
-    /**
      * Waits for the next input from the user, and handles that input.
      */
     public static void handleUserInput() {

@@ -16,6 +16,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList list) {
+        int size = list.size();
         String content = list.stream().map(new Function<Task, String>() {
             private int index = 1;
 
@@ -26,7 +27,11 @@ public class ListCommand extends Command {
                 return out;
             }
         }).collect(Collectors.joining("\n"));
-        return "Here are the tasks in your list:\n" + content;
+        return size == 0
+                ? "There is no task in the library."
+                : size == 1
+                        ? "There is only one task in the library:\n" + content
+                        : "Here are the tasks in the library:\n" + content;
     }
 
     @Override

@@ -25,10 +25,11 @@ public class RemoveCommand extends Command {
     @Override
     public String execute(TaskList list) {
         Task task = list.remove(index);
+        int size = list.size();
         return String.format(
-                "I've removed this task:\n%s\nNow you have %s in the list",
-                task,
-                list.countTasks());
+                "I've removed this task:\n%s\nThere %s %d task%s in the library.",
+                task, size < 2 ? "is" : "are",
+                size, size < 2 ? "" : "s");
     }
 
     @Override

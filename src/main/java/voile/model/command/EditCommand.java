@@ -33,7 +33,7 @@ public class EditCommand extends Command {
         String oldDescription = task.getDescription();
         task.setDescription(newDescription);
         return String.format(
-                "I've edited your task's description: %s -> %s",
+                "I've edited your task: %s -> %s",
                 oldDescription,
                 newDescription);
     }

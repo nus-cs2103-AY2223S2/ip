@@ -97,6 +97,15 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Checks whether this {@code TaskList} is empty or not.
+     *
+     * @return {@code true} if this {@code TaskList} is empty, otherwise {@code false}
+     */
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
+
+    /**
      * Clears this {@code TaskList}.
      */
     public void clear() {
@@ -110,16 +119,6 @@ public class TaskList implements Serializable {
      */
     public Stream<Task> stream() {
         return tasks.stream();
-    }
-
-    /**
-     * Counts the number of stored tasks.
-     *
-     * @return a string representing the number of stored tasks
-     */
-    public String countTasks() {
-        int n = tasks.size();
-        return String.format("%d task%s", n, n < 2 ? "" : "s");
     }
 
     @Override

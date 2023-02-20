@@ -12,7 +12,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList list) {
-        return "Bye. Hope to see you again soon!";
+        return "The library will protect your tasks, come back later to retrieve them.\nGoodbye.";
     }
 
     /**

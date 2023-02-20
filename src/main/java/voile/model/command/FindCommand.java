@@ -1,5 +1,6 @@
 package voile.model.command;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -26,11 +27,18 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList list) {
-        String content = list.stream()
+        List<String> matchingTasks = list.stream()
                 .filter(task -> task.getDescription().contains(keyword))
                 .map(Objects::toString)
-                .collect(Collectors.joining("\n"));
-        return "Here are the matching tasks in your list:\n" + content;
+                .collect(Collectors.toList());
+        int size = matchingTasks.size();
+        String content = String.join("\n", matchingTasks);
+        return size == 0
+                ? "There is no matching task in the library."
+                : size == 1
+                        ? "There is only one matching task in the library:\n" + content
+                        : "Here are the matching tasks in the library:\n" + content;
+
     }
 
     @Override

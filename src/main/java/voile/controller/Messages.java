@@ -10,7 +10,4 @@ public class Messages {
             "I'm Patchouli Knowledge, the librarian.",
             "Use 'help' if you need any support");
 
-    public static final String GOODBYE_MESSAGE = String.join("\n",
-            "Your tasks are now protected, come back later to retrieve them.",
-            "Goodbye");
 }

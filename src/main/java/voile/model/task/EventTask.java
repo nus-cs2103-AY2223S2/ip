@@ -28,7 +28,8 @@ public class EventTask extends Task {
     public EventTask(String description, LocalDate startTime, LocalDate endTime) {
         super(description);
         if (startTime.isAfter(endTime)) {
-            throw new VoileIllegalArgumentException("start time cannot be after end time");
+            throw new VoileIllegalArgumentException(
+                    "Oh no! An event's start time cannot be after its end time.");
         }
         this.startTime = startTime;
         this.endTime = endTime;

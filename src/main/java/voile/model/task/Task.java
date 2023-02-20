@@ -32,7 +32,7 @@ public abstract class Task implements Serializable {
      */
     public Task(String description) {
         if (description.isEmpty()) {
-            throw new VoileIllegalArgumentException("description cannot be empty");
+            throw new VoileIllegalArgumentException("Oh no! Task description cannot be empty.");
         }
         this.description = description;
         this.isDone = false;
@@ -44,7 +44,7 @@ public abstract class Task implements Serializable {
 
     public void setDescription(String description) {
         if (description.isEmpty()) {
-            throw new VoileIllegalArgumentException("description cannot be empty");
+            throw new VoileIllegalArgumentException("Oh no! Task description cannot be empty.");
         }
         this.description = description;
     }
@@ -54,7 +54,7 @@ public abstract class Task implements Serializable {
      */
     public void markAsDone() {
         if (isDone) {
-            throw new VoileIllegalStateException("Task is already marked as done");
+            throw new VoileIllegalStateException("Oh no! Task is already marked as done.");
         }
         isDone = true;
     }
@@ -64,7 +64,7 @@ public abstract class Task implements Serializable {
      */
     public void unmarkAsDone() {
         if (!isDone) {
-            throw new VoileIllegalStateException("Task is already marked as not done");
+            throw new VoileIllegalStateException("Oh no! Task is already marked as not done.");
         }
         isDone = false;
     }
