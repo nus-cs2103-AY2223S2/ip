@@ -20,7 +20,7 @@ public class Exit extends Command {
      */
     @Override
     public void execute(TaskList toDoList) {
-        // nothing to do; simply exits
+        // nothing to do. simply exits
     }
 
     @Override

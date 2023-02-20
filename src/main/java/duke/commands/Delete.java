@@ -12,6 +12,12 @@ public class Delete extends Command {
     private Task removed;
     private int newSize;
 
+    /**
+     * Constructs a Delete object.
+     *
+     * @param message The full command message.
+     * @param index The index in the task list to be deleted.
+     */
     public Delete(String message, int index) {
         super(message);
         this.index = index;

@@ -1,5 +1,7 @@
 package duke.commands;
 
+import java.util.List;
+
 import duke.TaskList;
 import duke.commands.tasks.Task;
 
@@ -8,7 +10,13 @@ import duke.commands.tasks.Task;
  */
 public class Add extends Command {
     private static final String RESPONSE_HEADER = "Got it! I've added this task:\n";
+    private static final String DUPLICATE_HANDLER = "However, there this task has duplicate(s) " +
+            "and is repeated at the following indexes:\n";
+    private static final String DELETE_PROMPT = "I suggest deleting one of the duplicates! Or keep them there.." +
+            " up to you.\n";
     private final Task task;
+    private boolean hasDuplicate;
+    private List<Integer> duplicateIndex;
 
     /**
      * Creates the Add class.
@@ -19,6 +27,7 @@ public class Add extends Command {
     public Add(String message, Task task) {
         super(message);
         this.task = task;
+        this.hasDuplicate = false;
     }
 
     /**
@@ -28,15 +37,23 @@ public class Add extends Command {
      */
     @Override
     public void execute(TaskList toDoList) {
+        this.hasDuplicate = toDoList.contains(this.task);
         toDoList.add(this.task);
+        this.duplicateIndex = toDoList.getOccurrences(this.task);
     }
 
     @Override
     public String getResponseOutput() {
-        return String.format(Add.RESPONSE_HEADER
+        String result = String.format(Add.RESPONSE_HEADER
                 + Command.INDENT
                 + "%s\n",
                 this.task.toString());
+        if (this.hasDuplicate) {
+            result += Add.DUPLICATE_HANDLER;
+            result += this.duplicateIndex.toString() + "\n";
+            result += Add.DELETE_PROMPT;
+        }
+        return result;
     }
 
     @Override
