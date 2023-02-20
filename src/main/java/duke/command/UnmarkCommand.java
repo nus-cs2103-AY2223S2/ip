@@ -30,7 +30,9 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (taskNum < 0 || taskNum - 1 >= tasks.size()) {
+        boolean isSmallerThanZero = taskNum < 0;
+        boolean isGreaterThanSize = taskNum > tasks.size() + 1;
+        if (isSmallerThanZero || isGreaterThanSize) {
             throw new DukeException("\u2639 OOPS!!! The index to mark as done cannot be less than 0 or "
                     + "greater than the length of the list.");
         }
