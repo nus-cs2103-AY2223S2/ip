@@ -124,7 +124,8 @@ public class Command {
         index--;
         Task removedTask = LIST.get(index);
         LIST.remove(index);
-        return UI.showDelete(removedTask);
+        return UI.showDelete(removedTask)  + "your tasklist has been updated:\n"
+                + UI.showTaskList(LIST);
     }
 
     /**
