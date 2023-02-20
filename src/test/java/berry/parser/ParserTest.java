@@ -1,14 +1,15 @@
 package berry.parser;
 
+import static org.junit.Assert.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import berry.command.Command;
 import berry.command.ExitCommand;
 import berry.command.ListCommand;
 import berry.exception.BerryException;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     private Parser parser;
