@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import fideline.exception.CorruptedDataFileException;
 import fideline.exception.UnableToCreateDataFileException;
+import fideline.user.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

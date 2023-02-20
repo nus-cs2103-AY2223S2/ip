@@ -1,5 +1,7 @@
-package fideline;
+package fideline.user;
 
+import fideline.Fideline;
+import fideline.user.DialogBox;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

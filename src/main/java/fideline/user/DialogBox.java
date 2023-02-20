@@ -1,4 +1,4 @@
-package fideline;
+package fideline.user;
 
 import java.io.IOException;
 import java.util.Collections;

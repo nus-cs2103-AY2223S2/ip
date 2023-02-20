@@ -2,6 +2,32 @@
 
 Fideline is a chatbot that records and manages tasks.
 
+
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [Commands](#commands)
+  - [`todo` - Adding a TODO task](#todo---adding-a-todo-task)
+  - [`deadline` - Adding a DEADLINE task](#deadline---adding-a-deadline-task)
+  - [`event` - Adding an EVENT task](#event---adding-an-event-task)
+  - [`mark` - Marking a task as complete](#mark---marking-a-task-as-complete)
+  - [`unmark` - Reverting a task back to unmarked](#unmark---reverting-a-task-back-to-unmarked)
+  - [`list` - Showing all tasks](#list---showing-all-tasks)
+  - [`find` - Finding tasks with keyword](#find---finding-tasks-with-keyword)
+  - [`delete` - Deleting a task](#delete---deleting-a-task)
+  - [`bye` - Terminating the program](#bye---terminating-the-program)
+
+## Quick Start
+
+1. Have Java 11 or above installed on your computer.
+2. Download the latest jar from [here](https://github.com/niekis/ip)
+3. Open your command terminal, and navigate to the folder with the jar file. 
+4. Use the ```java -jar fideline.jar``` command to run the application. 
+5. A GUI similar to below should appear in a few seconds:
+
+<div style="text-align: center;">
+  <img src="./ProgStart.png" width="499" alt="Start Up Screenshot">
+</div>
+
 ## Features 
 
 - Add new tasks (`TODO`, `DEADLINE`, `EVENT`)
