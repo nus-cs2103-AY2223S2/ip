@@ -16,7 +16,7 @@
 
 1. Ensure that you have Java 11 installed on your device
 2. Get the JAR file from [here](https://github.com/joytqt-1202/ip/releases/download/A-Release/duke.jar)
-3. ENJOY DUKE!
+3. Double click the downloaded jar file to... ENJOY DUKE!
 
 ## Features 
 
