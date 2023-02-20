@@ -51,7 +51,7 @@ public class TaskList {
             output += taskList.get(i) + "\n";
         }
         if(output.equals("")){
-            output += "Hold up son, you ain't got any tasks yet.";
+            output += "[E] Hold up son, you ain't got any tasks yet.";
         }
         return output;
     }
@@ -214,7 +214,7 @@ public class TaskList {
             }
         }
         if(matches == 0){
-            return "Dag Nabbit! I couldn't find any tasks.";
+            return "[E] Dag Nabbit! I couldn't find any tasks.";
         }
         return output;
     }
