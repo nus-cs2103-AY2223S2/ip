@@ -9,17 +9,13 @@ import commands.ToDoCommand;
 import commands.DeadlineCommand;
 import commands.EventCommand;
 import commands.DeleteCommand;
-import commands.InvalidCommand;
 import commands.FindCommand;
+import commands.HelpCommand;
 
 public class Parser {
     // enum for commands
     private enum commands {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
-    }
-    
-    private commands getCommand(String input) {
-        return commands.valueOf(input.split(" ")[0].toUpperCase());
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, HELP
     }
 
     /**
@@ -27,8 +23,8 @@ public class Parser {
      * @param input The input from the user.
      * @return The appropriate command.
      */
-    public Command parse(String input) {
-        switch (getCommand(input)) {
+    public Command parse(String input) throws IllegalArgumentException {
+        switch (commands.valueOf(input.split(" ")[0].toUpperCase())) {
         case BYE:
             return new ByeCommand(input);
         case LIST:
@@ -47,8 +43,10 @@ public class Parser {
             return new DeleteCommand(input);
         case FIND:
             return new FindCommand(input);
+        case HELP:
+            return new HelpCommand(input);
         default:
-            return new InvalidCommand(input);
+            throw new IllegalArgumentException();
         }
     }
 }

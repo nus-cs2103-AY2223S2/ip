@@ -1,5 +1,6 @@
 package baymax;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
@@ -8,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import javax.swing.text.PlainDocument;
 
 
 /**
@@ -33,7 +36,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        ui.welcomeMessage();
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.welcomeMessage(), dukeImage));
     }
 
@@ -54,5 +56,16 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            new java.util.Timer().schedule(new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        Platform.exit();
+                        System.exit(0);
+                    }
+                },
+                1000
+            );
+        }
     }
 }
