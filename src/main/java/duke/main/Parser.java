@@ -83,14 +83,18 @@ public class Parser {
                 task.printDelete(allTasks.getAllTasks());
                 allTasks.deleteTask(taskIndex);
                 storage.saveListToFile(command, task, allTasks);
-            } else if (command.startsWith("find deadlines or events on")) {
+            } else if (command.startsWith("show deadlines or events on")) {
                 DukeException.emptyCommandException(command);
-                String[] str = command.split("find deadlines or events on ");
+                String[] str = command.split("show deadlines or events on ");
                 String dateTime = str[1];
                 DateTimeFormatter dateTimeFormatter2 =
                         DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate dateTime1 = LocalDate.parse(dateTime, dateTimeFormatter2);
                 ui.printDeadlineOrEventsOnDay(dateTime1, allTasks);
+            } else if (command.startsWith("find")) {
+                String[] str = command.split("find");
+                String keyword = str[1];
+                ui.printFindResults(keyword, allTasks);
             } else if (command.equals("bye")){
                 boolean saidBye = true;
                 ui.printByeMessage();

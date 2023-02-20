@@ -72,20 +72,60 @@ public class Ui {
             if (task.getTaskType().equals("[D]") && task.getDate().equals(dateTime)) {
                 time = " (by: "
                         + task.getDeadline().format(dateTimeFormatter1) + ")";
+                System.out.println("\t " + numbering + "."
+                        + task.getTaskType() + task.getTaskStatus() + " "
+                        + task.getTask() + time);
+                numbering += 1;
             } else if (task.getTaskType().equals("[E]") && task.getDate().equals(dateTime)) {
                 time = " (from: "
                         + task.getEventStartTime().format(dateTimeFormatter1)
                         + " to: "
                         + task.getEventEndTime().format(dateTimeFormatter1)
                         + ")";
-            } else {
-                continue;
+                System.out.println("\t " + numbering + "."
+                        + task.getTaskType() + task.getTaskStatus() + " "
+                        + task.getTask() + time);
+                numbering += 1;
             }
-            System.out.println("\t " + numbering + "."
-                    + task.getTaskType() + task.getTaskStatus() + " "
-                    + task.getTask() + time);
-            numbering += 1;
         }
+        System.out.println("\t____________________________________________________________");
+    }
+
+    /**
+     * Prints a list of tasks contains keyword.
+     */
+    public void printFindResults(String keyword, TaskList allTasks) {
+        DateTimeFormatter dateTimeFormatter1 =
+                DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\t Here are the matching tasks in your list:");
+        int numbering = 1;
+        for (int i = 0; i < allTasks.getNumberOfTask(); i++) {
+            Task task = allTasks.getTask(i);
+            String time = "";
+            if (task.getTaskType().equals("[D]") &&
+                    task.getTask().contains(keyword)) {
+                time = " (by: "
+                        + task.getDeadline().format(dateTimeFormatter1) + ")";
+                System.out.println("\t " + numbering + "."
+                        + task.getTaskType() + task.getTaskStatus() + " "
+                        + task.getTask() + time);
+                numbering += 1;
+            } else if (task.getTaskType().equals("[E]") &&
+                    task.getTask().contains(keyword)) {
+                time = " (from: "
+                        + task.getEventStartTime().format(dateTimeFormatter1)
+                        + " to: "
+                        + task.getEventEndTime().format(dateTimeFormatter1)
+                        + ")";
+                System.out.println("\t " + numbering + "."
+                        + task.getTaskType() + task.getTaskStatus() + " "
+                        + task.getTask() + time);
+                numbering += 1;
+            }
+        }
+
+        System.out.println("\t____________________________________________________________");
     }
 
     /**
