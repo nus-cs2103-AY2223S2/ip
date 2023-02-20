@@ -27,7 +27,6 @@ public class ByeCommand extends Command {
                     + "Check your settings before running Duke to try again!";
         }
         taskList.clear();
-        return "Bye! Hope you enjoyed using Duke! \n Your list awaits your return!\n\n"
-                + "This window will close in 10 seconds... :(";
+        return "Bye! Hope you enjoyed using Duke! \n Your list awaits your return!";
     }
 }
