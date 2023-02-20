@@ -43,4 +43,15 @@ public class TaskList {
     public int size() {
         return this.tasks.size();
     }
+
+    public TaskList find(String userInput) {
+        TaskList filteredTasks = new TaskList();
+        for (int i = 0; i < tasks.size(); i++) {
+            String currentTask = this.tasks.get(i).getDescription();
+            if (currentTask.contains(userInput)) {
+                filteredTasks.add(this.tasks.get(i));
+            }
+        }
+        return filteredTasks;
+    }
 }

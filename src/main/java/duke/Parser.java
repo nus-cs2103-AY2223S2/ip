@@ -6,6 +6,7 @@ import duke.command.AddTodoCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -52,6 +53,10 @@ public class Parser {
             String userInput = Command.replaceFirst("delete", "").trim();
             int taskNum = errorDeleteIndex(userInput);
             return new DeleteCommand(taskNum);
+        } else if (isFindCommand(Command)){
+            String userInput = Command.replaceFirst("find", "").trim();
+            errorFind(userInput);
+            return new FindCommand(userInput);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -94,10 +99,16 @@ public class Parser {
 
     private static int errorMarkOrUnmarkOrDeleteIndex(String userInput) throws DukeException {
         if (userInput.isEmpty() || isNotNumeric(userInput)) {
-            throw new DukeException("☹ OOPS!!! The index to remove cannot be empty or not an integer.");
+            throw new DukeException("☹ OOPS!!! The content of find cannot be empty.");
         }
 
         return Integer.parseInt(userInput);
+    }
+
+    private static void errorFind(String userInput) throws DukeException {
+        if (userInput.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! The index to remove cannot be empty or not an integer.");
+        }
     }
 
     private static boolean isNotNumeric(String input) {
@@ -166,5 +177,9 @@ public class Parser {
 
     public static boolean isDeleteCommand(String UserInput) {
         return UserInput.startsWith("delete");
+    }
+
+    public static boolean isFindCommand(String UserInput) {
+        return UserInput.startsWith("find");
     }
 }
