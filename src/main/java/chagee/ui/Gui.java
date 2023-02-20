@@ -1,10 +1,10 @@
 package chagee.ui;
 
+import chagee.controller.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import chagee.controller.MainWindow;
 
 
 /**
