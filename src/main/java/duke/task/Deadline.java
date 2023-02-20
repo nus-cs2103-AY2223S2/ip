@@ -73,6 +73,8 @@ public class Deadline extends Task {
 
     /**
      * Returns that this is a deadline task type.
+     *
+     * @return Type of task.
      */
     @Override
     public String getTaskType() {
@@ -80,7 +82,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get task deadline.
+     * Gets task deadline.
+     *
+     * @return Date and time of deadline.
      */
     @Override
     public LocalDateTime getDeadline() {
@@ -88,7 +92,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get date of task deadline.
+     * Gets date of task deadline.
+     *
+     * @return Date of deadline.
      */
     @Override
     public LocalDate getDate() {

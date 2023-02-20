@@ -82,6 +82,8 @@ public class Event extends Task {
 
     /**
      * Returns that this is an event task type.
+     *
+     * @return Task type.
      */
     @Override
     public String getTaskType() {
@@ -90,6 +92,8 @@ public class Event extends Task {
 
     /**
      * Get the starting time of event.
+     *
+     * @return Date and time of event start time.
      */
     @Override
     public LocalDateTime getEventStartTime() {
@@ -98,6 +102,8 @@ public class Event extends Task {
 
     /**
      * Get the ending time of event.
+     *
+     * @return Date and time of event end time.
      */
     @Override
     public LocalDateTime getEventEndTime() {
@@ -106,6 +112,8 @@ public class Event extends Task {
 
     /**
      * Get the date of event.
+     *
+     * @return Date of event.
      */
     @Override
     public LocalDate getDate() {

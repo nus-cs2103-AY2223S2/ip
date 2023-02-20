@@ -55,13 +55,19 @@ public class Task {
 
     /**
      * Gets task number.
+     *
+     * @return Index of task on task list.
      */
     public int getTaskNumber() {
         return this.taskNumber;
     }
 
     /**
-     * Gets type of task: Todo, Deadline, Event.
+     * Gets type of task.
+     * Returns empty string as parent class is not a specific type of
+     * task.
+     *
+     * @return String of task type.
      */
     public String getTaskType() {
         return "";
@@ -69,6 +75,8 @@ public class Task {
 
     /**
      * Gets whether task is done.
+     *
+     * @return String of brackets that fills with X if task is done.
      */
     public String getTaskStatus() {
         if (!this.taskStatus) {
@@ -80,30 +88,59 @@ public class Task {
 
     /**
      * Gets task.
+     *
+     * @return Task.
      */
     public String getTask() {
         return this.task;
     }
 
+    /**
+     * Gets deadline.
+     * Returns null as parent class does not require deadlines.
+     *
+     * @return Date and time of deadline.
+     */
     public LocalDateTime getDeadline() {
         return null;
     }
 
+    /**
+     * Gets event start time.
+     * Returns null as parent class does not have a start time.
+     *
+     * @return Date and time of event start time.
+     */
     public LocalDateTime getEventStartTime() {
         return null;
     }
 
+    /**
+     * Gets event start time.
+     * Returns null as parent class does not have an end time.
+     *
+     * @return Date and time of event end time.
+     */
     public LocalDateTime getEventEndTime() {
         return null;
     }
 
+    /**
+     * Gets task date.
+     * Returns null as parent class does not have a date required.
+     *
+     * @return Date of task.
+     */
     public LocalDate getDate() {
         return null;
     }
 
     /**
-     * To override equals such that same type of object can pass Junit
-     * test.
+     * Overrides default equal method such that same type of object
+     * can pass Junit test.
+     *
+     * @param o Object to be compared to.
+     * @return Boolean of whether object has same class.
      */
     @Override
     public boolean equals(Object o) {
