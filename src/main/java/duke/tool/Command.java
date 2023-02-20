@@ -1,6 +1,8 @@
 package duke.tool;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.task.Task;
 import duke.ui.Ui;
@@ -62,8 +64,10 @@ public class Command {
      * @return The successful or unsuccessful ui notification message.
      */
     public String add_task(Task task) {
-        if (this.check_duplicates(task)) {
-            return ui.print_custom_msg("Duplicate tasks detected! \n\t" + task);
+        ArrayList<Task> dupTasks = check_duplicates(task);
+        if (!(dupTasks.isEmpty())) {
+            return ui.print_custom_msg("Duplicate tasks detected! \n\t")
+                    + ui.print_task_list(dupTasks);
         }
         tasks.add(task);
         return ui.print_add_msg(task, tasks.size());
@@ -105,13 +109,11 @@ public class Command {
         return ui.print_task_list(matchedTasks);
     }
 
-    private boolean check_duplicates(Task task) {
+    private ArrayList<Task> check_duplicates(Task task) {
         String taskDescr = task.getDescription();
-        for (Task curTask : tasks) {
-            if (curTask.getDescription().equals(taskDescr)) {
-                return true;
-            }
-        }
-        return false;
+        List<Task> dupTasks = tasks.stream().filter((curTask) -> {
+            return curTask.getDescription().equals(taskDescr);
+        }).collect(Collectors.toList());
+        return new ArrayList<>(dupTasks);
     }
 }
