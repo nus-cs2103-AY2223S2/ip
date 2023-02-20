@@ -144,6 +144,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("Chad - Your Personal Digital Assistant");
             stage.setScene(scene);
             this.chad = new Chad();
             fxmlLoader.<MainWindow>getController().setChad(chad);
