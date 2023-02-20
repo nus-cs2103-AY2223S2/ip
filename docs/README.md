@@ -45,6 +45,7 @@ Example of usage:
 'deadline return book /by 2019-06-15`
 
 Expected outcome:
+
 Task with the stipulated deadline will be added to the list of tasks
 
 ```
