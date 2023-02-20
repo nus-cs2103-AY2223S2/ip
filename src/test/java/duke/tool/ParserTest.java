@@ -1,17 +1,16 @@
 package duke.tool;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import duke.exception.DukeException;
-import duke.ui.Ui;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
+import duke.ui.Ui;
 
 public class ParserTest {
     @Test
