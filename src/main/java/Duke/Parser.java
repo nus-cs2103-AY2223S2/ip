@@ -1,14 +1,11 @@
 package Duke;
 
+import Duke.command.*;
+import Duke.Exceptions.CommandNotFoundException;
 import Duke.Exceptions.InvalidIndexException;
 import Duke.Storage.Storage;
-import Duke.Tasks.Task;
-
-import Duke.Exceptions.CommandNotFoundException;
-import Duke.command.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Parser {
     private static TaskList t;
@@ -91,6 +88,9 @@ public class Parser {
             ArrayList<Task> filteredTasks = t.findRelevantTasks(splitDescription);
             System.out.println(filteredTasks);
             cmd = new FindCommand(splitDescription);
+            break;
+        case "REMIND":
+            cmd = new ReminderCommand();
             break;
         default:
             throw new CommandNotFoundException("I'm sorry, but I don't know what that means :-(");

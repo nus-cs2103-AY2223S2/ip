@@ -1,6 +1,7 @@
 package Duke.Tasks;
 
 import Duke.Exceptions.CommandNotFoundException;
+
 public class Task {
     protected String description;
     protected boolean isComplete;
@@ -16,6 +17,10 @@ public class Task {
 
     public boolean isMatch(String keywords) {
         return this.description.contains(keywords);
+    }
+
+    public boolean isDueSoon() {
+        return false;
     }
 
     public static Task strToTask(String strTask) throws CommandNotFoundException {

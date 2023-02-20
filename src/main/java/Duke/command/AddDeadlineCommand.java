@@ -13,6 +13,11 @@ public class AddDeadlineCommand extends Command {
     private final String description;
     private final String dueDate;
 
+    /**
+     * Constructor that uses to create Deadline instance.
+     * @param input The information about the task details which includes the
+     *              description and due date.
+     */
     public AddDeadlineCommand(String input) {
         String[] splitDesWithBy = input.split(" /by ", 2);
         this.description = splitDesWithBy[0].trim();

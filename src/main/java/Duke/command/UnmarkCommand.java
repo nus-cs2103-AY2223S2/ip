@@ -19,7 +19,7 @@ public class UnmarkCommand extends Command {
             DukeMainExceptions {
         try {
             Task task = tasks.unmark(this.index);
-            return ui.printMarked(task);
+            return ui.printUnmarked(task);
         } catch (IndexOutOfBoundsException exception) {
             throw new InvalidIndexException(tasks.getSize());
         }
