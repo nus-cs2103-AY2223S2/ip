@@ -25,10 +25,10 @@ public class StorageTest {
         try {
             ArrayList<Task> loadedTasks = testStorage.loadTasks();
 
-            assertEquals(loadedTasks.get(0).toString(), "[T][] do homework");
-            assertEquals(loadedTasks.get(1).toString(), "[T][X] read book");
-            assertEquals(loadedTasks.get(2).toString(), "[D][X] hand in assignment (by: Dec 2 2019 1822)");
-            assertEquals(loadedTasks.get(3).toString(), "[E][] project meeting (from: May 4 2022 1900 to: May 4 2022 2000)");
+            assertEquals("[T][] do homework", loadedTasks.get(0).toString());
+            assertEquals("[T][X] read book", loadedTasks.get(1).toString());
+            assertEquals("[D][X] hand in assignment (by: Dec 2 2019 1822)", loadedTasks.get(2).toString());
+            assertEquals("[E][] project meeting (from: May 4 2022 1900 to: May 4 2022 2000)", loadedTasks.get(3).toString());
 
 
         } catch (FileNotFoundException e) {
@@ -54,10 +54,10 @@ public class StorageTest {
 
         try {
             Scanner sc = new Scanner(new File(testFilePath));
-            assertEquals(sc.nextLine(), "T|0|do homework");
-            assertEquals(sc.nextLine(), "T|1|read book");
-            assertEquals(sc.nextLine(), "D|1|hand in assignment|2/12/2019 1822");
-            assertEquals(sc.nextLine(), "E|0|project meeting|4/5/2022 1900|4/5/2022 1200");
+            assertEquals("T|0|do homework", sc.nextLine());
+            assertEquals( "T|1|read book", sc.nextLine());
+            assertEquals("D|1|hand in assignment|2/12/2019 1822", sc.nextLine());
+            assertEquals("E|0|project meeting|4/5/2022 1900|4/5/2022 1200", sc.nextLine());
 
         } catch (IOException e) {
             // file exists

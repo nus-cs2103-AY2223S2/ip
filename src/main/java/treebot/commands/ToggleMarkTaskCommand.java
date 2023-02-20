@@ -28,9 +28,16 @@ public class ToggleMarkTaskCommand extends Command implements IUndoable {
     }
     @Override
     public String execute() {
-        this.markedTask = !isMarkAsDone
-                ? taskList.unmarkTask(index)
-                : taskList.markTask(index);
+
+        try {
+            this.markedTask = !isMarkAsDone
+                    ? taskList.unmarkTask(index)
+                    : taskList.markTask(index);
+        } catch (IndexOutOfBoundsException e) {
+            return "Given index is out of range of taskList!!";
+        }
+
+
         try {
             storage.saveTasks(taskList.getArrayListCopy());
             return toResultString();

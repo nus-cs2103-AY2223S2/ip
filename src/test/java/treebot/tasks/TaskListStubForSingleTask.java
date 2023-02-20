@@ -39,12 +39,14 @@ public class TaskListStubForSingleTask implements ITaskList {
 
     @Override
     public Task markTask(int index) {
-        return null;
+        this.task.markAsDone();
+        return this.task;
     }
 
     @Override
     public Task unmarkTask(int index) {
-        return null;
+        this.task.markAsUndone();
+        return this.task;
     }
 
     @Override

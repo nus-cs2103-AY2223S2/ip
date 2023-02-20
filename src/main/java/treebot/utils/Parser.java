@@ -187,7 +187,9 @@ public class Parser {
            return false;
         }
         String[] commandSplit = fullCommand.split("\\s+", 2);
-        return !commandSplit[1].split(" /by ")[0].isEmpty();
+        String[] deadlineSplit = commandSplit[1].split("/by", 2);
+
+        return !deadlineSplit[0].isEmpty();
 
     }
 
@@ -198,7 +200,9 @@ public class Parser {
 
         String[] commandSplit = fullCommand.split("\\s+", 2);
 
-        return !commandSplit[1].split(" /from ", 2)[0].isEmpty();
+        String[] rangeSplit = commandSplit[1].split("/from", 2);
+
+        return !rangeSplit[0].isEmpty();
 
     }
 

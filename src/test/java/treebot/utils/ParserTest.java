@@ -64,6 +64,14 @@ public class ParserTest {
     }
 
     @Test
+    void deadline_onlyTaskDescriptionEmpty_exceptionThrown() {
+        String input = "deadline /by 5/7/1999 1800";
+        Exception e = assertThrows(TreeBotException.class,
+                () -> new Parser().parse(input));
+        assertEquals("Deadline task description cannot be empty", e.getMessage());
+    }
+
+    @Test
     void event_emptyTaskDescription_exceptionThrown() {
         String input = "event";
         Exception e = assertThrows(TreeBotException.class,
@@ -86,6 +94,17 @@ public class ParserTest {
         assertEquals("Event task datetime range is not valid", e.getMessage());
 
     }
+
+    @Test
+    void event_onlyTaskDescriptionNotSpecified_exceptionThrown() {
+        String input = "event /from 5/7/1999 1800 /to 5/7/1999 1900";
+        Exception e = assertThrows(TreeBotException.class,
+                () -> new Parser().parse(input));
+
+        assertEquals("Event task description cannot be empty", e.getMessage());
+    }
+
+
     @Test
     void event_startDateNotSpecified_exceptionThrown() {
         String input = "event some task /to 5/7/1999 1800";
@@ -120,7 +139,7 @@ public class ParserTest {
             Command c = new Parser().parse(input);
             c.injectContext(testTaskList, new StorageStub(), null);
             c.execute();
-            assertEquals(testTaskList.getPrintableTasks(), "[T][] homework");
+            assertEquals("[T][] homework", testTaskList.getPrintableTasks());
 
         } catch (Exception e) {
             fail();
@@ -135,7 +154,7 @@ public class ParserTest {
             Command c = new Parser().parse(input);
             c.injectContext(testTaskList, new StorageStub(), null);
             c.execute();
-            assertEquals(testTaskList.getPrintableTasks(), "[D][] do homework (by: Jul 5 1999 1800)");
+            assertEquals("[D][] do homework (by: Jul 5 1999 1800)", testTaskList.getPrintableTasks());
 
         } catch (Exception e) {
             fail();
@@ -150,14 +169,11 @@ public class ParserTest {
             Command c = new Parser().parse(input);
             c.injectContext(testTaskList, new StorageStub(), null);
             c.execute();
-            assertEquals(testTaskList.getPrintableTasks(), "[E][] project meeting (from: Jul 5 1999 1800 to: Jul 5 1999 1900)");
+            assertEquals("[E][] project meeting (from: Jul 5 1999 1800 to: Jul 5 1999 1900)", testTaskList.getPrintableTasks());
 
         } catch (Exception e) {
             fail();
         }
     }
-
-
-
 
 }

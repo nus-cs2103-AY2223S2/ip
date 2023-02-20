@@ -8,23 +8,20 @@ import treebot.tasks.TaskListStubForSingleTask;
 import treebot.tasks.Todo;
 import treebot.utils.StorageStub;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeleteCommandTest {
 
 
     @Test
-    void deleteTaskCommand_indexOutOfRange_exceptionHandled() {
+    void deleteTaskCommand_indexOutOfBounds_exceptionHandled() {
         ITaskList taskList = new TaskListStubForIndexableCommands();
         int sizeLimit = taskList.getSize();
         Command c = new DeleteCommand(sizeLimit + 1);
         c.injectContext(taskList, new StorageStub(), null);
 
         String expected = "Given index is out of range of taskList!!";
-        assertEquals(c.execute(), expected);
+        assertEquals(expected, c.execute());
 
     }
 
@@ -39,7 +36,7 @@ public class DeleteCommandTest {
                 "[T][] Dummy todo\n" +
                 "Now you have 5 tasks remaining.";
 
-        assertEquals(c.execute(), expected);
+        assertEquals(expected, c.execute());
 
     }
 
@@ -52,14 +49,10 @@ public class DeleteCommandTest {
         c.execute();
 
         assert taskList.getSize() == 0 : "delete command executes correctly";
-        // save to history
-        Deque<IUndoable> history = new ArrayDeque<>();
-        history.addFirst((IUndoable) c);
 
         ((IUndoable) c).undo();
 
-        assertEquals(taskList.getPrintableTasks(), "[T][] Dummy todo undo delete");
-
+        assertEquals("[T][] Dummy todo undo delete", taskList.getPrintableTasks());
 
     }
 
