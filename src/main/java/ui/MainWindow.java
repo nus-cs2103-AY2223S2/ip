@@ -68,17 +68,7 @@ public class MainWindow {
 
         if (input.equalsIgnoreCase("bye")) {
             inputContainer.getChildren().clear();
-            
-            Platform.runLater(() -> {
-                long mTime = System.currentTimeMillis();
-                long end = mTime + 10000;
-    
-                while (mTime < end) {
-                    mTime = System.currentTimeMillis();
-                }
-                Platform.exit();
-            });
-           
+
         }
     }
 }

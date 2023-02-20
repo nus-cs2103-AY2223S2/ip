@@ -2,6 +2,7 @@
 
 <img src="Ui.png" align="right"/>
 
+* [Quick Start](#quick-start)
 * [Features](#features)
 * [Usage](#usage)
     * [List](#list---lists-all-tasks)
@@ -11,6 +12,10 @@
     * [Search](#find-check---searches-through-task-list)
     * [Exit](#bye---say-bye-to-duke)
 
+## Quick Start
+
+1) Ensure that you have Java 11 installed on your device
+2) 
 
 ## Features 
 
@@ -24,7 +29,6 @@ To get this list of tasks again, either scroll up or use the [`Check` command](#
 ## Usage
 
 ### `List` - Lists all tasks
-
 Lists all statuses of tasks that are currently in the overall task list
 
 Syntax: `list`
@@ -35,12 +39,10 @@ Outcome: numbered of iists of tasks and status of whether each task is marked
 <br>
 
 ### `Todo`, `Deadline`, `Event` - Add task of specified type
-
 Adds a Todo, Deadline or Event task to the task list
 
 
 #### `Todo` - add task of type todo
-
 Adds a new simple task with just a description
 
 Syntax: `Todo <description>`
@@ -51,7 +53,6 @@ Outcome: task with description "read notes" is added into task list
 
 
 #### `Deadline` - add task of type deadline
-
 Adds a new task with a description and a deadline to complete by
 
 Syntax: `Deadline <description> /<yyyy-MM-ddThh:mm>`
@@ -62,7 +63,6 @@ Outcome: task with description "cs2103 iP Submission" and deadline of 17 Feb 202
 
 
 #### `Event` - add task of type event
-
 Adds a new task with a description that spans over 2 dates
 
 Syntax: `Event <description> /<yyyy-MM-ddThh:mm> /<yyyy-MM-ddThh:mm>`
@@ -75,12 +75,10 @@ Outcome: task with description "iP Extension" spanning from 18 Feb 2023, 12am to
 <br>
 
 ### `Mark`, `Unmark` - Mark task of specified index as completed or not completed
-
 Marks task in task list as complete or incomplete
 
 
 #### `Mark` - mark task as complete
-
 Marks an existing task at specified index of the overall task list as complete.
 
 Prompt differs if the task was already marked as complete before this command.
@@ -121,7 +119,6 @@ U - `Mark 1`
 </details>
 
 #### `Unmark` - mark as incomplete
-
 Unmarks an existing task at specified index of the overall task list as incomplete.
 
 Prompt differs if the task was already marked as incomplete before this command.
@@ -165,7 +162,6 @@ U - `Unmark 2`
 <br>
 
 ### `Delete` - Deletes a task at a specified index
-
 Deletes an existing task from the current task list
 
 Syntax: `Delete <index>`
@@ -188,12 +184,10 @@ U - `Delete 3`
 <br>
 
 ### `Find`, `Check` - Searches through task list
-
 Searches through the task list and returns a list of tasks that match the search term
 
 
 #### `Check` - search using date
-
 Searches for tasks that are due on a date (deadline task) and span over a specific date (event task)
 
 Syntax: `Check <yyyy-MM-dd>`
@@ -204,7 +198,6 @@ Outcome: finds all deadline tasks that are due on 12 FEB 2023 and all event task
 
 
 #### `Find` - search using description
-
 Searches for tasks that contain a specific search term in the task description
 
 Syntax: `Find <search term>`
@@ -228,7 +221,6 @@ U - `Find famil`
 <br><br>
 
 ### `Bye` - say bye to duke :(
-
 Ends current session
 
 Syntax: `Bye`
