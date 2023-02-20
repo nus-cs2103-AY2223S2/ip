@@ -10,7 +10,7 @@ public class UnmarkCommand extends Command {
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader) {
-        taskList.unmarkTask(index);
-        return null;
+        return taskList.unmarkTask(index);
+
     }
 }

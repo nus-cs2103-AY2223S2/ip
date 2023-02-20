@@ -10,7 +10,6 @@ public class DeleteCommand extends Command{
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader) {
-        taskList.deleteTask(index);
-        return null;
+        return taskList.deleteTask(index);
     }
 }

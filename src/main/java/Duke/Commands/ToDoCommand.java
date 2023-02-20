@@ -10,8 +10,7 @@ public class ToDoCommand extends Command {
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader) {
-        taskList.addTask(this.name);
-        return null;
+        return taskList.addTask(this.name);
     }
 
 }

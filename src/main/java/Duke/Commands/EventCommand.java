@@ -15,7 +15,6 @@ public class EventCommand extends Command{
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader) {
-        taskList.addTask(this.name,this.start,this.end);
-        return null;
+        return taskList.addTask(this.name,this.start,this.end);
     }
 }

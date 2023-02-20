@@ -13,7 +13,7 @@ public class DeadlineCommand extends Command {
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader) {
-        taskList.addTask(this.name,this.end);
-        return null;
+        return taskList.addTask(this.name,this.end);
+
     }
 }
