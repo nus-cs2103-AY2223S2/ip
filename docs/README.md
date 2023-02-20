@@ -200,5 +200,31 @@ Ok, I've marked this task as not done yet:
 [E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
 ```
 
+### `sort` - sorts all tasks 
+
+Sort all tasks by Deadlines, Events, and Todos
+The tasks are sorted by alphabetical order within each kind of task
+
+Example of usage: 
+```
+sort
+```
+
+Expected outcome:
+
+The tasks will be sorted by alphabetical order within each kind of task
+```
+Sorted!
+```
+If we input 'list' again, we get 
+
+```
+Tasks: 
+1.[E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
+2.[D][ ] return book (by: Jun 15 2019)
+3.[T][ ] borrow book
+4.[T][ ] join sports club
+```
+
 
 
