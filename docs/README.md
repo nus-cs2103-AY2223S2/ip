@@ -14,6 +14,7 @@
 
 ### Feature - Adding Tasks
 *Adds a task into the list*
+
 #### Usage - Todo
 Command:
 ```
@@ -22,7 +23,8 @@ Eg. todo Read Book
 ```
 
 Expected output:
-```Got it. I've added this task: 
+```
+Got it. I've added this task: 
 [T][] Read Book
 Priority:
 Now you have 1 tasks in the list.
@@ -58,7 +60,8 @@ Now you have 3 tasks in the list.
 ### Feature - List
 *Displays all tasks in your list*
 #### Usage
-Command: `list`
+Command: 
+`list`
 
 Expected output:
 ```Here are the tasks in your list: 
