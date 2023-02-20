@@ -58,7 +58,7 @@ Now you have 1 task in the list.
 
 Adds a deadline task to the task-list
 
-Format: `deadline (DESCRIPTION) /by (DATE) (TIME)
+Format: `deadline (DESCRIPTION) /by (DATE) (TIME)`
 
 ```
 * `DATE` should be in yyyy-MM-dd format.
