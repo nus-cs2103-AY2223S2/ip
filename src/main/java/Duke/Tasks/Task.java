@@ -44,7 +44,7 @@ public abstract class Task {
 
     public String getTags() {
         String output = "tags: ";
-        for(int i = 0; i< tags.size(); i++) {
+        for(int i = 0; i < tags.size(); i++) {
             output+="[" + tags.get(i)+"] ";
         }
         output.strip();

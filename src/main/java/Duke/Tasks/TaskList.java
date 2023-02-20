@@ -165,8 +165,10 @@ public class TaskList {
             System.out.println(parameters[0]);
             throw new ProgramException("Save file data corrupted.");
         }
+        parameters[1] = parameters[1].replace("[","").replace("]","");
         parameters = parameters[1].split(" ");
         Collections.addAll(tags,parameters);
+        return tags;
     }
 
     public void fromSave(String saveData) throws ProgramException {

@@ -60,7 +60,7 @@ public class Handler{
         }
         parameters = parameters[1].split("/by");
         if(parameters.length<2){
-            throw new ProgramException("Bad format! /by command needed to set the deadline!");
+            throw new ProgramException("Bad format! /by command needed with deadline!");
         }
         if(parameters.length>2){
             throw new ProgramException("Bad format! Use /by only as a command!");
@@ -78,7 +78,7 @@ public class Handler{
         }
         parameters = parameters[1].split("/from");
         if(parameters.length<2){
-            throw new ProgramException("Bad format! /from command needed to set the deadline!");
+            throw new ProgramException("Bad format! /from command needed with start time!");
         }
         if(parameters.length>2){
             throw new ProgramException("Bad format! Use /from only as a command!");
@@ -86,7 +86,7 @@ public class Handler{
         String name = parameters[0].strip();
         parameters = parameters[1].split("/to");
         if(parameters.length<2){
-            throw new ProgramException("Bad format! /to command needed to set the deadline!");
+            throw new ProgramException("Bad format! /to command needed with end time!");
         }
         if(parameters.length>2){
             throw new ProgramException("Bad format! Use /to only as a command!");
