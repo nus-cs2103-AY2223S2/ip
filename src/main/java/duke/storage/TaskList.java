@@ -17,36 +17,18 @@ import java.util.Map;
 
 public class TaskList {
     private final ArrayList<Task> list;
-    private final HashMap<String, HashSet<Task>> map = new HashMap<>();
     private final Parser parser = new Parser();
 
     public TaskList() {
         this.list = new ArrayList<>();
     }
-
-    public void addFind(String description, Task task) {
-        String[] words = description.split(" ");
-        for (String word: words) {
-            if (!map.containsKey(word)) {
-                map.put(word, new HashSet<>());
-            }
-            map.get(word).add(task);
-        }
-    }
-
-    public void removeFind(Task task) {
-        for (Map.Entry<String, HashSet<Task>> set : map.entrySet()) {
-            set.getValue().remove(task);
-        }
-    }
     
     public String find(String word) {
         String output = "";
-        if (!map.containsKey(word)) {
-            return "";
-        }
-        for (Task task: map.get(word)) {
-            output += (task.toString() + "\n");
+        for (Task task: list) {
+            if (task.getDescription().contains(word)) {
+                output += (task + "\n");
+            }
         }
         return output;
     }
@@ -82,7 +64,6 @@ public class TaskList {
      */
     public void add(String input) {
         Task newTask = parser.parseTask(input);
-        addFind(newTask.getDescription(), newTask);
         list.add(newTask);
     }
     /**
@@ -91,7 +72,6 @@ public class TaskList {
      * @param num Index of the task to be deleted.
      */
     public void delete(int num) {
-        removeFind(list.get(num - 1));
         list.remove(num - 1);
     }
 

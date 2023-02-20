@@ -96,7 +96,6 @@ public class Storage {
                 if (currLine[1].equals("X")) {
                     newTask.mark();
                 }
-                list.addFind(description, newTask);
                 list.add(newTask);
             }
         }
