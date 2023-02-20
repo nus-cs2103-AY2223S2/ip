@@ -1,6 +1,7 @@
 package Duke.Tasks;
 
 import Duke.Exceptions.CommandNotFoundException;
+
 public class Task {
     protected String description;
     protected boolean isComplete;

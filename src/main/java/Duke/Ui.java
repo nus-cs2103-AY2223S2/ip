@@ -3,7 +3,6 @@ package Duke;
 import Duke.Tasks.Task;
 
 public class Ui {
-    private static final String LINES = "\t--------------------------\n";
     public Ui() {
     }
 
@@ -23,13 +22,13 @@ public class Ui {
     }
 
     public String printMarked(Task task) {
-        String output = String.format("Nice! I've marked this task as done:%s", task);
+        String output = String.format("Nice! I've marked this task as done:\n%s", task);
         System.out.println(output);
         return output;
     }
 
     public String printUnmarked(Task task) {
-        String output = String.format("Nice! I've marked this task as not done yet:%s", task);
+        String output = String.format("Nice! I've marked this task as not done yet:\n%s", task);
         System.out.println(output);
         return output;
     }
