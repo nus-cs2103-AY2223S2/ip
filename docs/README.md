@@ -1,6 +1,6 @@
 # User Guide
 
-<img src="Ui.png" style="align:right"/>
+<img src="Ui.png" align="right"/>
 
 * [Features](#features)
 * [Usage](#usage)
