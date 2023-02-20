@@ -1,1 +1,5 @@
-do this
+E | 0 | project meeting | HIGH | Mon 5pm | 8pm
+D | 1 | return book | MEDIUM | 2023-04-05
+T | 1 | do this | LOW
+D | 0 | return book | LOW | 2023-05-05
+T | 0 | submit project | LOW
