@@ -12,7 +12,7 @@ public class Duke {
     public static File fileAddress = new File(System.getProperty("user.dir") + System.getProperty("file.separator")
             + "lists" + System.getProperty("file.separator") + "taskList.txt");
 
-    public static Scanner sc = new Scanner(System.in);
+    public static Scanner sc = new Scanner(System.in); // used to scan
 
     public static void checkFile() {
         try {
