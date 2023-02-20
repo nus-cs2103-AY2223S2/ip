@@ -130,17 +130,17 @@ public class Parser {
             }
 
         case "delete":
-        try {
-            int idx = Integer.parseInt(tokens[1]);
-            c = new Delete(idx, tasklist);
+            try {
+                int idx = Integer.parseInt(tokens[1]);
+                c = new Delete(idx, tasklist);
 
-            //  Executing here to catch IndexOutOfBoundsException.
-            return c.execute();
-        } catch (IndexOutOfBoundsException ioobe) {
-            return "Please enter a valid index, Boss.";
-        } catch (NumberFormatException nfe) {
-            return "Please enter an index after \"delete\".";
-        }
+                //  Executing here to catch IndexOutOfBoundsException.
+                return c.execute();
+            } catch (IndexOutOfBoundsException ioobe) {
+                return "Please enter a valid index, Boss.";
+            } catch (NumberFormatException nfe) {
+                return "Please enter an index after \"delete\".";
+            }
 
         case "find":
             try {
@@ -153,7 +153,6 @@ public class Parser {
         default:
             return "Boss, I'm sorry, but I don't understand :-(\n";
         }
-
         return c.execute();
     }
 

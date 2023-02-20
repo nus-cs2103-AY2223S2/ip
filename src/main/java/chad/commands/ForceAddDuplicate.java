@@ -4,8 +4,8 @@ import chad.backend.TaskList;
 import chad.tasks.Task;
 
 public class ForceAddDuplicate extends Command {
-    private Task task;
-    private TaskList tasklist;
+    private final Task task;
+    private final TaskList tasklist;
 
     public ForceAddDuplicate(Task task, TaskList tasklist) {
         this.task = task;

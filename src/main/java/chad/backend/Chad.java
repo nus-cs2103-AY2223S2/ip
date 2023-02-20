@@ -6,8 +6,8 @@ import java.io.IOException;
  * Class encapsulating Chad.
  */
 public class Chad {
-    private TaskList tasklist;
-    private Parser parser;
+    private final TaskList tasklist;
+    private final Parser parser;
 
     /**
      * Constructor for Chad.

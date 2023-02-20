@@ -9,8 +9,8 @@ import chad.tasks.Task;
  * Command to create an Event.
  */
 public class MakeEvent extends Make {
-    private String from;
-    private String to;
+    private final String from;
+    private final String to;
 
     /**
      * Constructor for a command to make a new Event.

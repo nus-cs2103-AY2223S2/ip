@@ -7,8 +7,8 @@ import chad.tasks.Task;
  * Command to Mark a Task as not done.
  */
 public class Unmark extends Command {
-    private int idx;
-    private TaskList tasklist;
+    private final int idx;
+    private final TaskList tasklist;
 
     /**
      * Constructor for an Unmark command.

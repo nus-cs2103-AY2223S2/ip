@@ -16,7 +16,7 @@ import chad.tasks.Task;
 import chad.tasks.Todo;
 
 class Storage {
-    private File prevTasks;
+    private final File prevTasks;
 
     public Storage(File prevTasks) {
         this.prevTasks = prevTasks;
@@ -86,6 +86,7 @@ class Storage {
             fw.flush();
             fw.close();
         } catch (IOException e) {
+
         }
     }
 }

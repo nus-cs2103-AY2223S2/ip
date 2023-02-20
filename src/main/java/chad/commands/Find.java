@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class Find extends Command {
 
-    private TaskList tasklist;
-    private String searchKey;
+    private final TaskList tasklist;
+    private final String searchKey;
 
     /**
      * Constructor for a Find command.

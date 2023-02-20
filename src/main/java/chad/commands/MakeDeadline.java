@@ -9,7 +9,7 @@ import chad.tasks.Task;
  * Command to create a Deadline.
  */
 public class MakeDeadline extends Make {
-    private String by;
+    private final String by;
     private TaskList tasklist;
 
     /**
@@ -21,7 +21,6 @@ public class MakeDeadline extends Make {
     public MakeDeadline(String description, String by, TaskList tasklist, Parser parser) {
         super(description, tasklist, parser);
         this.by = by;
-//        this.tasklist = tasklist;
     }
 
     @Override

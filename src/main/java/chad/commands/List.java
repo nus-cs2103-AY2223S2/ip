@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Command to list down all current Tasks.
  */
 public class List extends Command {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for a List command.

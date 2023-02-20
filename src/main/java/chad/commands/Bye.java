@@ -6,7 +6,7 @@ import chad.backend.TaskList;
  * Command for exiting Duke.
  */
 public class Bye extends Command {
-    private TaskList tasklist;
+    private final TaskList tasklist;
 
     /**
      * Constructor for a Bye command.

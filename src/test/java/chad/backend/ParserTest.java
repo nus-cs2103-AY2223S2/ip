@@ -67,9 +67,9 @@ class ParserTest {
 
         //  Insert duplicate:
         String expected = "Boss, I've found a an existing task with the same name:\n"
-                    + new Todo("hello1").toString()
+                    + new Todo("hello1")
                     + "\nDo you still want to add this new task?\n"
-                    + new Todo("hello1").toString();
+                    + new Todo("hello1");
         assertEquals(expected, parser.parse("todo hello1"));
 
         //  Choose to save duplicate:
@@ -98,9 +98,9 @@ class ParserTest {
 
         //  Insert duplicate:
         String expected = "Boss, I've found a an existing task with the same name:\n"
-                + new Todo("hello1").toString()
+                + new Todo("hello1")
                 + "\nDo you still want to add this new task?\n"
-                + new Todo("hello1").toString();
+                + new Todo("hello1");
         assertEquals(expected, parser.parse("todo hello1"));
 
         //  Choose to save duplicate:

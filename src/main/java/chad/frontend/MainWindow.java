@@ -34,8 +34,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-//        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(jarvis.getResponse("welcome"), jarvisImage
-//        ));
     }
 
     public void setChad(Chad j) {

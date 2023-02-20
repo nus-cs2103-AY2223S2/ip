@@ -7,8 +7,8 @@ import chad.tasks.Task;
  * Command to Mark a Task as done.
  */
 public class Mark extends Command {
-    private int idx;
-    private TaskList tasklist;
+    private final int idx;
+    private final TaskList tasklist;
 
     /**
      * Constructor for a Mark command.

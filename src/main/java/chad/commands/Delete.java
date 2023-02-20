@@ -8,8 +8,8 @@ import chad.tasks.Task;
  */
 public class Delete extends Command {
 
-    private int idx;
-    private TaskList tasklist;
+    private final int idx;
+    private final TaskList tasklist;
 
     /**
      * Constructor for Delete command.
