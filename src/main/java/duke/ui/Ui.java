@@ -10,6 +10,15 @@ import duke.task.Task;
 public class Ui {
 
     /**
+     * Prints customized message through UI.
+     * @param msg Message to print.
+     * @return String object.
+     */
+    public String print_custom_msg(String msg) {
+        return "[Custom message] " + msg;
+    }
+
+    /**
      * Prints message signifying empty inputs
      * @return A message string.
      */
@@ -40,17 +49,18 @@ public class Ui {
      * @return A message string.
      */
     public String print_task_list(ArrayList<Task> tasks) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         if (tasks.isEmpty()) {
-            output = "None yet.";
+            output.append("None yet.");
         } else {
             int i = 1;
             for (Task t : tasks) {
-                output += i + "." + t.toString() + "\n";
+                String strToAppend = i + "." + t.toString() + "\n";
+                output.append(strToAppend);
                 i++;
             }
         }
-        return output;
+        return output.toString();
     }
 
     /**
@@ -59,7 +69,7 @@ public class Ui {
      * @return A message string.
      */
     public String print_done_msg(Task task) {
-        String output = "";
+        String output;
         if (task.isNull()) {
             output = "Unsuccessfully marked.";
             return output;
@@ -74,7 +84,7 @@ public class Ui {
      * @return A message string.
      */
     public String print_undone_msg(Task task) {
-        String output = "";
+        String output;
         if (task.isNull()) {
             output = "Unsuccessfully marked.";
             return output;
@@ -90,7 +100,7 @@ public class Ui {
      * @return A message string.
      */
     public String print_add_msg(Task task, int size) {
-        String output = "";
+        String output;
         if (task.isNull()) {
             output = "Unsuccessfully added.";
             return output;
@@ -109,7 +119,7 @@ public class Ui {
      * @return A message string.
      */
     public String print_remove_msg(Task task, int size) {
-        String output = "";
+        String output;
         if (task.isNull()) {
             output = "Unsuccessfully removed.";
             return output;

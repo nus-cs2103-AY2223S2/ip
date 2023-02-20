@@ -25,6 +25,14 @@ public class Task {
     }
 
     /**
+     * Gets descriptions string.
+     * @return A string object.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Signifies whether this task is null and fake.
      * @return An indicator of whether this task is null.
      */
