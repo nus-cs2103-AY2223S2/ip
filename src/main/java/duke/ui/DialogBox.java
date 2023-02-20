@@ -8,8 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
@@ -30,7 +30,8 @@ public class DialogBox extends HBox {
                 new CornerRadii(17.0), new BorderWidths(2.0));
         Border dialogBorder = new Border(borderStroke);
 
-        text.setStyle("-fx-padding: 15;  -fx-background-radius: 25; -fx-background-color: #FFFDD0; -fx-text-fill: black; -fx-opacity: 90%;");
+        text.setStyle("-fx-padding: 15;  -fx-background-radius: 25; -fx-background-color: #FFFDD0;"
+                + "-fx-text-fill: black; -fx-opacity: 90%;");
         text.setBorder(dialogBorder);
 
         this.setAlignment(Pos.TOP_RIGHT);

@@ -1,13 +1,14 @@
 package duke.storage;
+
+import duke.dukeexceptions.DukeExceptions;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.ui.Ui;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-
-import duke.ui.Ui;
-import duke.dukeexceptions.DukeExceptions;
-import duke.tasklist.TaskList;
-import duke.tasks.Task;
 
 /**
  * Class to abstract the interaction between local storage and program task list.

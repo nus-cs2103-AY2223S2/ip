@@ -1,9 +1,7 @@
 package duke.commands;
 import duke.dukeexceptions.MissingArgumentException;
-import duke.tasks.ToDo;
-import duke.ui.Ui;
-import duke.storage.Storage;
 import duke.tasklist.TaskList;
+import duke.tasks.ToDo;
 
 /**
  * Command to add a "to do" task to a task list.

@@ -1,9 +1,7 @@
 package duke.commands;
 import duke.dukeexceptions.MissingArgumentException;
-import duke.tasks.Deadline;
-import duke.ui.Ui;
-import duke.storage.Storage;
 import duke.tasklist.TaskList;
+import duke.tasks.Deadline;
 
 /**
  * Command to add a deadline.

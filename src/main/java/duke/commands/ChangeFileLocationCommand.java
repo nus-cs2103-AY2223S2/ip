@@ -5,11 +5,11 @@ import duke.dukeexceptions.InvalidArgumentException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
-public class ChangeFileLocationCommand extends Command{
+public class ChangeFileLocationCommand extends Command {
     private String fileLocation;
     private Storage storage;
 
-    public ChangeFileLocationCommand(String fileLocation, Storage storage){
+    public ChangeFileLocationCommand(String fileLocation, Storage storage) {
         super("CHANGE_FILE_LOCATION");
         this.fileLocation = fileLocation;
         this.storage = storage;

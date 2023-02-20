@@ -1,12 +1,12 @@
 package duke.tasks;
+import duke.dukeexceptions.DukeExceptions;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
-
-import duke.dukeexceptions.DukeExceptions;
 
 /**
  * A task representing a deadline.

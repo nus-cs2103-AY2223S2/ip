@@ -1,7 +1,5 @@
 package duke.commands;
-import duke.ui.Ui;
 import duke.dukeexceptions.UnknownCommandException;
-import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
 /**

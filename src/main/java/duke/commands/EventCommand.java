@@ -1,9 +1,7 @@
 package duke.commands;
 import duke.dukeexceptions.MissingArgumentException;
-import duke.tasks.Event;
-import duke.ui.Ui;
-import duke.storage.Storage;
 import duke.tasklist.TaskList;
+import duke.tasks.Event;
 
 /**
  * Command to add an event to a task list.

@@ -1,22 +1,20 @@
 package duke.commands;
 
-import duke.ui.Ui;
-import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
 /**
  * Command to search for keywords in task of a task list.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String keyword;
 
-    public FindCommand(String keyword){
+    public FindCommand(String keyword) {
         super("FIND");
         this.keyword = keyword;
     }
 
     @Override
-    public String execute(TaskList tasks){
+    public String execute(TaskList tasks) {
         assert this.keyword != "";
         return tasks.find(this.keyword);
     }

@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String inputString = userInput.getText();
         Label input = new Label(inputString);
-        Label response = new Label (duke.getResponse(inputString));
+        Label response = new Label(duke.getResponse(inputString));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, new ImageView(userImage)),
                 DialogBox.getDukeDialog(response, new ImageView(dukeImage))

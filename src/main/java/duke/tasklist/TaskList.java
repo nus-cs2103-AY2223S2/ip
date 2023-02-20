@@ -1,11 +1,10 @@
 package duke.tasklist;
 import duke.dukeexceptions.InvalidArgumentException;
-import duke.ui.Ui;
-import duke.dukeexceptions.MissingArgumentException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
+import duke.ui.Ui;
 
 /**
  * Stores tasks in a list
@@ -22,7 +21,7 @@ public class TaskList {
         this.len = 0;
     }
 
-    public int getLen(){
+    public int getLen() {
         return this.len;
     }
 
@@ -43,7 +42,7 @@ public class TaskList {
         String result = "";
         for (int i = 0; i < this.len; i++) {
             int index = i + 1;
-            result += + index + ". " + list[i].toString();
+            result += index + ". " + list[i].toString();
         }
         System.out.print(result);
         return result;

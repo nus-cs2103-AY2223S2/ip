@@ -40,7 +40,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand, this.storage);
                 c.execute(taskList);
 
-                if(c.getTag() == "CHANGE_FILE_LOCATION") {
+                if (c.getTag() == "CHANGE_FILE_LOCATION") {
                     loadFile();
                 }
 
@@ -55,7 +55,7 @@ public class Duke {
         storage.save(taskList);
     }
 
-    public void loadFile(){
+    public void loadFile() {
         this.taskList = storage.loadFile();
     }
 
@@ -70,7 +70,7 @@ public class Duke {
             String response = com.execute(this.taskList);
 
             //load task list from new filepath
-            if(com.getTag() == "CHANGE_FILE_LOCATION") {
+            if (com.getTag() == "CHANGE_FILE_LOCATION") {
                 loadFile();
             }
 
