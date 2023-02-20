@@ -94,7 +94,7 @@ public class TaskList {
     public String find(String command) {
         String keyWord = command.substring(5);
         Predicate<Task> keyWordFilter = task -> (task.getDescription().contains(keyWord));
-        Stream<Task> resultedTasks = tasks.stream(A).filter(keyWordFilter);
+        Stream<Task> resultedTasks = tasks.stream().filter(keyWordFilter);
         return Ui.getFindTaskMessage(resultedTasks);
     }
 }
