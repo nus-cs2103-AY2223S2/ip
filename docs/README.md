@@ -20,7 +20,6 @@ Outcome: numbered of iists of tasks and status of whether each task is marked
 
 <br>
 <br>
-<br>
 
 ### `Todo`, `Deadline`, `Event` - Add task of specified type
 
@@ -59,7 +58,8 @@ Example: `Event iP Extension /2023-02-18T00:00 /2023-02-20T23:59`
 
 Outcome: task with description "iP Extension" spanning from 18 Feb 2023, 12am to 20 Feb 2023, 11:59pm is added into the task list
 
-
+<br>
+<br>
 
 ### `Mark`, `Unmark` - Mark task of specified index as completed or not completed
 
@@ -148,6 +148,9 @@ U - `Unmark 2`
 
 </details>
 
+<br>
+<br>
+
 ### `Delete` - Deletes a task at a specified index
 
 Deletes an existing task from the current task list
@@ -168,7 +171,8 @@ U - `Delete 3`
 >        [E] [ ] event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM ) <br>
 > Currently, your list has 2 tasks.
 
-
+<br>
+<br>
 
 ### `Find`, `Check` - Searches through task list
 
@@ -208,7 +212,7 @@ U - `Find famil`
 >        1) [T] [ ] get family to use Duke <br>
 >        2) [E] [ ] families connect event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM ) 
 
-
+<br><br>
 
 ### `Bye` - say bye to duke :(
 
