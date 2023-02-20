@@ -50,7 +50,7 @@ public abstract class Parser {
         case LIST:
             return new ListTasksCommand();
         case CHECK:
-            LocalDate date = Parser.parseToLocalDate(commands[1]);
+            LocalDate date = Parser.parseStringToLocalDate(commands[1]);
             return new FindCommand(date);
         case FIND:
             return new FindCommand(commands[1]);
@@ -109,7 +109,7 @@ public abstract class Parser {
      * @return Local Date format of string
      * @throws InvalidDateFormatException if string input cannot be parsed
      */
-    public static LocalDate parseToLocalDate(String s) throws InvalidDateFormatException {
+    public static LocalDate parseStringToLocalDate(String s) throws InvalidDateFormatException {
         try {
             return LocalDate.parse(s);
         } catch (DateTimeParseException e) {
@@ -128,7 +128,7 @@ public abstract class Parser {
      * @return ParsedDate object
      * @throws LoadTaskException
      */
-    public static String stringToParsedDateString(String s) throws LoadTaskException {
+    public static String parseStringToParsedDateString(String s) throws LoadTaskException {
 
         String[] dateTime = s.split(" ");
         String mIndex;
@@ -152,5 +152,18 @@ public abstract class Parser {
         String dateTimeValue = dateTime[2].substring(0, 4) + "-" + mIndex + "-" + dateTime[1]
                                 + "T" + dateTime[4].substring(0, 5);
         return dateTimeValue;
+    }
+
+    /**
+     * Parses boolean variable argument into single boolean value
+     * 
+     * @param boolVarargs boolean variable argument
+     * @return first boolean argument in input. false if no input
+     */
+    public static boolean parseBoolVarargsToBoolean(boolean[] boolVarargs) {
+        for (boolean b: boolVarargs) {
+            return b;
+        }
+        return false;
     }
 }

@@ -10,11 +10,11 @@ import java.io.InputStreamReader;
 public class Ui {
 
     /** Logo of Duke */
-    final String logo = " ____        _        \n"
-                        + "|  _ \\ _   _| | _____ \n"
-                        + "| | | | | | | |/ / _ \\\n"
-                        + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|\n";
+    final String logo = " ___             _        \n"
+                        + "|  _  \\  _    _|  |  _  __ \n"
+                        + "| |  |  |  |  |  |  |/  /  _ \\\n"
+                        + "| |_|  |  |_|  |     <   __/\n"
+                        + "|___/ \\__,_|_|\\_\\__\\\n";
 
     /** Reader for faster scanning of input*/
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
