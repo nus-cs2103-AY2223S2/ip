@@ -2,7 +2,7 @@ package duke.exception;
 
 public class DescriptionException extends CommandException {
 
-    private static final String STRING = "☹ OOPS!!! The description of a task cannot be empty.";
+    private static final String STRING = "OOPS!!! The description of a task cannot be empty.";
     public DescriptionException() {
     }
 

@@ -109,7 +109,7 @@ public class Ui {
      * @return formatted string of loading error
      */
     public String showLoadingError() {
-        String output = "☹ OOPS!!! I'm sorry, but I cannot find the directory!";
+        String output = "OOPS!!! I'm sorry, but I cannot find the directory!";
         System.out.println(output);
         return output;
     }
