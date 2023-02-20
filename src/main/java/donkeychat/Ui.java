@@ -33,12 +33,12 @@ public class Ui {
         addToOutput("Here are the matching tasks in your list:");
         for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.getAtIndex(i);
-            if(task.description.contains(toMatch)) {
+            if (task.description.contains(toMatch)) {
                 addToOutput(i + 1 + "." + task);
                 hasFoundMatch = true;
             }
         }
-        if(!hasFoundMatch) {
+        if (!hasFoundMatch) {
             addToOutput("No Tasks with matching Description found!");
         }
     }
@@ -55,6 +55,11 @@ public class Ui {
             addToOutput("OK, I've marked this task as not done yet:");
             addToOutput(String.valueOf(task));
         }
+    }
+
+    public void displaySnooze(Task task) {
+        addToOutput("Snoozed! Task is now:");
+        addToOutput(String.valueOf(task));
     }
 
     public void displayAddTask(TaskList taskList) {

@@ -31,6 +31,14 @@ public class Deadline extends Task {
         }
     }
 
+    public void snooze(int days) {
+        by = by.plusDays(days);
+    }
+
+    public boolean isValid() {
+        return by != null;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(FORMAT_PRINT) + ")";

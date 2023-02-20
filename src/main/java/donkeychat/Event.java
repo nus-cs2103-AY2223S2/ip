@@ -33,6 +33,10 @@ public class Event extends Task {
         }
     }
 
+    public boolean isValid() {
+        return from != null && to != null;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " +

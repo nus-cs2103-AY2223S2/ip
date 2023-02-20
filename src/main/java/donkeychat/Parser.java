@@ -51,6 +51,9 @@ public class Parser {
             case "find":
                 handleCommandFind(taskList, ui, splitInput);
                 break;
+            case "snooze":
+                handleCommandSnooze(taskList, ui, splitInput);
+                break;
             default:
                 throw new DukeException("Please enter a valid command!");
             }
@@ -60,6 +63,32 @@ public class Parser {
             ui.displayText(e.getMessage());
         }
         return true;
+    }
+
+    private void handleCommandSnooze(TaskList taskList, Ui ui, String[] splitInput) throws DukeException {
+        Integer taskIndex;
+        Integer snoozeDays;
+        if (splitInput.length != 2) {
+            throw new DukeException("'snooze' requires exactly 2 arguments: taskIndex and days to snooze by!");
+        }
+        String[] tokens = splitInput[1].split(" ");
+        if (tokens.length != 2) {
+            throw new DukeException("'snooze' requires exactly 2 arguments: taskIndex and days to snooze by!");
+        }
+        try {
+            taskIndex = Integer.valueOf(tokens[0]) - 1;
+            snoozeDays = Integer.valueOf(tokens[1]);
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            return;
+        }
+        Task task = taskList.getAtIndex(taskIndex);
+        if (task instanceof Deadline) {
+            ((Deadline) task).snooze(snoozeDays);
+            ui.displaySnooze(task);
+        } else {
+            throw new DukeException("snooze is for deadline tasks only!");
+        }
     }
 
     private void handleCommandFind(TaskList taskList, Ui ui, String[] splitInput) throws DukeException {
@@ -95,11 +124,14 @@ public class Parser {
         }
         Integer indexFrom = splitInput[1].indexOf("/from ");
         Integer indexTo = splitInput[1].indexOf("/to ");
-        taskList.addTask(new Event(
+        Event event = new Event(
             splitInput[1].substring(0, indexFrom - 1),
             splitInput[1].substring(indexFrom + 6, indexTo - 1),
-            splitInput[1].substring(indexTo + 4)));
-        ui.displayAddTask(taskList);
+            splitInput[1].substring(indexTo + 4));
+        if (event.isValid()) {
+            taskList.addTask(event);
+            ui.displayAddTask(taskList);
+        }
     }
 
     private void handleCommandDeadline(TaskList taskList, Ui ui, String[] splitInput) throws DukeException {
@@ -107,10 +139,14 @@ public class Parser {
             throw new DukeException("'deadline' requires additional arguments!");
         }
         Integer indexBy = splitInput[1].indexOf("/by ");
-        taskList.addTask(
-            new Deadline(splitInput[1].substring(0, indexBy - 1),
-                splitInput[1].substring(indexBy + 4)));
-        ui.displayAddTask(taskList);
+
+        Deadline deadline = new Deadline(splitInput[1].substring(0, indexBy - 1),
+            splitInput[1].substring(indexBy + 4));
+        if (deadline.isValid()) {
+            taskList.addTask(deadline);
+            ui.displayAddTask(taskList);
+        }
+
     }
 
     private void handleCommandTodo(TaskList taskList, Ui ui, String[] splitInput) throws DukeException {
