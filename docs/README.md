@@ -53,7 +53,7 @@ Syntax: `Mark <index>`
 Example: `List` followed by `Mark 1`
 Outcome: task at index 1 of the task list is marked as complete. separate prompt for if the task was already marked as complete.
 <details>
-    <summary> If task was not previously marked as complete </summary>
+    <summary> If task was previously marked as **incomplete** </summary>
 
 U - `List`
 > Currently, your list has 3 tasks.
@@ -67,7 +67,7 @@ U - `Mark 1`
 </details>
 
 <details>
-    <summary> If task was previously marked as complete </summary>
+    <summary> If task was previously marked as **complete** </summary>
 
 U - `List`
 > Currently, your list has 3 tasks.
@@ -87,7 +87,7 @@ Syntax: `Unmark <index>`
 Example: `List` followed by `Unmark 2`
 Outcome: task at index 2 of the task list is marked as incomplete. separate prompt for if the task was already marked as incomplete.
 <details>
-    <summary> If task was previously marked as incomplete </summary>
+    <summary> If task was previously marked as **incomplete** </summary>
 
 U - `List`
 > Currently, your list has 3 tasks.
@@ -95,7 +95,27 @@ U - `List`
 >        2) [D] [ ] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
 >        3) [E] [ ] event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM )
 U - `Unmark 2`
-> 
+> This task 
+>       [D] [ ] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
+> hasn't been done! How can you not know?!
+
+</details>
+
+<details>
+    <summary> If task was previously marked as **complete** </summary>
+
+U - `List`
+> Currently, your list has 3 tasks.
+>        1) [T] [ ] todo
+>        2) [D] [X] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
+>        3) [E] [ ] event ( from: 18 FEB 2023, SAT, 12:00AM ) ( to: 20 FEB 2023, MON, 11:59PM )
+U - `Unmark 2`
+> Okay... Being unproductive I see...:
+>        [D] [ ] deadline ( by: 17 FEB 2023, FRI, 11:59PM )
+
+</details>
+
+
 Example of usage: 
 
 `keyword (optional arguments)`
