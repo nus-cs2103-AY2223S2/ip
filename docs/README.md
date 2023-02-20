@@ -1,6 +1,6 @@
 # User Guide for Tick Pro
 
-![This is an image](/docs/Ui.png)
+![This is an image](Ui.png)
 
 ## Getting Started
 
