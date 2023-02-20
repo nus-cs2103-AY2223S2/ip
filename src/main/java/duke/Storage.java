@@ -59,6 +59,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * writes the data from taskList to save file.
+     * @param filePath file path leading to data directory.
+     * @param list taskList which data will be written to the save file.
+     * @throws IOException if there is an error accessing the file.
+     */
     public static void write(String filePath, TaskList list) throws IOException {
         File file = new File(filePath);
         file.createNewFile();

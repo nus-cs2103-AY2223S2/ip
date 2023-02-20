@@ -39,9 +39,13 @@ public class Command {
         String str = INPUT.replace("mark ", "");
         int index = Integer.parseInt(str);
         index--;
-        Task task = LIST.get(index);
-        task.markAsDone();
-        return UI.showMarked(task);
+        try {
+            Task task = LIST.get(index);
+            task.markAsDone();
+            return UI.showMarked(task);
+        } catch (IndexOutOfBoundsException e) {
+            return "No such index, try again!";
+        }
     }
 
     /**
@@ -52,9 +56,13 @@ public class Command {
         String str = INPUT.replace("unmark ", "");
         int index = Integer.parseInt(str);
         index--;
-        Task task = LIST.get(index);
-        task.unmark();
-        return UI.showUnmarked(task);
+        try {
+            Task task = LIST.get(index);
+            task.unmark();
+            return UI.showUnmarked(task);
+        } catch (IndexOutOfBoundsException e) {
+            return "No such index, try again!";
+        }
     }
 
     /**
@@ -122,10 +130,14 @@ public class Command {
         String str = INPUT.replace("delete ", "");
         int index = Integer.parseInt(str);
         index--;
-        Task removedTask = LIST.get(index);
-        LIST.remove(index);
-        return UI.showDelete(removedTask)  + "your tasklist has been updated:\n"
-                + UI.showTaskList(LIST);
+        try {
+            Task removedTask = LIST.get(index);
+            LIST.remove(index);
+            return UI.showDelete(removedTask) + "your tasklist has been updated:\n"
+                    + UI.showTaskList(LIST);
+        } catch (IndexOutOfBoundsException e) {
+            return "No such index, try again!";
+        }
     }
 
     /**
