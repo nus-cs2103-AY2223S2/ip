@@ -31,7 +31,7 @@ file in, and use the `java -jar duke.jar` command to run the application. A GUI 
 
 ### Adding tasks
 
-#### Adding a `ToDo`
+#### Adding a ToDo
 
 ToDos are tasks without any date/time attached.
 
