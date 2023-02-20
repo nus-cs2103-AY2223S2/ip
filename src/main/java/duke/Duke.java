@@ -27,7 +27,6 @@ public class Duke {
         }
     }
     public void run() throws DukeException, IOException {
-        System.out.println(System.getProperty("user.dir"));
         System.out.println(ui.printWelcomeMessage());
         System.out.println(ui.showLine());
         Scanner sc = new Scanner(System.in);
