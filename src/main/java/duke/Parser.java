@@ -1,6 +1,14 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,18 +22,18 @@ public class Parser {
             return new ListCommand();
         } else if (isMarkCommand(Command)) {
             String userInput = Command.replaceFirst("mark", "").trim();
-            int taskNum = ErrorMarkIndex(userInput);
+            int taskNum = errorMarkIndex(userInput);
             return new MarkCommand(taskNum - 1);
         } else if (isUnmarkCommand(Command)) {
             String userInput = Command.replaceFirst("unmark", "").trim();
-            int taskNum = ErrorUnmarkIndex(userInput);
+            int taskNum = errorUnmarkIndex(userInput);
             return new UnmarkCommand(taskNum - 1);
         } else if (isAddTodoCommand(Command)) {
             String todo = Command.replaceFirst("todo", "").trim();
-            ErrorTodo(todo);
+            errorTodo(todo);
             return new AddTodoCommand(todo);
         } else if (isAddEventCommand(Command)) {
-            String[] event = ErrorEvent(Command);
+            String[] event = errorEvent(Command);
             if (isDate(event[1])) {
                 Date eventDate = parseDate(event[1]);
                 return new AddEventCommand(event[0], eventDate);
@@ -33,7 +41,7 @@ public class Parser {
                 return new AddEventCommand(event[0], event[1]);
             }
         } else if (isAddDeadlineCommand(Command)) {
-            String[] deadline = ErrorDeadline(Command);
+            String[] deadline = errorDeadline(Command);
             if (isDate(deadline[1])) {
                 Date deadlineDate = parseDate(deadline[1]);
                 return new AddDeadlineCommand(deadline[0], deadlineDate);
@@ -42,7 +50,7 @@ public class Parser {
             }
         } else if (isDeleteCommand(Command)) {
             String userInput = Command.replaceFirst("delete", "").trim();
-            int taskNum = ErrorDeleteIndex(userInput);
+            int taskNum = errorDeleteIndex(userInput);
             return new DeleteCommand(taskNum);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -72,19 +80,19 @@ public class Parser {
         return true;
     }
 
-    private static int ErrorMarkIndex(String userInput) throws DukeException {
-        return ErrorMarkOrUnmarkOrDeleteIndex(userInput);
+    private static int errorMarkIndex(String userInput) throws DukeException {
+        return errorMarkOrUnmarkOrDeleteIndex(userInput);
     }
 
-    private static int ErrorUnmarkIndex(String userInput) throws DukeException {
-        return ErrorMarkOrUnmarkOrDeleteIndex(userInput);
+    private static int errorUnmarkIndex(String userInput) throws DukeException {
+        return errorMarkOrUnmarkOrDeleteIndex(userInput);
     }
 
-    private static int ErrorDeleteIndex(String userInput) throws DukeException {
-        return ErrorMarkOrUnmarkOrDeleteIndex(userInput);
+    private static int errorDeleteIndex(String userInput) throws DukeException {
+        return errorMarkOrUnmarkOrDeleteIndex(userInput);
     }
 
-    private static int ErrorMarkOrUnmarkOrDeleteIndex(String userInput) throws DukeException {
+    private static int errorMarkOrUnmarkOrDeleteIndex(String userInput) throws DukeException {
         if (userInput.isEmpty() || isNotNumeric(userInput)) {
             throw new DukeException("☹ OOPS!!! The index to remove cannot be empty or not an integer.");
         }
@@ -96,21 +104,21 @@ public class Parser {
         return !input.matches("-?\\d+(\\.\\d+)?");
     }
 
-    private static void ErrorTodo(String todo) throws DukeException {
+    private static void errorTodo(String todo) throws DukeException {
         if (todo.isEmpty()) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
-    private static String[] ErrorEvent(String userInput) throws DukeException {
-        return ErrorEventOrDeadline(userInput, "event", "/from");
+    private static String[] errorEvent(String userInput) throws DukeException {
+        return errorEventOrDeadline(userInput, "event", "/from");
     }
 
-    private static String[] ErrorDeadline(String UserInput) throws DukeException {
-        return ErrorEventOrDeadline(UserInput, "deadline", "/by");
+    private static String[] errorDeadline(String UserInput) throws DukeException {
+        return errorEventOrDeadline(UserInput, "deadline", "/by");
     }
 
-    private static String[] ErrorEventOrDeadline(String UserInput, String textToReplace, String textToSplit) throws DukeException {
+    private static String[] errorEventOrDeadline(String UserInput, String textToReplace, String textToSplit) throws DukeException {
         String[] splitInput = UserInput.replaceFirst(textToReplace, "")
                 .trim().split(textToSplit);
 

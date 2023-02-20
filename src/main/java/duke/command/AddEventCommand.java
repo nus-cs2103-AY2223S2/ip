@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
 import duke.task.Event;
 import duke.task.TaskList;
 
@@ -53,7 +55,7 @@ public class AddEventCommand extends Command {
             event = new Event(description, eventDate);
         }
         tasks.add(event);
-        Ui.ShowAddMessage(event, tasks.size());
+        Ui.showAddMessage(event, tasks.size());
         storage.save(tasks.getAllTasks());
     }
 }

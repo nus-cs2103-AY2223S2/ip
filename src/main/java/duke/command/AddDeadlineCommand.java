@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.TaskList;
 
@@ -53,7 +55,7 @@ public class AddDeadlineCommand extends Command {
             deadline = new Deadline(description, dueDate);
         }
         tasks.add(deadline);
-        Ui.ShowAddMessage(deadline, tasks.size());
+        Ui.showAddMessage(deadline, tasks.size());
         storage.save(tasks.getAllTasks());
     }
 }

@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
 import duke.task.TaskList;
 import duke.task.Todo;
 
@@ -31,7 +33,7 @@ public class AddTodoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Todo todo = new Todo(description);
         tasks.add(todo);
-        Ui.ShowAddMessage(todo, tasks.size());
+        Ui.showAddMessage(todo, tasks.size());
         storage.save(tasks.getAllTasks());
     }
 }
