@@ -1,11 +1,13 @@
 package ui;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -16,6 +18,8 @@ public class MainWindow {
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
+    @FXML
+    private HBox inputContainer;
     @FXML
     private TextField userInput;
     @FXML
@@ -61,5 +65,10 @@ public class MainWindow {
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equalsIgnoreCase("bye")) {
+            inputContainer.getChildren().removeAll(userInput, sendButton);
+
+        }
     }
 }

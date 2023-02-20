@@ -42,9 +42,6 @@ public class DialogBox extends HBox {
 
         this.dialog.setText(text);
         this.displayPicture.setImage(img);
-
-        // // add space between profile picture and text
-        // this.setSpacing(20);
     }
 
     /**
