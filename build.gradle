@@ -13,6 +13,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 
+
+
     String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
@@ -44,12 +46,13 @@ test {
 }
 
 application {
-    mainClassName = "seedu.fideline.Fideline"
+    mainClassName = "fideline.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "fideline"
     archiveClassifier = null
+    archiveVersion = "v0.2"
 }
 
 run{
