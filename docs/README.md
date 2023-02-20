@@ -4,6 +4,12 @@
 
 ## Features
 
+### List all tasks: `list`
+
+Syntax: `list`
+
+Displays a list of all saved tasks and their statuses.
+
 ### Add To-Do: `todo`
 
 Syntax: `todo <DESCRIPTION>`
@@ -30,16 +36,36 @@ _Note_: Both date fields must be given in the format "dd-MM-yyyy".
 
 Syntax: `mark <INDEX>`
 
-Marks the task at `INDEX` as done.
+Marks the task at the given index as done.
 
 ### Mark task as undone: `unmark`
 
 Syntax: `unmark <INDEX>`
 
-Marks the task at `INDEX` as not done yet.
+Marks the task at the given index as not done yet.
 
 ### Delete task: `delete`
 
 Syntax: `delete <INDEX>`
 
-Deletes the task at `INDEX`.
+Deletes the task atthe given index .
+
+### Find task: `find`
+
+Syntax: `find <KEYWORD>`
+
+Lists all tasks that match the given keyword.
+
+### Archive all tasks: `archive`
+
+Syntax: `archive` OR `archive <FILENAME>`
+
+Archives all saved tasks to a file, then clears the task list.
+
+Tasks will be saved to the given filename if provided, otherwise it will be saved to "archive-dd-MM-yyyy-HH-mm.txt" in the current directory.
+
+### Exit Duke: `bye`
+
+Syntax: `bye`
+
+Bye!
