@@ -52,7 +52,6 @@ class Storage {
             }
             fileSc.close();
         } catch (FileNotFoundException fnfe) {
-            System.out.println("Unable to retrieve saved tasks!");
             //  Previous task file doesn't exist,
             prevTasks.createNewFile();
         }
@@ -83,12 +82,10 @@ class Storage {
         }
         try {
             FileWriter fw = new FileWriter(prevTasks);
-            System.out.println("saving the following tasks: \n" + encoding);
             fw.write(encoding);
             fw.flush();
             fw.close();
         } catch (IOException e) {
-            System.out.println("Sorry, unable to save your tasks right now.");
         }
     }
 }
