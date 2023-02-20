@@ -1,12 +1,21 @@
 package cluck.parser;
 
-import cluck.commands.*;
+import cluck.commands.Command;
+import cluck.commands.DeadlineCommand;
+import cluck.commands.DeleteTaskCommand;
+import cluck.commands.EventCommand;
+import cluck.commands.ExitCommand;
+import cluck.commands.InvalidCommand;
+import cluck.commands.ListCommand;
+import cluck.commands.MarkTaskCommand;
+import cluck.commands.ToDoCommand;
+import cluck.commands.UnmarkTaskCommand;
+
+
 import cluck.exceptions.IncorrectArgumentException;
 import cluck.exceptions.MissingArgumentException;
 import cluck.messages.Messages;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Parser class takes user input and parses it into commands
@@ -31,24 +40,18 @@ public class Parser {
      * @param strNum String of interest.
      * @return boolean value
      */
-    public static boolean isNumeric(String strNum) {
+    public static boolean isNotNumeric(String strNum) {
         if (strNum == null) {
-            return false;
+            return true;
         }
         try {
-            double d = Double.parseDouble(strNum);
+            Double.parseDouble(strNum);
         } catch (NumberFormatException nfe) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
-            "dd-MM-yyyy HH:mm");
-
-    protected static LocalDateTime interpretLocalDateTime(String input) {
-            return LocalDateTime.parse(input, formatter);
-    }
     /**
      * Takes the string input of the user and converts it into an executable command.
      *
@@ -59,75 +62,76 @@ public class Parser {
         int taskIndex;
 
         switch (words[0]) {
-        case EXIT_COMMAND:
-            return new ExitCommand();
+            case EXIT_COMMAND:
+                return new ExitCommand();
 
-        case LIST_COMMAND:
-            return new ListCommand();
+            case LIST_COMMAND:
+                return new ListCommand();
 
-        case MARK_TASK_COMMAND:
-            if (words.length == 1) {
-                throw new MissingArgumentException(Messages.MESSAGE_INDEX_MISSING);
-            }
-            if (!isNumeric(words[1])) {
-                throw new IncorrectArgumentException(Messages.MESSAGE_INDEX_INVALID);
-            }
-            taskIndex = Integer.parseInt(words[1]);
-            return new MarkTaskCommand(taskIndex - 1);
+            case MARK_TASK_COMMAND:
+                if (words.length == 1) {
+                    throw new MissingArgumentException(Messages.MESSAGE_INDEX_MISSING);
+                }
+                if (isNotNumeric(words[1])) {
+                    throw new IncorrectArgumentException(Messages.MESSAGE_INDEX_INVALID);
+                }
+                taskIndex = Integer.parseInt(words[1]);
+                return new MarkTaskCommand(taskIndex - 1);
 
-        case UNMARK_TASK_COMMAND:
-            if (words.length == 1) {
-                throw new MissingArgumentException(Messages.MESSAGE_INDEX_MISSING);
-            }
-            if (!isNumeric(words[1])) {
-                throw new IncorrectArgumentException(Messages.MESSAGE_INDEX_INVALID);
-            }
-            taskIndex = Integer.parseInt(words[1]);
-            return new UnmarkTaskCommand(taskIndex - 1);
+            case UNMARK_TASK_COMMAND:
+                if (words.length == 1) {
+                    throw new MissingArgumentException(Messages.MESSAGE_INDEX_MISSING);
+                }
+                if (isNotNumeric(words[1])) {
+                    throw new IncorrectArgumentException(Messages.MESSAGE_INDEX_INVALID);
+                }
+                taskIndex = Integer.parseInt(words[1]);
+                return new UnmarkTaskCommand(taskIndex - 1);
 
-        case DELETE_TASK_COMMAND:
-            if (words.length == 1) {
-                throw new MissingArgumentException(Messages.MESSAGE_INDEX_MISSING);
-            } if (!isNumeric(words[1])) {
-                throw new IncorrectArgumentException(Messages.MESSAGE_INDEX_INVALID);
-            }
-            taskIndex = Integer.parseInt(words[1]);
-            return new DeleteTaskCommand(taskIndex - 1);
+            case DELETE_TASK_COMMAND:
+                if (words.length == 1) {
+                    throw new MissingArgumentException(Messages.MESSAGE_INDEX_MISSING);
+                }
+                if (isNotNumeric(words[1])) {
+                    throw new IncorrectArgumentException(Messages.MESSAGE_INDEX_INVALID);
+                }
+                taskIndex = Integer.parseInt(words[1]);
+                return new DeleteTaskCommand(taskIndex - 1);
 
-        case MAKE_TODO:
-            if (words.length < 2) {
-                throw new MissingArgumentException(Messages.MESSAGE_DESCRIPTION_MISSING);
-            }
-            return new ToDoCommand(userInput.substring(5));
+            case MAKE_TODO:
+                if (words.length < 2) {
+                    throw new MissingArgumentException(Messages.MESSAGE_DESCRIPTION_MISSING);
+                }
+                return new ToDoCommand(userInput.substring(5));
 
-        case MAKE_DEADLINE:
-            String body = userInput.substring(9);
-            if (!body.contains(DUE_DATE_FLAG)) {
-                throw new MissingArgumentException(Messages.MESSAGE_DUEDATE_FLAG_MISSING);
-            }
-            String[] fields = body.split(" " + DUE_DATE_FLAG);
-            if (fields.length < 2) {
-                throw new MissingArgumentException(Messages.MESSAGE_DATE_MISSING);
-            }
-            return new DeadlineCommand(fields[0], fields[1]);
+            case MAKE_DEADLINE:
+                String body = userInput.substring(9);
+                if (!body.contains(DUE_DATE_FLAG)) {
+                    throw new MissingArgumentException(Messages.MESSAGE_DUEDATE_FLAG_MISSING);
+                }
+                String[] fields = body.split(" " + DUE_DATE_FLAG);
+                if (fields.length < 2) {
+                    throw new MissingArgumentException(Messages.MESSAGE_DATE_MISSING);
+                }
+                return new DeadlineCommand(fields[0], fields[1]);
 
-        case MAKE_EVENT:
-            String substring = userInput.substring(6);
-            if (!substring.contains(EVENT_START_FLAG)) {
-                throw new MissingArgumentException(Messages.MESSAGE_START_FLAG_MISSING);
-            }
-            if (!substring.contains(EVENT_END_FLAG)) {
-                throw new MissingArgumentException(Messages.MESSAGE_END_FLAG_MISSING);
-            }
-            fields = substring.split("\\s/\\w{2,4}\\s");
-            if (fields.length < 3) {
-                throw new MissingArgumentException(Messages.MESSAGE_DATE_MISSING);
-            }
-            return new EventCommand(fields[0], fields[1], fields[2]);
+            case MAKE_EVENT:
+                String substring = userInput.substring(6);
+                if (!substring.contains(EVENT_START_FLAG)) {
+                    throw new MissingArgumentException(Messages.MESSAGE_START_FLAG_MISSING);
+                }
+                if (!substring.contains(EVENT_END_FLAG)) {
+                    throw new MissingArgumentException(Messages.MESSAGE_END_FLAG_MISSING);
+                }
+                fields = substring.split("\\s/\\w{2,4}\\s");
+                if (fields.length < 3) {
+                    throw new MissingArgumentException(Messages.MESSAGE_DATE_MISSING);
+                }
+                return new EventCommand(fields[0], fields[1], fields[2]);
 
 
-
-        default:
-            System.out.println(Messages.MESSAGE_INVALID_COMMAND);
+            default:
+                return new InvalidCommand(userInput);
+        }
     }
 }
