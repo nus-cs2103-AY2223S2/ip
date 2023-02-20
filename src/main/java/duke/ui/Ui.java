@@ -8,6 +8,7 @@ import duke.Storage;
 import duke.TodoList;
 import duke.command.Command;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -90,6 +91,12 @@ public class Ui extends Application{
             String userInputCommand = userInput.getText();
             Label userText = new Label(userInputCommand);
             String response = "";
+
+            if (userInputCommand.equals("bye")) {
+                userInput.clear();
+                Platform.exit();
+                stage.close();
+            }
             try {
                 Command command = bot.parse(userInputCommand);
                 response = command.execute();
@@ -108,6 +115,11 @@ public class Ui extends Application{
             String userInputCommand = userInput.getText();
             Label userText = new Label(userInputCommand);
             String response = "";
+            if (userInputCommand.equals("bye")) {
+                userInput.clear();
+                Platform.exit();
+                stage.close();
+            }
             try {
                 Command command = bot.parse(userInputCommand);
                 response = command.execute();
@@ -129,20 +141,8 @@ public class Ui extends Application{
     }
 
     @Override
-    public void stop() throws Exception {
+    public void stop() {
         storage.save(todoList);
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
     }
 
 }

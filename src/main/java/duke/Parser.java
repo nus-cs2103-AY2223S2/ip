@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     private TodoList todoList;
 
-    private enum Instructions {todo, deadline, event, mark, unmark, delete, find}
+    private enum Instructions {todo, deadline, event, duration, mark, unmark, delete, find}
 
     public Parser(TodoList todoList) {
         this.todoList = todoList;
