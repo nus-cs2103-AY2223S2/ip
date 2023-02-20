@@ -12,8 +12,9 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline task.
+     *
      * @param description Description of the task.
-     * @param by Complete-by date for the task.
+     * @param by          Complete-by date for the task.
      */
     public Deadline(String description, String by) {
         this(description, false, by);
