@@ -40,7 +40,7 @@ Example(s) of usage:
 - `deadline go to school /by 2023-02-27`
 - `deadline submit project /by 2023-02-20`
 
-### `Event` - Add new event task
+### `event` - Add new event task
 
 Adds a new event task to Kal's task list
 
