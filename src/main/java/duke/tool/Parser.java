@@ -40,7 +40,7 @@ public class Parser {
     }
 
     public static int parse_task_id(String input) throws DukeEmptyTaskException {
-        int tid = -1;
+        int tid;
         try {
             tid = Integer.parseInt(input.split(" ")[1]);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -50,7 +50,7 @@ public class Parser {
     }
 
     public static String parse_task_match_string(String input) throws DukeEmptyTaskException {
-        String match_str = "";
+        String match_str;
         try {
             match_str = input.split(" ")[1].strip();
         } catch (IndexOutOfBoundsException e) {
@@ -117,6 +117,7 @@ public class Parser {
     }
     public static String switch_input(ArrayList<Task> tasks, String input, Ui ui) throws DukeCommandNotFoundException, DukeEmptyTaskException {
         String trigger = input.split(" ")[0];
+        Command command = new Command(tasks, ui);
         int tid;
         Task task;
         String output;
@@ -129,31 +130,31 @@ public class Parser {
                 break;
             case "mark":
                 tid = parse_task_id(input);
-                output = Command.mark_as_done(tid, tasks, ui);
+                output = command.mark_as_done(tid);
                 break;
             case "unmark":
                 tid = parse_task_id(input);
-                output = Command.mark_as_undone(tid, tasks, ui);
+                output = command.mark_as_undone(tid);
                 break;
             case "deadline":
                 task = parse_deadline(trigger, input);
-                output = Command.add_task_to_list(task, tasks, ui);
+                output = command.add_task_to_list(task);
                 break;
             case "event":
                 task = parse_event(trigger, input);
-                output = Command.add_task_to_list(task, tasks, ui);
+                output = command.add_task_to_list(task);
                 break;
             case "todo":
                 task = parse_todo(trigger, input);
-                output = Command.add_task_to_list(task, tasks, ui);
+                output = command.add_task_to_list(task);
                 break;
             case "delete":
                 tid = parse_delete_task_id(trigger, input);
-                output = Command.delete_task(tid, tasks, ui);
+                output = command.delete_task(tid);
                 break;
             case "find":
                 String match_str = parse_task_match_string(input);
-                output = Command.find_tasks(match_str, tasks, ui);
+                output = command.find_tasks(match_str);
                 break;
             default:
                 throw new DukeCommandNotFoundException();
