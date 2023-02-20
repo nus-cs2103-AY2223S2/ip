@@ -35,6 +35,20 @@ public class Deadline extends Quest {
 
     }
 
+    @Override
+    public void edit(String[] args) throws PageException {
+        if (!args[0].equals("")) {
+            setDescription(args[0]);
+        }
+        if (!args[1].equals("")) {
+            try {
+                this.by = LocalDateTime.parse(args[1], inputFormatter);
+            } catch (DateTimeParseException e) {
+                throw new PageException("Please format the date and time like this: 2359 31/12/99");
+            }
+        }
+    }
+
     /**
      * Returns the String representation of the deadline.
      *

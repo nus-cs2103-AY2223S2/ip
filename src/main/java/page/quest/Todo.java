@@ -9,6 +9,14 @@ public class Todo extends Quest {
         super(description);
     }
 
+
+    @Override
+    public void edit(String[] args) {
+        if (!args[0].equals("")) {
+            setDescription(args[0]);
+        }
+    }
+
     /**
      * Returns the String representation of the todo.
      *

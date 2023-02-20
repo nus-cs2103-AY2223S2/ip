@@ -1,16 +1,6 @@
 package page;
 
-import page.command.Command;
-import page.command.CommandBye;
-import page.command.CommandComplete;
-import page.command.CommandDeadline;
-import page.command.CommandDelete;
-import page.command.CommandEvent;
-import page.command.CommandFind;
-import page.command.CommandHelp;
-import page.command.CommandIncomplete;
-import page.command.CommandLog;
-import page.command.CommandTodo;
+import page.command.*;
 
 
 /**
@@ -52,6 +42,8 @@ public class Parser {
                 return parseDelete(input);
             case "find":
                 return parseFind(input);
+            case "edit":
+                return parseEdit(input);
             default:
                 throw new PageException("Sorry, that is not a valid input. Type 'help' to learn the valid commands.");
             }
@@ -157,6 +149,44 @@ public class Parser {
             String keyword = splitInput[1];
             return new CommandFind(keyword);
         }
+    }
+
+    private CommandEdit parseEdit(String input) throws PageException {
+        int index;
+        String restOfInput;
+        String[] splitInput = input.split(" ", 3);
+        if (splitInput.length < 3) {
+            throw new PageException("Sorry, please include more details of the quest to be edited!");
+        }
+        try {
+            index = Integer.parseInt(splitInput[1]);
+        } catch (NumberFormatException e) {
+            throw new PageException("Sorry, that's not a number!");
+        }
+
+        restOfInput = splitInput[2];
+        String[] args = new String[]{"", "", ""};
+        boolean hasBy = restOfInput.contains("/by");
+        boolean hasFrom = restOfInput.contains("/from");
+        boolean hasTo = restOfInput.contains("/to");
+
+        if (hasBy) {
+            String[] splitRest = restOfInput.split("/by ", 2);
+            args[0] = splitRest[0];
+            args[1] = splitRest[1];
+        } else if (hasFrom | hasTo) {
+            String[] splitRest = restOfInput.split("/from | /to ", 3);
+            args[0] = splitRest[0];
+            args[1] = splitRest[1];
+            if (hasTo) {
+                String[] splitWithTo = restOfInput.split(" /to ");
+                args[2] = splitWithTo[splitWithTo.length - 1];
+            }
+        } else {
+            args[0] = restOfInput;
+        }
+
+        return new CommandEdit(index, args);
     }
 
     private boolean hasNoSplit(String[] arr) {

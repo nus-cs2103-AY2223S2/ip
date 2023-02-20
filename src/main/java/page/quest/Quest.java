@@ -1,5 +1,7 @@
 package page.quest;
 
+import page.PageException;
+
 /**
  * Represents a quest, i.e. a task that the user must do.
  */
@@ -17,6 +19,15 @@ public abstract class Quest {
     public Quest(String description) {
         this.description = description;
         this.isCompleted = false;
+    }
+
+    /**
+     * Sets the description of the quest to the new given String.
+     *
+     * @param description The new description of the quest.
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -55,6 +66,8 @@ public abstract class Quest {
     public boolean hasKeyword(String keyword) {
         return description.toLowerCase().contains(keyword.toLowerCase());
     }
+
+    public abstract void edit(String[] args) throws PageException;
 
     /**
      * Returns the String representation of the quest.

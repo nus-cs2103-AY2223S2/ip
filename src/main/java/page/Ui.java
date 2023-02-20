@@ -128,6 +128,10 @@ public class Ui {
         return text;
     }
 
+    public String showQuestEdited(Quest q) {
+        return "Quest Edited!\n" + q.toString();
+    }
+
     /**
      * Returns a message listing all the commands available to Page.
      *
