@@ -74,4 +74,9 @@ public class Task {
     public LocalDate getDate() {
         return null;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return getClass() == o.getClass();
+    }
 }
