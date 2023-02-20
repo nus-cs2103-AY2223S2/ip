@@ -23,7 +23,6 @@ Eg. todo Read Book
 ```
 
 Expected output:
-
 ```Got it. I've added this task: 
 [T][] Read Book
 Priority:
@@ -38,7 +37,6 @@ Eg. deadline Finish CS2100 Quiz /by 2021-01-02
 ```
 
 Expected output:
-
 ```Got it. I've added this task: 
 [D][] Finish CS2100 Quiz (02/01/2021)
 Priority:
@@ -52,7 +50,6 @@ event <description> /from <start> /to <end>
 Eg. event Industry Talk /from 03/06/2021 2pm /to 03/06/2021 4pm
 ```
 Expected output:
-
 ```Got it. I've added this task: 
 [E][] Industry Talk (from: 03/06/2021 2pm to: 03/06/2021 4pm)
 Priority:
@@ -65,7 +62,6 @@ Now you have 3 tasks in the list.
 Command: `list`
 
 Expected output:
-
 ```Here are the tasks in your list: 
 1. [T][] Read Book
 Priority:
@@ -165,7 +161,6 @@ as high priority
 Command: `bye`
 
 Expected output:
-
 ```
 Bye! Hope to see you again soon!
 ```
