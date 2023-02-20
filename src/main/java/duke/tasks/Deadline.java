@@ -1,7 +1,14 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
+
 
 /**
  * Represents a deadline task.
@@ -11,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     private String desc;
-    private LocalDate dueDate;
+    private LocalDateTime dueDate;
 
     /**
      * Creates a deadline task.
@@ -22,8 +29,20 @@ public class Deadline extends Task {
      */
     public Deadline(int id, String description, String dueDate) {
         super(id);
+        List<Date> dates = new PrettyTimeParser().parse(dueDate);
         desc = description;
-        this.dueDate = LocalDate.parse(dueDate);
+        
+        if(dates.size() == 0) {
+            throw new IllegalArgumentException("Invalid date format");
+        } else {
+            this.dueDate = convertDateToLocalDateTime(dates.get(0));
+        }
+    }
+
+    private LocalDateTime convertDateToLocalDateTime(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
     }
 
     @Override
@@ -35,7 +54,7 @@ public class Deadline extends Task {
     public String toString() {
         String isDone = isCompleted() ? "X" : " ";
         return String.format("[D][%s] %s (by: %s)", isDone, description(),
-                dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm a")));
     }
 
     @Override
