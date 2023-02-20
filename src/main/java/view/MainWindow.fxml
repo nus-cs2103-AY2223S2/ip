@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -15,5 +17,10 @@
                 <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" style="-fx-background-color: FFD580;" />
             </content>
         </ScrollPane>
+        <ImageView fitHeight="558.0" fitWidth="388.0" opacity="0.05">
+            <image>
+                <Image url="@../images/background.png" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>
