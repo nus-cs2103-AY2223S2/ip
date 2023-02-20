@@ -15,8 +15,8 @@ public class Main extends Application {
         MainWindow mainWindow = new MainWindow();
         stage.setScene(new Scene(mainWindow));
         stage.setTitle("DaBeztSithLord");
-        stage.setMinWidth(700);
-        stage.setMinHeight(700);
+        stage.setMinWidth(800);
+        stage.setMinHeight(800);
         stage.setResizable(true);
         stage.show();
         mainWindow.greet();
