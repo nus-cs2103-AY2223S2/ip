@@ -60,7 +60,7 @@ test {
 }
 
 application {
-    mainClassName = "Duke.gui.Main"
+    mainClassName = "Duke.gui.Launcher"
 
 }
 
