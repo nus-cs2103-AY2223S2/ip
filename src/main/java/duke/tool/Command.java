@@ -91,19 +91,17 @@ public class Command {
      * @return The contents of tasks found.
      */
     public String find_tasks(String matchStr) {
-        // TODO: use Java streams to rewrite.
         assert matchStr != null : "Please provide a match string";
         if (matchStr.isBlank()) {
-            return "";
+            return ui.print_custom_msg("Nothing found");
         }
         ArrayList<Task> matchedTasks = new ArrayList<>();
-        String description;
-        for (Task task : tasks) {
-            description = task.toString();
+        tasks.forEach((task) -> {
+            String description = task.getDescription();
             if (description.contains(matchStr)) {
                 matchedTasks.add(task);
             }
-        }
+        });
         return ui.print_task_list(matchedTasks);
     }
 
