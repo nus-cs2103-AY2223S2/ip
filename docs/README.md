@@ -1,7 +1,6 @@
-# IP project
 CookieBot is a desktop CLI application for keeping track of the status of various tasks, including tasks with deadlines
 
-#Quick start
+# Quick start
 
 1) Ensure that you have Java 11 installed on the computer.
 2) Download Duke.jar from this link [here](https://github.com/ongweijie7/ip/releases/tag/v0.2).
