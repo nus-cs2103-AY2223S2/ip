@@ -42,6 +42,7 @@ public class Saver {
         try {
             createFile();
             FileWriter writer = new FileWriter(PATH + FILE_NAME);
+            System.out.println("Texas style.");
             writer.write(taskList.toSave());
             writer.close();
         } catch (IOException e) {

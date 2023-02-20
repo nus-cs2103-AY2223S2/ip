@@ -167,7 +167,11 @@ public class TaskList {
         }
         parameters[1] = parameters[1].replace("[","").replace("]","");
         parameters = parameters[1].split(" ");
-        Collections.addAll(tags,parameters);
+        for(int i = 0; i< parameters.length; i++){
+            if(!parameters[i].strip().equals("")){
+                tags.add(parameters[i]);
+            }
+        }
         return tags;
     }
 
@@ -197,6 +201,7 @@ public class TaskList {
             saveTaskList.add(task);
 
         }
+        this.numTasks = data.length/2;
         this.taskList = saveTaskList;
     }
 
