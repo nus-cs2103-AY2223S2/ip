@@ -38,6 +38,7 @@ public class DeleteCommand extends Command {
 
         Task deletedTask = tasks.get(taskNum - 1);
         tasks.delete(taskNum - 1);
+        assert (tasks.size() == taskNum - 1) : "Tasks size should be equal to previous tasks size - 1";
         storage.save(tasks.getAllTasks());
         return Ui.showDeleteMessage(deletedTask, tasks.size());
     }
