@@ -126,17 +126,14 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
+
     private String getResponse(String input) {
         try {
             Command userCommand = handler.processCommand(input, taskList);
             return userCommand.run(taskList,messageLoader);
         }
         catch (ProgramException e){
-            return ("Error encountered!!!!");
+            return e.getMessage();
         }
     }
 

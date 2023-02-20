@@ -4,6 +4,8 @@ import Duke.Commands.*;
 import Duke.Exception.ProgramException;
 import Duke.Tasks.TaskList;
 
+import java.util.ArrayList;
+
 /**
  * Class to handle commands given to Duke.
  * @author Bryan Juniano
@@ -45,16 +47,32 @@ public class Handler{
     public String parseToDo(String input) throws ProgramException{
         String parameters[] = input.split(" ",2);
         if(parameters.length==1){
-            throw new ProgramException("Task description needed!");
+            throw new ProgramException("Missing info! I need the task description.");
         }
         return parameters[1];
     }
 
     public String[] parseDeadline(String input) throws ProgramException{
-        return "1";
+        String parameters[] = input.split(" ",2);
+        if(parameters.length==1){
+            throw new ProgramException("Missing info! I need the task description and the end time");
+        }
+        parameters = parameters[1].split("/by");
+        if(parameters.length>2){
+            throw new ProgramException("Bad format! Use /by only as a command!");
+        }
+        for(int i = 0; i< parameters.length; i++){
+            parameters[i] = parameters[i].strip();
+        }
+        return parameters;
     }
 
     public String[] parseEvent(String input) throws ProgramException{
+        String parameters[] = input.split(" ",2);
+        if(parameters.length==1){
+            throw new ProgramException("Missing info! I need the task description, start and end time");
+        }
+        throw new ProgramException("Bad format!");
         return "1";
     }
 
@@ -64,6 +82,7 @@ public class Handler{
         String content = null;
         String start = null;
         String end = null;
+        String[] parameters = null;
         int index = 0;
         CommandList command = getCommand(input);
         switch (command) {
@@ -83,7 +102,8 @@ public class Handler{
                 c = new DeleteCommand(index);
                 break;
             case DEADLINE:
-                c = new DeadlineCommand("2","2");
+                parameters = parseDeadline(input);
+                c = new DeadlineCommand(parameters[0],parameters[1]);
                 break;
             case EVENT:
                 c = new EventCommand("2","2","2");
