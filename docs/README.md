@@ -6,7 +6,7 @@
 
 Add and delete tasks like todo, deadline and event to your task list.
 
-### Marking and unmarking tasks
+### Marking and un-marking tasks
 
 Mark tasks as done or not done.
 
@@ -64,24 +64,7 @@ Adds a deadline task with description "return book", deadline 10 Feb 2023 2 pm t
 
 ### `event DESCRIPTION /from DATE /to DATE` - Add event
 
-Adds a event task to your task list with start and end dates and times.
-
-Example of usage:
-
-`event dinner /from 10/08/2023 19:00 /to 10/08/2023 21:00`
-
-Expected outcome:
-
-Adds an event task with description "dinner", from 7pm to 9pm on 10 Aug 2023 to your task list.
-
-```
-[E][][LOW] dinner (from: 10 Aug 2023 7 PM to: 10 Aug 2023 9 PM)
-```
-<br/>
-
-### `event DESCRIPTION /from DATE /to DATE` - Add event
-
-Adds a event task to your task list with start and end dates and times.
+Adds an event task to your task list with start and end dates and times.
 
 Example of usage:
 
@@ -142,3 +125,43 @@ Delete task at INDEX.
 Example of usage:
 
 `delete 1`
+
+<br/>
+
+### `find KEYWORD` - Find task
+
+Show tasks with KEYWORD in description.
+
+Example of usage:
+
+`find book`
+
+<br/>
+
+### `pget INDEX` - Get Priority of task
+
+Show priority of task at INDEX.
+
+Example of usage:
+`pget 1`
+Expected outcome:
+
+```
+Priority of this task is: LOW
+```
+
+<br/>
+
+### `pset PRIORITY_VALUE INDEX` - Set Priority of task
+
+Sets priority of task at INDEX.
+
+Example of usage:
+`pset h 1`
+Expected outcome:
+
+```
+Priority of this task has been set to: HIGH
+```
+
+
