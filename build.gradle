@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Launcher"
+    mainClassName = "voile.Launcher"
     applicationDefaultJvmArgs = ['-Djdk.gtk.version=2', '-Djdk.gtk.verbose=true']
 }
 
@@ -51,11 +51,8 @@ checkstyle {
     toolVersion = "10.2"
 }
 
-checkstyleMain
-    .exclude('duke/model/Parser.java')
-
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "voile"
     archiveClassifier = null
 }
 
