@@ -14,7 +14,7 @@ public class DeleteCommand extends Command{
 
     @Override
     public String execute() throws DukeExceptions {
-        todoList.delete(index);
-        return(String.format("Now I have %d tasks in the list.", todoList.getNumberOfTasks()));
+        String message = todoList.delete(index);
+        return(String.format("%s\nNow I have %d tasks in the list.", message, todoList.getNumberOfTasks()));
     }
 }
