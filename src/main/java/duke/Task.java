@@ -11,7 +11,6 @@ import java.time.format.DateTimeParseException;
 public class Task implements Serializable {
     private Boolean isDone;
     private String description;
-//    private static final long serialVersionUID = -7531925916726747642;
 
     public Task() {
         this.isDone = false;

@@ -7,10 +7,10 @@ import java.util.ArrayList;
  * Represents a list containing all tasks.
  */
 public class TodoList implements Serializable {
-    private ArrayList<Task> todo_list;
+    private ArrayList<Task> todoList;
 
     public TodoList() {
-        this.todo_list = new ArrayList<>(100);
+        this.todoList = new ArrayList<>(100);
     }
 
     /**
@@ -23,7 +23,7 @@ public class TodoList implements Serializable {
     public String add(String type, String task) throws DukeExceptions{
         Task taskObject = new Task();
         Task newTask = taskObject.createNewTask(type, task);
-        todo_list.add(newTask);
+        todoList.add(newTask);
         return ("Got it. I've added this task:\n" + newTask.toString());
     }
 
@@ -34,14 +34,14 @@ public class TodoList implements Serializable {
      * @throws DukeExceptions If the input syntax is incorrect.
      */
     public String mark(int index) throws DukeExceptions{
-        int todo_list_length = todo_list.size();
+        int todo_list_length = todoList.size();
         boolean isOutOfBound = index < 0 || index > todo_list_length;
         if (isOutOfBound) {
             throw new DukeExceptions("Please use list command to check the index!");
         }
-        Task task = todo_list.get(index - 1);
+        Task task = todoList.get(index - 1);
         task.markTask();
-        return String.format("Nice! I've marked this task as done:\n%s", todo_list.get(index-1));
+        return String.format("Nice! I've marked this task as done:\n%s", todoList.get(index-1));
     }
 
     /**
@@ -51,14 +51,14 @@ public class TodoList implements Serializable {
      * @throws DukeExceptions If the input syntax is incorrect.
      */
     public String unmark(int index) throws DukeExceptions{
-        int todo_list_length = todo_list.size();
+        int todo_list_length = todoList.size();
         boolean isOutOfBound = index < 0 || index > todo_list_length;
         if (isOutOfBound) {
             throw new DukeExceptions("Please use list command to check the index!");
         }
-        Task task = todo_list.get(index - 1);
+        Task task = todoList.get(index - 1);
         task.unmarkTask();
-        return String.format("OK, I've marked this task as not done yet:\n%s", todo_list.get(index-1));
+        return String.format("OK, I've marked this task as not done yet:\n%s", todoList.get(index-1));
     }
 
     /**
@@ -68,12 +68,12 @@ public class TodoList implements Serializable {
      * @throws DukeExceptions If the input syntax is incorrect.
      */
     public String delete(int index) throws DukeExceptions {
-        int todo_list_length = todo_list.size();
+        int todo_list_length = todoList.size();
         boolean isOutOfBound = index < 0 || index > todo_list_length;
         if (isOutOfBound) {
             throw new DukeExceptions("Please use list command to check the index!");
         }
-        Task task = todo_list.remove(index - 1);
+        Task task = todoList.remove(index - 1);
         return String.format("Noted. I've removed this task:\n%s", task);
     }
 
@@ -82,30 +82,30 @@ public class TodoList implements Serializable {
      *
      * @return How many tasks in the list.
      */
-    public int number_of_tasks() {
-        return todo_list.size();
+    public int getNumberOfTasks() {
+        return todoList.size();
     }
 
     public String find(String keyword) {
-        String result_list = "";
-        int todo_list_length = todo_list.size();
+        String resultList = "";
+        int todoListLength = todoList.size();
         int resultIndex = 1;
-        for (int i = 1; i <= todo_list_length; i++) {
-            Task task = todo_list.get(i-1);
+        for (int i = 1; i <= todoListLength; i++) {
+            Task task = todoList.get(i-1);
             if (task.doesContainKeyword(keyword)) {
-                result_list += String.format("%d. %s\n", resultIndex++, task);
+                resultList += String.format("%d. %s\n", resultIndex++, task);
             }
         }
-        return("Here are the matching tasks in your list:\n" + result_list);
+        return("Here are the matching tasks in your list:\n" + resultList);
     }
 
     @Override
     public String toString() {
-        String shown_list = "";
-        int todo_list_length = todo_list.size();
-        for (int i = 1; i <= todo_list_length; i++) {
-            shown_list += String.format("%d. %s\n", i, todo_list.get(i-1));
+        String shownList = "";
+        int todoListLength = todoList.size();
+        for (int i = 1; i <= todoListLength; i++) {
+            shownList += String.format("%d. %s\n", i, todoList.get(i-1));
         }
-        return shown_list;
+        return shownList;
     }
 }
