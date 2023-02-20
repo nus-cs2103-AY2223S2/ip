@@ -25,7 +25,7 @@ public class Storage {
      */
     public Storage() {
         this.home = System.getProperty("user.dir");
-        this.path = Paths.get(this.home, "../../../DataDuke");
+        this.path = Paths.get(this.home, "/DataDuke");
         this.file = Paths.get(this.path.toString(), "DATA_dUkE.txt").toFile();
 
         if (!Files.exists(this.path)) {
