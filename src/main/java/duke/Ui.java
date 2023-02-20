@@ -45,7 +45,7 @@ public class Ui {
      * @param command The command to be described.
      */
     public void printCommandMessage(Command command) {
-        System.out.println(command);
+        System.out.println(command.getResponseOutput());
     }
 
     /**

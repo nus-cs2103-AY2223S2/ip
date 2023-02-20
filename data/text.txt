@@ -1,8 +1,7 @@
-D~ ~do homework~2023-02-04
+D~X~do homework~2023-02-04
 E~X~hackathon~2023-01-01~2023-01-02
 D~X~go sleep~2023-02-05
 E~ ~dolphin rehearsal~2023-02-15~2023-02-15
 T~ ~go to sleep
 T~ ~fewq
 E~ ~finish ip~2023-02-11~2023-02-17
-D~ ~cs1231 quiz~2023-02-15
