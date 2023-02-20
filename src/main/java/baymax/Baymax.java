@@ -1,6 +1,7 @@
 package baymax;
 
 import commands.Command;
+import commands.InvalidCommand;
 
 import java.io.FileNotFoundException;
 
@@ -27,7 +28,12 @@ public class Baymax {
      * Runs the program.
      */
     public String run(String string) {
-        Command command = parser.parse(string);
-        return command.execute(tasks, ui, storage);
+        try {
+            Command command = parser.parse(string);
+            return command.execute(tasks, ui, storage);
+        } catch (IllegalArgumentException e) {
+            Command command = new InvalidCommand(string);
+            return command.execute(tasks, ui, storage);
+        }
     }
 }

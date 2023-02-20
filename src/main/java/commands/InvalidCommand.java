@@ -20,6 +20,6 @@ public class InvalidCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.showLoadingErrorMessage();
+        return ui.invalidArgument();
     }
 }

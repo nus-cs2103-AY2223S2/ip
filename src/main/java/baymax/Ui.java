@@ -7,12 +7,27 @@ import tasks.Event;
 
 
 public class Ui {
+
+    public String showHelp() {
+        return "Command you can give Baymax:" +
+                "\n  - todo water the plants" +
+                "\n  - deadline complete homework /by 2023-05-17 23:59" +
+                "\n  - event movie night /from 2023-11-03 21:30 " +
+                "\n    /to 2023-11-03 23:00" +
+                "\n  - list" +
+                "\n  - delete 5" +
+                "\n  - mark 4" +
+                "\n  - unmark 4" +
+                "\n  - find water" +
+                "\n  - help" +
+                "\n  - bye";
+    }
     
     public String showLoadingErrorMessage() {
-        return ("Unable to load previous tasks");
+        return "Unable to load previous tasks";
     }
     public String welcomeMessage() {
-        return ("Hello, I am Baymax.Baymax your personal chat bot Companion. \nWhat can I do for you today?");
+        return ("Hello, I am Baymax, your personal chat bot. \nWhat can I do for you today?");
     }
 
     public String exitMessage() {
@@ -50,5 +65,9 @@ public class Ui {
 
     public String deleteMessage(Task task) {
         return "Task has been deleted: " + task.toString();
+    }
+
+    public String invalidArgument() {
+        return "Invalid command! Type \"help\" learn more";
     }
 }
