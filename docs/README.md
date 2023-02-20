@@ -163,4 +163,4 @@ Exit the application.
 
 ## Acknowledgements
 
-Voile is built with Java 11. The GUI of Voile is developed with [JavaFX](https://openjfx.io/).
+**Voile** is built with Java 11. The GUI of **Voile** is developed with [JavaFX](https://openjfx.io/).
