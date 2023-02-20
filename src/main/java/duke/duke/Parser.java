@@ -16,6 +16,8 @@ import duke.tasks.ToDo;
 public class Parser {
     private TaskList data;
 
+    private ArrayList<Task> stash;
+
     public Parser(TaskList data) {
         this.data = data;
     }
@@ -58,6 +60,7 @@ public class Parser {
         }
 
         if (input.contains("delete")) {
+            stash = data.copy();
             char query = input.charAt(input.length() - 1);
             int pos = Character.getNumericValue(query);
             //error check for pos exceeding size
@@ -68,6 +71,7 @@ public class Parser {
         }
 
         if (input.contains("todo ")) {
+            stash = data.copy();
             Task todo = new ToDo();
             String description = input.replace("todo ", "");
             try {
@@ -80,6 +84,7 @@ public class Parser {
         }
 
         if (input.contains("event ")) {
+            stash = data.copy();
             Task event = new Event();
             String description = input.replace("event ", "");
             try {
@@ -92,6 +97,7 @@ public class Parser {
         }
 
         if (input.contains("deadline ")) {
+            stash = data.copy();
             Task deadline = new Deadline();
             String description = input.replace("deadline ", "");
             try {
@@ -114,6 +120,11 @@ public class Parser {
                 matched += msg;
             }
             return matched;
+        }
+
+        if (input.equals("undo")) {
+            data.revert(stash);
+            return "Reverted";
         }
         return "I do not understand your instructions...";
     }

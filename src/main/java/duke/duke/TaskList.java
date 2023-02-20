@@ -85,6 +85,19 @@ public class TaskList {
         return matches;
     }
 
+    public ArrayList<Task> copy() {
+        ArrayList<Task> newList = new ArrayList<>();
+        for (int i = 0; i < this.getSize(); i++) {
+            Task curr = data.get(i);
+            newList.add(curr);
+        }
+        return newList;
+    }
+
+    public void revert(ArrayList<Task> newList) {
+        this.data = newList;
+    }
+
     @Override
     public String toString() {
         String tasks = "";
