@@ -2,6 +2,8 @@
 ## Introduction
 >"Don't forget stuff like I always do" - Jia-Ao Shi, _Kal Developer_
 
+Kal is a cat-themed calendar helper that helps you keep track of your tasks!
+
 ## Installation
 - Install Java 11 on your computer
 - Download **latest** JAR release of Kal [here](https://github.com/ShiJiaAo/ip/releases)
