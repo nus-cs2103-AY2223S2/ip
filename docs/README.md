@@ -1,6 +1,6 @@
-# User Guide
+# DUKE
 
-## Features 
+## Features
 
 ### Feature-ABC
 
@@ -10,13 +10,29 @@ Description of the feature.
 
 Description of the feature.
 
+### Feature-ABC
+
+Description of the feature.
+
+### Feature-XYZ
+
+Description of the feature.
+
+### Feature-ABC
+
+Description of the feature.
+
+### bye
+
+To exit and save all current data,
+
 ## Usage
 
 ### `Keyword` - Describe action
 
 Describe the action and its outcome.
 
-Example of usage: 
+Example of usage:
 
 `keyword (optional arguments)`
 

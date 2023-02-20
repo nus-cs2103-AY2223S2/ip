@@ -7,9 +7,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
+import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
 
@@ -25,6 +25,13 @@ public class DialogBox extends HBox {
         displayPicture.setFitHeight(100.0);
         Circle clip = new Circle(50, 50, 50);
         displayPicture.setClip(clip);
+
+        BorderStroke borderStroke = new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
+                new CornerRadii(17.0), new BorderWidths(2.0));
+        Border dialogBorder = new Border(borderStroke);
+
+        text.setStyle("-fx-padding: 15;  -fx-background-radius: 25; -fx-background-color: #FFFDD0; -fx-text-fill: black; -fx-opacity: 90%;");
+        text.setBorder(dialogBorder);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.setPadding(new Insets(5, 10, 5, 10));
