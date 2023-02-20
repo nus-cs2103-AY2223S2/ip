@@ -7,6 +7,8 @@ import duke.exception.InvalidTaskNumberException;
 import duke.exception.NotANumberException;
 import duke.task.Task;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * TaskList class that handles all the tasks
  */
@@ -55,7 +57,13 @@ public class TaskList {
      * @throws DukeException If task number is invalid
      */
     public String deleteTask(String taskId) throws DukeException {
-        Task task = getTask(taskId, "delete");
+        int taskNum;
+        try {
+            taskNum = Integer.parseInt(taskId);
+        } catch (NumberFormatException e) {
+            throw new NotANumberException("delete");
+        }
+        Task task = getTask(taskNum);
         tasks.remove(task);
         return ui.outputDeleteMsg(task, tasks.size());
     }
@@ -69,7 +77,13 @@ public class TaskList {
      * @throws DukeException If task number is invalid
      */
     public String changeMarkStatus(boolean isDone, String taskId) throws DukeException {
-        Task taskToMark = getTask(taskId, "mark");
+        int taskNum;
+        try {
+            taskNum = Integer.parseInt(taskId);
+        } catch (NumberFormatException e) {
+            throw new NotANumberException("mark");
+        }
+        Task taskToMark = getTask(taskNum);
         taskToMark.setIsDone(isDone);
         return ui.outputMarkMsg(isDone, taskToMark);
     }
@@ -78,20 +92,16 @@ public class TaskList {
      * Obtains the task according to the task number
      *
      * @param taskNumber task number of the task to be returned
-     * @param type type of the task
      * @return the task obtained using its task number
      * @throws InvalidTaskNumberException Throws when task number is invalid
-     * @throws NotANumberException Throws when task number is not a number
      */
-    public Task getTask(String taskNumber, String type) throws InvalidTaskNumberException, NotANumberException {
-        assert Integer.parseInt(taskNumber) >= 1 : "Task number inputs should be 1 or more";
+    public Task getTask(int taskNumber) throws InvalidTaskNumberException {
+        assert taskNumber >= 1 : "Task number inputs should be 1 or more";
         try {
-            int taskNo = Integer.parseInt(taskNumber) - 1;
+            int taskNo = taskNumber - 1;
             return tasks.get(taskNo);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException();
-        } catch (NumberFormatException e) {
-            throw new NotANumberException(type);
         }
     }
 
