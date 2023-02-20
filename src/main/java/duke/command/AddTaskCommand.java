@@ -20,6 +20,6 @@ public class AddTaskCommand extends Command{
     @Override
     public String execute() throws DukeExceptions {
         String result = todoList.add(instruction, description);
-        return(String.format("%s\nNow I have %d tasks in the list.", result, todoList.number_of_tasks()));
+        return(String.format("%s\nNow I have %d tasks in the list.", result, todoList.getNumberOfTasks()));
     }
 }
