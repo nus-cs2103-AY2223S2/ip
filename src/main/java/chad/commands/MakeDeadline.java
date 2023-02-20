@@ -9,7 +9,6 @@ import chad.tasks.Task;
  * Command to create a Deadline.
  */
 public class MakeDeadline extends Make {
-    private String description;
     private String by;
     private TaskList tasklist;
 
@@ -22,6 +21,7 @@ public class MakeDeadline extends Make {
     public MakeDeadline(String description, String by, TaskList tasklist, Parser parser) {
         super(description, tasklist, parser);
         this.by = by;
+//        this.tasklist = tasklist;
     }
 
     @Override
@@ -32,7 +32,8 @@ public class MakeDeadline extends Make {
         if (duplicate != null) {
             return duplicateFound(t, duplicate);
         }
-        tasklist.add(t);
+        System.out.println("created deadline " + t);
+        super.tasklist.add(t);
         return "Added this new Deadline: \n" + t;
     }
 }

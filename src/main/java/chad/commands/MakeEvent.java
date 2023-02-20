@@ -33,7 +33,7 @@ public class MakeEvent extends Make {
         if (duplicate != null) {
             return duplicateFound(t, duplicate);
         }
-        tasklist.add(t);
+        super.tasklist.add(t);
         return "Added this new Event:\n" + t;
     }
 }
