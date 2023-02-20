@@ -8,7 +8,7 @@
 - Delete obsolete tasks.
 
 ## Quick Start Guide
-1. Download the latest Chad version from (here)[https://github.com/fahim-tazz/ip/releases].
+1. Download the latest Chad version from (here](https://github.com/fahim-tazz/ip/releases).
 2. Open your Terminal/Command Prompt.
 3. Type `cd Downloads` (or wherever the `chad.jar` file is stored).
 4. Type in `java -jar chad.jar`.
