@@ -20,6 +20,7 @@ public class Storage {
      * @param file_name The name of a file within the directory to write into. Defaults to "tolist.txt"
      */
     public Storage(String dir_name, String file_name) {
+        assert ((dir_name != null) && (file_name != null)) : "please provide a valid path to save task list";
         if (dir_name.isBlank()) {
             dir_name = "data";
         }

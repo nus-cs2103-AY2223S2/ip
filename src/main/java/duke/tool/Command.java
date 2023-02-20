@@ -14,6 +14,7 @@ public class Command {
     private final Ui ui;
 
     public Command(ArrayList<Task> tasks, Ui ui) {
+        assert ui != null : "Unable to accept null user interface";
         this.tasks = tasks;
         this.ui = ui;
     }
@@ -83,6 +84,7 @@ public class Command {
      */
     public String find_tasks(String match_str) {
         // TODO: use Java streams to rewrite.
+        assert match_str != null : "Please provide a match string";
         if (match_str.isBlank()) {
             return "";
         }
