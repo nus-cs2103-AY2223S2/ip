@@ -3,7 +3,6 @@ package voile.util.parser;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import voile.common.exception.VoileRuntimeException;
 import voile.model.command.AddCommand;
 import voile.model.command.ClearCommand;
 import voile.model.command.Command;
@@ -36,7 +35,7 @@ public class CommandParser {
     private static final ApplicativeParser<Void> THROW_IF_TOO_MANY_ARGUMENTS_PARSER =
             ApplicativeParser.skipWhitespaces()
                     .takeNext(ApplicativeParser.eof())
-                    .throwIfFail("too many arguments");
+                    .throwIfFail("Too many arguments - the library cannot handle them.");
 
     private static final ApplicativeParser<String> NEXT_NON_WHITESPACES_PARSER =
             ApplicativeParser.skipWhitespaces().takeNext(ApplicativeParser.parseNonWhitespaces());
@@ -56,18 +55,17 @@ public class CommandParser {
     private static final ApplicativeParser<LocalDate> DATE_OR_DAY_PARSER =
             DATE_PARSER
                     .or(DAY_PARSER)
-                    .throwIfFail("incorrect format for a date/day argument - \n"
-                            + "date format is yyyy-MM-dd, day format is EEE");
+                    .throwIfFail("Incorrect format for a date/day - the library cannot store it.");
 
     private static final ApplicativeParser<Integer> INT_PARSER =
             NEXT_NON_WHITESPACES_PARSER
                     .optionalMap(Conversions::parseInt)
-                    .throwIfFail("incorrect format for an integer argument");
+                    .throwIfFail("Incorrect format for an index - the library cannot handle it.");
 
     private static final ApplicativeParser<Keyword> KEYWORD_PARSER =
             NEXT_NON_WHITESPACES_PARSER
                     .optionalMap(Conversions::parseKeyword)
-                    .throwIfFail("unknown command");
+                    .throwIfFail("Unknown command - the library cannot handle it.");
 
     private static final ApplicativeParser<Optional<Keyword>> OPTIONAL_KEYWORD_PARSER =
             KEYWORD_PARSER
@@ -77,7 +75,7 @@ public class CommandParser {
                             .parseUntilEof()
                             .filter(String::isBlank)
                             .takeNext(ApplicativeParser.of(Optional.empty())))
-                    .throwIfFail("unknown command");
+                    .throwIfFail("Unknown command - there is no such entry for 'help'.");
 
     private static final ApplicativeParser<String> WORD_PARSER = NEXT_NON_WHITESPACES_PARSER;
 
@@ -87,25 +85,34 @@ public class CommandParser {
     private static final ApplicativeParser<Task> TODO_TASK_PARSER =
             DESCRIPTION_UNTIL_EOF_PARSER.map(TodoTask::new);
 
+    private static final String MISSING_BY_ARGUMENT =
+            "Missing '--by <deadline>' - the library cannot create this deadline.";
+
     private static final ApplicativeParser<Task> DEADLINE_TASK_PARSER =
             ApplicativeParser
                     .parseUntil("--by")
                     .map(String::strip)
-                    .throwIfFail("expect '--by <deadline>' as argument")
+                    .throwIfFail(MISSING_BY_ARGUMENT)
                     .flatMap(description -> DATE_OR_DAY_PARSER
                             .flatMap(deadline -> ApplicativeParser
                                     .of(new DeadlineTask(description, deadline))));
+
+    private static final String MISSING_FROM_ARGUMENT =
+            "Missing '--from <date or day>' - the library cannot create this event.";
+
+    private static final String MISSING_TO_ARGUMENT =
+            "Missing '--to <date or day>' - the library cannot create this event.";
 
     private static final ApplicativeParser<Task> EVENT_TASK_PARSER =
             ApplicativeParser
                     .parseUntil("--from")
                     .map(String::strip)
-                    .throwIfFail("expect '--from <date or day>' as argument")
+                    .throwIfFail(MISSING_FROM_ARGUMENT)
                     .flatMap(description -> DATE_OR_DAY_PARSER
                             .flatMap(startTime -> ApplicativeParser
                                     .skipWhitespaces()
                                     .takeNext(ApplicativeParser.parseString("--to"))
-                                    .throwIfFail("expect '--to <date or day>' as argument")
+                                    .throwIfFail(MISSING_TO_ARGUMENT)
                                     .takeNext(DATE_OR_DAY_PARSER)
                                     .flatMap(endTime -> ApplicativeParser
                                             .of(new EventTask(description, startTime, endTime)))));
@@ -158,12 +165,12 @@ public class CommandParser {
      * an used parser, a {@code DukeRuntimeException} will be thrown.
      *
      * @return a command corresponded to the input string
-     * @throws VoileRuntimeException if the parser is already used
+     * @throws RuntimeException if the parser is already used
      * @throws ParserException if the input string cannot be parsed
      */
     public Command parse() {
         if (isUsed) {
-            throw new VoileRuntimeException("this parser is already used");
+            throw new RuntimeException("this parser is already used");
         }
         isUsed = true;
         Command cmd = null;
