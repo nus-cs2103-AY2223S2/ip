@@ -1,6 +1,6 @@
 # User Guide for Tick Pro
 
-![This is an image](/assets/screenshot_ip.png)
+![This is an image](/docs/Ui.png)
 
 ## Getting Started
 
