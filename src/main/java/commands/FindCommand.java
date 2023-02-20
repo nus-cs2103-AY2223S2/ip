@@ -63,7 +63,7 @@ public class FindCommand extends Command {
         int len = taskContainSearchList.size();
         return "You have " + (len == 0
                                 ? "no tasks"
-                                : len + (len > 1
+                                : len + (len < 1
                                         ? " task"
                                         : " tasks"))
                 + (this.date != null && this.date.isEqual(LocalDate.now())
