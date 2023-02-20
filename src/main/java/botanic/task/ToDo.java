@@ -2,7 +2,7 @@ package botanic.task;
 
 /**
  * Encapsulates the related fields and behavior of a ToDo task.
- * Represents a task without any date/time attached.
+ * This class represents a task without any date/time attached.
  */
 public class ToDo extends Task {
     /**
@@ -37,7 +37,7 @@ public class ToDo extends Task {
     /**
      * Returns a formatted string representation of this task for storage.
      *
-     * @return A string representation of this task.
+     * @return A string representation of this ToDo task.
      */
     @Override
     public String formatForStorage() {

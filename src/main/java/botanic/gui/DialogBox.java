@@ -24,6 +24,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
+
+
 /**
  * A class that represents the container for the user's input or for botanic's response,
  * it consists of an ImageView representing the user/botanic icon and a Label containing
@@ -33,24 +35,22 @@ import javafx.scene.paint.Color;
 public class DialogBox extends HBox {
     private static final BorderStrokeStyle BORDER_STROKE_STYLE = BorderStrokeStyle.SOLID;
     private static final BorderWidths BORDER_WIDTH = new BorderWidths(1.0);
-    private static final Color BOTANIC_COLOR = Color.LAVENDERBLUSH;
-    private static final Color BORDER_COLOR = Color.BLACK;
-    private static final Color USER_COLOR = Color.LIGHTGOLDENRODYELLOW;
+    private static final Color COLOR_BOTANIC = Color.LAVENDERBLUSH;
+    private static final Color COLOR_BORDER = Color.BLACK;
+    private static final Color COLOR_USER = Color.LIGHTGOLDENRODYELLOW;
     private static final CornerRadii DIALOG_BOX_CORNER_RADII = new CornerRadii(10.0);
-    private static final Insets INSETS = new Insets(-10);
+    private static final Insets INSETS = new Insets(-5.0);
 
-    /**
-     * The label containing a string representing the user input or botanic's response.
-     */
+    //@@author HmuuMyatMoe-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+    // with minor modifications
+
+    /** The label containing a string representing the user input or botanic's response. */
     @FXML
     private Label dialog;
-    /**
-     * The icon to be displayed, representing the user's icon or the botanic's icon.
-     */
+    /** The icon to be displayed, representing the user's icon or the botanic's icon. */
     @FXML
     private ImageView displayPicture;
-
-
 
     /**
      * Instantiates DialogBox.
@@ -68,23 +68,24 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        this.dialog.setText(text);
-        this.displayPicture.setImage(img);
-
-        this.dialog.setMinHeight(Region.USE_PREF_SIZE);
+        dialog.setText(text);
+        displayPicture.setImage(img);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        ObservableList<Node> tmp = FXCollections.observableArrayList(getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.CENTER_LEFT);
     }
+    //@@author
 
+    //Solution below adapted from
+    // https://stackoverflow.com/questions/27712213/how-do-i-make-a-simple-solid-border-around-a-flowpane-in-javafx
     /**
      * Adds border to the given dialog box.
      *
@@ -93,11 +94,13 @@ public class DialogBox extends HBox {
     private static void designBorder(DialogBox dialogBox) {
         dialogBox.dialog.setBorder(
                 new Border(new BorderStroke(
-                        DialogBox.BORDER_COLOR, DialogBox.BORDER_STROKE_STYLE,
+                        DialogBox.COLOR_BORDER, DialogBox.BORDER_STROKE_STYLE,
                         DialogBox.DIALOG_BOX_CORNER_RADII, DialogBox.BORDER_WIDTH,
                         DialogBox.INSETS)));
     }
 
+    //Solution below adapted from
+    // https://stackoverflow.com/questions/22614758/issue-with-background-color-in-javafx-8
     /**
      * Sets the background color of the given dialog box to the given color.
      *
@@ -110,6 +113,9 @@ public class DialogBox extends HBox {
                         color, DialogBox.DIALOG_BOX_CORNER_RADII, DialogBox.INSETS)));
     }
 
+    //@@author HmuuMyatMoe-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+    // with minor modifications
     /**
      * Instantiates DialogBox where the ImageView is on the right and text on the left,
      * which represents the user's input.
@@ -121,23 +127,24 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialog = new DialogBox(text, img);
         designBorder(userDialog);
-        setBackgroundColor(userDialog, DialogBox.USER_COLOR);
+        setBackgroundColor(userDialog, DialogBox.COLOR_USER);
         return userDialog;
     }
 
     /**
      * Instantiates DialogBox where the ImageView is on the left and text on the right,
-     * which represents the botanic response.
+     * which represents botanic's response.
      *
-     * @param text Botanic response.
-     * @param img Botanic icon.
-     * @return A DialogBox representing Botanic response message.
+     * @param text Botanic's response.
+     * @param img Botanic's icon.
+     * @return A DialogBox representing Botanic's response message.
      */
     public static DialogBox getBotanicDialog(String text, Image img) {
         var botanicDialog = new DialogBox(text, img);
         botanicDialog.flip();
         designBorder(botanicDialog);
-        setBackgroundColor(botanicDialog, DialogBox.BOTANIC_COLOR);
+        setBackgroundColor(botanicDialog, DialogBox.COLOR_BOTANIC);
         return botanicDialog;
     }
+    //@@author
 }

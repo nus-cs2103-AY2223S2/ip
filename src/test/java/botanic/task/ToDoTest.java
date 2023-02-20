@@ -32,78 +32,79 @@ public class ToDoTest {
     }
 
     /**
-    * Tests the behaviour of mark().
+    * Tests the behaviour of setDone() by trying to mark the task as done.
     */
     @Test
-    public void testMark() {
+    public void setDone_setTrue_true() {
         ToDo todo = new ToDo("get food");
-        todo.markIsDone();
+        todo.setDone(true);
         assertEquals("[T][X] get food", todo.toString());
     }
 
     /**
-     * Tests the behaviour of unmark().
+     * Tests the behaviour of setDone() by trying to mark the task as done,
+     * then mark the task as not done.
      */
     @Test
-    public void testUnmark() {
+    public void setDone_setTrueThenSetFalse_false() {
         ToDo todo = new ToDo("get food");
-        todo.markIsDone();
-        todo.unmarkIsDone();
+        todo.setDone(true);
+        todo.setDone(false);
         assertEquals("[T][ ] get food", todo.toString());
     }
 
     /**
-     * Tests the behaviour of isDone() when a task is not marked.
+     * Tests the behaviour of getIsDone() when a task is not marked.
      */
     @Test
-    public void isDone_unmarked_whiteSpace() {
-        assertEquals(" ", new ToDo("a").isDone());
+    public void getIsDone_unmarked_whiteSpace() {
+        assertEquals(" ", new ToDo("a").getIsDone());
     }
 
     /**
-     * Tests the behaviour of isDone() when a task is marked.
+     * Tests the behaviour of getIsDone() when a task is marked.
      */
     @Test
-    public void isDone_marked_markedX() {
+    public void getIsDone_marked_markedX() {
         ToDo todo = new ToDo("a");
-        todo.markIsDone();
-        assertEquals("X", todo.isDone());
+        todo.setDone(true);
+        assertEquals("X", todo.getIsDone());
     }
 
     /**
-     * Tests the behaviour of containKeyword() by searching for
+     * Tests the behaviour of hasKeyword() by searching for
      * a keyword that the task name is expected to completely match with.
      */
     @Test
-    public void containKeyword_allMatchingName_true() {
-        assertTrue(new ToDo("get food").containKeyword("get food"));
+    public void hasKeyword_allMatchingName_true() {
+        assertTrue(new ToDo("get food").hasKeyword("get food"));
     }
 
     /**
-     * Tests the behaviour of containKeyword() by searching for
+     * Tests the behaviour of hasKeyword() by searching for
      * a keyword that the task name is expected to partially match with.
      */
     @Test
-    public void containKeyword_partialMatchingName_true() {
-        assertTrue(new ToDo("get food").containKeyword("foo"));
+    public void hasKeyword_partialMatchingName_true() {
+        assertTrue(new ToDo("get food").hasKeyword("foo"));
     }
 
     /**
-     * Tests the behaviour of containKeyword() by searching for
+     * Tests the behaviour of hasKeyword() by searching for
      * a keyword that the task name is expected to not match with.
      */
     @Test
-    public void containKeyword_noMatchingName_true() {
-        assertFalse(new ToDo("get food").containKeyword("gt food"));
+    public void hasKeyword_noMatchingName_true() {
+        assertFalse(new ToDo("get food").hasKeyword("gt food"));
     }
 
     /**
-     * Tests the behaviour of containDate().
+     * Tests the behaviour of hasDate().
      */
     @Test
-    public void testContainDate() {
+    public void testHasDate() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate ld = LocalDate.parse("2024/11/11", dtf);
-        assertFalse(new ToDo("get food").containDate(ld));
+        assertFalse(new ToDo("get food").hasDate(ld));
     }
 }

@@ -13,59 +13,70 @@ import botanic.task.ToDo;
  * Encapsulates the related fields and behavior of Botanic.
  */
 public class Botanic {
+    //@@author HmuuMyatMoe-reused
+    //Reused from https://nus-cs2103-ay2223s2.github.io/website/admin/ip-w3.html
+    //with minor modifications
     private Storage storage;
     private TaskList tasks;
     private Gui gui;
     private Parser parser;
 
     /**
-     * Instantiates the chatbot program.
+     * Instantiates the Botanic program.
      *
-     * @param dirPath The path to the directory that the file is stored in.
+     * @param dirPath The path to the directory that the storage file is located at.
      * @param fileName The name of the storage file.
      */
     public Botanic(String dirPath, String fileName) {
-        this.storage = new Storage(dirPath, fileName);
-        this.gui = new Gui();
-        this.parser = new Parser();
+        storage = new Storage(dirPath, fileName);
+        gui = new Gui();
+        parser = new Parser();
         try {
-            this.tasks = new TaskList(this.storage.read());
+            tasks = new TaskList(storage.read());
         } catch (BotanicException e) {
-            this.gui.printMsg(e.getMessage());
-            this.tasks = new TaskList();
+            tasks = new TaskList();
+            e.printStackTrace();
         }
     }
+    //@@author
 
     /**
-     * Gets the welcome message.
+     * Returns the welcome message.
      *
      * @return The welcome message string.
      */
     public String getWelcome() {
-        return this.gui.getWelcome();
+        return gui.getWelcome();
     }
 
     /**
      * Stores the tasks in a file in hard drive.
      */
     public void store() {
-        Task[] t = { new ToDo("a") };
-        this.storage.writeToFile(this.tasks.getTaskList().toArray(t));
+        Task[] tempTasks = { new ToDo("a") };
+        storage.writeToFile(
+                tasks.getTaskList().toArray(tempTasks));
     }
 
     /**
-     * Parses the user input to get a Command, executes the returned Command and
-     * catches and handles BotanicException if there is any thrown.
+     * Parses the user input to get a Command, executes the Command.
+     * Returns Botanic's response if command execution is successful.
+     * Catches and handles BotanicException if there is any thrown.
      *
      * @param input The user input read.
      * @return A string representing Botanic's response to the user input.
      */
+
     public String getResponse(String input) {
+        //@@author HmuuMyatMoe-reused
+        //Reused from https://nus-cs2103-ay2223s2.github.io/website/admin/ip-w3.html
+        //with minor modifications
         try {
-            Command cmd = this.parser.parseCommand(input);
-            return cmd.execute(this.tasks, this.storage, this.gui);
+            Command cmd = parser.parseCommand(input);
+            return cmd.execute(tasks, storage, gui);
         } catch (BotanicException e) {
             return e.getMessage();
         }
+        //@@author
     }
 }

@@ -21,16 +21,16 @@ public class TaskList {
      * Instantiates TaskList with no arguments given.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
      * Instantiates TaskList with the given ArrayList.
      *
-     * @param taskList The list of our tasks fetched from hard drive storage.
+     * @param tasks The list of our tasks fetched from hard drive storage.
      */
-    public TaskList(ArrayList<Task> taskList) {
-        this.tasks = taskList;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -39,19 +39,19 @@ public class TaskList {
      * @return The ArrayList containing the tasks.
      */
     public ArrayList<Task> getTaskList() {
-        return this.tasks;
+        return tasks;
     }
 
     /**
      * Adds tasks into the list and prints out completion message when done.
      *
      * @param task The task to be added.
-     * @return A string message to signify the success or failure of task executed.
+     * @return A string message to signify a successful task addition.
      */
     public String add(Task task) {
-        boolean hasAdded = this.tasks.add(task);
-        assert hasAdded : "Task is not added to the task basket successfully.";
-        String response = gui.getAddSuccessMsg(task, this.tasks.size());
+        boolean isAdded = tasks.add(task);
+        assert isAdded : "Task is not added to the task basket successfully.";
+        String response = gui.getAddSuccessMsg(task, tasks.size());
         return response;
     }
 
@@ -59,37 +59,37 @@ public class TaskList {
      * Deletes task at the given index.
      *
      * @param index The index of task to be deleted.
-     * @return A string message to signify the success or failure of task executed.
+     * @return A string message to signify a successful task deletion.
      * @throws OutOfBoundsException If index given is less than 0
      *                              or more than the index of the last list element.
      */
     public String delete(int index) throws OutOfBoundsException {
-        if (index < 0 || index >= this.tasks.size()) {
+        if (index < 0 || index >= tasks.size()) {
             throw new OutOfBoundsException(gui.getOutOfBoundsErrorMsg());
         }
-        assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
+        assert index > 0 && index < tasks.size() : "Index given is out of bounds";
 
-        Task removed = this.tasks.remove(index);
+        Task removed = tasks.remove(index);
         assert removed != null : "Task at index not removed.";
-        return gui.getDeleteSuccessMsg(removed, this.tasks.size());
+        return gui.getDeleteSuccessMsg(removed, tasks.size());
     }
 
     /**
      * Marks the task at the given index as done.
      *
      * @param index The index number of the task given.
-     * @return A string message to signify the success of failure of task executed.
+     * @return A string message to signify the successful marking of task as done.
      * @throws OutOfBoundsException If index given is less than 0
      *                              or more than the index of the last list element.
      */
     public String markIsDone(int index) throws OutOfBoundsException {
-        if (index < 0 || index >= this.tasks.size()) {
+        if (index < 0 || index >= tasks.size()) {
             throw new OutOfBoundsException(gui.getOutOfBoundsErrorMsg());
         }
-        assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
+        assert index > 0 && index < tasks.size() : "Index given is out of bounds";
 
-        Task task = this.tasks.get(index);
-        task.markIsDone();
+        Task task = tasks.get(index);
+        task.setDone(true);
         return gui.getMarkSuccessMsg(task);
     }
 
@@ -97,18 +97,18 @@ public class TaskList {
      * Marks the task at the given index as not done.
      *
      * @param index The index number of the task given.
-     * @return A string message to signify the success of failure of task executed.
+     * @return A string message to signify the success marking of task as not done.
      * @throws OutOfBoundsException If index given is less than 0
      *                              or more than the index of the last list element.
      */
     public String unmarkIsDone(int index) throws OutOfBoundsException {
-        if (index < 0 || index >= this.tasks.size()) {
+        if (index < 0 || index >= tasks.size()) {
             throw new OutOfBoundsException(gui.getOutOfBoundsErrorMsg());
         }
-        assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
+        assert index > 0 && index < tasks.size() : "Index given is out of bounds";
 
-        Task task = this.tasks.get(index);
-        task.unmarkIsDone();
+        Task task = tasks.get(index);
+        task.setDone(false);
         return gui.getUnmarkSuccessMsg(task);
     }
 
@@ -118,7 +118,7 @@ public class TaskList {
      * @return A string representation of the list of all the tasks.
      */
     public String print() {
-        int size = this.tasks.size();
+        int size = tasks.size();
         if (size == 0) {
             return gui.getNoItemErrorMsg();
         }
@@ -128,17 +128,17 @@ public class TaskList {
 
     /**
      * Searches for tasks with names that completely matches
-     * the given keyword (case-insensitive) and prints them out.
+     * the given keyword (case-insensitive) and returns the result.
      *
      * @param keyword The keyword to search for.
      * @return The results of the search.
      */
     public String findAllMatch(String keyword) {
-        int size = this.tasks.size();
+        int size = tasks.size();
         TaskList searchResult = new TaskList();
         for (int currIndex = 0; currIndex < size; currIndex++) {
-            Task curr = this.tasks.get(currIndex);
-            if (curr.containKeyword(" " + keyword + " ")) {
+            Task curr = tasks.get(currIndex);
+            if (curr.hasKeyword(" " + keyword + " ")) {
                 searchResult.add(curr);
             }
         }
@@ -152,17 +152,17 @@ public class TaskList {
 
     /**
      * Searches for tasks with names that partially or completely matches
-     * the given keyword (case-insensitive) and prints them out.
+     * the given keyword (case-insensitive) and returns the result.
      *
      * @param keyword The keyword to search for.
      * @return The results of the search.
      */
     public String findFlexibly(String keyword) {
-        int size = this.tasks.size();
+        int size = tasks.size();
         TaskList searchResult = new TaskList();
         for (int currIndex = 0; currIndex < size; currIndex++) {
-            Task curr = this.tasks.get(currIndex);
-            if (curr.containKeyword(keyword)) {
+            Task curr = tasks.get(currIndex);
+            if (curr.hasKeyword(keyword)) {
                 searchResult.add(curr);
             }
         }
@@ -176,17 +176,17 @@ public class TaskList {
 
     /**
      * Searches for tasks with dates that matches
-     * the given date and prints them out.
+     * the given date and returns the result.
      *
      * @param dateToFind The date to search for.
      * @return The results of the search.
      */
     public String findDate(LocalDate dateToFind) {
-        int size = this.tasks.size();
+        int size = tasks.size();
         TaskList searchResult = new TaskList();
         for (int currIndex = 0; currIndex < size; currIndex++) {
-            Task curr = this.tasks.get(currIndex);
-            if (curr.containDate(dateToFind)) {
+            Task curr = tasks.get(currIndex);
+            if (curr.hasDate(dateToFind)) {
                 searchResult.add(curr);
             }
         }
@@ -200,16 +200,16 @@ public class TaskList {
     }
 
     /**
-     * Gets a string representation of all the tasks in the list.
+     * Returns a string representation of all the tasks in the list.
      *
      * @return A string representation of the list.
      */
     @Override
     public String toString() {
-        int size = this.tasks.size();
+        int size = tasks.size();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            sb.append(String.format("%d. %s\n", (i + 1), this.tasks.get(i)));
+            sb.append(String.format("%d. %s\n", (i + 1), tasks.get(i)));
         }
         return sb.toString();
     }

@@ -6,7 +6,7 @@ import botanic.Formatter;
 
 /**
  * Encapsulates the related fields and behavior of an Event task.
- * Represents a task that starts and ends at a specific date/time.
+ * This class represents a task that starts and ends at a specific date.
  */
 public class Event extends Task {
     //Start time
@@ -19,8 +19,8 @@ public class Event extends Task {
      * Instantiates Event with three arguments given.
      *
      * @param name The name of the task.
-     * @param start The start date/time of event.
-     * @param end The end date/time of event.
+     * @param start The start date of event.
+     * @param end The end date of event.
      */
     public Event(String name, LocalDate start, LocalDate end) {
         super(name);
@@ -32,8 +32,8 @@ public class Event extends Task {
      * Instantiates Event with 4 arguments given.
      *
      * @param name The name of the task.
-     * @param start The start date/time of event.
-     * @param end The end date/time of event.
+     * @param start The start date of event.
+     * @param end The end date of event.
      * @param isDone Status of the task.
      */
     public Event(String name, LocalDate start, LocalDate end, boolean isDone) {
@@ -49,8 +49,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String s = Formatter.formatDateForPrint(this.start);
-        String e = Formatter.formatDateForPrint(this.end);
+        String s = Formatter.formatDateForPrint(start);
+        String e = Formatter.formatDateForPrint(end);
         String toPrint = String.format("[E]%s (from: %s to: %s)",
                 super.toString(), s, e);
         return toPrint;
@@ -59,24 +59,24 @@ public class Event extends Task {
     /**
      * Returns a formatted string representation of this task for storage.
      *
-     * @return A string representation of this task.
+     * @return A string representation of this Event task.
      */
     @Override
     public String formatForStorage() {
-        String s = Formatter.formatDateForStorage(this.start);
-        String e = Formatter.formatDateForStorage(this.end);
+        String s = Formatter.formatDateForStorage(start);
+        String e = Formatter.formatDateForStorage(end);
         return ("E | " + super.formatForStorage() + String.format(" | %s | %s", s, e));
     }
 
     /**
-     * Searches for given date in the task description.
+     * Checks if given date matches with this event's start date or end date.
      *
      * @param dateToFind The given date to find.
-     * @return True if date matches start or end date, false otherwise.
+     * @return True if date given matches with this event's start or end date, false otherwise.
      */
     @Override
-    public boolean containDate(LocalDate dateToFind) {
-        if (this.start.equals(dateToFind) || this.end.equals(dateToFind)) {
+    public boolean hasDate(LocalDate dateToFind) {
+        if (start.equals(dateToFind) || end.equals(dateToFind)) {
             return true;
         }
         return false;

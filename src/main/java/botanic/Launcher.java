@@ -1,5 +1,8 @@
 package botanic;
 
+//@@author HmuuMyatMoe-reused
+//Reused from https://se-education.org/guides/tutorials/javaFxPart1.html
+//with minor modifications
 import javafx.application.Application;
 
 /**
@@ -16,3 +19,4 @@ public class Launcher {
         Application.launch(Main.class, args);
     }
 }
+//@@author

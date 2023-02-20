@@ -6,7 +6,7 @@ import botanic.Formatter;
 
 /**
  * Encapsulates the related fields and behavior of a Deadline task,
- * a task that needs to be done before a specific date/time.
+ * a task that needs to be done before a specific date.
  */
 public class Deadline extends Task {
     //The deadline given.
@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * Instantiates Deadline with two arguments given.
      *
      * @param name The name of the task.
-     * @param end The end date/time of deadline.
+     * @param end The end date of deadline.
      */
     public Deadline(String name, LocalDate end) {
         super(name);
@@ -27,7 +27,7 @@ public class Deadline extends Task {
      * Instantiates deadline with three arguments given.
      *
      * @param name The name of the task.
-     * @param end The end date/time of deadline.
+     * @param end The end date of deadline.
      * @param isDone Status of the task.
      */
     public Deadline(String name, LocalDate end, boolean isDone) {
@@ -43,30 +43,30 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String toPrint = String.format("[D]%s (by: %s)",
-                super.toString(), Formatter.formatDateForPrint(this.end));
+                super.toString(), Formatter.formatDateForPrint(end));
         return toPrint;
     }
 
     /**
      * Returns a formatted string representation of this task for storage.
      *
-     * @return A string representation of this task.
+     * @return A string representation of this Deadline task.
      */
     @Override
     public String formatForStorage() {
         return ("D | " + super.formatForStorage()
-                + String.format(" | %s", Formatter.formatDateForStorage(this.end)));
+                + String.format(" | %s", Formatter.formatDateForStorage(end)));
     }
 
     /**
-     * Searches for given date in the task description.
+     * Checks if given date matches with this deadline's end date.
      *
      * @param dateToFind The given date to find.
-     * @return True if date matches start or end date, false otherwise.
+     * @return True if date given matches with this deadline's end date, false otherwise.
      */
     @Override
-    public boolean containDate(LocalDate dateToFind) {
-        if (this.end.equals(dateToFind)) {
+    public boolean hasDate(LocalDate dateToFind) {
+        if (end.equals(dateToFind)) {
             return true;
         }
         return false;

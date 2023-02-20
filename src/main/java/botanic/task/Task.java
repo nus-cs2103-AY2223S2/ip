@@ -33,17 +33,12 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as done.
+     * Sets isDone to given boolean value.
+     *
+     * @param isDone Boolean value to set isDone to.
      */
-    public void markIsDone() {
-        this.isDone = true;
-    }
-
-    /**
-     * Marks the task as undone.
-     */
-    public void unmarkIsDone() {
-        this.isDone = false;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -51,8 +46,8 @@ public abstract class Task {
      *
      * @return "X" if isDone is true, " " otherwise.
      */
-    public String isDone() {
-        if (this.isDone) {
+    public String getIsDone() {
+        if (isDone) {
             return "X";
         }
         return " ";
@@ -65,8 +60,8 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String status = this.isDone();
-        return (String.format("[%s] %s", status, this.name));
+        String status = getIsDone();
+        return (String.format("[%s] %s", status, name));
     }
 
     /**
@@ -77,7 +72,7 @@ public abstract class Task {
     public String formatForStorage() {
         String status = isDone ? "1" : "0";
         assert status == "1" || status == "0" : "Status not set properly.";
-        return (String.format("%s | %s", status, this.name));
+        return (String.format("%s | %s", status, name));
     }
 
     /**
@@ -86,8 +81,8 @@ public abstract class Task {
      * @param keyword The given keyword string.
      * @return True if name contains keyword, false otherwise.
      */
-    public boolean containKeyword(String keyword) {
-        String formatName = this.name.toUpperCase();
+    public boolean hasKeyword(String keyword) {
+        String formatName = " " + name.toUpperCase() + " ";
         return formatName.contains(keyword.toUpperCase());
     }
 
@@ -97,7 +92,7 @@ public abstract class Task {
      * @param dateToFind The given date to find.
      * @return False as Task does not have a date field.
      */
-    public boolean containDate(LocalDate dateToFind) {
+    public boolean hasDate(LocalDate dateToFind) {
         return false;
     }
 }

@@ -9,7 +9,9 @@ import botanic.task.TaskList;
  * Encapsulates the related fields and behavior of a command to add a task.
  */
 public class AddCommand extends Command {
+    /** The task to be added. */
     private Task task;
+
     /**
      * Instantiates AddCommand.
      *
@@ -20,15 +22,15 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds the given task to the taskList.
+     * Adds the given task into the taskList.
      *
-     * @param tasks The ArrayList of tasks.
+     * @param tasks The TaskList of tasks.
      * @param storage The class that reads and write program data to hard drive.
      * @param gui The class that handles interaction with the users.
-     * @return A string message to signify the success or failure of task executed.
+     * @return A string message signifying Botanic's response to a successful add.
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Gui gui) {
-        return tasks.add(this.task);
+        return tasks.add(task);
     }
 }

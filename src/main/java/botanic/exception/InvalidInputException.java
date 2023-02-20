@@ -2,8 +2,8 @@ package botanic.exception;
 
 /**
  * Encapsulates the related fields and behavior of an InvalidInputException.
- * Represents the exception to throw when given input is invalid,
- * for instance, command given does not exit.
+ * This class represents the exception to throw when given input is invalid,
+ * for instance, given command given does not exit.
  */
 public class InvalidInputException extends BotanicException {
     /**

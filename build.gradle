@@ -9,6 +9,8 @@ checkstyle {
     toolVersion = '10.2'
 }
 
+//@@author HmuuMyatMoe-reused
+//Reused from https://se-education.org/guides/tutorials/javaFxPart1.html
 repositories {
     mavenCentral()
 }
@@ -32,6 +34,7 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
+//@@author
 
 test {
     useJUnitPlatform()
@@ -48,11 +51,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.Launcher"
+    mainClassName = "botanic.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "botanic"
     archiveClassifier = null
 }
 

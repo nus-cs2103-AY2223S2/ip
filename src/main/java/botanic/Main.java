@@ -1,5 +1,9 @@
 package botanic;
 
+//@@author HmuuMyatMoe-reused
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+//with minor modifications
+
 import java.io.IOException;
 
 import botanic.gui.MainWindow;
@@ -14,22 +18,24 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Botanic botanic = new Botanic("./ip/data", "BotanicList.txt");
+    private Botanic botanic;
 
     /**
-     * Stages the primary stage onto the screen.
-     * This is the starting point of the application.
+     * Stages the primary stage onto the screen, this is the starting point of the application.
      *
      * @param stage The primary stage for this application.
      */
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            botanic = new Botanic("./botanicData", "BotanicList.txt");
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setBotanic(this.botanic);
+            stage.setTitle("BOTanic");
+            fxmlLoader.<MainWindow>getController().setBotanic(botanic);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,12 +43,12 @@ public class Main extends Application {
     }
 
     /**
-     * Stops the entire application and
-     * stores data of the tasks in the local hard drive
+     * Stops the entire application and stores data of the tasks in the local hard drive
      * upon exiting the application.
      */
     @Override
     public void stop() {
-        this.botanic.store();
+        botanic.store();
     }
 }
+//@@author

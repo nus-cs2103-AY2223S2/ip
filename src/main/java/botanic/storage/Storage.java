@@ -18,7 +18,7 @@ import botanic.task.ToDo;
 
 /**
  * Encapsulates the related fields and behavior of the Storage.
- * Represents the class that reads and writes to the storage file in the hard disk.
+ * This class represents the class that reads and writes to the storage file in the hard disk.
  */
 public class Storage {
     private String dirPath;
@@ -35,25 +35,28 @@ public class Storage {
     public Storage(String dirPath, String fileName) {
         this.dirPath = dirPath;
         this.fileName = fileName;
-        this.filePath = dirPath + "/" + this.fileName;
+        filePath = dirPath + "/" + this.fileName;
     }
 
     /**
+     * Creates directory at the specified directory path if it does not already exist.
      * Creates file at the specified file path if it does not already exist.
      */
     public void createFile() {
-        File dir = new File(this.dirPath);
+        //create directory if it does not already exist
+        File dir = new File(dirPath);
         if (!dir.exists()) {
-            dir.mkdir();
+            dir.mkdirs();
         }
         //create file if it does not already exist
+        //Solution adapted from https://www.w3schools.com/java/java_files_create.asp
         try {
-            myFile = new File(this.filePath);
+            myFile = new File(filePath);
             if (!myFile.exists()) {
                 myFile.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println(e + "\nNew storage file cannot be created.");
+            System.out.println("New storage file cannot be created.");
             e.printStackTrace();
         }
     }
@@ -62,30 +65,31 @@ public class Storage {
      * Reads data stored in the hard disk.
      *
      * @return An ArrayList containing existing tasks stored in the storage.
-     * @throws BotanicException if file to be read cannot be found.
+     * @throws BotanicException If file to be read cannot be found.
      */
     public ArrayList<Task> read() throws BotanicException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            this.createFile();
+            createFile();
+            //Solution adapted from https://www.w3schools.com/java/java_files_read.asp
             Scanner sc = new Scanner(myFile);
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
-                String[] dataArr = data.split(" \\| ");
-                String type = dataArr[0];
-                boolean isDone = dataArr[1].equals("1");
+                String[] splitDatas = data.split(" \\| ");
+                String taskType = splitDatas[0];
+                boolean isDone = splitDatas[1].equals("1");
 
-                if (type.equals("T")) {
-                    ToDo t = new ToDo(dataArr[2], isDone);
+                if (taskType.equals("T")) {
+                    ToDo t = new ToDo(splitDatas[2], isDone);
                     tasks.add(t);
-                } else if (type.equals("D")) {
-                    LocalDate end = Parser.parseDate(dataArr[3]);
-                    Deadline d = new Deadline(dataArr[2], end, isDone);
+                } else if (taskType.equals("D")) {
+                    LocalDate end = Parser.parseDate(splitDatas[3]);
+                    Deadline d = new Deadline(splitDatas[2], end, isDone);
                     tasks.add(d);
                 } else {
-                    LocalDate start = Parser.parseDate(dataArr[3]);
-                    LocalDate end = Parser.parseDate(dataArr[4]);
-                    Event e = new Event(dataArr[2], start, end, isDone);
+                    LocalDate start = Parser.parseDate(splitDatas[3]);
+                    LocalDate end = Parser.parseDate(splitDatas[4]);
+                    Event e = new Event(splitDatas[2], start, end, isDone);
                     tasks.add(e);
                 }
             }
@@ -100,13 +104,13 @@ public class Storage {
      * Writes the given string input to file using given fileWriter.
      *
      * @param fileWriter The fileWriter to use to write input.
-     * @param input The input to write into file
+     * @param input The input to write into file.
      */
     private void writeUsingFileWriter(FileWriter fileWriter, String input) {
         try {
             fileWriter.write(input + "\n");
         } catch (IOException e) {
-            System.out.println(e + "\nUnable to write to data file.");
+            System.out.println("Unable to write to data file.");
             e.printStackTrace();
         }
     }
@@ -118,13 +122,14 @@ public class Storage {
      */
     public void writeToFile(Task... tasks) {
         try {
-            FileWriter fileWriter = new FileWriter(this.filePath);
+            //Solution adapted from https://www.w3schools.com/java/java_files_create.asp
+            FileWriter fileWriter = new FileWriter(filePath);
             Arrays.stream(tasks)
                     .map(t -> t.formatForStorage())
                     .forEach(t -> writeUsingFileWriter(fileWriter, t));
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println(e + "\nUnable to write to data file.");
+            System.out.println("Unable to write to data file.");
             e.printStackTrace();
         }
     }

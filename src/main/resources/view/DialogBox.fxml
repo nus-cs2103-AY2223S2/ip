@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+    @@author HmuuMyatMoe-reused
+    Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+    with minor modifications
+-->
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -20,3 +24,6 @@
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
 </fx:root>
+<!--
+    @@author
+-->

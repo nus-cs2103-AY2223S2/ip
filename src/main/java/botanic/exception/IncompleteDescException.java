@@ -2,7 +2,7 @@ package botanic.exception;
 
 /**
  * Encapsulates the related fields and behavior of an IncompleteDescException.
- * Represents the exception to throw when description given is missing or incomplete.
+ * This class represents the exception to throw when description is missing or incomplete.
  */
 public class IncompleteDescException extends BotanicException {
     /**

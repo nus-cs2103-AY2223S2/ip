@@ -11,7 +11,7 @@ public class ListCommand extends Command {
     /**
      * Prints out all tasks in the list.
      *
-     * @param tasks The ArrayList of tasks.
+     * @param tasks The TaskList of tasks.
      * @param storage The class that reads and write program data to hard drive.
      * @param gui The class that handles interaction with the users.
      * @return A string representation of the list of all the tasks.

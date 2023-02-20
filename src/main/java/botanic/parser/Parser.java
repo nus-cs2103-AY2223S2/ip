@@ -27,26 +27,26 @@ import botanic.task.ToDo;
  * Encapsulates the related fields and behavior of a parser that parses the inputs given.
  */
 public class Parser {
-    protected enum CommandEnum {
+    private enum CommandEnum {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FINDALLMATCH, FINDFLEX, FINDDATE
     }
 
     private Gui gui = new Gui();
 
     /**
-     * Checks if name of tasks is given in the given input
+     * Checks if the required fields for a given command is given
      * by checking the length of String array of the split input
      * and checking that the portion of the given input behind the command name is not empty.
      *
      * @param splitInputs The given user input that was split into 2 sections using " ".
-     * @param cmdType The type of the command given by user.
-     * @throws IncompleteDescException If there is no name of task given.
+     * @param fieldType The type of the field we are checking for.
+     * @throws IncompleteDescException If the expected field is missing.
      */
-    private void checkNameExists(String[] splitInputs, String cmdType)
+    private void checkFieldExists(String[] splitInputs, String fieldType)
             throws IncompleteDescException {
         if (splitInputs.length <= 1 || splitInputs[1].isBlank()) {
             throw new IncompleteDescException(
-                    gui.getNoDescErrorMsg(cmdType));
+                    gui.getMissingFieldErrorMsg(fieldType));
         }
     }
 
@@ -58,7 +58,7 @@ public class Parser {
      * @throws IncompleteDescException If name of the task is not given.
      */
     private ToDo getTodo(String[] splitInputs) throws IncompleteDescException {
-        checkNameExists(splitInputs, "todo");
+        checkFieldExists(splitInputs, "name of todo");
         return new ToDo(splitInputs[1]);
     }
 
@@ -74,10 +74,9 @@ public class Parser {
     }
 
     /**
-     * Finds the index of the given keyword
-     * in a section of a given string.
+     * Finds the index of the given keyword in a section of a given command string.
      *
-     * @param input The section of the user input with the command name removed.
+     * @param input The section of the user input to find the keyword in.
      * @param keyword The keyword to be found.
      * @param keywordType The type of keyword given (what the keyword represents).
      * @return The index of the given keyword in the given string.
@@ -108,7 +107,7 @@ public class Parser {
         String name = input.substring(startIndex, endIndex).strip();
         if (name.isBlank()) {
             throw new IncompleteDescException(
-                    gui.getMissingFieldErrorMsg("name"));
+                    gui.getMissingFieldErrorMsg("name of task"));
         }
         return name;
     }
@@ -143,16 +142,15 @@ public class Parser {
     }
 
     /**
-     * Checks whether the given dateInput is before the dateToCheckWith.
+     * Checks that the given dateInput has not passed (i.e., given dateInput is after today's date).
      *
      * @param dateInput The date we want to check.
-     * @param dateToCheckWith The date we are cross-checking against.
      * @param dateType The type of dateInput given (what the dateInput represents).
-     * @throws InvalidInputException If dateInput is not before the dateToCheckWith.
+     * @throws InvalidInputException If dateInput has passed.
      */
-    private void checkDateIsBefore(LocalDate dateInput, LocalDate dateToCheckWith, String dateType)
+    private void checkDateHasNotPassed(LocalDate dateInput, String dateType)
             throws InvalidInputException {
-        if (dateInput.isBefore(dateToCheckWith)) {
+        if (dateInput.isBefore(LocalDate.now())) {
             String dateFormatted = Formatter.formatDateForPrint(dateInput);
             throw new InvalidInputException(
                     gui.getDatePassedErrorMsg(dateType, dateFormatted));
@@ -168,11 +166,12 @@ public class Parser {
      */
     private void checkEndIsAfterStart(LocalDate startDate, LocalDate endDate)
             throws InvalidInputException {
-        if (startDate.isAfter(endDate)) {
+        if (endDate.isBefore(startDate)) {
             String startDateFormatted = Formatter.formatDateForPrint(startDate);
             throw new InvalidInputException(
                     gui.getStartAfterEndErrorMsg(startDateFormatted));
         }
+        assert endDate.isAfter(startDate) : "End date should be after start date.";
     }
 
     /**
@@ -180,18 +179,22 @@ public class Parser {
      *
      * @param splitInputs An array containing the input by the user.
      * @return A new Deadline object.
-     * @throws IncompleteDescException If name or due date/time or both is/are not provided.
-     * @throws InvalidInputException If due date/time is given in the wrong format.
+     * @throws IncompleteDescException If name or due date or both is/are not provided.
+     * @throws InvalidInputException If due date is given in the wrong format.
      */
     private Deadline getDeadline(String[] splitInputs)
             throws IncompleteDescException, InvalidInputException {
-        checkNameExists(splitInputs, "deadline");
+        //get name
+        checkFieldExists(splitInputs, "name of deadline");
         int endIndex = getKeywordIndex(splitInputs[1], "/by", "due date/time");
-
         String name = getName(splitInputs[1], 0, endIndex);
+
+        //get end date and check validity
         LocalDate endLocalDate = getLocalDate(splitInputs[1], endIndex + 3,
                 splitInputs[1].length(), "due date/time");
-        checkDateIsBefore(endLocalDate, LocalDate.now(), "deadline");
+        checkDateHasNotPassed(endLocalDate, "deadline");
+
+        //create new deadline object and return it
         return new Deadline(name, endLocalDate);
     }
 
@@ -200,24 +203,29 @@ public class Parser {
      *
      * @param splitInputs An array containing the input by the user.
      * @return A new Event.
-     * @throws IncompleteDescException If the name, start date/time or due date/time are not given.
-     * @throws InvalidInputException If any of the date/time are given
+     * @throws IncompleteDescException If the name, start date or due date are not given.
+     * @throws InvalidInputException If any of the date are given
      *                               in a format different from "yyyy/MM/dd".
      */
     private Event getEvent(String[] splitInputs)
             throws IncompleteDescException, InvalidInputException {
-        checkNameExists(splitInputs, "event");
+        //get name
+        checkFieldExists(splitInputs, "name of event");
         int startIndex = getKeywordIndex(splitInputs[1], "/from", "start date/time");
-        int endIndex = getKeywordIndex(splitInputs[1], "/to", "end date/time");
         String name = getName(splitInputs[1], 0, startIndex);
 
+        //get start date and end date of event
+        int endIndex = getKeywordIndex(splitInputs[1], "/to", "end date/time");
         LocalDate startLocalDate = getLocalDate(splitInputs[1], startIndex + 5,
                 endIndex, "start date/time");
         LocalDate endLocalDate = getLocalDate(splitInputs[1], endIndex + 3,
                 splitInputs[1].length(), "end date/time");
 
+        //check validity of start and end date
         checkEndIsAfterStart(startLocalDate, endLocalDate);
-        checkDateIsBefore(endLocalDate, LocalDate.now(), "end date");
+        checkDateHasNotPassed(endLocalDate, "end date");
+
+        //create new event object and return it
         return new Event(name, startLocalDate, endLocalDate);
     }
 
@@ -234,7 +242,7 @@ public class Parser {
             throws IncompleteDescException {
         if (splitInputs.length <= 1 || splitInputs[1].isBlank()) {
             throw new IncompleteDescException(
-                    "Please give the index of the item to " + cmdType);
+                    gui.getMissingFieldErrorMsg("index of the item to " + cmdType));
         }
     }
 
@@ -251,7 +259,7 @@ public class Parser {
             return Integer.parseInt(input) - 1;
         } catch (NumberFormatException n) {
             throw new InvalidInputException(
-                    "Please give the index of the item to " + cmdType
+                    gui.getNonIntIndexErrorMsg(cmdType)
             );
         }
     }
@@ -260,17 +268,15 @@ public class Parser {
      * Parses the given string into the correct command.
      *
      * @param input The string input given by the user.
-     * @return A Command representing the command given.
-     * @throws IncompleteDescException If command given is incomplete.
-     * @throws InvalidInputException If command is invalid.
+     * @return A Command representing the string command given.
+     * @throws IncompleteDescException If given string command is incomplete.
+     * @throws InvalidInputException If given string command is invalid.
      */
     public Command parseCommand(String input)
             throws IncompleteDescException, InvalidInputException {
         String[] splitInputs = input.split(" ", 2);
-        CommandEnum commandType;
-        int index;
         try {
-            commandType = CommandEnum.valueOf(splitInputs[0].toUpperCase());
+            CommandEnum commandType = CommandEnum.valueOf(splitInputs[0].toUpperCase());
             switch (commandType) {
             case BYE:
                 return new ByeCommand();
@@ -278,40 +284,43 @@ public class Parser {
                 return new ListCommand();
             case MARK:
                 checkIndexExists(splitInputs, "mark");
-                index = getParsedIndex(splitInputs[1], "mark");
-                return new MarkCommand(index);
+                int markIndex = getParsedIndex(splitInputs[1], "mark");
+                return new MarkCommand(markIndex);
             case UNMARK:
                 checkIndexExists(splitInputs, "unmark");
-                index = getParsedIndex(splitInputs[1], "unmark");
-                return new UnmarkCommand(index);
+                int unmarkIndex = getParsedIndex(splitInputs[1], "unmark");
+                return new UnmarkCommand(unmarkIndex);
             case DELETE:
                 checkIndexExists(splitInputs, "delete");
-                index = getParsedIndex(splitInputs[1], "delete");
-                return new DeleteCommand(index);
+                int deleteIndex = getParsedIndex(splitInputs[1], "delete");
+                return new DeleteCommand(deleteIndex);
             case TODO:
-                Task task = this.getTodo(splitInputs);
+                Task task = getTodo(splitInputs);
                 return new AddCommand(task);
             case DEADLINE:
-                Deadline deadline = this.getDeadline(splitInputs);
+                Deadline deadline = getDeadline(splitInputs);
                 return new AddCommand(deadline);
             case EVENT:
-                Event event = this.getEvent(splitInputs);
+                Event event = getEvent(splitInputs);
                 return new AddCommand(event);
             case FINDALLMATCH:
+                checkFieldExists(splitInputs, "keyword to find");
                 return new FindAllMatchCommand(splitInputs[1]);
             case FINDFLEX:
+                checkFieldExists(splitInputs, "keyword to find");
                 return new FindFlexCommand(splitInputs[1]);
             case FINDDATE:
+                checkFieldExists(splitInputs, "date to find");
                 LocalDate localDateToFind = getLocalDate(splitInputs[1],
                         0, splitInputs[1].length(), "date to find");
                 return new FindDateCommand(localDateToFind);
             default:
                 throw new InvalidInputException(
-                        "I'm sorry, there is no such command.");
+                        gui.getInvalidCommandErrorMsg());
             }
         } catch (IllegalArgumentException i) {
             throw new InvalidInputException(
-                    "I'm sorry, there is no such command.");
+                    gui.getInvalidCommandErrorMsg());
         }
     }
 }

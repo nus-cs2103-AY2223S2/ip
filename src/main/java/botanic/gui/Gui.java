@@ -9,16 +9,17 @@ import botanic.task.TaskList;
  */
 public class Gui {
     /**
-     * Gets the welcome message.
+     * Returns the welcome message.
      *
      * @return A String representation of the welcome message.
      */
     public String getWelcome() {
-        return "Aloe there! I am BOTanic! How may I help you today?\n";
+        return "Aloe there! I am BOTanic! How may I help you today?\n"
+                + "Program is designed using images from Flaticon.com ";
     }
 
     /**
-     * Gets the goodbye message.
+     * Returns the goodbye message.
      *
      * @return A string representation of the goodbye message.
      */
@@ -27,7 +28,7 @@ public class Gui {
     }
 
     /**
-     * Gets botanic message response to successful add command.
+     * Returns botanic message response to successful add command.
      *
      * @param task The task added.
      * @param size The size of task list after new task added.
@@ -40,7 +41,7 @@ public class Gui {
     }
 
     /**
-     * Gets botanic message response to successful delete command.
+     * Returns botanic's message response to successful delete command.
      *
      * @param task The task deleted.
      * @param size The size of task list after task deleted.
@@ -53,7 +54,7 @@ public class Gui {
     }
 
     /**
-     * Gets botanic message response to successful mark command.
+     * Returns botanic's message response to successful mark command.
      *
      * @param task The task marked.
      * @return Mark success message.
@@ -63,7 +64,7 @@ public class Gui {
     }
 
     /**
-     * Gets botanic message response to successful unmark command.
+     * Returns botanic's message response to successful unmark command.
      *
      * @param task The task unmarked.
      * @return Unmark success message.
@@ -73,7 +74,17 @@ public class Gui {
     }
 
     /**
-     * Gets a string representation of the tasks in the list in response
+     * Returns botanic response to when there is no item to list.
+     *
+     * @return No-item-to-list error message.
+     */
+    public String getNoItemErrorMsg() {
+        return "There are no items in your basket.\n"
+                + "Start adding some!\n";
+    }
+
+    /**
+     * Returns a string representation of all the tasks in the list in response
      * to the list command.
      *
      * @param tasks The task list to be printed.
@@ -85,9 +96,9 @@ public class Gui {
     }
 
     /**
-     * Gets results found from searching for a keyword in the list.
+     * Returns results found from searching for a keyword in the list.
      *
-     * @param tasks The tasks that matches with given keyword.
+     * @param tasks The tasks that match with given keyword.
      * @return Search results.
      */
     public String getFindResult(TaskList tasks) {
@@ -96,7 +107,7 @@ public class Gui {
     }
 
     /**
-     * Gets botanic response to an out-of-bounds exception.
+     * Returns botanic response to an out-of-bounds exception.
      *
      * @return Out-of-bounds exception error message.
      */
@@ -105,27 +116,20 @@ public class Gui {
     }
 
     /**
-     * Gets botanic response to when there is no item to list.
-     *
-     * @return No-item-to-list error message.
-     */
-    public String getNoItemErrorMsg() {
-        return "There are no items in your basket.\n"
-                + "Start adding some!\n";
-    }
-
-    /**
-     * Gets botanic response to when there is no item found using findAllMatch().
+     * Returns botanic response to when there is no task with names that
+     * completely match the given keyword.
      *
      * @param keyword The keyword searched for.
      * @return No-completely-matching-item error message.
      */
     public String getNoCompleteMatchErrorMsg(String keyword) {
-        return "None of the items in your basket completely matches with \"" + keyword + "\"";
+        return "None of the items in your basket completely matches with \""
+                + keyword + "\"";
     }
 
     /**
-     * Gets botanic response to when there is no item found using findflex().
+     * Returns botanic response to when there is no task with names that
+     * partially or completely match the given keyword.
      *
      * @param keyword The keyword searched for.
      * @return No-partially-matching-item error message.
@@ -136,7 +140,8 @@ public class Gui {
     }
 
     /**
-     * Gets botanic response to when there is no item found using findDate().
+     * Returns botanic response to when there is no task with dates
+     * that match the given date.
      *
      * @param date The date searched for.
      * @return No-date-match-item error message.
@@ -146,29 +151,19 @@ public class Gui {
     }
 
     /**
-     * Gets botanic response to a command with incomplete description (no name).
-     *
-     * @param cmdType The type of command which was incomplete.
-     * @return Incomplete Description exception error message.
-     */
-    public String getNoDescErrorMsg(String cmdType) {
-        return "The description of a " + cmdType + " cannot be empty!";
-    }
-
-    /**
-     * Gets botanic response to a command with incomplete description
+     * Returns botanic response to a command with incomplete description
      * (missing fields such as name, index, dates).
      *
      * @param fieldType The field that was missing.
      * @return Incomplete Description exception error message.
      */
     public String getMissingFieldErrorMsg(String fieldType) {
-        return "Please add the " + fieldType;
+        return "Please give the " + fieldType + ".";
     }
 
     /**
-     * Gets botanic response to a command with an invalid date input given in
-     * the wrong date format.
+     * Returns botanic response to a command with an invalid date input.
+     * For instance, date given in the wrong format or a date that does not exist on the calendar.
      *
      * @return Invalid Date error message.
      */
@@ -177,19 +172,20 @@ public class Gui {
     }
 
     /**
-     * Gets botanic response to an attempt to add
-     * a deadline or event task that has passed.
+     * Returns botanic response to an attempt to add
+     * a deadline or event task with a due/end date that has passed.
      *
-     * @param dateType The type of the date (start date, end date or due date).
+     * @param dateType The type of the date (e.g., end date or due date).
      * @param dateFormatted The date input formatted into DD MONTH YYYY format.
      * @return Date Passed error message.
      */
     public String getDatePassedErrorMsg(String dateType, String dateFormatted) {
-        return "The given " + dateType + " (yyyy/mm/dd) " + dateFormatted + " has passed.";
+        return "The given " + dateType + " (yyyy/mm/dd) "
+                + dateFormatted + " has passed.";
     }
 
     /**
-     * Gets botanic response to an attempt to add
+     * Returns botanic response to an attempt to add
      * an event with a start date that is later than the end date.
      *
      * @param startDateFormatted The start date input formatted into DD MONTH YYYY format.
@@ -201,10 +197,21 @@ public class Gui {
     }
 
     /**
-     * Prints out the given string to screen.
+     * Returns botanic response to a given index input that is a non-integer.
+     *
+     * @param cmdType The command the input was to be used for.
+     * @return Non integer index input error message.
      */
-    public void printMsg(String errMessage) {
-        System.out.println(errMessage + "\n");
+    public String getNonIntIndexErrorMsg(String cmdType) {
+        return "Please give an integer for the index of the item to " + cmdType + ".";
     }
 
+    /**
+     * Returns botanic response to an invalid command given.
+     *
+     * @return Invalid command error message.
+     */
+    public String getInvalidCommandErrorMsg() {
+        return "I'm sorry, there is no such command.";
+    }
 }
