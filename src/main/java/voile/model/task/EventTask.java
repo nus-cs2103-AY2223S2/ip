@@ -35,6 +35,14 @@ public class EventTask extends Task {
         this.endTime = endTime;
     }
 
+    public LocalDate getStartTime() {
+        return startTime;
+    }
+
+    public LocalDate getEndTime() {
+        return endTime;
+    }
+
     @Override
     public String toString() {
         return String.format(
