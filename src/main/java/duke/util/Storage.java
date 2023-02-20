@@ -8,13 +8,12 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
-import java.util.List;
-
 
 import javafx.util.Pair;
 
@@ -27,13 +26,14 @@ import javafx.util.Pair;
  */
 
 public class Storage {
+
+    private static final String SAVED_FILE_PATH =
+            FileSystems.getDefault().getPath("").toAbsolutePath()
+            + Path.of("/Saved Progress/").toString();
+    private static final String SAVE_FILE_NAME = "/MY_GRAND_PLAN.txt";
+
     private HashMap<String, TaskList> keywordDatabase;
     private HashMap<String, PriorityQueue<Pair<LocalDateTime, Task>>> taskScheduleOnDates;
-    private static final String SAVED_FILE_PATH =
-            FileSystems.getDefault().getPath("").toAbsolutePath() +
-            Path.of("/Saved Progress/").toString();
-    private static final String SAVE_FILE_NAME = "/" + "MY_GRAND_PLAN.txt";
-
     /**
      * Construct the {@code Storage} object with
      * empty database
@@ -95,7 +95,7 @@ public class Storage {
 
                 String actionAndDate = "";
                 for (int i = 1; i < availableTaskAsList.size(); i++) {
-                        actionAndDate += availableTaskAsList.get(i) + " ";
+                    actionAndDate += availableTaskAsList.get(i) + " ";
                 }
 
                 actionAndDate = actionAndDate.stripTrailing();
@@ -150,8 +150,8 @@ public class Storage {
      */
 
     private void addToKeywordStorage(Task task) {
-        String toUpdateKeywordDatabase = task.getNature() +
-                " " + task.getAction() + " " + task.getTimeInfo();
+        String toUpdateKeywordDatabase = task.getNature()
+               + " " + task.getAction() + " " + task.getTimeInfo();
 
         for (String keyword : toUpdateKeywordDatabase.split(" ")) {
             if (this.keywordDatabase.containsKey(keyword)) {
@@ -182,8 +182,8 @@ public class Storage {
     }
 
     private void removeFromKeywordStorage(Task task) {
-        String removedTask = task.getNature() +
-                " " + task.getAction() + " " + task.getTimeInfo();
+        String removedTask = task.getNature()
+                + " " + task.getAction() + " " + task.getTimeInfo();
         for (String keyword : removedTask.split(" ")) {
             if (this.keywordDatabase.containsKey(keyword)) {
                 TaskList currentList = this.keywordDatabase.get(keyword);
@@ -223,8 +223,8 @@ public class Storage {
             Pair<LocalDateTime, Task> deletedPair = new Pair<>(datesOfTasks.get(0), task);
 
             for (Pair<LocalDateTime, Task> pair : scheduleOnDate) {
-                if (pair.getKey().equals(datesOfTasks.get(0)) &&
-                        pair.getValue().toString().equals(task.toString())) {
+                if (pair.getKey().equals(datesOfTasks.get(0))
+                        && pair.getValue().toString().equals(task.toString())) {
                     deletedPair = pair;
                     break;
                 }
@@ -266,7 +266,7 @@ public class Storage {
      *
      */
 
-    public static void saveProgressGUI(String userCommand, TaskList listOfCurrentTasks) {
+    public static void saveProgressGui(String userCommand, TaskList listOfCurrentTasks) {
         if (userCommand.equals("YES")) {
             saveProgress(listOfCurrentTasks);
         }
@@ -300,7 +300,6 @@ public class Storage {
 
             while (dateBeginFormatted.compareTo(dateEndFormatted) <= 0) {
                 String searchDate = dateBeginFormatted.toString();
-                System.out.println(searchDate);
                 PriorityQueue<Pair<LocalDateTime, Task>> currentQueue;
                 if (this.taskScheduleOnDates.containsKey(searchDate)) {
                     currentQueue = this.taskScheduleOnDates.get(searchDate);

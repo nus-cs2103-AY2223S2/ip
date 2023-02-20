@@ -2,7 +2,9 @@ package duke.io.input.ui;
 
 import java.io.IOException;
 
+import duke.util.Parser;
 import duke.util.Storage;
+import duke.util.TaskList;
 import duke.workflow.Event;
 import duke.workflow.Greeting;
 import javafx.fxml.FXML;
@@ -121,14 +123,27 @@ public class MainWindow extends AnchorPane {
         getScene().getWindow().sizeToScene();
         if (this.firstTimeRunningDukeFlag < 0) {
             firstTimeRunningDukeFlag = runDuke();
+
         } else if (firstTimeRunningDukeFlag > 0) {
             if (!this.currentEvent.isFinalEvent()) {
                 String input = userInput.getText();
                 userInput.clear();
+                TaskList currentTaskList = this.currentEvent.getTaskList();
+                boolean validInput = Parser.checkInputValidity(input, currentTaskList.getSize());
                 this.currentEvent = this.currentEvent.toNextEvent(input);
+
                 dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getUserDialog(input, userImage));
+
+                if (!validInput) {
+                    String warning = Parser.getWarningGui(input, currentTaskList.getSize());
+                    dialogContainer.getChildren().addAll(
+                            DialogBox.getDukeDialog(warning, dukeImage));
+                }
+
+                dialogContainer.getChildren().addAll(
                         DialogBox.getDukeDialog(this.currentEvent.toString(), dukeImage));
+
                 if (this.currentEvent.isFinalEvent()) {
                     String saveProgressQuery = "SAVE YOUR GRAND PLAN FOR ANOTHER DAY? ";
                     dialogContainer.getChildren().add(
@@ -141,7 +156,7 @@ public class MainWindow extends AnchorPane {
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(input, userImage));
 
-                Storage.saveProgressGUI(input, this.currentEvent.getTaskList());
+                Storage.saveProgressGui(input, this.currentEvent.getTaskList());
                 System.exit(0);
             }
         } else {

@@ -131,4 +131,24 @@ public class Parser {
         }
         return true;
     }
+
+    /**
+     * Get the warning message for GUI version of Duke if user input is invalid
+     *
+     * @param userCommand the user input
+     * @param tasklistSize the current number of tasks
+     *
+     * @return a String that contains the exception
+     */
+
+    public static String getWarningGui(String userCommand, int tasklistSize) {
+        try {
+            UserInputException.checkUserInput(userCommand, tasklistSize);
+        } catch (DukeException exception) {
+            return exception.toString();
+        } catch (Exception exception) {
+            return "ERRRR ERROR ERRR. SYSTEM FAILURE. UNKNOWN EXCEPTION. ERR ERR";
+        }
+        return "";
+    }
 }
