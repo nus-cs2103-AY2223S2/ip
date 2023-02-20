@@ -83,7 +83,7 @@ public class Parser {
                 // Checks if todo is empty.
                 throw new DukeException("todo");
             } else {
-                return new String[]{input};
+                return new String[]{output};
             }
         case UPDATE:
             String[] outputText = input.split(" ", 3);
