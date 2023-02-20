@@ -22,7 +22,7 @@ benefits of a Graphical User Interface (GUI)
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed on your computer.
-2. Download the latest `treebot.jar` file from [here]().
+2. Download the latest `treebot.jar` file from [here](https://github.com/pkwangjoo/ip/releases/tag/A-Release).
 3. Copy the `.jar` file to the folder that you want to use as the _home folder_ for the application.
 4. Double-click on the file to start the application. You should see a similar graphical user interface.
    <img src = "Ui.png" width = "400px">
