@@ -17,10 +17,11 @@ public class Storage {
     }
 
     public TaskList readSave() {
-        if (saveFile.mkdirs()) {
+        if (!saveFile.exists()) {
             return new TaskList();
         }
         try {
+            saveFile.getParentFile().mkdirs();
             TaskList taskList = new TaskList();
             Task currTask;
             Scanner savedFileScanner = new Scanner(saveFile);

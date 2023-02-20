@@ -1,6 +1,7 @@
 package cluck;
 
 import cluck.commands.Command;
+import cluck.commands.ExitCommand;
 import cluck.exceptions.CluckException;
 import cluck.parser.Parser;
 import cluck.storage.Storage;
@@ -33,20 +34,24 @@ public class Cluck {
         String userInput;
         String response;
         Command currCommand;
+
         while (isRunning) {
             userInput = ui.readInput();
             try {
                 currCommand = Parser.commandFactory(userInput);
                 response = currCommand.execute(taskList);
+                if (currCommand instanceof ExitCommand) {
+                    isRunning = false;
+                }
             } catch (CluckException e) {
                 response = e.getMessage();
             }
             ui.printResponse(response);
         }
+        storage.writeSave(taskList);
     }
 
     public static void main(String[] args) {
-        new Cluck("data/CluckSave.txt").run();
-
+        new Cluck("C:/Users/User/OneDrive - National University of Singapore/NUS/Y2S2/ip/data/CluckSave.txt").run();
     }
 }

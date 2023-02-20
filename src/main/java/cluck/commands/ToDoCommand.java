@@ -16,6 +16,6 @@ public class ToDoCommand implements Command {
     public String execute(TaskList taskList) {
         Task task = new ToDo(description);
         taskList.addTask(task);
-        return Messages.MESSAGE_TODO_ADDED;
+        return Messages.MESSAGE_TODO_ADDED + "\n" + task;
     }
 }

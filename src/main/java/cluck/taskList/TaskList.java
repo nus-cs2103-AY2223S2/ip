@@ -12,9 +12,6 @@ import cluck.tasks.Task;
 public class TaskList {
     private final ArrayList<Task> taskList = new ArrayList<>();
 
-    public TaskList() {
-    }
-
     /**
      * @param taskIndex index of task in ArrayList.
      * @return task at index given if mark operation was succssful.
@@ -78,11 +75,15 @@ public class TaskList {
     public int taskCount() {
         return taskList.size();
     }
+
     public String toString() {
         StringBuilder tasks = new StringBuilder();
+        int counter = 1;
         for (Task task : taskList) {
+            tasks.append(counter + ") ");
             tasks.append(task.toString());
             tasks.append("\n");
+            counter += 1;
         }
         return tasks.toString();
 

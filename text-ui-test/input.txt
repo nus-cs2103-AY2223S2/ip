@@ -1,2 +1,16 @@
-deadline Eat cookies /by tonight
+list
+todo Meet Jason
+todo
+asdf
+deadline /by 27-02-2023 23:59
+deadline Assignment 1 by 27-02-2023 23:59
+deadline Assignment 1 by 27-022023 23:59
+deadline Assignment 1 /by 27-02-2023 23:59
+event Darien Wedding /from 24-03-2030 08:00 /to 24-03-2030 20:00
+event Darien Wedding /from 24-0 08:00 /to 24-03-203 20:00
+list
+mark
+mark 1
+unmark 1
+delete 2
 bye
