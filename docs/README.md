@@ -1,6 +1,6 @@
 # User Guide
 
-![](/ip/docs/Ui.png)
+![](Ui.png)
 
 ## Features 
 
