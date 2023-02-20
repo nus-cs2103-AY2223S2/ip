@@ -1,7 +1,5 @@
 package kal.gui;
 
-import kal.Kal;
-import kal.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,11 +8,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import kal.Kal;
+import kal.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String DUKE_IMAGE_FILEPATH = "/images/Kal.jpeg";
+    private static final String USER_IMAGE_FILEPATH = "/images/You.jpeg";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -26,11 +28,12 @@ public class MainWindow extends AnchorPane {
 
     private Kal kal;
 
-    private static final String USER_IMAGE_FILEPATH = "/images/You.jpeg";
-    private static final String DUKE_IMAGE_FILEPATH = "/images/Kal.jpeg";
     private final Image userImage = new Image(this.getClass().getResourceAsStream(MainWindow.USER_IMAGE_FILEPATH));
     private final Image kalImage = new Image(this.getClass().getResourceAsStream(MainWindow.DUKE_IMAGE_FILEPATH));
 
+    /**
+     * Initializes the dialog window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

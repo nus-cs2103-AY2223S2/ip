@@ -7,8 +7,8 @@ import kal.kalexception.KalException;
  * This class handles user interactions/messages.
  */
 public class Ui {
-    private static final String WELCOME = "Hello! Welcome to Kal. I'm your best calendar pal. " +
-            "Let's start doing some work!";
+    private static final String WELCOME = "Hello! I am Kal. I'm your best calendar pal. "
+            + "Let's start doing some work!";
     private static final String GOODBYE = "Auf Wiedersehen!";
 
     /**

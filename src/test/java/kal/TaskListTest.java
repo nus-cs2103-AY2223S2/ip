@@ -1,10 +1,11 @@
 package kal;
 
-import kal.commands.tasks.Task;
-import kal.commands.tasks.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import kal.commands.tasks.Task;
+import kal.commands.tasks.ToDo;
 
 class TaskListTest {
 

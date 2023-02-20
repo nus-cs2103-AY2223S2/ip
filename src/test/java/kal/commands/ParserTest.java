@@ -1,9 +1,10 @@
 package kal.commands;
 
-import kal.kalexception.KalException;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import kal.kalexception.KalException;
 
 class ParserTest {
     @Test
@@ -16,7 +17,7 @@ class ParserTest {
 
         try {
             Command toDoCommand = toDo.process();
-            Command deadlineCommand= deadline.process();
+            Command deadlineCommand = deadline.process();
             Command eventCommand = event.process();
             Command markCommand = mark.process();
             Command findCommand = find.process();

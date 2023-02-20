@@ -13,6 +13,12 @@ public class Find extends Command {
     private String keyword;
     private String searchResults;
 
+    /**
+     * Constructs a new Find object.
+     *
+     * @param message The full command message that is represented by the Find object.
+     * @param keyword The keyword to search for.
+     */
     public Find(String message, String keyword) {
         super(message);
         this.keyword = keyword;

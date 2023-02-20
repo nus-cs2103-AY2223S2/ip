@@ -8,7 +8,7 @@ import kal.commands.Parser;
 import kal.kalexception.KalException;
 
 /**
- * This is the core class of the program.
+ * This is the core class of the program. Handles all core operations.
  *
  * @author Shi Jia Ao
  */
@@ -20,6 +20,9 @@ public class Kal {
     private TaskList toDoList;
     private boolean isTerminated;
 
+    /**
+     * Constructs a new Kal object.
+     */
     public Kal() {
         this.ui = new Ui();
         this.storage = new Storage(Kal.FILEPATH);
@@ -82,6 +85,11 @@ public class Kal {
         sc.close();
     }
 
+    /**
+     * Entry point of the program for text-based ui interactions.
+     *
+     * @param args Optional string arguments.
+     */
     public static void main(String[] args) {
         Kal kal = new Kal();
         kal.runWithCommandLineUi();

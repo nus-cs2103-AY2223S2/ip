@@ -3,15 +3,31 @@ package kal.commands.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class handles Deadlines and their related operations.
+ */
 public class Deadline extends Task {
-    private static String IDENTIFIER = "D";
     protected static final String DATE_FORMAT = "MMM dd yyyy";
+    private static final String IDENTIFIER = "D";
     protected LocalDate deadline;
 
+    /**
+     * Constructs a Deadline object.
+     *
+     * @param description The description of the deadline.
+     * @param deadline The date of the deadline.
+     */
     public Deadline(String description, String deadline) {
         this(description, false, deadline);
     }
 
+    /**
+     * Constructs a Deadline object.
+     *
+     * @param description The description of the deadline.
+     * @param isDone The completion status of the deadline.
+     * @param deadline The date of the deadline.
+     */
     public Deadline(String description, boolean isDone, String deadline) {
         super(description, isDone);
         this.deadline = LocalDate.parse(deadline);
@@ -41,6 +57,7 @@ public class Deadline extends Task {
                 this.getDescription(), this.deadline);
     }
 
+    @Override
     public String toString() {
         return String.format("[%s][%s] %s (by: %s)",
                 this.getTaskClass(), this.getStatusIcon(), this.description, this.getDeadline());

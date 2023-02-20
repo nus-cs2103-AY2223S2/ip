@@ -13,16 +13,17 @@ import kal.commands.tasks.ToDo;
 import kal.kalexception.KalException;
 
 /**
- * This class handles updating Kal's task list into a local file.
+ * This class handles updating and saving Kal's task list into a local file,
+ * as well as loading the task list from a local file.
  */
 public class Storage {
-    private static final String INITIALIZATION_ERROR = "Unable to initialize file/directory, " +
-            "see error message here: ";
-    private static final String LOAD_ERROR = "Unable to load existing to-do list, " +
-            "see error message here: ";
+    private static final String INITIALIZATION_ERROR = "Unable to initialize file/directory, "
+            + "see error message here: ";
+    private static final String LOAD_ERROR = "Unable to load existing to-do list, "
+            + "see error message here: ";
     private static final String UNIDENTIFIED_TASK_ERROR = "Encountered unidentified task in local task file";
-    private static final String UPDATE_ERROR = "Unable to update to-do list, " +
-            "see error message here: ";
+    private static final String UPDATE_ERROR = "Unable to update to-do list, "
+            + "see error message here: ";
     private static final String SPECIFIC_FILE_PATH = "/text.txt";
     private static final String REGEX = "~";
     private static final String COMPLETE_MARK = "X";
@@ -36,12 +37,23 @@ public class Storage {
     private final File file;
     private final Ui ui;
 
+    /**
+     * Constructs a new Storage object.
+     *
+     * @param filePath The filepath of the directory where the task list is stored locally.
+     */
     public Storage(String filePath) {
         this.fileDirectory = new File(filePath);
         this.file = new File(filePath + Storage.SPECIFIC_FILE_PATH);
         this.ui = new Ui();
     }
 
+    /**
+     * Initializes the task list.
+     *
+     * @return A new TaskList object if the local saved task list is empty or if there is no saved task list.
+     *     Otherwise, returns the local saved task list represented in a TaskList object.
+     */
     public TaskList initialize() {
         try {
             fileDirectory.mkdirs();
@@ -100,6 +112,11 @@ public class Storage {
         return status.equals(Storage.COMPLETE_MARK) ? true : false;
     }
 
+    /**
+     * Updates the local saved task list to match the current TaskList object.
+     *
+     * @param tasks The current TaskList to be updated to.
+     */
     public void update(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(this.file);

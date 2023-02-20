@@ -10,10 +10,10 @@ import kal.commands.tasks.Task;
  */
 public class Add extends Command {
     private static final String RESPONSE_HEADER = "Okay. This task is in your calendar meow:\n";
-    private static final String DUPLICATE_HANDLER = "However, there this task has duplicate(s) " +
-            "and is repeated at the following indexes:\n";
-    private static final String DELETE_PROMPT = "I suggest deleting one of the duplicates! Or keep them there.." +
-            " up to you.\n";
+    private static final String DUPLICATE_HANDLER = "However, there this task has duplicate(s) "
+            + "and is repeated at the following indexes:\n";
+    private static final String DELETE_PROMPT = "I suggest deleting one of the duplicates! Or keep them there.."
+            + " up to you.\n";
     private final Task task;
     private boolean hasDuplicate;
     private List<Integer> duplicateIndex;

@@ -3,10 +3,10 @@ package kal.commands;
 import kal.commands.tasks.Deadline;
 import kal.commands.tasks.Event;
 import kal.commands.tasks.ToDo;
-import kal.kalexception.KalException;
 import kal.kalexception.EmptyDateException;
 import kal.kalexception.EmptyFieldException;
 import kal.kalexception.InvalidCommandException;
+import kal.kalexception.KalException;
 
 /**
  * This class interprets a user command.
@@ -35,6 +35,11 @@ public class Parser {
     private final String command;
     private final String[] commandArr;
 
+    /**
+     * Constructs a new Parser object.
+     *
+     * @param command The command to be parsed by the Parser object.
+     */
     public Parser(String command) {
         this.command = command.trim();
         this.commandArr = this.command.split(Parser.REGEX);
@@ -105,12 +110,12 @@ public class Parser {
     }
 
     private int getEditIndex() {
-        if (command.length() > 0) {
+        if (!command.isEmpty()) {
             return Character.getNumericValue(command.charAt(command.length() - 1)) - 1;
         }
         return Parser.BEGINNING_INDEX;
     }
-    
+
     /**
      * Interprets the command stored internally within the class.
      *

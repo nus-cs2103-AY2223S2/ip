@@ -3,16 +3,34 @@ package kal.commands.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class handles Events and their related operations.
+ */
 public class Event extends Task {
-    private static String IDENTIFIER = "E";
-    private static String DATE_FORMAT = "MMM dd yyyy";
+    private static final String IDENTIFIER = "E";
+    private static final String DATE_FORMAT = "MMM dd yyyy";
     protected LocalDate from;
     protected LocalDate to;
 
+    /**
+     * Constructs an Event object.
+     *
+     * @param description The description of the Event.
+     * @param from The start time of the Event.
+     * @param to The end time of the Event.
+     */
     public Event(String description, String from, String to) {
         this(description, false, from, to);
     }
 
+    /**
+     * Constructs an Event object.
+     *
+     * @param description The description of the Event.
+     * @param isDone The completion status of the Event.
+     * @param from The start time of the Event.
+     * @param to The end time of the Event.
+     */
     public Event(String description, boolean isDone, String from, String to) {
         super(description, isDone);
         this.from = LocalDate.parse(from);
@@ -47,6 +65,7 @@ public class Event extends Task {
         return this.to.format(DateTimeFormatter.ofPattern(Event.DATE_FORMAT));
     }
 
+    @Override
     public String toString() {
         return String.format("[%s][%s] %s (from: %s to: %s)",
                 this.getTaskClass(), this.getStatusIcon(),

@@ -10,10 +10,10 @@ import kal.commands.tasks.Task;
  * This class serves to represent a to-do list.
  */
 public class TaskList {
+    private static final int INCREMENT = 1;
+    private static final int START_INDEX = 0;
     private ArrayList<Task> tasks;
     private HashMap<String, List<Integer>> duplicateTracker;
-    private static final int START_INDEX = 0;
-    private static final int INCREMENT = 1;
 
     /**
      * Creates a TaskList object.
@@ -54,7 +54,7 @@ public class TaskList {
      *
      * @param match The task to be searched for.
      * @return A list of indexes representing where the task appears in the task list,
-     * returns an empty list if the task is not found.
+     *     returns an empty list if the task is not found.
      */
     public List<Integer> getOccurrences(Task match) {
         return this.duplicateTracker.getOrDefault(match.getDescription(), new ArrayList<>());

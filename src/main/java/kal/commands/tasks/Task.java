@@ -1,22 +1,41 @@
 package kal.commands.tasks;
 
+/**
+ * This class deals with Tasks and their associated operations.
+ */
 public abstract class Task {
-    private static String DONE_MARK = "X";
-    private static String UNDONE_MARK = " ";
-    private static String REGEX = "~";
+    private static final String DONE_MARK = "X";
+    private static final String UNDONE_MARK = " ";
+    private static final String REGEX = "~";
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructs a Task object.
+     *
+     * @param description The description of the task.
+     */
     public Task(String description) {
         this(description, false);
     }
 
+    /**
+     * Constructs a Task object.
+     *
+     * @param description The description of the Task.
+     * @param isDone The completion status of the Task.
+     */
     public Task(String description, boolean isDone) {
         assert !description.isEmpty() : "Command empty";
         this.description = description.trim();
         this.isDone = isDone;
     }
 
+    /**
+     * Generates a descriptive string describing the type of task that a task object represents.
+     *
+     * @return A string describing the task type that the task object is representing.
+     */
     public abstract String getTaskClass();
 
     /**

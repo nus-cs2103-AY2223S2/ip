@@ -1,9 +1,11 @@
 package kal.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import kal.TaskList;
 import kal.commands.tasks.ToDo;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeleteTest {
 

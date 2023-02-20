@@ -9,6 +9,11 @@ public class ListTasks extends Command {
     private static final String RESPONSE_HEADER = "Printing tasks:\n";
     private String response;
 
+    /**
+     * Constructs a new ListTasks object.
+     *
+     * @param message The full command message represented by the ListTasks object.
+     */
     public ListTasks(String message) {
         super(message);
         this.response = RESPONSE_HEADER;
