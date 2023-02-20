@@ -28,10 +28,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Image userImage =
-            new Image(getClass().getResourceAsStream("/resources/images/User.png"));
-    private Image chageeImage =
-            new Image(getClass().getResourceAsStream("/resources/images/Anya.jpg"));
+    private Image userImage = new Image(getClass().getResourceAsStream("/images/User.png"));
+    private Image chageeImage = new Image(getClass().getResourceAsStream("/images/Anya.jpg"));
 
 
     /**
@@ -39,8 +37,7 @@ public class MainWindow extends AnchorPane {
      */
     public MainWindow() {
         try {
-            FXMLLoader fxmlLoader =
-                    new FXMLLoader(getClass().getResource("/resources/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
