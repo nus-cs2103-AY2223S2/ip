@@ -17,7 +17,7 @@ public class CheckDuplicateCommand extends Command {
             Task task = taskList.getTask(i);
 
             if (hashMap.get(task.toString()) != null) {
-                ui.printResponse("Goodness me. I have detected repeated tasks. \n" +
+                ui.printResponse("Goodness me! I have detected repeated tasks. \n" +
                         "Tasks " + (hashMap.get(task.toString()) + 1) + " and " + (i + 1) +
                         " are duplicates. \nPlease make amendments.");
             }
