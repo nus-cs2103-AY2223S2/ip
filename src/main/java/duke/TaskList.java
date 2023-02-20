@@ -56,7 +56,9 @@ public class TaskList {
      */
     public String mark(String command) {
         int index = Integer.valueOf(command.substring(5)) - 1;
+        assert index >=0;
         Task target = tasks.get(index);
+        assert target != null;
         target.mark();
         Storage.writeFile(tasks);
         return Ui.getMarkTaskMessage(target);
@@ -69,7 +71,9 @@ public class TaskList {
      */
     public String unmark(String command) {
         int index = Integer.valueOf(command.substring(7)) - 1;
+        assert index >= 0;
         Task target = tasks.get(index);
+        assert target != null;
         target.unmark();
         Storage.writeFile(tasks);
         return Ui.getUnmarkTaskMessage(target);
@@ -82,8 +86,10 @@ public class TaskList {
      */
     public String delete(String command) {
         int index = Integer.valueOf(command.substring(7)) - 1;
+        assert index >= 0;
         int size = tasks.size();
         Task target = tasks.get(index);
+        assert target != null;
         tasks.remove(index);
         Storage.writeFile(tasks);
         return Ui.getDeleteTaskMessage(target, size);
@@ -97,7 +103,7 @@ public class TaskList {
     public String find(String command) {
         String keyWord = command.substring(5);
         Predicate<Task> keyWordFilter = task -> (task.getDescription().contains(keyWord));
-        Stream<Task> resultedTasks = tasks.stream().filter(keyWordFilter);
+        Stream<Task> resultedTasks = tasks.stream(A).filter(keyWordFilter);
         return Ui.getFindTaskMessage(resultedTasks);
     }
 }
