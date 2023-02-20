@@ -34,6 +34,7 @@ public class Duke extends Application {
     private TaskList taskList = new TaskList();
     private Handler handler = new Handler();
     private MessageLoader messageLoader = new MessageLoader();
+    private Saver saver = new Saver();
 
     @Override
     public void start(Stage stage) {
@@ -84,6 +85,11 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        try {
+            saver.load(taskList);
+        } catch (ProgramException e) {
+            System.out.println(e.getMessage());
+        }
         Label welcomeText = new Label(messageLoader.getWelcomeMessage());
 
         dialogContainer.getChildren().addAll(
@@ -130,7 +136,7 @@ public class Duke extends Application {
     private String getResponse(String input) {
         try {
             Command userCommand = handler.processCommand(input, taskList);
-            return userCommand.run(taskList,messageLoader);
+            return userCommand.run(taskList,messageLoader,saver);
         }
         catch (ProgramException e){
             return e.getMessage();

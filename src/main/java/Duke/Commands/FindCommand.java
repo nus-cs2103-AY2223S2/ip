@@ -4,14 +4,13 @@ import Duke.MessageLoader;
 import Duke.Saver;
 import Duke.Tasks.TaskList;
 
-public class MarkCommand extends Command {
-    private int index;
-    public MarkCommand(int index) {
-        this.index = index;
+public class FindCommand extends Command{
+    private String query;
+    public FindCommand(String query) {
+        this.query = query;
     }
     @Override
     public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
-        return taskList.markTask(index);
-
+        return taskList.findTasks(query);
     }
 }

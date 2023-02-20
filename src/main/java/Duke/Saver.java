@@ -1,4 +1,5 @@
 package Duke;
+import Duke.Exception.ProgramException;
 import Duke.Tasks.TaskList;
 
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class Saver {
      * Loads the content from the stored text file into a taskList Object.
      * @param taskList the taskList to store the contents of the file into.
      */
-    public void load(TaskList taskList){
+    public void load(TaskList taskList) throws ProgramException {
         try {
             createFile();
             Path path = Paths.get(PATH+FILE_NAME);
@@ -60,7 +61,7 @@ public class Saver {
             System.out.println("tasks loaded successfully.");
         }
         catch (IOException e) {
-            e.printStackTrace();
+            throw new ProgramException("Save file data corrupted.");
         }
     }
 

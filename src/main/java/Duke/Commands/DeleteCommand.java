@@ -1,6 +1,7 @@
 package Duke.Commands;
 
 import Duke.MessageLoader;
+import Duke.Saver;
 import Duke.Tasks.TaskList;
 
 public class DeleteCommand extends Command{
@@ -9,7 +10,7 @@ public class DeleteCommand extends Command{
         this.index = index;
     }
     @Override
-    public String run(TaskList taskList, MessageLoader messageLoader) {
+    public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
         return taskList.deleteTask(index);
     }
 }

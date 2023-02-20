@@ -1,6 +1,7 @@
 package Duke.Commands;
 
 import Duke.MessageLoader;
+import Duke.Saver;
 import Duke.Tasks.TaskList;
 
 public class DeadlineCommand extends Command {
@@ -12,7 +13,7 @@ public class DeadlineCommand extends Command {
         this.end = end;
     }
     @Override
-    public String run(TaskList taskList, MessageLoader messageLoader) {
+    public String run(TaskList taskList, MessageLoader messageLoader , Saver saver) {
         return taskList.addTask(this.name,this.end);
 
     }

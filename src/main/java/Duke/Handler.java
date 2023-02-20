@@ -36,7 +36,7 @@ public class Handler{
         }
         try{
             int index = Integer.parseInt(parameters[1]);
-            if(index>taskList.size()){
+            if(index > taskList.size() || index < 0){
                 throw new ProgramException("Index out of bounds!");
             }
             return index;
@@ -47,7 +47,7 @@ public class Handler{
 
     }
 
-    public String parseToDo(String input) throws ProgramException{
+    public String parseString(String input) throws ProgramException{
         String parameters[] = input.split(" ",2);
         if(parameters.length==1){
             throw new ProgramException("Missing info! I need the task description.");
@@ -132,8 +132,12 @@ public class Handler{
                 c = new EventCommand(parameters[0],parameters[1],parameters[2]);
                 break;
             case TODO:
-                content = parseToDo(input);
+                content = parseString(input);
                 c = new ToDoCommand(content);
+                break;
+            case FIND:
+                content = parseString(input);
+                c = new FindCommand(content);
                 break;
             case BYE:
                 c = new ByeCommand();

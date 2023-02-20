@@ -1,5 +1,7 @@
 package Duke.Tasks;
 
+import Duke.Exception.ProgramException;
+
 import java.util.ArrayList;
 
 /**
@@ -77,35 +79,53 @@ public class TaskList {
         return output;
     }
 
-    public void fromSave(String saveData){
+    public Task ToDoFromSave(String data) throws ProgramException{
+        String parameters[] = data.split(" ",2);
+        if(parameters.length!=2){
+            throw new ProgramException("Save file data corrupted.");
+        }
+        Task task = new ToDo(parameters[1]);
+        if(parameters[0].equals("[X]")){
+            task.mark();
+        } else if(parameters[0].equals("[ ]")) {
+            task.unMark();
+        } else {
+            throw new ProgramException("Save file data corrupted.");
+        }
+        return new ToDo(parameters[1]);
+
+    }
+    public Task EventfromSave(String data) throws ProgramException{
+        String parameters[] = data.split(" ", 2);
+        Task task = new ToDo(parameters[1]);
+        return task;
+
+    }
+    public Task DeadlinefromSave(String data) throws ProgramException{
+        String parameters[] = data.split(" ", 2);
+        Task task = new ToDo(parameters[1]);
+        return task;
+
+    }
+    public void fromSave(String saveData) throws ProgramException {
         ArrayList saveTaskList = new ArrayList<>();
         String data[] = saveData.split("\n");
         this.numTasks = 0;
-        Task task = new ToDo("");
         for(int i = 0; i<data.length; i++){
             if(data[i].equals("")) continue;
-            String parameters[] = data[i].split("\\|");
-            String type = parameters[0].replace("[", "").replace("]", "").replace(" ","");
-            String mark = parameters[1].replace("[", "").replace("]", "").replace(" ","");
-            String name = parameters[2].trim();
-            if(type.equals("T")){
-                task = new ToDo(name);
-            }
-            else if(type.equals("E")){
-                String start = parameters[4].trim();
-                String end = parameters[6].trim();
-                task = new Event(name, start, end);
-            }
-            else if(type.equals("D")){
-                String start = parameters[4].trim();
-                task = new Deadline(name,start);
+            String parameters[] = data[i].split(" ",2);
+            String type = parameters[0];
+            if(type.equals("[T]")) {
+                ToDoFromSave(parameters[1]);
+            } else if(type.equals("[D]")) {
+                DeadlinefromSave(parameters[1]);
+            } else if(type.equals("E")) {
+                EventfromSave(parameters[1]);
+            } else {
+                throw new ProgramException("Save file data corrupted.");
             }
 
-            if(mark.equals("X")){
-                task.mark();
-            }
-            saveTaskList.add(task);
-            this.numTasks += 1;
+
         }
         this.taskList = saveTaskList;
 
@@ -116,11 +136,11 @@ public class TaskList {
         for (int i = 0; i < this.numTasks; i++) {
             if(taskList.get(i).toString().contains(query)){
                 matches += 1;
-                output+= i +". " + taskList.get(i) + "\n";
+                output+= i+1 +". " + taskList.get(i) + "\n";
             }
         }
         if(matches == 0){
-            return "Oops! Could not find any tasks matching your query";
+            return "Oops! Could not find any tasks matching your query.";
         }
         return output;
     }
