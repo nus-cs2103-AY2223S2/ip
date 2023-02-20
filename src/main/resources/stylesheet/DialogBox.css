@@ -1,5 +1,4 @@
 .dialog {
-    -fx-font-family: sans-serif;
     -fx-text-fill: #B22222;
     -fx-padding: 5px;
     -fx-border-width: 3;
@@ -9,4 +8,7 @@
 
 .displayPicture {
     -fx-border-radius: 100;
+    -fx-padding: 5px;
+    -fx-background-color: red;
+
 }
