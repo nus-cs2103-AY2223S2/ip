@@ -13,7 +13,11 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Creates a task list containing input data
+<<<<<<< HEAD
      *
+=======
+     * 
+>>>>>>> 2d0a99319054beecdc77c19dd4a28387a9ee9d14
      * @param data string data from list to import
      * @throws LoadTaskException
      */
@@ -55,7 +59,11 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Gets all tasks in this task list as a string output
+<<<<<<< HEAD
      *
+=======
+     * 
+>>>>>>> 2d0a99319054beecdc77c19dd4a28387a9ee9d14
      * @return string of all tasks in this task list
      */
     public String getAllAsString() {
@@ -68,7 +76,11 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Gets the size of the task list
+<<<<<<< HEAD
      *
+=======
+     * 
+>>>>>>> 2d0a99319054beecdc77c19dd4a28387a9ee9d14
      * @return string of Duke's interpretation of the number of tasks in the task list
      */
     public String getSizeAsString() {
