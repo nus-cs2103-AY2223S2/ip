@@ -95,7 +95,7 @@ public class Duke {
                 return "Incorrect format detected." + "\nPlease enter update in the following format:"
                         + "\n    update index description";
             } else {
-                return "MEOW!!! The description of a " + e.getMessage() + " cannot be empty.";
+                return "MEOW!!! The description and time (if applicable) of a " + e.getMessage() + " cannot be empty.";
             }
         } catch (DateTimeParseException e) {
             return "Incorrect format detected." + "\nPlease enter date/time in the following format:"

@@ -60,7 +60,7 @@ public class Parser {
         switch (type) {
         case DEADLINE:
             output = input.replace("deadline ", "");
-            if (output.equals("deadline")) {
+            if (output.equals("deadline") || !output.contains("/by")) {
                 // Checks if deadline is empty.
                 throw new DukeException("deadline");
             } else {
@@ -68,7 +68,7 @@ public class Parser {
             }
         case EVENT:
             output = input.replace("event ", "");
-            if (output.equals("event")) {
+            if (output.equals("event") || (!output.contains("/from") && !output.contains("/to"))) {
                 // Checks if event is empty.
                 throw new DukeException("event");
             } else {
