@@ -1,0 +1,63 @@
+todo lorem ipsum
+mark 1
+unmark 1
+delete 1
+todo
+deadline lorem ipsum /by 01/01/2024 1200
+mark 1
+unmark 1
+delete 1
+deadline
+deadline   /by  
+deadline /by 01/01/2024 1200
+deadline   /by 01/01/2024 1200
+deadline lorem ipsum
+deadline lorem ipsum /by
+deadline lorem ipsum /by  
+deadline lorem ipsum /by now
+deadline lorem ipsum /by 01/00/2024 1200
+event lorem ipsum /from 01/01/2024 1200 /to 02/01/2024 1300
+mark 1
+unmark 1
+delete 1
+event
+event   /from   /to  
+event /from 01/01/2024 1200 /to 02/01/2024 1300
+event   /from 01/01/2024 1200 /to 02/01/2024 1300
+event lorem ipsum /to 02/01/2024 1300
+event lorem ipsum /from 01/01/2024 1200
+event lorem ipsum /from /to 02/01/2024 1300
+event lorem ipsum /from   /to 02/01/2024 1300
+event lorem ipsum /from 01/01/2024 1200 /to
+event lorem ipsum /from 01/01/2024 1200 /to  
+event lorem ipsum
+event lorem ipsum /from /to
+event lorem ipsum /from   /to
+event lorem ipsum /from now /to later
+event lorem ipsum /from 01/01/2024 1200 /to later
+event lorem ipsum /from now /to 02/01/2024 1300
+event lorem ipsum /from 01/00/2024 1200 /to 02/01/2024 1300
+event lorem ipsum /from 01/01/2024 1200 /to 02/00/2024 1300
+event lorem ipsum /from 01/00/2024 1200 /to 02/00/2024 1300
+list
+todo lorem ipsum
+deadline hello this world /by 01/01/2024 1200
+event this world end /from 01/01/2024 1200 /to 02/01/2024 1300
+list
+find
+find  
+find this world
+find no keyword
+delete 1
+delete 1
+delete 1
+mark
+mark lorem ipsum
+mark -1
+mark 1
+unmark
+unmark lorem ipsum
+unmark -1
+unmark 1
+delete 0
+bye

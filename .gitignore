@@ -3,8 +3,12 @@
 /out/
 /*.iml
 
+# VSCode files
+/.vscode/
+
 # Gradle build files
 /.gradle/
+/text-ui-test/.gradle/
 /build/
 src/main/resources/docs/
 
@@ -13,5 +17,9 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Text-ui-test artifacts
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Save files
+save-data/
