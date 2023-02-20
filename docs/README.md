@@ -1,5 +1,5 @@
 # User Guide for `/* ask-prof-duke */`
-Too much to 💩 to remember? FRET NOT! Prof Duke is here to manage your woes! Start using **`/* ask-prof-duke */`**, a chatbot that automates your task
+Too much 💩 to remember? FRET NOT! Prof Duke is here to manage your woes! Start using **`/* ask-prof-duke */`**, a chatbot that automates your task
 tracking endeavours and make life so much simpler for you!
 
 ![demo](https://user-images.githubusercontent.com/87931905/219407500-f8e047ab-b3b0-4fc3-9560-79630b30ff20.gif)
@@ -71,8 +71,8 @@ Display all tasks that are currently recorded in the task list for the current s
 ```
 Here are the tasks in your list:
 1. [T][ ] do calculus assignment
-2. [D][ ] write up user guide for cs2103T ip (by: 17 Feb 2023 2359)
-3. [E][X] christmas party @ ben's (from: 25 Dec 2023 1800 to: 26 Dec 2023 0200)
+2. [D][ ] write up user guide for cs2103T ip (by: 17 Feb 2023 11:59PM)
+3. [E][X] christmas party @ ben's (from: 25 Dec 2023 1800 to: 26 Dec 2023 2:00AM)
 ```
 
 
@@ -112,7 +112,7 @@ Undo the previous command executed.
 
 
 ### Exit chat session <a name="exit"></a>
-End the current chat session. The GUI will close within 3 seconds of executing the `bye` command. The updated list of tasks will be saved in the local storage.
+End the current chat session. The GUI will close within 2 seconds of executing the `bye` command. The updated list of tasks will be saved in the local storage.
 
 **Command:** `bye`
 
@@ -126,8 +126,8 @@ End the current chat session. The GUI will close within 3 seconds of executing t
 ```
 Here are the tasks in your list:
 1. [T][ ] do calculus assignment
-2. [D][ ] write up user guide for cs2103T ip (by: 17 Feb 2023 2359)
-3. [E][X] christmas party @ ben's (from: 25 Dec 2023 1800 to: 26 Dec 2023 0200)
+2. [D][ ] write up user guide for cs2103T ip (by: 17 Feb 2023 11:59PM)
+3. [E][X] christmas party @ ben's (from: 25 Dec 2023 6:00PM to: 26 Dec 2023 2:00AM)
 ```
 
 *then the corresponding task number you are looking for is 1.*<br><br>
@@ -138,7 +138,7 @@ Here are the tasks in your list:
 *You have probably closed the GUI through the ❌ button on the top left of the app window, force quit or pressing Ctrl+C in your CLI, rather than ending the chat session through the `bye` command. At the moment, the app is only able to save your changes upon exiting the chat session through the `bye` command.*<br><br>
 
 
-> **Help! I'm unable to open the app and nothing happens after double clicling the JAR file...**<br>
+> **Help! I'm unable to open the app and nothing happens after double clicking the JAR file...**<br>
 
 *You should run the app's JAR file through the command `java -jar duke.txt` on your CLI.*<br><br>
 
