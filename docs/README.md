@@ -160,6 +160,26 @@ Nice! I've marked this task as done:
 [E][X] project meeting (from: Jun 15 2019 to: Jun 19 2019)
 ```
 
+### `unmark` - unmark an existing task
+
+Set the status of a task to undone
+
+Example of usage: 
+```
+unmark [index]
+```
+
+```
+unmark 1
+```
+
+Expected outcome:
+
+The task with the index will be marked as done with a cross
+```
+Ok, I've marked this task as not done yet:
+[E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
+```
 
 
 
