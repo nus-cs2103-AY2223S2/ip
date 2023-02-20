@@ -121,7 +121,6 @@ public class TaskList {
      */
     public String deleteTask(String[] command) {
         int taskPointer = Integer.parseInt(command[1]) - 1;
-        //duke.tasks.Task temp = duke.tasks.get(taskPointer);
         try {
             Task temp = tasks.get(taskPointer);
             tasks.remove(taskPointer);
