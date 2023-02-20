@@ -16,7 +16,7 @@ public class Task {
         this.isDone = false;
     }
 
-    /*
+    /**
      * Constructs an empty and fake task object.
      */
     public Task() {

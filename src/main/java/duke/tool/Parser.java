@@ -139,7 +139,7 @@ public class Parser {
      * @return Task id to delete from.
      * @throws DukeEmptyTaskException Indicates that task description is not found
      */
-    public static int parse_delete_task_id(String trigger, String input) throws DukeEmptyTaskException {
+    public static int parse_delete_id(String trigger, String input) throws DukeEmptyTaskException {
         int tid = -1;
         if (input.split(trigger).length == 1) {
             throw new DukeEmptyTaskException();
@@ -204,7 +204,7 @@ public class Parser {
             output = command.add_task(task);
             break;
         case "delete":
-            tid = parse_delete_task_id(trigger, input);
+            tid = parse_delete_id(trigger, input);
             output = command.delete_task(tid);
             break;
         case "find":
