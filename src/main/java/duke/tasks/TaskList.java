@@ -2,7 +2,6 @@ package duke.tasks;
 
 import java.util.ArrayList;
 
-
 import duke.exceptions.InvalidTaskDescriptionException;
 
 
@@ -65,7 +64,7 @@ public class TaskList {
         msg += String.format("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
                 + "\nto all the shit u need to do\n");
         msg += String.format("shag bro now u got %d tasks\n", this.getCurrentSize());
-        assert this.tasks.size() > 0: "wait jialat i think the task never got added";
+        assert this.tasks.size() > 0 : "wait jialat i think the task never got added";
         return msg;
     }
 
@@ -88,7 +87,7 @@ public class TaskList {
         msg += String.format("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
                 + "\nto all the shit u need to do\n");
         msg += String.format("shag bro now u got %d tasks\n", this.getCurrentSize());
-        assert this.tasks.size() > 0: "wait jialat i think the task never got added";
+        assert this.tasks.size() > 0 : "wait jialat i think the task never got added";
         return msg;
     }
 
@@ -111,10 +110,9 @@ public class TaskList {
         msg += String.format("I've added\n" + tasks.get(this.getCurrentSize() - 1).toString()
                 + "\nto all the shit u need to do\n");
         msg += String.format("shag bro now u got %d tasks\n", this.getCurrentSize());
-        assert this.tasks.size() > 0: "wait jialat i think the task never got added";
+        assert this.tasks.size() > 0 : "wait jialat i think the task never got added";
         return msg;
     }
-    
 
     /**
      * Deletes a task from the tasklist.
@@ -152,10 +150,9 @@ public class TaskList {
             tasks.get(taskPointer).markAsDone();
             return "marked that for u brother\n";
         } catch (IndexOutOfBoundsException e) {
-            return("Wake up and choose a better task to mark\n");
+            return ("Wake up and choose a better task to mark\n");
         }
     }
-    
 
     /**
      *  Method which marks the task specified by the index as undone.
@@ -197,7 +194,7 @@ public class TaskList {
     public String listTasks() {
         String str = "";
         if (this.getCurrentSize() == 0) {
-           str += "You got nothing to do brother its time to get a life\n";
+            str += "You got nothing to do brother its time to get a life\n";
         }
         for (int i = 0; i < this.getCurrentSize(); i++) {
             if (this.tasks.get(i) == null) {

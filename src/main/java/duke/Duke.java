@@ -10,7 +10,6 @@ import javafx.application.Application;
 
 /**
  * Encapsulates ChadGPT in its full majesty.
- * 
  */
 public class Duke {
 
@@ -18,20 +17,20 @@ public class Duke {
     private String contactsFilepath;
     private Storage taskStorage;
     private Storage contactStorage;
-    public TaskList taskList;
-
-    public ContactList contactList;
 
 
     private Ui ui;
+    private TaskList taskList;
+
+    private ContactList contactList;
+
 
     public Duke() {}
 
 
     /**
      * Helper function to initialize ChadGPT's context.
-     * Loads the existing contact's and tasks. 
-     *
+     * Loads the existing contact's and tasks.
      * @param filepath1 Relative filepath of ChadGPT's task storage.
      * @param filepath2 Relative filepath of ChadGPT's contacts storage.
      *

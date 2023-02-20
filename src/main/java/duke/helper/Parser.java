@@ -1,8 +1,9 @@
 package duke.helper;
 
+import duke.contact.ContactList;
 import duke.exceptions.InvalidTaskDescriptionException;
 import duke.tasks.TaskList;
-import duke.contact.ContactList;
+
 
 
 

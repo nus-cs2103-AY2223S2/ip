@@ -1,5 +1,11 @@
 package duke.contact;
 
+/**
+ * Encapsultes the user's contact to be stored.
+ *
+ * @author Tan Matthew Simon Castaneda
+ * @version CS2103 AY22/23 Semester 2
+ */
 public class Contact {
 
     private String name;

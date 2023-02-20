@@ -44,7 +44,7 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(this.path);
 
-            for (int j = 0; j < contactList.getCurrSize(); j ++) {
+            for (int j = 0; j < contactList.getCurrSize(); j++) {
                 Contact curr = contactList.getContacts().get(j);
                 fileWriter.write("C/" + curr.getName() + "/" + curr.getPhoneNumber());
                 if (j < contactList.getCurrSize() - 1) {

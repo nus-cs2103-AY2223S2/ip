@@ -4,6 +4,12 @@ package duke.contact;
 
 import java.util.ArrayList;
 
+/**
+ *  Ecapsulates the list of user's contacts to be stored.
+ *
+ * @author Tan Matthew Simon Castaneda
+ * @version CS2103 AY22/23 Semester 2
+ */
 public class ContactList {
 
     private ArrayList<Contact> contacts;
