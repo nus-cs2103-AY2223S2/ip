@@ -5,7 +5,7 @@ which you can talk to him and get his immediate response.
 
 ## Quick start
 1. Ensure you have Java 11 or above installed in your device.
-2. Download the latest duke.jar from [here](www.google.com).
+2. Download the latest duke.jar from [here](https://github.com/jiasheng59/ip/releases/tag/v0.3).
 3. Create a folder to be the home folder and move duke.jar to this folder. 
 4. Open a command terminal, `cd` into the folder and enter this command `java -jar duke.jar` to get started.
 
