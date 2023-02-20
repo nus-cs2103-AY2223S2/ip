@@ -58,12 +58,12 @@ public class Validator {
      * @return error message
      */
     private static String generateDescriptionErrorMessage(String task) {
-        return "Hey now.. The description of a " + task + " cannot be empty. >:(";
+        return "Hey now.. The description of a " + task + " cannot be empty.";
     }
 
     /**
      * Validates the description string if it is empty
-     * and throws a DukeException if it is empty
+     * and throws a NookException if it is empty
      *
      * @param inputArr an array representation of the user's input line
      * @param task     string of the task type derived from commandType
@@ -76,8 +76,22 @@ public class Validator {
     }
 
     /**
+     * Validates the description string if it is empty
+     * and throws a NookException if it is empty
+     *
+     * @param input user's input line to be validate
+     * @param task     string of the task type derived from commandType
+     * @throws NookException
+     */
+    public void validateDescription(String input, String task) throws NookException {
+        if (input.trim().isEmpty()) {
+            throw new NookException(generateDescriptionErrorMessage(task));
+        }
+    }
+
+    /**
      * Validates the date string if it can be parsed into LocalDate
-     * and throws a DukeException if it is unable to be parsed into LocalDate
+     * and throws a NookException if it is unable to be parsed into LocalDate
      *
      * @param input string of the date to be parsed
      * @throws NookException
@@ -90,7 +104,7 @@ public class Validator {
 
     /**
      * Validates the priority string if it can be parsed into recognisable Priority
-     * and throws a DukeException if it is unable to be parsed into recognisable Priority
+     * and throws a NookException if it is unable to be parsed into recognisable Priority
      *
      * @param input string of the priority to be parsed
      * @throws NookException

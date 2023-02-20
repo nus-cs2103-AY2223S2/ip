@@ -6,7 +6,7 @@ package exceptions;
 public class NookException extends Exception {
 
     /**
-     * Constructs a new DukeException with the specified error message.
+     * Constructs a new NookException with the specified error message.
      *
      * @param err the detail message of the exception.
      */
