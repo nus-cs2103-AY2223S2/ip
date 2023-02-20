@@ -62,7 +62,7 @@ public class Event extends Task {
         if (!start.contains(" ")) {
             return startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } else {
-            return startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + startTime.getHour() + startTime.getMinute();
+            return startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + startTime.getHour() + ":" + startTime.getMinute();
         }
     }
 
@@ -75,7 +75,7 @@ public class Event extends Task {
         if (!end.contains(" ")) {
             return endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } else {
-            return endDate.format(DateTimeFormatter.ofPattern("MMM dd  yyyy")) + ", " + endTime.getHour() + endTime.getMinute();
+            return endDate.format(DateTimeFormatter.ofPattern("MMM dd  yyyy")) + ", " + endTime.getHour() + ":" + endTime.getMinute();
         }
     }
 

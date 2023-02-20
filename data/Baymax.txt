@@ -1,5 +1,3 @@
-[T][ ] sleep     
-[T][ ] sleep    
-[T][ ] eat   
-[T][ ] sleep  
-[T][ ] safdf 
+[D][X] submit CS2103T iP (by: 2023-02-20 23:59)
+[T][ ] watch a movie         
+[E][ ] watch the superbowl (from: 2023-02-13 06:00 to: 2023-02-13 12:00)

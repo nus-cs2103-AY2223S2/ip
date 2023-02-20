@@ -49,7 +49,7 @@ public class Deadline extends Task {
         if (!deadline.contains(" ")) {
             return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } else {
-            return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time.getHour() + time.getMinute();
+            return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time.getHour() + ":" + time.getMinute();
         }
     }
 
