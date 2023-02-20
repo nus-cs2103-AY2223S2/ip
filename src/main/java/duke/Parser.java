@@ -29,7 +29,6 @@ public class Parser {
     public Command parse(String command) throws DukeExceptions {
         String[] split_command = command.split(" ", 2);
         String instruction = split_command[0];
-
         if (instruction.equals("list")) {
             if (split_command.length == 1) {
                 return new ListCommand(todoList);

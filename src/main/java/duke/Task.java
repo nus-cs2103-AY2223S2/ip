@@ -38,7 +38,7 @@ public class Task implements Serializable {
         } else if (type.equals("event")) {
             return new Event(task);
         } else {
-            throw new DukeExceptions("unknown command! Please try again.");
+            assert false : "Should not allow creating " + type;
         }
     }
 
