@@ -51,6 +51,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Generates reminder prompt
+     *
+     * @return message to remind user of ongoing event tasks and deadline tasks that are due soon
+     */
     public String remindTasks() {
         LocalDate today = LocalDate.now();
         return new FindCommand(today).execute(tasks, ui, storage);

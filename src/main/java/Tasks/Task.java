@@ -107,7 +107,7 @@ public abstract class Task {
         boolean isPrevMarked = this.isChecked;
         this.isChecked = true;
         String s = isPrevMarked
-                    ? "This task \n    " + this + "\n had previously already marked as done! Did you forget?"
+                    ? "This task \n    " + this + "\n was already marked as done! Did you forget? OR U PLAYIN ME?!"
                     : "This task is marked as done: \n    " + this;
         return s;
     }

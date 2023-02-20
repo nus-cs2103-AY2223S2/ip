@@ -65,11 +65,12 @@ public abstract class Parser {
                 return new MarkCommand(false, index);
             case DELETE:
                 return new DeleteCommand(index);
-            default: 
-                assert comm != EnumCommand.MARK 
-                    || comm != EnumCommand.UNMARK 
+            default:
+                assert comm != EnumCommand.MARK
+                    || comm != EnumCommand.UNMARK
                     || comm != EnumCommand.DELETE;
             }
+            throw new UnknownTaskException(j);
         case BYE:
             return new ByeCommand();
         default: // add commands - todo, deadline or event
@@ -93,7 +94,7 @@ public abstract class Parser {
         for (int i = 1; i < args.length; i++) {
             taskArguments += args[i] + " ";
         }
-        
+
         String[] information = taskArguments.split("/");
         for (int i = 0; i < information.length; i++) {
             commandDetails[i + 1] = information[i];
@@ -156,7 +157,7 @@ public abstract class Parser {
 
     /**
      * Parses boolean variable argument into single boolean value
-     * 
+     *
      * @param boolVarargs boolean variable argument
      * @return first boolean argument in input. false if no input
      */
