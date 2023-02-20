@@ -40,6 +40,25 @@ Returns a string 'bye' as output before closing the program window
 "Byeee! Hope to see you again! Signing off, duke."
 ```
 
+### `todo` - add a todo task
+
+Add a todo task to the list of tasks
+
+Example of usage: 
+```
+todo borrow book
+```
+
+Expected outcome:
+
+Todo task will be added to the list of tasks
+
+```
+Got it. I've added this task: 
+[T][ ] borrow book
+Now you have 1 task(s) in the list.
+```
+
 ### `deadline` - create a task with its deadline
 
 Add a task which has a deadline to the list of tasks
