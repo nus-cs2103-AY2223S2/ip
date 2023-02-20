@@ -1,5 +1,7 @@
 package duke.backend;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -118,6 +120,9 @@ public class Storage {
     }
 
     /**
+     * Archives the current task list to the archive file.
+     * Then, clears the current task list.
+     * It was implemented with the help of ChatGPT, a language model trained by OpenAI.
      * @param currentTasks the current storage of tasks
      * @throws DukeException if the file is not found.
      */
@@ -125,12 +130,17 @@ public class Storage {
         try {
             // Copy current storage to archive
             FileReader fr = new FileReader(currentTasks.file);
+            BufferedReader br = new BufferedReader(fr);
             FileWriter fw = new FileWriter(file);
-            while (fr.read() != -1) {
-                fw.write(fr.read());
+            BufferedWriter bw = new BufferedWriter(fw);
+            String line;
+            while ((line = br.readLine()) != null) {
+                bw.write(line);
+                bw.newLine();
             }
-            fr.close();
-            fw.close();
+            br.close();
+            bw.close();
+
             // clear current storage of already archived tasks
             FileWriter fw2 = new FileWriter(currentTasks.file);
             fw2.write("");
@@ -139,4 +149,5 @@ public class Storage {
             throw new DukeException("File not found");
         }
     }
+
 }
