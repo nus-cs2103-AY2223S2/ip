@@ -8,7 +8,7 @@ import duke.commands.Parser;
 import duke.dukeexception.DukeException;
 
 /**
- * This is the main class of the program.
+ * This is the core class of the program.
  *
  * @author Shi Jia Ao
  */
@@ -58,12 +58,8 @@ public class Duke {
     /**
      * Runs the program using command line UI.
      */
-    public static void runWithCommandLineUi() {
-        Ui ui = new Ui();
-        ui.printWelcome();
-        Storage storage = new Storage(Duke.FILEPATH);
-        TaskList toDoList;
-        toDoList = storage.initialize();
+    private void runWithCommandLineUi() {
+        this.ui.printWelcome();
         Scanner sc = new Scanner(System.in);
         while (true) {
             String command = sc.nextLine();
@@ -71,18 +67,23 @@ public class Duke {
             Command currCommand;
             try {
                 currCommand = parser.process();
-                currCommand.execute(toDoList);
-                ui.printCommandMessage(currCommand);
+                currCommand.execute(this.toDoList);
+                this.ui.printCommandMessage(currCommand);
             } catch (DukeException ex) {
-                ui.printExceptionMessage(ex);
+                this.ui.printExceptionMessage(ex);
                 continue;
             }
             if (currCommand instanceof Exit) {
-                ui.printGoodbye();
-                storage.update(toDoList);
+                this.ui.printGoodbye();
+                this.storage.update(this.toDoList);
                 break;
             }
         }
         sc.close();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.runWithCommandLineUi();
     }
 }

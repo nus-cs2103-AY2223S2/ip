@@ -40,9 +40,14 @@ public abstract class Task {
                 this.getDescription());
     }
 
+    // @@author CS2103_website-reused
+    // Reused from
+    // https://nus-cs2103-ay2223s2.github.io/website/schedule/week2/project.html
+    // Under A-Classes: partial solution with modifications
     protected String getStatusIcon() {
-        return (this.isDone ? Task.DONE_MARK : Task.UNDONE_MARK); // mark done task with X
+        return (this.isDone ? Task.DONE_MARK : Task.UNDONE_MARK);
     }
+    // @@author
 
     public void markDone() {
         this.isDone = true;

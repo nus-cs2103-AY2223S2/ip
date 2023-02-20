@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private static String MAIN_WINDOW_FILEPATH = "/view/MainWindow.fxml";
+    private static final String MAIN_WINDOW_FILEPATH = "/view/MainWindow.fxml";
     private Duke duke = new Duke();
 
     @Override
