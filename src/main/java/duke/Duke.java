@@ -4,7 +4,7 @@ import java.util.*;
 
 import duke.command.*;
 /**
- * main duke class. helps abstract all the other components
+ * main duke class. helps abstract all the other components by calling their methods
  */
 public class Duke {
     private static Ui ui; //deal with user interactionss
