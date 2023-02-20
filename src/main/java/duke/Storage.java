@@ -41,6 +41,10 @@ public class Storage {
             s.close();
         } catch (FileNotFoundException e) {
             try {
+                File dir = new File("./data");
+                if (!dir.exists()) {
+                    dir.mkdir();
+                }
                 Files.createFile(Paths.get(filePath));
             } catch (IOException exception) {
                 System.out.println("Error: " + exception.getMessage());

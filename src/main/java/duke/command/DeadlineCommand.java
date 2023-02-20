@@ -20,7 +20,7 @@ public class DeadlineCommand extends Command {
      */
     public DeadlineCommand(String command) {
         this.command = command;
-        assert command.substring(0, command.indexOf(" ")).equals("deadline");
+        assert command.toLowerCase().substring(0, command.indexOf(" ")).equals("deadline");
     }
 
     /**
@@ -35,8 +35,9 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList taskList, Storage storage,  Ui ui) throws DukeException {
         try {
             Task newTask;
-            String description = command.substring(command.indexOf(" ") + 1, command.indexOf("/"));
-            String stringDate = command.substring(command.indexOf("/by") + 4);
+            String[] commands = command.split(" ", 2);
+            String description = commands[1].substring(0, commands[1].indexOf("/"));
+            String stringDate = commands[1].substring(commands[1].indexOf("/by") + 4);
 
             if (description.equals("")) {
                 throw new DukeException("OOPS!!! The description of a deadline task cannot be empty.");

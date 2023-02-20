@@ -33,10 +33,10 @@ public class Parser {
 
             switch (firstWord) {
             case "mark":
-                int i = Integer.parseInt(command.replaceAll("mark ", "")) - 1;
+                int i = Integer.parseInt(command.toLowerCase().replaceAll("mark ", "")) - 1;
                 return new MarkCommand(i);
             case "unmark":
-                int j = Integer.parseInt(command.replaceAll("unmark ", "")) - 1;
+                int j = Integer.parseInt(command.toLowerCase().replaceAll("unmark ", "")) - 1;
                 return new UnmarkCommand(j);
             case "delete":
                 return new DeleteCommand(command);

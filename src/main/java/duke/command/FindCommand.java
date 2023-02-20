@@ -11,7 +11,7 @@ public class FindCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param command the task to be found in the list
+     * @param command the task to be found in the list.
      */
     public FindCommand(String command) {
         this.command = command;
@@ -28,7 +28,8 @@ public class FindCommand extends Command {
      * @throws DukeException
      */
     public String execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
-        String keyword = command.substring(command.indexOf(" ") + 1);
+        String[] commands = command.split(" ", 2);
+        String keyword = commands[1];
         int[] indexArray = new int[taskList.getSize()];
         boolean isContained = false;
 

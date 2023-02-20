@@ -132,6 +132,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Returns a message that a task has been marked with a tag.
+     * @param task Task to be tagged.
+     * @return message that task has been tagged.
+     */
     public String printTagTask(Task task) {
         String output = "I have tagged the following task:\n" + task;
         return output;

@@ -20,7 +20,7 @@ public class EventCommand extends Command {
      */
     public EventCommand(String command) {
         this.command = command;
-        assert command.substring(0, command.indexOf(" ")).equals("event");
+        assert command.toLowerCase().substring(0, command.indexOf(" ")).equals("event");
     }
 
     /**
@@ -35,9 +35,10 @@ public class EventCommand extends Command {
     public String execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         try {
             Task newTask;
-            String description = command.substring(command.indexOf(" ") + 1, command.indexOf("/from"));
-            String stringFrom = command.substring(command.indexOf("/from") + 6, command.indexOf(" /to"));
-            String stringTo = command.substring(command.indexOf("/to") + 4);
+            String[] commands = command.split(" ", 2);
+            String description = commands[1].substring(0, commands[1].indexOf("/from"));
+            String stringFrom = commands[1].substring(commands[1].indexOf("/from") + 6, commands[1].indexOf(" /to"));
+            String stringTo = commands[1].substring(commands[1].indexOf("/to") + 4);
 
             if (description.equals("")) {
                 throw new DukeException("OOPS!!! The description of an event task cannot be empty.");
@@ -52,7 +53,6 @@ public class EventCommand extends Command {
                 } catch (Exception e) {
                     throw new DukeException("The time period must be in the format: 'HH:mm dd-MM-yyyy'");
                 }
-
             }
 
             taskList.addTask(newTask);
@@ -60,6 +60,5 @@ public class EventCommand extends Command {
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }
-
     }
 }

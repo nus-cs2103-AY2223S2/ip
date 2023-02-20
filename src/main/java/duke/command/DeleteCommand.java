@@ -28,7 +28,8 @@ public class DeleteCommand extends Command {
      * @throws DukeException
      */
     public String execute(TaskList taskList, Storage storage,  Ui ui) throws DukeException {
-        int index = Integer.parseInt(command.replaceAll("delete ", "")) - 1;
+        String[] commands = command.split(" ", 2);
+        int index = Integer.parseInt(commands[1]) - 1;
         Task tempTask = taskList.getTask(index);
         taskList.deleteTask(index);
         return ui.printDeleteTask(tempTask);

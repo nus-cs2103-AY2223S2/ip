@@ -17,7 +17,7 @@ public class ToDoCommand extends Command {
      */
     public ToDoCommand(String command) {
         this.command = command;
-        assert command.substring(0, command.indexOf(" ")).equals("todo");
+        assert command.toLowerCase().substring(0, command.indexOf(" ")).equals("todo");
     }
 
     /**
@@ -32,7 +32,8 @@ public class ToDoCommand extends Command {
     public String execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         try {
             Task newTask;
-            String description = command.substring(command.indexOf(" ") + 1);
+            String[] commands = command.split(" ", 2);
+            String description = commands[1];
 
             if (description.equals("")) {
                 throw new DukeException("OOPS!!! The description of a todo task cannot be empty.");

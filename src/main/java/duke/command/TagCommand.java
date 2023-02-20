@@ -27,7 +27,8 @@ public class TagCommand extends Command {
      * @throws DukeException
      */
     public String execute(TaskList taskList, Storage storage,  Ui ui) throws DukeException {
-        String splitCommand = command.replaceAll("tag ", "");
+        String[] commands = command.split(" ", 2);
+        String splitCommand = commands[1];
         int index = Integer.parseInt(splitCommand.substring(0, splitCommand.indexOf(" "))) - 1;
         String tag = splitCommand.substring(splitCommand.indexOf(" ") + 1);
 

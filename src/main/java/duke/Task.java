@@ -48,6 +48,11 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Sets the tag of the task.
+     *
+     * @param tag description of tag.
+     */
     public void setTag(String tag) {
         this.tag = tag;
     }
