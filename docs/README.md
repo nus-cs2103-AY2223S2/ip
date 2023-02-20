@@ -37,6 +37,23 @@ Returns a string 'bye' as output before closing the program window
 "Byeee! Hope to see you again! Signing off, duke."
 ```
 
+### `deadline` - create a task with its deadline
+
+Add a task which has a deadline to the list of tasks
+
+Example of usage: 
+'
+
+`keyword (optional arguments)`
+
+Expected outcome:
+
+Description of the outcome.
+
+```
+expected output
+```
+
 ### `Keyword` - Describe action
 
 Describe the action and its outcome.
