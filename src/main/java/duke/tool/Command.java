@@ -21,7 +21,7 @@ public class Command {
     /**
      * Marks a task as done.
      * @param tid The id of the task.
-     * @return
+     * @return The successful or unsuccessful ui notification message.
      */
     public String mark_as_done(int tid) {
         Task task = new Task();
@@ -34,6 +34,11 @@ public class Command {
         return ui.print_mark_as_done_msg(task);
     }
 
+    /**
+     * Marks a task as not done.
+     * @param tid The id of the task.
+     * @return The successful or unsuccessful ui notification message.
+     */
     public String mark_as_undone(int tid) {
         Task task = new Task();
         try {
@@ -45,11 +50,21 @@ public class Command {
         return ui.print_mask_as_undone_msg(task);
     }
 
+    /**
+     * Add the task to the task list.
+     * @param task The task to add.
+     * @return The successful or unsuccessful ui notification message.
+     */
     public String add_task_to_list(Task task) {
         tasks.add(task);
         return ui.print_add_task_msg(task, tasks.size());
     }
 
+    /**
+     * Delete the task to the task list.
+     * @param tid The task id to delete.
+     * @return The successful or unsuccessful ui notification message.
+     */
     public String delete_task(int tid) {
         Task task = new Task();
         try {
@@ -61,6 +76,11 @@ public class Command {
         return ui.print_remove_task_msg(task, tasks.size());
     }
 
+    /**
+     * Find the task that contains match string from the task list.
+     * @param match_str The string to match with.
+     * @return The contents of tasks found.
+     */
     public String find_tasks(String match_str) {
         // TODO: use Java streams to rewrite.
         if (match_str.isBlank()) {

@@ -6,19 +6,36 @@ import duke.task.Task;
 
 public class Ui {
 
+    /**
+     * Prints message signifying empty inputs
+     * @return A message string.
+     */
     public String print_empty_msg() {
         return "Nothing to say about this!!";
     }
 
+    /**
+     * Prints greeting message.
+     * @return A message string.
+     */
     public String print_greet_msg() {
         return "Hello! I'm Duke\n" +
                 "     What can I do for you?";
     }
 
+    /**
+     * Prints bye message.
+     * @return A message string.
+     */
     public String print_bye_msg() {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Prints the list of tasks.
+     * @param tasks The list of tasks.
+     * @return A message string.
+     */
     public String print_task_list(ArrayList<Task> tasks) {
         String output = "";
         if (tasks.isEmpty()) {
@@ -33,6 +50,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Prints mark-as-done message.
+     * @param task The task to mark as done.
+     * @return A message string.
+     */
     public String print_mark_as_done_msg(Task task) {
         String output = "";
         if (task.isNull()) {
@@ -43,6 +65,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Prints mark-as-not-done message.
+     * @param task The task to mark as not done.
+     * @return A message string.
+     */
     public String print_mask_as_undone_msg(Task task) {
         String output = "";
         if (task.isNull()) {
@@ -53,6 +80,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Prints adding task status message.
+     * @param task The task to add.
+     * @return A message string.
+     */
     public String print_add_task_msg(Task task, int size) {
         String output = "";
         if (task.isNull()) {
@@ -64,6 +96,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Prints removing task status message.
+     * @param task The task to remove.
+     * @return A message string.
+     */
     public String print_remove_task_msg(Task task, int size) {
         String output = "";
         if (task.isNull()) {

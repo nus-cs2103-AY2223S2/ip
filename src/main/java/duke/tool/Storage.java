@@ -7,16 +7,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a storage class that handles saving and loading to disk jobs.
+ */
 public class Storage {
     protected File dir;
     protected File file;
 
+    /**
+     * Constructs a storage object.
+     * @param dir_name The name of a local directory to write. Defaults to "data".
+     * @param file_name The name of a file within the directory to write into. Defaults to "tolist.txt"
+     */
     public Storage(String dir_name, String file_name) {
         if (dir_name.isBlank()) {
             dir_name = "data";
         }
         if (file_name.isBlank()) {
-            file_name = "tolist.txt";
+            file_name = "todo_list.txt";
         }
         this.dir = new File(dir_name);
         this.file = new File(file_name);
@@ -26,6 +34,10 @@ public class Storage {
         System.out.println(str);
     }
 
+    /**
+     * Saves list of tasks to disk.
+     * @param tasks The list of tasks to write.
+     */
     public void save_to_file(ArrayList<Task> tasks) {
         try {
             if (!this.dir.exists()){
