@@ -30,11 +30,11 @@ public class Deadline extends Task implements Comparable<Deadline> {
     @Override
     public int compareTo(Deadline other) {
         if (other.deadline.isBefore(deadline)) {
-            return -1;
+            return 1;
         } else if (other.deadline.isEqual(deadline)) {
             return 0;
         } else {
-            return 1;
+            return -1;
         }
     }
 }
