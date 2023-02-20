@@ -1,9 +1,9 @@
-package duke;
+package duke.duke;
 
 import java.util.Scanner;
 
 public class Ui {
-    Parser parser;
+    private Parser parser;
 
     public Ui(Parser parser) {
         this.parser = parser;
@@ -17,6 +17,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Greetings");
+
         Scanner user = new Scanner(System.in);
         String responseMsg = "";
         while (true) {

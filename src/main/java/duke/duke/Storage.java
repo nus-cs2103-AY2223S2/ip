@@ -1,11 +1,19 @@
-package duke;
+package duke.duke;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 
 /*
@@ -82,22 +90,23 @@ public class Storage {
             char type = entry.charAt(0);
             int marked = Character.getNumericValue(entry.charAt(1));
             String description = entry.substring(2);
+
             if (type == 'T') {
                 ToDo todo = new ToDo(description);
                 if (marked == 1) {
-                    todo.mark();
+                    todo.markDone();
                 }
                 data.addFileEntry(todo);
             } else if (type == 'D') {
                 Deadline deadline = new Deadline(description);
                 if (marked == 1) {
-                    deadline.mark();
+                    deadline.markDone();
                 }
                 data.addFileEntry(deadline);
             } else {
                 Event event = new Event(description);
                 if (marked == 1) {
-                    event.mark();
+                    event.markDone();
                 }
                 data.addFileEntry(event);
             }

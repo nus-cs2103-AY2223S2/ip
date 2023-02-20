@@ -13,9 +13,10 @@ public class DeadlineTest {
         String input = "deadline abc /by 2023-02-26 1800";
         Deadline deadline = new Deadline();
         try {
-            deadline.genDscp(input);
+            deadline.formatDescription(input);
             assertEquals("abc (by: 2023-02-15 1800", deadline.getDescription());
         } catch(DukeExceptions e){
+
         }
     }
 
@@ -24,7 +25,7 @@ public class DeadlineTest {
         String input = "deadline abc /by 1";
         Deadline deadline = new Deadline();
         try {
-            deadline.genDscp(input);
+            deadline.formatDescription(input);
         } catch(DukeExceptions e){
             assertEquals("Please enter the deadline correctly", e.getMessage());
         }

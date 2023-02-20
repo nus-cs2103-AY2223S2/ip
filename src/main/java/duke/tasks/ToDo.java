@@ -13,12 +13,10 @@ public class ToDo extends Task{
     }
 
     @Override
-    public void genDscp(String input) throws InvalidTodo {
+    public void formatDescription(String input) throws InvalidTodo {
         if (input.isBlank()) {
             throw new InvalidTodo();
         }
         super.description = input;
     }
-
-    //Override toString
 }

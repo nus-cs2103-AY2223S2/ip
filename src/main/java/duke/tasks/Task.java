@@ -3,22 +3,22 @@ package duke.tasks;
 import duke.exceptions.DukeExceptions;
 
 public class Task {
-    String description;
-    String tag = " ";
-    boolean done = false;
+    protected String description;
+    protected String tag = " ";
+    protected boolean isDone = false;
 
-    public void genDscp(String input) throws DukeExceptions {
+    public void formatDescription(String input) throws DukeExceptions {
         this.description = input;
     }
-    public void mark() {
-        this.done = true;
+    public void markDone() {
+        this.isDone = true;
     }
 
-    public void unmark() {
-        this.done = false;
+    public void unmarkDone() {
+        this.isDone = false;
     }
 
-    public boolean isMarked() { return this.done;}
+    public boolean isMarked() { return this.isDone;}
 
     public String getTag() {return this.tag;}
 
@@ -26,7 +26,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String mark = this.done ? "X" : " ";
+        String mark = this.isDone ? "X" : " ";
         return "[" + this.tag + "]" + "[" + mark + "] " + this.description;
     }
 }

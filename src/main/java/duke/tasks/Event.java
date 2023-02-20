@@ -8,9 +8,9 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
-    String tag = "E";
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    private String tag = "E";
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     public Event() {
         super.tag = tag;
@@ -23,11 +23,12 @@ public class Event extends Task {
 
     //KEEP ALL WORDS SEPARATED BY SPACES
     @Override
-    public void genDscp(String input) throws InvalidEvent {
+    public void formatDescription(String input) throws InvalidEvent {
         String dscp = input.replace("event ", "");
         if (dscp.isBlank()) {
             throw new InvalidEvent();
         }
+
         int fromId = dscp.indexOf("/from");
         int toId = dscp.indexOf(("/to"));
         if (fromId == -1 || toId == -1) {
@@ -42,9 +43,9 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             throw new InvalidEvent("Please enter the event period correctly");
         }
+
         String formattedFrom = this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
         String formattedTo = this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
-
         String description = String.format("%s (from: %s to: %s)", input.substring(0, fromId - 1),
                 formattedFrom, formattedTo);
         super.description = description;

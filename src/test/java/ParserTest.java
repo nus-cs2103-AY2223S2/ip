@@ -1,5 +1,5 @@
-import duke.Parser;
-import duke.TaskList;
+import duke.duke.Parser;
+import duke.duke.TaskList;
 
 import org.junit.jupiter.api.Test;
 
