@@ -53,6 +53,8 @@ public class InputParser {
                 return handleUnmarkCommand(tokens);
             case "delete":
                 return handleDeleteCommand(tokens);
+            case "sort":
+                return handleSortCommand(tokens);
             default:
                 throw new UnsupportedCommandError();
             }
@@ -61,6 +63,12 @@ public class InputParser {
         }
     }
 
+    private Command handleSortCommand(String[] tokens) throws InvalidInputError, InvalidParameterError {
+        if (tokens.length != 1) {
+            throw new InvalidInputError("Oops, sort doesn't take parameters!");
+        }
+        return commandFactory.createCommand(CommandType.SORT);
+    }
     private Command handleDeleteCommand(String[] tokens) throws InvalidInputError, InvalidParameterError {
         if (tokens.length != 2) {
             throw new InvalidInputError();

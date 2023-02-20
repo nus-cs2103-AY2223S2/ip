@@ -21,6 +21,7 @@ public class CommandFactory {
     public enum CommandType {
         GREET, BYE, LIST, MARK_DONE, MARK_UNDONE, CREATE_TODO,
         CREATE_DEADLINE, CREATE_EVENT, DELETE_TASK, FIND,
+        SORT
     }
 
     /**
@@ -87,6 +88,8 @@ public class CommandFactory {
             return new DeleteTaskCommand(taskModel, taskView, indexToDelete);
         case FIND:
             return new FindTaskCommand(taskModel, taskView, args[0]);
+        case SORT:
+            return new SortDeadlinesCommand(taskModel, taskView);
         default:
             return null;
         }
