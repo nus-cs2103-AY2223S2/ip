@@ -4,13 +4,14 @@ import duke.exceptions.InvalidDeadline;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.time.format.DateTimeParseException;
 
 /**
  * Represents a deadline task that the user can input.
  * Tag = D.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private String tag = "D";
     private LocalDateTime by;
 

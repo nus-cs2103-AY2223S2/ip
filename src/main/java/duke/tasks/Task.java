@@ -41,19 +41,25 @@ public class Task {
      */
 
 
-    public boolean isMarked() { return this.isDone;}
+    public boolean isMarked() {
+        return this.isDone;
+    }
 
     /**
      * Return the tag representing the type of task.
      * @return The tag
      */
-    public String getTag() {return this.tag;}
+    public String getTag() {
+        return this.tag;
+    }
 
     /**
      * Return the description of the task.
      * @return The description.
      */
-    public String getDescription() {return this.description;}
+    public String getDescription() {
+        return this.description;
+    }
 
     @Override
     public String toString() {
