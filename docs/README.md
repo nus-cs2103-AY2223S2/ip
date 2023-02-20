@@ -1,11 +1,12 @@
 # User Guide
 
-**Duke** is **an application for managing your upcoming tasks**. You can use application with either a **Command Line Interface** (CLI) or a **Graphical User Interface** (GUI), by typing commands into the application.
+**Voile** is **an application for managing your upcoming tasks**. You can use application with either a **Command Line Interface** (CLI) or a **Graphical User Interface** (GUI), by typing commands into the application.
 
 ## Table of Content
 
 1. [Quick start](#quick-start)
 1. [Features](#features)
+    - [Notes about the command format](#notes-about-the-command-format)
     - [Automatically save data](#automatically-save-data)
     - [Manage 3 kinds of tasks](#manage-3-kinds-of-tasks)
     - [Show help: **help**](#show-help-help)
@@ -18,17 +19,19 @@
     - [Delete a task: **delete**](#delete-a-task-delete)
     - [Delete all tasks: **clear**](#delete-all-tasks-clear)
     - [Find tasks with a keyword: **find**](#find-tasks-with-a-keyword-find)
-    - [Sort and show all deadlines: **sort-deadlines**](#sort-and-show-all-deadlines-sort-deadlines)
-    - [Edit a task's description: **set-description**](#edit-a-tasks-description-set-description)
+    - [Sort and show all tasks: **sort**](#sort-and-show-all-tasks-sort)
+    - [Edit a task's description: **edit**](#edit-a-tasks-description-edit)
     - [Exit the application: **bye**](#exit-the-application-bye)
 1. [Acknowledgements](#acknowledgements)
 
 ## Quick start
 
 1. Ensure you have **Java 11** or above installed in your computer. You can check by opening a command terminal, and run `java --version`. If **Java** is not installed, or the version is **10** or below, you can install the lastest **Java** version [here](https://www.oracle.com/sg/java/technologies/downloads/).
-1. Download the lastest version of **Duke** [here](https://github.com/VietAnh1010/ip/releases).
+1. Download the lastest version of **Voile** [here](https://github.com/VietAnh1010/ip/releases).
 1. Copy the downloaded file to the folder you want to use as the _home folder_ for the application.
-1. Open a command terminal, `cd` into the folder you put the file in, and run `java -jar Duke.jar`. A **GUI** simmlar to below should appear in a few seconds.<br>If you want to use the **CLI** instead, you can run `java -jar Duke.jar cli`.
+1. Open a command terminal, `cd` into the folder you put the file in, and run `java -jar Voile.jar`. A **GUI** simmlar to below should appear in a few seconds.<br>
+![GUI](./Ui.png)<br>
+If you want to use the **CLI** instead, you can run `java -jar voile.jar cli`.
 1. Start typing commands in the command box and press **Enter** to execute it. Type `help` for more details about the commands that you can use in the application.
 
 ## Features
@@ -41,15 +44,15 @@
 
 ### Automatically save data
 
-**Duke** data are saved in the hard disk automatically after you exit the application. There is no need to save the data manually.
+**Voile** data are saved in the hard disk automatically after you exit the application. There is no need to save the data manually.
 
 - If you are using the **CLI** version, **do not** interupt the application using **Ctrl+C**.
-- Saved data is stored at `<home-folder>/.duke/tasklist.ser`, where `home-foler` is the home folder of the application.
+- Saved data is stored at `<home-folder>/.voile/tasklist.ser`, where `home-foler` is the home folder of the application.
 - Data will not be saved if your application exit abnormally.
 
 ### Manage 3 kinds of tasks
 
-There are 3 kinds of tasks in **Duke**: **TODO**, **DEADLINE** and **EVENT**. All tasks store _descriptions_ about them - these _descriptions_ are specified by you and can be modified when needed.
+There are 3 kinds of tasks in **Voile**: **TODO**, **DEADLINE** and **EVENT**. All tasks store _descriptions_ about them - these _descriptions_ are specified by you and can be modified when needed.
 
 - A **DEADLINE** task stores an additional date as its _deadline_.
 - An **EVENT** tasks stores 2 additional dates. The first one is its _start time_, and the second one is its _end time_.
@@ -58,7 +61,7 @@ There are 3 kinds of tasks in **Duke**: **TODO**, **DEADLINE** and **EVENT**. Al
 
 Usage:<br>`help [command]`
 
-Display the list of commands supported by **Duke**. Include `command` for more details about a particular command.
+Display the list of commands supported by **Voile**. Include `command` for more details about a particular command.
 
 ### Show all tasks: **list**
 
@@ -90,8 +93,9 @@ Usage:<br>`event <description> --from <start-time> --to <end-time>`
 
 Add a new **EVENT** tasks to your list.
 
-- `description` can contain whitespaces, however, leading and trailing whitespaces will be removed.
+- `description` cannot be empty. Also, leading and trailing whitespaces will be removed.
 - `start-time` and `end-time` are either: dates with `yyyy-MM-dd` format (`2023-01-01`), or days of week with `EEE` format (`Mon`/`Tue`).
+- `start-time` cannot be after `end-time`.
 - If you supply a day of week as argument, the nearest day of week in the future will be used. Also, your input will be converted to the correct format automatically, for example, `mon` will be converted to `Mon`.
 
 ### Mark a task as done: **mark**
@@ -133,15 +137,17 @@ Usage:<br>`find <keyword>`
 
 Find and list all tasks, whose descriptions contain the given keyword.
 
-### Sort and show all deadlines: **sort-deadlines**
+### Sort and show all tasks: **sort**
 
-Usage:<br>`sort-deadlines`
+Usage:<br>`sort`
 
-Sort and show all **DEADLINE** tasks in your list.
+Sort and show all tasks in your list.
 
-### Edit a task's description: **set-description**
+- Tasks will be grouped into different groups before being sorted.
 
-Usage:<br>`set-description <index> <description>`
+### Edit a task's description: **edit**
+
+Usage:<br>`edit <index> <description>`
 
 Change the description of a particular task at the given index.
 
@@ -157,4 +163,4 @@ Exit the application.
 
 ## Acknowledgements
 
-Duke is built with Java 11. The GUI of Duke is developed with [JavaFX](https://openjfx.io/).
+Voile is built with Java 11. The GUI of Voile is developed with [JavaFX](https://openjfx.io/).

@@ -16,7 +16,7 @@ import voile.model.task.TaskList;
  */
 public class Storage {
 
-    private static final Path PATH_TO_FILE = Path.of(".duke", "tasklist.ser");
+    private static final Path PATH_TO_FILE = Path.of(".voile", "tasklist.ser");
 
     /**
      * Checks whether the log file exists or not. If the log file does not exists, a new log file

@@ -95,7 +95,9 @@ public class HelpCommand extends Command {
 
     private static final String SORT_HELP_MESSAGE = String.join("\n",
             "Usage: sort",
-            "Sort and show all DEADLINE tasks in the library.");
+            "Sort and show all tasks in the library.",
+            "Note:",
+            " - Tasks will be grouped into different groups before being sorted.");
 
     private static final String EDIT_HELP_MESSAGE = String.join("\n",
             "Usage: edit <index> <description>",
