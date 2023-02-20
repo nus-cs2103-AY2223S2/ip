@@ -13,7 +13,7 @@ import duke.exceptions.DukeException;
  * Every Duke object has its own storage, tasklist, and ui objects.
  *
  * @author Jian Cheng
- * @version 0.1
+ * @version 0.3
  */
 
 public class Duke {
