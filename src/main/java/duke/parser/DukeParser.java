@@ -9,6 +9,9 @@ import duke.command.DukeCommand;
 import duke.date.DukeDate;
 import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateFormatException;
+import duke.exception.InvalidEventException;
+import duke.exception.EmptyDescriptionException;
 
 /**
  * A class for parsing the user's input.
@@ -84,19 +87,35 @@ public class DukeParser {
         }
 
         case DELETE: {
-            parseDelete(inputString, commandArgs);
+            parseIndexCommand(DukeCommand.DELETE, inputString, commandArgs);
             break;
         }
         case MARK: {
-            parseMark(inputString, commandArgs);
+            parseIndexCommand(DukeCommand.MARK, inputString, commandArgs);
             break;
         }
         case UNMARK: {
-            parseUnmark(inputString, commandArgs);
+            parseIndexCommand(DukeCommand.UNMARK, inputString, commandArgs);
             break;
         }
         }
         return commandArgs.toArray(new String[] {});
+    }
+
+    private static void parseListOrBye(String inputString, List<String> commandArgs) {
+        boolean isInputJustList = inputString.strip().length() == DukeCommand.LIST.text.length();
+        boolean isInputJustBye = inputString.strip().length() == DukeCommand.BYE.text.length();
+
+        boolean hasUserProvidedArgs = !isInputJustList && !isInputJustBye;
+        if (hasUserProvidedArgs) {
+            throw new InvalidCommandException();
+        }
+    }
+
+    private static void parseFind(String inputString, List<String> commandArgs) {
+        String keyword = inputString.substring(DukeCommand.FIND.text.length());
+        String cleanedKeyword = keyword.strip();
+        commandArgs.add(cleanedKeyword);
     }
 
     private static void parseViewSchedule(String inputString, List<String> commandArgs)
@@ -111,44 +130,24 @@ public class DukeParser {
         }
     }
 
-    private static void parseListOrBye(String inputString, List<String> commandArgs) {
-        boolean isInputJustList = inputString.strip().length() == DukeCommand.LIST.text.length();
-        boolean isInputJustBye = inputString.strip().length() == DukeCommand.BYE.text.length();
-
-        boolean hasUserProvidedArgs = !isInputJustList && !isInputJustBye;
-        if (hasUserProvidedArgs) {
-            throw new InvalidCommandException();
-        }
+    private static void parseToDo(String inputString, List<String> commandArgs) {
+        // Shift the offset as follows to capture the description using substring;
+        // {todo}[offset] {description}
+        int offset = getCommandLength(DukeCommand.TODO);
+        String description = inputString.substring(offset).strip();
+        checkHasDescription(description);
+        commandArgs.add(description);
     }
 
-
-    private static void parseFind(String inputString, List<String> commandArgs) {
-        String keyword = inputString.substring(DukeCommand.FIND.text.length());
-        String cleanedKeyword = keyword.strip();
-        commandArgs.add(cleanedKeyword);
-    }
-
-    private static void parseDeadline(String inputString, List<String> commandArgs) {
-        int offset = DukeCommand.DEADLINE.text.length();
-        int byIndex = inputString.indexOf("/by", offset);
-        boolean isByKeywordExist = byIndex != -1;
-        if (!isByKeywordExist) {
-            throw new Error("Invalid argument!");
-        }
-        String description = inputString.substring(offset, byIndex).strip();
-        String deadline = inputString.substring(byIndex + ("/by".length())).strip();
-
-        try {
-            DukeDate.parseDateString(deadline);
-            commandArgs.add(description);
-            commandArgs.add(deadline);
-        } catch (DateTimeParseException e) {
-            throw new Error("☹ OOPS!!! The time format is invalid, please use yyyy-MM-dd");
+    private static void checkHasDescription(String description) {
+        boolean isDescriptionEmpty = description.length() == 0;
+        if (isDescriptionEmpty) {
+            throw new EmptyDescriptionException();
         }
     }
 
     private static void parseEvent(String inputString, List<String> commandArgs) {
-        int offset = DukeCommand.EVENT.text.length();
+        int offset = getCommandLength(DukeCommand.EVENT);
         int fromIndex = inputString.indexOf("/from", offset);
         int toIndex = inputString.indexOf("/to", offset);
 
@@ -158,41 +157,61 @@ public class DukeParser {
         }
 
         String description = inputString.substring(offset, fromIndex).strip();
+        checkHasDescription(description);
 
-        try {
-            String from = inputString.substring(fromIndex + ("/from".length()), toIndex).strip();
-            String to = inputString.substring(toIndex + ("/to".length())).strip();
-            LocalDate fromDate = DukeDate.parseDateString(from);
-            LocalDate toDate = DukeDate.parseDateString(to);
-
-            boolean isValidFromDate = fromDate.isBefore(toDate) || fromDate.isEqual(toDate);
-
-            if (!isValidFromDate) {
-                throw new Error("☹ OOPS!!! from date should be before to date!");
-            }
-            commandArgs.add(description);
-            commandArgs.add(from);
-            commandArgs.add(to);
-
-        } catch (DateTimeParseException e) {
-            throw new Error("☹ OOPS!!! The time format is invalid, please use yyyy-MM-dd");
-        }
-    }
-
-    private static void parseToDo(String inputString, List<String> commandArgs) {
-        // Shift the offset as follows to capture the description using substring;
-        // {todo}[offset] {description}
-        int offset = DukeCommand.TODO.text.length();
-        String description = inputString.substring(offset).strip();
-        boolean isDescriptionEmpty = description.length() == 0;
-        if (isDescriptionEmpty) {
-            throw new Error("☹ OOPS!!! The description of a todo cannot be empty.");
-        }
+        String from = inputString.substring(fromIndex + ("/from".length()), toIndex).strip();
+        String to = inputString.substring(toIndex + ("/to".length())).strip();
+        LocalDate fromDate = checkValidDate(from);
+        LocalDate toDate = checkValidDate(to);
+        checkValidEventPeriod(fromDate, toDate);
         commandArgs.add(description);
+        commandArgs.add(from);
+        commandArgs.add(to);
+
     }
 
-    private static void parseMark(String inputString, List<String> commandArgs) {
-        String taskIndex = inputString.substring(DukeCommand.MARK.text.length());
+    private static void checkValidEventPeriod(LocalDate fromDate, LocalDate toDate) {
+        boolean isValidFromDate = fromDate.isBefore(toDate) || fromDate.isEqual(toDate);
+
+        if (!isValidFromDate) {
+            throw new InvalidEventException();
+        }
+    }
+
+    private static LocalDate checkValidDate(String dateString) {
+        try {
+            LocalDate date = DukeDate.parseDateString(dateString);
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateFormatException(dateString);
+        }
+    }
+
+    private static void parseDeadline(String inputString, List<String> commandArgs) {
+        int offset = getCommandLength(DukeCommand.DEADLINE);
+        int byIndex = inputString.indexOf("/by", offset);
+        boolean isByKeywordExist = byIndex != -1;
+        if (!isByKeywordExist) {
+            throw new InvalidArgumentException();
+        }
+        String description = inputString.substring(offset, byIndex).strip();
+        String deadline = checkValidDeadline(inputString, byIndex);
+        checkHasDescription(description);
+
+        commandArgs.add(description);
+        commandArgs.add(deadline);
+    }
+
+    private static String checkValidDeadline(String inputString, int byIndex) {
+        String deadline = inputString.substring(byIndex + ("/by".length())).strip();
+        checkValidDate(deadline);
+        return deadline;
+    }
+
+    private static void parseIndexCommand(DukeCommand command, String inputString,
+            List<String> commandArgs) {
+        int offset = getCommandLength(command);
+        String taskIndex = inputString.substring(offset);
         String cleanedTaskIndex = taskIndex.strip();
         try {
             Integer.parseInt(cleanedTaskIndex);
@@ -202,26 +221,8 @@ public class DukeParser {
         }
     }
 
-    private static void parseUnmark(String inputString, List<String> commandArgs) {
-        String taskIndex = inputString.substring(DukeCommand.UNMARK.text.length());
-        String cleanedTaskIndex = taskIndex.strip();
-        try {
-            Integer.parseInt(cleanedTaskIndex);
-            commandArgs.add(cleanedTaskIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidArgumentException();
-        }
-    }
-
-    private static void parseDelete(String inputString, List<String> commandArgs) {
-        String taskIndex = inputString.substring(DukeCommand.DELETE.text.length());
-        String cleanedTaskIndex = taskIndex.strip();
-        try {
-            Integer.parseInt(cleanedTaskIndex);
-            commandArgs.add(cleanedTaskIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidArgumentException();
-        }
+    private static int getCommandLength(DukeCommand command) {
+        return command.text.length();
     }
 
 }
