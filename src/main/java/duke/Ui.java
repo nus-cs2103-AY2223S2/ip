@@ -2,7 +2,14 @@ package duke;
 
 import duke.task.Task;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * This class deals with interactions with the user.
@@ -128,6 +135,22 @@ public class Ui {
      */
     public void showDateTimeError() {
         message.append("OOPS!!! Incorrect date time format. Use dd/mm/yyyy HHmm instead.");
+    }
+
+    public void showHelpPage() throws DukeException {
+        String fileSep = System.getProperty("file.separator");
+        String userDir = System.getProperty("user.dir");
+        Path foldPath = Paths.get( userDir + fileSep + "src/main");
+        Path filePath = Paths.get(foldPath + fileSep + "help.txt");
+        try {
+            File f = new File(filePath.toString());
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                message.append(s.nextLine() + "\n");
+            }
+        } catch (FileNotFoundException e) {
+            throw new DukeException();
+        }
     }
 
     public StringBuilder getMessage() {
