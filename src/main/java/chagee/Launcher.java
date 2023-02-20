@@ -1,8 +1,9 @@
 package chagee;
 
+import chagee.ui.Gui;
 import javafx.application.Application;
 
-import chagee.ui.Gui;
+
 
 /**
  * A launcher class to workaround classpath issues.

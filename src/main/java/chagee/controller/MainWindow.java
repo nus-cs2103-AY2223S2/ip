@@ -2,6 +2,7 @@ package chagee.controller;
 
 import java.io.IOException;
 
+import chagee.driver.GuiDriver;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import chagee.driver.GuiDriver;
 
 
 
