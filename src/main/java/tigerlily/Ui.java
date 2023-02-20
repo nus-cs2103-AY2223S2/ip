@@ -1,4 +1,4 @@
-package tigerlily.util;
+package tigerlily;
 
 import tigerlily.exceptions.DukeExceptions;
 

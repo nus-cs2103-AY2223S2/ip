@@ -12,8 +12,8 @@ import javafx.scene.layout.VBox;
 
 import javafx.stage.Stage;
 
-import tigerlily.util.Tigerlily;
-import tigerlily.util.Ui;
+import tigerlily.Tigerlily;
+import tigerlily.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

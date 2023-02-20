@@ -1,2 +1,1 @@
-E | 0 | bake sale | 2023-02-14 14:00 to 2023-02-14 16:00
-T | 0 | buy ingredients
+T | 1 | buy ingredients

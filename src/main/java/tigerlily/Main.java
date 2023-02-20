@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tigerlily.gui.MainWindow;
-import tigerlily.util.Tigerlily;
 
 /**
  * A GUI for Duke using FXML.
