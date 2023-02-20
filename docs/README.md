@@ -16,6 +16,8 @@ Fideline is a chatbot that records and manages tasks.
   - [`delete` - Deleting a task](#delete---deleting-a-task)
   - [`bye` - Terminating the program](#bye---terminating-the-program)
 
+<br />
+
 ## Quick Start
 
 1. Have Java 11 or above installed on your computer.
@@ -35,6 +37,8 @@ Fideline is a chatbot that records and manages tasks.
 - Mark a task as complete
 - Find tasks by a keyword
 - Delete existing tasks
+
+<br />
 
 ## Commands
 
@@ -58,6 +62,7 @@ wow! there is 1 task in the list now! :0
 
 > **Feature:** Fideline prevents the user from creating
 > duplicate tasks by accident! 
+
 <br />
 
 ### `deadline` - Adding a DEADLINE task
@@ -152,11 +157,10 @@ Expected Output:
 here! your list:
 1. [T][X] mop the floor
 2. [D][ ] history essay (by: next friday)
-3. [C][X] buy jackson's present (by: Jan 16 2023)
-4. [E][ ] halloween party at jackson's (from: friday 5pm
-to 10pm)
+3. [D][X] buy jackson's present (by: Jan 16 2023)
+4. [E][ ] halloween party at jackson's (from: friday 5pm to 10pm)
 ```
-
+<br />
 ### `find` - Finding tasks with keyword
 
 Finds all tasks containing a keyword
@@ -171,8 +175,7 @@ Expected Output:
 ```
 here is everything that matched:
 1. [D][X] buy jackson's present (by: Jan 16 2023)
-2. [E][ ] halloween party at jackson's (from friday 5pm
-to: 10pm)
+2. [E][ ] halloween party at jackson's (from friday 5pm to: 10pm)
 ```
 <br />
 
@@ -199,5 +202,4 @@ now there are 3 tasks in the list now!
 Closes Fideline
 
 Format: `bye`
-are 3 tasks in the list now!
 <br />
