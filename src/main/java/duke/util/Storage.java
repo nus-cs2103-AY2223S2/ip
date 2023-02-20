@@ -4,9 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.util.List;
+
 
 import javafx.util.Pair;
 
@@ -21,6 +29,10 @@ import javafx.util.Pair;
 public class Storage {
     private HashMap<String, TaskList> keywordDatabase;
     private HashMap<String, PriorityQueue<Pair<LocalDateTime, Task>>> taskScheduleOnDates;
+    private static final String SAVED_FILE_PATH =
+            FileSystems.getDefault().getPath("").toAbsolutePath() +
+            Path.of("/Saved Progress/").toString();
+    private static final String SAVE_FILE_NAME = "/" + "MY_GRAND_PLAN.txt";
 
     /**
      * Construct the {@code Storage} object with
@@ -38,7 +50,11 @@ public class Storage {
      */
 
     private static void saveProgress(TaskList taskList) {
-        File savedFile = new File("MY_GRAND_PLAN.txt");
+        File directory = new File(SAVED_FILE_PATH.toString());
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        File savedFile = new File(SAVED_FILE_PATH + SAVE_FILE_NAME);
         System.out.println("[X] FILE CREATED");
         try {
             FileWriter myWriter = new FileWriter(savedFile, false);
@@ -50,6 +66,8 @@ public class Storage {
             myWriter.close();
             System.out.println("[X] FINISHED WRITING");
         } catch (IOException e) {
+            System.out.println("SOMETHING IS MESSING WITH THE SAVING FILE PROCESS");
+            System.out.println("CANNOT FIND DIRECTORY");
             System.out.println("BEE BOO BOOP...");
         }
     }
@@ -64,7 +82,7 @@ public class Storage {
 
     public static TaskList loadProgress() {
         try {
-            File previousProgress = new File("MY_GRAND_PLAN.txt");
+            File previousProgress = new File(SAVED_FILE_PATH + SAVE_FILE_NAME);
             Scanner progressScanner = new Scanner(previousProgress);
             TaskList returnTaskList = new TaskList();
 
