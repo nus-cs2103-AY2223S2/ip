@@ -33,6 +33,8 @@ public class Ui {
 
     /**
      * Prints a list of current tasks.
+     *
+     * @param allTasks List of all existing tasks.
      */
     public void printCommandList(List<Task> allTasks) {
         DateTimeFormatter dateTimeFormatter1 =
@@ -59,6 +61,9 @@ public class Ui {
 
     /**
      * Prints a list of deadlines or events happening on this day.
+     *
+     * @param dateTime Date that user wants to find tasks on.
+     * @param allTasks List of all existing tasks.
      */
     public void printDeadlineOrEventsOnDay(LocalDate dateTime, TaskList allTasks) {
         DateTimeFormatter dateTimeFormatter1 =
@@ -93,6 +98,10 @@ public class Ui {
 
     /**
      * Prints a list of tasks contains keyword.
+     *
+     * @param keyword Keyword that user wants to search for relevant
+     *                tasks.
+     * @param allTasks List of all existing tasks.
      */
     public void printFindResults(String keyword, TaskList allTasks) {
         DateTimeFormatter dateTimeFormatter1 =
@@ -139,13 +148,17 @@ public class Ui {
 
     /**
      * Reads command from user.
+     *
+     * @return Command typed by user.
      */
     public String getCommand() {
         return sc.nextLine();
     }
 
     /**
-     * Print any file loading error message.
+     * Prints any file loading error message.
+     *
+     * @param message Error message.
      */
     public void showLoadingError(String message) {
         System.out.println(message);

@@ -15,6 +15,33 @@ import duke.task.*;
  */
 public class Parser {
 
+    /**
+     * Parses the command to process.
+     * If command calls for list, task list is printed.
+     * If command starts with "mark", task will be mark as done.
+     * If command starts with "unmark", task will be unmarked as
+     * undone.
+     * If command starts with "todo", "deadline" or "event", task will
+     * be added to command list.
+     * If command starts with "delete", task will be deleted from task
+     * list.
+     * If command starts with "show deadlines or events on", matching
+     * tasks on input date will be shown.
+     * If command starts with "find", matching tasks to keyword will
+     * be shown.
+     * If command starts with "bye", exit message will be printed.
+     * Task list and text file on hard disk containing all commands
+     * updates if possible after each command.
+     * Corresponding messages will also be printed to signify
+     * completion of command.
+     * Each command has its corresponding exceptions catching.
+     *
+     * @param command Command typed by user.
+     * @param ui Ui object to print corresponding messages.
+     * @param allTasks A list of existing tasks.
+     * @param storage Storage object to update text file of task list
+     *                on hard disk.
+     */
     public void parse(String command, Ui ui, TaskList allTasks, Storage storage) {
 
         DateTimeFormatter dateTimeFormatter =

@@ -22,6 +22,10 @@ public class TaskList {
 
     /**
      * Updates relevant task's status as done.
+     *
+     * @param oldTask Task to be marked as done.
+     * @param taskIndex Index of task to be marked as done.
+     * @return New task that is marked as done.
      */
     public Task markTaskAsDone(Task oldTask, int taskIndex) {
         if (oldTask.getTaskType().equals("[T]")) {
@@ -49,6 +53,10 @@ public class TaskList {
 
     /**
      * Updates relevant task's status as undone.
+     *
+     * @param oldTask Task to be unmarked as undone.
+     * @param taskIndex Index of task to be unmarked as undone.
+     * @return New task that is unmarked as undone.
      */
     public Task unmarkTaskAsUndone(Task oldTask, int taskIndex) {
         if (oldTask.getTaskType().equals("[T]")) {
@@ -72,36 +80,46 @@ public class TaskList {
     }
 
     /**
-     * Delete task from task list.
+     * Deletes task from task list.
+     *
+     * @param taskIndex Index of task to be deleted.
      */
-
     public void deleteTask(int taskIndex) {
         this.allTasks.remove(taskIndex);
     }
 
     /**
      * Adds task to task list.
+     *
+     * @param task Task to be added to task list.
      */
     public void addTask(Task task) {
         this.allTasks.add(task);
     }
 
     /**
-     * Show all tasks.
+     * Shows all tasks.
+     *
+     * @return List of existing tasks.
      */
     public List<Task> getAllTasks() {
         return this.allTasks;
     }
 
     /**
-     * Get a specific task based on its index.
+     * Gets a specific task based on its index.
+     *
+     * @param index Index of task to be retrieved.
+     * @return Task that is retrieved.
      */
     public Task getTask(int index) {
         return this.allTasks.get(index);
     }
 
     /**
-     * Get total number of tasks.
+     * Gets total number of tasks.
+     *
+     * @return Total number of tasks.
      */
     public int getNumberOfTask() {
         return this.allTasks.size();

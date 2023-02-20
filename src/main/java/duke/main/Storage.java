@@ -27,7 +27,12 @@ public class Storage {
     }
 
     /**
-     * Load previous task list if it exists.
+     * Loads previous task list if it exists.
+     * Existing text file on hard disk containing all tasks loops
+     * through to read each line.
+     *
+     * @return list of tasks.
+     * @throws IOException if file cannot be loaded.
      */
     public List<Task> loadTxtFile() throws IOException {
 
@@ -81,6 +86,11 @@ public class Storage {
     /**
      * Saves the updated task list to existing file on hard disk.
      * If file does not exist, create a new one.
+     *
+     * @param command Command input from user.
+     * @param task Task to be added to text file.
+     * @param taskList Task list that updates with task changes.
+     * @throws IOException if file cannot be loaded.
      */
     public void saveListToFile(String command, Task task, TaskList taskList) throws IOException {
         File file3 = new File(this.filePathParent);

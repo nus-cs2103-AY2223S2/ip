@@ -3,7 +3,7 @@ package duke.main;
 import java.io.*;
 
 /**
- * Main class that runs the app.
+ * Runs the app.
  */
 public class Duke {
     private Storage storage;
@@ -13,6 +13,9 @@ public class Duke {
     /**
      * Initialises Storage, TaskList and Ui.
      * Previous tasks are loaded up.
+     * Loading error will be shown if file cannot be found/ generated.
+     *
+     * @param filePath file path of text file containing tasks.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -26,14 +29,14 @@ public class Duke {
     }
 
     /**
-     * Main method that updates the task file.
+     * Updates the task file in main method.
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 
     /**
-     * Runs the app
+     * Runs the app.
      */
     public void run() {
 
