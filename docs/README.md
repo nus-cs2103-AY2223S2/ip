@@ -11,6 +11,7 @@
     * [Delete Tasks](#delete---deletes-a-task-at-a-specified-index)
     * [Search](#find-check---searches-through-task-list)
     * [Exit](#bye---say-bye-to-duke)
+* [Summary](#summary)
 
 ## Quick Start
 
@@ -227,3 +228,20 @@ Ends current session
 Syntax: `Bye`
 
 Outcome: Duke will be sad to see you leave but duke knows you will return
+
+## Summary
+
+Click on any of the command syntax to get to the detailed explanation of each command!
+
+| Command Syntax | Function |
+| --- | --- |
+| [`List`](#list---lists-all-tasks) | Lists all tasks |
+| [`Todo <task description>`](#todo---add-task-of-type-todo) | Add todo task |
+| [`Deadline <task description> /<yyyy-MM-ddThh:mm>`](#deadline---add-task-of-type-deadline) | Add deadline task |
+| [`Event <task description> /<yyyy-MM-ddThh:mm> /<yyyy-MM-ddThh:mm>`](#event---add-task-of-type-event) | Add event task |
+| [`Delete <index>`](#delete---deletes-a-task-at-a-specified-index) | Delete task at index |
+| [`Mark <index>`](#mark---mark-task-as-complete) | Mark task at index as complete |
+| [`Unmark <index>`](#unmark---mark-as-incomplete) | Mark task at index as incomplete |
+| [`Find <search term>`](#find---search-using-description) | Get tasks containing search term |
+| [`Check <yyyy-MM-ddThh:mm>`](#check---search-using-date) | Get tasks containing date |
+| [`Bye`](#bye---say-bye-to-duke) | End Session |
