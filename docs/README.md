@@ -4,16 +4,16 @@
 
 ### Task can be added as:
 
-> todo \<description\>
-> event \<description\> \/from \<date\> \/to \<date\>
-> deadline \<description\> \/by \<date\> 
+> * todo \<description\>
+> * event \<description\> /from \<date\> /to \<date\>
+> * deadline \<description\> /by \<date\> 
 
 ### Task can be listed by saying:
 > "list"
 
 ## Task can be marked using their index in the list:
-> mark 1
-> unmark 1
+> * mark 1
+> * unmark 1
 
 ### `Keyword` - list of commands
 
