@@ -4,7 +4,8 @@ import utilities.Parser;
 import utilities.Ui;
 
 /**
- * Sunday is the main class that runs the application.
+ * Sunday is the class that is responsible for making sense of user inputs
+ * and driving the main logic of the program.
  *
  * @author Tan Yan-Hao Joshua
  *
