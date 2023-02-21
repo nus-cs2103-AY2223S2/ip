@@ -8,9 +8,10 @@ import tasks.Event;
 public class Ui {
 
     public String showHelp() {
-        return "Commands you can give Baymax:" +
+        return "Commands you can give Baymax (examples):" +
                 "\n  - todo water the plants" +
-                "\n  - deadline complete homework /by 2023-05-17 23:59" +
+                "\n  - deadline complete homework" +
+                "\n    /by 2023-05-17 23:59" +
                 "\n  - event movie night /from 2023-11-03 21:30 " +
                 "\n    /to 2023-11-03 23:00" +
                 "\n  - list" +

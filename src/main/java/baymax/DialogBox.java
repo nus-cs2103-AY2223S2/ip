@@ -41,7 +41,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setFont(Font.font("Comic Sans MS", 14));
+        dialog.setFont(Font.font("Comic Sans MS", 11));
         dialog.setStyle("-fx-background-color: #ECECEC ;padding: 20px; -fx-background-radius: 5%; -fx-label-padding: 5px");
         displayPicture.setImage(img);
     }
