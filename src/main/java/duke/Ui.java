@@ -25,16 +25,22 @@ public class Ui {
         return this.readLine();
     }
 
-    public String readTaskName(String type) throws DukeyException{
+    public String readTaskName(String type) throws DukeyException {
         this.print(type + " task name: ");
         String input = this.readLine();
         return parser.parseTaskName(input);
     }
 
-    public LocalDate readTime(String type) throws DukeyException{
+    public LocalDate readTime(String type) throws DukeyException {
         this.print(type + ": ");
         String timeString =  this.readLine();
         return parser.parseDate(timeString);
+    }
+
+    public String readKeyword() throws DukeyException {
+        this.print("Search keyword: ");
+        String keyword = this.readLine();
+        return parser.parseKeyword(keyword);
     }
 
     private void printLine(String string) {
@@ -103,6 +109,16 @@ public class Ui {
         }
     }
 
+    public void printFoundTaskList(ArrayList<TaskNumberPair> foundTaskList) {
+        if (foundTaskList.isEmpty()) {
+            this.printLine("No tasks found matching this keyword!");
+        } else {
+            this.printLine("DukeyList found these tasks matching the keyword:");
+            Iterator<TaskNumberPair> it = foundTaskList.iterator();
+            it.forEachRemaining(x -> this.printLine((x.getNumber() + 1) + ". " + x.getTask()));
+        }
+    }
+
     public void printAddedMessage(Task task) {
         this.printLine("");
         this.printLine(task.messageWhenAdded() + " " + task);
@@ -127,9 +143,10 @@ public class Ui {
         System.out.println("DukeList saved!");
     }
 
+
     public void printLoadMessage(int status) {
         if (status == 0) {
-            this.printLine("DukeList saved!");
+            this.printLine("DukeyList is empty, starting a new list.");
         } else {
             System.out.println("Saved list loaded:");
         }
@@ -165,6 +182,7 @@ public class Ui {
         printLine("To delete a task: 'delete'");
         printLine("To clear the list: 'clearList'");
         printLine("To save the list: 'save'");
+        printLine("To find tasks using keywords: 'find'");
         printLnBreak();
     }
 

@@ -104,6 +104,28 @@ public class TaskList {
         this.printSize();
     }
 
+    public void find() {
+        String keyword = "";
+        try {
+            keyword = ui.readKeyword();
+        } catch (DukeyException e) {
+            ui.printExceptionMessage(e);
+        }
+
+        String confirmedKeyword = keyword;
+        ArrayList<TaskNumberPair> foundTaskList = new ArrayList<>();
+        Iterator<Task> it = getIterator();
+
+        it.forEachRemaining(x -> {
+            if (x.getName().contains(confirmedKeyword)) {
+                foundTaskList.add(new TaskNumberPair(x, list.indexOf(x)));
+            }
+        });
+
+        ui.printFoundTaskList(foundTaskList);
+
+    }
+
     public int getSize() {
         return list.size();
     }

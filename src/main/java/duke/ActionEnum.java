@@ -12,6 +12,8 @@ public enum ActionEnum {
     CLEARLIST,
     BYE,
     FORCESTOP,
-    CLEARSAVE
+    CLEARSAVE,
+    FIND
+
 
 }

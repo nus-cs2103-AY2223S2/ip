@@ -42,7 +42,7 @@ public class Duke {
         try {
             taskList.initiate(storage);
         } catch (FileNotFoundException e) {
-            ui.printExceptionMessage(new DukeyException("No saved list found, starting new list."));
+            ui.printLoadMessage(0);
         }
 
         boolean stillRunning = true;
@@ -77,6 +77,9 @@ public class Duke {
                         break;
                     case CLEARLIST:
                         taskList.clearList();
+                        break;
+                    case FIND:
+                        taskList.find();
                         break;
                     case SAVE:
                         taskList.save(storage);

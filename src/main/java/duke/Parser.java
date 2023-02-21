@@ -51,6 +51,9 @@ public class Parser {
         if (input.equals("forcestop")) {
             return ActionEnum.FORCESTOP;
         }
+        if (input.equals("find")) {
+            return ActionEnum.FIND;
+        }
 
         throw new DukeyException("Error! Invalid command!");
     }
@@ -58,15 +61,24 @@ public class Parser {
     public String parseTaskName(String input) throws DukeyException{
         input = input.strip();
         if (checkIfEmpty(input)) {
-            throw new DukeyException("Error! duke.Task name cannot be empty!");
+            throw new DukeyException("Error! Task name cannot be empty!");
         }
         return input;
     }
 
     public LocalDate parseDate(String input) throws DukeyException {
+        input = input.strip();
         if (checkIfEmpty(input)) {
             throw new DukeyException("Input cannot be empty!");
         }
         return DukeyTime.getDateFromString(input);
+    }
+
+    public String parseKeyword(String input) throws DukeyException {
+        input = input.strip();
+        if (checkIfEmpty(input)) {
+            throw new DukeyException("Input cannot be empty!");
+        }
+        return input;
     }
 }
