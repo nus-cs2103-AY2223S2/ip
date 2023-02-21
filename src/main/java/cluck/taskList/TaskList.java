@@ -13,9 +13,11 @@ public class TaskList {
     private final ArrayList<Task> taskList = new ArrayList<>();
 
     /**
-     * @param taskIndex index of task in ArrayList.
-     * @return task at index given if mark operation was succssful.
-     * @throws TaskIndexOutOfBoundsException is thrown when the index given is out of bounds
+     * Marks the task at a given index.
+     *
+     * @param taskIndex index of task in ArrayList
+     * @return task at index given if mark operation successful
+     * @throws TaskIndexOutOfBoundsException if index given is out of bounds
      */
     public Task markTask(int taskIndex) throws TaskIndexOutOfBoundsException {
         try {
@@ -28,9 +30,11 @@ public class TaskList {
     }
 
     /**
+     * Un-marks the task at a given index.
+     *
      * @param taskIndex index of task in ArrayList.
-     * @return task at index given if un-mark operation was successful.
-     * @throws TaskIndexOutOfBoundsException if given index lies outside taskList's range
+     * @return task at index given if un-mark operation successful.
+     * @throws TaskIndexOutOfBoundsException if index given is out of bounds
      */
     public Task unmarkTask(int taskIndex) throws TaskIndexOutOfBoundsException {
         try {
@@ -43,17 +47,22 @@ public class TaskList {
     }
 
     /**
+     * Adds a task to the task list.
+     *
      * @param task task to be added.
      * @return task added
      */
+    //Todo: have commands print the task added
     public Task addTask(Task task) {
         this.taskList.add(task);
         return task;
     }
 
     /**
+     * Deletes a task from task list at the given index.
+     *
      * @param taskIndex index of task to be deleted.
-     * @return return task if deletion was successful.
+     * @return return task if deletion successful.
      * @throws TaskIndexOutOfBoundsException if index out of bounds of ArrayList
      */
     public Task deleteTask(int taskIndex) throws TaskIndexOutOfBoundsException {
@@ -64,7 +73,12 @@ public class TaskList {
         }
     }
 
-    public String toSave() {
+    /**
+     * Converts all the tasks in task list to a single String in save format.
+     *
+     * @return the string
+     */
+    public String toSaveFormat() {
         StringBuilder toWrite = new StringBuilder();
         for (Task task : taskList) {
             toWrite.append(task.makeSaveFormat());
@@ -72,6 +86,11 @@ public class TaskList {
         return toWrite.toString();
     }
 
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return number of tasks in the list
+     */
     public int taskCount() {
         return taskList.size();
     }
@@ -86,7 +105,6 @@ public class TaskList {
             counter += 1;
         }
         return tasks.toString();
-
     }
 
 
