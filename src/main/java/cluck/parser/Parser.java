@@ -36,7 +36,7 @@ public class Parser {
     private static final String FIND_TASK_COMMAND = "find";
 
     /**
-     * Returns true if input is a number in string format, false otherwise.
+     * Returns true if given string is not a number in String format, false otherwise.
      *
      * @param strNum String of interest.
      * @return boolean value
@@ -58,7 +58,7 @@ public class Parser {
      *
      * @param userInput takes userInput from Ui class and parses it into a command.
      * @return subtype of Command interface.
-     * @throws MissingArgumentException if either flags, descriptions, or task indexes are missing
+     * @throws MissingArgumentException   if either flags, descriptions, or task indexes are missing
      * @throws IncorrectArgumentException if index given is not a number or out of the task list range
      */
     public static Command commandFactory(String userInput) throws MissingArgumentException, IncorrectArgumentException {
