@@ -4,11 +4,11 @@ Duke is a chatbot that helps you to track your tasks via a **Command Line Interf
 Duke allows you to quickly perform tasks by typing commands into the chatbox.
 
 ## Features 
-[X] Track Deadlines, Todos and Events
-[X] Mark tasks as done
-[X] Store data on your local device
-[X] Sort your task list for easy management
-[X] Search for relevant tasks
+- [X] Track Deadlines, Todos and Events
+- [X] Mark tasks as done
+- [X] Store data on your local device
+- [X] Sort your task list for easy management
+- [X] Search for relevant tasks
 
 ## Installation Guide
 1. Ensure that you have Java 11 installed on your computer. If you don't have it installed, you can get it 
