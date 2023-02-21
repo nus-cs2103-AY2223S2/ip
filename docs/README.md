@@ -39,7 +39,7 @@ List all tasks.
 ```java
 list
 ```
-eg. ```list``
+eg. ```list```
 
 ### find
 Finds tasks using a keyword.
