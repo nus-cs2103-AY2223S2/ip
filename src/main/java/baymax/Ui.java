@@ -5,7 +5,6 @@ import tasks.Task;
 import tasks.Todo;
 import tasks.Event;
 
-
 public class Ui {
 
     public String showHelp() {
@@ -24,10 +23,10 @@ public class Ui {
     }
     
     public String showLoadingErrorMessage() {
-        return "Unable to load previous tasks";
+        return "Unable to load previous tasks.";
     }
     public String welcomeMessage() {
-        return ("Hello, I am Baymax, your personal chat bot. \nWhat can I do for you today?");
+        return ("Hello, I am Baymax.\nWhat can I do for you today?");
     }
 
     public String exitMessage() {
@@ -68,6 +67,6 @@ public class Ui {
     }
 
     public String invalidArgument() {
-        return "Invalid command! Type \"help\" learn more";
+        return "INVALID COMMAND !\nType \"help\".";
     }
 }
