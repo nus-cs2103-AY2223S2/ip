@@ -66,6 +66,7 @@ New Event task has been added successfully: [E][ ] recess week (from Feb 20 2023
 ### `list` - Allows user to view all tasks stored in Baymax
 
 Baymax displays all the users tasks in a numbered list
+
 Example of usage:
 
 `list`
