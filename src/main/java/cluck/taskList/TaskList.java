@@ -3,6 +3,7 @@ package cluck.taskList;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 
+import cluck.messages.Messages;
 import cluck.exceptions.TaskIndexOutOfBoundsException;
 import cluck.tasks.Task;
 
@@ -76,19 +77,16 @@ public class TaskList {
         return taskList.size();
     }
 
-    public String findMatches(String keyWord) {
-        StringBuilder matchingTasks = new StringBuilder();
-        int counter = 1;
+    public TaskList findMatches(String keyWord) {
+        TaskList matchingTasks = new TaskList();
+        int counter = 0;
         for (Task task : taskList) {
             if (task.containsKeyWord(keyWord)) {
-                    matchingTasks.append(counter);
-                    matchingTasks.append(") ");
-                    matchingTasks.append(task.toString());
-                    matchingTasks.append("\n");
-                    counter += 1;
+                counter += 1;
+                matchingTasks.addTask(task);
             }
         }
-        return matchingTasks.toString();
+        return matchingTasks;
     }
 
 

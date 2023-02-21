@@ -1,15 +1,6 @@
 package cluck.parser;
 
-import cluck.commands.Command;
-import cluck.commands.DeadlineCommand;
-import cluck.commands.DeleteTaskCommand;
-import cluck.commands.EventCommand;
-import cluck.commands.ExitCommand;
-import cluck.commands.InvalidCommand;
-import cluck.commands.ListCommand;
-import cluck.commands.MarkTaskCommand;
-import cluck.commands.ToDoCommand;
-import cluck.commands.UnmarkTaskCommand;
+import cluck.commands.*;
 
 
 import cluck.exceptions.IncorrectArgumentException;
@@ -33,6 +24,7 @@ public class Parser {
     private static final String MARK_TASK_COMMAND = "mark";
     private static final String UNMARK_TASK_COMMAND = "unmark";
     private static final String DELETE_TASK_COMMAND = "delete";
+    private static final String FIND_TASK_COMMAND = "find";
 
     /**
      * Returns true if input is a number in string format, false otherwise.
@@ -108,18 +100,18 @@ public class Parser {
                 return new ToDoCommand(userInput.substring(5));
 
             case MAKE_DEADLINE:
-                String body = userInput.substring(9);
-                if (!body.contains(DUE_DATE_FLAG)) {
+                String substring = userInput.substring(9);
+                if (!substring.contains(DUE_DATE_FLAG)) {
                     throw new MissingArgumentException(Messages.MESSAGE_DUEDATE_FLAG_MISSING);
                 }
-                String[] fields = body.split(" " + DUE_DATE_FLAG);
+                String[] fields = substring.split(" " + DUE_DATE_FLAG);
                 if (fields.length < 2) {
                     throw new MissingArgumentException(Messages.MESSAGE_DATE_MISSING);
                 }
                 return new DeadlineCommand(fields[0], fields[1]);
 
             case MAKE_EVENT:
-                String substring = userInput.substring(6);
+                substring = userInput.substring(6);
                 if (!substring.contains(EVENT_START_FLAG)) {
                     throw new MissingArgumentException(Messages.MESSAGE_START_FLAG_MISSING);
                 }
@@ -132,6 +124,12 @@ public class Parser {
                 }
                 return new EventCommand(fields[0], fields[1], fields[2]);
 
+            case FIND_TASK_COMMAND:
+                if (words.length == 1) {
+                    throw new MissingArgumentException(Messages.MESSAGE_KEYWORD_MISSING);
+                }
+                substring = userInput.substring(5);
+                return new FindTaskCommand(substring);
 
             default:
                 return new InvalidCommand(userInput);
