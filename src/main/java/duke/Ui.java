@@ -53,7 +53,7 @@ public class Ui {
 
 
     public String getTaskNumber() {
-        this.print("duke.Task number: ");
+        this.print("Task number: ");
         return this.readLine();
     }
 
@@ -121,16 +121,16 @@ public class Ui {
 
     public void printAddedMessage(Task task) {
         this.printLine("");
-        this.printLine(task.messageWhenAdded() + " " + task);
+        this.printLine(task.getMessageWhenAdded() + " " + task);
     }
 
     public void printMarkedMessage(int taskNumber, Task taskToMark) {
-        this.printLine("DukeyList: duke.Task number " + (taskNumber + 1) + " has been marked as done!");
+        this.printLine("DukeyList: Task number " + (taskNumber + 1) + " has been marked as done!");
         this.printTask(taskNumber, taskToMark);
     }
 
     public void printUnmarkedMessage(int taskNumber, Task taskToUnmark) {
-        this.printLine("DukeyList: duke.Task number " + (taskNumber + 1) + " has been unmarked.");
+        this.printLine("DukeyList: Task number " + (taskNumber + 1) + " has been unmarked.");
         this.printTask(taskNumber, taskToUnmark);
     }
 

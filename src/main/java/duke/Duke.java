@@ -45,10 +45,10 @@ public class Duke {
             ui.printLoadMessage(0);
         }
 
-        boolean stillRunning = true;
-        boolean forceStop = false;
+        boolean isStillRunning = true;
+        boolean isForceStopped = false;
 
-        while (stillRunning && !forceStop) {
+        while (isStillRunning && !isForceStopped) {
             ui.printLnBreak();
             ActionEnum actionEnum = ActionEnum.BYE;
             try {
@@ -88,17 +88,17 @@ public class Duke {
                         taskList.clearSave(storage);
                         break;
                     case BYE:
-                        stillRunning = false;
+                        isStillRunning = false;
                         break;
                     case FORCESTOP:
-                        forceStop = true;
+                        isForceStopped = true;
                         break;
                 }
             } catch (DukeyException e) {
                 ui.printExceptionMessage(e);
             }
 
-            if (!stillRunning) {
+            if (!isStillRunning) {
                 taskList.save(storage);
                 ui.printGoodbyeMessage();
             }

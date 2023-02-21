@@ -17,9 +17,9 @@ public class ToDoTest {
     public void checkMarkAndUnmark() {
         ToDo toDo = new ToDo("testing ToDo");
         assertEquals(toDo.isDone(), false);
-        toDo.markAsDone();
+        toDo.setMarked();
         assertEquals(toDo.isDone(), true);
-        toDo.unmark();
+        toDo.setUnmarked();
         assertEquals(toDo.isDone(), false);
     }
 }

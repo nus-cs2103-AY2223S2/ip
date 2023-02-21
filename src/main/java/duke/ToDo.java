@@ -26,13 +26,13 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String messageWhenAdded() {
+    public String getMessageWhenAdded() {
         return "DukeyList just added a new todo:";
     }
 
     @Override
     public String getLogString() {
-        return "T" + "," + isDoneStatus() + "," + this.getName();
+        return "T" + "," + getMarkedStatus() + "," + this.getName();
     }
 
     @Override
