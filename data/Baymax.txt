@@ -1,3 +1,2 @@
-[T][ ] start tP project        
-[E][ ] recess week (from: 2023-02-20 to: 2023-02-26)
-[D][ ] submit iP project (by: 2023-02-17 23:59)
+[T][X] walk the dog 
+[E][ ] recess week (from: 2023-02-20 00:00 to: 2023-02-26 23:59 )
