@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="360.0" style="-fx-background-color: transparent;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" alignment="CENTER" maxWidth="-Infinity" minHeight="40.0" minWidth="230.0" prefWidth="230.0" style="-fx-background-color: #7fa175; -fx-label-padding: 10 10 10 10; -fx-background-radius: 30; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); -fx-border-radius: 30; -fx-border-color: black; -fx-border-width: 2;" text="Label" wrapText="true" HBox.hgrow="ALWAYS">
+            <font>
+                <Font name="Verdana" size="10.0" />
+            </font>
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+        </Label>
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <HBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </HBox.margin>
+      </ImageView>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>
