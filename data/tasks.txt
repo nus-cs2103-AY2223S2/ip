@@ -1,4 +1,1 @@
 T|false|test
-T|false|Do laundry
-D|false|Finish homework|03/03/2023
-E|false|Hackathon|02/02/2023|03/03/2023

@@ -93,13 +93,14 @@ public class Storage {
     public TaskList loadTasks() {
         Task parsedTask;
         String taskString;
-        File dataDirectory = new File("..\\..\\..\\data");
+        File dataDirectory = new File("data/tasks.txt");
 
         if (!dataDirectory.exists()) {
             dataDirectory.mkdir();
         }
 
-        File taskFilePath = new File("C:\\Users\\jedng\\Documents\\CS2103T\\ip\\ip\\data\\tasks.txt");
+        File taskFilePath = new File("data/tasks.txt");
+        System.out.println(taskFilePath.getAbsolutePath());
         try {
             if (!taskFilePath.exists()) {
                 taskFilePath.createNewFile();
