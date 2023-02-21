@@ -70,6 +70,7 @@ public class UserInterface {
      * Reads the user command
      *
      * @param taskManager hand over the command to task manager
+     * @return the command correspond to user input
      * @throws DukeException IF error occur
      */
     public ICommand readCommand(TaskManager taskManager) throws DukeException {
@@ -86,6 +87,7 @@ public class UserInterface {
      *
      * @param taskManager hand over the command to task manager
      * @param input       from Gui
+     * @return the command correspond to user input
      * @throws DukeException IF error occur
      */
     public ICommand readCommand(TaskManager taskManager,

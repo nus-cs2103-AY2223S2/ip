@@ -78,6 +78,7 @@ public abstract class ICommand {
          * Converts String command type into Enum type
          *
          * @param type string representation of Enum type
+         * @return the type of Command
          * @throws InvalidCommandException IF enum type not found
          */
         public static Type valueOfOrElse(String type) throws DukeException {

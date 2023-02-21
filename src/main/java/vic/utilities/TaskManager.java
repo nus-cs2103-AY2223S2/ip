@@ -51,6 +51,8 @@ public class TaskManager {
 
     /**
      * Finds specific task from given keyword
+     *
+     * @return tasks of object type which match the given keyword
      */
     public Object[] find(String keyword) {
         return tasks.stream()
@@ -59,6 +61,8 @@ public class TaskManager {
 
     /**
      * Returns the size of task
+     *
+     * @return the size of tasks
      */
     public int size() {
         return tasks.size();
@@ -68,6 +72,7 @@ public class TaskManager {
      * Removes specific task at given index
      *
      * @param index the index of task to be removed
+     * @return the task that removed
      */
     public ITask remove(int index) throws DukeException {
 
@@ -81,6 +86,8 @@ public class TaskManager {
     /**
      * Undoes the last action to the task list
      * and returns the feedback result
+     *
+     * @return the feedback message of undo action
      */
     public String undo() throws DukeException {
         String result;
@@ -109,13 +116,16 @@ public class TaskManager {
     /**
      * Marks specific task
      *
-     * @param index  the index of task
+     * @param index the index of task
+     * @return the task which is marked
      */
     public ITask mark(int index) throws DukeException {
         ITask task = tasks.get(index);
 
         updateLastTask(ICommand.Type.MARK, task);
         task.markAsDone();
+
+        storage.saveAll(tasks);
 
         return task;
     }
@@ -124,6 +134,7 @@ public class TaskManager {
      * Un-marks specific task
      *
      * @param index  the index of task
+     * @return the task which is unmarked
      */
     public ITask unmark(int index) throws DukeException {
         ITask task = tasks.get(index);

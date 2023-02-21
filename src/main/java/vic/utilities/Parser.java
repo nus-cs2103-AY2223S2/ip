@@ -10,7 +10,6 @@ import vic.exceptions.DateParseException;
 import vic.exceptions.DukeException;
 import vic.exceptions.IncompleteCommandException;
 import vic.exceptions.InvalidMarkInput;
-import vic.tasks.ITask;
 
 
 /**
@@ -32,7 +31,6 @@ public class Parser {
     private String input;
     private int index;
     private String description;
-    private ITask.TaskTypes type;
     private Date by;
     private Date from;
     private Date to;
@@ -68,23 +66,11 @@ public class Parser {
         this.taskManager = taskManager;
     }
 
-    /**
-     * Constructor for Parser
-     *
-     * @param input       input from user
-     * @param taskManager to handle to task
-     * @param type        of the command
-     */
-    public Parser(String input, TaskManager taskManager, ITask.TaskTypes type) {
-        this.taskManager = taskManager;
-        this.input = input;
-        this.type = type;
-    }
-
 
     /**
      * Returns the 'by' date of deadline task
      *
+     * @return the 'by' date for deadline task
      * @throws DukeException IF error occur
      */
     public Date getBy() throws DukeException {
@@ -129,6 +115,7 @@ public class Parser {
     /**
      * Returns the 'from' date of event task
      *
+     * @return the 'from' date for event task
      * @throws DukeException IF error occur
      */
     public Date getFrom() throws DukeException {
@@ -143,6 +130,7 @@ public class Parser {
     /**
      * Returns the 'to' date of event task
      *
+     * @return the 'to' date for event task
      * @throws DukeException IF error occur
      */
     public Date getTo() throws DukeException {
@@ -156,14 +144,9 @@ public class Parser {
 
 
     /**
-     * Returns the enum type of task
-     */
-    public ITask.TaskTypes getType() {
-        return type;
-    }
-
-    /**
      * Returns the task manager
+     *
+     * @return the task manager
      */
 
     public TaskManager getTaskManager() {
@@ -174,6 +157,7 @@ public class Parser {
      * Returns the index of task for a mark or unmark task
      * task
      *
+     * @return the index of task
      * @throws DukeException IF error occur
      */
     public int getIndex() throws DukeException {
@@ -194,6 +178,7 @@ public class Parser {
     /**
      * Returns the description of task
      *
+     * @return the description of task
      * @throws DukeException IF error occur
      */
     public String getDescription() throws DukeException {

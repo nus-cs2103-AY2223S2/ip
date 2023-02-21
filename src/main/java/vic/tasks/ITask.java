@@ -39,17 +39,7 @@ public abstract class ITask implements Cloneable {
     public UUID getId() {
         return id;
     }
-    /**
-     * TaskTypes represent different type of task
-     */
-    public enum TaskTypes {
-        ToDos,
-        Deadlines,
-        Events,
-        Find,
-        Unknown
 
-    }
 
     public boolean descriptionContain(String keyword) {
         return description.contains(keyword);
@@ -79,6 +69,8 @@ public abstract class ITask implements Cloneable {
 
     /**
      * Converts the task status to a String icon representation
+     *
+     * @return the string representation of status icon
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X

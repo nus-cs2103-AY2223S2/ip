@@ -34,6 +34,7 @@ public class Storage {
     /**
      * Loads the tasks from local database
      *
+     * @return the list of saved tasks
      * @throws DukeException IF error occur during loading of task.
      */
     public ArrayList<ITask> load() throws DukeException {

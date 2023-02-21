@@ -28,6 +28,7 @@ public class LastCommand {
      * Undoes the last command to the tasks list
      *
      * @param tasks reference to task list
+     * @return the feedback messages of the undo action
      */
     public String undo(ArrayList<ITask> tasks) {
         String action = "";
