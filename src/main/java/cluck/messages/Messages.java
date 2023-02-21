@@ -7,13 +7,8 @@ import java.security.PublicKey;
 m */
 
 public class Messages {
-    public static final String MESSAGE_LOGO = " _____  _               _____   _\n"
-            + "|  ___|| |     _    _  |  ___| | |  _\n"
-            + "| |    | |    | |  | | | |     | |/ /\n"
-            + "| |___ | |___ | |__| | | |___  |    \\\n"
-            + "|_____||_____||______| |_____| |_| \\_\\\n";
     public static final String MESSAGE_WELCOME = "Howdy! I'm Cluck!\n"
-            + "    What can I cluck-a-doodle-do for you?";
+            + "What can I cluck-a-doodle-do for you?";
     public static final String MESSAGE_GOODBYE = "Buh-cluck, see ya!";
 
     public static final String MESSAGE_MARK_SUCCESSFUL = "Marked it! Cluck-a-doodle-done!";
