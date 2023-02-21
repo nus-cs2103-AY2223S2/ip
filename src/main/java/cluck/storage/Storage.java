@@ -46,7 +46,7 @@ public class Storage {
     public void writeSave(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(saveFile);
-            writer.write(taskList.toSave());
+            writer.write(taskList.toSaveFormat());
             writer.close();
         } catch (IOException e) {
             System.out.println("Buh oh! An error occurred!!");
