@@ -49,106 +49,8 @@ public class Wessy {
     /**
      *
      */
-    public void run() {
-        startsUp();
-        while (ui.hasNextLine()) {
-            try {
-                String userInput = ui.readNextLine();
-                CmdType cmd = Parser.getCmd(userInput);
-                if (cmd == null) {
-                    throw new CommandNotFoundException();
-                }
-                UserInputChecker.checkSpacingAftCmd(userInput, cmd);
-
-                switch (cmd) {
-
-                case BYE:
-                    ui.printByeMessage();
-                    return;
-                case LIST:
-                    ui.printListOrFindMessage(tasks.printAsStr(), true);
-                    break;
-
-                case TODO:
-                    // Fallthrough
-                case DEADLINE:
-                    // Fallthrough
-                case EVENT:
-
-                    UserInputChecker.checkMissingInput(userInput, cmd);
-                    UserInputChecker.checkMissingKeyword(userInput, cmd);
-                    if (cmd == CmdType.DEADLINE) {
-                        UserInputChecker.checkDeadlineMissingInput(userInput);
-                    } else if (cmd == CmdType.EVENT) {
-                        UserInputChecker.checkEventMissingInput(userInput);
-                    }
-
-                    String[] taskComponents = Parser.getTaskComponents(userInput, cmd);
-                    Task newTask = tasks.add(taskComponents);
-                    saveToStorage();
-                    ui.printAddedMessage(newTask, tasks.getSize());
-                    break;
-
-                case MARK:
-                case UNMARK:
-                    checkBeforeParse(userInput, cmd);
-
-                    boolean isMark = cmd == CmdType.MARK;
-                    Task updatedTask = tasks.markOrUnmark(Parser.parseInt(userInput, cmd), isMark);
-                    saveToStorage();
-                    ui.printMarkUnmarkMessage(updatedTask, isMark);
-                    break;
-
-                case DELETE:
-                    checkBeforeParse(userInput, cmd);
-
-                    Task deletedTask = tasks.delete(Parser.parseInt(userInput, cmd));
-                    saveToStorage();
-                    ui.printDeleteMessage(deletedTask, tasks.getSize());
-                    break;
-
-                case FIND:
-                    String target = userInput.substring(cmd.getStrLength() + 1);
-                    ui.printListOrFindMessage(tasks.find(target), false);
-                    break;
-
-                case CLEAR:
-                    tasks.clear();
-                    saveToStorage();
-                    ui.printClearMessage();
-                    // Fallthrough
-                }
-
-            } catch (DateTimeParseException dtpe) {
-                ui.handleException("Please enter the date (and time, if any) in the correct format.");
-            } catch (SecurityException se) {
-                ui.handleException("You do not have the permission to access the file.");
-                se.printStackTrace();
-            } catch (IOException ioe) {
-                ui.handleException("There is some issue in the input-output operation.");
-                ioe.printStackTrace();
-            } catch (WessyException we) {
-                ui.handleException(we.toString());
-            } catch (Exception ex) {
-                ui.handleException(ex.getMessage());
-            }
-        }
-    }
-
-    /**
-     *
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Wessy("data/savedTasks.txt").run();
-    }
-
-    /**
-     *
-     */
     public String startsUp() {
-        return ui.printWelcomeMessage(tasks.printAsStr());
+        return ui.getWelcomeMessage(tasks.printAsStr());
     }
 
     /**
@@ -176,8 +78,9 @@ public class Wessy {
         storage.save(tasks.saveAsStr());
     }
 
-
-
+    /**
+     *
+     */
     public String respond(String userInput) {
         try {
             CmdType cmd = Parser.getCmd(userInput);
@@ -189,9 +92,9 @@ public class Wessy {
             switch (cmd) {
 
                 case BYE:
-                    return ui.printByeMessage();
+                    return ui.getByeMessage();
                 case LIST:
-                    return ui.printListOrFindMessage(tasks.printAsStr(), true);
+                    return ui.getListOrFindMessage(tasks.printAsStr(), true);
                 case TODO:
                     // Fallthrough
                 case DEADLINE:
@@ -209,7 +112,7 @@ public class Wessy {
                     String[] taskComponents = Parser.getTaskComponents(userInput, cmd);
                     Task newTask = tasks.add(taskComponents);
                     saveToStorage();
-                    return ui.printAddedMessage(newTask, tasks.getSize());
+                    return ui.getAddedMessage(newTask, tasks.getSize());
 
                 case MARK:
                 case UNMARK:
@@ -218,23 +121,23 @@ public class Wessy {
                     boolean isMark = cmd == CmdType.MARK;
                     Task updatedTask = tasks.markOrUnmark(Parser.parseInt(userInput, cmd), isMark);
                     saveToStorage();
-                    return ui.printMarkUnmarkMessage(updatedTask, isMark);
+                    return ui.getMarkUnmarkMessage(updatedTask, isMark);
 
                 case DELETE:
                     checkBeforeParse(userInput, cmd);
 
                     Task deletedTask = tasks.delete(Parser.parseInt(userInput, cmd));
                     saveToStorage();
-                    return ui.printDeleteMessage(deletedTask, tasks.getSize());
+                    return ui.getDeleteMessage(deletedTask, tasks.getSize());
 
                 case FIND:
                     String target = userInput.substring(cmd.getStrLength() + 1);
-                    return ui.printListOrFindMessage(tasks.find(target), false);
+                    return ui.getListOrFindMessage(tasks.find(target), false);
 
                 case CLEAR:
                     tasks.clear();
                     saveToStorage();
-                    return ui.printClearMessage();
+                    return ui.getClearMessage();
                     // Fallthrough
             }
 
@@ -248,10 +151,108 @@ public class Wessy {
             return ui.handleException("There is some issue in the input-output operation.");
 
         } catch (WessyException we) {
-            return ui.printMessage(we.toString());
+            return ui.getMessage(we.toString());
         } catch (Exception ex) {
-            return ui.printMessage(ex.getMessage());
+            return ui.getMessage(ex.getMessage());
         }
-        return ui.printMessage(new CommandNotFoundException().toString());
+        return ui.getMessage(new CommandNotFoundException().toString());
+    }
+
+    /**
+     *
+     */
+    public void run() {
+        startsUp();
+        while (ui.hasNextLine()) {
+            try {
+                String userInput = ui.readNextLine();
+                CmdType cmd = Parser.getCmd(userInput);
+                if (cmd == null) {
+                    throw new CommandNotFoundException();
+                }
+                UserInputChecker.checkSpacingAftCmd(userInput, cmd);
+
+                switch (cmd) {
+
+                    case BYE:
+                        ui.getByeMessage();
+                        return;
+                    case LIST:
+                        ui.getListOrFindMessage(tasks.printAsStr(), true);
+                        break;
+
+                    case TODO:
+                        // Fallthrough
+                    case DEADLINE:
+                        // Fallthrough
+                    case EVENT:
+
+                        UserInputChecker.checkMissingInput(userInput, cmd);
+                        UserInputChecker.checkMissingKeyword(userInput, cmd);
+                        if (cmd == CmdType.DEADLINE) {
+                            UserInputChecker.checkDeadlineMissingInput(userInput);
+                        } else if (cmd == CmdType.EVENT) {
+                            UserInputChecker.checkEventMissingInput(userInput);
+                        }
+
+                        String[] taskComponents = Parser.getTaskComponents(userInput, cmd);
+                        Task newTask = tasks.add(taskComponents);
+                        saveToStorage();
+                        ui.getAddedMessage(newTask, tasks.getSize());
+                        break;
+
+                    case MARK:
+                    case UNMARK:
+                        checkBeforeParse(userInput, cmd);
+
+                        boolean isMark = cmd == CmdType.MARK;
+                        Task updatedTask = tasks.markOrUnmark(Parser.parseInt(userInput, cmd), isMark);
+                        saveToStorage();
+                        ui.getMarkUnmarkMessage(updatedTask, isMark);
+                        break;
+
+                    case DELETE:
+                        checkBeforeParse(userInput, cmd);
+
+                        Task deletedTask = tasks.delete(Parser.parseInt(userInput, cmd));
+                        saveToStorage();
+                        ui.getDeleteMessage(deletedTask, tasks.getSize());
+                        break;
+
+                    case FIND:
+                        String target = userInput.substring(cmd.getStrLength() + 1);
+                        ui.getListOrFindMessage(tasks.find(target), false);
+                        break;
+
+                    case CLEAR:
+                        tasks.clear();
+                        saveToStorage();
+                        ui.getClearMessage();
+                        // Fallthrough
+                }
+
+            } catch (DateTimeParseException dtpe) {
+                ui.handleException("Please enter the date (and time, if any) in the correct format.");
+            } catch (SecurityException se) {
+                ui.handleException("You do not have the permission to access the file.");
+                se.printStackTrace();
+            } catch (IOException ioe) {
+                ui.handleException("There is some issue in the input-output operation.");
+                ioe.printStackTrace();
+            } catch (WessyException we) {
+                ui.handleException(we.toString());
+            } catch (Exception ex) {
+                ui.handleException(ex.getMessage());
+            }
+        }
+    }
+
+    /**
+     *
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        new Wessy("data/savedTasks.txt").run();
     }
 }

@@ -39,8 +39,8 @@ public class Ui {
     /**
      * Prints output message for "bye" command.
      */
-    public String printByeMessage() {
-        return printMessage("Bye. Hope to see you again soon!\n");
+    public String getByeMessage() {
+        return getMessage("Bye. Hope to see you again soon!\n");
     }
 
     /**
@@ -49,8 +49,8 @@ public class Ui {
      * @param tasks
      * @param isList
      */
-    public String printListOrFindMessage(String[] tasks, boolean isList) {
-        return printMessage(printListOrFind(tasks, isList));
+    public String getListOrFindMessage(String[] tasks, boolean isList) {
+        return getMessage(getListOrFindContent(tasks, isList));
     }
 
     /**
@@ -59,7 +59,7 @@ public class Ui {
      * @param tasks
      * @param isList
      */
-    String printListOrFind(String[] tasks, boolean isList) {
+    private String getListOrFindContent(String[] tasks, boolean isList) {
         String extraWord = isList ? "" : "matching ";
         if (tasks.length == 0) {
             if (isList) {
@@ -68,7 +68,7 @@ public class Ui {
                 return "Sorry. We did not find any task that matches the text you entered.\n";
             }
         } else {
-            return "Here are the " + extraWord + "tasks in your list:\n" + printMultiln(tasks);
+            return "Here are the " + extraWord + "tasks in your list:\n" + getMultiln(tasks);
         }
     }
 
@@ -78,12 +78,12 @@ public class Ui {
      * @param task
      * @param size
      */
-    public String printAddedMessage(Task task, int size) {
+    public String getAddedMessage(Task task, int size) {
         String numOfTasks = " " + size + " task";
         if (size > 1) {
             numOfTasks += "s";
         }
-        return printMessage("Got it. I've added this task:", "  " + task, "Now you have" + numOfTasks
+        return getMessage("Got it. I've added this task:", "  " + task, "Now you have" + numOfTasks
                 + " in the list.");
     }
 
@@ -93,13 +93,13 @@ public class Ui {
      * @param chosenTask
      * @param isMark
      */
-    public String printMarkUnmarkMessage(Task chosenTask, boolean isMark) {
+    public String getMarkUnmarkMessage(Task chosenTask, boolean isMark) {
         String start = isMark ? "Nice! I've" : "OK, I've";
         if (isMark == chosenTask.checkIsDone()) {
             start = "You have already";
         }
         String end = isMark ? "done:" : "not done yet:";
-        return printMessage(start + " marked this task as " + end, "  " + chosenTask);
+        return getMessage(start + " marked this task as " + end, "  " + chosenTask);
     }
 
     /**
@@ -108,16 +108,16 @@ public class Ui {
      * @param chosenTask
      * @param totalNumOfTasks
      */
-    public String printDeleteMessage(Task chosenTask, int totalNumOfTasks) {
-        return printMessage("Noted. I've removed this task:", "  " + chosenTask, String.format(
+    public String getDeleteMessage(Task chosenTask, int totalNumOfTasks) {
+        return getMessage("Noted. I've removed this task:", "  " + chosenTask, String.format(
                 "Now you have %d task%s in the list.", totalNumOfTasks, totalNumOfTasks == 1 ? "" : "s"));
     }
 
     /**
      * Prints output message for "clear" command.
      */
-    public String printClearMessage() {
-        return printMessage("You have cleared your task list. The list is empty now.");
+    public String getClearMessage() {
+        return getMessage("You have cleared your task list. The list is empty now.");
     }
 
     /**
@@ -125,10 +125,10 @@ public class Ui {
      *
      * @param tasks
      */
-    public String printWelcomeMessage(String[] tasks) {
+    public String getWelcomeMessage(String[] tasks) {
 //        printOpening();
         return "Hi, I am Wessy, your personal assistant chatbot.\n\n" +
-        printListOrFind(tasks, true);
+        getListOrFindContent(tasks, true);
 //        printClosing();
     }
 
@@ -211,7 +211,7 @@ public class Ui {
      *
      * @param linesOfString
      */
-    private String printMultiln(String... linesOfString) {
+    private String getMultiln(String... linesOfString) {
         String str = "";
         for (String line : linesOfString) {
             str += line + "\n";
@@ -224,8 +224,8 @@ public class Ui {
      *
      * @param linesOfString
      */
-    public String printMessage(String... linesOfString) {
-        return OPENING + printMultiln(linesOfString);
+    public String getMessage(String... linesOfString) {
+        return OPENING + getMultiln(linesOfString);
     }
 
     /**
@@ -234,7 +234,7 @@ public class Ui {
      */
     public String handleException(String message) {
 //        System.err.println("    -Wessy---------------------------------------------------------------- ");
-        return printMessage("ERROR! " + message);
+        return getMessage("ERROR! " + message);
 //        System.err.println("    ---------------------------------------------------------------------- ");
     }
 }
