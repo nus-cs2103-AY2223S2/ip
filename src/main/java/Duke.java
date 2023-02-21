@@ -1,10 +1,39 @@
+
+import duke.duke_exception.DukeException;
+import duke.tasklist.TaskList;
+import duke.utility.parser.Parser;
+import duke.utility.storage.Storage;
+
+/**
+ * The Pepe chatbot is a bot that is capable to keep track of tasks from the
+ * users.
+ * 
+ * @author Brian Quek
+ */
+
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    private TaskList tasks;
+
+    public Duke() {
+        this.tasks = Storage.readData();
+    }
+
+    /**
+     * Creates a response message after parsing the input given.
+     * 
+     * @param input the user's input
+     * @return a String that contains a response message corresponding to the user's input.
+     * @throws DukeException if the command format is invalid.
+     */
+    public String getResponse(String input) {
+        String output = "";
+        try {
+            output += Parser.readCommand(input, tasks);
+            Storage.writeData(tasks);
+        } catch (DukeException e) {
+            output += e.toString();
+        }
+        return output;
     }
 }

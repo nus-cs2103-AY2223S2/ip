@@ -1,0 +1,10 @@
+to do task 1
+to do task 2
+deadline task 3.23 /by 24 June 2022 8:00pm
+event task 4.20 /from 22 June 2022 8:30am /to 29 June 2022 10:00pm
+list
+mark 3
+mark 4
+mark 2
+unmark 4
+bye
