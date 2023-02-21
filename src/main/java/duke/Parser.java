@@ -11,6 +11,12 @@ public class Parser {
 
     private final Storage storage;
 
+    /**
+     * Parser Class that makes changes to the tasklist, GUI and hard disk.
+     * @param tasklist
+     * @param ui
+     * @param storage
+     */
     public Parser(TaskList tasklist, Ui ui, Storage storage) {
         this.tasklist = tasklist;
         this.ui = ui;

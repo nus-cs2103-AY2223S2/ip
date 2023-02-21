@@ -4,10 +4,15 @@ package duke;
  * Event Task which contains description, when the event begins and ends.
  */
 public class Event extends Task {
-
     protected String from;
     protected String to;
 
+    /**
+     * Creating an Event with a from and to parameter.
+     * @param description
+     * @param from
+     * @param to
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = from;
@@ -22,6 +27,6 @@ public class Event extends Task {
     @Override
     public String toFileString() {
         return "E | " + super.toFileString() + " | " + this.from + " | " + this.to + "\n";
-     }
+    }
 }
 

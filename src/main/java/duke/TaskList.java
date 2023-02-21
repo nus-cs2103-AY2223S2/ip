@@ -20,6 +20,10 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Returns a list of all tasks in tasklist
+     * @return String format of tasks
+     */
     public String list() {
         String list = "";
         for (int i = 0; i < this.tasks.size(); i++) {
@@ -32,6 +36,11 @@ public class TaskList {
     }
 
 
+    /**
+     * Deletes task based on index in list
+     * @param index index of task
+     * @return UI String output of task removed
+     */
     public String delete(int index) {
         String output;
         Task task = this.tasks.get(index - 1);
@@ -40,6 +49,12 @@ public class TaskList {
         output = output + "\nNow you have " + this.tasks.size() + " tasks in the list.";
         return output;
     }
+
+    /**
+     * Creates a Todo Task
+     * @param taskDetails
+     * @return String confirmation of todo creation
+     */
 
     public String addToDo(String taskDetails) {
         String output;
@@ -50,6 +65,12 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Creates a deadline task
+     * @param description
+     * @param by
+     * @return String confirmation of deadline created
+     */
     public String addDeadline(String description, String by) {
         String output;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -61,6 +82,13 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Creates a event task
+     * @param description
+     * @param from
+     * @param to
+     * @return String confirmation of event created
+     */
     public String addEvent(String description, String from, String to) {
         String output;
         Event task = new Event(description, from, to);

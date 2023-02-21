@@ -8,6 +8,10 @@ public class Task {
     private final String description;
     private Boolean isDone;
 
+    /**
+     * Creates a Task with a description, which consists of Todos, Deadlines and Events
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

@@ -57,6 +57,8 @@ public class Storage {
                 case "E":
                     tasklist.addEvent(task[2], task[3], task[4]);
                     break;
+                default:
+                    throw new DukeException("Sorry, I could not save the file.");
                 }
                 if (task[1].equals("1")) {
                     tasklist.setTaskStatus(tasklist.listSize(), true);

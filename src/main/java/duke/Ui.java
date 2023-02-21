@@ -19,6 +19,10 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * UI Logo to greet user
+     * @return String
+     */
     public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -27,6 +31,11 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         return logo + "Hello! I'm Duke\nWhat can I do for you?";
     }
+
+    /**
+     * Exit GUI and CLI
+     * @return String
+     */
 
     public String exit() {
         System.exit(0);
