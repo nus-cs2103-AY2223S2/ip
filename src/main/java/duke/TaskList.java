@@ -7,43 +7,71 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
+/**
+ * Stores and manages Tasks.
+ */
 public class TaskList {
     private ArrayList<Task> list;
     private Ui ui;
 
+    /**
+     * Returns an empty TaskList.
+     */
     public TaskList(Ui ui) {
         this.list = new ArrayList<>();
         this.ui = ui;
     }
 
+    /**
+     * Returns an empty TaskList.
+     */
     public TaskList() {
         this.list = new ArrayList<>();
         this.ui = new Ui();
     }
 
+    /**
+     * Returns true if the TaskList has no Tasks.
+     */
     public boolean isEmpty() {
         return this.list.isEmpty();
     }
 
+    /**
+     * Returns an iterator of the list of Tasks.
+     */
     public Iterator<Task> getIterator() {
         return this.list.iterator();
     }
 
+    /**
+     * Adds a new Task to the TaskList and prints out a confirmation message for the user.
+     */
     public void addTask(Task task) {
         this.list.add(task);
         ui.printAddedMessage(task);
         printSize();
     }
 
+    /**
+     * Adds a new Task to the TaskList without printing anything. This method is used to load Tasks into
+     * the TaskList from a save File.
+     */
     public void addTaskFromSave(Task task) {
         this.list.add(task);
     }
 
+    /**
+     * Prints out all the Tasks in the TaskList.
+     */
     public void readList() {
         ui.readList(this.list);
     }
 
+    /**
+     * Marks a particular Task as done. This method uses the Ui class to read input from the user to get
+     * details about which Task is to be marked.
+     */
     public void mark() throws DukeyException {
         String taskNumberString = ui.getTaskNumber();
         int taskNumber;
@@ -64,6 +92,10 @@ public class TaskList {
         ui.printMarkedMessage(taskNumber, taskToMark);
     }
 
+    /**
+     * Marks a particular Task as undone. This method uses the Ui class to read input from the user to get
+     * details about which Task is to be unmarked.
+     */
     public void unmark() throws DukeyException {
         String taskNumberString = ui.getTaskNumber();
         int taskNumber;
@@ -83,6 +115,10 @@ public class TaskList {
         ui.printUnmarkedMessage(taskNumber, taskToUnmark);
     }
 
+    /**
+     * Deletes a Task from the TaskList. This method uses the Ui class to read input from the user to get
+     * details about which Task is to be deleted.
+     */
     public void delete() throws DukeyException {
         String taskNumberString = ui.getTaskNumber();
         int taskNumber;
@@ -104,6 +140,10 @@ public class TaskList {
         this.printSize();
     }
 
+    /**
+     * Finds Tasks in the TaskList that contains a particular keyword. This method
+     * uses the Ui class to read input from the user to get the keyword. The found Tasks are then printed out.
+     */
     public void find() {
         String keyword = "";
         try {
@@ -126,19 +166,32 @@ public class TaskList {
 
     }
 
+    /**
+     * Returns the number of Tasks in the TaskList.
+     */
     public int getSize() {
         return list.size();
     }
 
+    /**
+     * Uses the Ui class to print out the number of Tasks in the TaskList.
+     */
     public void printSize() {
         ui.printSize(getSize());
     }
 
+    /**
+     * Clears the TaskList.
+     */
     public void clearList() {
         this.list.clear();
         System.out.println("DukeyList cleared! DukeyList is now empty.");
     }
 
+    /**
+     * Saves the current TaskList to the save File.
+     * @param storage deals with the saving and loading of data to the save File.
+     */
     public void save(Storage storage) {
         try {
             storage.save(this);
@@ -149,6 +202,10 @@ public class TaskList {
         ui.printSavedMessage();
     }
 
+    /**
+     * Loads all the Tasks in the save File to the TaskList.
+     * @param storage deals with the saving and loading of data to the save File.
+     */
     public void initiate(Storage storage) throws FileNotFoundException {
         storage.load(this);
 
@@ -161,6 +218,9 @@ public class TaskList {
 
     }
 
+    /**
+     * Clears the save File.
+     */
     public void clearSave(Storage storage) {
         storage.clearFile();
         ui.printClearedMessage();

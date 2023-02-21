@@ -9,26 +9,46 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 
+
+/**
+ * Deals with the saving and loading of Tasks onto a hard drive.
+ */
 public class Storage {
     File file;
     String filePath;
 
+    /**
+     * Returns a new storage containing a File where data is to be stored.
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
         this.filePath = filePath;
     }
 
+    /**
+     * Appends text to the save File.
+     * @param textToAdd the text to be added
+     * @exception IOException on problems with the input text
+     */
     public void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(this.file, true);
         fw.write(textToAdd + "\n");
         fw.close();
     }
 
+    /**
+     * Clears the save File of any data.
+     */
     public void clearFile() {
         this.file.delete();
         this.file = new File(this.filePath);
     }
 
+    /**
+     * Saves all the Tasks on a TaskList to the hard drive by writing the log strings of each Task
+     * onto the save File.
+     * @param taskList the TaskList to be saved
+     */
     public void save(TaskList taskList) throws DukeyException {
         this.clearFile();
         Iterator<Task> it = taskList.getIterator();
@@ -43,6 +63,11 @@ public class Storage {
 
     }
 
+    /**
+     * Loads all the Tasks on the hard drive to a TaskList by creating new Tasks based on the details from
+     * their log string.
+     * @param taskList the TaskList on which the Tasks are to be laoded.
+     */
     public void load(TaskList taskList) throws FileNotFoundException {
         Scanner fileScanner = new Scanner(file);
         while (fileScanner.hasNextLine()) {

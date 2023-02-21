@@ -4,12 +4,26 @@ import duke.exceptions.DukeyException;
 
 import java.time.LocalDate;
 
+/**
+ * Analyzes user input.
+ */
 public class Parser {
 
+    /**
+     * Returns true if a given user input is empty.
+     * @param input the user input
+     */
     public boolean checkIfEmpty(String input) {
         return input.strip().equals("");
     }
 
+    /**
+     * Detects the user's command based on the user's input String, throws an exception if the user's input
+     * does not match any of the existing commands.
+     * @param input the user input
+     * @return the detected action
+     * @exception DukeyException on invalid user command
+     */
     public ActionEnum parseCommand(String input) throws DukeyException {
         input = input.strip().toLowerCase();
         if (checkIfEmpty(input)) {
@@ -58,6 +72,12 @@ public class Parser {
         throw new DukeyException("Error! Invalid command!");
     }
 
+
+    /**
+     * Scans the user's input for a Task name and returns the Task name, throws an exception if the
+     * user input is empty.
+     * @param input the user input
+     */
     public String parseTaskName(String input) throws DukeyException{
         input = input.strip();
         if (checkIfEmpty(input)) {
@@ -66,6 +86,11 @@ public class Parser {
         return input;
     }
 
+    /**
+     * Scans the user's input for a date and returns the date in the form of a LocalDate. Throws an exception if the
+     * user input is empty or if the date is in the incorrect format.
+     * @param input the user input
+     */
     public LocalDate parseDate(String input) throws DukeyException {
         input = input.strip();
         if (checkIfEmpty(input)) {
