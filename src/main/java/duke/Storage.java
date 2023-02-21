@@ -1,11 +1,11 @@
 package duke;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 /**
@@ -14,8 +14,7 @@ import java.util.Scanner;
  */
 
 public class Storage {
-    private File file;
-    private boolean hasData;
+    private Path path;
     private TaskList list;
 
     /**
@@ -24,9 +23,7 @@ public class Storage {
      */
     public Storage(TaskList list) {
         this.list = list;
-        Path path = Paths.get("src/main/data/duke.txt");
-        this.hasData = java.nio.file.Files.exists(path);
-        this.file = path.toFile();
+        this.path = Paths.get("./data/panpan.txt");
     }
 
     /**
@@ -36,8 +33,13 @@ public class Storage {
     public String findData() throws DukeException {
         try {
             String out = "(-v-) :: Checking past storage...\n";
-            if (!hasData) {
-                throw new DukeException("('o')!! :: Past data does not exist!");
+            if (Files.notExists(this.path)) {
+                try{
+                    Files.createDirectories(Path.of("./data"));
+                    Files.createFile(this.path);
+                } catch (IOException e) {
+                    throw new DukeException("('o')!! :: OOPS!!! Unable to create file!");
+                }
             }
             return out + "('v') :: Successfully retrieved past data!";
         } catch (DukeException e) {
@@ -51,7 +53,7 @@ public class Storage {
      */
     public void connect() throws DukeException {
         try {
-            Scanner sc = new Scanner(this.file);
+            Scanner sc = new Scanner(path.toFile());
             while (sc.hasNextLine()) {
                 String[] input = sc.nextLine().split(" \\| ");
                 Task task;
@@ -81,7 +83,7 @@ public class Storage {
      */
     public void save(TaskList lst) {
         try {
-            FileWriter writer = new FileWriter("src/main/data/duke.txt");
+            FileWriter writer = new FileWriter("./data/panpan.txt");
             for (int i = 0; i < lst.getSize(); i++) {
                 String line = lst.getTask(i).toSave();
                 writer.write(line);
