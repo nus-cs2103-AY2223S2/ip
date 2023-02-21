@@ -34,6 +34,10 @@ public class Messages {
     public static final String MESSAGE_END_FLAG_MISSING = " You're missing the '/to' flag! Buhcawk!";
     public static final String MESSAGE_DATE_INVALID = "Your date's format is all clucked up!";
     public static final String MESSAGE_DATE_MISSING = "Buh caw - You forgot to give me a date!";
+    public static final String MESSAGE_KEYWORD_MISSING = "What are you looking for? Feathers?";
+    public static final String MESSAGE_NO_MATCHES_FOUND = "Nope, don't got it!";
+    public static final String MESSAGE_ONE_MATCH_FOUND = "There's only one hen in this hen house! :";
+    public static final String MESSAGE_MATCHES_FOUND = "Cluck! Here's what I got: ";
 
     public static final String MESSAGE_LIST_DISPLAY = "Here are the tasks in your list:";
     public static final String MESSAGE_LIST_COUNT = "There are now %s items in your list!";

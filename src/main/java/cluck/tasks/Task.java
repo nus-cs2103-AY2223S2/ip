@@ -110,6 +110,12 @@ public abstract class Task {
         }
     }
 
+    public boolean containsKeyWord(String keyWord) {
+        String lowerCaseDescription = this.description.toLowerCase();
+        String lowerCaseKeyWord = keyWord.toLowerCase();
+        return lowerCaseDescription.contains(lowerCaseKeyWord);
+    }
+
     @Override
     public String toString() {
         return this.isMarked

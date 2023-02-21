@@ -3,6 +3,7 @@ package cluck.taskList;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 
+import cluck.messages.Messages;
 import cluck.exceptions.TaskIndexOutOfBoundsException;
 import cluck.tasks.Task;
 
@@ -52,7 +53,7 @@ public class TaskList {
      * @param task task to be added.
      * @return task added
      */
-    //Todo: have commands print the task added
+//Todo: have commands print the task added
     public Task addTask(Task task) {
         this.taskList.add(task);
         return task;
@@ -95,16 +96,37 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Find tasks with description containing the given key word.
+     * This method is not case-sensitive.
+     *
+     * @param keyWord the key word
+     * @return task list containing only the tasks with matching description
+     */
+    public TaskList findMatches(String keyWord) {
+        TaskList matchingTasks = new TaskList();
+        int counter = 0;
+        for (Task task : taskList) {
+            if (task.containsKeyWord(keyWord)) {
+                counter += 1;
+                matchingTasks.addTask(task);
+            }
+        }
+        return matchingTasks;
+    }
+
+
     public String toString() {
-        StringBuilder tasks = new StringBuilder();
+        StringBuilder allTasks = new StringBuilder();
         int counter = 1;
         for (Task task : taskList) {
-            tasks.append(counter + ") ");
-            tasks.append(task.toString());
-            tasks.append("\n");
+            allTasks.append(counter);
+            allTasks.append(") ");
+            allTasks.append(task.toString());
+            allTasks.append("\n");
             counter += 1;
         }
-        return tasks.toString();
+        return allTasks.toString();
     }
 
 
