@@ -47,13 +47,13 @@ public class Event extends Task {
     }
 
     @Override
-    public String messageWhenAdded() {
+    public String getMessageWhenAdded() {
         return "DukeyList just added a new event:";
     }
 
     @Override
     public String getLogString() {
-        return "E" + "," + isDoneStatus() + "," + this.getName() + "," + this.start + "," + this.end;
+        return "E" + "," + getMarkedStatus() + "," + this.getName() + "," + this.start + "," + this.end;
     }
 
     @Override

@@ -45,13 +45,13 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String messageWhenAdded() {
+    public String getMessageWhenAdded() {
         return "DukeyList just added a new deadline:";
     }
 
     @Override
     public String getLogString() {
-        return "D" + "," + this.isDoneStatus() + "," + this.getName() + "," + this.getDeadline();
+        return "D" + "," + this.getMarkedStatus() + "," + this.getName() + "," + this.getDeadline();
     }
 
     @Override

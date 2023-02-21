@@ -60,7 +60,7 @@ public class TaskList {
         }
 
         Task taskToMark = this.list.get(taskNumber);
-        taskToMark.markAsDone();
+        taskToMark.setMarked();
         ui.printMarkedMessage(taskNumber, taskToMark);
     }
 
@@ -79,7 +79,7 @@ public class TaskList {
             throw new DukeyException("Error! DukeyList only contains " + this.list.size() + " tasks");
         }
         Task taskToUnmark = this.list.get(taskNumber);
-        taskToUnmark.unmark();
+        taskToUnmark.setUnmarked();
         ui.printUnmarkedMessage(taskNumber, taskToUnmark);
     }
 

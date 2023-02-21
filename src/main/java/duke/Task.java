@@ -22,19 +22,19 @@ public abstract class Task {
         return this.done;
     }
 
-    public int isDoneStatus() {
+    public int getMarkedStatus() {
         return this.isDone() ? 1 : 0;
     }
 
-    public void markAsDone() {
+    public void setMarked() {
         this.done = true;
     }
 
-    public void unmark() {
+    public void setUnmarked() {
         this.done = false;
     }
 
-    public String messageWhenAdded() {
+    public String getMessageWhenAdded() {
         return "DukeyList just added a new item: ";
     }
 
