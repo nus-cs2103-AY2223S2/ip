@@ -1,5 +1,10 @@
 package duke;
 
+import java.io.FileNotFoundException;
+
+/**
+ * Available actions that can be performed with Duke
+ */
 public enum ActionEnum {
     LIST,
     TODO,

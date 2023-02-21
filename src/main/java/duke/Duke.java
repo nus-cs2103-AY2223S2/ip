@@ -4,12 +4,18 @@ import duke.exceptions.DukeyException;
 
 import java.io.FileNotFoundException;
 
-
+/**
+ * Interactive list which allows users to add Tasks and perform various operations to these Tasks.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Returns a new instance of Duke with a Storage, Ui and TaskList.
+     * @param filePath the file path of the save file used to save data from the Duke
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -23,6 +29,9 @@ public class Duke {
     }
 
 
+    /**
+     * Takes in user input and prints it back to the user.
+     */
     public void echo() {
         while (true) {
             String input = ui.readEchoInput();
@@ -36,6 +45,9 @@ public class Duke {
     }
 
 
+    /**
+     * Initiates the DukeyList by loading a save, then scans for and performs commands from the user.
+     */
     public void initiateDukeyList() {
         ui.printWelcomeMessage();
         ui.printInstruction();

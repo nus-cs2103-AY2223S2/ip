@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * Deals with user interactions, namely reading input from the user and printing messages to the user.
+ */
 public class Ui {
     Scanner scanner = new Scanner(System.in);
     Parser parser = new Parser();
