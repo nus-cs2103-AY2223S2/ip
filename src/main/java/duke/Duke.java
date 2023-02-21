@@ -1,8 +1,8 @@
 package duke;
 
-import duke.exceptions.DukeyException;
-
 import java.io.FileNotFoundException;
+
+import duke.exceptions.DukeyException;
 
 /**
  * Interactive list which allows users to add Tasks and perform various operations to these Tasks.
@@ -22,6 +22,9 @@ public class Duke {
         this.taskList = new TaskList(ui);
     }
 
+    /**
+     * Starts Duke
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("DukeySave.txt");
         duke.initiateDukeyList();
@@ -66,45 +69,45 @@ public class Duke {
             try {
                 actionEnum = ui.readCommand();
                 switch (actionEnum) {
-                    case TODO:
-                        taskList.addTask(ToDo.createToDo(ui));
-                        break;
-                    case DEADLINE:
-                        taskList.addTask(Deadline.createDeadline(ui));
-                        break;
-                    case EVENT:
-                        taskList.addTask(Event.createEvent(ui));
-                        break;
-                    case MARK:
-                        taskList.mark();
-                        break;
-                    case UNMARK:
-                        taskList.unmark();
-                        break;
-                    case DELETE:
-                        taskList.delete();
-                        break;
-                    case LIST:
-                        taskList.readList();
-                        break;
-                    case CLEARLIST:
-                        taskList.clearList();
-                        break;
-                    case FIND:
-                        taskList.find();
-                        break;
-                    case SAVE:
-                        taskList.save(storage);
-                        break;
-                    case CLEARSAVE:
-                        taskList.clearSave(storage);
-                        break;
-                    case BYE:
-                        isStillRunning = false;
-                        break;
-                    case FORCESTOP:
-                        isForceStopped = true;
-                        break;
+                case TODO:
+                    taskList.addTask(ToDo.createToDo(ui));
+                    break;
+                case DEADLINE:
+                    taskList.addTask(Deadline.createDeadline(ui));
+                    break;
+                case EVENT:
+                    taskList.addTask(Event.createEvent(ui));
+                    break;
+                case MARK:
+                    taskList.mark();
+                    break;
+                case UNMARK:
+                    taskList.unmark();
+                    break;
+                case DELETE:
+                    taskList.delete();
+                    break;
+                case LIST:
+                    taskList.readList();
+                    break;
+                case CLEARLIST:
+                    taskList.clearList();
+                    break;
+                case FIND:
+                    taskList.find();
+                    break;
+                case SAVE:
+                    taskList.save(storage);
+                    break;
+                case CLEARSAVE:
+                    taskList.clearSave(storage);
+                    break;
+                case BYE:
+                    isStillRunning = false;
+                    break;
+                case FORCESTOP:
+                    isForceStopped = true;
+                    break;
                 }
             } catch (DukeyException e) {
                 ui.printExceptionMessage(e);

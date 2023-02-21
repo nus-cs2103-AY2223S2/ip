@@ -1,11 +1,11 @@
 package duke;
 
-import duke.exceptions.DukeyException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+
+import duke.exceptions.DukeyException;
 
 /**
  * Handles operations relating to dates
@@ -16,6 +16,7 @@ public class DukeyTime {
     /**
      * Returns a LocalDate from a String
      * @param s the String containing the date
+     * @throws DukeyException on invalid string input for date
      */
     public static LocalDate getDateFromString(String s) throws DukeyException {
         LocalDate date = LocalDate.now();

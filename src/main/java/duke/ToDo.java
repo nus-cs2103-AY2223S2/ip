@@ -30,6 +30,7 @@ public class ToDo extends Task {
      * Returns a ToDo created with details taken from user input.
      * @param ui object to handle user interactions
      * @return ToDo created based on user's input
+     * @throws DukeyException on invalid user input for ToDo name
      */
     public static ToDo createToDo(Ui ui) throws DukeyException {
         String toDoName = ui.readTaskName("ToDo");

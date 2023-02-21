@@ -1,8 +1,9 @@
 package duke;
 
+import java.time.LocalDate;
+
 import duke.exceptions.DukeyException;
 
-import java.time.LocalDate;
 
 /**
  * Deadline is a type of Task which contains a name and a date (in the form of
@@ -38,6 +39,7 @@ public class Deadline extends Task {
      * Returns a Deadline created with details taken from user input.
      * @param ui object to handle user interactions
      * @return Deadline created based on the user's input
+     * @exception DukeyException on invalid user input
      */
     public static Deadline createDeadline(Ui ui) throws DukeyException {
         String deadlineName = ui.readTaskName("Deadline");

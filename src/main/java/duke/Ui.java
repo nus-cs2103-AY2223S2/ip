@@ -1,18 +1,18 @@
 package duke;
 
-import duke.exceptions.DukeyException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import duke.exceptions.DukeyException;
+
 /**
  * Deals with user interactions, namely reading input from the user and printing messages to the user.
  */
 public class Ui {
-    Scanner scanner = new Scanner(System.in);
-    Parser parser = new Parser();
+    private Scanner scanner = new Scanner(System.in);
+    private Parser parser = new Parser();
 
     private String readLine() {
         return scanner.nextLine();
@@ -36,7 +36,7 @@ public class Ui {
 
     public LocalDate readTime(String type) throws DukeyException {
         this.print(type + ": ");
-        String timeString =  this.readLine();
+        String timeString = this.readLine();
         return parser.parseDate(timeString);
     }
 
@@ -94,7 +94,7 @@ public class Ui {
         this.printLine((taskNumber + 1) + ". " + task);
     }
 
-    public void printTask (Task task) {
+    public void printTask(Task task) {
         this.printLine(task.toString());
     }
 
@@ -161,7 +161,7 @@ public class Ui {
 
 
     public void printSize(int size) {
-        if (size == 1){
+        if (size == 1) {
             printLine("DukeyList now has 1 task.");
         } else {
             printLine("DukeyList now has " + size + " tasks.");
@@ -174,7 +174,8 @@ public class Ui {
     }
 
     public void printInstruction() {
-        printLine("DukeyList: Welcome to DukeyList!! To use DukeyList, type the appropriate command and follow the prompts:");
+        printLine("DukeyList: Welcome to DukeyList!! To use DukeyList, " +
+                "type the appropriate command and follow the prompts:");
         printLine("To list: 'list'");
         printLine("To exit: 'bye'");
         printLine("To add a todo: 'todo'");

@@ -1,11 +1,11 @@
 package duke;
 
-import duke.exceptions.DukeyException;
-
 import static java.lang.Integer.parseInt;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import duke.exceptions.DukeyException;
 
 /**
  * Stores and manages Tasks.
@@ -71,6 +71,7 @@ public class TaskList {
     /**
      * Marks a particular Task as done. This method uses the Ui class to read input from the user to get
      * details about which Task is to be marked.
+     * @throws DukeyException on invalid Task number from user input
      */
     public void mark() throws DukeyException {
         String taskNumberString = ui.getTaskNumber();
@@ -95,6 +96,7 @@ public class TaskList {
     /**
      * Marks a particular Task as undone. This method uses the Ui class to read input from the user to get
      * details about which Task is to be unmarked.
+     * @throws DukeyException on invalid task number from user input
      */
     public void unmark() throws DukeyException {
         String taskNumberString = ui.getTaskNumber();
@@ -118,6 +120,7 @@ public class TaskList {
     /**
      * Deletes a Task from the TaskList. This method uses the Ui class to read input from the user to get
      * details about which Task is to be deleted.
+     * @throws DukeyException on invalid Task number from user input
      */
     public void delete() throws DukeyException {
         String taskNumberString = ui.getTaskNumber();
@@ -205,6 +208,7 @@ public class TaskList {
     /**
      * Loads all the Tasks in the save File to the TaskList.
      * @param storage deals with the saving and loading of data to the save File.
+     * @throws FileNotFoundException on missing save file
      */
     public void initiate(Storage storage) throws FileNotFoundException {
         storage.load(this);

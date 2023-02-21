@@ -1,8 +1,8 @@
 package duke;
 
-import duke.exceptions.DukeyException;
-
 import java.time.LocalDate;
+
+import duke.exceptions.DukeyException;
 
 /**
  * Analyzes user input.
@@ -77,8 +77,9 @@ public class Parser {
      * Scans the user's input for a Task name and returns the Task name, throws an exception if the
      * user input is empty.
      * @param input the user input
+     * @throws DukeyException on empty input for Task name
      */
-    public String parseTaskName(String input) throws DukeyException{
+    public String parseTaskName(String input) throws DukeyException {
         input = input.strip();
         if (checkIfEmpty(input)) {
             throw new DukeyException("Error! Task name cannot be empty!");
@@ -90,6 +91,7 @@ public class Parser {
      * Scans the user's input for a date and returns the date in the form of a LocalDate. Throws an exception if the
      * user input is empty or if the date is in the incorrect format.
      * @param input the user input
+     * @throws DukeyException on invalid string input for date
      */
     public LocalDate parseDate(String input) throws DukeyException {
         input = input.strip();
@@ -99,6 +101,12 @@ public class Parser {
         return DukeyTime.getDateFromString(input);
     }
 
+    /**
+     * Scans the user's input for a keywrod and returns the keyword. Throws an exception if the
+     * user input is empty.
+     * @param input the user input
+     * @throws DukeyException on empty user input
+     */
     public String parseKeyword(String input) throws DukeyException {
         input = input.strip();
         if (checkIfEmpty(input)) {

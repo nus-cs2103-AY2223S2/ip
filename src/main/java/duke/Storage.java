@@ -1,7 +1,5 @@
 package duke;
 
-import duke.exceptions.DukeyException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,13 +7,15 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import duke.exceptions.DukeyException;
+
 
 /**
  * Deals with the saving and loading of Tasks onto a hard drive.
  */
 public class Storage {
-    File file;
-    String filePath;
+    private File file;
+    private String filePath;
 
     /**
      * Returns a new storage containing a File where data is to be stored.
@@ -28,7 +28,7 @@ public class Storage {
     /**
      * Appends text to the save File.
      * @param textToAdd the text to be added
-     * @exception IOException on problems with the input text
+     * @throws IOException on problems with the input text
      */
     public void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(this.file, true);
@@ -48,6 +48,7 @@ public class Storage {
      * Saves all the Tasks on a TaskList to the hard drive by writing the log strings of each Task
      * onto the save File.
      * @param taskList the TaskList to be saved
+     * @throws DukeyException on invalid filepath provided
      */
     public void save(TaskList taskList) throws DukeyException {
         this.clearFile();
@@ -66,7 +67,8 @@ public class Storage {
     /**
      * Loads all the Tasks on the hard drive to a TaskList by creating new Tasks based on the details from
      * their log string.
-     * @param taskList the TaskList on which the Tasks are to be laoded.
+     * @param taskList the TaskList on which the Tasks are to be laoded
+     * @throws FileNotFoundException on missing file
      */
     public void load(TaskList taskList) throws FileNotFoundException {
         Scanner fileScanner = new Scanner(file);

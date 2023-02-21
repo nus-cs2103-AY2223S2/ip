@@ -1,8 +1,9 @@
 package duke;
 
+import java.time.LocalDate;
+
 import duke.exceptions.DukeyException;
 
-import java.time.LocalDate;
 
 /**
  * Event is a type of Task which contains a name and two dates (in the form of
@@ -43,6 +44,7 @@ public class Event extends Task {
      * Returns an Event created with details taken from user input.
      * @param ui object to handle user interactions
      * @return Event created based on the user's input
+     * @throws DukeyException on invalid String provided for date
      */
     public static Event createEvent(Ui ui) throws DukeyException {
         String eventName = ui.readTaskName("Event");
