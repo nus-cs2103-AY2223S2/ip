@@ -3,8 +3,6 @@ package cluck.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
-
 
 public abstract class Task {
     protected String description; // name of the task
@@ -73,11 +71,6 @@ public abstract class Task {
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
         return description.equals(task.description) && isMarked.equals(task.isMarked);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(description, isMarked);
     }
 
     @Override

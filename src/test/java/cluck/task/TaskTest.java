@@ -12,11 +12,6 @@ import cluck.tasks.ToDo;
 
 public class TaskTest {
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
     @Test
     public void todoFromSaveTest() {
         String workingTodoSave = "T|0|Meet Jason";
