@@ -1,0 +1,4 @@
+D | 1 | find one piece | 2022-02-02
+T | 0 | homework
+T | 0 | play mario kart
+E | 0 | sleep | 2022-01-01 | 2022-02-02
