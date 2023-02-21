@@ -51,7 +51,7 @@ Print out the tasks in DUKE
 > 
 > list
 
- ### 5.  `mark`
+### 5.  `mark`
 
 Mark the task as done
 >Use GUI for faster access.
