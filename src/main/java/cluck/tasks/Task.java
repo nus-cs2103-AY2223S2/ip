@@ -3,6 +3,7 @@ package cluck.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.*;
 
 
 public abstract class Task {
@@ -64,6 +65,19 @@ public abstract class Task {
                 System.out.println("Corrupted data found, skipping corrupted data.");
                 return null;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return description.equals(task.description) && isMarked.equals(task.isMarked);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isMarked);
     }
 
     @Override
