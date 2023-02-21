@@ -32,7 +32,7 @@ public class PriorityCommand extends Command {
     public TaskList execute(TaskList tasks) {
         switch(commandType) {
             case "get":
-                int taskIndex = Integer.parseInt(input.substring(5));
+                int taskIndex = Integer.parseInt(input.substring(5)) - 1;
                 Task task = tasks.get(taskIndex);
                 Ui.getPriorityMessage(task);
                 break;
