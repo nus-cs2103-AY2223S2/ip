@@ -2,9 +2,6 @@ package cluck.commands;
 
 import cluck.messages.Messages;
 import cluck.taskList.TaskList;
-import cluck.tasks.Task;
-
-import java.util.ArrayList;
 
 public class FindTaskCommand implements Command {
     private final String keyWord;

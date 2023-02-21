@@ -66,8 +66,10 @@ public abstract class Task {
         }
     }
 
-    public boolean containsKeyWord(String string) {
-        return this.description.contains(string);
+    public boolean containsKeyWord(String keyWord) {
+        String lowerCaseDescription = this.description.toLowerCase();
+        String lowerCaseKeyWord = keyWord.toLowerCase();
+        return lowerCaseDescription.contains(lowerCaseKeyWord);
     }
 
     @Override

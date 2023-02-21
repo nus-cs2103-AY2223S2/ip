@@ -1,7 +1,16 @@
 package cluck.parser;
 
-import cluck.commands.*;
-
+import cluck.commands.Command;
+import cluck.commands.DeadlineCommand;
+import cluck.commands.DeleteTaskCommand;
+import cluck.commands.EventCommand;
+import cluck.commands.ExitCommand;
+import cluck.commands.FindTaskCommand;
+import cluck.commands.InvalidCommand;
+import cluck.commands.ListCommand;
+import cluck.commands.MarkTaskCommand;
+import cluck.commands.ToDoCommand;
+import cluck.commands.UnmarkTaskCommand;
 
 import cluck.exceptions.IncorrectArgumentException;
 import cluck.exceptions.MissingArgumentException;
