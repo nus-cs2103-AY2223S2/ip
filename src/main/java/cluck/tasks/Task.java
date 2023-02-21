@@ -66,6 +66,10 @@ public abstract class Task {
         }
     }
 
+    public boolean containsKeyWord(String string) {
+        return this.description.contains(string);
+    }
+
     @Override
     public String toString() {
         return this.isMarked

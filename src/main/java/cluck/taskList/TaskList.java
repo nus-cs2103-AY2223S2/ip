@@ -76,17 +76,33 @@ public class TaskList {
         return taskList.size();
     }
 
-
-    public String toString() {
-        StringBuilder tasks = new StringBuilder();
+    public String findMatches(String keyWord) {
+        StringBuilder matchingTasks = new StringBuilder();
         int counter = 1;
         for (Task task : taskList) {
-            tasks.append(counter + ") ");
-            tasks.append(task.toString());
-            tasks.append("\n");
+            if (task.containsKeyWord(keyWord)) {
+                    matchingTasks.append(counter);
+                    matchingTasks.append(") ");
+                    matchingTasks.append(task.toString());
+                    matchingTasks.append("\n");
+                    counter += 1;
+            }
+        }
+        return matchingTasks.toString();
+    }
+
+
+    public String toString() {
+        StringBuilder allTasks = new StringBuilder();
+        int counter = 1;
+        for (Task task : taskList) {
+            allTasks.append(counter);
+            allTasks.append(") ");
+            allTasks.append(task.toString());
+            allTasks.append("\n");
             counter += 1;
         }
-        return tasks.toString();
+        return allTasks.toString();
 
     }
 
