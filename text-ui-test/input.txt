@@ -1,0 +1,22 @@
+
+hi
+help
+todo
+todo eat
+deadline drink
+deadline drink /by 1pm
+event sleep
+event sleep /from 10pm
+event sleep /from 10pm /to 8am
+log
+complete 1
+complete 1
+complete 2
+incomplete 2
+incomplete 2
+complete 10
+complete notANumber
+log
+delete 1
+log
+bye
