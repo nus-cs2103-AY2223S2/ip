@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import wessy.components.Parser;
 
 public class ParserTest {
     @Test

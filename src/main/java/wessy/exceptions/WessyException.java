@@ -5,7 +5,7 @@ package wessy.exceptions;
  * exceptions that might occur when the programme, "Wessy" is running.
  */
 public abstract class WessyException extends Exception {
-    private static final String OPENING = "☹ OOPS!!! ";
+    private static final String OPENING = "ERROR! ";
     private final String message;
 
     /**
