@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import java.util.List;
-import java.util.Scanner;
 
 import duke.task.*;
 
@@ -13,34 +12,38 @@ import duke.task.*;
  */
 public class Ui {
 
-    Scanner sc = new Scanner(System.in);
-
+    Ui() { }
     /**
      * Prints greeting message when app is started.
+     *
+     * @return String of greeting response.
      */
-    public void printGreetingMessage() {
-        String logo = " ____        _        \n"
+    public String printGreetingMessage() {
+        String output;
+        String logo;
+        logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("\t____________________________________________________________"
-                + "\n\t Hello! I'm Duke\n"
-                + "\t What can I do for you?"
-                + "\n\t____________________________________________________________");
+        output = "Hello from\n" + logo;
+        output += "\n\t Hello! I'm Duke\n"
+                + "\t What can I do for you?";
+        return output;
     }
 
     /**
      * Prints a list of current tasks.
      *
      * @param allTasks List of all existing tasks.
+     * @return String of existing list of tasks.
      */
-    public void printCommandList(List<Task> allTasks) {
+    public String printCommandList(List<Task> allTasks) {
         DateTimeFormatter dateTimeFormatter1 =
                 DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\t Here are the tasks in your list:");
+
+        String output;
+        output = "\t Here are the tasks in your list:";
         for (int i = 0; i < allTasks.size(); i++) {
             int numbering = i + 1;
             Task task = allTasks.get(i);
@@ -52,11 +55,10 @@ public class Ui {
                 time = " (from: " + task.getEventStartTime().format(dateTimeFormatter1)
                         + " to: " + task.getEventEndTime().format(dateTimeFormatter1) + ")";
             }
-            System.out.println("\t " + numbering + "." + task.getTaskType() + task.getTaskStatus() + " "
-                    + task.getTask() + time);
+            output += "\n\t " + numbering + "." + task.getTaskType() + task.getTaskStatus() + " "
+                    + task.getTask() + time;
         }
-
-        System.out.println("\t____________________________________________________________");
+        return output;
     }
 
     /**
@@ -64,12 +66,14 @@ public class Ui {
      *
      * @param dateTime Date that user wants to find tasks on.
      * @param allTasks List of all existing tasks.
+     * @return String of list of deadlines or events due on stated day.
      */
-    public void printDeadlineOrEventsOnDay(LocalDate dateTime, TaskList allTasks) {
+    public String printDeadlineOrEventsOnDay(LocalDate dateTime, TaskList allTasks) {
         DateTimeFormatter dateTimeFormatter1 =
                 DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\t Here are the tasks in your list at this day:");
+
+        String output;
+        output = "\t Here are the tasks in your list at this day:";
         int numbering = 1;
         for (int i = 0; i < allTasks.getNumberOfTask(); i++) {
             Task task = allTasks.getTask(i);
@@ -77,9 +81,9 @@ public class Ui {
             if (task.getTaskType().equals("[D]") && task.getDate().equals(dateTime)) {
                 time = " (by: "
                         + task.getDeadline().format(dateTimeFormatter1) + ")";
-                System.out.println("\t " + numbering + "."
+                output += "\n\t " + numbering + "."
                         + task.getTaskType() + task.getTaskStatus() + " "
-                        + task.getTask() + time);
+                        + task.getTask() + time;
                 numbering += 1;
             } else if (task.getTaskType().equals("[E]") && task.getDate().equals(dateTime)) {
                 time = " (from: "
@@ -87,13 +91,13 @@ public class Ui {
                         + " to: "
                         + task.getEventEndTime().format(dateTimeFormatter1)
                         + ")";
-                System.out.println("\t " + numbering + "."
+                output += "\n\t " + numbering + "."
                         + task.getTaskType() + task.getTaskStatus() + " "
-                        + task.getTask() + time);
+                        + task.getTask() + time;
                 numbering += 1;
             }
         }
-        System.out.println("\t____________________________________________________________");
+        return output;
     }
 
     /**
@@ -102,12 +106,14 @@ public class Ui {
      * @param keyword Keyword that user wants to search for relevant
      *                tasks.
      * @param allTasks List of all existing tasks.
+     * @return String of tasks relating to keyword.
      */
-    public void printFindResults(String keyword, TaskList allTasks) {
+    public String printFindResults(String keyword, TaskList allTasks) {
         DateTimeFormatter dateTimeFormatter1 =
                 DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\t Here are the matching tasks in your list:");
+
+        String output;
+        output = "\t Here are the matching tasks in your list:";
         int numbering = 1;
         for (int i = 0; i < allTasks.getNumberOfTask(); i++) {
             Task task = allTasks.getTask(i);
@@ -116,9 +122,9 @@ public class Ui {
                     task.getTask().contains(keyword)) {
                 time = " (by: "
                         + task.getDeadline().format(dateTimeFormatter1) + ")";
-                System.out.println("\t " + numbering + "."
+                output += "\n\t " + numbering + "."
                         + task.getTaskType() + task.getTaskStatus() + " "
-                        + task.getTask() + time);
+                        + task.getTask() + time;
                 numbering += 1;
             } else if (task.getTaskType().equals("[E]") &&
                     task.getTask().contains(keyword)) {
@@ -127,39 +133,26 @@ public class Ui {
                         + " to: "
                         + task.getEventEndTime().format(dateTimeFormatter1)
                         + ")";
-                System.out.println("\t " + numbering + "."
+                output += "\n\t " + numbering + "."
                         + task.getTaskType() + task.getTaskStatus() + " "
-                        + task.getTask() + time);
+                        + task.getTask() + time;
                 numbering += 1;
             }
         }
-
-        System.out.println("\t____________________________________________________________");
+        return output;
     }
 
     /**
      * Prints exit message when app is terminated.
+     *
+     * @return String of exit response.
      */
-    public void printByeMessage() {
-        System.out.println("\t____________________________________________________________"
-                + "\n\t Bye. Hope to see you again soon!"
-                + "\n\t____________________________________________________________");
+    public String printByeMessage() {
+        String output;
+        output = "\t Bye. Hope to see you again soon!";
+        return output;
     }
 
-    /**
-     * Reads command from user.
-     *
-     * @return Command typed by user.
-     */
-    public String getCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints any file loading error message.
-     *
-     * @param message Error message.
-     */
     public void showLoadingError(String message) {
         System.out.println(message);
     }
