@@ -56,7 +56,8 @@ public class Parser {
 
         assert !commandName.equals("");
 
-        String command = fullCommand.substring(firstWord + 1);
+        String command = fullcommand.substring(firstWord + 1);
+
         if (commandName.equals("todo")) {
             command = fullCommand.substring(4).trim();
         }

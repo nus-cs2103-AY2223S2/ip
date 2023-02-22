@@ -27,7 +27,7 @@ public class UpdateCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui) {
-        if ((this.index) > tasks.size()) {
+        if ((this.index) > tasks.size() | (this.index <= 0)) {
             return ui.showIdExceedsList(this.index);
         } else {
             switch (this.commandName) {
