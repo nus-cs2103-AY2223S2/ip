@@ -5,3 +5,29 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+added:
+[T][ ]buy vegetables
+added:
+[T][ ]watch football
+I have set the following task to done: 
+[T][X]watch football
+added:
+[D][ ]some homework / tomorrow
+1:[T][ ]buy vegetables
+2:[T][X]watch football
+3:[D][ ]some homework / tomorrow
+added:
+[E][ ]some other homework / today / tomorrow
+1:[T][ ]buy vegetables
+2:[T][X]watch football
+3:[D][ ]some homework / tomorrow
+4:[E][ ]some other homework / today / tomorrow
+I have set the following task to done: 
+[D][X]some homework / tomorrow
+I have set the following task to not done: 
+[T][ ]watch football
+1:[T][ ]buy vegetables
+2:[T][ ]watch football
+3:[D][X]some homework / tomorrow
+4:[E][ ]some other homework / today / tomorrow
+Goodbye!

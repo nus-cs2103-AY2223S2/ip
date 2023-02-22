@@ -1,0 +1,11 @@
+todo buy vegetables
+todo watch football
+mark 2
+deadline some homework / tomorrow
+list
+event some other homework / today / tomorrow
+list
+mark 3
+unmark 2
+list
+bye
