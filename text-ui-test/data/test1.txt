@@ -1,0 +1,21 @@
+5
+2
+T true 1
+read book
+3
+D false 1 1
+get bread
+2023-03-10 18:00
+4
+E false 1 1 1
+lunch
+2023-05-01 12:00
+2023-05-01 13:00
+2
+T false 1
+git-push
+4
+E false 1 1 1
+lecture
+2023-02-02 14:00
+2023-02-02 16:00
