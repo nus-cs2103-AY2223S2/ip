@@ -43,11 +43,11 @@ test {
 }
 
 application {
-    mainClassName = "baymax.Baymax"
+    mainClassName = "baymax.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "baymax"
+    archiveBaseName = "Baymax"
     archiveClassifier = null
 }
 
