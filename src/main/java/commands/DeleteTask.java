@@ -12,6 +12,11 @@ public class DeleteTask implements Command {
     }
 
     public String execute() {
-        return "Removed " + taskList.remove(taskIndex - 1);
+        try {
+            Task removed = taskList.remove(taskIndex - 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Removed ";
     }
 }

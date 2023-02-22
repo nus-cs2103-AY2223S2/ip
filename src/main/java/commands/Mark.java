@@ -1,14 +1,24 @@
 package commands;
+import exceptions.DukeMarkOutOfBounds;
 import tasks.Task;
 
-public class Mark implements Command {
-    private Task task;
+import java.util.ArrayList;
 
-    public Mark(Task task){
-        this.task = task;
+public class Mark implements Command {
+    private ArrayList<Task> tasks;
+    private int index;
+
+    public Mark(int index, ArrayList<Task> tasks){
+        this.tasks = tasks;
+        this.index = index;
     }
 
-    public String execute(){
-        return this.task.mark();
+    public String execute() throws DukeMarkOutOfBounds {
+        try {
+            Task toMark = tasks.get(index);
+            return toMark.mark();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeMarkOutOfBounds(index);
+        }
     }
 }

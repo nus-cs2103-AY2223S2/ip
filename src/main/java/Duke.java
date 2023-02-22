@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import exceptions.DukeException;
+import exceptions.DukeMarkOutOfBounds;
+import exceptions.DukeTodoNoDescription;
 import tasks.*;
 import commands.*;
 public class Duke {
@@ -44,34 +48,49 @@ public class Duke {
                 }
                 case "mark": {
                     int index = Integer.parseInt(arguments) - 1;
-                    Command mark = new Mark(tasks.get(index));
-                    System.out.println(line);
-                    System.out.println(mark.execute());
+                    try {
+                        Command mark = new Mark(index, tasks);
+                        System.out.println(line);
+                        System.out.println(mark.execute());
+
+                    } catch (DukeMarkOutOfBounds e) {
+                        System.out.println(e.getMessage());
+                    }
                     System.out.println(line);
                     break;
                 }
                 // honestly creation of task objects here should be handled by the task objects
                 // change later
                 case "todo": {
-                    Command addTask = new AddTask(new Todo(arguments), tasks);
                     System.out.println(line);
-                    System.out.println(addTask.execute());
+                    try {
+                        Command addTask = new AddTask("todo", arguments, tasks);
+                        System.out.println(addTask.execute());
+                    } catch (DukeTodoNoDescription e) {
+                        System.out.println(e.getMessage());
+                    }
                     System.out.println(line);
                     break;
                 }
                 case "deadline": {
-                    String[] argumentsSplit = input[1].split(" ", 2);
-                    Command addTask = new AddTask(new Deadline(argumentsSplit), tasks);
                     System.out.println(line);
-                    System.out.println(addTask.execute());
+                    try {
+                        Command addTask = new AddTask("deadline", arguments, tasks);
+                        System.out.println(addTask.execute());
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                     System.out.println(line);
                     break;
                 }
                 case "event": {
-                    String[] argumentsSplit = input[1].split(" ", 3);
-                    Command addTask = new AddTask(new Event(argumentsSplit), tasks);
                     System.out.println(line);
-                    System.out.println(addTask.execute());
+                    try {
+                        Command addTask = new AddTask("event", arguments, tasks);
+                        System.out.println(addTask.execute());
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                     System.out.println(line);
                     break;
                 }
@@ -79,6 +98,20 @@ public class Duke {
                     Command deleteTask = new DeleteTask(Integer.parseInt(arguments), tasks);
                     System.out.println(line);
                     System.out.println(deleteTask.execute());
+                    System.out.println(line);
+                    break;
+                }
+                case "save": {
+                    Command save = new Save(tasks);
+                    System.out.println(line);
+                    System.out.println(save.execute());
+                    System.out.println(line);
+                    break;
+                }
+                case "load": {
+                    Command load = new Load(tasks);
+                    System.out.println(line);
+                    System.out.println(load.execute());
                     System.out.println(line);
                     break;
                 }

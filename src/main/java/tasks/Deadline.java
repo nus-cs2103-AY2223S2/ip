@@ -2,17 +2,32 @@ package tasks;
 
 public class Deadline extends Task{
     protected String deadline;
+    private static final String PREFIX = "D";
 
-    public Deadline(String[] rawargs){
+    public Deadline(String desc, String deadline){
 //        String[] args = rawargs.split(" ", 2);
-        super(rawargs[0]);
-        this.deadline = rawargs[1];
+        super(desc);
+        this.deadline = deadline;
+    }
+
+    @Override
+    public String getPrefix() {
+        return PREFIX;
+    }
+
+    @Override
+    public String save() {
+        StringBuilder response = new StringBuilder("");
+        response.append(getPrefix() + ",");
+        response.append(description + ",");
+        response.append(deadline + ",");
+        response.append(isDone + "\n");
+        return response.toString();
     }
 
     @Override
     public String toString(){
-        return "[D]"
-                + super.toString()
+        return super.toString()
                 + " (by: "
                 + this.deadline
                 + ")";

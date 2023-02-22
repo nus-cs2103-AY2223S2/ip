@@ -3,16 +3,14 @@ package tasks;
 public class Task {
     protected String description;
     protected boolean isDone;
-    public void execute(){
+    private static final String PREFIX = "G";
 
-    };
-
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     };
 
-    public String mark(){
+    public String mark() {
         isDone = !isDone;
         String response;
         if (isDone) {
@@ -29,10 +27,22 @@ public class Task {
         return this.description;
     }
 
+    public String save() {
+        StringBuilder response = new StringBuilder("");
+        response.append(PREFIX + ",");
+        response.append(description + ",");
+        response.append(isDone + "\n");
+        return response.toString();
+    }
+
+    public String getPrefix() {
+        return PREFIX;
+    }
+
     @Override
     public String toString() {
         return isDone
-                ? "[X] " + this.description
-                : "[ ] " + this.description;
+                ? "[" + getPrefix() + "]" + "[X] " + this.description
+                : "[" + getPrefix() + "]" + "[ ] " + this.description;
     }
 }
