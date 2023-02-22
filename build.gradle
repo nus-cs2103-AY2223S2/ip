@@ -57,6 +57,6 @@ run{
 }
 
 javafx {
-    version = "19"
+    version = "11"
     modules = [ 'javafx.controls' , 'javafx.fxml']
 }
