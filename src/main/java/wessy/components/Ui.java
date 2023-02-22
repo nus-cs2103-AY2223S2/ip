@@ -127,28 +127,10 @@ public class Ui {
      * @param tasks
      */
     public String getWelcomeMessage(String[] tasks) {
-//        printOpening();
         return "Hi, I am Wessy, your personal assistant chatbot.\n\n" +
         getListOrFindContent(tasks, true);
-//        printClosing();
     }
-
-//    /**
-//     * A helper function
-//     */
-//    private static void printOpening() {
-//        System.out.println("    -Wessy------------------------------" +
-//                "---------------------------------- ");
-//    }
-//
-//    /**
-//     * A helper function
-//     */
-//    private static void printClosing() {
-//        System.out.println("    -----------------------------------" +
-//                "----------------------------------- ");
-//    }
-
+    
     /**
      * A helper function
      *
@@ -230,8 +212,6 @@ public class Ui {
      * @return
      */
     public String handleException(String message) {
-//        System.err.println("    -Wessy---------------------------------------------------------------- ");
         return getMessage("ERROR! " + message);
-//        System.err.println("    ---------------------------------------------------------------------- ");
     }
 }
