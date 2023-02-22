@@ -1,4 +1,3 @@
-/// Let parser throw exceptions for incorrect input
 package duke;
 
 import java.time.LocalDateTime;
@@ -28,26 +27,27 @@ public class Parser {
      * @return ture if input command is valid.
      */
     public static boolean isValidCommand(String commandName) {
-        return Arrays.asList(simpleCommands).contains(commandName) | Arrays.asList(moreCommands).contains(commandName);
+        boolean valid = Arrays.asList(simpleCommands).contains(commandName) | Arrays.asList(moreCommands).contains(commandName);
+        return valid;
     }
 
     /**
      * Parses user's input into a Command object.
      * Throws exceptions if the input has incorrect format.
      *
-     * @param fullcommand User's input.
+     * @param fullCommand User's input.
      * @param ui          Ui to show messages.
      * @return A Command object which contains information corresponds to the user's input.
      * @throws DukeException
      */
-    public static Command parse(String fullcommand, Ui ui) throws DukeException {
-        int firstWord = fullcommand.length() - 1;
+    public static Command parse(String fullCommand, Ui ui) throws DukeException {
+        int firstWord = fullCommand.length() - 1;
         String commandName;
         try {
-            firstWord = fullcommand.indexOf(' ');
-            commandName = fullcommand.substring(0, firstWord);
+            firstWord = fullCommand.indexOf(' ');
+            commandName = fullCommand.substring(0, firstWord);
         } catch (StringIndexOutOfBoundsException e) {
-            commandName = fullcommand.trim();
+            commandName = fullCommand.trim();
         }
 
         if (!isValidCommand(commandName)) {
@@ -57,8 +57,9 @@ public class Parser {
         assert !commandName.equals("");
 
         String command = fullcommand.substring(firstWord + 1);
+
         if (commandName.equals("todo")) {
-            command = fullcommand.substring(4).trim();
+            command = fullCommand.substring(4).trim();
         }
 
         switch (commandName) {
