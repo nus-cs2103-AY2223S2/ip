@@ -54,6 +54,8 @@ public class Parser {
             throw new DukeException("Please enter a valid command");
         }
 
+        assert !commandName.equals("");
+
         String command = fullcommand.substring(firstWord + 1);
         if (commandName.equals("todo")) {
             command = fullcommand.substring(4).trim();
