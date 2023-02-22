@@ -1,7 +1,7 @@
 package cluck.commands;
 
 import cluck.messages.Messages;
-import cluck.taskList.TaskList;
+import cluck.tasklist.TaskList;
 import cluck.tasks.Deadline;
 import cluck.tasks.Task;
 

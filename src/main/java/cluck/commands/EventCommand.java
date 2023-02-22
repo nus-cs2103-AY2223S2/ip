@@ -1,11 +1,9 @@
 package cluck.commands;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import cluck.messages.Messages;
-import cluck.taskList.TaskList;
-import cluck.tasks.Deadline;
+import cluck.tasklist.TaskList;
 import cluck.tasks.Event;
 import cluck.tasks.Task;
 

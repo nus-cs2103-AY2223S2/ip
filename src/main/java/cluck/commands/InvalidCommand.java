@@ -1,7 +1,7 @@
 package cluck.commands;
 
 import cluck.messages.Messages;
-import cluck.taskList.TaskList;
+import cluck.tasklist.TaskList;
 
 public class InvalidCommand implements Command {
     private final String invalidCommand;

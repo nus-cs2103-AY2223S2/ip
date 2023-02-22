@@ -1,6 +1,6 @@
 package cluck.commands;
 
-import cluck.taskList.TaskList;
+import cluck.tasklist.TaskList;
 import cluck.messages.Messages;
 
 public class ExitCommand implements Command{

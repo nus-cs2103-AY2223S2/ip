@@ -3,7 +3,7 @@ package cluck.commands;
 import cluck.exceptions.TaskIndexOutOfBoundsException;
 import cluck.messages.Messages;
 import cluck.tasks.Task;
-import cluck.taskList.TaskList;
+import cluck.tasklist.TaskList;
 
 public class MarkTaskCommand implements Command {
     private final int taskIndex;

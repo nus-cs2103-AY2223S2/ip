@@ -1,6 +1,6 @@
 package cluck.commands;
 
-import cluck.taskList.TaskList;
+import cluck.tasklist.TaskList;
 
 /**
  * Abstract class for Commands, defines the default of commands.

@@ -1,7 +1,6 @@
-package cluck.taskList;
+package cluck.tasklist;
 
 import java.util.ArrayList;
-import java.lang.StringBuilder;
 
 import cluck.exceptions.TaskIndexOutOfBoundsException;
 import cluck.tasks.Task;

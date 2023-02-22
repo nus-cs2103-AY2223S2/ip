@@ -5,7 +5,7 @@ import cluck.commands.ExitCommand;
 import cluck.exceptions.CluckException;
 import cluck.parser.Parser;
 import cluck.storage.Storage;
-import cluck.taskList.TaskList;
+import cluck.tasklist.TaskList;
 import cluck.ui.Ui;
 
 
