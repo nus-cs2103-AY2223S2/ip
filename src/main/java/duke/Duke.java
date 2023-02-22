@@ -32,7 +32,7 @@ public class Duke {
     public String getResponse(String input) {
         if (input.equals("bye")) {
             storage.write(this.tasks);
-            return "Bye~ Hope to see you next time! >v<\n"
+            return "bye~ \n"
                     + "Please click the X on the top right to close the program.";
         }
         try {
