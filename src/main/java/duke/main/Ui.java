@@ -43,7 +43,7 @@ public class Ui {
                 DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
 
         String output;
-        output = "\n\t Here are the tasks in your list:";
+        output = "\t Here are the tasks in your list:";
         for (int i = 0; i < allTasks.size(); i++) {
             int numbering = i + 1;
             Task task = allTasks.get(i);
@@ -73,7 +73,7 @@ public class Ui {
                 DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
 
         String output;
-        output = "\n\t Here are the tasks in your list at this day:";
+        output = "\t Here are the tasks in your list at this day:";
         int numbering = 1;
         for (int i = 0; i < allTasks.getNumberOfTask(); i++) {
             Task task = allTasks.getTask(i);
@@ -113,7 +113,7 @@ public class Ui {
                 DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
 
         String output;
-        output = "\n\t Here are the matching tasks in your list:";
+        output = "\t Here are the matching tasks in your list:";
         int numbering = 1;
         for (int i = 0; i < allTasks.getNumberOfTask(); i++) {
             Task task = allTasks.getTask(i);
@@ -149,7 +149,7 @@ public class Ui {
      */
     public String printByeMessage() {
         String output;
-        output = "\n\t Bye. Hope to see you again soon!";
+        output = "\t Bye. Hope to see you again soon!";
         return output;
     }
 

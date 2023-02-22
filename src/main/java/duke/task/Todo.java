@@ -20,10 +20,8 @@ public class Todo extends Task {
      */
     @Override
     public String markAsDone() {
-        return "\t____________________________________________________________"
-                + "\n\t Nice! I've marked this task as done:\n"
-                + "\t  " + this.taskType + "[X]" + " " + this.task
-                + "\n\t____________________________________________________________";
+        return "\t Nice! I've marked this task as done:\n"
+                + "\t  " + this.taskType + "[X]" + " " + this.task;
     }
 
     /**
@@ -33,10 +31,8 @@ public class Todo extends Task {
      */
     @Override
     public String unmarkAsUndone() {
-        return "\t____________________________________________________________"
-                + "\n\t OK, I've marked this task as not done yet:\n"
-                + "\t  " + this.taskType + "[ ]" + " " + this.task
-                + "\n\t____________________________________________________________";
+        return "\t OK, I've marked this task as not done yet:\n"
+                + "\t  " + this.taskType + "[ ]" + " " + this.task;
     }
 
     /**
@@ -45,11 +41,9 @@ public class Todo extends Task {
      * @return String response that show task is added.
      */
     public String printToDoTask() {
-        return "\t____________________________________________________________"
-                + "\n\t Got it. I've added this task:"
+        return "\t Got it. I've added this task:"
                 + "\n\t   [T]" + super.getTaskStatus() + " " + super.task
-                + "\n\t Now you have " + super.totalNumOfTasks + " tasks in the list."
-                + "\n\t____________________________________________________________";
+                + "\n\t Now you have " + super.totalNumOfTasks + " tasks in the list.";
     }
 
     /**
@@ -60,11 +54,9 @@ public class Todo extends Task {
     @Override
     public String printDelete(List<Task> allTasks) {
         int newTotalNumOfTasks = allTasks.size() - 1;
-        return "\t____________________________________________________________"
-                + "\n\t Noted. I've removed this task:" + "\n\t   " + this.taskType
+        return  "\t Noted. I've removed this task:" + "\n\t   " + this.taskType
                 + super.getTaskStatus() + " " + super.task
-                + "\n\t Now you have " + newTotalNumOfTasks + " tasks in the list."
-                + "\n\t____________________________________________________________";
+                + "\n\t Now you have " + newTotalNumOfTasks + " tasks in the list.";
     }
 
     /**

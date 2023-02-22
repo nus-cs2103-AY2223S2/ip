@@ -28,10 +28,8 @@ public class Task {
      * @return String response that show task is marked as done.
      */
     public String markAsDone() {
-        return "\t____________________________________________________________"
-                + "\n\t Nice! I've marked this task as done:\n"
-                + "\t  " + "[X]" + " " + this.task
-                + "\n\t____________________________________________________________";
+        return "\t Nice! I've marked this task as done:\n"
+                + "\t  " + "[X]" + " " + this.task;
     }
 
     /**
@@ -40,10 +38,8 @@ public class Task {
      * @return String response that show task is unmarked as undone.
      */
     public String unmarkAsUndone() {
-        return "\t____________________________________________________________"
-                + "\n\t OK, I've marked this task as not done yet:\n"
-                + "\t  " + "[ ]" + " " + this.task
-                + "\n\t____________________________________________________________";
+        return "\t OK, I've marked this task as not done yet:\n"
+                + "\t  " + "[ ]" + " " + this.task;
     }
 
     /**
@@ -53,8 +49,7 @@ public class Task {
      */
     public String printDelete(List<Task> allTasks) {
         int allTaskSize = allTasks.size() - 1;
-        return "\t____________________________________________________________"
-                + "\n\t Noted. I've removed this task:" + "\n\t   "
+        return "\t Noted. I've removed this task:" + "\n\t   "
                 + this.getTaskStatus() + " " + this.task
                 + "\n\t Now you have " + allTaskSize + " tasks in the list.";
     }

@@ -39,6 +39,7 @@ public class Duke {
             Parser parser = new Parser();
             return parser.parse(input, ui, tasks, storage);
         }
+
         return ui.printByeMessage();
     }
 

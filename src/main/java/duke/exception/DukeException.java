@@ -16,17 +16,11 @@ public class DukeException extends Exception {
      */
     public static void missingTimingException(String command) throws DukeException {
         if (command.startsWith("deadline") && !command.contains("/by")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! The timing of a deadline cannot be empty."
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! The timing of a deadline cannot be empty.");
         } else if (command.startsWith("event") && !command.contains("/from")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! The start time of an event cannot be empty."
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! The start time of an event cannot be empty.");
         } else if (command.startsWith("event") && !command.contains("/to")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! The end time of an event cannot be empty."
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! The end time of an event cannot be empty.");
         }
     }
 
@@ -39,17 +33,11 @@ public class DukeException extends Exception {
      */
     public static void missingIndexException(String command) throws DukeException {
         if (command.equals("mark")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be empty."
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! The task index to mark a task as done cannot be empty.");
         } else if (command.equals("unmark")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! The task index to unmark a task as not done cannot be empty."
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! The task index to unmark a task as not done cannot be empty.");
         } else if (command.equals("delete")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! The task index to delete a task as not done cannot be empty."
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! The task index to delete a task as not done cannot be empty.");
         }
     }
 
@@ -68,18 +56,12 @@ public class DukeException extends Exception {
             String index = command.split(" ")[1];
             int index1 = Integer.parseInt(index);
             if (index1 <= 0) {
-                throw new DukeException("\t____________________________________________________________"
-                        + "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be zero or less."
-                        + "\n\t____________________________________________________________");
+                throw new DukeException("\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be zero or less.");
             } else if (index.equals("")) {
-                throw new DukeException("\t____________________________________________________________"
-                        + "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be empty."
-                        + "\n\t____________________________________________________________");
+                throw new DukeException("\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be empty.");
             } else if (index1 > taskSize) {
-                throw new DukeException("\t____________________________________________________________"
-                        + "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be more than"
-                        + " number of tasks."
-                        + "\n\t____________________________________________________________");
+                throw new DukeException("\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be more than"
+                        + " number of tasks.");
             }
         }
     }
@@ -93,9 +75,7 @@ public class DukeException extends Exception {
     public static void invalidCommandException(String command) throws DukeException {
         if (!command.startsWith("event") || !(command.startsWith("deadline")) ||
                 !command.startsWith("todo") || command.startsWith("mark") || !command.startsWith("unmark")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-("
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -107,21 +87,13 @@ public class DukeException extends Exception {
      */
     public static void emptyCommandException(String command) throws DukeException {
         if (command.equals("todo")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! The description of a todo cannot be empty."
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! The description of a todo cannot be empty.");
         } else if (command.equals("deadline")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! The description of a deadline cannot be empty."
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! The description of a deadline cannot be empty.");
         } else if (command.equals("event")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! The description of an event cannot be empty."
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! The description of an event cannot be empty.");
         } else if (command.equals("find deadlines or events on")) {
-            throw new DukeException("\t____________________________________________________________"
-                    + "\n\t ☹ OOPS!!! The date of a deadline/ event cannot be empty."
-                    + "\n\t____________________________________________________________");
+            throw new DukeException("\t ☹ OOPS!!! The date of a deadline/ event cannot be empty.");
         }
     }
 }

@@ -28,11 +28,9 @@ public class Deadline extends Task {
      */
     @Override
     public String markAsDone() {
-        return "\t____________________________________________________________"
-                + "\n\t Nice! I've marked this task as done:\n"
+        return "\t Nice! I've marked this task as done:\n"
                 + "\t  " + this.taskType + "[X]" + " " + super.task
-                + " (by: " + this.taskDeadline.format(dateTimeFormatter1) + ")"
-                + "\n\t____________________________________________________________";
+                + " (by: " + this.taskDeadline.format(dateTimeFormatter1) + ")";
     }
 
     /**
@@ -42,11 +40,9 @@ public class Deadline extends Task {
      */
     @Override
     public String unmarkAsUndone() {
-        return "\t____________________________________________________________"
-                + "\n\t OK, I've marked this task as not done yet:\n"
+        return "\t OK, I've marked this task as not done yet:\n"
                 + "\t  " + this.taskType + "[ ]" + " " + super.task
-                + " (by: " + this.taskDeadline.format(dateTimeFormatter1) + ")"
-                + "\n\t____________________________________________________________";
+                + " (by: " + this.taskDeadline.format(dateTimeFormatter1) + ")";
     }
 
     /**
@@ -55,12 +51,10 @@ public class Deadline extends Task {
      * @return String response that show task is added.
      */
     public String printDeadlineTask() {
-        return "\t____________________________________________________________"
-                + "\n\t Got it. I've added this task:"
+        return "\t Got it. I've added this task:"
                 + "\n\t   [D]" + super.getTaskStatus() + " " + super.task
                 + "(by: " + this.taskDeadline.format(dateTimeFormatter1) + ")"
-                + "\n\t Now you have " + super.totalNumOfTasks + " tasks in the list."
-                + "\n\t____________________________________________________________";
+                + "\n\t Now you have " + super.totalNumOfTasks + " tasks in the list.";
     }
 
     /**
@@ -71,12 +65,10 @@ public class Deadline extends Task {
     @Override
     public String printDelete(List<Task> allTasks) {
         int newTotalNumOfTasks = allTasks.size() - 1;
-        return "\t____________________________________________________________"
-                + "\n\t Noted. I've removed this task:" + "\n\t   " + this.taskType
+        return "\t Noted. I've removed this task:" + "\n\t   " + this.taskType
                 + super.getTaskStatus() + " " + super.task + " (by: "
                 + this.taskDeadline.format(dateTimeFormatter1) + ")"
-                + "\n\t Now you have " + newTotalNumOfTasks + " tasks in the list."
-                + "\n\t____________________________________________________________";
+                + "\n\t Now you have " + newTotalNumOfTasks + " tasks in the list.";
     }
 
     /**

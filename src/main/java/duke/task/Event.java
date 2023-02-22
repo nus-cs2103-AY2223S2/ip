@@ -31,13 +31,11 @@ public class Event extends Task {
      */
     @Override
     public String markAsDone() {
-        return "\t____________________________________________________________"
-                + "\n\t Nice! I've marked this task as done:\n"
+        return "\t Nice! I've marked this task as done:\n"
                 + "\t  " + this.taskType + "[X]" + " " + super.task
                 + " (from: " + this.eventStartTime.format(dateTimeFormatter1)
                 + " to: "
-                + this.eventEndTime.format(dateTimeFormatter1)
-                + "\n\t____________________________________________________________";
+                + this.eventEndTime.format(dateTimeFormatter1);
     }
 
     /**
@@ -47,13 +45,11 @@ public class Event extends Task {
      */
     @Override
     public String unmarkAsUndone() {
-        return "\t____________________________________________________________"
-                + "\n\t OK, I've marked this task as not done yet:\n"
+        return "\t OK, I've marked this task as not done yet:\n"
                 + "\t  " + this.taskType + "[ ]" + " " + super.task
                 + " (from: " + this.eventStartTime.format(dateTimeFormatter1)
                 + " to: "
-                + this.eventEndTime.format(dateTimeFormatter1)
-                + "\n\t____________________________________________________________";
+                + this.eventEndTime.format(dateTimeFormatter1);
     }
 
     /**
@@ -62,13 +58,11 @@ public class Event extends Task {
      * @return String response that show task is added.
      */
     public String printEventTask() {
-        return "\t____________________________________________________________"
-                + "\n\t Got it. I've added this task:"
+        return "\t Got it. I've added this task:"
                 + "\n\t   [E]" + super.getTaskStatus() + " " + super.task
                 + "(from: " + this.eventStartTime.format(dateTimeFormatter1)
                 + " to: " + this.eventEndTime.format(dateTimeFormatter1) + ")"
-                + "\n\t Now you have " + super.totalNumOfTasks + " tasks in the list."
-                + "\n\t____________________________________________________________";
+                + "\n\t Now you have " + super.totalNumOfTasks + " tasks in the list.";
     }
 
     /**
@@ -79,13 +73,11 @@ public class Event extends Task {
     @Override
     public String printDelete(List<Task> allTasks) {
         int newTotalNumOfTasks = allTasks.size() - 1;
-        return "\t____________________________________________________________"
-                + "\n\t Noted. I've removed this task:" + "\n\t   " + this.taskType
+        return "\t Noted. I've removed this task:" + "\n\t   " + this.taskType
                 + super.getTaskStatus() + " " + super.task + " (from: "
                 + this.eventStartTime.format(dateTimeFormatter1) + " to: "
                 + this.eventEndTime.format(dateTimeFormatter1) + ")" + "\n\t Now you have "
-                + newTotalNumOfTasks + " tasks in the list."
-                + "\n\t____________________________________________________________";
+                + newTotalNumOfTasks + " tasks in the list.";
     }
 
     /**

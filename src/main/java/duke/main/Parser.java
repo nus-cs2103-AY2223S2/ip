@@ -127,6 +127,8 @@ public class Parser {
                 return ui.printFindResults(keyword, allTasks);
             } else if (command.equals("bye")){
                 return ui.printByeMessage();
+            } else {
+                DukeException.invalidCommandException(command);
             }
         } catch (DukeException d) {
             return d.getMessage();
