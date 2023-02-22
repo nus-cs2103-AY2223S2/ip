@@ -24,33 +24,39 @@ public class Task {
 
     /**
      * Prints that task is marked as done when task is done.
+     *
+     * @return String response that show task is marked as done.
      */
-    public void markAsDone() {
-        System.out.println("\t____________________________________________________________"
+    public String markAsDone() {
+        return "\t____________________________________________________________"
                 + "\n\t Nice! I've marked this task as done:\n"
                 + "\t  " + "[X]" + " " + this.task
-                + "\n\t____________________________________________________________");
+                + "\n\t____________________________________________________________";
     }
 
     /**
      * Prints that task is marked as not done when task is unmarked.
+     *
+     * @return String response that show task is unmarked as undone.
      */
-    public void unmarkAsUndone() {
-        System.out.println("\t____________________________________________________________"
+    public String unmarkAsUndone() {
+        return "\t____________________________________________________________"
                 + "\n\t OK, I've marked this task as not done yet:\n"
                 + "\t  " + "[ ]" + " " + this.task
-                + "\n\t____________________________________________________________");
+                + "\n\t____________________________________________________________";
     }
 
     /**
      * Prints that task is deleted.
+     *
+     * @return String response that show task is deleted.
      */
-    public void printDelete(List<Task> allTasks) {
+    public String printDelete(List<Task> allTasks) {
         int allTaskSize = allTasks.size() - 1;
-        System.out.println("\t____________________________________________________________"
+        return "\t____________________________________________________________"
                 + "\n\t Noted. I've removed this task:" + "\n\t   "
                 + this.getTaskStatus() + " " + this.task
-                + "\n\t Now you have " + allTaskSize + " tasks in the list.");
+                + "\n\t Now you have " + allTaskSize + " tasks in the list.";
     }
 
     /**

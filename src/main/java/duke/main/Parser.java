@@ -41,15 +41,18 @@ public class Parser {
      * @param allTasks A list of existing tasks.
      * @param storage Storage object to update text file of task list
      *                on hard disk.
+     * @return Ui response to user.
      */
-    public void parse(String command, Ui ui, TaskList allTasks, Storage storage) {
+    public String parse(String command, Ui ui, TaskList allTasks, Storage storage) {
 
         DateTimeFormatter dateTimeFormatter =
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
         try {
             if (command.equals("list")) {
-                ui.printCommandList(allTasks.getAllTasks());
+                String output;
+                output = ui.printCommandList(allTasks.getAllTasks());
+                return output;
             } else if (command.startsWith("mark")) {
                 DukeException.missingIndexException(command);
                 DukeException.invalidIndexException(command, allTasks.getNumberOfTask());
@@ -57,8 +60,8 @@ public class Parser {
                 int taskIndex = Integer.parseInt(str[1]) - 1;
                 Task oldTask = allTasks.getTask(taskIndex);
                 Task task = allTasks.markTaskAsDone(oldTask, taskIndex);
-                task.markAsDone();
                 storage.saveListToFile(command, task, allTasks);
+                return task.markAsDone();
             } else if (command.startsWith("unmark")) {
                 DukeException.missingIndexException(command);
                 DukeException.invalidIndexException(command, allTasks.getNumberOfTask());
@@ -66,8 +69,8 @@ public class Parser {
                 int taskIndex = Integer.parseInt(str[1]) - 1;
                 Task oldTask = allTasks.getTask(taskIndex);
                 Task task = allTasks.unmarkTaskAsUndone(oldTask, taskIndex);
-                task.unmarkAsUndone();
                 storage.saveListToFile(command, task, allTasks);
+                return task.unmarkAsUndone();
             } else if (command.startsWith("todo")) {
                 DukeException.emptyCommandException(command);
                 String[] str = command.split("todo");
@@ -75,8 +78,8 @@ public class Parser {
                 Todo todo = new Todo(allTasks.getNumberOfTask(), false,
                         taskName, allTasks.getNumberOfTask() + 1);
                 allTasks.addTask(todo);
-                todo.printToDoTask();
                 storage.saveListToFile(command, todo, allTasks);
+                return todo.printToDoTask();
             } else if (command.startsWith("deadline")) {
                 DukeException.emptyCommandException(command);
                 DukeException.missingTimingException(command);
@@ -86,8 +89,8 @@ public class Parser {
                 Deadline deadline = new Deadline(allTasks.getNumberOfTask(), false,
                         taskName, taskDeadline, allTasks.getNumberOfTask() + 1);
                 allTasks.addTask(deadline);
-                deadline.printDeadlineTask();
                 storage.saveListToFile(command, deadline, allTasks);
+                return deadline.printDeadlineTask();
             } else if (command.startsWith("event")) {
                 DukeException.emptyCommandException(command);
                 DukeException.missingTimingException(command);
@@ -99,17 +102,17 @@ public class Parser {
                 Event event = new Event(allTasks.getNumberOfTask(), false,
                         taskName, eventStartTime, eventEndTime, allTasks.getNumberOfTask() + 1);
                 allTasks.addTask(event);
-                event.printEventTask();
                 storage.saveListToFile(command, event, allTasks);
+                return event.printEventTask();
             } else if (command.startsWith("delete")) {
                 DukeException.missingIndexException(command);
                 DukeException.invalidIndexException(command, allTasks.getNumberOfTask());
                 String[] str = command.split(" ");
                 int taskIndex = Integer.parseInt(str[1]) - 1;
                 Task task = allTasks.getTask(taskIndex);
-                task.printDelete(allTasks.getAllTasks());
                 allTasks.deleteTask(taskIndex);
                 storage.saveListToFile(command, task, allTasks);
+                return task.printDelete(allTasks.getAllTasks());
             } else if (command.startsWith("show deadlines or events on")) {
                 DukeException.emptyCommandException(command);
                 String[] str = command.split("show deadlines or events on ");
@@ -117,25 +120,23 @@ public class Parser {
                 DateTimeFormatter dateTimeFormatter2 =
                         DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate dateTime1 = LocalDate.parse(dateTime, dateTimeFormatter2);
-                ui.printDeadlineOrEventsOnDay(dateTime1, allTasks);
+                return ui.printDeadlineOrEventsOnDay(dateTime1, allTasks);
             } else if (command.startsWith("find")) {
                 String[] str = command.split("find");
                 String keyword = str[1];
-                ui.printFindResults(keyword, allTasks);
+                return ui.printFindResults(keyword, allTasks);
             } else if (command.equals("bye")){
-                boolean saidBye = true;
-                ui.printByeMessage();
-            } else {
-                DukeException.invalidCommandException(command);
+                return ui.printByeMessage();
             }
         } catch (DukeException d) {
-            System.out.println(d.getMessage());
+            return d.getMessage();
         } catch (NumberFormatException nfe) {
-            System.out.println("\t____________________________________________________________" +
+            return "\t____________________________________________________________" +
                     "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be a non-integer." +
-                    "\n\t____________________________________________________________");
+                    "\n\t____________________________________________________________";
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return "uncaught exception";
     }
 }

@@ -15,48 +15,56 @@ public class Todo extends Task {
 
     /**
      * Prints that task is marked as done when task is done.
+     *
+     * @return String response that show task is marked as done.
      */
     @Override
-    public void markAsDone() {
-        System.out.println("\t____________________________________________________________"
+    public String markAsDone() {
+        return "\t____________________________________________________________"
                 + "\n\t Nice! I've marked this task as done:\n"
                 + "\t  " + this.taskType + "[X]" + " " + this.task
-                + "\n\t____________________________________________________________");
+                + "\n\t____________________________________________________________";
     }
 
     /**
      * Prints that task is marked as not done when task is unmarked.
+     *
+     * @return String response that show task is unmarked as undone.
      */
     @Override
-    public void unmarkAsUndone() {
-        System.out.println("\t____________________________________________________________"
+    public String unmarkAsUndone() {
+        return "\t____________________________________________________________"
                 + "\n\t OK, I've marked this task as not done yet:\n"
                 + "\t  " + this.taskType + "[ ]" + " " + this.task
-                + "\n\t____________________________________________________________");
+                + "\n\t____________________________________________________________";
     }
 
     /**
      * Prints task information when added to task list.
+     *
+     * @return String response that show task is added.
      */
-    public void printToDoTask() {
-        System.out.println("\t____________________________________________________________"
+    public String printToDoTask() {
+        return "\t____________________________________________________________"
                 + "\n\t Got it. I've added this task:"
                 + "\n\t   [T]" + super.getTaskStatus() + " " + super.task
                 + "\n\t Now you have " + super.totalNumOfTasks + " tasks in the list."
-                + "\n\t____________________________________________________________");
+                + "\n\t____________________________________________________________";
     }
 
     /**
      * Prints that task is deleted.
+     *
+     * @return String response that show task is deleted.
      */
     @Override
-    public void printDelete(List<Task> allTasks) {
+    public String printDelete(List<Task> allTasks) {
         int newTotalNumOfTasks = allTasks.size() - 1;
-        System.out.println("\t____________________________________________________________"
+        return "\t____________________________________________________________"
                 + "\n\t Noted. I've removed this task:" + "\n\t   " + this.taskType
                 + super.getTaskStatus() + " " + super.task
                 + "\n\t Now you have " + newTotalNumOfTasks + " tasks in the list."
-                + "\n\t____________________________________________________________");
+                + "\n\t____________________________________________________________";
     }
 
     /**

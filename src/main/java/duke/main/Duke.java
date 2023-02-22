@@ -9,15 +9,14 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private static final String filePath = "data/tasks.txt";
 
     /**
      * Initialises Storage, TaskList and Ui.
      * Previous tasks are loaded up.
      * Loading error will be shown if file cannot be found/ generated.
-     *
-     * @param filePath file path of text file containing tasks.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -29,26 +28,18 @@ public class Duke {
     }
 
     /**
-     * Updates the task file in main method.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-    /**
      * Runs the app.
+     *
+     * @param input Command input by user.
+     * @return Response by Duke.
      */
-    public void run() {
+    String getResponse(String input) {
 
-        ui.printGreetingMessage();
-
-        boolean saidBye = false;
-        while (!saidBye) {
-            String command = ui.getCommand();
+        while (!input.equals("bye")) {
             Parser parser = new Parser();
-            parser.parse(command, ui, tasks, storage);
+            return parser.parse(input, ui, tasks, storage);
         }
+        return ui.printByeMessage();
     }
-
 
 }
