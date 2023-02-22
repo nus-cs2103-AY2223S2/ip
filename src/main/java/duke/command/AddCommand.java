@@ -51,20 +51,22 @@ public class AddCommand extends Command {
      * @param ui Ui to show messages.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
+        String result = "";
         if (this.commandName.equals("todo")) {
             Todo t = new Todo(this.name);
-            ui.addTodo(t);
+            result = result + ui.addTodo(t) + "\n";
             tasks.add(t);
         } else if (this.commandName.equals("deadline")) {
             Deadline d = new Deadline(this.name, this.by);
-            ui.addDeadline(d);
+            result = result + ui.addDeadline(d) + "\n";
             tasks.add(d);
         } else if (this.commandName.equals("event")) {
             Event e = new Event(this.name, this.from, this.to);
-            ui.addEvent(e);
+            result = result + ui.addEvent(e) + "\n";
             tasks.add(e);
         }
-        ui.showCurrentTaskNo(tasks);
+        result = result + ui.showCurrentTaskNo(tasks) + "\n";
+        return result;
     }
 }

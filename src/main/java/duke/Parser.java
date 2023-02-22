@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import duke.command.AddCommand;
 import duke.command.Command;
+import duke.command.ErrorCommand;
 import duke.command.FindCommand;
 import duke.command.UpdateCommand;
 
@@ -22,6 +23,7 @@ public class Parser {
 
     /**
      * Checks if the input command is one of the acceptable commands.
+     *
      * @param commandName Input command name.
      * @return ture if input command is valid.
      */
@@ -32,8 +34,9 @@ public class Parser {
     /**
      * Parses user's input into a Command object.
      * Throws exceptions if the input has incorrect format.
+     *
      * @param fullcommand User's input.
-     * @param ui Ui to show messages.
+     * @param ui          Ui to show messages.
      * @return A Command object which contains information corresponds to the user's input.
      * @throws DukeException
      */
@@ -52,6 +55,9 @@ public class Parser {
         }
 
         String command = fullcommand.substring(firstWord + 1);
+        if (commandName.equals("todo")) {
+            command = fullcommand.substring(4).trim();
+        }
 
         switch (commandName) {
         case "bye":
@@ -65,9 +71,8 @@ public class Parser {
                 int index = Integer.parseInt(command.trim());
                 return new UpdateCommand(commandName, index);
             } catch (NumberFormatException e) {
-                System.out.println("Please enter the task number");
+                return new ErrorCommand(ui.showTaskNoError());
             }
-            break;
         }
         case "find": {
             return new FindCommand("find", command.trim());
@@ -75,11 +80,10 @@ public class Parser {
         case "todo": {
             String name = command.trim();
             if (name.isEmpty()) {
-                ui.todoFormatAlert();
+                return new ErrorCommand(ui.todoFormatAlert());
             } else {
                 return new AddCommand("todo", name, null, null, null);
             }
-            break;
         }
         case "deadline": {
             try {
@@ -94,9 +98,8 @@ public class Parser {
                     return new AddCommand("deadline", name, by, null, null);
                 }
             } catch (DateTimeParseException | StringIndexOutOfBoundsException | DukeException e) {
-                ui.deadlineFormatAlert();
+                return new ErrorCommand(ui.deadlineFormatAlert());
             }
-            break;
         }
         case "event": {
             try {
@@ -114,14 +117,12 @@ public class Parser {
                     return new AddCommand("event", name, null, from, to);
                 }
             } catch (DateTimeParseException | StringIndexOutOfBoundsException | DukeException e) {
-                ui.eventFormatAlert();
+                return new ErrorCommand(ui.eventFormatAlert());
             }
-            break;
         }
         default: {
-            throw new DukeException("May I know what type of task this is?");
+            return new ErrorCommand("May I know what type of task this is?");
         }
         }
-        throw new DukeException("Failed Command Generation");
     }
 }

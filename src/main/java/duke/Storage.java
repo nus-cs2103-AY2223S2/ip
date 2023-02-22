@@ -69,7 +69,7 @@ public class Storage {
                     taskList.add(currTask);
                 }
             }
-        } catch (IOException | DateTimeParseException e) {
+        } catch (IOException | DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Loading failed");
         }
         return taskList;

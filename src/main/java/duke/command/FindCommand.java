@@ -27,18 +27,20 @@ public class FindCommand extends Command {
      * @param ui Ui to show task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.showSearchInformation();
+    public String execute(TaskList tasks, Ui ui) {
+        String result = "";
+        result = result + ui.showSearchInformation() + "\n";
         int taskNo = 0;
         for (int i = 0; i < tasks.size(); i++) {
             Task curTask = tasks.get(i);
             if (curTask.toString().contains(this.taskName)) {
                 taskNo += 1;
-                ui.showTask(tasks.get(i), taskNo);
+                result = result + ui.showTask(tasks.get(i), taskNo) + "\n";
             }
         }
         if (taskNo == 0) {
-            ui.showZeroSearchResult();
+            return ui.showZeroSearchResult();
         }
+        return result;
     }
 }

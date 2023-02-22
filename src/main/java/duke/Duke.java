@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 
+
 /**
  * Represents a Duke object, Main Class of this application.
  */
@@ -13,12 +14,11 @@ public class Duke {
 
     /**
      * Class constructor.
-     * @param filePath Location of saved task list.
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
         this.tasks = new TaskList();
-        this.storage = new Storage(filePath); // create new storage object with file path
+        this.storage = new Storage("saved_tasks_list.txt"); // create new storage object with file path
         try {
             this.tasks = new TaskList(storage.load()); //create new task list from data read from storage
         } catch (DukeException e) {
@@ -29,29 +29,16 @@ public class Duke {
     /**
      * Start the programme
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand, ui);
-                c.execute(this.tasks, ui);
-                isExit = c.isExit(ui);
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        if (input.equals("bye")) {
+            storage.write(this.tasks);
+            return "bye~ Please click the X on the top right to close the program.";
         }
-        storage.write(this.tasks);
-    }
-
-    /**
-     * Execute the programme
-     */
-    public static void main(String[] args) {
-        new Duke("saved_tasks_list.txt").run();
+        try {
+            Command c = Parser.parse(input, ui);
+            return c.execute(this.tasks, ui);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 }

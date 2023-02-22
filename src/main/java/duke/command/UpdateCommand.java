@@ -26,28 +26,26 @@ public class UpdateCommand extends Command {
      * @param ui Ui to show task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         if ((this.index) > tasks.size()) {
-            ui.showIdExceedsList(this.index);
+            return ui.showIdExceedsList(this.index);
         } else {
             switch (this.commandName) {
             case "mark": {
                 tasks.get(this.index - 1).setDone();
-                ui.markTask(tasks, this.index - 1);
-                break;
+                return ui.markTask(tasks, this.index - 1);
             }
             case "unmark": {
                 tasks.get(this.index - 1).setNotDone();
-                ui.unmarkTask(tasks, this.index - 1);
-                break;
+                return ui.unmarkTask(tasks, this.index - 1);
             }
             case "delete": {
-                ui.deleteTask(tasks, this.index - 1);
+                String out = ui.deleteTask(tasks, this.index - 1);
                 tasks.remove(this.index - 1);
-                break;
+                return out;
             }
             default: {
-                break;
+                return "";
             }
             }
         }

@@ -23,22 +23,10 @@ public class Command {
      * @param tasks Current task list.
      * @param ui Ui to show task list.
      */
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         if (this.commandName.equals("list")) {
-            ui.showList(tasks);
+            return ui.showList(tasks);
         }
-    }
-
-    /**
-     * Check if the command is "bye".
-     * @param ui Ui to show exit message.
-     * @return
-     */
-    public boolean isExit(Ui ui) {
-        if (this.commandName.equals("bye")) {
-            ui.showExit();
-            return true;
-        }
-        return false;
+        return "";
     }
 }

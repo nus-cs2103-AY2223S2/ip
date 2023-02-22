@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -35,24 +33,19 @@ public class Ui {
     /**
      * Prints exit message.
      */
-    public void showExit() {
-        System.out.println("Bye~ Hope to see you next time! >v<");
+    public String showExit() {
+        return "Bye~ Hope to see you next time! >v<";
     }
 
     /**
      * Prints error message for loading error.
      */
-    public void showLoadingError() {
-        System.out.println("Loading error: No saved task list found.");
+    public String showLoadingError() {
+        return "Loading error: No saved task list found.";
     }
 
-    /**
-     * Reads user inputs.
-     * @return A string of user's inputs.
-     */
-    public String readCommand() {
-        Scanner keyboard = new Scanner(System.in);
-        return keyboard.nextLine();
+    public String showTaskNoError() {
+        return "Please enter the task number.";
     }
 
     /**
@@ -60,79 +53,85 @@ public class Ui {
      * Exception: no message will be printed for error of "Failed Command Generation".
      * @param msg Given error massage.
      */
-    public void showError(String msg) {
+    public String showError(String msg) {
         if (!msg.equals("Failed Command Generation")) {
-            System.out.println(msg);
+            return msg;
         }
+        return "";
     }
 
     /**
      * Prints messages to show a new Todo task is added.
      * @param t New Todo task.
      */
-    public void addTodo(Todo t) {
-        System.out.println("This todo has been added!");
-        System.out.println("  " + t);
+    public String addTodo(Todo t) {
+        String out = "This todo has been added!\n"
+                + "  " + t;
+        return out;
     }
 
     /**
      * Prints messages to show a new Deadline task is added.
      * @param d New Deadline task.
      */
-    public void addDeadline(Deadline d) {
-        System.out.println("This deadline had been added! Try to finish it early 0v0");
-        System.out.println("  " + d);
+    public String addDeadline(Deadline d) {
+        String out = "This deadline had been added! Try to finish it early 0v0\n"
+                + "  " + d;
+        return out;
     }
 
     /**
      * Prints messages to show a new Event task is added.
      * @param e New Event task.
      */
-    public void addEvent(Event e) {
-        System.out.println("This event has been added! Hope you will enjoy it :D");
-        System.out.println("  " + e);
+    public String addEvent(Event e) {
+        String out = "This event has been added! Hope you will enjoy it :D\n"
+                + "  " + e;
+        return out;
     }
 
     /**
      * Prints the total number of tasks in current task list.
      * @param tasks Current task list.
      */
-    public void showCurrentTaskNo(TaskList tasks) {
-        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+    public String showCurrentTaskNo(TaskList tasks) {
+        String out = "Now you have " + tasks.size() + " tasks in the list";
+        return out;
     }
 
     /**
      * Prints the response message for Find command.
      */
-    public void showSearchInformation() {
-        System.out.println("Here are the matching tasks in your list: ");
+    public String showSearchInformation() {
+        return "Here are the matching tasks in your list: ";
     }
 
-    public void showZeroSearchResult() {
-        System.out.println("  I cannot find any relevant tasks in the list QvQ");
+    public String showZeroSearchResult() {
+        return "  I cannot find any relevant tasks in the list QvQ";
     }
 
     /**
      * Prints the target task.
      * @param task Target task.
      * */
-    public void showTask(Task task, int index) {
-        System.out.println(index + "." + task.toString());
+    public String showTask(Task task, int index) {
+        String out = index + "." + task.toString();
+        return out;
     }
 
     /**
      * Prints the current task list.
      * @param tasks Current task list.
      */
-    public void showList(TaskList tasks) {
+    public String showList(TaskList tasks) {
         if (tasks.size() == 0) {
-            System.out.println("The task list is empty.");
+            return "The task list is empty.";
         } else {
-            System.out.println("Here are the current tasks:");
+            String out = "Here are the current tasks:\n";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.print((i + 1) + ".");
-                System.out.println(tasks.get(i).toString());
+                out = out + (i + 1) + "." + tasks.get(i).toString() + "\n";
             }
+            return out;
         }
     }
 
@@ -140,8 +139,8 @@ public class Ui {
      * Print messages to alert user when input task index exceeds the length of task list.
      * @param index Input task index.
      */
-    public void showIdExceedsList(int index) {
-        System.out.println("I cannot find task " + (index) + " as it exceeds the total tasks number");
+    public String showIdExceedsList(int index) {
+        return "I cannot find task " + (index) + " as it exceeds the total tasks number";
     }
 
     /**
@@ -149,9 +148,10 @@ public class Ui {
      * @param tasks Current task list.
      * @param index Input task index.
      */
-    public void markTask(TaskList tasks, int index) {
-        System.out.println("Nice! Great job for completing this task:");
-        System.out.println((tasks.get(index).toString()));
+    public String markTask(TaskList tasks, int index) {
+        String out = "Nice! Great job for completing this task:\n"
+                + (tasks.get(index).toString());
+        return out;
     }
 
     /**
@@ -159,9 +159,10 @@ public class Ui {
      * @param tasks Current task list.
      * @param index Input task index.
      */
-    public void unmarkTask(TaskList tasks, int index) {
-        System.out.println("This item is marked as not done yet");
-        System.out.println((tasks.get(index).toString()));
+    public String unmarkTask(TaskList tasks, int index) {
+        String out = "This item is marked as not done yet\n"
+                + tasks.get(index).toString();
+        return out;
     }
 
     /**
@@ -169,33 +170,37 @@ public class Ui {
      * @param tasks Current task list.
      * @param index Input task index.
      */
-    public void deleteTask(TaskList tasks, int index) {
-        System.out.println("This task is deleted from the list:");
-        System.out.println("  " + (tasks.get(index).toString()));
-        System.out.println("Now you have " + (tasks.size() - 1) + " tasks in the list");
+    public String deleteTask(TaskList tasks, int index) {
+        String out = "This task is deleted from the list:\n"
+                + "  " + (tasks.get(index).toString()) + "\n"
+                + "Now you have " + (tasks.size() - 1) + " tasks in the list";
+        return out;
     }
 
     /**
      * Prints alert to user when a new Todo task is not created due to incorrect input format.
      */
-    public void todoFormatAlert() {
-        System.out.println("Adding new todo failed");
-        System.out.println("The task name cannot be empty");
+    public String todoFormatAlert() {
+        String out = "Adding new todo failed\n"
+                + "The task name cannot be empty";
+        return out;
     }
 
     /**
      * Prints alert to user when a new Deadline task is not created due to incorrect input format.
      */
-    public void deadlineFormatAlert() {
-        System.out.println("Adding new deadline failed");
-        System.out.println("Please enter the deadline with format [name /ddmmyyyy time]");
+    public String deadlineFormatAlert() {
+        String out = "Adding new deadline failed\n"
+                + "Please enter the deadline with format [name /ddmmyyyy time]";
+        return out;
     }
 
     /**
      * Prints alert to user when a new Event task is not created due to incorrect input format.
      */
-    public void eventFormatAlert() {
-        System.out.println("Adding new event failed");
-        System.out.println("Please enter the task with the format [name /ddMMyyyy HHmm /ddMMyyyy HMmm]");
+    public String eventFormatAlert() {
+        String out = "Adding new event failed\n"
+                + "Please enter the task with the format [name /ddMMyyyy HHmm /ddMMyyyy HMmm]";
+        return out;
     }
 }
