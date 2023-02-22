@@ -23,6 +23,10 @@ public class Task {
         return response;
     }
 
+    public void importMark() {
+        isDone = true;
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -30,8 +34,8 @@ public class Task {
     public String save() {
         StringBuilder response = new StringBuilder("");
         response.append(PREFIX + ",");
-        response.append(description + ",");
-        response.append(isDone + "\n");
+        response.append(isDone + ",");
+        response.append(description + "\n");
         return response.toString();
     }
 

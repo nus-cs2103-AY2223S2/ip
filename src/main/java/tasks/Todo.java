@@ -19,8 +19,8 @@ public class Todo extends Task {
     public String save() {
         StringBuilder response = new StringBuilder("");
         response.append(getPrefix() + ",");
-        response.append(description + ",");
-        response.append(isDone + "\n");
+        response.append(isDone + ",");
+        response.append(description + "\n");
         return response.toString();
     }
 }

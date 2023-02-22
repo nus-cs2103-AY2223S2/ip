@@ -19,9 +19,9 @@ public class Deadline extends Task{
     public String save() {
         StringBuilder response = new StringBuilder("");
         response.append(getPrefix() + ",");
+        response.append(isDone + ",");
         response.append(description + ",");
-        response.append(deadline + ",");
-        response.append(isDone + "\n");
+        response.append(deadline + "\n");
         return response.toString();
     }
 
