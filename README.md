@@ -1,24 +1,48 @@
-# duke.Duke project template
+# BorzAI User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features 
 
-## Setting up in Intellij
+### Basic
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+- Add, mark , unmark, delete 3 types of tasks: todo, deadline, event.
+- Show list of tasks.
+- Loads and saves tasks from and to hard-disk.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### Filter and Sort
+
+- Filter tasks using keywords or dates.
+- Sort tasks by alphabetical order, dates, task type or status(marked/unmarked).
+
+## How to run BorzAI
+
+1. Ensure that you have downloaded the latest version of Borzai under Releases in GitHub.
+2. Copy the jar file into an empty folder.
+3. Open a command window in that folder.
+4. Run the command java -jar BorzAi-{version}.jar e.g., java -jar BorzAI-v1.0.jar (i.e., run the command in the same folder as the jar file).
+
+## List of Commands
+
+- `todo <description>` Add todo.
+- `deadline <description> /by <date/time>` Add deadline.
+- `event <description> /from <date/time> /to <date/time>`Add event.
+- `list` Show tasks.
+- `mark <number>` Mark task.
+- `unmark <number>` Unmark task.
+- `delete <number>` Delete task.
+- `filter <keywords...>` Filter tasks by keyword(s), separate multiple keywords with commas.
+- `filterdate <dates...>` Filter tasks by date(s), separate multiple dates with commas.
+- `sort` Sort tasks by alphabetical order.
+- `sortdate` Sort tasks by date.
+- `sorttask` Sort tasks by task type.
+- `sortdone` Sort tasks by status.
+
+## Export and import 
+
+1. Run BorzAI at least once and exit it.
+2. Copy the `tasks.ser` file from the location that you want to export from.
+3. Paste it into the `data` folder that should have been auto-created. Overwrite the existing file.
+4. Run BorzAI and enter `list` command to show updated tasks.
+
+<div style="text-align:center">
+   <img width="590" alt="Ui" src="https://user-images.githubusercontent.com/97421565/220763976-1de030d8-524c-47a3-a534-2852a775d466.png">
+</div>
