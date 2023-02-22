@@ -32,6 +32,8 @@ public class UserInputChecker {
     public static void checkSpacingAftCmd(String userInput, CmdType cmd) throws MissingSpacingException {
         if (isCmdThatNeedsInput(cmd) && (userInput.equals(cmd.toString())
                 || userInput.charAt(cmd.getStrLength()) != ' ')) {
+            assert cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT ||
+                    cmd == CmdType.MARK || cmd == CmdType.UNMARK || cmd == CmdType.DELETE;
             throw new MissingSpacingException(cmd.toString());
         }
     }
@@ -49,6 +51,8 @@ public class UserInputChecker {
      */
     public static void checkMissingInput(String userInput, CmdType cmd) throws MissingInputException {
         if (isCmdThatNeedsInput(cmd) && isAllSpaces(userInput.substring(cmd.getStrLength()))) {
+            assert cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT ||
+                    cmd == CmdType.MARK || cmd == CmdType.UNMARK || cmd == CmdType.DELETE;
             throw new MissingInputException(cmd.toString());
         }
     }

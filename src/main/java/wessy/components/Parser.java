@@ -40,6 +40,7 @@ public class Parser {
      * initialise a task.
      */
     public static String[] getTaskComponents(String userInput, CmdType cmd) {
+        assert cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT;
         String byStr = "/by";
         String fromStr = "/from";
         String toStr = "/to";
@@ -168,9 +169,10 @@ public class Parser {
      */
     public static int parseInt(String userInput, CmdType cmd) throws NotPositiveIntegerException {
         int num = Integer.parseInt(removeSpacePadding(userInput.substring(cmd.getStrLength())));
-            if (num <= 0) {
-                throw new NotPositiveIntegerException();
-            }
+        if (num <= 0) {
+            throw new NotPositiveIntegerException();
+        }
+        assert num > 0;
         return num;
     }
 
@@ -185,12 +187,11 @@ public class Parser {
         while (str.charAt(start) == ' ') {
             start++;
         }
-
         int end = str.length() - 1;
         while (str.charAt(end) == ' ') {
             end--;
         }
-
+        assert str.charAt(start) != ' ' && str.charAt(end) != ' ';
         return str.substring(start, end + 1);
     }
 }
