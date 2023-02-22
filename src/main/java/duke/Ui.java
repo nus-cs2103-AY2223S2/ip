@@ -11,33 +11,6 @@ import duke.task.Todo;
 public class Ui {
 
     /**
-     * Prints a line which encloses messages.
-     */
-    public void showLine() {
-        System.out.println("--------------------------------");
-    }
-
-    /**
-     * Prints application logo and welcome message.
-     */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?\n");
-    }
-
-    /**
-     * Prints exit message.
-     */
-    public String showExit() {
-        return "Bye~ Hope to see you next time! >v<";
-    }
-
-    /**
      * Prints error message for loading error.
      */
     public String showLoadingError() {

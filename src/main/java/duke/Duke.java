@@ -32,7 +32,8 @@ public class Duke {
     public String getResponse(String input) {
         if (input.equals("bye")) {
             storage.write(this.tasks);
-            return "bye~ Please click the X on the top right to close the program.";
+            return "Bye~ Hope to see you next time! >v<\n"
+                    + "Please click the X on the top right to close the program.";
         }
         try {
             Command c = Parser.parse(input, ui);
