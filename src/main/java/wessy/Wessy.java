@@ -178,10 +178,6 @@ public class Wessy {
 //                if (cmd == null) {
 //                    throw new CommandNotFoundException();
 //                }
-//                assert cmd != null;
-//                assert cmd == CmdType.BYE || cmd == CmdType.LIST || cmd == CmdType.TODO ||
-//                        cmd == CmdType.DEADLINE || cmd == CmdType.EVENT || cmd == CmdType.MARK ||
-//                        cmd == CmdType.UNMARK || cmd == CmdType.DELETE || cmd == CmdType.CLEAR;
 //                UserInputChecker.checkSpacingAftCmd(userInput, cmd);
 //
 //                switch (cmd) {

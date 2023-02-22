@@ -1,5 +1,6 @@
 package wessy.components;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import wessy.task.Task;
@@ -212,11 +213,7 @@ public class Ui {
      * @param linesOfString
      */
     private String getMultiln(String... linesOfString) {
-        String str = "";
-        for (String line : linesOfString) {
-            str += line + "\n";
-        }
-        return str;
+        return Arrays.stream(linesOfString).reduce("", (curr, next) -> curr + next + "\n");
     }
 
     /**
