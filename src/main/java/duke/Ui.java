@@ -115,6 +115,7 @@ public class Ui {
      * @param task Target task.
      * */
     public String showTask(Task task, int index) {
+        assert index >= 0;
         String out = index + "." + task.toString();
         return out;
     }
@@ -149,6 +150,7 @@ public class Ui {
      * @param index Input task index.
      */
     public String markTask(TaskList tasks, int index) {
+        assert index <= tasks.size();
         String out = "Nice! Great job for completing this task:\n"
                 + (tasks.get(index).toString());
         return out;
@@ -160,6 +162,7 @@ public class Ui {
      * @param index Input task index.
      */
     public String unmarkTask(TaskList tasks, int index) {
+        assert index <= tasks.size();
         String out = "This item is marked as not done yet\n"
                 + tasks.get(index).toString();
         return out;
@@ -171,6 +174,7 @@ public class Ui {
      * @param index Input task index.
      */
     public String deleteTask(TaskList tasks, int index) {
+        assert index <= tasks.size();
         String out = "This task is deleted from the list:\n"
                 + "  " + (tasks.get(index).toString()) + "\n"
                 + "Now you have " + (tasks.size() - 1) + " tasks in the list";
