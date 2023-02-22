@@ -9,7 +9,9 @@ import cluck.tasklist.TaskList;
 import cluck.ui.Ui;
 
 
-
+/**
+ * Cluck class is the main Class and module for Cluck.
+ */
 public class Cluck {
     private final TaskList taskList;
     private final Ui ui;
@@ -17,7 +19,8 @@ public class Cluck {
     private final Storage storage;
 
     /**
-     * Cluck class contains tasklist, User interface and parser needed.
+     * Cluck class contains and instance of TaskList, Ui, and Storage.
+     * These classes are the building blocks of Cluck.
      *
      * @param filePath path of saved path as String
      */
@@ -53,6 +56,11 @@ public class Cluck {
         storage.writeSave(taskList);
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new Cluck("C:/Users/User/OneDrive - National University of Singapore/NUS/Y2S2/ip/data/CluckSave.txt").run();
     }

@@ -1,18 +1,33 @@
 package cluck.tasks;
 
 
+/**
+ * To do class is a task that only stores the task description and whether it is checked.
+ */
 public class ToDo extends Task {
 
+    /**
+     * Instantiates a new To do.
+     *
+     * @param description the description
+     */
     public ToDo(String description) {
         super(description);
     }
-    public ToDo(boolean isMarked, String description) {
+
+    /**
+     * Instantiates a new To do, but To Do is manually set to be either marked or un-marked.
+     *
+     * @param isMarked    the is marked
+     * @param description the description
+     */
+    protected ToDo(boolean isMarked, String description) {
         super(isMarked, description);
     }
 
     @Override
     public String makeSaveFormat() {
-        return String.format("T|%1$s|%2$s\n", this.isMarked ? "1" : "0", this.description);
+        return "T" + super.makeSaveFormat() + "\n";
     }
 
     @Override
