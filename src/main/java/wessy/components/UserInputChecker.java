@@ -1,7 +1,8 @@
 package wessy.components;
 
+import java.util.stream.IntStream;
+
 import wessy.CmdType;
-import wessy.components.Parser;
 import wessy.exceptions.MissingSpacingException;
 import wessy.exceptions.TimeSpecifierException;
 import wessy.exceptions.UnspecifiedTimeException;
@@ -17,6 +18,7 @@ import wessy.exceptions.integer.NotAnIntegerException;
  * one which will be checked by the Parser class).
  */
 public class UserInputChecker {
+    private static final int START = 0;
     private static final char SPACE = ' ';
     private static final String SPACE_AS_STR = Character.toString(SPACE);
     private static final char DATE_SEPARATOR = '-';
@@ -38,6 +40,9 @@ public class UserInputChecker {
      */
     public static void checkSpacingAftCmd(String userInput, CmdType cmd) throws MissingSpacingException {
         if (isCmdThatNeedsInput(cmd)) {
+            assert cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT ||
+                    cmd == CmdType.MARK || cmd == CmdType.UNMARK || cmd == CmdType.DELETE;
+                    
             boolean noSpacing = userInput.equals(cmd.toString()) || userInput.charAt(cmd.getStrLength()) != SPACE;
             if (noSpacing) {
                 throw new MissingSpacingException(cmd.toString());
@@ -58,8 +63,10 @@ public class UserInputChecker {
      */
     public static void checkMissingInput(String userInput, CmdType cmd) throws MissingInputException {
         String remainingStr = userInput.substring(cmd.getStrLength());
-
         if (isCmdThatNeedsInput(cmd) && isAllSpaces(remainingStr)) {
+        
+            assert cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT ||
+                    cmd == CmdType.MARK || cmd == CmdType.UNMARK || cmd == CmdType.DELETE;
             throw new MissingInputException(cmd.toString());
         }
     }
@@ -151,37 +158,19 @@ public class UserInputChecker {
      */
     public static void checkNotNumerical(String userInput, CmdType cmd) throws NotAnIntegerException {
         String str = userInput.substring(cmd.getStrLength());
-        int n = str.length();
-
-        for (int i = 0; i < n; i++) {
-            if (!isDigit(str.charAt(i))) {
-                throw new NotAnIntegerException();
-            }
+        
+        boolean isNumerical = str.chars().allMatch(UserInputChecker::isValidChar);
+        if (!isNumerical) {
+            throw new NotAnIntegerException();
         }
     }
 
-    private static boolean isDigit(char c) {
-        for (char digit : digitSet()) {
-            if (digit == c) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static char[] digitSet() {
+    private static boolean isValidChar(int target) {
         int numOfDigits = 10;
-        int numOfExtras = 1 + 1;
-        int numOfChars = numOfDigits + numOfExtras;
-        char[] digits = new char[numOfChars];
-
-        for (int i = 0; i < numOfDigits; i++) {
-            digits[i] = (char) (i + '0');
-        }
-        digits[numOfChars - 2] = DATE_SEPARATOR;
-        digits[numOfChars - 1] = SPACE;
-
-        return digits;
+        int[] extras = new int[]{(int) ' ', (int) '-'};
+        
+        return IntStream.concat(IntStream.range(START, numOfDigits).map(i -> i + '0'), IntStream.of(extras))
+                .anyMatch(c -> target == c);
     }
 
     /**
@@ -198,12 +187,24 @@ public class UserInputChecker {
      */
     public static void checkTooManyInputs(String userInput, CmdType cmd) throws TooManyInputException {
         String str = Parser.removeSpacePadding(userInput.substring(cmd.getStrLength()));
-        int n = str.length();
-        for (int i = 0; i < n; i++) {
-            if (str.charAt(i) == SPACE) {
-                throw new TooManyInputException(cmd.toString());
-            }
+        
+        if (str.chars().anyMatch(UserInputChecker::isSpace)) {
+            throw new TooManyInputException(cmd.toString());
         }
+    }
+
+    /**
+     * A helper function to check does str only consist of space (" ").
+     *
+     * @param str A String to be checked.
+     * @return A boolean value indicating does str only consist of space (" ").
+     */
+    private static boolean isAllSpaces(String str) {
+        return str.chars().allMatch(UserInputChecker::isSpace);
+    }
+
+    private static boolean isSpace(int c) {
+        return c == (int) ' ';
     }
 
     /**
@@ -217,20 +218,5 @@ public class UserInputChecker {
     private static boolean isCmdThatNeedsInput(CmdType cmd) {
         return (cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT || cmd == CmdType.MARK
                 || cmd ==  CmdType.UNMARK || cmd == CmdType.DELETE);
-    }
-
-    /**
-     * A helper function to check does str only consist of space (" ").
-     *
-     * @param str A String to be checked.
-     * @return A boolean value indicating does str only consist of space (" ").
-     */
-    private static boolean isAllSpaces(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) != SPACE) {
-                return false;
-            }
-        }
-        return true;
     }
 }

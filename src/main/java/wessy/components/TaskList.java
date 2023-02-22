@@ -5,6 +5,11 @@ import java.util.List;
 
 import java.time.format.DateTimeParseException;
 
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import wessy.CmdType;
 import wessy.components.Parser;
 import wessy.task.Task;
@@ -47,6 +52,7 @@ public class TaskList {
      * @throws DateTimeParseException
      */
     public Task add(String[] strings) throws DateTimeParseException {
+        int oldSize = tasks.size();
         int len = strings.length;
         if (len == 1) {
             tasks.add(new ToDo(Parser.removeSpacePadding(strings[0])));
@@ -56,6 +62,7 @@ public class TaskList {
             tasks.add(new Event(Parser.removeSpacePadding(strings[0]), Parser.parseDateTime(strings[1]),
                     Parser.parseDateTime(strings[2])));
         }
+        assert tasks.size() == oldSize + 1;
         return tasks.get(getSize() - 1);
     }
 
@@ -72,7 +79,10 @@ public class TaskList {
     public Task markOrUnmark(int taskNum, boolean isMark) throws EmptyListException, InvalidIntegerException {
         CmdType cmd = isMark ? CmdType.MARK : CmdType.UNMARK;
         checkEmptyList(cmd);
+        assert tasks.size() > 0;
+        assert !tasks.isEmpty();
         checkOutOfUppBound(taskNum, cmd);
+        assert taskNum <= tasks.size();
 
         int idx = taskNum - 1;
         if (isMark) {
@@ -80,6 +90,7 @@ public class TaskList {
         } else {
             tasks.get(idx).unmark();
         }
+        assert tasks.get(idx).checkIsDone() == isMark;
         return tasks.get(idx);
     }
 
@@ -93,7 +104,10 @@ public class TaskList {
      */
     public Task delete(int taskNum) throws EmptyListException, InvalidIntegerException {
         checkEmptyList(CmdType.DELETE);
+        assert tasks.size() > 0;
+        assert !tasks.isEmpty();
         checkOutOfUppBound(taskNum, CmdType.DELETE);
+        assert taskNum <= tasks.size();
         return tasks.remove(taskNum - 1);
     }
 
@@ -102,17 +116,13 @@ public class TaskList {
      */
     public void clear() {
         tasks.clear();
+        assert tasks.size() == 0;
+        assert tasks.isEmpty();
     }
 
     public String[] find(String target) {
-        target = Parser.removeSpacePadding(target);
-        List<Task> foundResults = new ArrayList<Task>();
-        for (Task task : tasks) {
-            if (task.toString().contains(target)) {
-                foundResults.add(task);
-            }
-        }
-        return printAsStr(foundResults).toArray(new String[foundResults.size()]);
+        String finalTarget = Parser.removeSpacePadding(target);
+        return printAsStr(tasks.stream().filter(task -> task.toString().contains(finalTarget)));
     }
 
     /**
@@ -126,6 +136,8 @@ public class TaskList {
         if (tasks.isEmpty()) {
             throw new EmptyListException(cmd.toString());
         }
+        assert tasks.size() > 0;
+        assert !tasks.isEmpty();
     }
 
     /**
@@ -139,9 +151,11 @@ public class TaskList {
      */
     public void checkOutOfUppBound(int taskNum, CmdType cmd) throws InvalidIntegerException {
         int n = getSize();
+        assert n == tasks.size();
         if (taskNum - 1 >= n) {
             throw new InvalidIntegerException(cmd.toString(), taskNum, n);
         }
+        assert taskNum <= tasks.size();
     }
 
     /**
@@ -161,12 +175,9 @@ public class TaskList {
      */
     // For interaction with Storage
     public String saveAsStr() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < getSize(); i++) {
-            sb.append(tasks.get(i).saveAsStr(SEPARATOR));
-
-        }
-        return sb.toString();
+        BiFunction<StringBuilder, Task, StringBuilder> appender = (curr, task) -> curr.append(task.saveAsStr(SEPARATOR));
+        BinaryOperator<StringBuilder> combiner = (sb1, sb2) -> sb1.append(sb2.toString());
+        return tasks.stream().reduce(new StringBuilder(), appender, combiner).toString();
     }
 
     /**
@@ -175,23 +186,22 @@ public class TaskList {
      *
      * @return
      */
-    // For interaction with UI
     public String[] printAsStr() {
-        int n = getSize();
-        String[] arr = new String[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = "" + (i + 1) + "." + tasks.get(i);
-        }
-        return arr;
+        return printAsStr(tasks);
     }
 
     // HELPER FUNCTION
-    private static List<String> printAsStr(List<Task> foundResults) {
-        int n = foundResults.size();
-        List<String> list = new ArrayList<String>();
-        for (int i = 0; i < n; i++) {
-            list.add("" + (i + 1) + "." + foundResults.get(i));
-        }
-        return list;
+    private static String[] printAsStr(List<Task> foundResults) {
+        return printToStream(foundResults).toArray(String[]::new);
+    }
+
+    private static String[] printAsStr(Stream<Task> foundResults) {
+        return printAsStr(foundResults.collect(Collectors.toList()));
+    }
+
+    private static Stream<String> printToStream(List<Task> taskList) {
+        int n = taskList.size();
+        return IntStream.range(0, n)
+                .mapToObj(i -> "" + (i + 1) + "." + taskList.get(i));
     }
 }

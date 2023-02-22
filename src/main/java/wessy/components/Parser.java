@@ -3,6 +3,8 @@ package wessy.components;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import java.util.Arrays;
+
 import wessy.CmdType;
 import wessy.exceptions.integer.NotPositiveIntegerException;
 
@@ -49,6 +51,7 @@ public class Parser {
      * initialise a task.
      */
     public static String[] getTaskComponents(String userInput, CmdType cmd) {
+        assert cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT;
         String byStr = "/by";
         String fromStr = "/from";
         String toStr = "/to";
@@ -128,13 +131,9 @@ public class Parser {
      * @return The number of occurrence "target" appears in str.
      */
     private static int count(String str, char target) {
-        int num = 0;
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == target) {
-                num++;
-            }
-        }
-        return num;
+        int targetAsInt = (int) target;
+        long count = str.chars().filter(c -> c == targetAsInt).count();
+        return (int) count;
     }
 
     /**
@@ -154,11 +153,9 @@ public class Parser {
                 components = str.split(UNDESIRED_DATE_SEPARATOR, 3);
             }
 
-            for (int i = 0; i < components.length; i++) {
-                if (components[i].length() == 1) {
-                    components[i] = "0" + components[i];
-                }
-            }
+            components = Arrays.stream(components)
+                    .map( component -> component.length() == 1 ? "0" + component : component)
+                    .toArray(String[]::new);
 
             if (components[0].length() == 4) {
                 return components[0] + DATE_SEPARATOR + components[1] + DATE_SEPARATOR + components[2];
@@ -182,9 +179,10 @@ public class Parser {
      */
     public static int parseInt(String userInput, CmdType cmd) throws NotPositiveIntegerException {
         int num = Integer.parseInt(removeSpacePadding(userInput.substring(cmd.getStrLength())));
-            if (num <= 0) {
-                throw new NotPositiveIntegerException();
-            }
+        if (num <= 0) {
+            throw new NotPositiveIntegerException();
+        }
+        assert num > 0;
         return num;
     }
 
@@ -199,12 +197,11 @@ public class Parser {
         while (str.charAt(start) == SPACE) {
             start++;
         }
-
         int end = str.length() - 1;
         while (str.charAt(end) == SPACE) {
             end--;
         }
-
+        assert str.charAt(start) != ' ' && str.charAt(end) != ' ';
         return str.substring(start, end + 1);
     }
 }

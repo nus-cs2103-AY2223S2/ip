@@ -92,10 +92,16 @@ public class Wessy {
      */
     public String respond(String userInput) {
         try {
+            int oldSize = tasks.getSize();
             CmdType cmd = Parser.getCmd(userInput);
 
             checkForUnknownCmd(cmd);
             UserInputChecker.checkSpacingAftCmd(userInput, cmd);
+
+            assert cmd != null;
+            assert cmd == CmdType.BYE || cmd == CmdType.LIST || cmd == CmdType.TODO ||
+                    cmd == CmdType.DEADLINE || cmd == CmdType.EVENT || cmd == CmdType.MARK ||
+                    cmd == CmdType.UNMARK || cmd == CmdType.DELETE || cmd == CmdType.CLEAR;
 
             return triage(userInput, cmd);
 
