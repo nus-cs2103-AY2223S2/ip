@@ -34,8 +34,7 @@ public class Event extends Task {
         List<Date> toDates = new PrettyTimeParser().parse(to);
 
         desc = description;
-        
-        if(fromDates.size() == 0 || toDates.size() == 0) {
+        if (fromDates.size() == 0 || toDates.size() == 0) {
             throw new IllegalArgumentException("Unable to parse 'from' or 'to' date.");
         } else {
             this.from = convertDateToLocalDateTime(fromDates.get(0));

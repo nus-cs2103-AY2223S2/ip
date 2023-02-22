@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
-
 /**
  * Represents a deadline task.
  *
@@ -30,8 +29,7 @@ public class Deadline extends Task {
         super(id);
         List<Date> dates = new PrettyTimeParser().parse(dueDate);
         desc = description;
-        
-        if(dates.size() == 0) {
+        if (dates.size() == 0) {
             throw new IllegalArgumentException("Invalid date format");
         } else {
             this.dueDate = convertDateToLocalDateTime(dates.get(0));
