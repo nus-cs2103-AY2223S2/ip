@@ -1,4 +1,5 @@
 # User Guide for Kal, Your Calendar Pal
+<img width="401" alt="Ui" src="https://user-images.githubusercontent.com/88614585/220573644-f70829e5-95ad-4b1e-8aae-bf47d0ccef72.png">
 ## Introduction
 >"Don't forget stuff like I always do" - Jia-Ao Shi, _Kal Developer_
 
