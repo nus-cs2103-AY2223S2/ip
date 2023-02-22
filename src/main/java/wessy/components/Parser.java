@@ -3,6 +3,8 @@ package wessy.components;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import java.util.Arrays;
+
 import wessy.CmdType;
 import wessy.exceptions.integer.NotPositiveIntegerException;
 
@@ -114,13 +116,9 @@ public class Parser {
      * @return The number of occurrence "target" appears in str.
      */
     static int count(String str, char target) {
-        int num = 0;
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == target) {
-                num++;
-            }
-        }
-        return num;
+        int targetAsInt = (int) target;
+        long count = str.chars().filter(c -> c == targetAsInt).count();
+        return (int) count;
     }
 
     /**
@@ -140,11 +138,9 @@ public class Parser {
                 components = str.split("/", 3);
             }
 
-            for (int i = 0; i < components.length; i++) {
-                if (components[i].length() == 1) {
-                    components[i] = "0" + components[i];
-                }
-            }
+            components = Arrays.stream(components)
+                    .map( component -> component.length() == 1 ? "0" + component : component)
+                    .toArray(String[]::new);
 
             if (components[0].length() == 4) {
                 return components[0] + "-" + components[1] + "-" + components[2];
