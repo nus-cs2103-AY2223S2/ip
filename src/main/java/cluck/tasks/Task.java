@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+<<<<<<< HEAD
 
 /**
  * The type Task is an abstract class containing .
  */
+=======
+>>>>>>> branch-A-JUnit
 public abstract class Task {
     /**
      * The Description.
@@ -126,6 +129,14 @@ public abstract class Task {
         String lowerCaseDescription = this.description.toLowerCase();
         String lowerCaseKeyWord = keyWord.toLowerCase();
         return lowerCaseDescription.contains(lowerCaseKeyWord);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return description.equals(task.description) && isMarked.equals(task.isMarked);
     }
 
     @Override
