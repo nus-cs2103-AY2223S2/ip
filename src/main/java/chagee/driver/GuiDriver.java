@@ -1,6 +1,6 @@
 package chagee.driver;
 
-import chagee.command.Chagee;
+import chagee.command.ChageeCommand;
 import chagee.parser.ChageeParser;
 import chagee.storage.Storage;
 import chagee.tasks.Deadline;
@@ -24,7 +24,7 @@ public class GuiDriver {
      */
     public static String getResponse(String inputString) {
         try {
-            Chagee command = ChageeParser.parseCommand(inputString);
+            ChageeCommand command = ChageeParser.parseCommand(inputString);
             String[] commandArgs = ChageeParser.parseCommandArgs(command, inputString);
 
             switch (command) {
@@ -86,7 +86,7 @@ public class GuiDriver {
                 taskList.filterTaskByKeyword(keyword).toString());
     }
 
-    private static String processTaskCreationCommand(Chagee command, String[] commandArgs) {
+    private static String processTaskCreationCommand(ChageeCommand command, String[] commandArgs) {
         switch (command) {
         case DEADLINE: {
             return processDeadlineCommand(commandArgs);
@@ -103,7 +103,7 @@ public class GuiDriver {
         }
     }
 
-    private static String processIndexBasedCommand(Chagee command, String[] commandArgs) {
+    private static String processIndexBasedCommand(ChageeCommand command, String[] commandArgs) {
         switch (command) {
 
         case MARK:

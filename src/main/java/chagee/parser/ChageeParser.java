@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import chagee.command.Chagee;
+import chagee.command.ChageeCommand;
 import chagee.date.ChageeDate;
 import chagee.exception.EmptyDescriptionException;
 import chagee.exception.InvalidArgumentException;
@@ -26,7 +26,7 @@ public class ChageeParser {
      * @param inputString
      * @return
      */
-    public static Chagee parseCommand(String inputString) {
+    public static ChageeCommand parseCommand(String inputString) {
         // First split by space to get each individual word of the inputString
         String[] splittedString = inputString.split(" ");
 
@@ -37,8 +37,8 @@ public class ChageeParser {
         return getCommandOrError(command);
     }
 
-    private static Chagee getCommandOrError(String command) {
-        for (Chagee chageeCmd : Chagee.values()) {
+    private static ChageeCommand getCommandOrError(String command) {
+        for (ChageeCommand chageeCmd : ChageeCommand.values()) {
             if (chageeCmd.text.equals(command)) {
                 return chageeCmd;
             }
@@ -55,7 +55,7 @@ public class ChageeParser {
      * @param inputString
      * @return
      */
-    public static String[] parseCommandArgs(Chagee command, String inputString) {
+    public static String[] parseCommandArgs(ChageeCommand command, String inputString) {
         List<String> commandArgs = new ArrayList<>();
         switch (command) {
         case LIST:
@@ -87,15 +87,15 @@ public class ChageeParser {
         }
 
         case DELETE: {
-            parseIndexCommand(Chagee.DELETE, inputString, commandArgs);
+            parseIndexCommand(ChageeCommand.DELETE, inputString, commandArgs);
             break;
         }
         case MARK: {
-            parseIndexCommand(Chagee.MARK, inputString, commandArgs);
+            parseIndexCommand(ChageeCommand.MARK, inputString, commandArgs);
             break;
         }
         case UNMARK: {
-            parseIndexCommand(Chagee.UNMARK, inputString, commandArgs);
+            parseIndexCommand(ChageeCommand.UNMARK, inputString, commandArgs);
             break;
         }
         }
@@ -103,8 +103,8 @@ public class ChageeParser {
     }
 
     private static void parseListOrBye(String inputString, List<String> commandArgs) {
-        boolean isInputJustList = inputString.strip().length() == Chagee.LIST.text.length();
-        boolean isInputJustBye = inputString.strip().length() == Chagee.BYE.text.length();
+        boolean isInputJustList = inputString.strip().length() == ChageeCommand.LIST.text.length();
+        boolean isInputJustBye = inputString.strip().length() == ChageeCommand.BYE.text.length();
 
         boolean hasUserProvidedArgs = !isInputJustList && !isInputJustBye;
         if (hasUserProvidedArgs) {
@@ -113,14 +113,14 @@ public class ChageeParser {
     }
 
     private static void parseFind(String inputString, List<String> commandArgs) {
-        String keyword = inputString.substring(Chagee.FIND.text.length());
+        String keyword = inputString.substring(ChageeCommand.FIND.text.length());
         String cleanedKeyword = keyword.strip();
         commandArgs.add(cleanedKeyword);
     }
 
     private static void parseViewSchedule(String inputString, List<String> commandArgs)
             throws Error {
-        int offset = Chagee.VIEW_SCHEDULE.text.length();
+        int offset = ChageeCommand.VIEW_SCHEDULE.text.length();
         String dateString = inputString.substring(offset).strip();
         try {
             ChageeDate.parseDateString(dateString);
@@ -133,7 +133,7 @@ public class ChageeParser {
     private static void parseToDo(String inputString, List<String> commandArgs) {
         // Shift the offset as follows to capture the description using substring;
         // {todo}[offset] {description}
-        int offset = getCommandLength(Chagee.TODO);
+        int offset = getCommandLength(ChageeCommand.TODO);
         String description = inputString.substring(offset).strip();
         checkHasDescription(description);
         commandArgs.add(description);
@@ -147,7 +147,7 @@ public class ChageeParser {
     }
 
     private static void parseEvent(String inputString, List<String> commandArgs) {
-        int offset = getCommandLength(Chagee.EVENT);
+        int offset = getCommandLength(ChageeCommand.EVENT);
         int fromIndex = inputString.indexOf("/from", offset);
         int toIndex = inputString.indexOf("/to", offset);
 
@@ -188,7 +188,7 @@ public class ChageeParser {
     }
 
     private static void parseDeadline(String inputString, List<String> commandArgs) {
-        int offset = getCommandLength(Chagee.DEADLINE);
+        int offset = getCommandLength(ChageeCommand.DEADLINE);
         int byIndex = inputString.indexOf("/by", offset);
         boolean isByKeywordExist = byIndex != -1;
         if (!isByKeywordExist) {
@@ -208,7 +208,7 @@ public class ChageeParser {
         return deadline;
     }
 
-    private static void parseIndexCommand(Chagee command, String inputString,
+    private static void parseIndexCommand(ChageeCommand command, String inputString,
             List<String> commandArgs) {
         int offset = getCommandLength(command);
         String taskIndex = inputString.substring(offset);
@@ -221,7 +221,7 @@ public class ChageeParser {
         }
     }
 
-    private static int getCommandLength(Chagee command) {
+    private static int getCommandLength(ChageeCommand command) {
         return command.text.length();
     }
 
