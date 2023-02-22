@@ -74,16 +74,20 @@ public class Storage {
 
             while (sc.hasNextLine()) {
                 String[] taskComponents = sc.nextLine().split("~%~");
+                int numOfComponents = taskComponents.length;
                 boolean isDone = taskComponents[1].charAt(0) == '1';
 
                 switch (taskComponents[0].charAt(0)) {
                 case 'T':
+                    assert numOfComponents == 3;
                     tasks.add(new ToDo(taskComponents[2], isDone));
                     break;
                 case 'D':
+                    assert numOfComponents == 4;
                     tasks.add(new Deadline(taskComponents[2], Parser.parseDateTime(taskComponents[3]), isDone));
                     break;
                 case 'E':
+                    assert numOfComponents == 5;
                     tasks.add(new Event(taskComponents[2], Parser.parseDateTime(taskComponents[3]),
                             Parser.parseDateTime(taskComponents[4]), isDone));
                     break;

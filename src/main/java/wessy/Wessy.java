@@ -83,14 +83,19 @@ public class Wessy {
      */
     public String respond(String userInput) {
         try {
+            int oldSize = tasks.getSize();
+
             CmdType cmd = Parser.getCmd(userInput);
             if (cmd == null) {
                 throw new CommandNotFoundException();
             }
+            assert cmd != null;
+            assert cmd == CmdType.BYE || cmd == CmdType.LIST || cmd == CmdType.TODO ||
+                    cmd == CmdType.DEADLINE || cmd == CmdType.EVENT || cmd == CmdType.MARK ||
+                    cmd == CmdType.UNMARK || cmd == CmdType.DELETE || cmd == CmdType.CLEAR;
             UserInputChecker.checkSpacingAftCmd(userInput, cmd);
 
             switch (cmd) {
-
                 case BYE:
                     return ui.getByeMessage();
                 case LIST:
@@ -111,6 +116,7 @@ public class Wessy {
 
                     String[] taskComponents = Parser.getTaskComponents(userInput, cmd);
                     Task newTask = tasks.add(taskComponents);
+                    assert tasks.getSize() == oldSize + 1;
                     saveToStorage();
                     return ui.getAddedMessage(newTask, tasks.getSize());
 
@@ -125,8 +131,8 @@ public class Wessy {
 
                 case DELETE:
                     checkBeforeParse(userInput, cmd);
-
                     Task deletedTask = tasks.delete(Parser.parseInt(userInput, cmd));
+                    assert tasks.getSize() == oldSize - 1;
                     saveToStorage();
                     return ui.getDeleteMessage(deletedTask, tasks.getSize());
 
@@ -136,9 +142,11 @@ public class Wessy {
 
                 case CLEAR:
                     tasks.clear();
+                    assert tasks.getSize() == 0;
                     saveToStorage();
                     return ui.getClearMessage();
                     // Fallthrough
+
             }
 
         } catch (DateTimeParseException dtpe) {

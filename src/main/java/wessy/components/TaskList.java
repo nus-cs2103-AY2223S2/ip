@@ -52,6 +52,7 @@ public class TaskList {
      * @throws DateTimeParseException
      */
     public Task add(String[] strings) throws DateTimeParseException {
+        int oldSize = tasks.size();
         int len = strings.length;
         if (len == 1) {
             tasks.add(new ToDo(Parser.removeSpacePadding(strings[0])));
@@ -61,6 +62,7 @@ public class TaskList {
             tasks.add(new Event(Parser.removeSpacePadding(strings[0]), Parser.parseDateTime(strings[1]),
                     Parser.parseDateTime(strings[2])));
         }
+        assert tasks.size() == oldSize + 1;
         return tasks.get(getSize() - 1);
     }
 
@@ -77,7 +79,10 @@ public class TaskList {
     public Task markOrUnmark(int taskNum, boolean isMark) throws EmptyListException, InvalidIntegerException {
         CmdType cmd = isMark ? CmdType.MARK : CmdType.UNMARK;
         checkEmptyList(cmd);
+        assert tasks.size() > 0;
+        assert !tasks.isEmpty();
         checkOutOfUppBound(taskNum, cmd);
+        assert taskNum <= tasks.size();
 
         int idx = taskNum - 1;
         if (isMark) {
@@ -85,6 +90,7 @@ public class TaskList {
         } else {
             tasks.get(idx).unmark();
         }
+        assert tasks.get(idx).checkIsDone() == isMark;
         return tasks.get(idx);
     }
 
@@ -98,7 +104,10 @@ public class TaskList {
      */
     public Task delete(int taskNum) throws EmptyListException, InvalidIntegerException {
         checkEmptyList(CmdType.DELETE);
+        assert tasks.size() > 0;
+        assert !tasks.isEmpty();
         checkOutOfUppBound(taskNum, CmdType.DELETE);
+        assert taskNum <= tasks.size();
         return tasks.remove(taskNum - 1);
     }
 
@@ -107,6 +116,8 @@ public class TaskList {
      */
     public void clear() {
         tasks.clear();
+        assert tasks.size() == 0;
+        assert tasks.isEmpty();
     }
 
     public String[] find(String target) {
@@ -125,6 +136,8 @@ public class TaskList {
         if (tasks.isEmpty()) {
             throw new EmptyListException(cmd.toString());
         }
+        assert tasks.size() > 0;
+        assert !tasks.isEmpty();
     }
 
     /**
@@ -138,9 +151,11 @@ public class TaskList {
      */
     public void checkOutOfUppBound(int taskNum, CmdType cmd) throws InvalidIntegerException {
         int n = getSize();
+        assert n == tasks.size();
         if (taskNum - 1 >= n) {
             throw new InvalidIntegerException(cmd.toString(), taskNum, n);
         }
+        assert taskNum <= tasks.size();
     }
 
     /**
