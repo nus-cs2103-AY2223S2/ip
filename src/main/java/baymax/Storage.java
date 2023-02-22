@@ -14,12 +14,18 @@ import java.util.Scanner;
 
 public class Storage {
 
-    protected String filepath = "./data/Baymax.txt";
+    protected String filepath = "Baymax.txt";
     private final File file;
     private final Scanner fileReader;
     private final ArrayList<Task> myList;
 
     public Storage() throws FileNotFoundException {
+        try {
+            File file = new File(filepath);
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         file = new File(filepath);
         fileReader = new Scanner(file);
         myList = new ArrayList<>();
