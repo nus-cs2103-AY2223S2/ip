@@ -1,9 +1,12 @@
 package duke.task;
 
+/**
+ * Creates the Todo class.
+ */
 public class Todo extends Task {
 
     /**
-     * Constructs Todo class.
+     * Constructs a Todo.
      *
      * @param description Description of todo.
      */

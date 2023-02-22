@@ -3,14 +3,21 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Creates the Event class.
+ */
 public class Event extends Task {
+    /**
+     * Consistent serialVersionUID value
+     */
+    private static final long serialVersionUID = -4219171854668205715L;
     /** Start date and time of event */
-    private LocalDateTime startDateTime;
+    private final LocalDateTime startDateTime;
     /** End date and time of event */
-    private LocalDateTime endDateTime;
+    private final LocalDateTime endDateTime;
 
     /**
-     * Constructs Event class.
+     * Constructs an Event.
      *
      * @param description Description of task.
      * @param startDateTime Start date and time of task.
@@ -38,33 +45,6 @@ public class Event extends Task {
      */
     public LocalDateTime getEndDateTime() {
         return endDateTime;
-    }
-
-    /**
-     * Checks if event is upcoming.
-     *
-     * @return Status of event whether it is upcoming.
-     */
-    public boolean isUpcoming() {
-        return LocalDateTime.now().isBefore(startDateTime);
-    }
-
-    /**
-     * Checks if event is ongoing.
-     *
-     * @return Status of event whether it is ongoing.
-     */
-    public boolean isOngoing() {
-        return LocalDateTime.now().isAfter(startDateTime) && LocalDateTime.now().isBefore(endDateTime);
-    }
-
-    /**
-     * Checks if event has passed.
-     *
-     * @return Status of event whether it has passed.
-     */
-    public boolean isPassed() {
-        return LocalDateTime.now().isAfter(endDateTime);
     }
 
     /**

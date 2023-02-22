@@ -1,26 +1,31 @@
 package duke.ui;
 
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.task.Task;
+import duke.task.TaskList;
+
+/**
+ * Creates the Ui class.
+ */
 public class Ui {
-    /** Output for UI */
+    /**
+     * Output for UI
+     */
     private String output;
 
     /**
-     * Constructs Ui class.
+     * Constructs a Ui.
      */
     public Ui() {
         this.output = "";
     }
 
     /**
-     * Store output.
+     * Stores output.
      */
-    public void storeOutput(String output){
+    public void storeOutput(String output) {
         if (this.output.isEmpty()) {
             this.output += output;
         } else {
@@ -32,7 +37,7 @@ public class Ui {
     /**
      * Displays output.
      */
-    public String displayOutput(){
+    public String displayOutput() {
         String temp = output;
         output = "";
         return temp;
@@ -43,13 +48,6 @@ public class Ui {
      */
     public void showLoadingError() {
         storeOutput("Error: Unable to load tasks from file.");
-    }
-
-    /**
-     * Displays Ui line.
-     */
-    public void showLine() {
-        storeOutput("__________________________________________________________");
     }
 
     /**
@@ -143,9 +141,11 @@ public class Ui {
      * Displays help guide.
      */
     public void showHelp() {
-        String helpGuide = "Here's what I can do for you...\n\ntodo <description>\ndeadline <description> /by <date/time>\nevent " +
-                "<description> /from <date/time> /to <date/time>\nlist\nmark <number>\nunmark <number>\ndelete <number>\n" +
-                "filter <keywords...>\nfilterdate <dates...>\nsort\nsortdate\nsorttask\nsortdone";
+        String helpGuide = "Here's what I can do for you...\n\ntodo <description>\ndeadline <description> /by "
+                + "<date/time>\nevent "
+                + "<description> /from <date/time> /to <date/time>\nlist\nmark <number>\nunmark <number>\ndelete "
+                + "<number>\n"
+                + "filter <keywords...>\nfilterdate <dates...>\nsort\nsortdate\nsorttask\nsortdone";
         storeOutput(helpGuide);
     }
 

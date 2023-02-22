@@ -33,7 +33,6 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new Ui();
-//        ui.showStartUp();
         storage = new Storage(filePath);
         try {
             tasks = storage.load();

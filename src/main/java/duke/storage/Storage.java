@@ -1,8 +1,5 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.TaskList;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,12 +9,18 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import duke.exception.DukeException;
+import duke.task.TaskList;
+
+/**
+ * Creates the Storage class.
+ */
 public class Storage {
     /** Filepath of TaskList */
     private final Path filename;
 
     /**
-     * Constructs Storage class.
+     * Constructs a Storage.
      *
      * @param filename Filename of TaskList.
      */

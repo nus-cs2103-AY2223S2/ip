@@ -1,15 +1,18 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
+/**
+ * Creates the Parser class.
+ */
 public class Parser {
 
     /**
@@ -99,6 +102,182 @@ public class Parser {
     }
 
     /**
+     * @param parts User input.
+     * @return An AddCommand.
+     * @throws DukeException If user input is not valid.
+     */
+    public static Command parseTodoCommand(String[] parts) throws DukeException {
+        if (parts.length != 2 || parts[1].trim().isEmpty()) {
+            throw new DukeException("Command todo has to be followed by a description.");
+        }
+        Todo todo = new Todo(parts[1].trim());
+        return new Command.AddCommand(todo);
+    }
+
+    /**
+     * @param parts User input.
+     * @return An AddCommand.
+     * @throws DukeException If user input is not valid.
+     */
+    public static Command parseDeadlineCommand(String[] parts) throws DukeException {
+        String deadlineError = "Command deadline has to have a string and date separated with a /by keyword.";
+        if (parts.length != 2 || parts[1].trim().isEmpty()) {
+            throw new DukeException(deadlineError);
+        }
+        String[] subparts = parts[1].split(" /by ", 2);
+        if (subparts.length < 2 || subparts[0].trim().isEmpty() || subparts[1].trim().isEmpty()) {
+            throw new DukeException(deadlineError);
+        }
+        LocalDateTime deadlineDateTime = stringToDateTime(subparts[1].trim(), false);
+        Deadline deadline = new Deadline(subparts[0].trim(), deadlineDateTime);
+        return new Command.AddCommand(deadline);
+    }
+
+    /**
+     * @param parts User input.
+     * @return An AddCommand.
+     * @throws DukeException If user input is not valid.
+     */
+    public static Command parseEventCommand(String[] parts) throws DukeException {
+        String eventError = "Command event has to have a string and 2 dates separated with /from and /to keywords.";
+        if (parts.length != 2 || parts[1].trim().isEmpty()) {
+            throw new DukeException(eventError);
+        }
+        String[] subparts = parts[1].split(" /from | /to ", 3);
+        if (subparts.length < 3 || subparts[0].trim().isEmpty()
+                || subparts[1].trim().isEmpty() || subparts[2].trim().isEmpty()) {
+            throw new DukeException(eventError);
+        }
+        LocalDateTime startDateTime = stringToDateTime(subparts[1].trim(), true);
+        LocalDateTime endDateTime = stringToDateTime(subparts[2].trim(), false);
+        // Checks if start date is before end date
+        if (endDateTime.isBefore(startDateTime)) {
+            throw new DukeException("End date cannot be before start date.");
+        }
+        Event event = new Event(subparts[0].trim(), startDateTime, endDateTime);
+        return new Command.AddCommand(event);
+    }
+
+    public static Command parseListCommand() {
+        return new Command.ListCommand();
+    }
+
+    /**
+     * @param parts User input.
+     * @return A MarkCommand.
+     * @throws DukeException If user input is not valid.
+     */
+    public static Command parseMarkCommand(String[] parts) throws DukeException {
+        int indexInput;
+        String markError = "Command mark has to be followed by an integer.";
+        if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
+            throw new DukeException(markError);
+        }
+        try {
+            indexInput = Integer.parseInt(parts[1].trim());
+        } catch (NumberFormatException e) {
+            throw new DukeException(markError);
+        }
+        return new Command.MarkCommand(indexInput - 1);
+    }
+
+    /**
+     * @param parts User input.
+     * @return An UnmarkCommand.
+     * @throws DukeException If user input is not valid.
+     */
+    public static Command parseUnmarkCommand(String[] parts) throws DukeException {
+        int indexInput;
+        String unmarkError = "Command unmark has to be followed by an integer.";
+        if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
+            throw new DukeException(unmarkError);
+        }
+        try {
+            indexInput = Integer.parseInt(parts[1].trim());
+        } catch (NumberFormatException e) {
+            throw new DukeException(unmarkError);
+        }
+        return new Command.UnmarkCommand(indexInput - 1);
+    }
+
+    /**
+     * @param parts User input.
+     * @return A DeleteCommand.
+     * @throws DukeException If user input is not valid.
+     */
+    public static Command parseDeleteCommand(String[] parts) throws DukeException {
+        int indexInput;
+        String deleteError = "Command delete has to be followed by an integer.";
+        if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
+            throw new DukeException(deleteError);
+        }
+        try {
+            indexInput = Integer.parseInt(parts[1].trim());
+        } catch (NumberFormatException e) {
+            throw new DukeException(deleteError);
+        }
+        return new Command.DeleteCommand(indexInput - 1);
+    }
+
+    /**
+     * @param parts User input.
+     * @return A FilterCommand.
+     * @throws DukeException If user input is not valid.
+     */
+    public static Command parseFilterCommand(String[] parts) throws DukeException {
+        if (parts.length != 2 || parts[1].trim().isEmpty()) {
+            throw new DukeException("Command filter has to be followed by a keyword(s) separated with commas.");
+        }
+        String[] stringKeywords = parts[1].trim().split(",");
+        String[] validKeywords = new String[stringKeywords.length];
+        for (int i = 0; i < stringKeywords.length; i++) {
+            validKeywords[i] = stringKeywords[i].trim();
+        }
+        return new Command.FilterCommand(validKeywords);
+    }
+
+    /**
+     * @param parts User input.
+     * @return A FilterDateCommand.
+     * @throws DukeException If user input is not valid.
+     */
+    public static Command parseFilterDateCommand(String[] parts) throws DukeException {
+        if (parts.length != 2 || parts[1].trim().isEmpty()) {
+            throw new DukeException("Command filterdate has to be followed by date(s) separated with commas.");
+        }
+        String[] stringDates = parts[1].trim().split(",");
+        LocalDate[] validDates = new LocalDate[stringDates.length];
+        for (int i = 0; i < stringDates.length; i++) {
+            validDates[i] = stringToDate(stringDates[i].trim());
+        }
+        return new Command.FilterDateCommand(validDates);
+    }
+
+    public static Command parseSortCommand() {
+        return new Command.SortCommand();
+    }
+
+    public static Command parseSortDateCommand() {
+        return new Command.SortDateCommand();
+    }
+
+    public static Command parseSortTaskCommand() {
+        return new Command.SortTaskCommand();
+    }
+
+    public static Command parseSortDoneCommand() {
+        return new Command.SortDoneCommand();
+    }
+
+    public static Command parseExitCommand() {
+        return new Command.ExitCommand();
+    }
+
+    public static Command parseHelpCommand() {
+        return new Command.HelpCommand();
+    }
+
+    /**
      * Parses the user input to match commands.
      *
      * @param fullCommand User input.
@@ -107,112 +286,39 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] parts = fullCommand.split(" ", 2);
-        int indexInput;
-        switch(parts[0].trim().toLowerCase()) {
-            case "todo":
-                if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                    throw new DukeException("Command todo has to be followed by a description.");
-                }
-                Todo todo = new Todo(parts[1].trim());
-                return new Command.AddCommand(todo);
-            case "deadline":
-                String deadlineError = "Command deadline has to have a string and date separated with a /by keyword.";
-                if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                    throw new DukeException(deadlineError);
-                }
-                String[] d_parts = parts[1].split(" /by ", 2);
-                if (d_parts.length < 2 || d_parts[0].trim().isEmpty() || d_parts[1].trim().isEmpty()) {
-                    throw new DukeException(deadlineError);
-                }
-                LocalDateTime deadlineDateTime = stringToDateTime(d_parts[1].trim(),false);
-                Deadline deadline = new Deadline(d_parts[0].trim(), deadlineDateTime);
-                return new Command.AddCommand(deadline);
-            case "event":
-                String eventError = "Command event has to have a string and 2 dates separated with /from and /to keywords.";
-                if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                    throw new DukeException(eventError);
-                }
-                String[] e_parts = parts[1].split(" /from | /to ", 3);
-                if (e_parts.length < 3 || e_parts[0].trim().isEmpty() || e_parts[1].trim().isEmpty() || e_parts[2].trim().isEmpty()) {
-                    throw new DukeException(eventError);
-                }
-                LocalDateTime startDateTime = stringToDateTime(e_parts[1].trim(),true);
-                LocalDateTime endDateTime = stringToDateTime(e_parts[2].trim(),false);
-                // Checks if start date is before end date
-                if (endDateTime.isBefore(startDateTime)) {
-                    throw new DukeException("End date cannot be before start date.");
-                }
-                Event event = new Event(e_parts[0].trim(), startDateTime, endDateTime);
-                return new Command.AddCommand(event);
-            case "list":
-                return new Command.ListCommand();
-            case "mark":
-                String markError = "Command mark has to be followed by an integer.";
-                if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                    throw new DukeException(markError);
-                }
-                try {
-                    indexInput = Integer.parseInt(parts[1].trim());
-                } catch (NumberFormatException e) {
-                    throw new DukeException(markError);
-                }
-                return new Command.MarkCommand(indexInput - 1);
-            case "unmark":
-                String unmarkError = "Command unmark has to be followed by an integer.";
-                if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                    throw new DukeException(unmarkError);
-                }
-                try {
-                    indexInput = Integer.parseInt(parts[1].trim());
-                } catch (NumberFormatException e) {
-                    throw new DukeException(unmarkError);
-                }
-                return new Command.UnmarkCommand(indexInput - 1);
-            case "delete":
-                String deleteError = "Command delete has to be followed by an integer.";
-                if (parts.length != 2 || parts[1].trim().isEmpty()) { // 2nd arg not entered
-                    throw new DukeException(deleteError);
-                }
-                try {
-                    indexInput = Integer.parseInt(parts[1].trim());
-                } catch (NumberFormatException e) {
-                    throw new DukeException(deleteError);
-                }
-                return new Command.DeleteCommand(indexInput - 1);
-            case "filter":
-                if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                    throw new DukeException("Command filter has to be followed by a keyword(s) separated with commas.");
-                }
-                String[] stringKeywords = parts[1].trim().split(",");
-                String[] validKeywords = new String[stringKeywords.length];
-                for (int i = 0; i < stringKeywords.length; i++) {
-                    validKeywords[i] = stringKeywords[i].trim();
-                }
-                return new Command.FilterCommand(validKeywords);
-            case "filterdate":
-                if (parts.length != 2 || parts[1].trim().isEmpty()) {
-                    throw new DukeException("Command filterdate has to be followed by date(s) separated with commas.");
-                }
-                String[] stringDates = parts[1].trim().split(",");
-                LocalDate[] validDates = new LocalDate[stringDates.length];
-                for (int i = 0; i < stringDates.length; i++) {
-                    validDates[i] = stringToDate(stringDates[i].trim());
-                }
-                return new Command.FilterDateCommand(validDates);
-            case "sort":
-                return new Command.SortCommand();
-            case "sortdate":
-                return new Command.SortDateCommand();
-            case "sorttask":
-                return new Command.SortTaskCommand();
-            case "sortdone":
-                return new Command.SortDoneCommand();
-            case "bye":
-                return new Command.ExitCommand();
-            case "help":
-                return new Command.HelpCommand();
-            default:
-                throw new DukeException("I can't do that for you...\n(Enter 'help' to show guide.)");
+        switch (parts[0].trim().toLowerCase()) {
+        case "todo":
+            return parseTodoCommand(parts);
+        case "deadline":
+            return parseDeadlineCommand(parts);
+        case "event":
+            return parseEventCommand(parts);
+        case "list":
+            return parseListCommand();
+        case "mark":
+            return parseMarkCommand(parts);
+        case "unmark":
+            return parseUnmarkCommand(parts);
+        case "delete":
+            return parseDeleteCommand(parts);
+        case "filter":
+            return parseFilterCommand(parts);
+        case "filterdate":
+            return parseFilterDateCommand(parts);
+        case "sort":
+            return parseSortCommand();
+        case "sortdate":
+            return parseSortDateCommand();
+        case "sorttask":
+            return parseSortTaskCommand();
+        case "sortdone":
+            return parseSortDoneCommand();
+        case "bye":
+            return parseExitCommand();
+        case "help":
+            return parseHelpCommand();
+        default:
+            throw new DukeException("I can't do that for you...\n(Enter 'help' to show guide.)");
         }
     }
 }

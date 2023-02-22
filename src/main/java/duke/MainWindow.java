@@ -30,6 +30,9 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Catto.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Borzoi.png"));
 
+    /**
+     * Initialises the MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

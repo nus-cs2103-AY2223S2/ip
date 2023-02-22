@@ -2,14 +2,21 @@ package duke.task;
 
 import java.io.Serializable;
 
+/**
+ * Creates the Task class.
+ */
 public abstract class Task implements Serializable, Comparable<Task> {
+    /**
+     * Consistent serialVersionUID value
+     */
+    private static final long serialVersionUID = -8933814718819670784L;
     /** Description of task */
-    private String description;
+    private final String description;
     /** Status of task */
     private boolean isDone;
 
     /**
-     * Constructs Task class.
+     * Constructs a Task.
      *
      * @param description Description of task.
      */
@@ -25,15 +32,6 @@ public abstract class Task implements Serializable, Comparable<Task> {
      */
     public String getDescription() {
         return description;
-    }
-
-    /**
-     * Sets description of task.
-     *
-     * @param description Description of task to be set to.
-     */
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     /**

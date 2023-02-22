@@ -1,30 +1,36 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDate;
-
+/**
+ * Creates the Command class
+ */
 public abstract class Command {
-    /** Checks if command exits Duke */
-    private static boolean isExit;
 
     /**
      * Executes command.
      *
-     * @param tasks TaskList to be executed on.
-     * @param ui Ui to display the execution of command.
+     * @param tasks   TaskList to be executed on.
+     * @param ui      Ui to display the execution of command.
      * @param storage Storage to save TaskList.
      * @throws DukeException If TaskList cannot be saved or invalid index parsed.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
+    /**
+     * Creates the AddCommand class.
+     */
     public static class AddCommand extends Command {
-        /** Task to be added */
-        private Task task;
+        /**
+         * Task to be added
+         */
+        private final Task task;
 
         /**
          * Constructs AddCommand class.
@@ -33,7 +39,6 @@ public abstract class Command {
          */
         public AddCommand(Task task) {
             this.task = task;
-            Command.isExit =false;
         }
 
         /**
@@ -58,13 +63,15 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the ListCommand class.
+     */
     public static class ListCommand extends Command {
 
         /**
          * Constructs ListCommand class.
          */
         public ListCommand() {
-            Command.isExit =false;
         }
 
         /**
@@ -76,9 +83,14 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the MarkCommand class.
+     */
     public static class MarkCommand extends Command {
-        /** Index of task to be marked */
-        private int index;
+        /**
+         * Index of task to be marked
+         */
+        private final int index;
 
         /**
          * Constructs MarkCommand class.
@@ -87,7 +99,6 @@ public abstract class Command {
          */
         public MarkCommand(int index) {
             this.index = index;
-            Command.isExit =false;
         }
 
         /**
@@ -106,7 +117,7 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
             try {
-                assert index >= 0: "Index must be non-negative.";
+                assert index >= 0 : "Index must be non-negative.";
                 task = tasks.get(index);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Invalid index entered!");
@@ -117,9 +128,14 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the UnmarkCommand class.
+     */
     public static class UnmarkCommand extends Command {
-        /** Index of task to be unmarked */
-        private int index;
+        /**
+         * Index of task to be unmarked
+         */
+        private final int index;
 
         /**
          * Constructs UnmarkCommand class.
@@ -128,7 +144,6 @@ public abstract class Command {
          */
         public UnmarkCommand(int index) {
             this.index = index;
-            Command.isExit =false;
         }
 
         /**
@@ -147,7 +162,7 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
             try {
-                assert index >= 0: "Index must be non-negative.";
+                assert index >= 0 : "Index must be non-negative.";
                 task = tasks.get(index);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Invalid index entered!");
@@ -158,9 +173,14 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the DeleteCommand class.
+     */
     public static class DeleteCommand extends Command {
-        /** Index of task to be deleted */
-        private int index;
+        /**
+         * Index of task to be deleted
+         */
+        private final int index;
 
         /**
          * Constructs DeleteCommand class.
@@ -169,7 +189,6 @@ public abstract class Command {
          */
         public DeleteCommand(int index) {
             this.index = index;
-            Command.isExit =false;
         }
 
         /**
@@ -188,7 +207,7 @@ public abstract class Command {
         public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
             Task task;
             try {
-                assert index >= 0: "Index must be non-negative.";
+                assert index >= 0 : "Index must be non-negative.";
                 task = tasks.get(index);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Invalid index entered!");
@@ -200,9 +219,14 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the FilterCommand class.
+     */
     public static class FilterCommand extends Command {
-        /** Keywords for TaskList to be filtered by */
-        private String[] keywords;
+        /**
+         * Keywords for TaskList to be filtered by
+         */
+        private final String[] keywords;
 
         /**
          * Constructs FilterCommand class.
@@ -211,7 +235,6 @@ public abstract class Command {
          */
         public FilterCommand(String... keywords) {
             this.keywords = keywords;
-            Command.isExit =false;
         }
 
         /**
@@ -233,9 +256,14 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the FilterDateCommand class.
+     */
     public static class FilterDateCommand extends Command {
-        /** Dates for TaskList to be filtered by */
-        private LocalDate[] dates;
+        /**
+         * Dates for TaskList to be filtered by
+         */
+        private final LocalDate[] dates;
 
         /**
          * Constructs FilterDateCommand class.
@@ -244,7 +272,6 @@ public abstract class Command {
          */
         public FilterDateCommand(LocalDate... dates) {
             this.dates = dates;
-            Command.isExit =false;
         }
 
         /**
@@ -266,13 +293,15 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the SortCommand class.
+     */
     public static class SortCommand extends Command {
 
         /**
          * Constructs SortCommand class.
          */
         public SortCommand() {
-            Command.isExit =false;
         }
 
         /**
@@ -285,13 +314,15 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the SortDateCommand class.
+     */
     public static class SortDateCommand extends Command {
 
         /**
          * Constructs SortDateCommand class.
          */
         public SortDateCommand() {
-            Command.isExit =false;
         }
 
         /**
@@ -304,13 +335,15 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the SortTaskCommand class.
+     */
     public static class SortTaskCommand extends Command {
 
         /**
          * Constructs SortTaskCommand class.
          */
         public SortTaskCommand() {
-            Command.isExit =false;
         }
 
         /**
@@ -323,13 +356,15 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the SortDoneCommand class.
+     */
     public static class SortDoneCommand extends Command {
 
         /**
          * Constructs SortDoneCommand class.
          */
         public SortDoneCommand() {
-            Command.isExit =false;
         }
 
         /**
@@ -342,13 +377,15 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the HelpCommand class.
+     */
     public static class HelpCommand extends Command {
 
         /**
          * Constructs SortDoneCommand class.
          */
         public HelpCommand() {
-            Command.isExit =false;
         }
 
         /**
@@ -360,13 +397,15 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Creates the ExitCommand class.
+     */
     public static class ExitCommand extends Command {
 
         /**
          * Constructs ExitCommand class.
          */
         public ExitCommand() {
-            Command.isExit = true;
         }
 
         /**

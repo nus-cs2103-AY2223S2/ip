@@ -1,17 +1,20 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 public class ParserTest {
 
@@ -48,8 +51,8 @@ public class ParserTest {
         assertTrue(command instanceof Command.AddCommand);
         Event task = (Event) ((Command.AddCommand) command).getTask();
         assertEquals("go to party", task.getDescription());
-        assertEquals(LocalDateTime.of(2023, 1, 1,0,0), task.getStartDateTime());
-        assertEquals(LocalDateTime.of(2023, 1, 2,18,0), task.getEndDateTime());
+        assertEquals(LocalDateTime.of(2023, 1, 1, 0, 0), task.getStartDateTime());
+        assertEquals(LocalDateTime.of(2023, 1, 2, 18, 0), task.getEndDateTime());
     }
 
     @Test
@@ -104,7 +107,7 @@ public class ParserTest {
     public void parse_validFilterCommand_returnsFilterCommand() throws DukeException {
         Command command = Parser.parse("filter hi, wow, sup");
         assertTrue(command instanceof Command.FilterCommand);
-        String[] keywords = new String[] {"hi", "wow", "sup"};
+        String[] keywords = new String[]{"hi", "wow", "sup"};
         assertEquals(Arrays.asList(keywords), Arrays.asList(((Command.FilterCommand) command).getKeywords()));
     }
 
@@ -118,7 +121,8 @@ public class ParserTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
         Command command = Parser.parse("filterdate 01022023, 01022024");
         assertTrue(command instanceof Command.FilterDateCommand);
-        LocalDate[] keywords = new LocalDate[] {LocalDate.parse("01022023", formatter), LocalDate.parse("01022024", formatter)};
+        LocalDate[] keywords = new LocalDate[]{LocalDate.parse("01022023", formatter), LocalDate.parse("01022024",
+                formatter)};
         assertEquals(Arrays.asList(keywords), Arrays.asList(((Command.FilterDateCommand) command).getDates()));
     }
 

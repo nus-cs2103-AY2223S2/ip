@@ -6,12 +6,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-public class TaskList extends ArrayList<Task>{
-    /** Consistent serialVersionUID value */
+/**
+ * Creates the Tasklist class.
+ */
+public class TaskList extends ArrayList<Task> {
+    /**
+     * Consistent serialVersionUID value
+     */
     private static final long serialVersionUID = 6529685098267757690L;
 
     /**
-     * Constructs empty task list.
+     * Constructs an empty TaskList.
      */
     public TaskList() {
         super();
@@ -23,7 +28,7 @@ public class TaskList extends ArrayList<Task>{
      * @param index Index of task to be marked.
      */
     public void markTask(int index) {
-        Task task= this.get(index);
+        Task task = this.get(index);
         task.setDone(true);
     }
 
@@ -33,7 +38,7 @@ public class TaskList extends ArrayList<Task>{
      * @param index Index of task to be unmarked.
      */
     public void unmarkTask(int index) {
-        Task task= this.get(index);
+        Task task = this.get(index);
         task.setDone(false);
     }
 
@@ -63,10 +68,10 @@ public class TaskList extends ArrayList<Task>{
             return ((Deadline) task).getDeadline().toLocalDate().isEqual(date);
         } else if (task instanceof Event) {
             Event event = (Event) task;
-            return event.getStartDateTime().toLocalDate().isEqual(date) ||
-                    event.getEndDateTime().toLocalDate().isEqual(date) ||
-                    (event.getStartDateTime().toLocalDate().isBefore(date) &&
-                            event.getEndDateTime().toLocalDate().isAfter(date));
+            return event.getStartDateTime().toLocalDate().isEqual(date)
+                    || event.getEndDateTime().toLocalDate().isEqual(date)
+                    || (event.getStartDateTime().toLocalDate().isBefore(date)
+                    && event.getEndDateTime().toLocalDate().isAfter(date));
         }
         return false;
     }
@@ -108,6 +113,9 @@ public class TaskList extends ArrayList<Task>{
         Collections.sort(this);
     }
 
+    /**
+     * Sorts the TaskList by date, with Todo at the back.
+     */
     public void sortDate() {
         this.sort((task1, task2) -> {
             int comparison;
@@ -130,6 +138,9 @@ public class TaskList extends ArrayList<Task>{
         });
     }
 
+    /**
+     * Sorts the TaskList by the Task type.
+     */
     public void sortTask() {
         this.sort((task1, task2) -> {
             int comparison;
@@ -148,6 +159,9 @@ public class TaskList extends ArrayList<Task>{
         });
     }
 
+    /**
+     * Sorts the TaskList by the marked status.
+     */
     public void sortDone() {
         this.sort((task1, task2) -> {
             int comparison;

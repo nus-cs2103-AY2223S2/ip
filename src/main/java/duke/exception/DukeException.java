@@ -1,9 +1,12 @@
 package duke.exception;
 
-public class DukeException extends Exception{
+/**
+ * Creates the DukeException class
+ */
+public class DukeException extends Exception {
 
     /**
-     * Constructs DukeException class.
+     * Constructs a DukeException.
      *
      * @param message Duke error message.
      */
