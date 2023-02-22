@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    protected String filepath = "Baymax.txt";
+    protected String filepath = "./data/Baymax.txt";
     private final File file;
     private final Scanner fileReader;
     private final ArrayList<Task> myList;
