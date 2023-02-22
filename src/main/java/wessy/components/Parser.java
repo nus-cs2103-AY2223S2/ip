@@ -12,6 +12,17 @@ import wessy.exceptions.integer.NotPositiveIntegerException;
  * delegates checking of the other formatting issues to UserInputChecker class.
  */
 public class Parser {
+    private static final int START = 0;
+    private static final char SPACE = ' ';
+    private static final String DUMMY_TIME = "T12:34:56";
+    private static final String TIME_ZERO_PADDING = ":00";
+
+    private static final String DATE_SEPARATOR = "-";
+    private static final String UNDESIRED_DATE_SEPARATOR = "/";
+    private static final char TIME_SEPARATOR = ':';
+    private static final char UNDESIRED_TIME_SEPARATOR = '.';
+    private static final String DATETIME_SEPARATOR = "T";
+
     /**
      * Converts the first word in the line of user input, to the corresponding
      * CmdType, if it is a valid command type.
@@ -20,11 +31,9 @@ public class Parser {
      * @return The corresponding CmdType, if the first word is a valid command.
      */
     public static CmdType getCmd(String userInput) {
-        int idx = userInput.indexOf(' ');
-        if (idx == -1) {
-            idx = userInput.length();
-        }
-        return CmdType.getCmdType(userInput.substring(0, idx));
+        String spaceAsStr = Character.toString(SPACE);
+        int idx = userInput.contains(spaceAsStr) ? userInput.indexOf(SPACE) : userInput.length();
+        return CmdType.getCmdType(userInput.substring(START, idx));
     }
 
     /**
@@ -43,21 +52,25 @@ public class Parser {
         String byStr = "/by";
         String fromStr = "/from";
         String toStr = "/to";
+
         int firstIdx;
         int secondIdx;
+
         String description = userInput.substring(cmd.getStrLength() + 1);
 
         switch (cmd) {
         case TODO:
             return new String[]{description};
+
         case DEADLINE:
             firstIdx = description.indexOf(byStr);
-            return new String[]{removeSpacePadding(description.substring(0, firstIdx)),
+            return new String[]{removeSpacePadding(description.substring(START, firstIdx)),
                     removeSpacePadding(description.substring(firstIdx + byStr.length()))};
+
         case EVENT:
             firstIdx = description.indexOf(fromStr);
             secondIdx = description.indexOf(toStr);
-            return new String[]{removeSpacePadding(description.substring(0, firstIdx)),
+            return new String[]{removeSpacePadding(description.substring(START, firstIdx)),
                     removeSpacePadding(description.substring(firstIdx + fromStr.length(), secondIdx)),
                     removeSpacePadding(description.substring(secondIdx + toStr.length()))};
         }
@@ -74,35 +87,36 @@ public class Parser {
      * @throws DateTimeParseException If the format of str is wrong and thus
      * cannot be parsed into a LocalDateTime object.
      */
-    public static LocalDateTime parseDateTime(String str) throws
-            DateTimeParseException {
+    public static LocalDateTime parseDateTime(String str) throws DateTimeParseException {
         str = removeSpacePadding(str);
 
-        if (count(str, ':') == 2) {
+        if (count(str, TIME_SEPARATOR) == 2) {
             return LocalDateTime.parse(str);
         }
-        int n = str.length();
-        if (n <= 10) {
-            return LocalDateTime.parse(standardiseDateFormat(str) + "T12:34:56");
+
+        if (str.length() <= 10) {
+            return LocalDateTime.parse(standardiseDateFormat(str) + DUMMY_TIME);
         }
 
         int idx = 10;
-        if (str.charAt(9) == ' ') {
+        if (str.charAt(9) == SPACE) {
             idx = 9;
-        } else if (str.charAt(8) == ' ') {
+        } else if (str.charAt(8) == SPACE) {
             idx = 8;
         }
-        if (str.charAt(idx + 3) == ':') {
-            return LocalDateTime.parse(standardiseDateFormat(str.substring(0, idx)) + "T"
-                    + str.substring(idx + 1) + ":00");
+        if (str.charAt(idx + 3) == TIME_SEPARATOR) {
+            return LocalDateTime.parse(standardiseDateFormat(str.substring(0, idx)) + DATETIME_SEPARATOR
+                    + str.substring(idx + 1) + TIME_ZERO_PADDING);
         }
-        if (str.charAt(idx + 3) == '.') {
-            return LocalDateTime.parse(standardiseDateFormat(str.substring(0, idx)) + "T"
-                    + str.substring(idx + 1, idx + 3) + ":" + str.substring(idx + 4) + ":00");
+        if (str.charAt(idx + 3) == UNDESIRED_TIME_SEPARATOR) {
+            return LocalDateTime.parse(standardiseDateFormat(str.substring(0, idx)) + DATETIME_SEPARATOR
+                    + str.substring(idx + 1, idx + 3) + TIME_SEPARATOR + str.substring(idx + 4)
+                    + TIME_ZERO_PADDING);
         }
 
-        return LocalDateTime.parse(standardiseDateFormat(str.substring(0, idx)) + "T"
-                + str.substring(idx + 1, idx + 3) + ":" + str.substring(idx + 3) + ":00");
+        return LocalDateTime.parse(standardiseDateFormat(str.substring(0, idx)) + DATETIME_SEPARATOR
+                + str.substring(idx + 1, idx + 3) + TIME_SEPARATOR + str.substring(idx + 3)
+                + TIME_ZERO_PADDING);
     }
 
     /**
@@ -113,7 +127,7 @@ public class Parser {
      * @param target The character we look out for when scanning through str.
      * @return The number of occurrence "target" appears in str.
      */
-    static int count(String str, char target) {
+    private static int count(String str, char target) {
         int num = 0;
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == target) {
@@ -134,10 +148,10 @@ public class Parser {
      */
     private static String standardiseDateFormat(String str) throws DateTimeParseException {
         try {
-            String[] components = str.split("-", 3);
+            String[] components = str.split(DATE_SEPARATOR, 3);
 
-            if (str.contains("/")) {
-                components = str.split("/", 3);
+            if (str.contains(UNDESIRED_DATE_SEPARATOR)) {
+                components = str.split(UNDESIRED_DATE_SEPARATOR, 3);
             }
 
             for (int i = 0; i < components.length; i++) {
@@ -147,9 +161,9 @@ public class Parser {
             }
 
             if (components[0].length() == 4) {
-                return components[0] + "-" + components[1] + "-" + components[2];
+                return components[0] + DATE_SEPARATOR + components[1] + DATE_SEPARATOR + components[2];
             }
-            return components[2] + "-" + components[1] + "-" + components[0];
+            return components[2] + DATE_SEPARATOR + components[1] + DATE_SEPARATOR + components[0];
 
         } catch (ArrayIndexOutOfBoundsException ex) {
             throw new DateTimeParseException("", str, 0);
@@ -182,12 +196,12 @@ public class Parser {
      */
     public static String removeSpacePadding(String str) {
         int start = 0;
-        while (str.charAt(start) == ' ') {
+        while (str.charAt(start) == SPACE) {
             start++;
         }
 
         int end = str.length() - 1;
-        while (str.charAt(end) == ' ') {
+        while (str.charAt(end) == SPACE) {
             end--;
         }
 

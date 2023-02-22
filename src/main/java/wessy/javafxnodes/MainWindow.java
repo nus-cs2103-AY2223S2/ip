@@ -1,18 +1,21 @@
 package wessy.javafxnodes;
 
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 import wessy.Wessy;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -48,10 +51,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = wessy.respond(input);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialogBox(input, userImage),
                 DialogBox.getWessyDialogBox(response, wessyImage)
         );
+
         userInput.clear();
     }
 }

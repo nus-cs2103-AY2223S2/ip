@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import wessy.javafxnodes.DialogBox;
 import wessy.javafxnodes.MainWindow;
 
 /**
@@ -23,9 +22,11 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(wessy.Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setWessy(wessy);
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
