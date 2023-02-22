@@ -20,7 +20,7 @@ public class ParserTest {
     @Test
     public void parse_emptyInput_exceptionThrown() {
         Throwable exception = assertThrows(NemoException.class, () -> parser.parse(""));
-        assertEquals("Invalid command", exception.getMessage());
+        assertEquals("I'm unable to understand your command :(", exception.getMessage());
     }
 
     @Test
