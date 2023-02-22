@@ -50,6 +50,7 @@ public class Duke extends Application {
             Scene scene = new Scene(ap);
             ui = fxmlLoader.getController();
             fxmlLoader.<UserInterface>getController().setDuke(this);
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
 
