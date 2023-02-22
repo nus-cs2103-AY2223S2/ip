@@ -1,21 +1,35 @@
 package cluck.storage;
 
-import cluck.taskList.TaskList;
-import cluck.tasks.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import cluck.tasklist.TaskList;
+import cluck.tasks.Task;
+
+
+/**
+ * Storage class handles the reading and writing of saved tasks in a given .txt file.
+ */
 public class Storage {
     private File saveFile;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param filePath the file path of the saved tasks
+     */
     public Storage(String filePath) {
         saveFile = new File(filePath);
     }
 
+    /**
+     * Reads the saved tasks from the file and returns a task list populated with the saved tasked.
+     *
+     * @return the task list containing instances of Task class
+     */
     public TaskList readSave() {
         if (!saveFile.exists()) {
             return new TaskList();
@@ -46,7 +60,7 @@ public class Storage {
     public void writeSave(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(saveFile);
-            writer.write(taskList.toSave());
+            writer.write(taskList.toSaveFormat());
             writer.close();
         } catch (IOException e) {
             System.out.println("Buh oh! An error occurred!!");
