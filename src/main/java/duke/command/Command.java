@@ -5,7 +5,7 @@ import duke.Ui;
 
 /**
  * Represents a simple command which doesn't change task list.
- * This includes "bye" and "list".
+ * This includes "list" and "help".
  */
 public class Command {
     protected String commandName;
@@ -26,6 +26,10 @@ public class Command {
     public String execute(TaskList tasks, Ui ui) {
         if (this.commandName.equals("list")) {
             return ui.showList(tasks);
+        } else if (this.commandName.equals("help")) {
+            return ui.showHelp();
+        } else if (this.commandName.equals("add")) {
+            return ui.showAddHelp();
         }
         return "";
     }

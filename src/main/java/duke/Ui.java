@@ -34,6 +34,44 @@ public class Ui {
     }
 
     /**
+     * Print greetings
+     * @return greetings
+     */
+    public String showGreeting() {
+        return "Hello from Rhodes Island!\n"
+                + "What would you like to schedule today?";
+    }
+    /**
+     * Prints help information
+     * @return instructions to use the application
+     */
+    public String showHelp() {
+        String out = "Here are the commands that you may use this application:\n"
+                + "1. Check current task list: list\n"
+                + "2. Find a task: find [task_name]\n"
+                + "3. Mark/unmark/delete a task: mark/unmark/delete # (enter a task index)\n"
+                + "4. Save the current task: bye\n"
+                + "Enter [add] to see command to add new tasks";
+
+
+
+        return out;
+    }
+
+    /**
+     * Prints help information for add tasks
+     * @return instructions to use the application
+     */
+    public String showAddHelp() {
+        String out = "Here are the commands to add a task:\n"
+                + "datetime format: ddMMyyyy HHmm\n"
+                + "1. Add a new todo: todo [task_name]\n"
+                + "2. Add a new deadline: deadline [task_name /datetime]\n"
+                + "3. Add an new event: event [task_name /datetime /datetime]\n";
+        return out;
+    }
+
+    /**
      * Prints messages to show a new Todo task is added.
      * @param t New Todo task.
      */

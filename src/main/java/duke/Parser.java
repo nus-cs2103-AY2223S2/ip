@@ -17,7 +17,7 @@ import duke.command.UpdateCommand;
  */
 public class Parser {
 
-    protected static String[] simpleCommands = new String[]{"bye", "list", "find"};
+    protected static String[] simpleCommands = new String[]{"bye", "list", "find", "help", "add"};
     protected static String[] moreCommands = new String[]{"todo", "deadline", "event", "mark", "unmark", "delete"};
 
     /**
@@ -27,7 +27,8 @@ public class Parser {
      * @return ture if input command is valid.
      */
     public static boolean isValidCommand(String commandName) {
-        boolean valid = Arrays.asList(simpleCommands).contains(commandName) | Arrays.asList(moreCommands).contains(commandName);
+        boolean valid = Arrays.asList(simpleCommands).contains(commandName)
+                | Arrays.asList(moreCommands).contains(commandName);
         return valid;
     }
 
@@ -51,12 +52,13 @@ public class Parser {
         }
 
         if (!isValidCommand(commandName)) {
-            throw new DukeException("Please enter a valid command");
+            throw new DukeException("Please enter a valid command\n"
+                    + "You may enter [help] for more information :D");
         }
 
         assert !commandName.equals("");
 
-        String command = fullcommand.substring(firstWord + 1);
+        String command = fullCommand.substring(firstWord + 1);
 
         if (commandName.equals("todo")) {
             command = fullCommand.substring(4).trim();
@@ -64,7 +66,9 @@ public class Parser {
 
         switch (commandName) {
         case "bye":
-        case "list": {
+        case "list":
+        case "help":
+        case "add": {
             return new Command(commandName);
         }
         case "mark":
