@@ -1,6 +1,6 @@
 # User Guide
 
-###Welcome to the 2fort basement! Track all your mercenary tasks with this handy little PDA plug-in.
+#### Welcome to the 2fort basement! Track all your mercenary tasks with this handy little PDA plug-in.
 ![Twofort](https://i.ytimg.com/vi/kAEpdjXAAXM/maxresdefault.jpg)
 
 ## Quick Start
@@ -44,6 +44,6 @@ Twofort remembers your tasks! Your tasks will persists in between sessions.
 
 ## Sample Usage
 
-![sample1]https://raw.githubusercontent.com/junianob/ip/master/src/main/resources/images/sample.png
+![sample1](https://raw.githubusercontent.com/junianob/ip/master/src/main/resources/images/sample.png)
 
-![sample2]https://raw.githubusercontent.com/junianob/ip/master/src/main/resources/images/sample2.png
+![sample2](https://raw.githubusercontent.com/junianob/ip/master/src/main/resources/images/sample2.png)
