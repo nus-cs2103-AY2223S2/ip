@@ -1,69 +1,71 @@
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
-        System.out.println("Duke: Yoooz it's your boy Duke! What's up?");
-        try (Scanner sc = new Scanner(System.in)) {
-            DataSaver dataSaver = new DataSaver();
-            TaskArrayList tasks = new TaskArrayList(dataSaver.load());
-            while (true) {
-                System.out.print("You: ");
-                String str = sc.nextLine();
-                if (str.equals("bye")) {
-                    System.out.println("Duke: Good talk man, catch you again some other time!");
-                    dataSaver.save(tasks);
-                    break;
-                } else if (str.equals("list")) {
-                    System.out.println("Duke: Here you go!");
+    private static TaskArrayList tasks;
+    private static DataSaver dataSaver;
+    private static Ui ui;
+
+    public Duke() {
+        ui = new Ui();
+        try {
+            dataSaver = new DataSaver();
+            tasks = new TaskArrayList(dataSaver.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskArrayList(new ArrayList<>());
+        }
+    }
+
+    public static void run() {
+        try {
+            Ui.greet();
+            Scanner sc = new Scanner(System.in);
+            String input = sc.nextLine();
+            while (!input.equals("bye")) {
+                if (input.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println(i + 1 + ". " + tasks.get(i));
+                        System.out.println(String.valueOf(i + 1) + tasks.get(i).toString());
                     }
-                } else if (str.split(" ")[0].equals("mark")) {
-                    int index = Integer.parseInt(str.split(" ")[1]) - 1;
-                    System.out.println("Duke: Good job man!");
-                    System.out.println(tasks.get(index).mark());
-                } else if (str.split(" ")[0].equals("unmark")) {
-                    int index = Integer.parseInt(str.split(" ")[1]) - 1;
-                    System.out.println("Duke: Did you forget something?");
-                    System.out.println(tasks.get(index).unmark());
-                } else if (str.split(" ")[0].equals("delete")) {
-                    int index = Integer.parseInt(str.split(" ")[1]) - 1;
-                    System.out.println("Duke: Noted. I've removed this task:");
-                    Task toDel = tasks.get(index);
-                    tasks.remove(index);
-                    System.out.println(toDel);
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                } else if (str.split(" ")[0].equals("todo")) {
-                    String[] spaceSplit = str.split(" ", 2);
-                    if (spaceSplit.length < 2) {
-                        throw new DukeException("Duke: The description of a todo cannot be empty.");
-                    }
-                    tasks.add(new ToDo(spaceSplit[1]));
-                    System.out.println("Duke: New to-do added:");
-                    System.out.println(tasks.get(tasks.size() - 1));
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                } else if (str.split(" ")[0].equals("deadline")) {
-                    String[] spaceSplit = str.split(" ", 2);
-                    String[] bySplit = spaceSplit[1].split("/by", 2);
-                    tasks.add(new Deadline(bySplit[0], bySplit[1]));
-                    System.out.println("Duke: New deadline added:");
-                    System.out.println(tasks.get(tasks.size() - 1));
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                } else if (str.split(" ")[0].equals("event")) {
-                    String[] spaceSplit = str.split(" ", 2);
-                    String[] fromSplit = spaceSplit[1].split("/from", 2);
-                    String[] toSplit = fromSplit[1].split("/to", 2);
-                    tasks.add(new Event(fromSplit[0], toSplit[0], toSplit[1]));
-                    System.out.println("Duke: New event added:");
-                    System.out.println(tasks.get(tasks.size() - 1));
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 } else {
-                    throw new DukeException("Duke: That doesn't mean anything.");
+                    try {
+                        String command = (input.split(" ")[0]).toLowerCase();
+                        switch (command) {
+                            case "mark":
+                                Ui.markTask(tasks, input);
+                                break;
+                            case "unmark":
+                                Ui.unmarkTask(tasks, input);
+                                break;
+                            case "todo":
+                                Ui.addToDo(tasks, input);
+                                break;
+                            case "deadline":
+                                Ui.addDeadline(tasks, input);
+                                break;
+                            case "event":
+                                Ui.addEvent(tasks, input);
+                                break;
+                            case "delete":
+                                Ui.deleteTask(tasks, input);
+                                break;
+                            default:
+                                throw new DukeException("Please enter a valid command.");
+                        }
+                    } catch (DukeException e) {
+                        System.out.printf("Error: " + e.getMessage());
+                    }
                 }
+                input = sc.nextLine();
             }
-        } catch (NumberFormatException e) {
-            // Auto-generated catch block
+            Ui.farewell();
+            dataSaver.save(tasks);
+        } catch (DukeException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Duke.run();
     }
 }
