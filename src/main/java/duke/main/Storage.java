@@ -87,6 +87,51 @@ public class Storage {
         return allTasks;
     }
 
+    public String markOrUnmarkStorage(File file, String command, Task task, DateTimeFormatter dateTimeFormatter1,
+                                    TaskList taskList, String markOrUnmark) throws IOException {
+        FileReader file2 = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(file2);
+        String[] str = command.split(" ");
+        int taskIndex = Integer.parseInt(str[1]);
+        String unchangedTasks = "";
+        for (int i = 1; i < taskIndex; i++) {
+            unchangedTasks = unchangedTasks + bufferedReader.readLine() + "\n";
+        }
+        if (task.getTaskType().equals("[T]")) {
+            unchangedTasks = unchangedTasks + "T / " + markOrUnmark + " / " + task.getTask() + "\n";
+        } else if (task.getTaskType().equals("[D]")) {
+            unchangedTasks = unchangedTasks + "D / " + markOrUnmark + " / "
+                    + task.getTask() + " / "
+                    + task.getDeadline().format(dateTimeFormatter1) + "\n";
+        } else if (task.getTaskType().equals("[E]")) {
+            unchangedTasks = unchangedTasks + "E / " + markOrUnmark + " / "
+                    + task.getTask() + " / "
+                    + task.getEventStartTime().format(dateTimeFormatter1) + "-"
+                    + task.getEventEndTime().format(dateTimeFormatter1) + "\n";
+        }
+        bufferedReader.readLine();
+        for (int i = taskIndex + 1; i <= taskList.getNumberOfTask(); i++) {
+            unchangedTasks = unchangedTasks + bufferedReader.readLine() + "\n";
+        }
+        return unchangedTasks;
+    }
+
+    public String deleteStorage(File file, String command, TaskList taskList) throws IOException {
+        FileReader file2 = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(file2);
+        String undeletedTasks = "";
+        String[] str = command.split(" ");
+        int taskIndex = Integer.parseInt(str[1]);
+        for (int i = 1; i < taskIndex; i++) {
+            undeletedTasks = undeletedTasks + bufferedReader.readLine() + "\n";
+        }
+        bufferedReader.readLine();
+        for (int i = taskIndex; i <= taskList.getNumberOfTask(); i++) {
+            undeletedTasks = undeletedTasks + bufferedReader.readLine() + "\n";
+        }
+        return undeletedTasks;
+    }
+
     /**
      * Saves the updated task list to existing file on hard disk.
      * If file does not exist, create a new one.
@@ -123,76 +168,21 @@ public class Storage {
                     + task.getEventEndTime().format(dateTimeFormatter1) + "\n";
             buffer.write(content);
         } else if (command.startsWith("mark")) {
-            FileReader file2 = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(file2);
-            String[] str = command.split(" ");
-            int taskIndex = Integer.parseInt(str[1]);
-            String unchangedTasks = "";
-            for (int i = 1; i < taskIndex; i++) {
-                unchangedTasks = unchangedTasks + bufferedReader.readLine() + "\n";
-            }
-            if (task.getTaskType().equals("[T]")) {
-                unchangedTasks = unchangedTasks + "T / [X] / " + task.getTask() + "\n";
-            } else if (task.getTaskType().equals("[D]")) {
-                unchangedTasks = unchangedTasks + "D / [X] / "
-                        + task.getTask() + " / "
-                        + task.getDeadline().format(dateTimeFormatter1) + "\n";
-            } else if (task.getTaskType().equals("[E]")) {
-                unchangedTasks = unchangedTasks + "E / [X] / "
-                        + task.getTask() + " / "
-                        + task.getEventStartTime().format(dateTimeFormatter1) + "-"
-                        + task.getEventEndTime().format(dateTimeFormatter1) + "\n";
-            }
-            bufferedReader.readLine();
-            for (int i = taskIndex + 1; i <= taskList.getNumberOfTask(); i++) {
-                unchangedTasks = unchangedTasks + bufferedReader.readLine() + "\n";
-            }
+            String unchangedTasks = markOrUnmarkStorage(file, command, task, dateTimeFormatter1,
+                    taskList, "[X]");
             file.createNewFile();
             file1 = new FileWriter(file);
             buffer = new BufferedWriter(file1);
             buffer.write(unchangedTasks);
         } else if (command.startsWith("unmark")) {
-            FileReader file2 = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(file2);
-            String[] str = command.split(" ");
-            int taskIndex = Integer.parseInt(str[1]);
-            String unchangedTasks = "";
-            for (int i = 1; i < taskIndex; i++) {
-                unchangedTasks = unchangedTasks + bufferedReader.readLine() + "\n";
-            }
-            if (task.getTaskType().equals("[T]")) {
-                unchangedTasks = unchangedTasks + "T / [ ] / " + task.getTask() + "\n";
-            } else if (task.getTaskType().equals("[D]")) {
-                unchangedTasks = unchangedTasks + "D / [ ] / "
-                        + task.getTask() + " / "
-                        + task.getDeadline().format(dateTimeFormatter1) + "\n";
-            } else if (task.getTaskType().equals("[E]")) {
-                unchangedTasks = unchangedTasks + "E / [ ] / "
-                        + task.getTask() + " / "
-                        + task.getEventStartTime().format(dateTimeFormatter1) + "-"
-                        + task.getEventEndTime().format(dateTimeFormatter1) + "\n";
-            }
-            bufferedReader.readLine();
-            for (int i = taskIndex + 1; i <= taskList.getNumberOfTask(); i++) {
-                unchangedTasks = unchangedTasks + bufferedReader.readLine() + "\n";
-            }
+            String unchangedTasks = markOrUnmarkStorage(file, command, task, dateTimeFormatter1,
+                    taskList, "[ ]");
             file.createNewFile();
             file1 = new FileWriter(file);
             buffer = new BufferedWriter(file1);
             buffer.write(unchangedTasks);
         } else if (command.startsWith("delete")) {
-            FileReader file2 = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(file2);
-            String undeletedTasks = "";
-            String[] str = command.split(" ");
-            int taskIndex = Integer.parseInt(str[1]);
-            for (int i = 1; i < taskIndex; i++) {
-                undeletedTasks = undeletedTasks + bufferedReader.readLine() + "\n";
-            }
-            bufferedReader.readLine();
-            for (int i = taskIndex; i <= taskList.getNumberOfTask(); i++) {
-                undeletedTasks = undeletedTasks + bufferedReader.readLine() + "\n";
-            }
+            String undeletedTasks = deleteStorage(file, command, taskList);
             file.createNewFile();
             file1 = new FileWriter(file);
             buffer = new BufferedWriter(file1);
