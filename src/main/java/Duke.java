@@ -23,6 +23,12 @@ public class Duke {
         while(true) {
             if (inputScanner.hasNextLine()) {
                 input = inputScanner.nextLine();
+                try {
+                    validateInput(input);
+                } catch(DukeException x) {
+                    System.out.println(x.getMessage());
+                    continue;
+                }
 
                 // level-1 feature: exit when user types "bye"
                 if (input.equalsIgnoreCase("bye")) {
@@ -72,7 +78,31 @@ public class Duke {
 
         }
 
+
+
     }
+
+    public static void validateInput(String input) throws DukeException {
+        if (input.indexOf("todo") < 0 && input.indexOf("event") < 0 && input.indexOf("display") < 0 && input.indexOf("deadline") < 0 && input.indexOf("mark") < 0) {
+            throw new DukeException("OOPS! invalid command la bro");
+        }
+        if (input.substring(0, 4).equalsIgnoreCase("todo") && input.length() <= 5) {
+            throw new DukeException("OOPS wrong format my brother! consider this format: \ntodo xxx");
+        }
+
+        if (input.substring(0, 5).equalsIgnoreCase("event") && (input.indexOf("/from") < 0 || input.indexOf("/to") < 0 || input.indexOf("/from") > input.indexOf("/to"))) {
+            throw new DukeException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
+        }
+
+        if (input.substring(0, 8).equalsIgnoreCase("deadline") && input.indexOf("/by") < 0) {
+            throw new DukeException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
+        }
+
+
+
+    }
+
+
 
 }
 
