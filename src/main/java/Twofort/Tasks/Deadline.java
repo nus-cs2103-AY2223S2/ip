@@ -1,10 +1,9 @@
-package Duke.Tasks;
+package Twofort.Tasks;
 
 /**
  * Class representing a Deadline task with an end time.
  * @author Bryan Juniano
  */
-import Duke.Tasks.Task;
 
 public class Deadline extends Task {
     private String end;

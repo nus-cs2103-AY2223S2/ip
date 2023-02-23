@@ -1,6 +1,4 @@
-package Duke.Tasks;
-
-import Duke.Tasks.Task;
+package Twofort.Tasks;
 
 /**
  * Class representing an Event task with a start and end time.

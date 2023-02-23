@@ -1,6 +1,6 @@
-package Duke.Tasks;
+package Twofort.Tasks;
 
-import Duke.Exception.ProgramException;
+import Twofort.Exception.ProgramException;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package Duke.Exception;
+package Twofort.Exception;
 /**
  * Class to catch exceptions found when using Duke.
  * @author Bryan Juniano

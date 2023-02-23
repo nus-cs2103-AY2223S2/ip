@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -44,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "Duke.Launcher"
+    mainClassName = "Twofort.Launcher"
 }
 
 shadowJar {

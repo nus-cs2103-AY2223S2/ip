@@ -1,6 +1,4 @@
-[T] [ ] defend point
+[T] [X] drink bonk
 tags: 
-[T] [ ] drink bonk
-tags: 
-[T] [ ] call medic
+[D] [ ] defend intel by: today
 tags: 

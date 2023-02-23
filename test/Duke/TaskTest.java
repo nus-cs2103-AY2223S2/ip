@@ -1,6 +1,6 @@
-package Duke;
+package Twofort;
 
-import Duke.Tasks.ToDo;
+import Twofort.Tasks.ToDo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

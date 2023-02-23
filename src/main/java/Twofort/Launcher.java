@@ -1,4 +1,4 @@
-package Duke;
+package Twofort;
 
 import javafx.application.Application;
 

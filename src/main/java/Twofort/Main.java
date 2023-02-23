@@ -1,8 +1,8 @@
-package Duke;
+package Twofort;
 
 import java.io.IOException;
 
-import Duke.graphics.MainWindow;
+import Twofort.graphics.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Twofort twofort = new Twofort();
 
     @Override
     public void start(Stage stage) {
@@ -23,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setTwofort(twofort);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,8 +1,8 @@
-package Duke;
+package Twofort;
 
-import Duke.Commands.*;
-import Duke.Exception.ProgramException;
-import Duke.Tasks.TaskList;
+import Twofort.Commands.*;
+import Twofort.Exception.ProgramException;
+import Twofort.Tasks.TaskList;
 
 import java.util.Collections;
 import java.util.ArrayList;

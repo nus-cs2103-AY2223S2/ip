@@ -1,6 +1,6 @@
-package Duke;
-import Duke.Exception.ProgramException;
-import Duke.Tasks.TaskList;
+package Twofort;
+import Twofort.Exception.ProgramException;
+import Twofort.Tasks.TaskList;
 
 import java.io.IOException;
 import java.io.FileWriter;

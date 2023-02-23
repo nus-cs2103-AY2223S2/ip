@@ -1,8 +1,8 @@
-package Duke;
+package Twofort;
 
-import Duke.Exception.ProgramException;
-import Duke.Tasks.TaskList;
-import Duke.Commands.Command;
+import Twofort.Exception.ProgramException;
+import Twofort.Tasks.TaskList;
+import Twofort.Commands.Command;
 
 
 /**
@@ -10,13 +10,13 @@ import Duke.Commands.Command;
  * @author Bryan Juniano
  */
 
-public class Duke{
+public class Twofort {
 
     private TaskList taskList = new TaskList();
     private Handler handler = new Handler();
     private Saver saver = new Saver();
 
-    public Duke(){
+    public Twofort(){
         try {
             saver.load(taskList);
         } catch (ProgramException e) {

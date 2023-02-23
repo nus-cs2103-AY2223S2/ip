@@ -1,7 +1,7 @@
-package Duke.Commands;
+package Twofort.Commands;
 
-import Duke.Saver;
-import Duke.Tasks.TaskList;
+import Twofort.Saver;
+import Twofort.Tasks.TaskList;
 
 public class FindCommand extends Command{
     private String query;

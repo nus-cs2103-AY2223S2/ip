@@ -1,7 +1,7 @@
-package Duke.Commands;
+package Twofort.Commands;
 
-import Duke.Saver;
-import Duke.Tasks.TaskList;
+import Twofort.Saver;
+import Twofort.Tasks.TaskList;
 
 public class MarkCommand extends Command {
     private int index;

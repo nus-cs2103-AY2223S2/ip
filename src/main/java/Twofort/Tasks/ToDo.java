@@ -1,6 +1,4 @@
-package Duke.Tasks;
-
-import Duke.Tasks.Task;
+package Twofort.Tasks;
 
 /**
  * Class representing a ToDo task.
