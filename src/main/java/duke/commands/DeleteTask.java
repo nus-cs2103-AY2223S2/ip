@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -32,7 +31,7 @@ public class DeleteTask extends Command {
             ui.showMessage("Noted. I've removed this task: " + task);
             storage.save(list);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The task with id " + index + " does not exist.");
+            throw new Exception("The task with id " + index + " does not exist.");
         }
     }
 }

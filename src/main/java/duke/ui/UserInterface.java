@@ -54,23 +54,16 @@ public class UserInterface extends AnchorPane {
         duke = d;
 
     }
-
-    /**
-     * Gets the input from the user.
-     *
-     * @return The input from the user.
-     */
-    public String getInput() {
-        return "";
-    }
-
     /**
      * Prints the given list of tasks
      *
      * @param list List which is printed
      */
     public void showTasks(TaskList list) {
-
+        String message = list.stream()
+                .map(task -> task.toString())
+                .reduce("", (a, b) -> a + "\n" + b);
+        showMessage("Here are your results\n"+message);
     }
 
     @FXML
