@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class Task {
     protected final int taskNumber;
-    protected final boolean taskStatus;
+    protected final boolean isMarked;
     protected final String task;
     protected final int totalNumOfTasks;
 
-    Task(int taskNumber, boolean taskStatus, String task, int totalNumOfTasks) {
+    Task(int taskNumber, boolean isMarked, String task, int totalNumOfTasks) {
         this.taskNumber = taskNumber;
-        this.taskStatus = taskStatus;
+        this.isMarked = isMarked;
         this.task = task;
         this.totalNumOfTasks = totalNumOfTasks;
     }
@@ -79,7 +79,7 @@ public class Task {
      * @return String of brackets that fills with X if task is done.
      */
     public String getTaskStatus() {
-        if (!this.taskStatus) {
+        if (!this.isMarked) {
             return "[ ]";
         } else {
             return "[X]";

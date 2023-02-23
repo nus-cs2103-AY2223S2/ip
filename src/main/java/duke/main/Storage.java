@@ -57,25 +57,25 @@ public class Storage {
             for (int i = 0; i < taskList.size(); i++) {
                 String task = taskList.get(i);
                 String[] task1 = task.split(" / ");
-                boolean taskStatus = false;
+                boolean isMarked = false;
                 if (task1[1].equals("[ ]")) {
-                    taskStatus = false;
+                    isMarked = false;
                 } else if (task1[1].equals("[X]")){
-                    taskStatus = true;
+                    isMarked = true;
                 }
                 DateTimeFormatter dateTimeFormatter1 =
                         DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
                 if (task.startsWith("T")) {
-                    Todo todo = new Todo(i + 1, taskStatus, task1[2],
+                    Todo todo = new Todo(i + 1, isMarked, task1[2],
                             taskList.size());
                     allTasks.add(todo);
                 } else if (task.startsWith("D")) {
-                    Deadline deadline = new Deadline(i + 1, taskStatus, task1[2],
+                    Deadline deadline = new Deadline(i + 1, isMarked, task1[2],
                             LocalDateTime.parse(task1[3], dateTimeFormatter1), taskList.size());
                     allTasks.add(deadline);
                 } else if (task.startsWith("E")) {
                     String[] taskTiming = task1[3].split("-");
-                    Event event = new Event(i + 1, taskStatus, task1[2],
+                    Event event = new Event(i + 1, isMarked, task1[2],
                             LocalDateTime.parse(taskTiming[0], dateTimeFormatter1),
                             LocalDateTime.parse(taskTiming[1], dateTimeFormatter1), taskList.size());
                     allTasks.add(event);

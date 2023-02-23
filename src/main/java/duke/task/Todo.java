@@ -8,8 +8,8 @@ import java.util.List;
 public class Todo extends Task {
     private final String taskType;
 
-    public Todo(int taskNumber, boolean taskStatus, String task, int totalNumOfTasks) {
-        super(taskNumber, taskStatus, task, totalNumOfTasks);
+    public Todo(int taskNumber, boolean isMarked, String task, int totalNumOfTasks) {
+        super(taskNumber, isMarked, task, totalNumOfTasks);
         this.taskType = "[T]";
     }
 

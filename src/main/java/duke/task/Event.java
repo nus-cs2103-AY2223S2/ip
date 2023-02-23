@@ -16,9 +16,9 @@ public class Event extends Task {
     DateTimeFormatter dateTimeFormatter1 =
             DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
 
-    public Event(int taskNumber, boolean taskStatus, String task,
+    public Event(int taskNumber, boolean isMarked, String task,
                  LocalDateTime eventStartTime, LocalDateTime eventEndTime, int totalNumOfTasks) {
-        super(taskNumber, taskStatus, task, totalNumOfTasks);
+        super(taskNumber, isMarked, task, totalNumOfTasks);
         this.taskType = "[E]";
         this.eventStartTime = eventStartTime;
         this.eventEndTime = eventEndTime;

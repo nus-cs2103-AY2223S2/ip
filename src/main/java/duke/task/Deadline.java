@@ -15,8 +15,8 @@ public class Deadline extends Task {
     DateTimeFormatter dateTimeFormatter1 =
             DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
 
-    public Deadline(int taskNumber, boolean taskStatus, String task, LocalDateTime taskDeadline, int totalNumOfTasks) {
-        super(taskNumber, taskStatus, task, totalNumOfTasks);
+    public Deadline(int taskNumber, boolean isMarked, String task, LocalDateTime taskDeadline, int totalNumOfTasks) {
+        super(taskNumber, isMarked, task, totalNumOfTasks);
         this.taskType = "[D]";
         this.taskDeadline = taskDeadline;
     }
