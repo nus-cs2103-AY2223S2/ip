@@ -73,35 +73,35 @@ to __errors__. Invalid commands or fields will also result in __errors__.
 ### `list` - Shows DukeyList tasks
 The `list` commands lists out all the tasks in DukeyList.
 
-Usage of `list`:
+**Usage of `list`:**
 ```ignorelang
 list
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 1. [T][ ] Buy Fruits
 2. [D][X] Submit forms (by 12 Feb 2023)
 3. [E][ ] Seminar (15 Feb 2023 to 16 Feb 2023)
 4. [L][ ] Gas money: Brother owes $10 to Mother
 ```
-
+###
 
 ### `todo` - Add a new ToDo
 The `todo` command adds a new ToDo to the DukeyList.
 A ToDo requires the following `fields`:
 1. name
 
-The format for adding a Todo is shown below:
+The **format** for adding a Todo is shown below:
 ```ignorelang
 todo / <name>
 ```
 
-Example of usage: 
+**Example of usage:** 
 
 `todo / Buy Fruits`
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 DukeyList just added a new todo:
 [T][ ] Buy Fruits
@@ -110,24 +110,24 @@ DukeyList now has 5 tasks.
 
 DukeyList will show a confirmation message along with the created ToDo.
 
-
+###
 ### `deadline` - Add a new Deadline
 The `deadline` command adds a new Deadline to the DukeyList.
 A Deadline requires the following `fields`:
 1. name
 2. deadline in the form `yyyy-mm-dd`
 
-The format for adding a Deadline is shown below:
+The **format** for adding a Deadline is shown below:
 ```ignorelang
 deadline / <name> / <deadline>
 ```
 
-Example of usage:
+**Example of usage:**
 ```ignorelang
 deadline / Submit Forms / 2023-02-12
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 DukeyList just added a new deadline:
 [D][ ] Submit Forms (by 12 Feb 2023)
@@ -136,7 +136,7 @@ DukeyList now has 5 tasks.
 
 DukeyList will show a confirmation message along with the created ToDo.
 
-
+###
 ### `event` - Add a new Event
 The `event` command adds a new Event to the DukeyList.
 An Event requires the following `fields`:
@@ -144,17 +144,17 @@ An Event requires the following `fields`:
 2. start date in the form `yyyy-mm-dd`
 3. end date in the form `yyyy-mm-dd`
 
-The format for adding an Event is shown below:
+The **format** for adding an Event is shown below:
 ```ignorelang
 event / <name> / <start> / <end> 
 ```
 
-Example of usage:
+**Example of usage:**
 ```ignorelang
 event / Seminar / 2023-02-15 / 2023-02-16
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 DukeyList just added a new event:
 [E][ ] Seminar (15 Feb 2023 to 16 Feb 2023)
@@ -163,7 +163,7 @@ DukeyList now has 5 tasks.
 
 DukeyList will show a confirmation message along with the created Event.
 
-
+###
 ### `loan` - Add a new Loan
 The `loan` command adds a new Event to the DukeyList.
 A Loan requires the following `fields`:
@@ -172,17 +172,17 @@ A Loan requires the following `fields`:
 3. lender
 4. amount (must be a __number__)
 
-The format for adding an Event is shown below:
+The **format** for adding an Event is shown below:
 ```ignorelang
 loan / <name> / <borrower> / <lender> / <amount> 
 ```
 
-Example of usage:
+**Example of usage:**
 ```ignorelang
 loan / Gas money / Brother / Mother / $10
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 DukeyList just added a new loan:
 [L][ ] Gas money: Brother owes $10 to Mother
@@ -191,23 +191,23 @@ DukeyList now has 5 tasks.
 
 DukeyList will show a confirmation message along with the created Loan.
 
-
+###
 ### `mark` - Mark a task
 The `mark` command marks a task as completed.
 `mark` requires the following `fields`:
 1. task number (must be a __number__)
 
-The format for adding an Event is shown below:
+The **format** for adding an Event is shown below:
 ```ignorelang
 mark / <task number> 
 ```
 
-Example of usage:
+**Example of usage:**
 ```ignorelang
 mark / 1
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 Task number 1 has been marked as done!
 1. [T][X] Buy Fruits
@@ -215,23 +215,23 @@ Task number 1 has been marked as done!
 
 DukeyList will show a confirmation message along with the marked task.
 
-
+###
 ### `unmark` - Unmark a task
 The `unmark` command marks a task as incomplete.
 `unmark` requires the following `fields`:
 1. task number (must be a __number__)
 
-The format for adding an Event is shown below:
+The **format** for adding an Event is shown below:
 ```ignorelang
 unmark / <task number> 
 ```
 
-Example of usage:
+**Example of usage:**
 ```ignorelang
 unmark / 1
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 Task number 1 has been unmarked.
 1. [T][ ] Buy Fruits
@@ -239,23 +239,23 @@ Task number 1 has been unmarked.
 
 DukeyList will show a confirmation message along with the unmarked task.
 
-
+###
 ### `delete` - delete a task
 The `delete` command marks a task as incomplete.
 `delete` requires the following `fields`:
 1. task number (must be a __number__)
 
-The format for adding an Event is shown below:
+The **format** for adding an Event is shown below:
 ```ignorelang
 delete / <task number> 
 ```
 
-Example of usage:
+**Example of usage:**
 ```ignorelang
 delete / 1
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 The following task has been removed!
 [T][ ] Buy Fruits
@@ -264,23 +264,23 @@ DukeyList now has 4 tasks.
 
 DukeyList will show a confirmation message along with the deleted task.
 
-
+###
 ### `find` - Find tasks
 The `find` command finds and shows all tasks with a certain keyword.
 `find` requires the following `fields`:
 1. keyword
 
-The format for adding an Event is shown below:
+The **format** for adding an Event is shown below:
 ```ignorelang
 delete / <keyword> 
 ```
 
-Example of usage:
+**Example of usage:**
 ```ignorelang
 find / buy
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 DukeyList found the following tasks with the keyword 'buy':
 [T][ ] Buy Fruits
@@ -289,32 +289,32 @@ DukeyList found the following tasks with the keyword 'buy':
 
 DukeyList will show a confirmation message along with the list of tasks with the keyword.
 
-
+###
 ### `clearList` - Clears DukeyList
 The `clearList` command deletes all the tasks currently on DukeyList.
 
-Usage:
+**Usage:**
 ```ignorelang
 clearList
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 DukeyList cleared!
 ```
 
 DukeyList will show a confirmation message.
 
-
+###
 ### `save` - Save DukeyList
 The `save` command saves a copy of the current DukeyList locally.
 
-Usage:
+**Usage:**
 ```ignorelang
 save
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 DukeyList saved!
 ```
@@ -322,16 +322,16 @@ DukeyList saved!
 DukeyList will show a confirmation message.
 
 
-
+###
 ### `bye` - Exits DukeyList
 The `bye` command autosaves DukeyList and exits the application.
 
-Usage:
+**Usage:**
 ```ignorelang
 bye
 ```
 
-Expected outcome:
+**Expected outcome:**
 ```ignorelang
 DukeyList saved! Goodbye! Please return to DukeyList soon!
 Exiting...
