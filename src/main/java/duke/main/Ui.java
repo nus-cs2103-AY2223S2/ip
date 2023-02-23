@@ -55,6 +55,7 @@ public class Ui {
                 time = " (from: " + task.getEventStartTime().format(dateTimeFormatter1)
                         + " to: " + task.getEventEndTime().format(dateTimeFormatter1) + ")";
             }
+            assert task.getTaskType() != "";
             output += "\n\t " + numbering + "." + task.getTaskType() + task.getTaskStatus() + " "
                     + task.getTask() + time;
         }
@@ -133,6 +134,13 @@ public class Ui {
                         + " to: "
                         + task.getEventEndTime().format(dateTimeFormatter1)
                         + ")";
+                output += "\n\t " + numbering + "."
+                        + task.getTaskType() + task.getTaskStatus() + " "
+                        + task.getTask() + time;
+                numbering += 1;
+            } else if (task.getTaskType().equals("[T]") &&
+                    task.getTask().contains(keyword)) {
+                time = "";
                 output += "\n\t " + numbering + "."
                         + task.getTaskType() + task.getTaskStatus() + " "
                         + task.getTask() + time;
