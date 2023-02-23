@@ -1,6 +1,7 @@
 # Welcome to Duke
 
 >App that helps you to manage daily tasks e.g. deadlines, events, to do lists.
+
 ## Environment settings
 This app requires Java version 11.
 
