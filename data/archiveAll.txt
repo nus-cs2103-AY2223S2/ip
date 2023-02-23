@@ -1,3 +1,2 @@
-T / [X] /  1
-T / [X] /  2
-T / [ ] /  3
+D / [ ] /  read book  / Jan 01 2020 1800 PM
+E / [ ] /  read book  / Jan 01 2020 1800 PM-Jan 01 2020 2000 PM
