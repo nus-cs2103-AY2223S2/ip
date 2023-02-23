@@ -33,11 +33,14 @@ public class Duke {
      * @param input Command input by user.
      * @return Response by Duke.
      */
-    String getResponse(String input) {
+    String getResponse(String input) throws IOException {
+
+        Storage storageArchive = new Storage("data/archive.txt");
+        storageArchive.loadTxtFile();
 
         while (!input.equals("bye")) {
             Parser parser = new Parser();
-            return parser.parse(input, ui, tasks, storage);
+            return parser.parse(input, ui, tasks, storage, storageArchive);
         }
 
         return ui.printByeMessage();

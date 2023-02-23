@@ -53,10 +53,9 @@ public class Todo extends Task {
      */
     @Override
     public String printDelete(List<Task> allTasks) {
-        int newTotalNumOfTasks = allTasks.size() - 1;
         return  "\t Noted. I've removed this task:" + "\n\t   " + this.taskType
                 + super.getTaskStatus() + " " + super.task
-                + "\n\t Now you have " + newTotalNumOfTasks + " tasks in the list.";
+                + "\n\t Now you have " + allTasks.size() + " tasks in the list.";
     }
 
     /**

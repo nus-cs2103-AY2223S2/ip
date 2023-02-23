@@ -161,6 +161,10 @@ public class Ui {
         return output;
     }
 
+    public String printArchiveMessage() {
+        return "\t Previous archive has been cleared. \n\t Current tasks have been archived.";
+    }
+
     public void showLoadingError(String message) {
         System.out.println(message);
     }

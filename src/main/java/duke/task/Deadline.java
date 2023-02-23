@@ -64,11 +64,10 @@ public class Deadline extends Task {
      */
     @Override
     public String printDelete(List<Task> allTasks) {
-        int newTotalNumOfTasks = allTasks.size() - 1;
         return "\t Noted. I've removed this task:" + "\n\t   " + this.taskType
                 + super.getTaskStatus() + " " + super.task + " (by: "
                 + this.taskDeadline.format(dateTimeFormatter1) + ")"
-                + "\n\t Now you have " + newTotalNumOfTasks + " tasks in the list.";
+                + "\n\t Now you have " + allTasks.size() + " tasks in the list.";
     }
 
     /**

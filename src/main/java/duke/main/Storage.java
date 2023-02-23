@@ -39,8 +39,8 @@ public class Storage {
         List<Task> allTasks = new ArrayList<>();
 
         File file3 = new File(this.filePathParent);
-        assert this.filePath != "";
-        assert this.filePathParent != null;
+        assert !this.filePath.equals("");
+        assert !this.filePathParent.equals(null);
         if (!file3.exists()) {
             file3.mkdir();
         }
@@ -190,4 +190,48 @@ public class Storage {
         }
         buffer.close();
     }
+
+    public void saveWholeListToFile(TaskList taskList) throws IOException {
+        File file3 = new File(this.filePathParent);
+        if (!file3.exists()) {
+            file3.mkdir();
+        }
+        File file = new File(this.filePath);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        String filePathParent = Paths.get("data/tasks.txt").getParent().toString();
+        File file4 = new File(filePathParent);
+        if (!file4.exists()) {
+            file4.mkdir();
+        }
+        File file5 = new File("data/tasks.txt");
+
+        FileReader file2 = new FileReader(file5);
+        BufferedReader bufferedReader = new BufferedReader(file2);
+        String undeletedTasks = "";
+        for (int i = 1; i <= taskList.getNumberOfTask(); i++) {
+            undeletedTasks = undeletedTasks + bufferedReader.readLine() + "\n";
+        }
+
+        FileWriter file1 = new FileWriter(file);
+        BufferedWriter buffer = new BufferedWriter(file1);
+        buffer.write(undeletedTasks);
+        buffer.close();
+    }
+
+    public void clear() throws IOException {
+        File file3 = new File(this.filePathParent);
+        if (!file3.exists()) {
+            file3.mkdir();
+        }
+        File file = new File(this.filePath);
+        FileWriter file1 = new FileWriter(file, false);
+        BufferedWriter buffer = new BufferedWriter(file1);
+        buffer.flush();
+        buffer.close();
+        file1.close();
+    }
+
 }

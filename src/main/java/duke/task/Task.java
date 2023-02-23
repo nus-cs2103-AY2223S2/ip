@@ -48,10 +48,9 @@ public class Task {
      * @return String response that show task is deleted.
      */
     public String printDelete(List<Task> allTasks) {
-        int allTaskSize = allTasks.size() - 1;
         return "\t Noted. I've removed this task:" + "\n\t   "
                 + this.getTaskStatus() + " " + this.task
-                + "\n\t Now you have " + allTaskSize + " tasks in the list.";
+                + "\n\t Now you have " + allTasks.size() + " tasks in the list.";
     }
 
     /**
