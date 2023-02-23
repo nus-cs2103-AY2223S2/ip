@@ -1,4 +1,7 @@
-package seedu.duke;
+package jarvis;
+
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -13,20 +16,42 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- * JavaFX tutorial
- */
-public class Duke2 extends Application {
 
+/**
+ * The Duke chatbot.
+ */
+public class Duke extends Application {
+
+    private static String dataPath = "./data/jarvis.txt";
+    private final Storage storage;
+    private ToDoList todolist;
+    private Ui ui;
+    private final Parser parser;
+    private boolean isBye;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/TonyStark.png"));
+    private Image jarvis = new Image(this.getClass().getResourceAsStream("/images/jarvis.png"));
+    /**
+     * Duke Constructor.
+     */
+    public Duke() {
+        storage = new Storage(dataPath);
+        todolist = new ToDoList();
+        ui = new Ui();
+        parser = new Parser();
+        isBye = false;
 
-    public Duke2() {}
+        // Print previous data
+        try {
+            storage.loadTasks(todolist);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
 
     @Override
     public void start(Stage stage) {
@@ -49,14 +74,14 @@ public class Duke2 extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("J.A.R.V.I.S");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(800.0);
+        stage.setMinWidth(600.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(600.0, 800.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(585, 735);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -66,7 +91,7 @@ public class Duke2 extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(525.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -92,20 +117,6 @@ public class Duke2 extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -115,7 +126,7 @@ public class Duke2 extends Application {
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getDukeDialog(dukeText, new ImageView(jarvis))
         );
         userInput.clear();
     }
@@ -125,6 +136,17 @@ public class Duke2 extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        assert input != null : "No input given";
+        return parser.parse(input, todolist, storage);
     }
+
+    /**
+     * Returns the current date.
+     *
+     * @return the current date
+     */
+    public static LocalDate getCurrDate() {
+        return LocalDate.now();
+    }
+
 }

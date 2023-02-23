@@ -1,4 +1,4 @@
-package seedu.duke;
+package task;
 
 /**
  * Handles the tasks relating to the ToDoList
@@ -48,7 +48,7 @@ public class Task {
      */
     public void unmark(int index) {
         this.isDone = false;
-        System.out.println("\tjarvis.Task " + index + " has been unmarked.");
+        System.out.println("\ttask.Task " + index + " has been unmarked.");
         System.out.println("\t" + printTask());
     }
 

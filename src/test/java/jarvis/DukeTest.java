@@ -1,4 +1,4 @@
-package seedu.duke;
+package jarvis;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

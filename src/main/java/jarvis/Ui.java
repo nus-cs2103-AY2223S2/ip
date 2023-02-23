@@ -1,4 +1,4 @@
-package seedu.duke;
+package jarvis;
 
 import java.util.Scanner;
 

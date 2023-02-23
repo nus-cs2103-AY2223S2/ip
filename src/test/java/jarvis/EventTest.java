@@ -1,10 +1,11 @@
-package seedu.duke;
+package jarvis;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+import task.Event;
 
 public class EventTest {
 

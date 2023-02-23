@@ -1,4 +1,4 @@
-package seedu.duke;
+package jarvis;
 
 /**
  * The Ascii art to be printed.

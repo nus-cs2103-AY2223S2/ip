@@ -1,6 +1,8 @@
-package seedu.duke;
+package task;
 
 import java.time.LocalDate;
+
+import jarvis.Duke;
 
 /**
  * A Todo Task.

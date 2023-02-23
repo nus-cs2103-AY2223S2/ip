@@ -1,4 +1,4 @@
-package seedu.duke;
+package exception;
 
 /**
  * JarvisException class.
