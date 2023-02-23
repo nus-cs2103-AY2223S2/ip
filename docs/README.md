@@ -1,6 +1,7 @@
 # User Guide
 
 Welcome to the 2fort basement! Track all your mercenary tasks with this handy little PDA plug-in.
+![Twofort](https://i.ytimg.com/vi/kAEpdjXAAXM/maxresdefault.jpg)
 
 ## Quick Start
 
@@ -24,8 +25,8 @@ Function | Command
 `find tasks with a keyword` | `find <KEYWORD>`
 `tag task` | `tag <INDEX> <TAG1, TAG2 ....>`
 `untag task` | `untag <INDEX> <TAG1, TAG2 ....>`
-
 `exit the application` | `bye`
+
 ## Features 
 
 ### Create Tasks
@@ -41,7 +42,7 @@ Description of the feature.
 Description of the feature.
 
 
-## Usage
+## Sample Usage
 
 ### `Keyword` - Describe action
 
