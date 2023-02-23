@@ -17,8 +17,8 @@ import javafx.util.Duration;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private static final String USER_IMAGE_PATH = "/images/master.jpg";
-    private static final String FEA_IMAGE_PATH = "/images/mash.jpg";
+    private static final String USER_IMAGE_PATH = "/images/master.png";
+    private static final String FEA_IMAGE_PATH = "/images/mash.png";
     @FXML
     private ScrollPane scrollPane;
     @FXML
