@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Duke {
-    private static TaskArrayList tasks;
+    private static TaskList tasks;
     private static Storage dataSaver;
     private static Ui ui;
 
@@ -9,10 +9,10 @@ public class Duke {
         ui = new Ui();
         try {
             dataSaver = new Storage();
-            tasks = new TaskArrayList(dataSaver.load());
+            tasks = new TaskList(dataSaver.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskArrayList(new ArrayList<>());
+            tasks = new TaskList(new ArrayList<>());
         }
     }
 

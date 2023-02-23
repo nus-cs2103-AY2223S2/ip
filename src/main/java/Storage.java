@@ -66,7 +66,7 @@ public class Storage {
     return list;
   }
 
-  public void save(TaskArrayList tasks) throws DukeException {
+  public void save(TaskList tasks) throws DukeException {
     try {
       FileWriter fw = new FileWriter(filePath.toString());
       for (int i = 0; i < tasks.size(); ++i) {
