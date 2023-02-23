@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = twofort.getResponse(input);
+        assert(!response.isEmpty());
         if(response.split(" ",2)[0].equals("[E]")){ //error message
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
