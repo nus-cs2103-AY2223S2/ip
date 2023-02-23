@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import duke.exception.DukeException;
 
@@ -14,6 +16,15 @@ import duke.task.*;
  * Understands what the command is asking for.
  */
 public class Parser {
+
+    public int checkExceptionAndGetTask(String command, TaskList allTasks) throws DukeException {
+        DukeException.missingIndexException(command);
+        DukeException.invalidIndexException(command, allTasks.getNumberOfTask());
+        String[] str = command.split(" ");
+        int taskIndex = Integer.parseInt(str[1]) - 1;
+
+        return taskIndex;
+    }
 
     /**
      * Parses the command to process.
@@ -48,25 +59,21 @@ public class Parser {
         DateTimeFormatter dateTimeFormatter =
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
+        int taskIndex;
+
         try {
             if (command.equals("list")) {
                 String output;
                 output = ui.printCommandList(allTasks.getAllTasks());
                 return output;
             } else if (command.startsWith("mark")) {
-                DukeException.missingIndexException(command);
-                DukeException.invalidIndexException(command, allTasks.getNumberOfTask());
-                String[] str = command.split(" ");
-                int taskIndex = Integer.parseInt(str[1]) - 1;
+                taskIndex = checkExceptionAndGetTask(command, allTasks);
                 Task oldTask = allTasks.getTask(taskIndex);
                 Task task = allTasks.markTaskAsDone(oldTask, taskIndex);
                 storage.saveListToFile(command, task, allTasks);
                 return task.markAsDone();
             } else if (command.startsWith("unmark")) {
-                DukeException.missingIndexException(command);
-                DukeException.invalidIndexException(command, allTasks.getNumberOfTask());
-                String[] str = command.split(" ");
-                int taskIndex = Integer.parseInt(str[1]) - 1;
+                taskIndex = checkExceptionAndGetTask(command, allTasks);
                 Task oldTask = allTasks.getTask(taskIndex);
                 Task task = allTasks.unmarkTaskAsUndone(oldTask, taskIndex);
                 storage.saveListToFile(command, task, allTasks);
@@ -105,10 +112,7 @@ public class Parser {
                 storage.saveListToFile(command, event, allTasks);
                 return event.printEventTask();
             } else if (command.startsWith("delete")) {
-                DukeException.missingIndexException(command);
-                DukeException.invalidIndexException(command, allTasks.getNumberOfTask());
-                String[] str = command.split(" ");
-                int taskIndex = Integer.parseInt(str[1]) - 1;
+                taskIndex = checkExceptionAndGetTask(command, allTasks);
                 Task task = allTasks.getTask(taskIndex);
                 allTasks.deleteTask(taskIndex);
                 storage.saveListToFile(command, task, allTasks);
