@@ -10,6 +10,22 @@ Welcome to the 2fort basement! Track all your mercenary tasks with this handy li
 4. Using a command prompt or equivalent, navigate to the folder where your jar is located
 5. Type java -jar Twofort.jar to start the app!
 
+List of Commands
+
+Function | Command
+
+`create todo task` | `todo <DESCRIPTION>`
+`create deadline task` | `deadline <DESCRIPTION> /by <DATE>`
+`create event task` | `event <DESCRIPTION> /from <DATE> /to <DATE>`
+`mark task as completed` | `mark <INDEX>`
+`mark task as incomplete` | `unmark <INDEX>`
+`deletes task` | `delete <INDEX>`
+`list all tasks` | `list`
+`find tasks with a keyword` | `find <KEYWORD>`
+`tag task` | `tag <INDEX> <TAG1, TAG2 ....>`
+`untag task` | `untag <INDEX> <TAG1, TAG2 ....>`
+
+`exit the application` | `bye`
 ## Features 
 
 ### Create Tasks
