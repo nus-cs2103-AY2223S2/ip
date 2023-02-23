@@ -21,26 +21,26 @@ public class Handler{
             return command;
         }
         catch (IllegalArgumentException e) {
-            throw new ProgramException("This just aint right! Did you spell it correctly?");
+            throw new ProgramException("[E] This just aint right! Did you spell it correctly?");
         } catch (NullPointerException e) {
-            throw new ProgramException("I need a doggone command!");
+            throw new ProgramException("[E] I need a doggone command!");
         }
     }
 
     public int parseNumber(String input, TaskList taskList) throws ProgramException {
         String parameters[] = input.split(" ");
         if(parameters.length==1){
-            throw new ProgramException("I need a doggone Index!");
+            throw new ProgramException("[E] I need a doggone Index!");
         }
         try{
             int index = Integer.parseInt(parameters[1]);
             if(index > taskList.size() || index < 0){
-                throw new ProgramException("Index out of bounds!");
+                throw new ProgramException("[E] Index out of bounds!");
             }
             return index;
         }
         catch (NumberFormatException e){
-            throw new ProgramException("Index must be an Integer!");
+            throw new ProgramException("[E] Index must be an Integer!");
         }
 
     }
@@ -48,7 +48,7 @@ public class Handler{
     public String parseString(String input) throws ProgramException{
         String parameters[] = input.split(" ",2);
         if(parameters.length==1){
-            throw new ProgramException("I need the doggone Task description!.");
+            throw new ProgramException("[E] I need the doggone Task description!.");
         }
         return parameters[1];
     }
@@ -56,14 +56,14 @@ public class Handler{
     public String[] parseDeadline(String input) throws ProgramException{
         String parameters[] = input.split(" ",2);
         if(parameters.length==1){
-            throw new ProgramException("I need the doggone Task description and end time!");
+            throw new ProgramException("[E] I need the doggone Task description and end time!");
         }
         parameters = parameters[1].split("/by");
         if(parameters.length<2){
-            throw new ProgramException("You just ain't doing it right! /by command needed with deadline!");
+            throw new ProgramException("[E] You just ain't doing it right! /by command needed with deadline!");
         }
         if(parameters.length>2){
-            throw new ProgramException("You just ain't doing it right!  Use /by only as a command!");
+            throw new ProgramException("[E] You just ain't doing it right!  Use /by only as a command!");
         }
         String name = parameters[0].strip();
         String end = parameters[1].strip();
@@ -74,22 +74,22 @@ public class Handler{
     public String[] parseEvent(String input) throws ProgramException{
         String parameters[] = input.split(" ",2);
         if(parameters.length==1){
-            throw new ProgramException("I need the doggone task description, start and end time!");
+            throw new ProgramException("[E] I need the doggone task description, start and end time!");
         }
         parameters = parameters[1].split("/from");
         if(parameters.length<2){
-            throw new ProgramException("You just ain't doing it right!  /from command needed with start time!");
+            throw new ProgramException("[E] You just ain't doing it right!  /from command needed with start time!");
         }
         if(parameters.length>2){
-            throw new ProgramException("You just ain't doing it right!  Use /from only as a command!");
+            throw new ProgramException("[E] You just ain't doing it right!  Use /from only as a command!");
         }
         String name = parameters[0].strip();
         parameters = parameters[1].split("/to");
         if(parameters.length<2){
-            throw new ProgramException("You just ain't doing it right!  /to command needed with end time!");
+            throw new ProgramException("[E] You just ain't doing it right!  /to command needed with end time!");
         }
         if(parameters.length>2){
-            throw new ProgramException("You just ain't doing it right!  Use /to only as a command!");
+            throw new ProgramException("[E] You just ain't doing it right!  Use /to only as a command!");
         }
         String start = parameters[0].strip();
         String end = parameters[1].strip();
@@ -101,7 +101,7 @@ public class Handler{
         ArrayList<String> tags = new ArrayList<>();
         String parameters[] = input.split(" ",3);
         if(parameters.length<3){
-            throw new ProgramException("I need the doggone index of the task and the tags!.");
+            throw new ProgramException("[E] I need the doggone index of the task and the tags!.");
         }
         parameters = parameters[2].split(" ");
         Collections.addAll(tags,parameters);
@@ -156,6 +156,10 @@ public class Handler{
                 index = parseNumber(input,taskList);
                 c = new TagCommand(index,tags);
                 break;
+            case UNTAG:
+                tags = parseTags(input);
+                index = index = parseNumber(input,taskList);
+                c = new UntagCommand(index, tags);
             default:
                 //will never reach here, getCommand will throw an error if command is neither of the above
                 assert false;

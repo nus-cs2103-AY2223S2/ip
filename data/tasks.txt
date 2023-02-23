@@ -1,0 +1,6 @@
+[T] [ ] defend point
+tags: 
+[T] [ ] drink bonk
+tags: 
+[T] [ ] call medic
+tags: 

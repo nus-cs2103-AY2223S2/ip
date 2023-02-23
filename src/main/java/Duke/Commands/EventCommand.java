@@ -1,6 +1,5 @@
 package Duke.Commands;
 
-import Duke.MessageLoader;
 import Duke.Saver;
 import Duke.Tasks.TaskList;
 
@@ -15,7 +14,7 @@ public class EventCommand extends Command{
         this.end = end;
     }
     @Override
-    public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
+    public String run(TaskList taskList, Saver saver) {
         String message = taskList.addTask(this.name,this.start,this.end);
         saver.save(taskList);
         return message;

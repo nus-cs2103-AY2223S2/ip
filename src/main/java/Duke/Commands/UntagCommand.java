@@ -3,18 +3,23 @@ package Duke.Commands;
 import Duke.Saver;
 import Duke.Tasks.TaskList;
 
-public class MarkCommand extends Command {
-    private int index;
+import java.util.ArrayList;
 
-    public MarkCommand(int index) {
+public class UntagCommand extends Command {
+    private int index;
+    private ArrayList<String> tags;
+
+    public UntagCommand(int index, ArrayList<String> tags) {
         this.index = index;
+        this.tags = tags;
     }
 
     @Override
     public String run(TaskList taskList, Saver saver) {
-        String message = taskList.markTask(index);
+        String message = taskList.untagTask(index, tags);
         saver.save(taskList);
         return message;
 
     }
+
 }

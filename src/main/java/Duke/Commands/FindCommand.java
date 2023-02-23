@@ -1,6 +1,5 @@
 package Duke.Commands;
 
-import Duke.MessageLoader;
 import Duke.Saver;
 import Duke.Tasks.TaskList;
 
@@ -11,7 +10,7 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public String run(TaskList taskList, MessageLoader messageLoader, Saver saver) {
+    public String run(TaskList taskList, Saver saver) {
         String message = taskList.findTasks(query);
         saver.save(taskList);
         return message;

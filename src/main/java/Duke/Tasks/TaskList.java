@@ -14,7 +14,7 @@ public class TaskList {
     private int numTasks;
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.taskList = new ArrayList<Task>();
         this.numTasks = 0;
     }
 
@@ -25,7 +25,7 @@ public class TaskList {
     public String processTask(Task task){
         this.taskList.add(task);
         this.numTasks += 1;
-        return "Erectin a task. You now have:" + this.numTasks + " task(s).";
+        return "Erectin a task:\n" + task + "\nYou now have:" + this.numTasks + " task(s).";
     }
     public String addTask(String name){
         Task task = new ToDo(name);
@@ -51,24 +51,27 @@ public class TaskList {
             output += taskList.get(i) + "\n";
         }
         if(output.equals("")){
-            output += "Hold up son, you ain't got any tasks yet.";
+            output += "[E] Hold up son, you ain't got any tasks yet.";
         }
         return output;
     }
     public String markTask(int index){
-        this.taskList.get(index - 1).mark();
-        return "Alrighty Then! Task " + index + " marked.";
+        Task temp = this.taskList.get(index-1);
+        temp.mark();
+        return "Alrighty Then! Task " + index + "\n" + temp + "\nmarked.";
     }
 
     public String unmarkTask(int index){
-        this.taskList.get(index - 1).unMark();
-        return "Alrighty Then! Task " + index + " unmarked.";
+        Task temp = this.taskList.get(index-1);
+        temp.unMark();
+        return "Alrighty Then! Task " + index + "\n" + temp + "\nunmarked.";
     }
 
     public String deleteTask(int index){
+        Task temp = this.taskList.get(index-1);
         this.taskList.remove(index - 1);
         this.numTasks -= 1;
-        return "Alrighty Then! Task " + index + " deleted.";
+        return "Alrighty Then! Task " + index + "\n" + temp + "\ndeleted.";
     }
 
     public String toSave(){
@@ -214,17 +217,19 @@ public class TaskList {
             }
         }
         if(matches == 0){
-            return "Dag Nabbit! I couldn't find any tasks.";
+            return "[E] Dag Nabbit! I couldn't find any tasks.";
         }
         return output;
     }
 
     public String tagTask(int index, ArrayList<String> tags){
-        this.taskList.get(index - 1).setTags(tags);
-        return "Alrighty then! Task " + index + " tagged.";
+        Task temp = this.taskList.get(index-1);
+        temp.setTags(tags);
+        return "Alrighty then! Task " + index + "\n" + temp + "\ntagged.";
     }
     public String untagTask(int index, ArrayList<String> tags){
+        Task temp = this.taskList.get(index-1);
         this.taskList.get(index - 1).removeTags(tags);
-        return "Alrighty then! Task " + index + " untagged.";
+        return "Alrighty then! Task " + index + "\n" + temp + "\nuntagged.";
     }
 }
