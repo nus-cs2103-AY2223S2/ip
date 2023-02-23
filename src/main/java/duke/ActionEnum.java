@@ -8,6 +8,7 @@ public enum ActionEnum {
     TODO,
     DEADLINE,
     EVENT,
+    LOAN,
     MARK,
     UNMARK,
     DELETE,

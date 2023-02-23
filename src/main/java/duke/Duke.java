@@ -72,6 +72,9 @@ public class Duke extends Application {
             case EVENT:
                 sb.append(taskList.addTask(Event.createEvent(ui, input)));
                 break;
+            case LOAN:
+                sb.append(taskList.addTask(Loan.createLoan(ui, input)));
+                break;
             case MARK:
                 sb.append(taskList.mark(input));
                 break;
@@ -130,7 +133,7 @@ public class Duke extends Application {
             response = ui.printExceptionMessage(e);
         }
 
-        return response + ui.getGoodbyeMessage() + '\n' + "Exiting...";
+        return response + " " + ui.getGoodbyeMessage() + '\n' + "Exiting...";
     }
 
     @Override

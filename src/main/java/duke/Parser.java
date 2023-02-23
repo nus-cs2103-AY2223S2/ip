@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import duke.exceptions.DukeyException;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * Analyzes user input.
  */
@@ -43,6 +45,9 @@ public class Parser {
         }
         if (input.equals("eve")) {
             return ActionEnum.EVENT;
+        }
+        if (input.equals("loa")) {
+            return ActionEnum.LOAN;
         }
         if (input.equals("lis")) {
             return ActionEnum.LIST;
@@ -105,7 +110,7 @@ public class Parser {
     }
 
     /**
-     * Scans the user's input for a keywrod and returns the keyword. Throws an exception if the
+     * Scans the user's input for a keyword and returns the keyword. Throws an exception if the
      * user input is empty.
      * @param input the user input
      * @throws DukeyException on empty user input
@@ -114,6 +119,30 @@ public class Parser {
         input = input.strip();
         if (checkIfEmpty(input)) {
             throw new DukeyException("Input cannot be empty!");
+        }
+        return input;
+    }
+
+    public int parseAmount(String input) throws DukeyException {
+        input = input.strip();
+        int amount;
+        try {
+            amount = parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new DukeyException("Error! Invalid amount!");
+        }
+
+        if (amount < 0) {
+            throw new DukeyException("Error! Invalid amount!");
+        }
+
+        return amount;
+    }
+
+    public String parseName(String input) throws DukeyException {
+        input = input.strip();
+        if (checkIfEmpty(input)) {
+            throw new DukeyException("Name cannot be empty!");
         }
         return input;
     }

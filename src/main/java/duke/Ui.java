@@ -28,6 +28,15 @@ public class Ui {
         return parser.parseKeyword(keyword);
     }
 
+    public int readAmount(String input) throws DukeyException {
+        return parser.parseAmount(input);
+    }
+
+    public String readName(String input) throws DukeyException {
+        return parser.parseName(input);
+    }
+
+
     public String getWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -38,7 +47,7 @@ public class Ui {
     }
 
     public String getGoodbyeMessage() {
-        return "DukeyList: Goodbye!! Please return to Dukey again soon!! :)";
+        return "Goodbye!! Please return to Dukey again soon!! :)";
     }
 
     public String printTask(int taskNumber, Task task) {
@@ -142,6 +151,7 @@ public class Ui {
         sb.append("To add a todo: 'todo / <name> '\n");
         sb.append("To add a deadline: 'deadline / <name> / <deadline> '\n");
         sb.append("To add an event: 'event / <name> / <start> / <end>'\n");
+        sb.append("To add a loan: 'loan / <name> / <borrower> / <lender> / <amount> ");
         sb.append("To mark a task as done: 'mark / <number>'\n");
         sb.append("To unmark a task: 'unmark / <number>'\n");
         sb.append("To delete a task: 'delete / <number> '\n");

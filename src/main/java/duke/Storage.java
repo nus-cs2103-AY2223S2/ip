@@ -81,6 +81,8 @@ public class Storage {
                 taskList.addTaskFromSave(Deadline.createDeadlineFromLog(logStringArray));
             } else if (logStringArray[0].equals("E")) {
                 taskList.addTaskFromSave(Event.createEventFromLog(logStringArray));
+            } else if (logStringArray[0].equals("L")) {
+                taskList.addTaskFromSave(Loan.createLoanFromLog(logStringArray));
             }
         }
     }
