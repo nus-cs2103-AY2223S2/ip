@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
+import duke.exceptions.DeserializingException;
+
 /**
  * Represents a deadline task.
  *
@@ -25,8 +27,8 @@ public class Deadline extends Task {
      * @param description The description of the deadline.
      * @param dueDate     The due date of the deadline.
      */
-    public Deadline(int id, String description, String dueDate) {
-        super(id);
+    public Deadline(String description, String dueDate) {
+        super();
         List<Date> dates = new PrettyTimeParser().parse(dueDate);
         desc = description;
         if (dates.size() == 0) {
@@ -56,8 +58,8 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
-        String isDone = isCompleted() ? "1" : "0";
-        return String.format("D|%s|%s|%s|%s", id(), isDone, description(), dueDate);
+        return String.format("D|%d|%s|%s", isCompleted() ? 1 : 0, description(),
+                dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm a")));
     }
 
     /**
@@ -66,12 +68,16 @@ public class Deadline extends Task {
      * @param s The string to deserialize from.
      * @return The deserialized deadline.
      */
-    public static Deadline deserialize(String s) {
-        String[] parts = s.split("\\|");
-        Deadline deadline = new Deadline(Integer.parseInt(parts[1]), parts[3], parts[4]);
-        if (parts[2].equals("1")) {
-            deadline.markCompleted();
+    public static Deadline deserialize(String s) throws DeserializingException {
+        try {
+            String[] parts = s.split("\\|");
+            Deadline deadline = new Deadline(parts[2], parts[3]);
+            if (parts[1].equals("1")) {
+                deadline.markCompleted();
+            }
+            return deadline;
+        } catch (Exception e) {
+            throw new DeserializingException("Unable to deserialize deadline");
         }
-        return deadline;
     }
 }

@@ -27,8 +27,8 @@ public class Event extends Task {
      * @param from        The start time of the event.
      * @param to          The end time of the event.
      */
-    public Event(int id, String description, String from, String to) {
-        super(id);
+    public Event(String description, String from, String to) {
+        super();
 
         List<Date> fromDates = new PrettyTimeParser().parse(from);
         List<Date> toDates = new PrettyTimeParser().parse(to);
@@ -64,7 +64,7 @@ public class Event extends Task {
     @Override
     public String serialize() {
         String isDone = isCompleted() ? "1" : "0";
-        return String.format("E|%s|%s|%s|%s|%s", id(), isDone, description(), from, to);
+        return String.format("E|%s|%s|%s|%s", isDone, description(), from, to);
     }
 
     /**
@@ -75,10 +75,11 @@ public class Event extends Task {
      */
     public static Event deserialize(String s) {
         String[] parts = s.split("\\|");
-        Event event = new Event(Integer.parseInt(parts[1]), parts[3], parts[4], parts[5]);
-        if (parts[2].equals("1")) {
+        Event event = new Event(parts[2], parts[3], parts[4]);
+        if (parts[1].equals("1")) {
             event.markCompleted();
         }
         return event;
+
     }
 }

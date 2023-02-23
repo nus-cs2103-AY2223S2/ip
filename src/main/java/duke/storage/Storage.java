@@ -6,10 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Path;
 
+import duke.exceptions.DeserializingException;
 import duke.exceptions.IOException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-
 
 /**
  * Represents a storage that stores the tasks in a file.
@@ -99,9 +99,12 @@ public class Storage {
 
             while ((line = br.readLine()) != null) {
                 Task task = Task.deserialize(line);
+
                 list.add(task);
             }
             br.close();
+        } catch (DeserializingException d) {
+            throw new IOException(d.getMessage());
         } catch (Exception e) {
             throw new IOException("Unable to read from file");
         }

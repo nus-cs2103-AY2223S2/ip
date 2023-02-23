@@ -4,16 +4,13 @@ package duke.tasks;
 public abstract class Task {
 
     private TaskStatus status;
-    private int id;
-
     /**
      * Creates a new task.
      *
      * @param id The id of the task.
      */
-    public Task(int id) {
+    public Task() {
         status = TaskStatus.Pending;
-        this.id = id;
     }
 
     /**
@@ -36,15 +33,6 @@ public abstract class Task {
     }
 
     /**
-     * Returns the id of the task.
-     *
-     * @return the id of the task.
-     */
-    public int id() {
-        return this.id;
-    }
-
-    /**
      * Returns the description of the task.
      *
      * @return the description of the task.
@@ -64,7 +52,7 @@ public abstract class Task {
      * @param s The string to deserialize from.
      * @return The deserialized task.
      */
-    public static Task deserialize(String s) {
+    public static Task deserialize(String s) throws Exception{
         switch (s.charAt(0)) {
         case 'T':
             return Todo.deserialize(s);

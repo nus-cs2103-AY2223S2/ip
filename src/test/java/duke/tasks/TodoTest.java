@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 class TodoTest {
     @Test
     void hasCorrectDescription() {
-        Todo todo = new Todo(1, "read book");
+        Todo todo = new Todo("read book");
         assertEquals("[T][ ] read book", todo.toString());
     }
 
     @Test
     void hasCorrectStatus() {
-        Todo todo = new Todo(1, "read book");
+        Todo todo = new Todo("read book");
         assertEquals(false, todo.isCompleted());
         todo.markCompleted();
         assertEquals(true, todo.isCompleted());

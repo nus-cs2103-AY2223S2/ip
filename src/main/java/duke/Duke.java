@@ -68,6 +68,9 @@ public class Duke extends Application {
     public void run(String input) {
         try {
             parser.parse(input).execute(list, ui, storage);
+
+            // scroll to the bottom
+            ui.scrollToBottom();
         } catch (Exception e) {
             ui.showMessage(e.getMessage());
         }

@@ -23,6 +23,15 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Returns a stream of tasks.
+     *
+     * @return a stream of tasks.
+     */
+    public int indexOf(Task t) {
+        return tasks.indexOf(t);
+    }
+
+    /**
      * Creates a new TaskList.
      * @param tasks The list of tasks.
      */

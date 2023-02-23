@@ -83,4 +83,8 @@ public class UserInterface extends AnchorPane {
         duke.run(input);
         userInput.clear();
     }
+
+    public void scrollToBottom() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
 }

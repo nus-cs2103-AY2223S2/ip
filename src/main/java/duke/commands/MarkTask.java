@@ -25,11 +25,12 @@ public class MarkTask extends Command {
     }
 
     @Override
-    public void execute(TaskList list, UserInterface ui, Storage storage) throws DukeException {
+    public void execute(TaskList list, UserInterface ui, Storage storage) throws Exception {
         try {
-            Task task = list.stream().filter(t -> t.id() == id).findFirst().get();
+            Task task = list.get(id - 1);
             task.markCompleted();
             ui.showMessage("Nice! I've marked this task as done: " + task);
+            storage.save(list);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The task with id " + id + " does not exist.");
         }

@@ -15,8 +15,8 @@ public class Todo extends Task {
      * @param id          The id of the todo.
      * @param description The description of the todo.
      */
-    public Todo(int id, String description) {
-        super(id);
+    public Todo(String description) {
+        super();
         desc = description;
     }
 
@@ -38,7 +38,7 @@ public class Todo extends Task {
     @Override
     public String serialize() {
         String isDone = isCompleted() ? "1" : "0";
-        return String.format("T|%s|%s|%s", id(), isDone, description());
+        return String.format("T|%s|%s", isDone, description());
     }
 
     /**
@@ -49,8 +49,8 @@ public class Todo extends Task {
      */
     public static Todo deserialize(String s) {
         String[] parts = s.split("\\|");
-        Todo todo = new Todo(Integer.parseInt(parts[1]), parts[3]);
-        if (parts[2].equals("1")) {
+        Todo todo = new Todo(parts[2]);
+        if (parts[1].equals("1")) {
             todo.markCompleted();
         }
         return todo;

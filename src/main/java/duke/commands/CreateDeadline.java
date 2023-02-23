@@ -29,7 +29,7 @@ public class CreateDeadline extends Command {
 
     @Override
     public void execute(TaskList list, UserInterface ui, Storage storage) throws IOException {
-        Deadline deadline = new Deadline(list.nextId(), description, by);
+        Deadline deadline = new Deadline(description, by);
         list.add(deadline);
         ui.showMessage("Got it. I've added this task: " + deadline);
 

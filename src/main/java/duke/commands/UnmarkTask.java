@@ -25,11 +25,12 @@ public class UnmarkTask extends Command {
     }
 
     @Override
-    public void execute(TaskList list, UserInterface ui, Storage storage) throws DukeException {
+    public void execute(TaskList list, UserInterface ui, Storage storage) throws Exception {
         try {
-            Task task = list.stream().filter(t -> t.id() == index).findFirst().get();
-            task.markCompleted();
-            ui.showMessage("Nice! I've marked this task as pending: " + task);
+            Task task = list.get(index - 1);
+            task.markPending();
+            ui.showMessage("Nice! I've marked this task as not done: " + task);
+            storage.save(list);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The task with id " + index + " does not exist.");
         }

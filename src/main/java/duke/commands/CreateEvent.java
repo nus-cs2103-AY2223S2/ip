@@ -31,9 +31,11 @@ public class CreateEvent extends Command {
     }
 
     @Override
-    public void execute(TaskList list, UserInterface ui, Storage storage) throws DukeException {
-        Event event = new Event(list.nextId(), description, from, to);
+    public void execute(TaskList list, UserInterface ui, Storage storage) throws Exception {
+        Event event = new Event(description, from, to);
         list.add(event);
         ui.showMessage("Got it. I've added this task: " + event);
+
+        storage.save(list);
     }
 }

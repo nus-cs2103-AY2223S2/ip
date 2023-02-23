@@ -25,7 +25,7 @@ public class CreateTodo extends Command {
 
     @Override
     public void execute(TaskList list, UserInterface ui, Storage storage) throws Exception {
-        Todo todo = new Todo(list.nextId(), description);
+        Todo todo = new Todo(description);
         list.add(todo);
         ui.showMessage("Got it. I've added this task: " + todo);
 
