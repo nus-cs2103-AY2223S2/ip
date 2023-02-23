@@ -71,14 +71,12 @@ public class Parser {
                 Task oldTask = allTasks.getTask(taskIndex);
                 Task task = allTasks.markTaskAsDone(oldTask, taskIndex);
                 storage.saveListToFile(command, task, allTasks);
-                storageArchive.saveListToFile(command, task, allTasks);
                 return task.markAsDone();
             } else if (command.startsWith("unmark")) {
                 taskIndex = checkExceptionAndGetTask(command, allTasks);
                 Task oldTask = allTasks.getTask(taskIndex);
                 Task task = allTasks.unmarkTaskAsUndone(oldTask, taskIndex);
                 storage.saveListToFile(command, task, allTasks);
-                storageArchive.saveListToFile(command, task, allTasks);
                 return task.unmarkAsUndone();
             } else if (command.startsWith("todo")) {
                 DukeException.emptyCommandException(command);
