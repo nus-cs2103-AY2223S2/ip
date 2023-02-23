@@ -3,7 +3,6 @@ package duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import duke.exceptions.DukeyException;
 
@@ -11,19 +10,10 @@ import duke.exceptions.DukeyException;
  * Deals with user interactions, namely reading input from the user and printing messages to the user.
  */
 public class Ui {
-    private Scanner scanner = new Scanner(System.in);
     private Parser parser = new Parser();
-
-    private String readLine() {
-        return scanner.nextLine();
-    }
 
     public ActionEnum readCommand(String command) throws DukeyException {
         return parser.parseCommand(command);
-    }
-
-    public String readEchoInput() {
-        return this.readLine();
     }
 
     public String readTaskName(String input) throws DukeyException {
@@ -38,48 +28,17 @@ public class Ui {
         return parser.parseKeyword(keyword);
     }
 
-    private void printLine(String string) {
-        System.out.println(string);
-    }
-
-    private void print(String string) {
-        System.out.print(string);
-    }
-
-
-    public String getTaskNumber() {
-        this.print("Task number: ");
-        return this.readLine();
-    }
-
-    public void printWelcomeMessage() {
+    public String getWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        this.printLine("Hello from\n" + logo);
-        this.printLine("Welcome welcome!");
+        return "Hello from\n" + logo + '\n';
     }
 
-    public String printGoodbyeMessage() {
+    public String getGoodbyeMessage() {
         return "DukeyList: Goodbye!! Please return to Dukey again soon!! :)";
-    }
-
-    public void printLnBreak() {
-        this.printLine("_________________________________________________________");
-    }
-
-    public void printErrorBreak() {
-        this.printLine("__________________________error__________________________");
-    }
-
-    public void echo(String string) {
-        this.printLine("Dukey: " + string);
-    }
-
-    public void printWrongCommandMessage() {
-        this.printLine("Error! Unknown command. Try again!");
     }
 
     public String printTask(int taskNumber, Task task) {
@@ -181,24 +140,17 @@ public class Ui {
         sb.append("To list: 'list'\n");
         sb.append("To exit: 'bye'\n");
         sb.append("To add a todo: 'todo / <name> '\n");
-        sb.append("To add a deadline: 'deadline / <name> / deadline '\n");
-        sb.append("To add an event: 'event'\n");
-        sb.append("To mark a task as done: 'mark'\n");
-        sb.append("To unmark a task: 'unmark'\n");
-        sb.append("To delete a task: 'delete'\n");
+        sb.append("To add a deadline: 'deadline / <name> / <deadline> '\n");
+        sb.append("To add an event: 'event / <name> / <start> / <end>'\n");
+        sb.append("To mark a task as done: 'mark / <number>'\n");
+        sb.append("To unmark a task: 'unmark / <number>'\n");
+        sb.append("To delete a task: 'delete / <number> '\n");
         sb.append("To clear the list: 'clearList'\n");
         sb.append("To save the list: 'save'\n");
-        sb.append("To find tasks using keywords: 'find'\n");
+        sb.append("To find tasks using keywords: 'find / <keyword>'\n");
 
         return sb.toString();
     }
 
-    public void printEchoInstruction() {
-        printLine("Start by typing something and Dukey will echo!! Type bye to exit!! ");
-    }
-
-    public void close() {
-        scanner.close();
-    }
 
 }

@@ -2,12 +2,9 @@ package duke;
 
 import java.io.FileNotFoundException;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -56,25 +53,6 @@ public class Duke extends Application {
 
 
     /**
-     * Takes in user input and prints it back to the user.
-     */
-    public void echo() {
-        while (true) {
-            String input = ui.readEchoInput();
-            if (input.equals("bye")) {
-                break;
-            }
-            ui.echo(input);
-        }
-        ui.printGoodbyeMessage();
-    }
-
-    public int getInputStatus() {
-        return this.inputStatus;
-    }
-
-
-    /**
      * Initiates the DukeyList by loading a save, then scans for and performs commands from the user.
      */
     public String runDuke(String input) {
@@ -116,11 +94,6 @@ public class Duke extends Application {
             case CLEARSAVE:
                 taskList.clearSave(storage);
                 break;
-            case BYE:
-                return "DukeyList saved! Exiting now...";
-            case FORCESTOP:
-                //isForceStopped = true;
-                break;
             }
         } catch (DukeyException e) {
             sb.append(ui.printExceptionMessage(e));
@@ -131,8 +104,8 @@ public class Duke extends Application {
 
     }
 
-    public String printInstruction() {
-        return ui.printInstruction();
+    public String getInstruction() {
+        return ui.getWelcomeMessage() + ui.printInstruction();
     }
 
     public String loadDuke() {
@@ -155,7 +128,7 @@ public class Duke extends Application {
             response = ui.printExceptionMessage(e);
         }
 
-        return response + ui.printGoodbyeMessage();
+        return response + ui.getGoodbyeMessage() + '\n' + "Exiting...";
     }
 
     @Override
@@ -202,11 +175,11 @@ public class Duke extends Application {
 
         //Handle user input
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput(5);
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput(5);
+            handleUserInput();
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -216,26 +189,12 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput(int a) {
+    private void handleUserInput() {
         String userText = userInput.getText();
-        String response = "";
         String dukeText = getResponse(userText);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
@@ -250,10 +209,5 @@ public class Duke extends Application {
     public String getResponse(String input) {
         return "DukeyList:  " + input;
     }
-
-    public String trySomething(String input) {
-        return input + " good";
-    }
-
 
 }

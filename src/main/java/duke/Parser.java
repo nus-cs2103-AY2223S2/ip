@@ -32,40 +32,43 @@ public class Parser {
         if (input.length() < 3) {
             throw new DukeyException("Invalid Command!");
         }
-        if (input.substring(0,3).strip().equals("tod")) {
+
+        input = input.substring(0,3);
+
+        if (input.equals("tod")) {
             return ActionEnum.TODO;
         }
-        if (input.substring(0,3).strip().equals("dea")) {
+        if (input.equals("dea")) {
             return ActionEnum.DEADLINE;
         }
-        if (input.substring(0,3).strip().equals("eve")) {
+        if (input.equals("eve")) {
             return ActionEnum.EVENT;
         }
-        if (input.substring(0,3).strip().equals("lis")) {
+        if (input.equals("lis")) {
             return ActionEnum.LIST;
         }
-        if (input.substring(0,3).strip().equals("mar")) {
+        if (input.equals("mar")) {
             return ActionEnum.MARK;
         }
-        if (input.substring(0,3).strip().equals("unm")) {
+        if (input.equals("unm")) {
             return ActionEnum.UNMARK;
         }
-        if (input.substring(0,3).strip().equals("del")) {
+        if (input.equals("del")) {
             return ActionEnum.DELETE;
         }
-        if (input.substring(0,3).strip().equals("sav")) {
+        if (input.equals("sav")) {
             return ActionEnum.SAVE;
         }
-        if (input.substring(0,3).strip().equals("cle")) {
+        if (input.equals("cle")) {
             return ActionEnum.CLEARLIST;
         }
-        if (input.substring(0,3).strip().equals("bye")) {
+        if (input.equals("bye")) {
             return ActionEnum.BYE;
         }
-        if (input.substring(0,3).strip().equals("for")) {
+        if (input.equals("for")) {
             return ActionEnum.FORCESTOP;
         }
-        if (input.substring(0,3).strip().equals("fin")) {
+        if (input.equals("fin")) {
             return ActionEnum.FIND;
         }
 
