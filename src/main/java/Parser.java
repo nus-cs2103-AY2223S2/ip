@@ -1,5 +1,3 @@
-package parser;
-
 public class Parser {
   private String input;
   private String[] splitInput;
