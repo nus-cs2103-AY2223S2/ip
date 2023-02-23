@@ -1,6 +1,6 @@
 # User Guide
 
-####Welcome to the 2fort basement! Track all your mercenary tasks with this handy little PDA plug-in.
+###Welcome to the 2fort basement! Track all your mercenary tasks with this handy little PDA plug-in.
 ![Twofort](https://i.ytimg.com/vi/kAEpdjXAAXM/maxresdefault.jpg)
 
 ## Quick Start
