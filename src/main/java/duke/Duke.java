@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -33,9 +34,13 @@ import javafx.scene.layout.HBox;
  * This is the main class that serves as the entry point into the application
  */
 public class Duke extends Application {
+    @FXML
     private ScrollPane scrollPane;
+    @FXML
     private VBox dialogContainer;
+    @FXML
     private TextField userInput;
+    @FXML
     private Button sendButton;
     private Scene scene;
 
@@ -144,6 +149,7 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    @FXML
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
