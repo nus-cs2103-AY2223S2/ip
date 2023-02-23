@@ -1,14 +1,21 @@
 # User Guide
 
+Welcome to the 2fort basement! Track all your mercenary tasks with this handy little PDA plug-in.
+
 ## Features 
 
-### Feature-ABC
+### Create Tasks
 
 Description of the feature.
 
-### Feature-XYZ
+### Tag your tasks
 
 Description of the feature.
+
+### Save and Load Tasks
+
+Description of the feature.
+
 
 ## Usage
 
