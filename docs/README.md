@@ -44,18 +44,6 @@ Twofort remembers your tasks! Your tasks will persists in between sessions.
 
 ## Sample Usage
 
-### `Keyword` - Describe action
+![sample1]https://raw.githubusercontent.com/junianob/ip/master/src/main/resources/images/sample.png
 
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
+![sample2]https://raw.githubusercontent.com/junianob/ip/master/src/main/resources/images/sample2.png
