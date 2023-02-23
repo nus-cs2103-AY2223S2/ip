@@ -1,0 +1,5 @@
+T | 0 | gym
+T | 0 | sleep
+T | 0 | vibe
+T | 0 | sjdk
+T | 0 | yooo
