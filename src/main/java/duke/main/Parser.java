@@ -54,7 +54,7 @@ public class Parser {
      *                on hard disk.
      * @return Ui response to user.
      */
-    public String parse(String command, Ui ui, TaskList allTasks, Storage storage) {
+    public String parse(String command, Ui ui, TaskList allTasks, Storage storage, Storage storageArchive) {
 
         DateTimeFormatter dateTimeFormatter =
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -71,12 +71,14 @@ public class Parser {
                 Task oldTask = allTasks.getTask(taskIndex);
                 Task task = allTasks.markTaskAsDone(oldTask, taskIndex);
                 storage.saveListToFile(command, task, allTasks);
+                storageArchive.saveListToFile(command, task, allTasks);
                 return task.markAsDone();
             } else if (command.startsWith("unmark")) {
                 taskIndex = checkExceptionAndGetTask(command, allTasks);
                 Task oldTask = allTasks.getTask(taskIndex);
                 Task task = allTasks.unmarkTaskAsUndone(oldTask, taskIndex);
                 storage.saveListToFile(command, task, allTasks);
+                storageArchive.saveListToFile(command, task, allTasks);
                 return task.unmarkAsUndone();
             } else if (command.startsWith("todo")) {
                 DukeException.emptyCommandException(command);
@@ -86,6 +88,7 @@ public class Parser {
                         taskName, allTasks.getNumberOfTask() + 1);
                 allTasks.addTask(todo);
                 storage.saveListToFile(command, todo, allTasks);
+                storageArchive.saveListToFile(command, todo, allTasks);
                 return todo.printToDoTask();
             } else if (command.startsWith("deadline")) {
                 DukeException.emptyCommandException(command);
@@ -97,6 +100,7 @@ public class Parser {
                         taskName, taskDeadline, allTasks.getNumberOfTask() + 1);
                 allTasks.addTask(deadline);
                 storage.saveListToFile(command, deadline, allTasks);
+                storageArchive.saveListToFile(command, deadline, allTasks);
                 return deadline.printDeadlineTask();
             } else if (command.startsWith("event")) {
                 DukeException.emptyCommandException(command);
@@ -110,6 +114,7 @@ public class Parser {
                         taskName, eventStartTime, eventEndTime, allTasks.getNumberOfTask() + 1);
                 allTasks.addTask(event);
                 storage.saveListToFile(command, event, allTasks);
+                storageArchive.saveListToFile(command, event, allTasks);
                 return event.printEventTask();
             } else if (command.startsWith("delete")) {
                 taskIndex = checkExceptionAndGetTask(command, allTasks);
@@ -129,6 +134,13 @@ public class Parser {
                 String[] str = command.split("find");
                 String keyword = str[1];
                 return ui.printFindResults(keyword, allTasks);
+            } else if (command.equals("archive")) {
+                Storage storage1 = new Storage("data/archiveAll.txt");
+                storage1.loadTxtFile();
+                storage1.saveWholeListToFile(allTasks);
+                storage.clear();
+                allTasks.deleteAllTasks();
+                return ui.printArchiveMessage();
             } else if (command.equals("bye")){
                 return ui.printByeMessage();
             } else {

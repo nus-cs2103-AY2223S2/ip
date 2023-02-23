@@ -135,4 +135,8 @@ public class TaskList {
         return this.allTasks.size();
     }
 
+    public void deleteAllTasks() {
+        allTasks.removeAll(allTasks);
+    }
+
 }
