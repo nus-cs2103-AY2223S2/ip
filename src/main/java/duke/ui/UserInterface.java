@@ -63,7 +63,7 @@ public class UserInterface extends AnchorPane {
         String message = list.stream()
                 .map(task -> task.toString())
                 .reduce("", (a, b) -> a + "\n" + b);
-        showMessage("Here are your results\n"+message);
+        showMessage("Here are your results\n" + message);
     }
 
     @FXML

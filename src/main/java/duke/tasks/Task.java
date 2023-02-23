@@ -52,7 +52,7 @@ public abstract class Task {
      * @param s The string to deserialize from.
      * @return The deserialized task.
      */
-    public static Task deserialize(String s) throws Exception{
+    public static Task deserialize(String s) throws Exception {
         switch (s.charAt(0)) {
         case 'T':
             return Todo.deserialize(s);

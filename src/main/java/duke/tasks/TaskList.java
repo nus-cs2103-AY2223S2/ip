@@ -23,21 +23,22 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Creates a new TaskList.
+     *
+     * @param tasks The list of tasks.
+     */
+    public TaskList(List<Task> tasks) {
+        this.tasks = new ArrayList<>(tasks);
+        nextId = tasks.size() + 1;
+    }
+
+    /**
      * Returns a stream of tasks.
      *
      * @return a stream of tasks.
      */
     public int indexOf(Task t) {
         return tasks.indexOf(t);
-    }
-
-    /**
-     * Creates a new TaskList.
-     * @param tasks The list of tasks.
-     */
-    public TaskList(List<Task> tasks) {
-        this.tasks = new ArrayList<>(tasks);
-        nextId = tasks.size() + 1;
     }
 
     /**
@@ -104,6 +105,5 @@ public class TaskList implements Iterable<Task> {
     public java.util.Iterator<Task> iterator() {
         return tasks.iterator();
     }
-
 
 }
