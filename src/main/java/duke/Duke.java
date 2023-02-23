@@ -78,6 +78,8 @@ public class Duke extends Application {
      * Initiates the DukeyList by loading a save, then scans for and performs commands from the user.
      */
     public String runDuke(String input) {
+        assert !ui.equals(null) && !storage.equals(null) && !taskList.equals(null);
+        assert !input.equals("");
         StringBuilder sb = new StringBuilder();
         ActionEnum actionEnum = ActionEnum.BYE;
         try {
