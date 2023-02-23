@@ -49,6 +49,7 @@ public class TaskList {
      * @return the confirmation message for the user
      */
     public String addTask(Task task) {
+        assert !task.equals(null);
         this.list.add(task);
         return ui.printAddedMessage(task) + '\n' + printSize();
     }
@@ -58,6 +59,7 @@ public class TaskList {
      * the TaskList from a save File.
      */
     public void addTaskFromSave(Task task) {
+        assert !task.equals(null);
         this.list.add(task);
     }
 
@@ -221,6 +223,7 @@ public class TaskList {
      * @throws FileNotFoundException on missing save file
      */
     public int initiate(Storage storage) throws FileNotFoundException {
+        assert !storage.equals(null);
         storage.load(this);
 
         if (this.list.isEmpty()) {
@@ -235,6 +238,7 @@ public class TaskList {
      * Clears the save File.
      */
     public void clearSave(Storage storage) {
+        assert !storage.equals(null);
         storage.clearFile();
         ui.printClearedMessage();
     }
