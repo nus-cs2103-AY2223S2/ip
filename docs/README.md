@@ -29,17 +29,17 @@ Function | Command
 
 ## Features 
 
-### Create Tasks
+### Manage Tasks
 
-Description of the feature.
+Create and edit todos, deadlines and events. 
 
 ### Tag your tasks
 
-Description of the feature.
+Assign special tags to your tasks to group them together.
 
 ### Save and Load Tasks
 
-Description of the feature.
+Twofort remembers your tasks! Your tasks will persists in between sessions.
 
 
 ## Sample Usage
