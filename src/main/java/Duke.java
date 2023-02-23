@@ -2,13 +2,13 @@ import java.util.*;
 
 public class Duke {
     private static TaskArrayList tasks;
-    private static DataSaver dataSaver;
+    private static Storage dataSaver;
     private static Ui ui;
 
     public Duke() {
         ui = new Ui();
         try {
-            dataSaver = new DataSaver();
+            dataSaver = new Storage();
             tasks = new TaskArrayList(dataSaver.load());
         } catch (DukeException e) {
             ui.showLoadingError();
