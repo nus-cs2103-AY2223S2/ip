@@ -49,12 +49,12 @@ public class MainWindow extends AnchorPane {
         if(response.split(" ",2)[0].equals("[E]")){ //error message
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeErrorImage)
+                    DialogBox.getTwofortDialog(response, dukeErrorImage)
             );
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    DialogBox.getTwofortDialog(response, dukeImage)
             );
         }
         userInput.clear();
@@ -62,6 +62,6 @@ public class MainWindow extends AnchorPane {
 
     private void getWelcomeMessage(){
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Howdy pardner! It's time to get to work!", dukeImage));
+                DialogBox.getTwofortDialog("Howdy pardner! It's time to get to work!", dukeImage));
     }
 }
