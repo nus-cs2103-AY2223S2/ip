@@ -46,10 +46,14 @@ public class Event extends Task {
      * @return Event created based on the user's input
      * @throws DukeyException on invalid String provided for date
      */
-    public static Event createEvent(Ui ui) throws DukeyException {
-        String eventName = ui.readTaskName("Event");
-        LocalDate eventStart = ui.readTime("Event start time");
-        LocalDate eventEnd = ui.readTime("Event end time");
+    public static Event createEvent(Ui ui, String input) throws DukeyException {
+        String[] inputArray = input.split("/");
+        if (inputArray.length != 4) {
+            throw new DukeyException("Error! Invalid Format!");
+        }
+        String eventName = ui.readTaskName(inputArray[1]);
+        LocalDate eventStart = ui.readTime(inputArray[2]);
+        LocalDate eventEnd = ui.readTime(inputArray[3]);
         return new Event(eventName, eventStart, eventEnd);
     }
 

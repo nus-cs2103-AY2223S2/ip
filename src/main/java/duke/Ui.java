@@ -18,31 +18,23 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    public ActionEnum readCommand() throws DukeyException {
-        this.print("Dukey command: ");
-        String input = this.readLine();
-        return parser.parseCommand(input);
+    public ActionEnum readCommand(String command) throws DukeyException {
+        return parser.parseCommand(command);
     }
 
     public String readEchoInput() {
         return this.readLine();
     }
 
-    public String readTaskName(String type) throws DukeyException {
-        this.print(type + " task name: ");
-        String input = this.readLine();
+    public String readTaskName(String input) throws DukeyException {
         return parser.parseTaskName(input);
     }
 
-    public LocalDate readTime(String type) throws DukeyException {
-        this.print(type + ": ");
-        String timeString = this.readLine();
+    public LocalDate readTime(String timeString) throws DukeyException {
         return parser.parseDate(timeString);
     }
 
-    public String readKeyword() throws DukeyException {
-        this.print("Search keyword: ");
-        String keyword = this.readLine();
+    public String readKeyword(String keyword) throws DukeyException {
         return parser.parseKeyword(keyword);
     }
 
@@ -70,8 +62,8 @@ public class Ui {
         this.printLine("Welcome welcome!");
     }
 
-    public void printGoodbyeMessage() {
-        this.printLine("DukeyList: Goodbye!! Please return to Dukey again soon!! :)");
+    public String printGoodbyeMessage() {
+        return "DukeyList: Goodbye!! Please return to Dukey again soon!! :)";
     }
 
     public void printLnBreak() {
@@ -90,108 +82,123 @@ public class Ui {
         this.printLine("Error! Unknown command. Try again!");
     }
 
-    public void printTask(int taskNumber, Task task) {
-        this.printLine((taskNumber + 1) + ". " + task);
+    public String printTask(int taskNumber, Task task) {
+        return (taskNumber + 1) + ". " + task;
     }
 
-    public void printTask(Task task) {
-        this.printLine(task.toString());
+    public String printTask(Task task) {
+        return task.toString();
     }
 
-    public void printEmptyListMessage() {
-        this.printLine("DukeyList: DukeyList is empty!");
+    public String printEmptyListMessage() {
+        return "DukeyList: DukeyList is empty!";
     }
 
-    public void readList(ArrayList<Task> list) {
+    public String readList(ArrayList<Task> list) {
+        StringBuilder sb = new StringBuilder();
         if (list.isEmpty()) {
-            this.printEmptyListMessage();
+            sb.append(printEmptyListMessage());
         } else {
-            this.printLine("DukeyList:");
+            sb.append("DukeyList:\n");
             Iterator<Task> it = list.iterator();
-            it.forEachRemaining(x -> System.out.println((list.indexOf(x) + 1) + ". " + x.toString()));
+            it.forEachRemaining(x -> sb.append((list.indexOf(x) + 1) + ". " + x.toString() + '\n'));
         }
+        return sb.toString();
     }
 
-    public void printFoundTaskList(ArrayList<TaskNumberPair> foundTaskList) {
+    public String printFoundTaskList(ArrayList<TaskNumberPair> foundTaskList) {
+        StringBuilder sb = new StringBuilder();
         if (foundTaskList.isEmpty()) {
-            this.printLine("No tasks found matching this keyword!");
+            sb.append("No tasks found matching this keyword!");
         } else {
-            this.printLine("DukeyList found these tasks matching the keyword:");
+            sb.append("DukeyList found these tasks matching the keyword:\n");
             Iterator<TaskNumberPair> it = foundTaskList.iterator();
-            it.forEachRemaining(x -> this.printLine((x.getNumber() + 1) + ". " + x.getTask()));
+            it.forEachRemaining(x -> sb.append((x.getNumber() + 1) + ". " + x.getTask() + "\n"));
         }
+
+        return sb.toString();
     }
 
-    public void printAddedMessage(Task task) {
-        this.printLine("");
-        this.printLine(task.getMessageWhenAdded() + " " + task);
+    public String printAddedMessage(Task task) {
+        return '\n' + task.getMessageWhenAdded() + "\n" + task;
     }
 
-    public void printMarkedMessage(int taskNumber, Task taskToMark) {
-        this.printLine("DukeyList: Task number " + (taskNumber + 1) + " has been marked as done!");
-        this.printTask(taskNumber, taskToMark);
+    public String printMarkedMessage(int taskNumber, Task taskToMark) {
+        String response = "";
+        response +=  "DukeyList: Task number " + (taskNumber + 1) + " has been marked as done!\n";
+        response += printTask(taskNumber, taskToMark);
+        return response;
     }
 
-    public void printUnmarkedMessage(int taskNumber, Task taskToUnmark) {
-        this.printLine("DukeyList: Task number " + (taskNumber + 1) + " has been unmarked.");
-        this.printTask(taskNumber, taskToUnmark);
+    public String printUnmarkedMessage(int taskNumber, Task taskToUnmark) {
+        String response = "";
+        response +=  "DukeyList: Task number " + (taskNumber + 1) + " has been unmarked.\n";
+        response += printTask(taskNumber, taskToUnmark);
+        return response;
     }
 
-    public void printDeletedMessage(Task taskToDelete) {
-        this.printLine("DukeyList: The following item has been removed!");
-        this.printTask(taskToDelete);
+    public String printDeletedMessage(Task taskToDelete) {
+        String response = "";
+        response += "DukeyList: The following item has been removed!\n";
+        response += this.printTask(taskToDelete);
+        return response;
     }
 
-    public void printSavedMessage() {
-        System.out.println("DukeList saved!");
+    public String printSavedMessage() {
+        return "DukeList saved!";
     }
 
 
-    public void printLoadMessage(int status) {
+    public String printLoadMessage(int status) {
         if (status == 0) {
-            this.printLine("DukeyList is empty, starting a new list.");
+            return "DukeyList is empty, starting a new list.\n";
         } else {
-            System.out.println("Saved list loaded:");
+            return "Saved list loaded:\n";
         }
     }
 
-    public void printClearedMessage() {
-        this.printLine("DukeyList save has been cleared.");
+    public String printClearedMessage() {
+        return "DukeyList save has been cleared.";
     }
 
 
-    public void printSize(int size) {
+    public String printSize(int size) {
         if (size == 1) {
-            printLine("DukeyList now has 1 task.");
+           return "DukeyList now has 1 task.\n";
         } else {
-            printLine("DukeyList now has " + size + " tasks.");
+            return "DukeyList now has " + size + " tasks.\n";
         }
     }
 
-    public void printExceptionMessage(DukeyException e) {
-        printLine(e.getMessage());
-        printErrorBreak();
+    public String printExceptionMessage(DukeyException e) {
+        return ":(\n" + e.getMessage();
     }
 
-    public void printInstruction() {
-        printLine("DukeyList: Welcome to DukeyList!! To use DukeyList, " +
-                "type the appropriate command and follow the prompts:");
-        printLine("To list: 'list'");
-        printLine("To exit: 'bye'");
-        printLine("To add a todo: 'todo'");
-        printLine("To add a deadline: 'deadline'");
-        printLine("To add an event: 'event'");
-        printLine("To mark a task as done: 'mark'");
-        printLine("To unmark a task: 'unmark'");
-        printLine("To delete a task: 'delete'");
-        printLine("To clear the list: 'clearList'");
-        printLine("To save the list: 'save'");
-        printLine("To find tasks using keywords: 'find'");
-        printLnBreak();
+    public String printInstruction() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("DukeyList: Welcome to DukeyList!! To use DukeyList, " +
+                "type the appropriate command and follow the prompts:\n");
+        sb.append("To list: 'list'\n");
+        sb.append("To exit: 'bye'\n");
+        sb.append("To add a todo: 'todo / <name> '\n");
+        sb.append("To add a deadline: 'deadline / <name> / deadline '\n");
+        sb.append("To add an event: 'event'\n");
+        sb.append("To mark a task as done: 'mark'\n");
+        sb.append("To unmark a task: 'unmark'\n");
+        sb.append("To delete a task: 'delete'\n");
+        sb.append("To clear the list: 'clearList'\n");
+        sb.append("To save the list: 'save'\n");
+        sb.append("To find tasks using keywords: 'find'\n");
+
+        return sb.toString();
     }
 
     public void printEchoInstruction() {
         printLine("Start by typing something and Dukey will echo!! Type bye to exit!! ");
+    }
+
+    public void close() {
+        scanner.close();
     }
 
 }

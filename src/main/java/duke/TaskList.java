@@ -46,11 +46,11 @@ public class TaskList {
 
     /**
      * Adds a new Task to the TaskList and prints out a confirmation message for the user.
+     * @return the confirmation message for the user
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.list.add(task);
-        ui.printAddedMessage(task);
-        printSize();
+        return ui.printAddedMessage(task) + '\n' + printSize();
     }
 
     /**
@@ -63,21 +63,26 @@ public class TaskList {
 
     /**
      * Prints out all the Tasks in the TaskList.
+     * @return the string containing the list of tasks
      */
-    public void readList() {
-        ui.readList(this.list);
+    public String readList() {
+        return ui.readList(this.list);
     }
 
     /**
      * Marks a particular Task as done. This method uses the Ui class to read input from the user to get
      * details about which Task is to be marked.
+     * @return the confirmation message for the user
      * @throws DukeyException on invalid Task number from user input
      */
-    public void mark() throws DukeyException {
-        String taskNumberString = ui.getTaskNumber();
+    public String mark(String input) throws DukeyException {
+        String[] inputArray = input.split("/");
+        if (inputArray.length != 2) {
+            throw new DukeyException("Error, Invalid Format!");
+        }
         int taskNumber;
         try {
-            taskNumber = parseInt(taskNumberString.strip()) - 1;
+            taskNumber = parseInt(inputArray[1].strip()) - 1;
         } catch (NumberFormatException e) {
             throw new DukeyException("Error! Invalid task number format!");
         }
@@ -90,19 +95,23 @@ public class TaskList {
 
         Task taskToMark = this.list.get(taskNumber);
         taskToMark.setMarked();
-        ui.printMarkedMessage(taskNumber, taskToMark);
+        return ui.printMarkedMessage(taskNumber, taskToMark);
     }
 
     /**
      * Marks a particular Task as undone. This method uses the Ui class to read input from the user to get
      * details about which Task is to be unmarked.
+     * @return the confirmation message for the user
      * @throws DukeyException on invalid task number from user input
      */
-    public void unmark() throws DukeyException {
-        String taskNumberString = ui.getTaskNumber();
+    public String unmark(String input) throws DukeyException {
+        String[] inputArray = input.split("/");
+        if (inputArray.length != 2) {
+            throw new DukeyException("Error, Invalid Format!");
+        }
         int taskNumber;
         try {
-            taskNumber = parseInt(taskNumberString.strip()) - 1;
+            taskNumber = parseInt(inputArray[1].strip()) - 1;
         } catch (NumberFormatException e) {
             throw new DukeyException("Error! Invalid task number format!");
         }
@@ -114,19 +123,23 @@ public class TaskList {
         }
         Task taskToUnmark = this.list.get(taskNumber);
         taskToUnmark.setUnmarked();
-        ui.printUnmarkedMessage(taskNumber, taskToUnmark);
+        return ui.printUnmarkedMessage(taskNumber, taskToUnmark);
     }
 
     /**
      * Deletes a Task from the TaskList. This method uses the Ui class to read input from the user to get
      * details about which Task is to be deleted.
+     * @return the confirmation message for the user
      * @throws DukeyException on invalid Task number from user input
      */
-    public void delete() throws DukeyException {
-        String taskNumberString = ui.getTaskNumber();
+    public String delete(String input) throws DukeyException {
+        String[] inputArray = input.split("/");
+        if (inputArray.length != 2) {
+            throw new DukeyException("Error, Invalid Format!");
+        }
         int taskNumber;
         try {
-            taskNumber = parseInt(taskNumberString.strip()) - 1;
+            taskNumber = parseInt(inputArray[1].strip()) - 1;
         } catch (NumberFormatException e) {
             throw new DukeyException("Error! Invalid task number format!");
         }
@@ -138,23 +151,23 @@ public class TaskList {
         }
 
         Task taskToRemove = list.get(taskNumber);
-        ui.printDeletedMessage(taskToRemove);
+        String response = ui.printDeletedMessage(taskToRemove);
         list.remove(taskNumber);
-        this.printSize();
+        response += '\n' + this.printSize();
+        return response;
     }
 
     /**
      * Finds Tasks in the TaskList that contains a particular keyword. This method
      * uses the Ui class to read input from the user to get the keyword. The found Tasks are then printed out.
+     * @return the confirmation message for the user
      */
-    public void find() {
-        String keyword = "";
-        try {
-            keyword = ui.readKeyword();
-        } catch (DukeyException e) {
-            ui.printExceptionMessage(e);
+    public String find(String input) throws DukeyException {
+        String[] inputArray = input.split("/");
+        if (inputArray.length != 2) {
+            throw new DukeyException("Error! Invalid format!");
         }
-
+        String keyword = ui.readKeyword(inputArray[1]);
         String confirmedKeyword = keyword;
         ArrayList<TaskNumberPair> foundTaskList = new ArrayList<>();
         Iterator<Task> it = getIterator();
@@ -165,7 +178,7 @@ public class TaskList {
             }
         });
 
-        ui.printFoundTaskList(foundTaskList);
+        return ui.printFoundTaskList(foundTaskList);
 
     }
 
@@ -178,31 +191,28 @@ public class TaskList {
 
     /**
      * Uses the Ui class to print out the number of Tasks in the TaskList.
+     * @return the string containing the size
      */
-    public void printSize() {
-        ui.printSize(getSize());
+    public String printSize() {
+        return ui.printSize(getSize());
     }
 
     /**
      * Clears the TaskList.
      */
-    public void clearList() {
+    public String clearList() {
         this.list.clear();
-        System.out.println("DukeyList cleared! DukeyList is now empty.");
+        return ui.printClearedMessage();
     }
 
     /**
      * Saves the current TaskList to the save File.
+     * @return the confirmation message for the user
      * @param storage deals with the saving and loading of data to the save File.
      */
-    public void save(Storage storage) {
-        try {
-            storage.save(this);
-        } catch (DukeyException e) {
-            ui.printExceptionMessage(e);
-        }
-
-        ui.printSavedMessage();
+    public String save(Storage storage) throws DukeyException {
+        storage.save(this);
+        return ui.printSavedMessage();
     }
 
     /**
@@ -210,14 +220,13 @@ public class TaskList {
      * @param storage deals with the saving and loading of data to the save File.
      * @throws FileNotFoundException on missing save file
      */
-    public void initiate(Storage storage) throws FileNotFoundException {
+    public int initiate(Storage storage) throws FileNotFoundException {
         storage.load(this);
 
         if (this.list.isEmpty()) {
-            ui.printLoadMessage(0);
+            return 0;
         } else {
-            ui.printLoadMessage(1);
-            ui.readList(list);
+            return 1;
         }
 
     }

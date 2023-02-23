@@ -29,43 +29,43 @@ public class Parser {
         if (checkIfEmpty(input)) {
             throw new DukeyException("Error! Input cannot be empty.");
         }
-        if (input.equals("todo")) {
+        if (input.length() < 3) {
+            throw new DukeyException("Invalid Command!");
+        }
+        if (input.substring(0,3).strip().equals("tod")) {
             return ActionEnum.TODO;
         }
-        if (input.equals("deadline")) {
+        if (input.substring(0,3).strip().equals("dea")) {
             return ActionEnum.DEADLINE;
         }
-        if (input.equals("event")) {
+        if (input.substring(0,3).strip().equals("eve")) {
             return ActionEnum.EVENT;
         }
-        if (input.equals("list")) {
+        if (input.substring(0,3).strip().equals("lis")) {
             return ActionEnum.LIST;
         }
-        if (input.equals("mark")) {
+        if (input.substring(0,3).strip().equals("mar")) {
             return ActionEnum.MARK;
         }
-        if (input.equals("unmark")) {
+        if (input.substring(0,3).strip().equals("unm")) {
             return ActionEnum.UNMARK;
         }
-        if (input.equals("delete")) {
+        if (input.substring(0,3).strip().equals("del")) {
             return ActionEnum.DELETE;
         }
-        if (input.equals("save")) {
+        if (input.substring(0,3).strip().equals("sav")) {
             return ActionEnum.SAVE;
         }
-        if (input.equals("clearlist")) {
+        if (input.substring(0,3).strip().equals("cle")) {
             return ActionEnum.CLEARLIST;
         }
-        if (input.equals("clearsave")) {
-            return ActionEnum.CLEARSAVE;
-        }
-        if (input.equals("bye")) {
+        if (input.substring(0,3).strip().equals("bye")) {
             return ActionEnum.BYE;
         }
-        if (input.equals("forcestop")) {
+        if (input.substring(0,3).strip().equals("for")) {
             return ActionEnum.FORCESTOP;
         }
-        if (input.equals("find")) {
+        if (input.substring(0,3).strip().equals("fin")) {
             return ActionEnum.FIND;
         }
 

@@ -41,9 +41,13 @@ public class Deadline extends Task {
      * @return Deadline created based on the user's input
      * @exception DukeyException on invalid user input
      */
-    public static Deadline createDeadline(Ui ui) throws DukeyException {
-        String deadlineName = ui.readTaskName("Deadline");
-        LocalDate deadlineTime = ui.readTime("Deadline");
+    public static Deadline createDeadline(Ui ui, String input) throws DukeyException {
+        String[] inputArray = input.split("/");
+        if (inputArray.length != 3) {
+            throw new DukeyException("Error! invalid format!");
+        }
+        String deadlineName = ui.readTaskName(inputArray[1]);
+        LocalDate deadlineTime = ui.readTime(inputArray[2]);
 
         return new Deadline(deadlineName, deadlineTime);
 

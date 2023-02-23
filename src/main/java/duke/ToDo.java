@@ -32,8 +32,12 @@ public class ToDo extends Task {
      * @return ToDo created based on user's input
      * @throws DukeyException on invalid user input for ToDo name
      */
-    public static ToDo createToDo(Ui ui) throws DukeyException {
-        String toDoName = ui.readTaskName("ToDo");
+    public static ToDo createToDo(Ui ui, String input) throws DukeyException {
+        String[] inputArray = input.split("/");
+        if (inputArray.length != 2) {
+            throw new DukeyException("Error! Invalid Format!");
+        }
+        String toDoName = ui.readTaskName(inputArray[1]);
         return new ToDo(toDoName);
     }
 
