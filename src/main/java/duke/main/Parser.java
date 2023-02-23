@@ -133,12 +133,11 @@ public class Parser {
         } catch (DukeException d) {
             return d.getMessage();
         } catch (NumberFormatException nfe) {
-            return "\t____________________________________________________________" +
-                    "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be a non-integer." +
-                    "\n\t____________________________________________________________";
+            return "\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be a non-integer.";
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return "uncaught exception";
+        assert false: "Uncaught error";
+        return "Uncaught error";
     }
 }

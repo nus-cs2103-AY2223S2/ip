@@ -33,12 +33,14 @@ public class TaskList {
                     true, oldTask.getTask(),
                     this.allTasks.size());
             this.allTasks.set(taskIndex, todo);
+            assert taskIndex == this.allTasks.indexOf(oldTask);
             oldTask = todo;
         } else if (oldTask.getTaskType().equals("[D]")) {
             Deadline deadline = new Deadline(oldTask.getTaskNumber(),
                     true, oldTask.getTask(),
                     oldTask.getDeadline(), this.allTasks.size());
             this.allTasks.set(taskIndex, deadline);
+            assert taskIndex == this.allTasks.indexOf(oldTask);
             oldTask = deadline;
         } else if (oldTask.getTaskType().equals("[E]")) {
             Event event = new Event(oldTask.getTaskNumber(),
@@ -46,7 +48,10 @@ public class TaskList {
                     oldTask.getEventStartTime(),
                     oldTask.getEventEndTime(), this.allTasks.size());
             this.allTasks.set(taskIndex, event);
+            assert taskIndex == this.allTasks.indexOf(oldTask);
             oldTask = event;
+        } else {
+            assert false: "No such class type";
         }
         return oldTask;
     }
@@ -64,17 +69,22 @@ public class TaskList {
                     false, oldTask.getTask(),
                     this.allTasks.size());
             this.allTasks.set(taskIndex, todo);
+            assert taskIndex == this.allTasks.indexOf(oldTask);
         } else if (oldTask.getTaskType().equals("[D]")) {
             Deadline deadline = new Deadline(oldTask.getTaskNumber(),
                     false, oldTask.getTask(),
                     oldTask.getDeadline(), this.allTasks.size());
             this.allTasks.set(taskIndex, deadline);
+            assert taskIndex == this.allTasks.indexOf(oldTask);
         } else if (oldTask.getTaskType().equals("[E]")) {
             Event event = new Event(oldTask.getTaskNumber(),
                     false, oldTask.getTask(),
                     oldTask.getEventStartTime(),
                     oldTask.getEventEndTime(), this.allTasks.size());
             this.allTasks.set(taskIndex, event);
+            assert taskIndex == this.allTasks.indexOf(oldTask);
+        } else {
+            assert false: "No such class type";
         }
         return oldTask;
     }

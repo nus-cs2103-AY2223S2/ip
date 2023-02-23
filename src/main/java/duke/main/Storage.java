@@ -39,6 +39,8 @@ public class Storage {
         List<Task> allTasks = new ArrayList<>();
 
         File file3 = new File(this.filePathParent);
+        assert this.filePath != "";
+        assert this.filePathParent != null;
         if (!file3.exists()) {
             file3.mkdir();
         }
@@ -77,6 +79,8 @@ public class Storage {
                             LocalDateTime.parse(taskTiming[0], dateTimeFormatter1),
                             LocalDateTime.parse(taskTiming[1], dateTimeFormatter1), taskList.size());
                     allTasks.add(event);
+                } else {
+                    assert false: "Erroneous task";
                 }
             }
         }
