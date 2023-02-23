@@ -21,12 +21,6 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    /**
-     * Getter for task isDone status.
-     */
-    public boolean isDone() {
-        return this.isDone;
-    }
 
     /**
      * Marks task as done.
@@ -45,7 +39,7 @@ public abstract class Task {
     public String getTags() {
         String output = "tags: ";
         for(int i = 0; i < tags.size(); i++) {
-            output+="[" + tags.get(i)+"] ";
+            output += "[" + tags.get(i)+ "] ";
         }
         output.strip();
         return output;
