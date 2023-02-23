@@ -14,10 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import wessy.components.Parser;
-import wessy.task.Task;
-import wessy.task.ToDo;
-import wessy.task.Deadline;
-import wessy.task.Event;
+import wessy.task.*;
 
 /**
  *
@@ -90,6 +87,14 @@ public class Storage {
                     assert numOfComponents == 5;
                     tasks.add(new Event(taskComponents[2], Parser.parseDateTime(taskComponents[3]),
                             Parser.parseDateTime(taskComponents[4]), isDone));
+                    break;
+                case 'A':
+                    assert numOfComponents == 4;
+                    tasks.add(new DoAfterTask(taskComponents[2], taskComponents[3], isDone));
+                    break;
+                case 'F':
+                    assert numOfComponents == 4;
+                    tasks.add(new FixedDurationTask(taskComponents[2], taskComponents[3], isDone));
                     break;
                 }
             }

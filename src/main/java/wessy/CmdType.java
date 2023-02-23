@@ -13,8 +13,10 @@ public enum CmdType {
     MARK("mark"),
     UNMARK("unmark"),
     TODO("todo"),
-    DEADLINE("deadline"),
-    EVENT("event"),
+    DEADLINE("deadline", "/by"),
+    EVENT("event", "/from", "/to"),
+    DOAFTER("doafter", "/after"),
+    FIXEDDURATION("fix", "/need"),
     DELETE("delete"),
     FIND("find"),
     CLEAR("clear");
@@ -26,19 +28,24 @@ public enum CmdType {
         COMMANDS.put("todo", CmdType.TODO);
         COMMANDS.put("deadline", CmdType.DEADLINE);
         COMMANDS.put("event", CmdType.EVENT);
+        COMMANDS.put("doafter", CmdType.DOAFTER);
+        COMMANDS.put("fix", CmdType.FIXEDDURATION);
         COMMANDS.put("mark", CmdType.MARK);
         COMMANDS.put("unmark", CmdType.UNMARK);
         COMMANDS.put("delete", CmdType.DELETE);
         COMMANDS.put("find", CmdType.FIND);
         COMMANDS.put("clear", CmdType.CLEAR);
     }
+
     private final String cmd;
+    private final String[] specifiers;
 
     /** Constructs an instance of CmdType that corresponds to the different
      * types of commands, along with the command in its text form.
      */
-    CmdType(String str) {
+    CmdType(String str, String... specifiers) {
         this.cmd = str;
+        this.specifiers = specifiers;
     }
 
     /**
@@ -69,5 +76,9 @@ public enum CmdType {
      */
     public int getStrLength() {
         return cmd.length();
+    }
+
+    public String[] getSpecifiers() {
+        return specifiers;
     }
 }

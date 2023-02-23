@@ -15,6 +15,8 @@ import wessy.components.Parser;
 import wessy.task.Task;
 import wessy.task.ToDo;
 import wessy.task.Deadline;
+import wessy.task.DoAfterTask;
+import wessy.task.FixedDurationTask;
 import wessy.task.Event;
 
 import wessy.exceptions.integer.EmptyListException;
@@ -51,16 +53,28 @@ public class TaskList {
      * @return
      * @throws DateTimeParseException
      */
-    public Task add(String[] strings) throws DateTimeParseException {
+    public Task add(String[] strings, CmdType cmd) throws DateTimeParseException {
         int oldSize = tasks.size();
-        int len = strings.length;
-        if (len == 1) {
-            tasks.add(new ToDo(Parser.removeSpacePadding(strings[0])));
-        } else if (len == 2) {
-            tasks.add(new Deadline(Parser.removeSpacePadding(strings[0]), Parser.parseDateTime(strings[1])));
-        } else if (len == 3) {
-            tasks.add(new Event(Parser.removeSpacePadding(strings[0]), Parser.parseDateTime(strings[1]),
-                    Parser.parseDateTime(strings[2])));
+
+        switch (cmd) {
+            case TODO:
+                tasks.add(new ToDo(Parser.removeSpacePadding(strings[0])));
+                break;
+            case DEADLINE:
+                tasks.add(new Deadline(Parser.removeSpacePadding(strings[0]), Parser.parseDateTime(strings[1])));
+                break;
+            case DOAFTER:
+                tasks.add(new DoAfterTask(Parser.removeSpacePadding(strings[0]),
+                        Parser.removeSpacePadding(strings[1])));
+                break;
+            case FIXEDDURATION:
+                tasks.add(new FixedDurationTask(Parser.removeSpacePadding(strings[0]),
+                        Parser.removeSpacePadding(strings[1])));
+                break;
+            case EVENT:
+                tasks.add(new Event(Parser.removeSpacePadding(strings[0]), Parser.parseDateTime(strings[1]),
+                        Parser.parseDateTime(strings[2])));
+                break;
         }
         assert tasks.size() == oldSize + 1;
         return tasks.get(getSize() - 1);

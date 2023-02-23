@@ -51,34 +51,42 @@ public class Parser {
      * initialise a task.
      */
     public static String[] getTaskComponents(String userInput, CmdType cmd) {
-        assert cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT;
-        String byStr = "/by";
-        String fromStr = "/from";
-        String toStr = "/to";
+        assert cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT
+                || cmd == CmdType.DOAFTER || cmd == CmdType.FIXEDDURATION;
 
-        int firstIdx;
-        int secondIdx;
-
-        String description = userInput.substring(cmd.getStrLength() + 1);
+        String[] specifiers = cmd.getSpecifiers();
+        String remainingStr = userInput.substring(cmd.getStrLength() + 1);
 
         switch (cmd) {
         case TODO:
-            return new String[]{description};
+            return new String[]{remainingStr};
 
         case DEADLINE:
-            firstIdx = description.indexOf(byStr);
-            return new String[]{removeSpacePadding(description.substring(START, firstIdx)),
-                    removeSpacePadding(description.substring(firstIdx + byStr.length()))};
+            // Fallthrough
+        case DOAFTER:
+            // Fallthrough
+        case FIXEDDURATION:
+            return singleSpecifierStrSlicer(remainingStr, specifiers[0]);
 
         case EVENT:
-            firstIdx = description.indexOf(fromStr);
-            secondIdx = description.indexOf(toStr);
-            return new String[]{removeSpacePadding(description.substring(START, firstIdx)),
-                    removeSpacePadding(description.substring(firstIdx + fromStr.length(), secondIdx)),
-                    removeSpacePadding(description.substring(secondIdx + toStr.length()))};
+            String from = specifiers[0];
+            String to = specifiers[1];
+            int firstIdx = remainingStr.indexOf(from);
+            int secondIdx = remainingStr.indexOf(to);
+            return new String[]{removeSpacePadding(remainingStr.substring(START, firstIdx)),
+                    removeSpacePadding(remainingStr.substring(firstIdx + from.length(), secondIdx)),
+                    removeSpacePadding(remainingStr.substring(secondIdx + to.length()))};
         }
-
         return new String[0];
+    }
+
+    private static String[] singleSpecifierStrSlicer(String str, String specifier) {
+        int idx = str.indexOf(specifier);
+        if (str.contains(specifier + "s")) {
+            specifier += "s";
+        }
+        return new String[]{removeSpacePadding(str.substring(START, idx)),
+                removeSpacePadding(str.substring(idx + specifier.length()))};
     }
 
     /**

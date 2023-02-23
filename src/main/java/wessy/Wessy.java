@@ -140,17 +140,18 @@ public class Wessy {
             case DEADLINE:
                 // Fallthrough
             case EVENT:
+                // Fallthrough
+            case DOAFTER:
+                // Fallthrough
+            case FIXEDDURATION:
 
                 UserInputChecker.checkMissingInput(userInput, cmd);
                 UserInputChecker.checkMissingKeyword(userInput, cmd);
-                if (cmd == CmdType.DEADLINE) {
-                    UserInputChecker.checkDeadlineMissingInput(userInput);
-                } else if (cmd == CmdType.EVENT) {
-                    UserInputChecker.checkEventMissingInput(userInput);
+                if (cmd != CmdType.TODO) {
+                    UserInputChecker.checkSpecifierMissingInput(userInput, cmd);
                 }
-
                 String[] taskComponents = Parser.getTaskComponents(userInput, cmd);
-                Task newTask = tasks.add(taskComponents);
+                Task newTask = tasks.add(taskComponents, cmd);
                 saveToStorage();
                 return ui.getAddedMessage(newTask, tasks.getSize());
 

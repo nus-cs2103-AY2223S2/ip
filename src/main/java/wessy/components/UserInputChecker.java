@@ -21,10 +21,6 @@ public class UserInputChecker {
     private static final int START = 0;
     private static final char SPACE = ' ';
     private static final String SPACE_AS_STR = Character.toString(SPACE);
-    private static final char DATE_SEPARATOR = '-';
-    private static final String BY_SPECIFIER = "/by";
-    private static final String FROM_SPECIFIER = "/from";
-    private static final String TO_SPECIFIER = "/to";
 
     /**
      * Throws MissingSpaceException when there is a missing space after the
@@ -76,25 +72,24 @@ public class UserInputChecker {
      * deadline command, or if the substring " /from" or " /to" is missing for event command.
      *
      * @param userInput The line of user input to be checked.
-     * @param cmd The specified command. Only accepts CmdType.DEADLINE and
-     *            CmdType.EVENT.
+     * @param cmd The specified command. Only accepts CmdType.DEADLINE and CmdType.EVENT.
      * @throws TimeSpecifierException If the required time specifier keyword is missing.
      */
     public static void checkMissingKeyword(String userInput, CmdType cmd) throws TimeSpecifierException {
-        String timeSpecifier = null;
+        assert hasSingleSpecifier(cmd) || cmd == CmdType.EVENT;
 
-        if (cmd == CmdType.DEADLINE && !userInput.contains(SPACE_AS_STR + BY_SPECIFIER)) {
-            timeSpecifier = BY_SPECIFIER;
-        } else if (cmd == CmdType.EVENT) {
-            if (!userInput.contains(SPACE_AS_STR + FROM_SPECIFIER)) {
-                timeSpecifier = FROM_SPECIFIER;
-            } else if (!userInput.contains(SPACE_AS_STR + TO_SPECIFIER)) {
-                timeSpecifier = TO_SPECIFIER;
+        String[] specifiers = cmd.getSpecifiers();
+        String missingSpecifier = null;
+
+        for (String specifier : specifiers) {
+            if (!userInput.contains(SPACE_AS_STR + specifier)) {
+                missingSpecifier = specifier;
+                break;
             }
         }
 
-        if (timeSpecifier != null) {
-            throw new TimeSpecifierException(timeSpecifier);
+        if (missingSpecifier != null) {
+            throw new TimeSpecifierException(missingSpecifier);
         }
     }
 
@@ -106,14 +101,21 @@ public class UserInputChecker {
      * @throws UnspecifiedTimeException if the "/by" time input is missing for
      * the deadline command.
      */
-    public static void checkDeadlineMissingInput(String userInput) throws UnspecifiedTimeException {
-        int pos = userInput.indexOf(BY_SPECIFIER);
+    private static void checkSingleSpecifierMissingInput(String userInput, CmdType cmd, String specifier) throws
+            UnspecifiedTimeException {
+        assert hasSingleSpecifier(cmd);
+
+        if (cmd == CmdType.FIXEDDURATION && userInput.contains(specifier + "s")) {
+            specifier += "s";
+        }
+
+        int pos = userInput.indexOf(specifier);
         UnspecifiedTimeException ex = null;
 
-        if (isAllSpaces(userInput.substring(CmdType.DEADLINE.getStrLength(), pos))) {
-            ex = new UnspecifiedTimeException(BY_SPECIFIER, true);
-        } else if (isAllSpaces(userInput.substring(pos + BY_SPECIFIER.length()))) {
-            ex = new UnspecifiedTimeException(BY_SPECIFIER, false);
+        if (isAllSpaces(userInput.substring(cmd.getStrLength(), pos))) {
+            ex = new UnspecifiedTimeException(specifier, true);
+        } else if (isAllSpaces(userInput.substring(pos + specifier.length()))) {
+            ex = new UnspecifiedTimeException(specifier, false);
         }
 
         if (ex != null) {
@@ -129,21 +131,31 @@ public class UserInputChecker {
      * @throws UnspecifiedTimeException if any of the time input is missing for
      * the event command.
      */
-    public static void checkEventMissingInput(String userInput) throws UnspecifiedTimeException {
-        int fPos = userInput.indexOf(FROM_SPECIFIER);
-        int tPos = userInput.indexOf(TO_SPECIFIER);
+    public static void checkSpecifierMissingInput(String userInput, CmdType cmd) throws UnspecifiedTimeException {
+        assert hasSingleSpecifier(cmd) || cmd == CmdType.EVENT;
+        String[] specifiers = cmd.getSpecifiers();
 
-        UnspecifiedTimeException ex = null;
-        if (isAllSpaces(userInput.substring(CmdType.EVENT.getStrLength(), fPos))) {
-            ex = new UnspecifiedTimeException(FROM_SPECIFIER, true);
-        } else if (isAllSpaces(userInput.substring(fPos + FROM_SPECIFIER.length(), tPos))) {
-            ex = new UnspecifiedTimeException(FROM_SPECIFIER, false);
-        } else if (isAllSpaces(userInput.substring(tPos + TO_SPECIFIER.length()))) {
-            ex = new UnspecifiedTimeException(TO_SPECIFIER, false);
-        }
+        if (cmd == CmdType.EVENT) {
 
-        if (ex != null) {
-            throw ex;
+            String from = specifiers[0];
+            String to = specifiers[1];
+            int fPos = userInput.indexOf(from);
+            int tPos = userInput.indexOf(to);
+
+            UnspecifiedTimeException ex = null;
+            if (isAllSpaces(userInput.substring(cmd.getStrLength(), fPos))) {
+                ex = new UnspecifiedTimeException(from, true);
+            } else if (isAllSpaces(userInput.substring(fPos + from.length(), tPos))) {
+                ex = new UnspecifiedTimeException(from, false);
+            } else if (isAllSpaces(userInput.substring(tPos + to.length()))) {
+                ex = new UnspecifiedTimeException(to, false);
+            }
+
+            if (ex != null) {
+                throw ex;
+            }
+        } else {
+            checkSingleSpecifierMissingInput(userInput, cmd, specifiers[0]);
         }
     }
 
@@ -218,5 +230,9 @@ public class UserInputChecker {
     private static boolean isCmdThatNeedsInput(CmdType cmd) {
         return (cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT || cmd == CmdType.MARK
                 || cmd ==  CmdType.UNMARK || cmd == CmdType.DELETE);
+    }
+
+    private static boolean hasSingleSpecifier(CmdType cmd) {
+        return (cmd == CmdType.DEADLINE || cmd == CmdType.DOAFTER || cmd == CmdType.FIXEDDURATION);
     }
 }
