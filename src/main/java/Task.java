@@ -14,6 +14,9 @@ public class Task {
         this.task = task;
         this.isDone = isDone;
     }
+    public boolean isDone() {
+        return this.isDone;
+    }
     /**
      * Sets task as done
      */
@@ -26,7 +29,9 @@ public class Task {
     public void unmarkAsDone() {
         this.isDone = false;
     }
-
+    protected String getTask() {
+        return this.task;
+    }
     /**
      * Returns the string of the task
      */
@@ -34,5 +39,9 @@ public class Task {
     public String toString() {
         String markedAsDone = isDone ? "X" : " ";
         return String.format("[%s] %s", markedAsDone, task);
+    }
+    public String saveString() {
+        int done = isDone() ? 1 : 0;
+        return String.format("Task | %d | %s", done, task);
     }
 }

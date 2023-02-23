@@ -1,8 +1,14 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.regex.PatternSyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Duke {
     /**
@@ -10,6 +16,8 @@ public class Duke {
      * The length of the command +2 (for whitespace and
      * at least 1 letter for the command)
      */
+    static final String HOMEDIRECTORY = System.getProperty("user.dir");
+    static final Path DUKELISTDIRECTORY = Paths.get(HOMEDIRECTORY, "SavedList.txt");
     static final HashMap<String, Integer> MINVALIDLENGTH = new HashMap<>(Map.of(
             "todo", 6,
             "deadline", 10,
@@ -33,7 +41,14 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         System.out.println(greet());
 
+        // arr => needs to be updated w old list
         ArrayList<Task> arr = new ArrayList<>();
+        try {
+            arr = readSavedFile();
+        } catch (IOException unknown) {
+            print(unknown + "\nUnsure of error");
+        }
+
         while (sc.hasNext()) {
             String cmd = sc.nextLine();
             if (cmd.equals("bye")) {
@@ -44,6 +59,57 @@ public class Duke {
 //            echo(sc.nextLine());
         }
         sc.close();
+    }
+    public static ArrayList<Task> readSavedFile() throws IOException {
+        try {
+            Files.createFile(DUKELISTDIRECTORY);
+            return new ArrayList<Task>();
+        } catch (FileAlreadyExistsException e) {
+            ArrayList<Task> arr = new ArrayList<>();
+            List<String> savedList = Files.readAllLines(DUKELISTDIRECTORY);
+            for (String task : savedList) {
+                try {
+                    arr.add(readLineToTask(task));
+                } catch (WrongTaskFormatException | ArrayIndexOutOfBoundsException wrongFormat) {
+                    print("File format of tasks is wrong.\n" +
+                            "List now contains information up to line before wrongly formatted line.");
+                    printList(arr);
+                    return arr;
+                }
+            }
+            return arr;
+        }
+    }
+    public static Task readLineToTask(String taskDescription) throws WrongTaskFormatException {
+        String[] items = taskDescription.split(" \\| ");
+        boolean isDone = getIsDone(items[1]);
+        Task task = new Task(taskDescription, isDone);
+        switch(items[0]) {
+            case "T":
+                task = new ToDo(items[2], isDone);
+//                return task;
+                break;
+            case "D":
+                task = new Deadline(items[2], items[3], isDone);
+//                return task;
+                break;
+            case "E":
+                String[] timeOfEvent = items[3].split("-");
+                task = new Event(items[2], timeOfEvent[0], timeOfEvent[1], isDone);
+//                return task;
+                break;
+            default:
+                throw new WrongTaskFormatException("Invalid Task String Format");
+        }
+        return task;
+    }
+
+    /**
+     * @param doneString a simple string containing 0/1
+     * @returns the int value
+     */
+    public static boolean getIsDone(String doneString) {
+        return doneString.equals("1");
     }
     static void execute(String cmd, ArrayList<Task> arr) {
         String[] words = cmd.split(" ");
@@ -62,6 +128,20 @@ public class Duke {
                 break;
             default:    // for tasks
                 print(add(cmd, arr));
+        }
+        saveList(arr);
+    }
+    static void saveList(ArrayList<Task> arr) {
+        try {
+            // no need to deleteIfExists as BufferedWritter automatically clears all prev input
+            BufferedWriter fileWriter = Files.newBufferedWriter(DUKELISTDIRECTORY);
+            for (Task task : arr) {
+                fileWriter.write(task.saveString());
+                fileWriter.newLine();
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            // unsure of what cases would throw IOException under deleteIfExists
         }
     }
     static String add(String cmd, ArrayList<Task> arr) {

@@ -4,10 +4,16 @@ public class Deadline extends Task {
     private String deadline;
     public Deadline(String cmd) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         this(cmd.split(" /by")[0],
-                cmd.split(" /by")[1]);
+                cmd.split(" /by")[1],
+                false);
     }
-    Deadline(String task, String deadline) {
-        super(task);
+    public Deadline(String cmd, boolean isDone) {
+        this(cmd.split(" /by")[0],
+                cmd.split(" /by")[1],
+                isDone);
+    }
+    public Deadline(String task, String deadline, boolean isDone) {
+        super(task, isDone);
         this.deadline = deadline;
     }
     /**
@@ -16,5 +22,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D]%s (by:%s)", super.toString(), deadline);
+    }
+    @Override
+    public String saveString() {
+        int done = isDone() ? 1 : 0;
+        return String.format("D | %d | %s | %s", done, getTask(), deadline);
     }
 }
