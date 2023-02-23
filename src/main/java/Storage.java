@@ -8,12 +8,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DataSaver {
+public class Storage {
 
   private final Path filePath;
   private final Path foldPath;
 
-  public DataSaver() throws DukeException {
+  public Storage() throws DukeException {
     try {
       String fileSep = System.getProperty("file.separator");
       String userDir = System.getProperty("user.dir");

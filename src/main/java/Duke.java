@@ -16,7 +16,7 @@ public class Duke {
         }
     }
 
-    public static void run() {
+    public void run() {
         try {
             Ui.greet();
             Scanner sc = new Scanner(System.in);
@@ -66,6 +66,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke.run();
+        new Duke().run();
     }
 }
