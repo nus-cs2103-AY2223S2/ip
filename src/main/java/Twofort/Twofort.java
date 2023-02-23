@@ -6,7 +6,7 @@ import Twofort.Commands.Command;
 
 
 /**
- * Main driver class for Duke.
+ * Main driver class for Twofort
  * @author Bryan Juniano
  */
 
@@ -16,7 +16,7 @@ public class Twofort {
     private Handler handler = new Handler();
     private Saver saver = new Saver();
 
-    public Twofort(){
+    public Twofort() {
         try {
             saver.load(taskList);
         } catch (ProgramException e) {

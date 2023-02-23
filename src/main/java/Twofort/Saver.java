@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Class to save and load tasks to and from Duke.
+ * Class to save and load tasks to and from Twofort
  * @author Bryan Juniano
  */
 

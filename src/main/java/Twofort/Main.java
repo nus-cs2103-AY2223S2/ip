@@ -10,8 +10,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * Main class for Twofort
+ * @author Bryan Juniano
  */
+
 public class Main extends Application {
 
     private Twofort twofort = new Twofort();
