@@ -1,4 +1,4 @@
-[T] [X] drink bonk
-tags: 
-[D] [ ] defend intel by: today
+[T] [ ] drink bonk
+tags: [urgent] 
+[D] [ ] defend intel by: tomorrow
 tags: 
