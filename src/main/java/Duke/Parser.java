@@ -1,4 +1,7 @@
+package Duke;
 
+import Duke.Exception.InvalidCommandException;
+import Duke.Exception.NoDescriptionException;
 
 public class Parser {
 

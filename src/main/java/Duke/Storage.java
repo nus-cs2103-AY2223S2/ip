@@ -1,3 +1,8 @@
+package Duke;
+
+import Duke.Exception.InvalidCommandException;
+import Duke.Exception.NoDescriptionException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

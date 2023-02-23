@@ -1,3 +1,12 @@
+package Duke;
+
+import Duke.Exception.InvalidCommandException;
+import Duke.Exception.NoDescriptionException;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.Task;
+import Duke.Tasks.Todo;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -33,7 +42,7 @@ public class TaskList {
         Ui.giveOutput("Now you have " + list.size() + " tasks in the list.");
     }
 
-    public static void add_to_list(String str) throws InvalidCommandException, NoDescriptionException{
+    public static void add_to_list(String str) throws InvalidCommandException, NoDescriptionException {
 
         if((str.split(" ", 2).length == 1)) {
             throw new NoDescriptionException();

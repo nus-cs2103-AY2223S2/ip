@@ -1,6 +1,10 @@
+package Duke.Tasks;
+
+import Duke.Tasks.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+
 public class Event extends Task {
 
     public Event(String str1) {
