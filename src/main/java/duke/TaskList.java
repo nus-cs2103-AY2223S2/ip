@@ -32,11 +32,12 @@ public class TaskList {
      * Method to add a task to the TaskList object
      * @param task The Task object to be added to the TastList object
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.list.add(task);
-        System.out.println("Got it! I have added the following task: \n    " + task.toString());
         numberUndone++;
         numberOfTasks++;
+        return "Got it! I have added the following task: \n    " + task.toString();
+
     }
 
     /**
@@ -54,30 +55,28 @@ public class TaskList {
      * Method to mark a task with the supplied index number as completed
      * @param taskNumber The index number of the Task object in the TaskList object
      */
-    public void markDone(int taskNumber) {
+    public String markDone(int taskNumber) {
 
         if (numberOfTasks == 0) {
-            System.out.println("There are no tasks in your list!");
-            return;
+            return "There are no tasks in your list!";
         }
 
         if (taskNumber > this.numberOfTasks || taskNumber <= 0) {
-            System.out.println("Please enter a task number between 1 and the total number of tasks!");
-            return;
+            return "Please enter a task number between 1 and the total number of tasks!";
         }
         int indexAdjustedTaskNumber = taskNumber - 1;
 
         Task toBeMarked = this.list.get(indexAdjustedTaskNumber);
         if (toBeMarked.isDone) {
-            System.out.println("This task has already been marked as done!");
-            return;
+            return "This task has already been marked as done!";
         } else {
             toBeMarked.setMarked();
         }
-        System.out.println("Great! I have marked this task as done!");
-        System.out.println(list.get(indexAdjustedTaskNumber));
+
         numberUndone--;
         numberDone++;
+        return "Great! I have marked this task as done! \n" + list.get(indexAdjustedTaskNumber).toString();
+
 
     }
 
@@ -86,53 +85,52 @@ public class TaskList {
      * Method to mark a task with the supplied index number as incomplete
      * @param taskNumber The index number of the Task object in the TaskList object
      */
-    public void markUndone(int taskNumber) {
+    public String markUndone(int taskNumber) {
 
 
         if (numberOfTasks == 0) {
-            System.out.println("There are no tasks in your task list!");
+            return "There are no tasks in your task list!";
         }
 
         if (taskNumber > this.numberOfTasks || taskNumber <= 0) {
-            System.out.println("Please enter a task number between 1 and the total number of tasks!");
-            return;
+            return "Please enter a task number between 1 and the total number of tasks!";
         }
 
         int indexAdjustedTaskNumber = taskNumber - 1;
         Task toBeUnmarked = this.list.get(indexAdjustedTaskNumber);
         if (!toBeUnmarked.isDone) {
-            System.out.println("This task is already marked as undone!");
-            return;
+           return "This task is already marked as undone!";
         } else {
             toBeUnmarked.setUnmarked();
         }
-        System.out.println("Noted. I have marked this task as undone!");
-        System.out.println(list.get(indexAdjustedTaskNumber));
         numberUndone++;
         numberDone--;
+        return "Noted. I have marked this task as undone! \n" + list.get(indexAdjustedTaskNumber).toString();
     }
 
     /**
      * Method that prints all the tasks in the TaskList object
      */
-    public void printItems () {
+    public String printItems () {
+        String output = "These are the tasks you have left to complete: ";
         int numOfTasks = this.list.size();
-        System.out.println("These are the tasks you have left to complete: ");
+
         for (int i = 0; i < numOfTasks; i++) {
-            System.out.println(i + 1 + "." + list.get(i).toString());
+            output +=  i + 1 + "." + list.get(i).toString() + "\n";
         }
+        return output;
     }
 
     /**
      * Method to print the total number of tasks, as well as the number of tasks that are completed, and the number of
      * tasks that are yet to be completed
      */
-    public void getTaskDetails() {
+    public String getTaskDetails() {
         String pluralCheck = (numberOfTasks == 1 ? " task" : " tasks");
-        System.out.println("You now have " + numberOfTasks +  pluralCheck + " in the list");
-        System.out.println("Number of tasks completed: " + numberDone);
-        System.out.println("Number of tasks yet to be completed: " + numberUndone);
-
+        String output = "You now have " + numberOfTasks +  pluralCheck + " in the list";
+        output += "\n Number of tasks completed: " + numberDone;
+        output += "\n Number of tasks yet to be completed: " + numberUndone;
+        return output;
     }
 
 
@@ -160,14 +158,14 @@ public class TaskList {
      * Method to delete a Task from the TastList
      * @param taskNumber An integer that represents the index of the Task in the TaskList
      */
-    public void deleteTask(int taskNumber) {
+    public String deleteTask(int taskNumber) {
 
         if (numberOfTasks == 0) {
-            System.out.println("You do not have any tasks at the moment!");
+            return "You do not have any tasks at the moment!";
         } else if (taskNumber > numberOfTasks || taskNumber < 0) {
-            System.out.println("Please enter a task number between 1 and the total number of tasks!");
+            return "Please enter a task number between 1 and the total number of tasks!";
         } else {
-            System.out.println("Noted! I have deleted this task: \n" + this.list.get(taskNumber - 1));
+            String output = "Noted! I have deleted this task: \n" + this.list.get(taskNumber - 1).toString();
             boolean isDeletedDone = this.list.get(taskNumber - 1).isDone;
             this.list.remove(taskNumber - 1);
             this.numberOfTasks--;
@@ -176,24 +174,24 @@ public class TaskList {
             } else {
                 numberUndone--;
             }
+            return output;
         }
 
     }
 
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
+        String output = "Here are the tasks matching the given keyword\n";
         int index = 1;
         for (Task task : list) {
             if (task.description.toUpperCase().contains(keyword.toUpperCase())) {
-                if (index == 1) {
-                    System.out.println("Here are the tasks matching the given keyword:");
-                }
-                System.out.println(index + " " + task.toString());
+                output += index + " " + task.toString() + "\n";
                 index++;
             }
         }
         if (index == 1) {
-            System.out.println("There seem to be no tasks matching the keyword");
+            return "There seem to be no tasks matching the keyword";
         }
+        return output;
     }
 
 

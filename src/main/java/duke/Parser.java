@@ -2,6 +2,7 @@ package duke;
 
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 /**
  * A Parser has the methods that decode the requests entered by the user and executes the relevant methods that
@@ -28,12 +29,11 @@ public class Parser {
      * @param list      the TaskList object that stores all the user's tasks
      * @throws IOException
      */
-    public void parseAndExecute(String userInput, TaskList list) throws IOException {
+    public String parseAndExecute(String userInput, TaskList list) throws IOException {
 
         String[] userInputComponents = userInput.split(" ");
         if (userInputComponents.length == 0) {
-            System.out.println("Your request cannot be empty! Please re-enter your request");
-            return;
+            return "Your request cannot be empty! Please re-enter your request";
         }
 
         String requestType = userInputComponents[0];
@@ -42,112 +42,135 @@ public class Parser {
 
             switch (request) {
             case LIST: {
-                UI.printHorizontalLine();
-                list.printItems();
-                list.getTaskDetails();
-                UI.printHorizontalLine();
-                break;
+                String firstOutput = list.printItems();
+                String secondOutput = list.getTaskDetails();
+                updateStorage(list);
+                return firstOutput + secondOutput;
             }
 
             case MARK: {
                 if (userInputComponents.length != 2) {
-                    System.out.println("This request requires exactly one task number as the second argument!");
-                    return;
+                    return "This request requires exactly one task number as the second argument!";
+                } try {
+                    int taskNumber = Integer.parseInt(userInputComponents[1]);
+                    String firstOutput = list.markDone(taskNumber);
+                    String secondOutput = list.getTaskDetails();
+                    updateStorage(list);
+                    return firstOutput + secondOutput;
+                } catch (NumberFormatException e) {
+                    return "You have to specify a number representing the task number!";
                 }
-                int taskNumber = Integer.parseInt(userInputComponents[1]);
-                UI.printHorizontalLine();
-                list.markDone(taskNumber);
-                list.getTaskDetails();
-                UI.printHorizontalLine();
-                ;
-                break;
+
             }
 
             case UNMARK: {
                 if (userInputComponents.length != 2) {
-                    System.out.println("This request requires exactly one task number as the second argument!");
-                    return;
+                    return "This request requires exactly one task number as the second argument!";
                 }
-                int taskNumber = Integer.parseInt(userInputComponents[1]);
-                UI.printHorizontalLine();
-                list.markUndone(taskNumber);
-                list.getTaskDetails();
-                UI.printHorizontalLine();
-                break;
+
+                try {
+                    int taskNumber = Integer.parseInt(userInputComponents[1]);
+                    String firstOutput = list.markUndone(taskNumber);
+                    String secondOutput = list.getTaskDetails();
+                    updateStorage(list);
+                    return firstOutput + secondOutput;
+                } catch (NumberFormatException e) {
+                    return "You have to specify a number representing the task number!";
+                }
             }
 
             case TODO: {
                 try {
-                    UI.printHorizontalLine();
-                    list.addTask(new ToDo(userInput.substring(5).strip()));
-                    list.getTaskDetails();
-                    UI.printHorizontalLine();
+                    String firstOutput = list.addTask(new ToDo(userInput.substring(5).strip()));
+                    String secondOutput = list.getTaskDetails();
+                    updateStorage(list);
+                    return firstOutput + "\n" + secondOutput;
                 } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("The description of todo cannot be empty!");
+                    return "The description of todo cannot be empty!";
                 }
-                break;
             }
             case DEADLINE: {
+
                 String[] splitDeadline = userInput.split("/");
-                String description = splitDeadline[0].substring(9).strip();
-                String deadline = splitDeadline[1];
-                UI.printHorizontalLine();
-                list.addTask(new Deadline(description, deadline));
-                list.getTaskDetails();
-                UI.printHorizontalLine();
-                break;
+                if (splitDeadline.length != 2) {
+                    return "You have to enter a deadline!";
+                }
+                try {
+                    String description = splitDeadline[0].substring(9).strip();
+                    String deadline = splitDeadline[1];
+                    String firstOutput = list.addTask(new Deadline(description, deadline));
+                    String secondOutput = list.getTaskDetails();
+                    updateStorage(list);
+                    return firstOutput + "\n" + secondOutput;
+                } catch (InvalidDateFormatException e) {
+                    return "You have to enter the deadline date in this format: dd-Mmm-yyyy";
+                }
             }
             case EVENT: {
                 String[] splitTimes = userInput.split("/");
+                if (splitTimes.length != 3) {
+                    return "You have to enter a start and a finish date and time!";
+                }
                 String description = splitTimes[0].substring(6);
                 String startDayTime = splitTimes[1];
                 String endDayTime = splitTimes[2];
-                UI.printHorizontalLine();
-                list.addTask(new Event(startDayTime, endDayTime, description));
-                list.getTaskDetails();
-                UI.printHorizontalLine();
-                break;
+                try {
+                    String firstOutput = list.addTask(new Event(startDayTime, endDayTime, description));
+                    String secondOutput = list.getTaskDetails();
+                    updateStorage(list);
+                    return firstOutput + "\n" + secondOutput;
+                } catch (DateTimeParseException e) {
+                    return "The date needs to be in this format: dd-Mmm-yyyy" +
+                            " and the time needs to be in this format: HHmm";
+                }
+
             }
 
             case DELETE: {
                 if (userInputComponents.length != 2) {
-                    System.out.println("You have to specify a task number to be deleted!");
-                    return;
+                    return "You have to specify a task number to be deleted!";
                 }
-                UI.printHorizontalLine();
-                list.deleteTask(Integer.parseInt(userInputComponents[1]));
-                UI.printHorizontalLine();
-                break;
+                try {
+                    String firstOutput = list.deleteTask(Integer.parseInt(userInputComponents[1]));
+                    updateStorage(list);
+                    return firstOutput;
+                } catch (NumberFormatException e) {
+                    return "You have to specify a number representing the task number!";
+                }
             }
 
             case FIND: {
                 if (userInputComponents.length != 2) {
-                    System.out.println("You have to enter a keyword to find a task with a match!");
-                    return;
+                    return "You have to enter a keyword to find a task with a match!";
                 }
                 String keyword = userInputComponents[1].strip();
-                UI.printHorizontalLine();
-                list.findTask(keyword);
-                UI.printHorizontalLine();
-                break;
-
+                String firstOutput = list.findTask(keyword);
+                return firstOutput;
             }
             default: {
-                System.out.println("You may have accidentally entered in an invalid command. Please re-enter!");
+                return "You may have accidentally entered in an invalid command. Please re-enter!";
             }
 
             }
         } catch (DukeException e) {
-            System.out.println("Invalid Duke Request; please re-enter your request!");
+            return "Invalid Duke Request; please re-enter your request!";
 
         }
 
+
+
+    }
+
+    /**
+     * Updates the storage file each time the task list is altered
+     * @param list The list that stores all the tasks of the user
+     */
+    private void updateStorage(TaskList list) {
         try {
             storage.updateTasksInFile(list);
         } catch (IOException e) {
             System.out.println("Unable to open storage file");
         }
-
 
     }
 

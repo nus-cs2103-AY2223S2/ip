@@ -34,8 +34,9 @@ public class UI {
     /**
      * Prints a message asking the user to re-enter a date in the correct format
      */
-    public void printInvalidDateFormatMessage() {
-        System.out.println(UI_INVALID_DATE_FORMAT_MESSAGE);
+    public String printInvalidDateFormatMessage() {
+
+        return UI_INVALID_DATE_FORMAT_MESSAGE;
     }
 
     /**

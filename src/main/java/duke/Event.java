@@ -32,7 +32,7 @@ public class Event extends Task {
      * @param description A brief description of the event
      */
 
-    public Event(String startTime, String endTime, String description) {
+    public Event(String startTime, String endTime, String description) throws DateTimeParseException {
         super(description);
         String[] startComponents = startTime.strip().split(" ");
         String[] endComponents = endTime.strip().split(" ");
@@ -44,17 +44,13 @@ public class Event extends Task {
             this.endDate = LocalDate.parse(endComponents[0].strip(), formatter);
             this.endTime = LocalTime.parse(endComponents[1].strip(), timeFormatter);
         } catch (DateTimeParseException e) {
-            try {
                 this.startDate = LocalDate.parse(startComponents[0].strip(), formatter2);
                 this.startTime = LocalTime.parse(startComponents[1].strip(), timeFormatter);
                 this.endDate = LocalDate.parse(endComponents[0].strip(), formatter2);
                 this.endTime = LocalTime.parse(endComponents[1].strip(), timeFormatter);
-            } catch (DateTimeParseException e2) {
-                System.out.println("Please enter the date in this format: dd-MMM-YYYY OR dd/MMM/YYYY");
-                System.out.println("Please enter the time in this format: HHmm");
             }
         }
-    }
+
 
     @Override
     public String toString() {
