@@ -49,7 +49,7 @@ shadowJar {
     archiveBaseName = "wessy"
     archiveClassifier = null
 }
-
-run{
-    standardInput = System.in
-}
+//
+//run{
+//    standardInput = System.in
+//}
