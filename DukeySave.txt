@@ -1,2 +1,4 @@
-T,1,eat
-D,0,eat,2022-12-12
+T,1,buy water bottle
+E,1,school trip,2023-02-11,2023-02-12
+T,0,charge laptop
+D,0,wash dishes,2023-02-25
