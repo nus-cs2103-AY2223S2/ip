@@ -4,7 +4,7 @@ public class ToDo extends Task {
     public ToDo(String cmd) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         super(cmd);
     }
-    public ToDo(String cmd, boolean isDone) {
+    public ToDo(String cmd, boolean isDone) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         super(cmd, isDone);
     }
     /**

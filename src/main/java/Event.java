@@ -4,10 +4,7 @@ public class Event extends Task {
     private String from;
     private String to;
     public Event(String cmd) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
-        this(cmd.split(" /")[0],
-                cmd.split(" /")[1].replace("from ", ""),
-                cmd.split(" /")[2].replace("to ", ""),
-                false);
+        this(cmd, false);
     }
     public Event(String cmd, boolean isDone) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         this(cmd.split(" /")[0],

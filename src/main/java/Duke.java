@@ -1,6 +1,8 @@
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
+import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Map;
@@ -31,7 +33,7 @@ public class Duke {
      */
     static final HashMap<String, String> CORRECTFORMAT = new HashMap<>(Map.of(
             "todo", "todo THE TASK",
-            "deadline", "deadline THE TASK /by TIME",
+            "deadline", "deadline THE TASK /by yyyy-mm-ddThh:mm:ss",
             "event", "event THE TASK /from TIME /to TIME",
             "mark", "mark NUMBER",
             "unmark", "unmark NUMBER",
@@ -160,7 +162,7 @@ public class Duke {
             //.replace(typeOfTask + " ", ""));
             arr.add(task);
             return String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", task, arr.size());
-        } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException wrongFormat) {
+        } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException | DateTimeParseException wrongFormat) {
             return errorMsg("Please enter the command in the correct format.") + "\n" + CORRECTFORMAT.get(typeOfTask);
         }
     }
