@@ -16,7 +16,7 @@ public enum CmdType {
     DEADLINE("deadline", "/by"),
     EVENT("event", "/from", "/to"),
     DOAFTER("doafter", "/after"),
-    FIXEDDURATION("fix", "/need"),
+    FIXEDDURATION("fix", "/for"),
     DELETE("delete"),
     FIND("find"),
     CLEAR("clear");

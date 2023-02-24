@@ -14,7 +14,7 @@ public class DoAfterTask extends Task {
 
     @Override
     public String toString() {
-        return "[A]" + super.toString() + " (after " + after + ")";
+        return "[A]" + super.toString() + " (after: " + after + ")";
     }
 
     @Override

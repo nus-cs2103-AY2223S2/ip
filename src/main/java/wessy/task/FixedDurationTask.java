@@ -14,7 +14,7 @@ public class FixedDurationTask extends Task {
 
     @Override
     public String toString() {
-        return "[F]" + super.toString() + " (needs " + requiredDuration + ")";
+        return "[F]" + super.toString() + " (for: " + requiredDuration + ")";
     }
 
     @Override

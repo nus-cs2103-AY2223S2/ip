@@ -69,7 +69,7 @@ public class Ui {
                 return "Sorry. We did not find any task that matches the text you entered.\n";
             }
         } else {
-            return "Here are the " + extraWord + "tasks in your list:\n" + getMultiln(tasks);
+            return "Here are the " + extraWord + "tasks on your list:\n" + getMultiln(tasks);
         }
     }
 
@@ -85,22 +85,18 @@ public class Ui {
             numOfTasks += "s";
         }
         return getMessage("Got it. I've added this task:", "  " + task, "Now you have" + numOfTasks
-                + " in the list.");
+                + " on the list.");
     }
 
     /**
      * Prints output message for "mark" and "unmark" commands.
      *
      * @param chosenTask
-     * @param isMark
+     * @param isDone
      */
-    public String getMarkUnmarkMessage(Task chosenTask, boolean isMark) {
-        String start = isMark ? "Nice! I've" : "OK, I've";
-        if (isMark == chosenTask.checkIsDone()) {
-            start = "You have already";
-        }
-        String end = isMark ? "done:" : "not done yet:";
-        return getMessage(start + " marked this task as " + end, "  " + chosenTask);
+    public String getMarkUnmarkMessage(Task chosenTask, boolean isDone) {
+        String end = isDone ? "done already:" : "not done yet:";
+        return getMessage("You mark this task as " + end, "  " + chosenTask);
     }
 
     /**
@@ -111,7 +107,7 @@ public class Ui {
      */
     public String getDeleteMessage(Task chosenTask, int totalNumOfTasks) {
         return getMessage("Noted. I've removed this task:", "  " + chosenTask, String.format(
-                "Now you have %d task%s in the list.", totalNumOfTasks, totalNumOfTasks == 1 ? "" : "s"));
+                "Now you have %d task%s on the list.", totalNumOfTasks, totalNumOfTasks == 1 ? "" : "s"));
     }
 
     /**
