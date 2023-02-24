@@ -1,6 +1,6 @@
 # User Guide
 
-##DukeyList
+## DukeyList
 DukeyList a great and easy way to manage and keep track of your tasks! Using DukeyList, you can add and remove tasks, 
 and mark them as completed.
 
@@ -62,7 +62,7 @@ You can now start typing commands into DukeyList!
 
 
 
-##Using DukeyList
+## Using DukeyList
 To use DukeyList, type in a `command`, followed by necessary fields and press enter. Each `field` is separated by a '/'
 character. The `command` is also followed by the '/' character.
 The format and usages of various commands are shown below. Note that commands are not case-sensitive. 
@@ -85,7 +85,7 @@ list
 3. [E][ ] Seminar (15 Feb 2023 to 16 Feb 2023)
 4. [L][ ] Gas money: Brother owes $10 to Mother
 ```
-###
+
 
 ### `todo` - Add a new ToDo
 The `todo` command adds a new ToDo to the DukeyList.
@@ -110,7 +110,7 @@ DukeyList now has 5 tasks.
 
 DukeyList will show a confirmation message along with the created ToDo.
 
-###
+
 ### `deadline` - Add a new Deadline
 The `deadline` command adds a new Deadline to the DukeyList.
 A Deadline requires the following `fields`:
@@ -136,7 +136,7 @@ DukeyList now has 5 tasks.
 
 DukeyList will show a confirmation message along with the created ToDo.
 
-###
+
 ### `event` - Add a new Event
 The `event` command adds a new Event to the DukeyList.
 An Event requires the following `fields`:
@@ -163,7 +163,7 @@ DukeyList now has 5 tasks.
 
 DukeyList will show a confirmation message along with the created Event.
 
-###
+
 ### `loan` - Add a new Loan
 The `loan` command adds a new Event to the DukeyList.
 A Loan requires the following `fields`:
@@ -191,7 +191,7 @@ DukeyList now has 5 tasks.
 
 DukeyList will show a confirmation message along with the created Loan.
 
-###
+
 ### `mark` - Mark a task
 The `mark` command marks a task as completed.
 `mark` requires the following `fields`:
@@ -215,7 +215,7 @@ Task number 1 has been marked as done!
 
 DukeyList will show a confirmation message along with the marked task.
 
-###
+
 ### `unmark` - Unmark a task
 The `unmark` command marks a task as incomplete.
 `unmark` requires the following `fields`:
@@ -239,7 +239,7 @@ Task number 1 has been unmarked.
 
 DukeyList will show a confirmation message along with the unmarked task.
 
-###
+
 ### `delete` - delete a task
 The `delete` command marks a task as incomplete.
 `delete` requires the following `fields`:
@@ -264,7 +264,7 @@ DukeyList now has 4 tasks.
 
 DukeyList will show a confirmation message along with the deleted task.
 
-###
+
 ### `find` - Find tasks
 The `find` command finds and shows all tasks with a certain keyword.
 `find` requires the following `fields`:
@@ -289,7 +289,7 @@ DukeyList found the following tasks with the keyword 'buy':
 
 DukeyList will show a confirmation message along with the list of tasks with the keyword.
 
-###
+
 ### `clearList` - Clears DukeyList
 The `clearList` command deletes all the tasks currently on DukeyList.
 
@@ -305,7 +305,7 @@ DukeyList cleared!
 
 DukeyList will show a confirmation message.
 
-###
+
 ### `save` - Save DukeyList
 The `save` command saves a copy of the current DukeyList locally.
 
@@ -322,7 +322,7 @@ DukeyList saved!
 DukeyList will show a confirmation message.
 
 
-###
+
 ### `bye` - Exits DukeyList
 The `bye` command autosaves DukeyList and exits the application.
 
