@@ -14,11 +14,15 @@ public class DeleteCommand extends Command {
     }
 
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task task = taskList.getTasks().get(index - 1);
-        String taskString = taskList.formatTaskToString(task);
-        taskList.deleteTask(index);
-        assert !taskList.getTasks().contains(task) : "Task should be deleted from tasklist";
-        return "Noted, I've removed this task: \n" + taskString + "\nNow you have " + taskList.getNumTasks() + " tasks in the list.";
+        try {
+            Task task = taskList.getTasks().get(index - 1);
+            String taskString = taskList.formatTaskToString(task);
+            taskList.deleteTask(index);
+            assert !taskList.getTasks().contains(task) : "Task should be deleted from tasklist";
+            return "Noted, I've removed this task: \n" + taskString + "\nNow you have " + taskList.getNumTasks() + " tasks in the list.";
+        } catch (IndexOutOfBoundsException err) {
+            throw new DukeException("That task does not exist!");
+        }
     }
 
     public boolean isExit() {

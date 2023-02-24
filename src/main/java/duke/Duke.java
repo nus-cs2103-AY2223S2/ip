@@ -16,7 +16,7 @@ public class Duke {
 
     public Duke() {
         try {
-            this.storage = new Storage("/data/duke.txt");
+            this.storage = new Storage("./duke.txt");
             assert storage.isFileLoaded(): "File loaded to load and save tasks";
             this.taskList = new TaskList(storage.loadTasks());
             assert taskList.getTasks() != null : "taskList should be present";

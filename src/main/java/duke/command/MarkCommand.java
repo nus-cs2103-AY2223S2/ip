@@ -12,13 +12,17 @@ public class MarkCommand extends Command {
         this.index = index;
     }
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task task = taskList.getTasks().get(index-1);
-        if (task.getStatusIcon().equals("X")) {
-            return "This task is already marked!";
-        } else {
-            taskList.markTask(index);
+        try {
+            Task task = taskList.getTasks().get(index - 1);
+            if (task.getStatusIcon().equals("X")) {
+                return "This task is already marked!";
+            } else {
+                taskList.markTask(index);
             }
-        return "Nice! I've marked this task as done: \n" + taskList.formatTaskToString(task);
+            return "Nice! I've marked this task as done: \n" + taskList.formatTaskToString(task);
+        } catch (IndexOutOfBoundsException err) {
+            throw new DukeException("That task does not exist!");
+        }
     }
     public boolean isExit() {
         return false;

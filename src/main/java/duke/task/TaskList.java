@@ -1,12 +1,7 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
-import java.util.ArrayList;
 
-import javax.swing.text.DateFormatter;
+import java.util.ArrayList;
 
 import duke.exception.DukeException;
 
@@ -46,11 +41,7 @@ public class TaskList {
      * @throws DukeException If the number specified is invalid (> Number of tasks in task list or <= 0).
      */
     public void deleteTask(int index) throws DukeException {
-        try {
             tasks.remove(index - 1);
-        } catch (IndexOutOfBoundsException err) {
-            throw new DukeException("That task does not exist!");
-        }
     }
 
     /**

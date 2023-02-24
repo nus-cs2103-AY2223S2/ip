@@ -23,7 +23,6 @@ public class Storage {
         try {
             this.file = new File(fileInput);
             if (!file.exists()) {
-                Files.createDirectories(Paths.get(file.getParent()));
                 this.file = Files.createFile(Path.of(fileInput)).toFile();
             }
         } catch (IOException err) {
