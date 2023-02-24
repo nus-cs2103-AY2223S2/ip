@@ -11,7 +11,7 @@ The task with fixed duration (using the `fix` command) can record exactly how mu
 This can be achieved by marking those tasks that are completed via the `mark` command. This action can be undone using the `unmark`.
 
 ### Able to continue from where you left when reopening the program each other
-The tasks and their status will be exactly the same as they are when you quited the program previously.
+The tasks and their status will be exactly the same as they were when you quited the program previously.
 
 ## Commands that Wessy accepts and how to use them
 
