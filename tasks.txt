@@ -1,4 +1,0 @@
-T | 0 | Study for midterms
-T | 0 | eat lol
-D | 0 | deadline play squash | 12/12/2000 1212
-E | 0 | event brother's wedding | 12/12/2000 1212 | 13/12/2000 1233

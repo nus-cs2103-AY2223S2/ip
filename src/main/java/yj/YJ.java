@@ -9,7 +9,7 @@ public class YJ {
 
     public YJ() {
         ui = new Ui();
-        storage = new Storage("tasks.txt");
+        storage = new Storage("/data/tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
