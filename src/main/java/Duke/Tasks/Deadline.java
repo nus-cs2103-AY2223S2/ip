@@ -47,7 +47,7 @@ public class Deadline extends Task {
             if (years == 0 && months == 0 && days <= 3) {
                 return true;
             }
-            return false;
+            return true;
         }
     }
 

@@ -38,18 +38,15 @@ public class Duke {
      * Execute the main program.
      */
     public void run() throws IOException {
-//        ui.greet();
         String input;
         Scanner scanner = new Scanner(System.in);
         input = scanner.nextLine();
         while (!input.equals("bye")) {
-//            parser.parse(input);
             Command command = Parser.parse(input);
             command.execute(this.taskList, this.storage, this.ui);
             input = scanner.nextLine();
         }
 
-        ui.bye();
     }
 
     public static void main(String[] args)

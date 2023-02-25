@@ -87,26 +87,6 @@ public class Storage {
         return this.tasks;
     }
 
-    /**
-     * Store the tasks into the specific file.
-     *
-     * @throws IOException
-     */
-    public void storeTasks() throws IOException {
-        String filePath = "./data/duke.txt";
-        File file  = new File(filePath);
-
-        final FileWriter fw = new FileWriter(file.getAbsoluteFile());
-        BufferedWriter bw = new BufferedWriter(fw);
-
-        for (int i = 0; i < this.tasks.getSize(); i++) {
-            Task currTask = this.tasks.getTask(i);
-            System.out.println(currTask.toString());
-            bw.append(currTask.printTask());
-        }
-        bw.close();
-    }
-
     public void store(TaskList tasks) throws FileException {
         try {
             this.file.createNewFile();

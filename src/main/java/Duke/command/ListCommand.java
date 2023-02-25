@@ -8,7 +8,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {
         String output;
-        if (ui.printAllTasks(tasks) == null) {
+        if (ui.printAllTasks(tasks).equals("")) {
             output = String.format(
                     "\n\tThere is no task in the list." + "\n");
             return output;

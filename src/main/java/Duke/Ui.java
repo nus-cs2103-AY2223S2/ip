@@ -17,31 +17,16 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String output = String.format("Hello from\n%s \nWhat " +
                 "can I do for you?", logo);
-        System.out.println(output);
         return output;
     }
 
     public String printMarked(Task task) {
         String output = String.format("Nice! I've marked this task as done:\n%s", task);
-        System.out.println(output);
         return output;
     }
 
     public String printUnmarked(Task task) {
         String output = String.format("Nice! I've marked this task as not done yet:\n%s", task);
-        System.out.println(output);
-        return output;
-    }
-
-    public String printDeletedTask(Task task) {
-        String output = String.format("This task has been deleted successfully\n%s", task.toString());
-        System.out.println(output);
-        return output;
-    }
-
-    public String printLoadingError() {
-        String output = "The directory is not found!";
-        System.out.println(output);
         return output;
     }
 
@@ -54,13 +39,11 @@ public class Ui {
     public String printAddedTask(Task task, TaskList tasks) {
         String output = String.format("Got it. I've added this task:\n%s", task.toString());
         output += String.format("\nNow you have %d tasks in the list.", tasks.getSize());
-        System.out.println(output);
         return output;
     }
 
     public String printAllTasks(TaskList tasks) {
         String output = tasks.toFormattedString();
-        System.out.println(output);
         return output;
     }
 

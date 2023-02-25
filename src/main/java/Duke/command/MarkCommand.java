@@ -16,7 +16,7 @@ public class MarkCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) throws
-            DukeMainExceptions, InvalidIndexException {
+            DukeMainExceptions {
         try {
             Task task = tasks.mark(this.index);
             return ui.printMarked(task);

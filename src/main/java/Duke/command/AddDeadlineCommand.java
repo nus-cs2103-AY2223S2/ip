@@ -6,7 +6,6 @@ import Duke.Exceptions.NoDescriptionException;
 import Duke.Storage.Storage;
 import Duke.Tasks.Deadline;
 import Duke.TaskList;
-import Duke.Tasks.Task;
 import Duke.Ui;
 
 public class AddDeadlineCommand extends Command {

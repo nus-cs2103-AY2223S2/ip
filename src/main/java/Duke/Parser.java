@@ -93,16 +93,15 @@ public class Parser {
                     ? input.split(" ", 2)[1]
                     : "";
             ArrayList<Task> filteredTasks = t.findRelevantTasks(splitDescription);
-            System.out.println(filteredTasks);
-            cmd = new FindCommand(splitDescription);
+            cmd = new FindCommand(filteredTasks.toString());
             break;
         case "REMIND":
-            cmd = new ReminderCommand();
+            String tasksDueSoon = t.findTaskDueSoon();
+            cmd = new ReminderCommand(tasksDueSoon);
             break;
         default:
             throw new CommandNotFoundException("I'm sorry, but I don't know what that means :-(");
         }
-//        storage.storeTasks();
         return cmd;
     }
 }

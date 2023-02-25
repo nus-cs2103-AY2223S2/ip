@@ -60,10 +60,6 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
-    public void addToNewList(Task task) {
-        this.taskList.add(task);
-    }
-
     public String toFormattedString() {
         int count = 1;
         StringBuilder result = new StringBuilder();
@@ -91,7 +87,6 @@ public class TaskList {
                 "\t" + currTask.toString() +
                 "\n\tNow you have " + this.index + " tasks in the list.\n" +
                 LINES);
-        System.out.println(output);
         return output;
     }
 
@@ -107,11 +102,6 @@ public class TaskList {
         }
         Task newTodo = new Todo(input);
         this.index++;
-        String output = String.format(LINES +
-                "\tGot it. I've added this task:" +
-                "\t\t" + newTodo.toString() +
-                "\tNow you have " + this.index  + " tasks in the list." +
-                LINES);
         return newTodo;
     }
 
@@ -137,7 +127,6 @@ public class TaskList {
         String dueDate = splitDesWithBy[1].trim();
 
         Task newDeadline = new Deadline(description, dueDate);
-        this.taskList.add(newDeadline);
         this.index++;
         return newDeadline;
     }
@@ -173,19 +162,7 @@ public class TaskList {
         String endingTime = period[1].trim();
 
         Task newEvent = new Event(description, startingTime, endingTime);
-        this.taskList.add(newEvent);
         this.index++;
-        String output = String.format(LINES +
-                "\tGot it. I've added this task:" +
-                "\t\t" + newEvent.toString() +
-                "\tNow you have " + this.index  + " tasks in the list." +
-                LINES);
-        System.out.println(output);
-//        System.out.println("\t--------------------------");
-//        System.out.println("\tGot it. I've added this task:");
-//        System.out.println("\t\t" + newEvent.toString());
-//        System.out.println("\tNow you have " + this.index + " tasks in the list.");
-//        System.out.println("\t--------------------------");
         return newEvent;
     }
 
@@ -197,21 +174,13 @@ public class TaskList {
             String output = String.format(LINES +
                     "\tThere is no task in the list." + "\n" +
                     LINES);
-            System.out.println(output);
             return output;
-//            System.out.println("\tThere is no task in the list.");
         } else {
             String output = String.format(LINES +
                     "\tHere are the tasks in your list:\n" + "\n" +
                     this.toFormattedString() +
                     LINES);
-            System.out.println(output);
             return output;
-//            System.out.println("\tHere are the tasks in your list:");
-//            for (int i = 0; i < this.index; i++) {
-//                Task currTask = this.taskList.get(i);
-//                System.out.println("\t" + (i + 1) + ". " + currTask.toString());
-//            }
         }
     }
 
@@ -223,16 +192,7 @@ public class TaskList {
     public Task mark(int input) {
         Task currTask = this.taskList.get(input - 1);
         currTask.markDone();
-//        String output = String.format(LINES +
-//                "\tNice! I've marked this task as done:\n" +
-//                "\t\t" + currTask.toString() +
-//                LINES);
-//        System.out.println(output);
         return currTask;
-//        System.out.println("\t--------------------------");
-//        System.out.println("\tNice! I've marked this task as done:");
-//        System.out.println("\t\t" + currTask.toString());
-//        System.out.println("\t--------------------------");
 
     }
 
@@ -244,16 +204,7 @@ public class TaskList {
     public Task unmark(int input) {
         Task currTask = this.taskList.get(input - 1);
         currTask.markNotDone();
-//        String output = String.format(LINES +
-//                "\tNice! I've marked this task as not done yet:\n" +
-//                "\t\t" + currTask.toString() +
-//                LINES);
-//        System.out.println(output);
         return currTask;
-//        System.out.println("\t--------------------------");
-//        System.out.println("\tOK, I've marked this task as not done yet:");
-//        System.out.println("\t\t" + currTask.toString());
-//        System.out.println("\t--------------------------");
     }
 
     public void addTask(Task task, Storage storage) throws NoDescriptionException {
@@ -274,8 +225,17 @@ public class TaskList {
         return (ArrayList<Task>) this.taskList
                 .stream().filter(task -> task.toString().contains(keywords))
                 .collect(Collectors.toList());
-
-
     }
 
+    public String findTaskDueSoon() {
+        String output = "";
+        for (int i = 0; i < this.index; i++) {
+            Task currTask = this.getTask(i);
+            if (currTask.isDueSoon()) {
+                String str = String.format("%d. " + currTask.toString() + "\n", i + 1);
+                output += str;
+            }
+        }
+        return output;
+    }
 }
