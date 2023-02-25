@@ -26,6 +26,7 @@ public class Storage {
 
     /**
      * Saves tasks to file.
+     *
      * @param tasks List of tasks
      */
     public void save(List<Task> tasks) {
@@ -42,46 +43,49 @@ public class Storage {
 
     /**
      * Loads tasks from file.
+     *
      * @return List of tasks
      */
     public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
         // Read tasks from file
+        Scanner scanner;
         try {
-            Scanner scanner = new Scanner(tasksFile);
-            while (scanner.hasNextLine()) {
-                String taskLine = scanner.nextLine();
-                String[] taskLineParts = taskLine.split("\\|");
-
-                String taskType = taskLineParts[0].trim();
-                int isDone = Integer.parseInt(taskLineParts[1].trim());
-                String description = taskLineParts[2].trim();
-
-                Task task;
-                switch (taskType) {
-                    case "T":
-                        task = new ToDo(description);
-                        break;
-                    case "D":
-                        String by = taskLineParts[3].trim();
-                        task = new Deadline(description, by);
-                        break;
-                    case "E":
-                        String from = taskLineParts[3].trim();
-                        String to = taskLineParts[4].trim();
-                        task = new Event(description, from, to);
-                        break;
-                    default:
-                        task = new Task("");
-                }
-                if (isDone == 1) {
-                    task.markAsDone();
-                }
-                tasks.add(task);
-            }
-            return tasks;
+            scanner = new Scanner(tasksFile);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        while (scanner.hasNextLine()) {
+            String taskLine = scanner.nextLine();
+            String[] taskLineParts = taskLine.split("\\|");
+
+            String taskType = taskLineParts[0].trim();
+            int isDone = Integer.parseInt(taskLineParts[1].trim());
+            String description = taskLineParts[2].trim();
+
+            Task task;
+            switch (taskType) {
+                case "T":
+                    task = new ToDo(description);
+                    break;
+                case "D":
+                    String by = taskLineParts[3].trim();
+                    task = new Deadline(description, by);
+                    break;
+                case "E":
+                    String from = taskLineParts[3].trim();
+                    String to = taskLineParts[4].trim();
+                    task = new Event(description, from, to);
+                    break;
+                default:
+                    task = new Task("");
+            }
+            if (isDone == 1) {
+                task.markAsDone();
+            }
+            tasks.add(task);
+        }
+        return tasks;
+
     }
 }
