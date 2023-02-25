@@ -20,8 +20,11 @@ import java.io.IOException;
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
                 AnchorPane ap = fxmlLoader.load();
+                assert ap != null : "AnchorPane is null";
                 Scene scene = new Scene(ap);
+                assert scene != null : "Scene is null";
                 stage.setScene(scene);
+                assert yj != null : "YJ is null";
                 fxmlLoader.<MainWindow>getController().setYJ(yj);
                 stage.show();
             } catch (IOException e) {
