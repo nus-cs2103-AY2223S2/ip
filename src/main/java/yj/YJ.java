@@ -88,7 +88,7 @@ public class YJ {
                     Map<String, String> result = Parser.parseEventCommand(input);
                     Event newEvent = new Event(result.get("description"), result.get("from"), result.get("to"));
                     tasks.addTask(newEvent);
-                    ui.print("Ok! I've added this event!" + newEvent.toString());
+                    ui.print("Ok! I've added this event!" + newEvent);
                     ui.print("You now have this many tasks: " + tasks.getNumberofTasks());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     ui.print("Crapadoodle! You need to specify an event in the correct format!");
