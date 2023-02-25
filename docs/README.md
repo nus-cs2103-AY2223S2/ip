@@ -2,7 +2,7 @@
 
 Introducing Duke! Tasks made easier.
 
-![UI](Ui.jpg)
+![UI](Ui.png)
 
 ## Quick Start
 
