@@ -11,6 +11,7 @@ public class Parser {
 
     /**
      * Parses the mark command.
+     *
      * @param input The input string.
      * @return The task number.
      */
@@ -21,6 +22,7 @@ public class Parser {
 
     /**
      * Parses the unmark command.
+     *
      * @param input The input string.
      * @return The task number.
      */
@@ -31,6 +33,7 @@ public class Parser {
 
     /**
      * Parses the todo command.
+     *
      * @param input The input string.
      * @return The todo description.
      */
@@ -41,6 +44,7 @@ public class Parser {
 
     /**
      * Parses the deadline command.
+     *
      * @param input The input string.
      * @return A map containing the description and the deadline.
      */
@@ -55,6 +59,7 @@ public class Parser {
 
     /**
      * Parses the event command.
+     *
      * @param input The input string.
      * @return A map containing the description, the start time and the end time.
      */
@@ -73,25 +78,26 @@ public class Parser {
 
     /**
      * Parses the command.
+     *
      * @param command The command string.
      * @return The command enum.
      */
     static public Command parseCommand(String command) {
-        if (command.equals("bye")) {
+        if (command.equals("bye") || command.equals("exit") || command.equals("quit")) {
             return Command.BYE;
-        } else if (command.equals("list")) {
+        } else if (command.equals("list") || command.equals("ls")) {
             return Command.LIST;
-        } else if (command.startsWith("delete")) {
+        } else if (command.startsWith("delete") || command.startsWith("rm")) {
             return Command.DELETE;
-        } else if (command.startsWith("mark")) {
+        } else if (command.startsWith("mark") || command.startsWith("m")) {
             return Command.MARK;
-        } else if (command.startsWith("unmark")) {
+        } else if (command.startsWith("unmark") || command.startsWith("u")) {
             return Command.UNMARK;
-        } else if (command.startsWith("todo")) {
+        } else if (command.startsWith("todo") || command.startsWith("t")) {
             return Command.TODO;
-        } else if (command.startsWith("deadline")) {
+        } else if (command.startsWith("deadline") || command.startsWith("d")) {
             return Command.DEADLINE;
-        } else if (command.startsWith("event")) {
+        } else if (command.startsWith("event") || command.startsWith("e")) {
             return Command.EVENT;
         } else {
             return Command.UNKNOWN;
