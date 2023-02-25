@@ -1,24 +1,113 @@
-# Duke project template
+# User Guide
+Angela is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Quick start
 
-## Setting up in Intellij
+1. Ensure you have Java `11` or above installed in your Computer.
+2. Download the latest `angela.jar` from [here](https://github.com/glozxi/ip/releases/tag/A-Release).
+3. Copy the file to the folder you want to use as the *home folder* for Angela.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar angela.jar` command to run the application.
+5. Refer to the Features below for details of each command.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Features
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Notes about the command format:
+* Words in `UPPER_CASE` are the parameters to be supplied by the user
+* Words in `<angle brackets>` are the format to follow for a parameter
+* Extraneous parameters for commands that do not take in parameters will be ignored
+
+### Adding a todo task: `todo`
+
+Adds a todo task to the task list.
+
+Format: `todo DESCRIPTION`
+
+Examples:
+* `todo watch TV`
+* `todo buy a charger`
+
+### Adding a deadline task: `deadline`
+
+Adds a deadline task to the task list.
+
+Format: `deadline DESCRIPTION /by <dd-MM-yyyy HH:mm>`
+
+Examples:
+* `deadline submit assignment /by 17-03-2023 11:00`
+* `deadline eat /by 25-11-2024 12:12`
+
+### Adding an event task: `event`
+
+Adds an event task to the task list.
+
+Format: `event DESCRIPTION /from <dd-MM-yyyy HH:mm> /to <dd-MM-yyyy HH:mm>`
+
+Examples:
+* `event school /from 21-03-2023 09:00 /to 21-03-2023 11:00`
+* `event long holiday /from 22-03-2024 00:00 /to 30-04-2024 23:59`
+
+### Listing all tasks: `list`
+
+Shows all tasks in the task list.
+
+Format: `list`
+
+### Marking a task as done: `mark`
+
+Marks a task in the task list as done.
+
+Format: `mark INDEX`
+* Marks the task at the specified `INDEX` as done. The index refers to the index number shown in the full displayed task list. The index **must be a positive value** 1, 2, 3...
+
+### Marking a task as not done: `unmark`
+
+Marks a task in the task list as not done.
+
+Format: `unmark INDEX`
+* Marks the task at the specified `INDEX` as not done. The index refers to the index number shown in the full displayed task list. The index **must be a positive value** 1, 2, 3...
+
+### Deleting a task: `delete`
+
+Deletes a task in the task list.
+
+Format: `delete INDEX`
+* Deletes the task at the specified `INDEX`. The index refers to the index number shown in the full displayed task list. The index **must be a positive value** 1, 2, 3...
+
+### Finding tasks that match a phrase: `find`
+
+Shows tasks in the task list which contain the given phrase in their descriptions.
+
+Format: `find PHRASE`
+
+Example:
+* `find go to school`
+
+### Showing upcoming tasks: `remind`
+
+Shows deadlines that end and events that start within 2 days of the current time.
+
+Format: `remind`
+
+### Exiting the program: `bye`
+
+Exits the program.
+
+Format: `bye`
+
+### Saving the data
+
+Task list data are saved in the hard disk automatically after every command. There is no need to save manually.
+
+## Command summary
+| Command | Format | Examples |
+| --- | --- | --- |
+| todo | `todo DESCRIPTION` | `todo watch TV` |
+| deadline | `deadline DESCRIPTION /by <dd-MM-yyyy HH:mm>` | `deadline submit assignment /by 17-03-2023 11:00` |
+| event | `event DESCRIPTION /from <dd-MM-yyyy HH:mm> /to <dd-MM-yyyy HH:mm>` | `event school /from 21-03-2023 09:00 /to 21-03-2023 11:00` |
+| list | `list` |  |
+| mark | `mark INDEX` | `mark 1` |
+| unmark | `unmark INDEX` | `unmark 1` |
+| delete | `delete INDEX` | `delete 1` |
+| find | `find` |  |
+| remind | `remind` |  |
+| bye | `bye` |  |
