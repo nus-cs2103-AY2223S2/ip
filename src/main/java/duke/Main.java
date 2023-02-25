@@ -13,8 +13,16 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private static final String FILE_PATH = "./data/duke.txt";
-    private Ui ui = new Ui();
-    private Duke duke = new Duke(FILE_PATH, ui);
+    private Ui ui;
+    private Duke duke;
+
+    /**
+     * Default constructor to create an instance of Main.
+     */
+    public Main() {
+        ui = new Ui();
+        duke = new Duke(FILE_PATH, ui);
+    }
 
     @Override
     public void start(Stage stage) {
