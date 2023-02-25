@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Collections;
+import java.io.*;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,6 +11,27 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
          **/
+
+        // Level-7 feature: load existing data.txt file if it exists, else create new file
+        File hardDisk = new File("data.txt");
+        try {
+            Boolean created = hardDisk.createNewFile();
+            // load existing data.txt file
+            if (!created) {
+                System.out.println("Existing Tasks my brother!");
+                BufferedReader reader = new BufferedReader(new FileReader(hardDisk));
+                String line;
+                while((line = reader.readLine())!= null) {
+                    System.out.println(line);
+                }
+                reader.close();
+            } else {
+                System.out.println("New file created: data.txt");
+            }
+
+        } catch (IOException e) {
+            System.out.println("An error occurred while creating the new file: data.txt");
+        }
 
         System.out.println("Hello Brother\nWelcome to Brother Bot\nWhats up what can I do for you mi amigo");
 
@@ -79,24 +100,37 @@ public class Duke {
                     int x = storage.size();
                     System.out.println("added to list my brother: \n" + x + "." + storage.get(x - 1).toString() + "\nNow you have " + x + " tasks!");
                 }
+
+
+
+                // if changes made to task list, rewrite task list in data.txt
+                if (!input.contains("display") && !input.contains("bye")) {
+                    try {
+                        FileWriter writer = new FileWriter(hardDisk, false);
+                        PrintWriter printWriter = new PrintWriter(writer);
+                        int i = 0;
+                        for(Task task: storage) {
+                            printWriter.println((i + 1) + ". " + task.toString());
+                            i++;
+                        }
+                        printWriter.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-
-
         }
-
-
-
     }
 
     public static void validateInput(String input, ArrayList<Task> storage) throws DukeException {
-        if (input.indexOf("todo") < 0 && input.indexOf("event") < 0 && input.indexOf("display") < 0 && input.indexOf("deadline") < 0 && input.indexOf("mark") < 0 && input.indexOf("bye") < 0 && input.indexOf("delete") < 0) {
+        if (!input.contains("todo") && !input.contains("event") && !input.contains("display") && !input.contains("deadline") && !input.contains("mark") && !input.contains("bye") && !input.contains("delete")) {
             throw new DukeException("OOPS! invalid command la bro");
         }
         if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("todo") && input.length() <= 5) {
             throw new DukeException("OOPS wrong format my brother! consider this format: \ntodo xxx");
         }
 
-        if (input.length() > 5 && input.substring(0, 5).equalsIgnoreCase("event") && (input.indexOf("/from") < 0 || input.indexOf("/to") < 0 || input.indexOf("/from") > input.indexOf("/to"))) {
+        if (input.length() > 5 && input.substring(0, 5).equalsIgnoreCase("event") && (!input.contains("/from") || !input.contains("/to") || input.indexOf("/from") > input.indexOf("/to"))) {
             throw new DukeException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
         }
 
@@ -111,7 +145,7 @@ public class Duke {
             }
         }
 
-        if (input.length() > 8 && input.substring(0, 8).equalsIgnoreCase("deadline") && input.indexOf("/by") < 0) {
+        if (input.length() > 8 && input.substring(0, 8).equalsIgnoreCase("deadline") && !input.contains("/by")) {
             throw new DukeException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
         }
 
