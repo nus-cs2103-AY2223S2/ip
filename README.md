@@ -1,6 +1,12 @@
  ## DukePro
 >"Your mind is for having ideas, not holding them." – David Allen ([source](https://dansilvestre.com/productivity-quotes))
 
+---
+### About the Project
+* This repository contains the codebase for `DukePro`, a chatbot developed as part of the _CS2103T Software Engineering_ module at the National University of Singapore.
+* It provides a reasonably well-written code base that is written in OOP fashion. It comes with a reasonable level of user and developer documentation.
+---
+
 DukePro frees your mind of having to remember things you need to do. It's,
 - text-based
 - easy to learn
@@ -37,3 +43,4 @@ So what are you waiting for? Come say hello to
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
