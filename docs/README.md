@@ -1,29 +1,4 @@
 # User Guide
+There are several commands that Duke supports. To run a command, simply type your command into the textbox and press enter or click "submit". The output of the command will be displayed in the textbox.
 
-## Features 
-
-### Feature-ABC
-
-Description of the feature.
-
-### Feature-XYZ
-
-Description of the feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
+Pressing the up and down arrow keys will let you see previous commands you have entered.
