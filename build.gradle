@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "yj.YJ"
+    mainClassName = 'yj.Launcher'
 }
 
 shadowJar {

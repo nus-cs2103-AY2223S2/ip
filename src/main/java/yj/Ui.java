@@ -1,8 +1,18 @@
 package yj;
 
 public class Ui {
+    private String message;
     public void print(String message) {
         System.out.println(message);
+        this.message += "\n" + message;
+    }
+
+    public void clear() {
+        this.message = "";
+    }
+
+    public String getMessage() {
+        return this.message;
     }
 
     /**
