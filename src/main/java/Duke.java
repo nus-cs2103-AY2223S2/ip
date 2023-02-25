@@ -12,23 +12,49 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
          **/
 
+        ArrayList<Task> storage = new ArrayList<>();
+
         // Level-7 feature: load existing data.txt file if it exists, else create new file
         File hardDisk = new File("data.txt");
         try {
-            Boolean created = hardDisk.createNewFile();
+            boolean created = hardDisk.createNewFile();
             // load existing data.txt file
             if (!created) {
-                System.out.println("Existing Tasks my brother!");
-                BufferedReader reader = new BufferedReader(new FileReader(hardDisk));
-                String line;
-                while((line = reader.readLine())!= null) {
-                    System.out.println(line);
+                Scanner scanner = new Scanner(hardDisk);
+                if (!scanner.hasNextLine()) {
+                    System.out.println("No Existing Tasks my brother!");
+                } else {
+                    System.out.println("Existing Tasks my brother!");
                 }
-                reader.close();
+                while (scanner.hasNextLine()) {
+                    String input = scanner.nextLine();
+                    boolean isDone = Character.isLetter(input.charAt(8));
+                    Task x;
+                    if (input.contains("From:")) {
+                        int endDescription = input.indexOf("From:") - 1;
+                        int endStart = input.indexOf("To:") - 1;
+                        x = new Event(input.substring(11, endDescription), input.substring(endDescription + 7, endStart), input.substring(endStart + 5));
+                    } else if (input.contains("By:")) {
+                        int endDescription = input.indexOf("By:") - 1;
+                        x = new Deadline(input.substring(11, endDescription), input.substring(endDescription + 5));
+                    } else {
+                        x = new Todo(input.substring(11));
+                    }
+                    if (isDone) {
+                        x.markAsDone();
+                    }
+                    storage.add(x);
+                }
+                // Printout existing storage database
+                int i = 0;
+                for(Task task: storage) {
+                    System.out.println((i + 1) + ". " + task.toString());
+                    i++;
+                }
+                scanner.close();
             } else {
                 System.out.println("New file created: data.txt");
             }
-
         } catch (IOException e) {
             System.out.println("An error occurred while creating the new file: data.txt");
         }
@@ -37,7 +63,6 @@ public class Duke {
 
         Scanner inputScanner = new Scanner(System.in);
         String input;
-        ArrayList<Task> storage = new ArrayList<>();
 
         while(true) {
             if (inputScanner.hasNextLine()) {
@@ -80,18 +105,18 @@ public class Duke {
                     // Level-4 feature: Todo, Deadline, Event
                     // note existing exception: indexOf() is case sensitive so /by etc must be in right caps
                     if (input.substring(0, 4).equalsIgnoreCase("todo")) {
-                        storage.add(new Todo(input));
+                        storage.add(new Todo(input.substring(5)));
                     } else if (input.substring(0, 5).equalsIgnoreCase("event")) {
                         int startIndex = input.indexOf("/from ");
                         int x = input.indexOf("/to ");
                         int endIndex = x + 4;
-                        String description = input.substring(6, startIndex);
-                        String start = input.substring(startIndex + 6, x);
+                        String description = input.substring(6, startIndex - 1);
+                        String start = input.substring(startIndex + 6, x - 1);
                         String end = input.substring(endIndex);
                         storage.add(new Event(description, start, end));
                     } else if (input.substring(0, 8).equalsIgnoreCase("deadline")) {
                         int startIndex = input.indexOf("/by "); // exception
-                        String description = input.substring(9, startIndex);
+                        String description = input.substring(9, startIndex - 1);
                         String deadline = input.substring(startIndex + 4);
                         storage.add(new Deadline(description, deadline));
                     } else {
