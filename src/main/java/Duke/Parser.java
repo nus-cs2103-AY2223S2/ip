@@ -6,6 +6,11 @@ import Duke.Exception.NoDescriptionException;
 public class Parser {
 
     public static Boolean parserStatus = true; //comment
+
+    /**
+     * Makes sense of the string command and takes suitable action.
+     * @param str takes in the command
+     */
     public static void makeSense(String str) {
         String key = str.split(" ", 2)[0];
         switch (key) {

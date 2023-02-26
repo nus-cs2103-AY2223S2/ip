@@ -1,7 +1,9 @@
 package Duke;
 
 public class Duke {
-
+    /**
+     * includes all the processes to be executed in the beginning before taking input
+     */
     public static void run() {
         Ui.greet();
         boolean stillOn = true;
