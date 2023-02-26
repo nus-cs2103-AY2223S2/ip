@@ -14,10 +14,14 @@ public class Storage {
     public Storage(Path filePath) {
         this.filePath = filePath;
     }
-    public ArrayList<Task> load() throws IOException {
-        return this.readSavedFile(this.filePath);
+    public ArrayList<Task> load() throws DukeException {
+        try {
+            return this.readSavedFile(this.filePath);
+        } catch (IOException e) {
+            throw new DukeException("File is corrupted.");
+        }
     }
-    public ArrayList<Task> readSavedFile(Path path) throws IOException {
+    public ArrayList<Task> readSavedFile(Path path) throws IOException, DukeException {
         try {
             Files.createFile(path);
             return new ArrayList<Task>();
@@ -28,10 +32,7 @@ public class Storage {
                 try {
                     arr.add(readLineToTask(task));
                 } catch (WrongTaskFormatException | ArrayIndexOutOfBoundsException wrongFormat) {
-//                    print("File format of tasks is wrong.\n" +
-//                            "List now contains information up to line before wrongly formatted line.");
-//                    printList(arr);
-                    return arr;
+                    throw new DukeException("File format of tasks is wrong.");
                 }
             }
             return arr;
@@ -67,11 +68,11 @@ public class Storage {
     public boolean getIsDone(String doneString) {
         return doneString.equals("1");
     }
-    void saveList(ArrayList<Task> arr) {
+    public void saveList(TaskList tasks) {
         try {
             // no need to deleteIfExists as BufferedWritter automatically clears all prev input
             BufferedWriter fileWriter = Files.newBufferedWriter(this.filePath);
-            for (Task task : arr) {
+            for (Task task : tasks.getTasks()) {
                 fileWriter.write(task.saveString());
                 fileWriter.newLine();
             }
