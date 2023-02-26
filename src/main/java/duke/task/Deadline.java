@@ -1,9 +1,11 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.regex.PatternSyntaxException;
 
 public class Deadline extends Task {
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
     public Deadline(String cmd) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         this(cmd,false);
     }

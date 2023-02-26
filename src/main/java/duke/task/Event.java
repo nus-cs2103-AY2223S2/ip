@@ -1,8 +1,10 @@
+package duke.task;
+
 import java.util.regex.PatternSyntaxException;
 
 public class Event extends Task {
-    private String from;
-    private String to;
+    private final String from;
+    private final String to;
     public Event(String cmd) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         this(cmd, false);
     }

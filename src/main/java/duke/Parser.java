@@ -1,6 +1,16 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.command.DeleteCommand;
+import duke.command.AddTaskCommand;
+
+
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class Parser {
     static final String VALIDCOMMANDS = "bye, list, mark, unmark, delete, todo, deadline, event";

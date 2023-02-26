@@ -1,19 +1,17 @@
-import java.util.ArrayList;
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
     private static final String LINE = "~~~~~~~~~~~~~~~~~~~~";
-    private Scanner sc;
+    private final Scanner sc;
     public Ui() {
         this.sc = new Scanner(System.in);
     }
     public void showLoadingError() {
         // error in reading the file
         print("error");
-    };
-    /*public static void print(String reply) {
-        System.out.println(String.format("%s\n%s\n%s", LINE, reply, LINE));
-    }*/
+    }
     public void print(String toBePrinted) {
         System.out.println(toBePrinted);
     }
@@ -44,8 +42,7 @@ public class Ui {
         System.out.println(LINE);
     }
     public String readCommand() {
-        String command = this.sc.nextLine();
-        return command;
+        return this.sc.nextLine();
     }
     public void closeUi() {
         this.sc.close();

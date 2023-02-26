@@ -1,11 +1,13 @@
-import java.time.format.DateTimeParseException;
+package duke.task;
+
+import duke.DukeException;
+
 import java.util.ArrayList;
-import java.util.regex.PatternSyntaxException;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
     public TaskList() {
-        this(new ArrayList<Task>());
+        this(new ArrayList<>());
     }
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -22,7 +24,6 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
-    // below is unfactored properly yet
     public void add(Task task) {
         this.tasks.add(task);
     }

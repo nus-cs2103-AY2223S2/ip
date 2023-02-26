@@ -1,16 +1,12 @@
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+
 import java.util.Map;
 import java.util.HashMap;
-import java.util.regex.PatternSyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
 
 public class Duke {
     /**
@@ -79,7 +75,7 @@ public class Duke {
         System.out.println(greet());
 
         // arr => needs to be updated w old list
-        ArrayList<Task> arr = new ArrayList<>();
+        ArrayList<task.Task> arr = new ArrayList<>();
         try {
             arr = readSavedFile();
         } catch (IOException unknown) {

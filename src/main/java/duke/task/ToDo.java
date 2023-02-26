@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.regex.PatternSyntaxException;
 
 public class ToDo extends Task {
@@ -8,7 +10,7 @@ public class ToDo extends Task {
         super(cmd, isDone);
     }
     /**
-     * Return the String for ToDo
+     * Return the String for duke.task.ToDo
      */
     @Override
     public String toString() {

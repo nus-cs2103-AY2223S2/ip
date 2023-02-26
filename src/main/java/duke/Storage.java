@@ -1,3 +1,11 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+
 import java.io.BufferedWriter;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -24,7 +32,7 @@ public class Storage {
     public ArrayList<Task> readSavedFile(Path path) throws IOException, DukeException {
         try {
             Files.createFile(path);
-            return new ArrayList<Task>();
+            return new ArrayList<>();
         } catch (FileAlreadyExistsException e) {
             ArrayList<Task> arr = new ArrayList<>();
             List<String> savedList = Files.readAllLines(path);
@@ -45,26 +53,19 @@ public class Storage {
         switch(items[0]) {
             case "T":
                 task = new ToDo(items[2], isDone);
-//                return task;
                 break;
             case "D":
                 task = new Deadline(items[2], items[3], isDone);
-//                return task;
                 break;
             case "E":
                 String[] timeOfEvent = items[3].split("-");
                 task = new Event(items[2], timeOfEvent[0], timeOfEvent[1], isDone);
-//                return task;
                 break;
             default:
-                throw new WrongTaskFormatException("Invalid Task String Format");
+                throw new WrongTaskFormatException("Invalid task.Task String Format");
         }
         return task;
     }
-    /**
-     * @param doneString a simple string containing 0/1
-     * @returns the int value
-     */
     public boolean getIsDone(String doneString) {
         return doneString.equals("1");
     }
