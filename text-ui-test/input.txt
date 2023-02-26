@@ -1,0 +1,44 @@
+todo read book
+deadline return book /by 6th June
+mark 1
+event project meeting /from Aug 6th 2pm /to 4pm
+list
+unmark 2
+todo join sports club
+todo borrow book
+mark 4
+mark 1
+list
+deadline return book /by Sunday
+event project meeting /from Mon 2pm /to 4pm
+casual
+list
+todo 1 proposal
+deadline do homework /by no idea :-p
+mark 3
+outlier
+unmark 1
+event 1119 /from ^&^ /to (((*`v`*
+list
+todo
+blah
+list test
+deadline
+event
+event/
+mark
+unmark mark 18
+unmark -1
+unmark 12344r
+unmark 12345
+mark cat
+deadline /by
+deadline task /by
+event task /from t1 /to
+event task /from /to t2
+event task t1 /from /to t2
+event task t1 /to t2
+even task /to t2
+event /from t1 /to t2
+event task /from /to
+bye

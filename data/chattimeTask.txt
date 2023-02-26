@@ -1,0 +1,5 @@
+T @ 0 @ read book
+D @ 1 @ return book @ 2022-06-06 @ 0
+E @ 0 @ project meeting @ 2022-08-06 @ 02:00 @ 2022-08-07 @ 13:00
+E @ 0 @ project meeting @ 2022-09-16 @ 00:00 @ 2022-10-01 @ 23:59
+T @ 0 @ join sport clubs
