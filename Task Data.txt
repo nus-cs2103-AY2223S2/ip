@@ -1,6 +1,0 @@
-[T][ ] homework
-[T][ ] do the programming assignment
-[T][ ] run
-[T][ ] eat
-[T][ ] sleep
-[T][ ] jump

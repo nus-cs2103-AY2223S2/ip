@@ -8,6 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Class that handles the Graphical User Interface
+ */
 public class MainWindow extends AnchorPane{
     @FXML
     private ScrollPane scrollPane;
@@ -28,6 +31,10 @@ public class MainWindow extends AnchorPane{
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Duke instance to be used with this Graphical User Interface
+     * @param d The Duke instance
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

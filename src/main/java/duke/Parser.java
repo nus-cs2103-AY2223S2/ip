@@ -27,6 +27,7 @@ public class Parser {
      *
      * @param userInput the String entered by the user specifying their request
      * @param list      the TaskList object that stores all the user's tasks
+     * @return A String that is to be displayed to the user upon completion of their request
      * @throws IOException
      */
     public String parseAndExecute(String userInput, TaskList list) throws IOException {
@@ -45,7 +46,7 @@ public class Parser {
                 String firstOutput = list.printItems();
                 String secondOutput = list.getTaskDetails();
                 updateStorage(list);
-                return firstOutput + secondOutput;
+                return firstOutput + "\n" + secondOutput;
             }
 
             case MARK: {
@@ -56,7 +57,7 @@ public class Parser {
                     String firstOutput = list.markDone(taskNumber);
                     String secondOutput = list.getTaskDetails();
                     updateStorage(list);
-                    return firstOutput + secondOutput;
+                    return firstOutput + "\n" + secondOutput;
                 } catch (NumberFormatException e) {
                     return "You have to specify a number representing the task number!";
                 }
@@ -73,7 +74,7 @@ public class Parser {
                     String firstOutput = list.markUndone(taskNumber);
                     String secondOutput = list.getTaskDetails();
                     updateStorage(list);
-                    return firstOutput + secondOutput;
+                    return firstOutput + "\n" + secondOutput;
                 } catch (NumberFormatException e) {
                     return "You have to specify a number representing the task number!";
                 }
@@ -132,8 +133,9 @@ public class Parser {
                 }
                 try {
                     String firstOutput = list.deleteTask(Integer.parseInt(userInputComponents[1]));
+                    String secondOutput = list.getTaskDetails();
                     updateStorage(list);
-                    return firstOutput;
+                    return firstOutput + "\n" + secondOutput;
                 } catch (NumberFormatException e) {
                     return "You have to specify a number representing the task number!";
                 }

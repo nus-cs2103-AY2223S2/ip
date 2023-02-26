@@ -9,10 +9,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.geometry.Insets;
 
 /**
  * An example of a custom control using FXML.
@@ -49,12 +55,32 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Method to create a DialogBox where the user's requests are displayed back to the user
+     * @param text The text entered by the user
+     * @param img The image that represents the user
+     * @return The DialogBox where the user's requests are displayed back to the user
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox box = new DialogBox(text, img);
+        box.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE,
+                CornerRadii.EMPTY,
+                Insets.EMPTY)));
+        return box;
     }
 
+
+    /**
+     * Method to create a DialogBox where the responses of the application are displayed back to the user
+     * @param text The text that is the output from the application
+     * @param img The image that represents the application (Duke)
+     * @return The DialogBox where the responses of the application are displayed to the user
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setBackground(new Background(new BackgroundFill(Color.BISQUE,
+                CornerRadii.EMPTY,
+                Insets.EMPTY)));
         db.flip();
         return db;
     }

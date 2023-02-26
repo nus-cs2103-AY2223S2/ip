@@ -34,18 +34,6 @@ import javafx.scene.layout.HBox;
  * This is the main class that serves as the entry point into the application
  */
 public class Duke  {
-    @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private VBox dialogContainer;
-    @FXML
-    private TextField userInput;
-    @FXML
-    private Button sendButton;
-    private Scene scene;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private Storage storage;
     private Parser parser;
@@ -62,6 +50,12 @@ public class Duke  {
         parser = new Parser(storage);
     }
 
+
+    /**
+     * Method to obtain the String that is output when the different requests are entered by the user
+     * @param input The request entered in by the user to the application
+     * @return A String representing the response of the application to the request of the user
+     */
     public String getResponse(String input) {
 
             try {
@@ -72,18 +66,6 @@ public class Duke  {
                 return output;
             }
     }
-
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
-    }
-
-
-
-
-
-
 }
 
 
