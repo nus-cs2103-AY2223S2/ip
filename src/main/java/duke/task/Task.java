@@ -43,6 +43,6 @@ public class Task {
     }
     public String saveString() {
         int done = isDone() ? 1 : 0;
-        return String.format("task.Task | %d | %s", done, task);
+        return String.format("Task | %d | %s", done, task);
     }
 }
