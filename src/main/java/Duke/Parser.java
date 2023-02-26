@@ -5,7 +5,7 @@ import Duke.Exception.NoDescriptionException;
 
 public class Parser {
 
-    public static Boolean parserStatus = true;
+    public static Boolean parserStatus = true; //comment
     public static void makeSense(String str) {
         String key = str.split(" ", 2)[0];
         switch (key) {
