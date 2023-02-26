@@ -37,7 +37,7 @@ public class Storage {
      */
     private File createStorageFile(TaskList list) {
 
-        File Task_Data = new File("duke.Task Data.txt");
+        File Task_Data = new File("Task Data.txt");
         try {
             Task_Data.createNewFile();
         } catch (FileAlreadyExistsException e){ // nothing should be done if the file already exists
@@ -56,7 +56,7 @@ public class Storage {
      * @throws IOException
      */
     public void updateTasksInFile (TaskList list) throws IOException {
-        PrintWriter logger = new PrintWriter("duke.Task Data.txt");
+        PrintWriter logger = new PrintWriter("Task Data.txt");
         for (int i = 0; i < list.getNumberOfTasks(); i++) {
             logger.write(list.getTaskAtIndex(i) + "\n");
         }

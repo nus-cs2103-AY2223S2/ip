@@ -25,6 +25,7 @@ public class TaskList {
      * @return An integer that is the number of tasks currently in the TaskList
      */
     public int getNumberOfTasks() {
+
         return this.list.size();
     }
 
@@ -112,7 +113,7 @@ public class TaskList {
      * Method that prints all the tasks in the TaskList object
      */
     public String printItems () {
-        String output = "These are the tasks you have left to complete: ";
+        String output = "These are the tasks you have left to complete: \n";
         int numOfTasks = this.list.size();
 
         for (int i = 0; i < numOfTasks; i++) {
@@ -127,7 +128,7 @@ public class TaskList {
      */
     public String getTaskDetails() {
         String pluralCheck = (numberOfTasks == 1 ? " task" : " tasks");
-        String output = "You now have " + numberOfTasks +  pluralCheck + " in the list";
+        String output = "\nYou now have " + numberOfTasks +  pluralCheck + " in the list";
         output += "\n Number of tasks completed: " + numberDone;
         output += "\n Number of tasks yet to be completed: " + numberUndone;
         return output;

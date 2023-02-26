@@ -37,6 +37,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedDate = deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
-        return (isDone? "[D][X] " : "[D][ ] ") + description + (". duke.Deadline: "  + formattedDate);
+        return (isDone? "[D][X] " : "[D][ ] ") + description + (". Deadline: "  + formattedDate);
     }
 }
