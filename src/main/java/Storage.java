@@ -13,7 +13,7 @@ public class Storage {
     }
 
 
-    public String load() {
+    public String load() throws DukeException {
         // Level-7 feature: load existing data.txt file if it exists, else create new file
         // STORAGE!!
         try {
