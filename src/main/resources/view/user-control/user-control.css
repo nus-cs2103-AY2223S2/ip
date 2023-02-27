@@ -1,0 +1,38 @@
+.user-control-outer-container {
+    -fx-padding: 25;
+    -fx-alignment: bottom-center;
+    -fx-min-height: 100;
+}
+
+.user-control-inner-container {
+    -fx-max-width: 420;
+}
+
+.user-input {
+    -fx-pref-height: 50;
+    -fx-pref-width: 350;
+    -fx-padding: 0 35;
+
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-background-color: -light-blue;
+
+    -fx-prompt-text-fill: -dark-grey;
+    -fx-prompt-text-font-weight: normal;
+    -fx-text-alignment: center;
+}
+
+.send-button {
+    -fx-pref-height: 50;
+    -fx-pref-width: 50;
+
+    -fx-alignment: center;
+
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-background-color: transparent;
+}
+
+.send-button:hover {
+    -fx-background-color: -light-grey;
+}

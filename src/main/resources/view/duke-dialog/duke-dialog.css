@@ -1,0 +1,11 @@
+.duke-dialog-container {
+    -fx-max-height: Infinity;
+    -fx-max-width: Infinity;
+    -fx-padding: 25 10;
+    -fx-border-width: 1 0;
+    -fx-border-color: -light-grey;
+}
+
+.duke-dialog-text {
+    -fx-padding: 0 0 0 35;
+}

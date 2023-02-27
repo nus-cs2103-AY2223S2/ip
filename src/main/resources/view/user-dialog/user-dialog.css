@@ -1,0 +1,19 @@
+.user-dialog-container {
+    -fx-alignment: bottom-right;
+    -fx-padding: 20 0 20 100;
+}
+
+.user-dialog-text {
+    -fx-min-width: 80;
+    -fx-min-height: 40;
+    -fx-padding: 5 15 5 15;
+
+    -fx-border-radius: 20 5 20 20;
+    -fx-background-radius: 20 5 20 20;
+    -fx-background-color: -seaweed-blue;
+
+    -fx-text-fill: -white;
+    -fx-wrap-text: true;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
