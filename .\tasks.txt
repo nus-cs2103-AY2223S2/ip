@@ -1,0 +1,6 @@
+T |   | something
+D |   | exercise | Jan 11 2011 0000AM
+D | X | do work | Feb 12 2012 0000AM
+T |   | something
+T |   | something
+E |   | somet | now-then
