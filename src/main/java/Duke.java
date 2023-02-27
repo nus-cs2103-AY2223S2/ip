@@ -1,6 +1,6 @@
 import java.time.DateTimeException;
 import java.util.ArrayList;
-import java.io.*;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -10,8 +10,8 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -39,50 +39,7 @@ public class Duke {
 
         ArrayList<Task> storage = new ArrayList<>();
 
-        // Level-7 feature: load existing data.txt file if it exists, else create new file
-        File hardDisk = new File("data.txt");
-        try {
-            boolean created = hardDisk.createNewFile();
-            // load existing data.txt file
-            if (!created) {
-                Scanner scanner = new Scanner(hardDisk);
-                if (!scanner.hasNextLine()) {
-                    System.out.println("No Existing Tasks my brother!");
-                } else {
-                    System.out.println("Existing Tasks my brother!");
-                }
-                while (scanner.hasNextLine()) {
-                    String input = scanner.nextLine();
-                    boolean isDone = Character.isLetter(input.charAt(8));
-                    Task x;
-                    if (input.contains("From:")) {
-                        int endDescription = input.indexOf("From:") - 1;
-                        int endStart = input.indexOf("To:") - 1;
-                        x = new Event(input.substring(11, endDescription), input.substring(endDescription + 7, endStart), input.substring(endStart + 5));
-                    } else if (input.contains("By:")) {
-                        int endDescription = input.indexOf("By:") - 1;
-                        x = new Deadline(input.substring(11, endDescription), input.substring(endDescription + 5));
-                    } else {
-                        x = new Todo(input.substring(11));
-                    }
-                    if (isDone) {
-                        x.markAsDone();
-                    }
-                    storage.add(x);
-                }
-                // Printout existing storage database
-                int i = 0;
-                for(Task task: storage) {
-                    System.out.println((i + 1) + ". " + task.toString());
-                    i++;
-                }
-                scanner.close();
-            } else {
-                System.out.println("New file created: data.txt");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred while creating the new file: data.txt");
-        }
+
 
         System.out.println("Hello Brother\nWelcome to Brother Bot\nWhats up what can I do for you mi amigo");
 
@@ -93,8 +50,11 @@ public class Duke {
             if (inputScanner.hasNextLine()) {
                 input = inputScanner.nextLine();
                 try {
+
                     validateInput(input, storage);
                 } catch(DukeException x) {
+
+                    // showLoading error
                     System.out.println(x.getMessage());
                     continue;
                 }
@@ -104,6 +64,8 @@ public class Duke {
                     System.out.println("ok see you brother all love no cringe!");
                     break;
                 }
+
+                // PARSER -> PARSE()
 
                 // level-3 feature: use input to construct Task object and add to array + display array when required + mark Task as done
                 if (input.equalsIgnoreCase("display")) {
@@ -163,7 +125,7 @@ public class Duke {
                 }
 
 
-
+                // STORAGE CLASS
                 // if changes made to task list, rewrite task list in data.txt
                 if (!input.contains("display") && !input.contains("bye")) {
                     try {
@@ -183,36 +145,6 @@ public class Duke {
         }
     }
 
-    public static void validateInput(String input, ArrayList<Task> storage) throws DukeException {
-        if (!input.contains("todo") && !input.contains("event") && !input.contains("display") && !input.contains("deadline") && !input.contains("mark") && !input.contains("bye") && !input.contains("delete")) {
-            throw new DukeException("OOPS! invalid command la bro");
-        }
-        if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("todo") && input.length() <= 5) {
-            throw new DukeException("OOPS wrong format my brother! consider this format: \ntodo xxx");
-        }
-
-        if (input.length() > 5 && input.substring(0, 5).equalsIgnoreCase("event") && (!input.contains("/from") || input.indexOf("/from") == 6 || !input.contains("/to") || input.indexOf("/from") > input.indexOf("/to"))) {
-            throw new DukeException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
-        }
-
-        if (input.length() > 6 && input.substring(0, 6).equalsIgnoreCase("delete")) {
-            try {
-                Integer.parseInt(input.substring(7));
-            } catch(NumberFormatException e) {
-                throw new DukeException("OOPS wrong format my brother! consider this format: \ndelete INSERT_NUMBER");
-            }
-            if (Integer.parseInt(input.substring(7)) > storage.size()) {
-                throw new DukeException("OOPS inserted number is invalid");
-            }
-        }
-
-        if (input.length() > 8 && input.substring(0, 8).equalsIgnoreCase("deadline") && (!input.contains("/by") || input.indexOf("/by") == 9)) {
-            throw new DukeException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
-        }
-
-
-
-    }
 
 
 
