@@ -1,6 +1,10 @@
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.io.*;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -113,12 +117,23 @@ public class Duke {
                         String description = input.substring(6, startIndex - 1);
                         String start = input.substring(startIndex + 6, x - 1);
                         String end = input.substring(endIndex);
-                        storage.add(new Event(description, start, end));
+                        try {
+                            storage.add(new Event(description, start, end));
+                        } catch (DateTimeException e) {
+                            System.out.println("Invalid Date and Time input brother. Here's the correct format:\ndd/MM/yyyy HHmm");
+                            continue;
+                        }
+
                     } else if (input.substring(0, 8).equalsIgnoreCase("deadline")) {
                         int startIndex = input.indexOf("/by "); // exception
                         String description = input.substring(9, startIndex - 1);
                         String deadline = input.substring(startIndex + 4);
-                        storage.add(new Deadline(description, deadline));
+                        try {
+                            storage.add(new Deadline(description, deadline));
+                        } catch (DateTimeException e) {
+                            System.out.println("Invalid Date and Time input brother. Here's the correct format:\ndd/MM/yyyy HHmm");
+                            continue;
+                        }
                     } else {
                         storage.add(new Task(input));
                     }
@@ -155,7 +170,7 @@ public class Duke {
             throw new DukeException("OOPS wrong format my brother! consider this format: \ntodo xxx");
         }
 
-        if (input.length() > 5 && input.substring(0, 5).equalsIgnoreCase("event") && (!input.contains("/from") || !input.contains("/to") || input.indexOf("/from") > input.indexOf("/to"))) {
+        if (input.length() > 5 && input.substring(0, 5).equalsIgnoreCase("event") && (!input.contains("/from") || input.indexOf("/from") == 6 || !input.contains("/to") || input.indexOf("/from") > input.indexOf("/to"))) {
             throw new DukeException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
         }
 
@@ -170,7 +185,7 @@ public class Duke {
             }
         }
 
-        if (input.length() > 8 && input.substring(0, 8).equalsIgnoreCase("deadline") && !input.contains("/by")) {
+        if (input.length() > 8 && input.substring(0, 8).equalsIgnoreCase("deadline") && (!input.contains("/by") || input.indexOf("/by") == 9)) {
             throw new DukeException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
         }
 
