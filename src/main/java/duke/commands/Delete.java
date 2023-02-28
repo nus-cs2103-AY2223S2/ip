@@ -31,13 +31,21 @@ public class Delete extends Command {
      * @param storage the storage object
      * @return
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.index > tasks.size() - 1 || this.index < 0) {
-            throw new DukeException("Sorry, you used an invalid index");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            assert this.index <= tasks.size() : ui.printInvalidIndex();
+            if (this.index < 0) {
+                throw new DukeException("Sorry, you used an invalid index");
+            }
+            this.t = tasks.getTask(index);
+            tasks.removeTask(index);
+            storage.saveTaskList(tasks);
+            return ui.printRemovedMessage(this.t, tasks.size());
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (AssertionError a) {
+            return a.getMessage();
         }
-        this.t = tasks.getTask(index);
-        tasks.removeTask(index);
-        storage.saveTaskList(tasks);
-        return ui.printRemovedMessage(this.t, tasks.size());
+
     }
 }
