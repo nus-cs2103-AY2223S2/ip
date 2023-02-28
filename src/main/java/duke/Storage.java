@@ -19,6 +19,9 @@ public class Storage {
     static final String HOMEDIRECTORY = System.getProperty("user.dir");
     static final Path DEFAULTDIRECTORY = Paths.get(HOMEDIRECTORY, "SavedList.txt");
     private final Path filePath;
+    public Storage() {
+        this.filePath = DEFAULTDIRECTORY;
+    }
     public Storage(Path filePath) {
         this.filePath = filePath;
     }
