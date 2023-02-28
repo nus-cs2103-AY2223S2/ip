@@ -14,8 +14,4 @@ public class ListCommand extends Command {
         }
         ui.print(str);
     }
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

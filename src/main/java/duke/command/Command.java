@@ -28,13 +28,14 @@ public class Command {
     }
 
     /**
-     * Executes the task of the command on TaskList, displays the output via Ui and saves the file via Storage
-     * If there arises any issues with the command, throws a DukeException with a helpful error message
+     * Executes the task of the command on TaskList
+     * Display the output via Ui
+     * Saves the file via Storage
      *
      * @param tasks TaskList of all the tasks
      * @param ui the user interface to interact with the user
      * @param storage used to save the TaskList to be retrieved in the future
-     * @throws DukeException
+     * @throws DukeException if an issue arises
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // do the commands purpose

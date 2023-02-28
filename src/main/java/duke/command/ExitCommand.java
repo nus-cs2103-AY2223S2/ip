@@ -10,6 +10,12 @@ public class ExitCommand extends Command {
         storage.saveList(tasks);
         ui.closeUi();
     }
+
+    /**
+     * Returns true as this is an ExitCommand
+     *
+     * @return true
+     */
     @Override
     public boolean isExit() {
         return true;

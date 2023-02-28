@@ -26,8 +26,4 @@ public class MarkCommand extends Command {
             throw new DukeException("Please enter a valid number");
         }
     }
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
