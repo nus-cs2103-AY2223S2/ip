@@ -11,8 +11,6 @@ public class EchoCommand extends Command {
     }
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        // do the commands purpose
-        // ui.print() the correct output
         ui.print(input);
     }
 }

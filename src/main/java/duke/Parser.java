@@ -7,13 +7,13 @@ import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.command.DeleteCommand;
 import duke.command.AddTaskCommand;
-
+import duke.command.FindCommand;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Parser {
-    static final String VALIDCOMMANDS = "bye, list, mark, unmark, delete, todo, deadline, event";
+    static final String VALIDCOMMANDS = "bye, list, mark, unmark, delete, todo, deadline, event, find";
     static final HashMap<String, String> CORRECTFORMAT = new HashMap<>(Map.of(
             "list", "list",
             "bye", "bye",
@@ -22,7 +22,8 @@ public class Parser {
             "event", "event THE TASK /from TIME /to TIME",
             "mark", "mark NUMBER",
             "unmark", "unmark NUMBER",
-            "delete", "delete NUMBER"
+            "delete", "delete NUMBER",
+            "find", "find WORDS"
     ));
     public static Command parse(String fullCommand) throws DukeException {
         String[] words = fullCommand.split(" ");
@@ -48,6 +49,9 @@ public class Parser {
                     break;
                 case "delete":
                     cmd = new DeleteCommand(words[1]);
+                    break;
+                case "find":
+                    cmd = new FindCommand(words[1]);
                     break;
                 default:    // for tasks
                     cmd = new AddTaskCommand(fullCommand);

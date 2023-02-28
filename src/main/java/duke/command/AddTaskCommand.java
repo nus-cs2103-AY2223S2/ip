@@ -19,8 +19,6 @@ public class AddTaskCommand extends Command {
     }
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        // do the commands purpose
-        // ui.print() the correct output
         try{
             Task task = makeTask();
             tasks.add(task);
