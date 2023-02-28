@@ -24,6 +24,9 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
     public void add(Task task) {
         this.tasks.add(task);
     }
@@ -43,5 +46,14 @@ public class TaskList {
     }
     public ArrayList<Task> getTasks() {
         return this.tasks;
+    }
+    public TaskList find(String words) {
+        ArrayList<Task> tasksWithWord = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getTask().contains(words)) {
+                tasksWithWord.add(task);
+            }
+        }
+        return new TaskList(tasksWithWord);
     }
 }
