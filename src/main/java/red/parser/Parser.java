@@ -64,23 +64,11 @@ public class Parser {
             if (arrOfStr.length <= 1) {
                 throw new RuntimeException("Specification of the DeadlineTask is missing\n");
             }
-            String[] deadstr = arrOfStr[1].split("/by ", 2);
-            if (deadstr.length != 2) {
+            String[] deadStr = arrOfStr[1].split("/by ", 2);
+            if (deadStr.length != 2) {
                 throw new RuntimeException("Specification of the DeadlineTask is missing\n");
             }
-            String[] timestr = deadstr[1].split(" ", 2);
-            if (timestr.length < 1) {
-                throw new RuntimeException("Specification of the DeadlineTask is missing\n");
-            }
-
-            if (timestr.length == 2 && timestr[1].isEmpty()) {
-                newDeadlineTask = new DeadlineTask(deadstr[0].trim(),timestr[0]);
-            } else if (timestr.length == 2) {
-                System.out.println(timestr[1].isEmpty());
-                newDeadlineTask = new DeadlineTask(deadstr[0].trim(),timestr[0],timestr[1]);
-            } else if (timestr.length == 1) {
-                newDeadlineTask = new DeadlineTask(deadstr[0].trim(),timestr[0]);
-            }
+            newDeadlineTask = new DeadlineTask(deadStr[0], deadStr[1]);
 
             return new AddCommand(newDeadlineTask);
 

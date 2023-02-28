@@ -1,5 +1,6 @@
 This is your current task list:
 1. [T][ ] eat 
-2. [D][ ] eat (Before: Dec 08 2020) 
-3. [E][ ] eat (From: 8/12/2020 To: 9/12/2020) 
+2. [D][ ] eat (Before: 22/12/2020) 
+3. [E][ ] eat (From: 22/12/2020 To: 22/12/2020) 
+4. [E][ ] die (From: 22/12/2020 To: 22/12/2020) 
 

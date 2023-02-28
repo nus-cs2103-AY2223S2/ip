@@ -1,10 +1,6 @@
 package red.task;
 
-import red.command.AddCommand;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -12,8 +8,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class DeadlineTask extends Task {
 
-    protected LocalDateTime dateTime = null;
     protected LocalDate date = null;
+    protected String formattedDate;
+    protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
      * Constructor for a DeadlineTask that takes in a String description as well as String date
@@ -21,44 +18,15 @@ public class DeadlineTask extends Task {
      *
      * @param description The description of the EventTask.
      * @param date The date of the event.
-     * @param time The time of the event.
      */
-    public DeadlineTask(String description, String date, String time) {
+    public DeadlineTask(String description, String date) {
         super(description);
-        String[] dateStr = date.split("/", 3);
-        String[] altDateStr = date.split("-", 3);
-        assert altDateStr.length == 3;
-        assert dateStr.length == 3;
-        if(altDateStr.length != 3 && dateStr.length != 3) {
-            throw new RuntimeException("Specification of the DeadlineTask date is incorrect\n");
-        } else if (dateStr.length == 3) {
-            this.dateTime = LocalDateTime.of( Integer.valueOf(dateStr[2]),
-                    Integer.valueOf(dateStr[1]), Integer.valueOf(dateStr[0]), Integer.valueOf(time.substring(0,2)),
-                    Integer.valueOf(time.substring(2)));
-
-        } else if(altDateStr.length == 3) {
-            LocalDate temp = LocalDate.parse(date);
-            LocalTime tempTime = LocalTime.of(Integer.valueOf(time.substring(0,2)), Integer.valueOf(time.substring(2)));
-            this.dateTime = LocalDateTime.of(temp,tempTime);
-
-        }
+        this.date = getLocalDate(date);
+        this.formattedDate = this.date.format(dateTimeFormatter);
     }
 
     /**
-     * Constructor for a DeadlineTask that takes in a String description as well as
-     * date and time in LocalDateTime format
-     *
-     * @param description The description of the EventTask.
-     * @param dateTime The date and time of the event.
-     */
-    public DeadlineTask(String description, LocalDateTime dateTime) {
-        super(description);
-        this.dateTime = dateTime;
-    }
-
-    /**
-     * Constructor for a DeadlineTask that takes in a String description as well as
-     * date in LocalDate format
+     * Constructor for a DeadlineTask that takes in a String description as well as LocalDate date
      *
      * @param description The description of the EventTask.
      * @param date The date of the event.
@@ -66,40 +34,28 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String description, LocalDate date) {
         super(description);
         this.date = date;
+        this.formattedDate = this.date.format(dateTimeFormatter);
     }
 
     /**
-     * Constructor for a DeadlineTask that takes in a String description as well as String date.
+     * Parses through String to obtain a LocalDate object
      *
-     * @param description The description of the EventTask.
-     * @param date The date of the event.
+     * @param date String representation of time
+     * @return LocalDate Object of specified time
      */
-    public DeadlineTask(String description, String date) {
-        super(description);
-        String[] dateStr = date.split("/", 3);
-        String[] altDateStr = date.split("-", 3);
-        assert altDateStr.length == 3;
-        assert dateStr.length == 3;
-        if(altDateStr.length != 3 && dateStr.length != 3) {
-            System.out.println(date);
-            throw new RuntimeException("Specification of the DeadlineTask date is incorrect\n");
-        } else if (dateStr.length == 3) {
-            this.date = LocalDate.of( Integer.valueOf(dateStr[2]),
-                    Integer.valueOf(dateStr[1]), Integer.valueOf(dateStr[0]));
-
-        } else if(altDateStr.length == 3) {
-            System.out.println(date);
-            this.date = LocalDate.parse(date);
-
+    public LocalDate getLocalDate(String date) {
+        String[] dateStr = date.split("/",3);
+        if (dateStr.length < 3) {
+            throw new RuntimeException("Specification of the EventTask date is incorrect\n");
         }
+        return LocalDate.of( Integer.valueOf(dateStr[2]), Integer.valueOf(dateStr[1]), Integer.valueOf(dateStr[0]));
+
     }
+
 
     @Override
     public String toString() {
-        if(dateTime == null) {
-            return "[D]" + super.toString() + " (Before: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
-        }
-        return "[D]" + super.toString() + " (Before: " + dateTime  + ")";
+        return "[D]" + super.toString() + " (Before: " + formattedDate  + ")";
     }
 
     /**
@@ -118,21 +74,10 @@ public class DeadlineTask extends Task {
         }
         DeadlineTask checkedObj = (DeadlineTask) obj;
         boolean isSameDescription = this.description.equals(checkedObj.description);
-        boolean isSameDate = false;
-        boolean isSameDateTime = false;
-        if(dateTime == null) {
-            isSameDate = this.date.equals(checkedObj.date);
-        }
-        if(date == null) {
-            isSameDateTime = this.dateTime.equals(checkedObj.dateTime);
-        }
+        boolean isSameDate = this.date.equals(checkedObj.date);
+        boolean isSame = isSameDescription && isSameDate;
 
-
-
-        if (isSameDescription && isSameDateTime) {
-            return true;
-        }
-        if (isSameDescription && isSameDate) {
+        if(isSame) {
             return true;
         }
 

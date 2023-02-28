@@ -66,6 +66,12 @@ public class Storage {
         }
     }
 
+    public LocalDate getDate(String date) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate value = LocalDate.parse(date,dateTimeFormatter);
+        return value;
+    }
+
     /**
      * Loads the file that will store the information of the TaskList and creates a file if it does not exist
      * while copying any information contained from a previous session into the current session.
@@ -103,24 +109,22 @@ public class Storage {
                     String[] arrOfStrStr= arrOfStr[1].split("\\(From: ", 2);
                     String[] arrOfStrStrStr= arrOfStrStr[1].split("To: ", 2);
                     String[] arrOfStrStrStrStr= arrOfStrStrStr[1].split("\\)", 2);
-                    EventTask currentTask = new EventTask(arrOfStrStr[0].trim(),arrOfStrStrStr[0],arrOfStrStrStrStr[0]);
+
+                    LocalDate startDate = getDate(arrOfStrStrStr[0].trim());
+                    LocalDate endDate = getDate(arrOfStrStrStrStr[0].trim());
+                    EventTask currentTask = new EventTask(arrOfStrStr[0].trim(),startDate,endDate);
+
                     Command currentCommand = new AddCommand(currentTask);
                     currentCommand.execute(this.tasks,this.ui,this);
 
                 } else if(Character.compare(str.charAt(4),deadline) == 0) {
-                    DeadlineTask currentTask = null;
                     String[] arrOfStr= str.split("] ", 2);
                     String[] arrOfStrStr= arrOfStr[1].split("\\(Before: ", 2);
                     String[] arrOfStrStrStr= arrOfStrStr[1].split("\\)", 2);
 
-                    if(arrOfStrStrStr[0].length() < 12) {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-                        LocalDate date = LocalDate.parse(arrOfStrStrStr[0],formatter);
-                        currentTask = new DeadlineTask(arrOfStrStr[0].trim(), date);
-                    } else {
-                        LocalDateTime dateTime = LocalDateTime.parse(arrOfStrStrStr[0]);
-                        currentTask = new DeadlineTask(arrOfStrStr[0].trim(), dateTime);
-                    }
+                    LocalDate date = getDate(arrOfStrStrStr[0].trim());
+                    DeadlineTask currentTask = new DeadlineTask(arrOfStrStr[0].trim(), date);
+
 
                     Command currentCommand = new AddCommand(currentTask);
                     currentCommand.execute(this.tasks,this.ui,this);
