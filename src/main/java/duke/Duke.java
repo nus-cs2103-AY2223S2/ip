@@ -33,7 +33,8 @@ public class Duke {
             "event", "event THE TASK /from TIME /to TIME",
             "mark", "mark NUMBER",
             "unmark", "unmark NUMBER",
-            "delete", "delete NUMBER"
+            "delete", "delete NUMBER",
+            "find", "find WORDS"
     ));
 
     private Storage storage;
