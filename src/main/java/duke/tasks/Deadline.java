@@ -24,7 +24,7 @@ public class Deadline extends Task {
             DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
             this.output = this.dueBy.format(newFormat);
         } catch (DateTimeParseException e) {
-            throw new DukeException(("Invalid deadline format, please input as YYYY-MM-DD with a space after /due_by"));
+            throw new DukeException(("Invalid deadline format, please input as YYYY-MM-DD with a space after /by"));
         }
     }
 
