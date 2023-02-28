@@ -1,0 +1,20 @@
+@font-face {
+  font-family: default;
+  src: url("../fonts/font.otf");
+}
+
+.root * {
+  -fx-padding: 10px;
+  -fx-font: 16px default;
+  -fx-text-fill: rgb(229, 227, 227);
+}
+
+#dialog {
+  -fx-background-color: rgba(34, 12, 131, 0.803);
+  -fx-background-insets: 10px;
+  -fx-background-radius: 10px;
+  -fx-border-insets: 10px;
+  -fx-border-radius: 10px;
+  -fx-border-color: rgb(255, 255, 255);
+  -fx-border-width: 1px;
+}
