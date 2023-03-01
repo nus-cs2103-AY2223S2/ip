@@ -12,8 +12,11 @@ import duke.command.FindCommand;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The Parser class that is used to take in and parse commands to be used for the correct purpose
+ */
 public class Parser {
-    static final String VALIDCOMMANDS = "bye, list, mark, unmark, delete, todo, deadline, event, find";
+    static final String VALIDCOMMANDS = "list, bye, todo, deadline, event, mark, unmark, delete, find";
     static final HashMap<String, String> CORRECTFORMAT = new HashMap<>(Map.of(
             "list", "list",
             "bye", "bye",
@@ -25,6 +28,14 @@ public class Parser {
             "delete", "delete NUMBER",
             "find", "find WORDS"
     ));
+
+    /**
+     * Returns the correct Command given by the string input
+     *
+     * @param fullCommand String containing the input of the full command
+     * @return cmd the correct type of Command
+     * @throws DukeException if the command does not exist or is in the wrong format
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] words = fullCommand.split(" ");
         if (!CORRECTFORMAT.containsKey(words[0])) {
