@@ -44,6 +44,10 @@ public class Parser {
             return toReturn;
         default:
             String[] arrOfStr = command.split(" ", 2);
+            if(arrOfStr.length == 1) {
+                toReturn = "Sorry your command is invalid";
+                return toReturn;
+            }
             try {
                 validateCmd(arrOfStr[1]);
             } catch (MissingDescriptionException e) {
