@@ -47,6 +47,14 @@ public class AddTaskCommand extends Command {
             throw new DukeException("Please enter the command in the correct format:\n" + correctFormat());
         }
     }
+
+    /**
+     * Returns the correct Task depending on the command that was entered
+     *
+     * @return task Correct version of Task (ToDo, Event, Deadline)
+     * @throws PatternSyntaxException if the command was not formatted correctly
+     * @throws ArrayIndexOutOfBoundsException if the command was not formatted correctly
+     */
     private Task makeTask() throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         Task task = new Task(this.command);
         String cmd = this.command.replace(typeOfTask + " ", "");

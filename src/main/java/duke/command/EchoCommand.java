@@ -21,7 +21,6 @@ public class EchoCommand extends Command {
     /**
      * Prints the input of the user
      * Display the output via Ui showing the input of the user
-     * Saves the file via Storage
      *
      * @param tasks TaskList of all the tasks
      * @param ui the user interface to interact with the user
