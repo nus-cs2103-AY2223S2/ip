@@ -3,10 +3,11 @@
 >"Don't forget stuff like I always do" - Jia-Ao Shi, _Kal Developer_
 
 Kal is a cat-themed calendar helper that helps you keep track of your tasks!
+Take a look at the UI [here](https://github.com/ShiJiaAo/ip/blob/master/docs/Ui.png)
 
 ## Installation
 - Install Java 11 on your computer
-- Download **latest** JAR release of Kal [here](https://github.com/ShiJiaAo/ip/releases)
+- Download **latest** JAR release of Kal [here](https://github.com/ShiJiaAo/ip/releases) (you only need the JAR file)
 
 ## Launching Kal
 1. Open a terminal
@@ -57,7 +58,7 @@ Deletes a task from Kal's task list according to the specified index
 
 Format: `delete {INDEX}`
 - `{INDEX}` is 1-indexed
-- `{INDEX}` must fall within the bounds of the task list
+- `{INDEX}` must fall within the bounds of the task list, ie. 0 < `{INDEX}` <= size of task list
 
 Example(s) of usage:
 - `delete 1`
@@ -79,7 +80,7 @@ Marks a task as complete according to the specified index
 
 Format: `mark {INDEX}`
 - `{INDEX}` is 1-indexed
-- `{INDEX}` must fall within the bounds of the task list
+- `{INDEX}` must fall within the bounds of the task list, ie. 0 < `{INDEX}` <= size of task list
 
 Example(s) of usage:
 - `mark 1`
@@ -92,7 +93,7 @@ Marks a task as incomplete according to the specified index
 
 Format: `unmark {INDEX}`
 - `{INDEX}` is 1-indexed
-- `{INDEX}` must fall within the bounds of the task list
+- `{INDEX}` must fall within the bounds of the task list, ie. 0 < `{INDEX}` <= size of task list
 
 Example(s) of usage:
 - `unmark 2`
