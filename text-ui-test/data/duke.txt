@@ -1,0 +1,24 @@
+[T][ ]  read book
+[D][X]  get shirt ironed  (by: 12 am)
+[E][ ]  attend lecture  (from:  2pm  to:  4pm)
+[T][ ]  walk dog
+[T][ ]  read book
+[D][ ]  get shirt ironed  (by: 12 am)
+[E][ ]  attend lecture  (from:  2pm  to:  4pm)
+[T][ ]  walk dog
+[T][ ]  bake cake
+[T][ ]  read book
+[D][ ]  get shirt ironed  (by: 12 am)
+[E][ ]  attend lecture  (from:  2pm  to:  4pm)
+[T][ ]  walk dog
+[T][ ]  bake cake
+[T][ ]  read book
+[D][ ]  get shirt ironed  (by: 12 am)
+[E][ ]  attend lecture  (from:  2pm  to:  4pm)
+[T][ ]  walk dog
+[T][ ]  bake cake
+[T][ ]  read book
+[D][ ]  get shirt ironed  (by: 12 am)
+[E][ ]  attend lecture  (from:  2pm  to:  4pm)
+[T][ ]  walk dog
+[T][ ]  bake cake
