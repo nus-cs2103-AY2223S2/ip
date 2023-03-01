@@ -4,14 +4,35 @@ import duke.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the TaskList that is used to store the tasks using 1-based indexing
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
+
+    /**
+     * Returns a new TaskList without any tasks
+     */
     public TaskList() {
         this(new ArrayList<>());
     }
+
+    /**
+     * Returns a new TaskList containing the Tasks in tasks
+     *
+     * @param tasks ArrayList of Task(s)
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+
+    /**
+     * Returns the Task at the index
+     *
+     * @param index int used to get the Task at index
+     * @return Task at the index
+     * @throws DukeException if index is not in range of size of TaskList
+     */
     public Task get(int index) throws DukeException {
         try {
             return tasks.get(index - 1);
@@ -21,15 +42,41 @@ public class TaskList {
                     this.size()));
         }
     }
+
+    /**
+     * Returns the size of the list
+     *
+     * @return size int size of list
+     */
     public int size() {
         return tasks.size();
     }
+
+    /**
+     * Returns true if the TaskList has no items and false otherwise
+     *
+     * @return isEmpty boolean
+     */
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
+
+    /**
+     * Adds the task given into the TaskList
+     *
+     * @param task Task to be added
+     */
     public void add(Task task) {
         this.tasks.add(task);
     }
+
+    /**
+     * Deletes the Task at the index
+     *
+     * @param index int used to delete the Task at index
+     * @return String of the deleted Task toString()
+     * @throws DukeException if index is not in range of size of TaskList
+     */
     public String delete(int index) throws DukeException {
         if (size() == 0) {
             throw new DukeException("You do not have any items in your list!");
@@ -44,9 +91,22 @@ public class TaskList {
                     this.size()));
         }
     }
+
+    /**
+     * Returns the ArrayList which stores the tasks
+     *
+     * @return ArrayList of Tasks
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
+
+    /**
+     * Returns a new TaskList with Tasks that contains the words provided
+     *
+     * @param words String words to be found in Tasks
+     * @return TaskList with only Tasks that contain the words
+     */
     public TaskList find(String words) {
         ArrayList<Task> tasksWithWord = new ArrayList<>();
         for (Task task : tasks) {
