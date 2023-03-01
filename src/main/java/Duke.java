@@ -6,6 +6,7 @@ import duke.Parser;
 import duke.Storage;
 import duke.Task;
 import duke.Ui;
+import javafx.application.Application;
 import javafx.application.Platform;
 
 /**
@@ -55,6 +56,10 @@ public class Duke {
         } catch (IOException e) {
             return "Error when trying to load/save your file";
         }
+    }
+
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 }
 
