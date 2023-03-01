@@ -5,3 +5,35 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+__________________________
+Hello! I'm Duke
+What can i do for you?
+__________________________
+__________________________
+I've added this task:
+[D][ ] Return book (by: Mon 2pm)
+You now have 1 tasks in the list
+__________________________
+__________________________
+I've added this task:
+[E][ ] EOY J-Culture Festival (from: Sat 12pm to: Sat 4pm)
+You now have 2 tasks in the list
+__________________________
+__________________________
+I've added this task:
+[T][ ] Implement PaperText API routes
+You now have 3 tasks in the list
+__________________________
+__________________________
+I've marked this task as done!
+[D][X] Return book (by: Mon 2pm)
+__________________________
+__________________________
+1. [D][X] Return book (by: Mon 2pm)
+2. [E][ ] EOY J-Culture Festival (from: Sat 12pm to: Sat 4pm)
+3. [T][ ] Implement PaperText API routes
+
+__________________________
+__________________________
+Bye! Hope to see you again soon!
+__________________________
