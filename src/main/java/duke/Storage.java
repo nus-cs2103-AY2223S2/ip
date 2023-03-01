@@ -93,7 +93,7 @@ public class Storage {
      */
     public void saveData() {
         try {
-            FileWriter writer = new FileWriter("data/duke.txt");
+            FileWriter writer = new FileWriter("../data/duke.txt");
             for (int i = 0; i < list.getSize(); i++) {
                 String line = list.getTask(i).log();
                 writer.write(line);

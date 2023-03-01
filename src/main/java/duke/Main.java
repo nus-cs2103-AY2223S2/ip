@@ -12,20 +12,17 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    /**
-     * Duke object created
-     */
-    private Duke duke = new Duke(new UI(), new Parser());
 
     /**
      * starts the Main application
      */
     @Override
     public void start(Stage stage) {
+        Duke duke = new Duke(new UI(), new Parser());
         assert !stage.equals(null);
         duke.initialize();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("../view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);

@@ -19,11 +19,11 @@ public class Duke extends Application {
     /**
      * User image from the image folder
      */
-    private Image user = new Image(this.getClass().getResourceAsStream("../images/DaUser.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     /**
      * Duke image from the image folder
      */
-    private Image duke = new Image(this.getClass().getResourceAsStream("../images/DaDuke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     /**
      * list of tasks that are initated to a size of 100
      */
