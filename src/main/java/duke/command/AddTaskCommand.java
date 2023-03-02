@@ -11,12 +11,31 @@ import duke.task.Deadline;
 
 import java.util.regex.PatternSyntaxException;
 
+/**
+ * Represents the command to add the tasks
+ */
 public class AddTaskCommand extends Command {
     private final String typeOfTask;
+
+    /**
+     * Returns an AddTaskCommand with the command stored
+     *
+     * @param command String of the command to be stored
+     */
     public AddTaskCommand(String command) {
         super(command);
         this.typeOfTask = command.split(" ")[0];
     }
+    /**
+     * Creates the correct type of task and adds the correct task to TaskList
+     * Display the output via Ui showing the new task created
+     * Saves the file via Storage
+     *
+     * @param tasks TaskList of all the tasks
+     * @param ui the user interface to interact with the user
+     * @param storage used to save the TaskList to be retrieved in the future
+     * @throws DukeException if the task is in the wrong format
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try{
@@ -28,6 +47,14 @@ public class AddTaskCommand extends Command {
             throw new DukeException("Please enter the command in the correct format:\n" + correctFormat());
         }
     }
+
+    /**
+     * Returns the correct Task depending on the command that was entered
+     *
+     * @return task Correct version of Task (ToDo, Event, Deadline)
+     * @throws PatternSyntaxException if the command was not formatted correctly
+     * @throws ArrayIndexOutOfBoundsException if the command was not formatted correctly
+     */
     private Task makeTask() throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         Task task = new Task(this.command);
         String cmd = this.command.replace(typeOfTask + " ", "");
@@ -44,7 +71,13 @@ public class AddTaskCommand extends Command {
         }
         return task;
     }
-    public String correctFormat() {
+
+    /**
+     * Returns the correct string format for the type of task that is stored in the AddTaskCommand
+     *
+     * @return String format
+     */
+    private String correctFormat() {
         String format = "THE TASK";
         switch(this.typeOfTask) {
             case "todo":
@@ -57,10 +90,5 @@ public class AddTaskCommand extends Command {
                 format = "event [TASK] /from TIME /to TIME";
         }
         return format;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }
