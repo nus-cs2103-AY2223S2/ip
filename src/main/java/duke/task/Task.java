@@ -62,6 +62,10 @@ public class Task {
         return chunkOfText.toString();
     }
 
+    public String encode() {
+        return String.format("%s ### %s", this.isDone, this.description);
+    }
+
     /**
      * Returns the string representation of the Task object.
      *

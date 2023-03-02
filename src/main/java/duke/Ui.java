@@ -13,6 +13,15 @@ import java.io.IOException;
  */
 public class Ui {
 
+    private Parser parser;
+
+    public Ui() {
+
+    }
+    public Ui(TaskStorage tasks) {
+        this.parser = new Parser(tasks);
+    }
+
     /**
      * Displays the welcome sign.
      */

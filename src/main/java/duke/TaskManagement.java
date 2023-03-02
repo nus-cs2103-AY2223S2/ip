@@ -1,8 +1,16 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Analogous to Storage suggested by the module coordinators.
@@ -78,14 +86,61 @@ public class TaskManagement {
     public void save(TaskStorage taskStorage) {
         try {
             FileWriter fw = new FileWriter(this.path);
-            for (int i = 0; i < taskStorage.noTasks(); i++) {
-                fw.write(taskStorage.getTask(i).toString());
-                fw.write(System.lineSeparator());
+            for (Task task : taskStorage.getTasks()) {
+                fw.write(task.encode() + "\n");
             }
+//            for (int i = 0; i < taskStorage.noTasks(); i++) {
+//                fw.write(taskStorage.getTask(i).toString());
+//                fw.write(System.lineSeparator());
+//            }
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public List<Task> retrieve() {
+        Scanner scanner = null;
+        List<Task> taskList = new ArrayList<>();
+        try {
+            scanner = new Scanner(this.file);
+            while (scanner.hasNextLine()) {
+                String encoded = scanner.nextLine();
+                taskList.add(this.decodeTask(encoded));
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        } finally {
+            scanner.close();
+        }
+        return taskList;
+    }
+
+    private Task decodeTask(String task) {
+        System.out.println(task);
+        String[] components = task.split(" ### ");
+        String command = components[0];
+        String toMark = components[1];
+        String des = components[2];
+        Task decoded = null;
+        switch (command) {
+        case "todo":
+            decoded = new Todo(des);
+            break;
+        case "deadline":
+            decoded = new Deadline(des, components[3]);
+            break;
+        case "event":
+            decoded = new Event(des, components[3], components[4]);
+            break;
+        default:
+            assert false : "Saved file may be corrupted";
+            break;
+        }
+        if (toMark.equals("true")) {
+            decoded.markAsDone();
+        }
+        return decoded;
     }
 
 }

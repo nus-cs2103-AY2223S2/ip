@@ -23,6 +23,13 @@ public class TaskStorage {
         taskStorage = new ArrayList<Task>();
     }
 
+    public TaskStorage(List<Task> tasks) {
+        this.taskStorage = tasks;
+    }
+
+    public List<Task> getTasks() {
+        return this.taskStorage;
+    }
     /**
      * Adds a task to the TaskStorage object with printing effects.
      *
