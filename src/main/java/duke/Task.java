@@ -46,8 +46,4 @@ public class Task {
     public String toString() {
         return (isDone? "[X] " : "[ ] ") + description;
     }
-
-
-
-
 }

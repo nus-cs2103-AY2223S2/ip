@@ -167,6 +167,5 @@ public class Storage {
         String endYear = startDateComponents[2];
         String endDetails = endDay + "-" + endMonth + "-" + endYear + " " + endTime.replace(":", "");;
         return new String[] {startDetails.strip(), endDetails.strip()};
-
     }
 }
