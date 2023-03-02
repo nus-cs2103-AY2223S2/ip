@@ -2,7 +2,7 @@ package duke;
 
 
 
-// obtained the idea to use enums this way from 4ndrelim
+// obtained the idea to use enums this way from github user 4ndrelim
 
 /**
  * An enum class that stores the different types of requests as fixed constants

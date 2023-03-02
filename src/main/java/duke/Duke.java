@@ -57,13 +57,13 @@ public class Duke  {
      * @return A String representing the response of the application to the request of the user
      */
     public String getResponse(String input) {
-
+        String furtherCommandPrompt = "\n\nAnything else I can do for you? Enter 'help' for a list of commands!";
             try {
                 String output = parser.parseAndExecute(input, list);
-                return output;
+                return output + furtherCommandPrompt;
             } catch (IOException e) {
                 String output = ui.printInvalidDateFormatMessage();
-                return output;
+                return output + furtherCommandPrompt;
             }
     }
 }

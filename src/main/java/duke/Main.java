@@ -3,9 +3,11 @@ package duke;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 /**
  * A GUI for Duke using FXML.
@@ -13,7 +15,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
-
 
     /**
      * Method that invokes the stage on which the Graphical User Interface is displayed
