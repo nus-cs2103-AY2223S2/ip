@@ -13,7 +13,7 @@ public class ToDoTest {
     @Test
     public void testStringMarked() {
         ToDo task1 = new ToDo("A123!@# task");
-        task1.markAsDone();
+        task1.setDone();
         ToDo task2 = new ToDo("A123!@# task", true);
 
         assertEquals("[T][X] A123!@# task", task1.toString());
