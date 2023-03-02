@@ -11,5 +11,9 @@ public class ExitCommand implements Command {
     public String execute(TaskList taskList) {
         return Messages.MESSAGE_GOODBYE;
     }
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ExitCommand;
+    }
 }

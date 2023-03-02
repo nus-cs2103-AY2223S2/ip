@@ -8,7 +8,6 @@ import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 import cluck.ui.Ui;
 
-
 /**
  * Cluck class is the main Class and module for Cluck.
  */
@@ -17,6 +16,16 @@ public class Cluck {
     private final Ui ui;
     private boolean isRunning = true;
     private final Storage storage;
+
+    /**
+     * Instantiates a new Cluck with no arguments for JavaFx Application use.
+     */
+    public Cluck() {
+        this.taskList = new TaskList();
+        this.ui = new Ui();
+        this.storage = new Storage("C:/Users/User/OneDrive - National University of Singapore/"
+                + "NUS/Y2S2/ip/data/CluckSave.txt");
+    }
 
     /**
      * Cluck class contains and instance of TaskList, Ui, and Storage.
@@ -55,13 +64,21 @@ public class Cluck {
         }
         storage.writeSave(taskList);
     }
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Cluck heard: " + input;
+    }
 
     /**
-     * The entry point of application.
+     * The entry point of application. Creates running instance of Cluck to handle task management
      *
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        new Cluck("C:/Users/User/OneDrive - National University of Singapore/NUS/Y2S2/ip/data/CluckSave.txt").run();
+        new Cluck("C:/Users/User/OneDrive - National University of Singapore/"
+                + "NUS/Y2S2/ip/data/CluckSave.txt").run();
     }
 }
