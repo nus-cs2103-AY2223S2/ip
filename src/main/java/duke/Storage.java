@@ -7,20 +7,20 @@ import duke.task.ToDo;
 import duke.task.TaskList;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * The Storage class that is used to store and read the list of Task(s)
  */
 public class Storage {
-    static final String HOMEDIRECTORY = System.getProperty("user.dir");
-    static final Path DEFAULTDIRECTORY = Paths.get(HOMEDIRECTORY, "SavedList.txt");
+    static final String HOME_DIRECTORY = System.getProperty("user.dir");
+    static final Path DEFAULT_DIRECTORY = Paths.get(HOME_DIRECTORY, "SavedList.txt");
     private final Path filePath;
 
     /**

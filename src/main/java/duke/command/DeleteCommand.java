@@ -35,8 +35,10 @@ public class DeleteCommand extends Command {
         try {
             int idx = Integer.parseInt(this.index);
             String taskDescription = tasks.delete(idx);
-            ui.print(String.format("Noted, I've removed this task: \n\t%s\nNow you have %d tasks in this list.",
-                    taskDescription, tasks.size()));
+            ui.print(String.format(
+                    "Noted, I've removed this task: \n\t%s\nNow you have %d tasks in this list.",
+                    taskDescription,
+                    tasks.size()));
             storage.saveList(tasks);
         } catch (NumberFormatException notANumber) {
             throw new DukeException("Please enter a valid number");

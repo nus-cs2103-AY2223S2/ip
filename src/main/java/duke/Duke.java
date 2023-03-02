@@ -12,9 +12,14 @@ import java.nio.file.Paths;
  * The class that encompasses the main logic of running Duke, the name of the todo list
  */
 public class Duke {
-    static final String HOMEDIRECTORY = System.getProperty("user.dir");
-    static final Path DUKELISTDIRECTORY = Paths.get(HOMEDIRECTORY, "SavedList.txt");
-    static final HashMap<String, Integer> MINVALIDLENGTH = new HashMap<>(Map.of(
+    /**
+     * Minimum length of a string command is given by
+     * The length of the command +2 (for whitespace and
+     * at least 1 letter for the command)
+     */
+    static final String HOME_DIRECTORY = System.getProperty("user.dir");
+    static final Path DUKE_LIST_DIRECTORY = Paths.get(HOME_DIRECTORY, "SavedList.txt");
+    static final HashMap<String, Integer> MIN_VALID_LENGTH = new HashMap<>(Map.of(
             "todo", 6,
             "deadline", 10,
             "event", 7,
@@ -25,7 +30,7 @@ public class Duke {
     /**
      * Correct formatting of commands given that the name of the command is correct
      */
-    static final HashMap<String, String> CORRECTFORMAT = new HashMap<>(Map.of(
+    static final HashMap<String, String> CORRECT_FORMAT = new HashMap<>(Map.of(
             "todo", "todo THE TASK",
             "deadline", "deadline THE TASK /by yyyy-mm-ddThh:mm:ss",
             "event", "event THE TASK /from TIME /to TIME",
@@ -83,6 +88,6 @@ public class Duke {
      * @param args String[] of any input
      */
     public static void main(String[] args) {
-        new Duke(DUKELISTDIRECTORY).run();
+        new Duke(DUKE_LIST_DIRECTORY).run();
     }
 }

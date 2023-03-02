@@ -10,7 +10,6 @@ import duke.task.TaskList;
  */
 public class UnmarkCommand extends Command {
     private final String index;
-
     /**
      * Returns an UnmarkCommand with the index stored
      *
@@ -37,7 +36,7 @@ public class UnmarkCommand extends Command {
         }
         try {
             int idx = Integer.parseInt(this.index);
-            tasks.get(idx).unmarkAsDone();
+            tasks.get(idx).setNotDone();
             ui.print(String.format("Nice! I've unmarked this task as done: \n\t%s",
                     tasks.get(idx)));
             storage.saveList(tasks);
