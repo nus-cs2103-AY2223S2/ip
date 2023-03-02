@@ -1,4 +1,5 @@
 package duke.ui;
+
 import duke.DukeException;
 import duke.command.Command;
 import duke.parser.Parser;
@@ -53,8 +54,6 @@ public class DukeUi extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-
-
     public static void main(String[] args) {
         Application.launch(DukeUi.class, args);
     }
@@ -68,26 +67,21 @@ public class DukeUi extends Application {
                         new LinearGradient(0, 0, 0, 1, true,
                                 CycleMethod.NO_CYCLE,
                                 new Stop(0, Color.web("#4568DC")),
-                                new Stop(1, Color.web("#B06AB3"))
-                        ), CornerRadii.EMPTY, Insets.EMPTY
-                ),
+                                new Stop(1, Color.web("#B06AB3"))),
+                        CornerRadii.EMPTY, Insets.EMPTY),
                 new BackgroundFill(
                         new ImagePattern(
                                 new Image("https://edencoding.com/resources/wp-content/uploads/2021/02/Stars_128.png"),
-                                0, 0, 128, 128, false
-                        ), CornerRadii.EMPTY, Insets.EMPTY
-                ),
+                                0, 0, 128, 128, false),
+                        CornerRadii.EMPTY, Insets.EMPTY),
                 new BackgroundFill(
                         new RadialGradient(
                                 0, 0, 0.5, 0.5, 0.5, true,
                                 CycleMethod.NO_CYCLE,
                                 new Stop(0, Color.web("#FFFFFF33")),
                                 new Stop(1, Color.web("#00000033"))),
-                        CornerRadii.EMPTY, Insets.EMPTY
-                )
-        ));
+                        CornerRadii.EMPTY, Insets.EMPTY)));
         scrollPane.setContent(dialogContainer);
-
 
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -125,7 +119,7 @@ public class DukeUi extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
@@ -184,6 +178,7 @@ public class DukeUi extends Application {
         }
         userInput.clear();
     }
+
     /**
      * Returns response from NoDuKo.
      * @param input user input
@@ -200,4 +195,3 @@ public class DukeUi extends Application {
         }
     }
 }
-

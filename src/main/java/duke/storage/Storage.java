@@ -3,6 +3,7 @@ package duke.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 import duke.DukeException;
@@ -20,7 +21,7 @@ import duke.task.ToDo;
  */
 public class Storage {
 
-    private String filePath = "data/duke.txt";
+    private String filePath = Paths.get(".", "data", "duke.txt").toString();
     private File file;
 
     /**
@@ -64,7 +65,7 @@ public class Storage {
                 }
             }
             sc.close();
-        } catch (IOException e) {
+        } catch (IOException | ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
             throw new DukeException("File reading failed.");
         }
