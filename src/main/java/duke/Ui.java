@@ -88,8 +88,13 @@ public class Ui {
     public String printNoTasksError() {
         return "Sorry, you have no tasks yet";
     }
+    /**
+     * This function returns a string that tells the user that the command they entered is invalid
+     *
+     * @return The invalidCommandError() method returns a string.
+     */
     public String invalidCommandError() {
-        return "Sorry, this is an invalid command. Please refer to the user guide here for the list of commands: " +
-                "https://github.com/gekhro/ip/blob/master/docs/README.md";
+        return "Sorry, this is an invalid command. Please refer to the user guide here for the list of commands: "
+                + "https://github.com/gekhro/ip/blob/master/docs/README.md";
     }
 }

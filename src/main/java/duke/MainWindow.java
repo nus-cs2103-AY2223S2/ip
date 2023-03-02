@@ -25,6 +25,11 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * The initialize function is called when the FXML file is loaded. It creates a new Ui object,
+     * binds the scroll pane's vertical value property to the dialog container's height property, and
+     * adds a dialog box to the dialog container.
+     */
     @FXML
     public void initialize() {
         Ui ui = new Ui();
