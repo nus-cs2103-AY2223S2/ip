@@ -19,7 +19,7 @@ public class UnmarkCommand extends Command {
         try {
             int idx = Integer.parseInt(this.index);
             tasks.get(idx).setNotDone();
-            ui.print(String.format("Nice! I've marked this task as done: \n\t%s",
+            ui.print(String.format("Nice! I've unmarked this task as done: \n\t%s",
                     tasks.get(idx)));
             storage.saveList(tasks);
         } catch (NumberFormatException notANumber) {

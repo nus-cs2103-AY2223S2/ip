@@ -6,8 +6,8 @@ import duke.Storage;
 import duke.task.TaskList;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.Event;
 
 import java.util.regex.PatternSyntaxException;
 
@@ -32,29 +32,29 @@ public class AddTaskCommand extends Command {
         Task task = new Task(this.command);
         String cmd = this.command.replace(typeOfTask + " ", "");
         switch (typeOfTask) {
-            case "todo":
-                task = new ToDo(cmd);
-                break;
-            case "deadline":
-                task = new Deadline(cmd);
-                break;
-            case "event":
-                task = new Event(cmd);
-                break;
+        case "todo":
+            task = new ToDo(cmd);
+            break;
+        case "deadline":
+            task = new Deadline(cmd);
+            break;
+        case "event":
+            task = new Event(cmd);
+            break;
         }
         return task;
     }
     public String correctFormat() {
         String format = "THE TASK";
         switch(this.typeOfTask) {
-            case "todo":
-                format = "todo [TASK]";
-                break;
-            case "deadline":
-                format = "deadline [TASK] /by yyyy-mm-ddThh:mm:ss";
-                break;
-            case "event":
-                format = "event [TASK] /from TIME /to TIME";
+        case "todo":
+            format = "todo [TASK]";
+            break;
+        case "deadline":
+            format = "deadline [TASK] /by yyyy-mm-ddThh:mm:ss";
+            break;
+        case "event":
+            format = "event [TASK] /from TIME /to TIME";
         }
         return format;
     }
