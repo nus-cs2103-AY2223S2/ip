@@ -18,7 +18,9 @@ public class Parser {
      * @param storage The storage object the handles storing of the tasks to a file so that it could be retrieved
      *                for subsequent uses of the bot
      */
-    public Parser(Storage storage) { this.storage = storage; }
+    public Parser(Storage storage) {
+        this.storage = storage;
+    }
 
     /**
      * This method interprets the user input and calls the relevant methods to facilitate the request of the user
