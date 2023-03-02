@@ -152,6 +152,10 @@ public class Parser {
                 String firstOutput = list.findTask(keyword);
                 return firstOutput;
             }
+
+            case HELP: {
+               return UI.printAvailableCommands();
+            }
             default: {
                 return "You may have accidentally entered in an invalid command. Please re-enter!";
             }

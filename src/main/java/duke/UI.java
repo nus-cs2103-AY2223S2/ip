@@ -35,4 +35,26 @@ public class UI {
 
         System.out.print("\n");
     }
+
+
+    /**
+     * Prints list of available commands so that the user could refer to it
+     * @return A String that is the list of the commands
+     */
+    public static String printAvailableCommands() {
+        String output = "";
+        output += "Here is the list of commands and their required details!\n";
+        output += "Ensure that you leave spaces between the different fields!\n";
+        output += "1. list - view a list of all your tasks and their completion status!\n";
+        output += "2. mark {insert task number in your list} - mark the corresponding task as completed!\n";
+        output += "3. unmark {insert task number in your list} - mark the corresponding task as incomplete!\n";
+        output += "4. todo {insert task description} - add a task with only a description to your list!";
+        output += "5. deadline {insert description} / {insert start date} / {insert end date} - add a deadline\n" +
+                      " to your list!\n";
+        output += "6. event {insert description} / {insert start date and time} / {insert end date and time}\n" +
+                      " add an event to your list\n";
+        output += "7. delete {insert task number in your list} - delete the corresponding task!\n";
+        output += "8. find {insert keyword} - find the task with a matching keyword\n";
+        return output;
+    }
 }
