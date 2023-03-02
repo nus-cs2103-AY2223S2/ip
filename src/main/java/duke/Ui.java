@@ -89,6 +89,7 @@ public class Ui {
         return "Sorry, you have no tasks yet";
     }
     public String invalidCommandError() {
-        return "Sorry, this is an invalid command. Please refer to the user guide here for the list of commands: link";
+        return "Sorry, this is an invalid command. Please refer to the user guide here for the list of commands: " +
+                "https://github.com/gekhro/ip/blob/master/docs/README.md";
     }
 }
