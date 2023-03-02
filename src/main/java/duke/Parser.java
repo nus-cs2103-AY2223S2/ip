@@ -18,9 +18,7 @@ public class Parser {
      * @param storage The storage object the handles storing of the tasks to a file so that it could be retrieved
      *                for subsequent uses of the bot
      */
-    public Parser(Storage storage) {
-        this.storage = storage;
-    }
+    public Parser(Storage storage) { this.storage = storage; }
 
     /**
      * This method interprets the user input and calls the relevant methods to facilitate the request of the user
@@ -54,6 +52,7 @@ public class Parser {
                     return "This request requires exactly one task number as the second argument!";
                 } try {
                     int taskNumber = Integer.parseInt(userInputComponents[1]);
+                    assert taskNumber < list.getNumberOfTasks();
                     String firstOutput = list.markDone(taskNumber);
                     String secondOutput = list.getTaskDetails();
                     updateStorage(list);
@@ -71,6 +70,7 @@ public class Parser {
 
                 try {
                     int taskNumber = Integer.parseInt(userInputComponents[1]);
+                    assert taskNumber < list.getNumberOfTasks();
                     String firstOutput = list.markUndone(taskNumber);
                     String secondOutput = list.getTaskDetails();
                     updateStorage(list);
@@ -82,6 +82,7 @@ public class Parser {
 
             case TODO: {
                 try {
+                    assert userInput.length() > 5;
                     String firstOutput = list.addTask(new ToDo(userInput.substring(5).strip()));
                     String secondOutput = list.getTaskDetails();
                     updateStorage(list);
