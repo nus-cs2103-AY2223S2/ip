@@ -11,7 +11,6 @@ import duke.DukeException;
 public class Deadline extends Task {
     private LocalDate dueBy;
     private String output;
-
     /**
      * A constructor that takes in a description and a due_by date. It then parses the due_by date and
      * formats it to a new format. If the date is not in the correct format, it will throw a
@@ -26,6 +25,10 @@ public class Deadline extends Task {
         } catch (DateTimeParseException e) {
             throw new DukeException(("Invalid deadline format, please input as YYYY-MM-DD with a space after /due_by"));
         }
+    }
+
+    public LocalDate getDeadline() {
+        return this.dueBy;
     }
 
     @Override

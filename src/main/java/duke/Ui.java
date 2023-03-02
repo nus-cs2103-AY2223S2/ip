@@ -14,12 +14,7 @@ public class Ui {
      * @return A string
      */
     public String showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello i'm\n" + logo + "What can i do for you?";
+        return "Hello i'm DUKE\n" + "What can i do for you?";
     }
 
     public void showLine() {
@@ -92,5 +87,8 @@ public class Ui {
     }
     public String printNoTasksError() {
         return "Sorry, you have no tasks yet";
+    }
+    public String invalidCommandError() {
+        return "Sorry, this is an invalid command. Please refer to the user guide here for the list of commands: link";
     }
 }

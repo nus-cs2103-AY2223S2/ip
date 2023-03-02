@@ -52,6 +52,8 @@ public class Duke {
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            return ui.invalidCommandError();
         }
     }
 }

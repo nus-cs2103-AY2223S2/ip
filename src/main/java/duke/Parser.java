@@ -8,6 +8,7 @@ import duke.commands.Delete;
 import duke.commands.Find;
 import duke.commands.List;
 import duke.commands.Mark;
+import duke.commands.Reminder;
 import duke.commands.Unmark;
 
 /**
@@ -15,15 +16,16 @@ import duke.commands.Unmark;
  */
 public class Parser {
     private enum Type {
-        BYE, 
-        LIST, 
-        MARK, 
-        UNMARK, 
-        TODO, 
-        DEADLINE, 
-        EVENT, 
-        DELETE, 
-        FIND
+        BYE,
+        LIST,
+        MARK,
+        UNMARK,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DELETE,
+        FIND,
+        REMINDER
     }
     /**
      * parse takes in the user input and returns a Command for the program to execute
@@ -83,10 +85,11 @@ public class Parser {
                 throw new DukeException("keyword for find command is missing");
             }
             return new Find(inputwords[1]);
+        case REMINDER:
+            return new Reminder();
 
         default:
             throw new DukeException("invalid command");
         }
-
     }
 }
