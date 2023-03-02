@@ -9,6 +9,11 @@ import java.time.format.DateTimeParseException;
  */
 public abstract class Task {
     /**
+     * The constant formatter used for dates.
+     */
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(
+            "dd-MM-yyyy HH:mm");
+    /**
      * The Description.
      */
     protected String description; // name of the task
@@ -16,13 +21,6 @@ public abstract class Task {
      * The Is marked.
      */
     protected Boolean isMarked; // indicates whether task is marked
-
-    /**
-     * The constant formatter used for dates.
-     */
-    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(
-            "dd-MM-yyyy HH:mm");
-
     /**
      * Instantiates a new Task. All tasks are un-marked initially.
      *
@@ -129,8 +127,12 @@ public abstract class Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Task task = (Task) o;
         return description.equals(task.description) && isMarked.equals(task.isMarked);
     }
