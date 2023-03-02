@@ -44,6 +44,4 @@ public enum Request {
         }
         throw new DukeException(name);
     }
-
-
 }

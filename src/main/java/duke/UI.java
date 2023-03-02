@@ -9,24 +9,7 @@ public class UI {
     private static final String UI_INVALID_DATE_FORMAT_MESSAGE = "Please re-enter the request with the date in the \n" +
                                                               "following format: dd-Mmm-yyyy";
 
-    /**
-     * Method that prints a welcome message when the application is started
-     */
-    public void printWelcome(){
-        UI.printHorizontalLine();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello there! I am: \n" + logo + "\nWhat can I help you with!");
-        System.out.println(UI_FIRST_COMMAND_MESSAGE);
-        UI.printHorizontalLine();
-    }
-
-    /**
-     * Prints a prompt for the next request from the user
-     */
+    
     public void printNextCommandMessage() {
         System.out.println(UI_NEXT_COMMAND_MESSAGE);
     }
@@ -52,7 +35,4 @@ public class UI {
 
         System.out.print("\n");
     }
-
-
-
 }
