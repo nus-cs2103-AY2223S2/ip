@@ -1,5 +1,5 @@
-#Welcome to Duke
-##A Personal Assistant Chatbot that helps a person to keep track of various tasks
+# Welcome to Duke
+## A Personal Assistant Chatbot that helps a person to keep track of various tasks
 
 ![](https://zhongli5712.github.io/ip/Ui.png)
 
