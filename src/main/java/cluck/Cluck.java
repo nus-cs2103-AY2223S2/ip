@@ -105,7 +105,7 @@ public class Cluck extends Application {
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
 
-        stage.setTitle("Duke");
+        stage.setTitle("Cluck!");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -168,8 +168,8 @@ public class Cluck extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
@@ -179,7 +179,7 @@ public class Cluck extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return "Cluck heard: " + input;
     }
 
     /**
