@@ -65,11 +65,11 @@ A new event with the description "gotoubun movie preview" is created, with the a
 
 Marks a task as completed. To select a task to complete, first use `list` to observe its current index. Then proceed to mark the task by its index, as per the example below. If the task was already marked as completed, then nothing happens.
 
-Example of usage:
+**Example of usage:**
 
 `mark 1`
 
-Expected outcome:
+**Expected outcome:**
 
 The task with index 1 (obtained via `list`) is marked as completed.
 
