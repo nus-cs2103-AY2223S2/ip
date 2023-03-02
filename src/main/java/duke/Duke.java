@@ -60,6 +60,10 @@ public class Duke  {
         String furtherCommandPrompt = "\n\nAnything else I can do for you? Enter 'help' for a list of commands!";
             try {
                 String output = parser.parseAndExecute(input, list);
+                if (output.equals("Thank You and have a great day ahead!")) {
+                    Main.close();
+
+                }
                 return output + furtherCommandPrompt;
             } catch (IOException e) {
                 String output = ui.printInvalidDateFormatMessage();

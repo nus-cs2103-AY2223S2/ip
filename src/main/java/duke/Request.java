@@ -17,7 +17,9 @@ public enum Request {
     DELETE("delete"),
 
     FIND("find"),
-    HELP("help");
+    HELP("help"),
+
+    BYE("bye");
 
     private String name;
 

@@ -146,7 +146,7 @@ public class Parser {
 
             case FIND: {
                 if (userInputComponents.length != 2) {
-                    return "You have to enter a keyword to find a task with a match!";
+                    return "You have to enter exactly one keyword to find a task with a match!";
                 }
                 String keyword = userInputComponents[1].strip();
                 String firstOutput = list.findTask(keyword);
@@ -155,6 +155,10 @@ public class Parser {
 
             case HELP: {
                return UI.printAvailableCommands();
+            }
+
+            case BYE: {
+                return "Thank You and have a great day ahead!";
             }
             default: {
                 return "You may have accidentally entered in an invalid command. Please re-enter!";
