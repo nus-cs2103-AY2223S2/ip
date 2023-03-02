@@ -166,3 +166,20 @@ Here are the matching tasks in your list:
 1.[D][0] do ip (by 17/02/2023 23:59)
 
 ```
+
+### `exit` - Close the program
+
+Close the Spongebob chatbox
+
+Format: exit
+
+Example of usage: 
+
+`exit`
+
+Expected outcome:
+
+```
+Bye. Hope to see you again soon!
+
+```
