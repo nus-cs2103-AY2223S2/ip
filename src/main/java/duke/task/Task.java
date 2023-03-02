@@ -21,13 +21,13 @@ public class Task {
     /**
      * Sets task as done
      */
-    public void setDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
     /**
      * Sets task as not done
      */
-    public void setNotDone() {
+    public void unmarkAsDone() {
         this.isDone = false;
     }
     protected String getTask() {

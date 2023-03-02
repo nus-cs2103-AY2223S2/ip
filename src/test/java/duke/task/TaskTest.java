@@ -14,7 +14,7 @@ public class TaskTest {
     @Test
     public void saveString_markAsDone_success() {
         Task task = new Task("the task");
-        task.setDone();
+        task.markAsDone();
         assertEquals("Task | 1 | the task", task.saveString());
     }
 }
