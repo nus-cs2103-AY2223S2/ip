@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * The class that encompasses the main logic of running Duke, the name of the todo list
+ */
 public class Duke {
     /**
      * Minimum length of a string command is given by
@@ -40,6 +43,12 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Returns Duke with the Path specified as filePath and loads the stored tasks
+     *
+     * @param filePath Path of where the tasks are stored
+     */
     public Duke(Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -50,6 +59,10 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Runs Duke, allowing the user to use interact with Duke
+     */
     public void run() {
         ui.greet();
         boolean isExit = false;
@@ -68,6 +81,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates Duke with the specified directory where the tasks are stored
+     * In this case using the default DUKELISTDIRECTORY
+     *
+     * @param args String[] of any input
+     */
     public static void main(String[] args) {
         new Duke(DUKE_LIST_DIRECTORY).run();
     }
