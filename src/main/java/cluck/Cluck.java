@@ -1,5 +1,10 @@
 package cluck;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import cluck.commands.Command;
 import cluck.commands.ExitCommand;
 import cluck.exceptions.CluckException;
@@ -12,11 +17,21 @@ import cluck.ui.Ui;
 /**
  * Cluck class is the main Class and module for Cluck.
  */
-public class Cluck {
+public class Cluck extends Application {
     private final TaskList taskList;
     private final Ui ui;
     private boolean isRunning = true;
     private final Storage storage;
+
+    /**
+     * Instantiates a new Cluck with no arguments for JavaFx Application use.
+     */
+    public Cluck() {
+        this.taskList = new TaskList();
+        this.ui = new Ui();
+        this.storage = new Storage("C:/Users/User/OneDrive - National University of Singapore/"
+                + "NUS/Y2S2/ip/data/CluckSave.txt");
+    }
 
     /**
      * Cluck class contains and instance of TaskList, Ui, and Storage.
@@ -56,12 +71,22 @@ public class Cluck {
         storage.writeSave(taskList);
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
     /**
      * The entry point of application.
      *
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        new Cluck("C:/Users/User/OneDrive - National University of Singapore/NUS/Y2S2/ip/data/CluckSave.txt").run();
+        new Cluck("C:/Users/User/OneDrive - National University of Singapore/"
+                + "NUS/Y2S2/ip/data/CluckSave.txt").run();
     }
 }
