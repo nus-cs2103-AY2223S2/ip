@@ -54,6 +54,7 @@ public class Parser {
                     return "This request requires exactly one task number as the second argument!";
                 } try {
                     int taskNumber = Integer.parseInt(userInputComponents[1]);
+                    assert taskNumber < list.getNumberOfTasks();
                     String firstOutput = list.markDone(taskNumber);
                     String secondOutput = list.getTaskDetails();
                     updateStorage(list);
@@ -71,6 +72,7 @@ public class Parser {
 
                 try {
                     int taskNumber = Integer.parseInt(userInputComponents[1]);
+                    assert taskNumber < list.getNumberOfTasks();
                     String firstOutput = list.markUndone(taskNumber);
                     String secondOutput = list.getTaskDetails();
                     updateStorage(list);
@@ -82,6 +84,7 @@ public class Parser {
 
             case TODO: {
                 try {
+                    assert userInput.length() > 5;
                     String firstOutput = list.addTask(new ToDo(userInput.substring(5).strip()));
                     String secondOutput = list.getTaskDetails();
                     updateStorage(list);

@@ -39,6 +39,8 @@ public class Event extends Task {
         this.startDayTime = startTime;
         this.endDayTime = endTime;
         try {
+            assert startComponents.length == 2;
+            assert endComponents.length == 2;
             this.startDate = LocalDate.parse(startComponents[0].strip(), formatter);
             this.startTime = LocalTime.parse(startComponents[1].strip(), timeFormatter);
             this.endDate = LocalDate.parse(endComponents[0].strip(), formatter);
