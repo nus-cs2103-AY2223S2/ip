@@ -21,7 +21,9 @@ TwoFive is a chatbot for **managing your daily tasks**, which can be a **todo, d
 ---
 
 ## Get Started
-1. Ensure you have Java `11` installed on your computer.
+1. Ensure you have Java `11` installed on your computer. <br> For macOS users, please ensure that you have 
+[Oracle JDK Version 11.0.8](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) installed,
+and it is selected as your default Java version.
 2. Download the latest `TwoFive.jar` from [here](https://github.com/jianminglok/ip/releases).
 3. Copy the downloaded `JAR` file to the folder you want to use as the *home folder* for TwoFive.
 4. Double click `TwoFive.jar` to run the application. Alternatively, open a command terminal, `cd` into the folder you 
