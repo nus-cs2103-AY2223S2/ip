@@ -48,11 +48,11 @@ test {
 }
 
 application {
-    mainClassName = "cluck.Main"
+    mainClassName = "cluck.Cluck"
 }
 
 shadowJar {
-    archiveBaseName = "Cluck!"
+    archiveBaseName = "duke"
     archiveClassifier = null
 }
 
