@@ -11,13 +11,13 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import java.io.IOException;
 
 public class Storage {
-    static final String HOMEDIRECTORY = System.getProperty("user.dir");
-    static final Path DEFAULTDIRECTORY = Paths.get(HOMEDIRECTORY, "SavedList.txt");
+    static final String HOME_DIRECTORY = System.getProperty("user.dir");
+    static final Path DEFAULT_DIRECTORY = Paths.get(HOME_DIRECTORY, "SavedList.txt");
     private final Path filePath;
     public Storage(Path filePath) {
         this.filePath = filePath;
