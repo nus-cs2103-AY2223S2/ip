@@ -4,13 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-<<<<<<< HEAD
-
 /**
  * The type Task is an abstract class containing .
  */
-=======
->>>>>>> branch-A-JUnit
 public abstract class Task {
     /**
      * The Description.
