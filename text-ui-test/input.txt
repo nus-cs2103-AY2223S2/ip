@@ -1,0 +1,7 @@
+todo return some books
+deadline complete assignment /by Monday 2359
+event CS2103T lecture /from Monday 1000 /to Monday 1200
+mark 1
+list
+unmark 1
+todo
