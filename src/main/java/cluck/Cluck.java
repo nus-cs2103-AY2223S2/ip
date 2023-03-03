@@ -55,11 +55,13 @@ public class Cluck {
         while (isRunning) {
             userInput = ui.readInput();
             response = getResponse(userInput);
+            assert Objects.nonNull(response);
             ui.printResponse(response);
         }
         storage.writeSave(taskList);
     }
     private Command getCommand(String userInput) throws CluckException {
+        assert Objects.nonNull(userInput);
         return Parser.commandFactory(userInput);
     }
     private String executeCommand(Command command) throws CluckException {

@@ -50,7 +50,6 @@ public class TaskList {
      *
      * @param task task to be added.
      */
-    //Todo: have commands print the task added
     public void addTask(Task task) {
         this.taskList.add(task);
     }
