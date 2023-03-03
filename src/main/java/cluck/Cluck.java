@@ -1,8 +1,11 @@
 package cluck;
 
+import java.util.Objects;
+
 import cluck.commands.Command;
 import cluck.commands.ExitCommand;
 import cluck.exceptions.CluckException;
+import cluck.messages.Messages;
 import cluck.parser.Parser;
 import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
@@ -47,29 +50,38 @@ public class Cluck {
         ui.greetUser();
         String userInput;
         String response;
-        Command currCommand;
 
         while (isRunning) {
             userInput = ui.readInput();
-            try {
-                currCommand = Parser.commandFactory(userInput);
-                response = currCommand.execute(taskList);
-                if (currCommand instanceof ExitCommand) {
-                    isRunning = false;
-                }
-            } catch (CluckException e) {
-                response = e.getMessage();
-            }
+            response = getResponse(userInput);
             ui.printResponse(response);
         }
         storage.writeSave(taskList);
+    }
+    private Command getCommand(String userInput) throws CluckException {
+        return Parser.commandFactory(userInput);
+    }
+    private String executeCommand(Command command) throws CluckException {
+        if (command instanceof ExitCommand) {
+            isRunning = false;
+        }
+        return command.execute(taskList);
     }
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Cluck heard: " + input;
+    public String getResponse(String userInput) {
+        if (Objects.isNull(userInput)) {
+            return Messages.MESSAGE_WELCOME;
+        }
+        Command currCommand;
+        try {
+            currCommand = getCommand(userInput);
+            return executeCommand(currCommand);
+        } catch (CluckException e) {
+            return e.getMessage();
+        }
     }
 
     /**
