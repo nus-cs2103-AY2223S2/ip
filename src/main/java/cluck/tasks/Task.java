@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import cluck.exceptions.CorruptedDataException;
+import cluck.messages.Messages;
+
 /**
  * The type Task is an abstract class containing .
  */
@@ -12,7 +15,7 @@ public abstract class Task {
      * The constant formatter used for dates.
      */
     protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(
-            "dd-MM-yyyy HH:mm");
+            "dd MMM yy HHmm");
     /**
      * The Description.
      */
@@ -47,12 +50,10 @@ public abstract class Task {
      *
      * @param input the input
      * @return date and time as a LocalDateTime class
-     * @throws DateTimeParseException if input is not able to be parsed using the given format
+     * @throws DateTimeParseException if input cannot be parsed using the given format
      */
     protected static LocalDateTime interpretLocalDateTime(String input) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
-                "dd-MM-yyyy HH:mm");
-        return LocalDateTime.parse(input, formatter);
+        return LocalDateTime.parse(input, FORMATTER);
     }
 
     /**
@@ -84,7 +85,7 @@ public abstract class Task {
      * @param savedTask the saved task
      * @return the task as a Task class
      */
-    public static Task buildTaskFromSave(String savedTask) {
+    public static Task buildTaskFromSave(String savedTask) throws CorruptedDataException {
         String[] savedTaskFields = savedTask.split("\\|");
         boolean isMarked;
 
@@ -93,23 +94,24 @@ public abstract class Task {
         } else if (savedTaskFields[1].equals("0")) {
             isMarked = false;
         } else {
-            System.out.println("Corrupted data found, skipping corrupted data.");
-            return null;
+            throw new CorruptedDataException(Messages.MESSAGE_CORRUPTED_DATA + savedTask + "\n");
         }
+        try {
+            switch (savedTaskFields[0]) {
+            case "E":
+                return new Event(isMarked, savedTaskFields[2], savedTaskFields[3], savedTaskFields[4]);
 
-        switch (savedTaskFields[0]) {
-        case "E":
-            return new Event(isMarked, savedTaskFields[2], savedTaskFields[3], savedTaskFields[4]);
+            case "D":
+                return new Deadline(isMarked, savedTaskFields[2], savedTaskFields[3]);
 
-        case "D":
-            return new Deadline(isMarked, savedTaskFields[2], savedTaskFields[3]);
+            case "T":
+                return new ToDo(isMarked, savedTaskFields[2]);
 
-        case "T":
-            return new ToDo(isMarked, savedTaskFields[2]);
-
-        default:
-            System.out.println("Corrupted data found, skipping corrupted data.");
-            return null;
+            default:
+                throw new CorruptedDataException(Messages.MESSAGE_CORRUPTED_DATA + savedTask + "\n");
+            }
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            throw new CorruptedDataException(Messages.MESSAGE_CORRUPTED_DATA + savedTask + "\n");
         }
     }
 

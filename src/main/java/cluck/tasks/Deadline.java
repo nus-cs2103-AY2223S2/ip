@@ -33,7 +33,7 @@ public class Deadline extends Task {
 
     @Override
     public String makeSaveFormat() {
-        return "E" + super.makeSaveFormat() + "|" + this.dueDate + "\n";
+        return "D" + super.makeSaveFormat() + "|" + this.dueDate.format(FORMATTER) + "\n";
     }
 
     @Override
