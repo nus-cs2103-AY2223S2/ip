@@ -4,6 +4,7 @@
 DukeMeister3000 tracks your tasks and gives you that edge to complete them on time. It is
 - extremely intuitive
 - fast
+- Makes you a sigma male/female
 - ~~quite~~ ~~very~~ ABSOLUTELY simple to use
 
 Simply
@@ -12,10 +13,11 @@ Simply
 3. Start typing your tasks
 4. And there you have it!
 
-Let DukeMeister3000 manage your tasks for you! 💯
+Let DukeMeister3000 and Gigachad manage your tasks for you! 💯
 
 Some features:
 - [ ] Deadline setting
+- [ ] GIGACHAD Sigma Role play for your entertainment
 - [ ] Display your current tasks
 - [ ] Stores your tasks when you stop the program and accesses them again on the next startup
 
