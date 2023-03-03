@@ -30,11 +30,9 @@ public class Duke {
      * The file which stores all the tasks of a user will be stored in that filepath.
      */
     public Duke() {
-
+        this.ui = new Ui();
         this.taskManager = new TaskManagement();
-        //this.taskStorage = new TaskStorage();
-        this.taskStorage = new TaskStorage();
-        this.ui = new Ui(this.taskStorage);
+        this.taskStorage = new TaskStorage(this.taskManager.load());
     }
 
     /**
@@ -46,8 +44,8 @@ public class Duke {
     public Duke(String filepath) {
         ui = new Ui();
         try {
-            taskStorage = new TaskStorage();
             taskManager = new TaskManagement(filepath);
+            taskStorage = new TaskStorage(taskManager.load());
         } catch (DukeException e) {
             ui.showLoadingError();
             taskManager = new TaskManagement();

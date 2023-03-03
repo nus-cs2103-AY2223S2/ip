@@ -30,6 +30,12 @@ public class Event extends Task {
 
     }
 
+    @Override
+    public String original() {
+        return "[E]" + super.toString() +
+                "(from: " + startDate + " to: " + endDate + ")";
+    }
+
     /**
      * Returns the string representation of the Deadline object.
      *

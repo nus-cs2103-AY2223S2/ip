@@ -23,13 +23,19 @@ public class TaskStorage {
         taskStorage = new ArrayList<Task>();
     }
 
-    public TaskStorage(List<Task> tasks) {
-        this.taskStorage = tasks;
-    }
 
     public List<Task> getTasks() {
         return this.taskStorage;
     }
+    /**
+     * Constructs a TaskStorage object with the given taskList.
+     *
+     * @param taskList The given tasklist.
+     */
+    public TaskStorage(List<Task> taskList) {
+        this.taskStorage = taskList;
+    }
+
     /**
      * Adds a task to the TaskStorage object with printing effects.
      *
@@ -42,7 +48,7 @@ public class TaskStorage {
         chunkOfText.append('\n');
         this.taskStorage.add(t);
         this.ind++;
-        chunkOfText.append("Now you have " + this.ind + " task(s) in the list.\n");
+        chunkOfText.append("Now you have " + this.noTasks() + " task(s) in the list.\n");
         return chunkOfText.toString();
     }
 
@@ -62,7 +68,7 @@ public class TaskStorage {
      * @return The number of tasks in the taskStorage object.
      */
     public int noTasks() {
-        return ind;
+        return this.taskStorage.size();
     }
 
     /**
@@ -86,7 +92,7 @@ public class TaskStorage {
         chunkOfText.append("  " + t + "\n");
         this.taskStorage.remove(t);
         ind--;
-        chunkOfText.append("Now you have " + ind + " task(s) in the list.\n");
+        chunkOfText.append("Now you have " + this.noTasks() + " task(s) in the list.\n");
         return chunkOfText.toString();
     }
 
