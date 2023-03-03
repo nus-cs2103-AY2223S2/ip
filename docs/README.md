@@ -159,11 +159,11 @@ At the start of the day/week/month/year, the task will be automatically marked a
 
 Input format:
 
-`recurrence <task number> <frequency>`
+`recurrence <frequency> <task number>`
 
 Example input:
 
-`recurrence 1 weekly`
+`recurrence weekly 1`
 
 Example output:
 
