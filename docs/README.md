@@ -143,7 +143,9 @@ Example of usage:
 Show priority of task at INDEX.
 
 Example of usage:
+
 `pget 1`
+
 Expected outcome:
 
 ```
@@ -157,7 +159,9 @@ Priority of this task is: LOW
 Sets priority of task at INDEX.
 
 Example of usage:
+
 `pset h 1`
+
 Expected outcome:
 
 ```
