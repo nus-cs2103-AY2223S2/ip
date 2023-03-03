@@ -3,10 +3,12 @@ package cluck;
 import cluck.commands.Command;
 import cluck.commands.ExitCommand;
 import cluck.exceptions.CluckException;
+import cluck.messages.Messages;
 import cluck.parser.Parser;
 import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 import cluck.ui.Ui;
+
 
 /**
  * Cluck class is the main Class and module for Cluck.
@@ -68,8 +70,20 @@ public class Cluck {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Cluck heard: " + input;
+    public String getResponse(String userInput) {
+        String response = Messages.MESSAGE_WELCOME;
+        Command currCommand;
+        try {
+            currCommand = Parser.commandFactory(userInput);
+            response = currCommand.execute(taskList);
+            if (currCommand instanceof ExitCommand) {
+                isRunning = false;
+            }
+        } catch (CluckException e) {
+            response = e.getMessage();
+        }
+        storage.writeSave(taskList);
+        return response;
     }
 
     /**
