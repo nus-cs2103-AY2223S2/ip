@@ -1,0 +1,10 @@
+deadline Return book /by 1/12/2023 1200
+deadline CS2100 Assignment /by 01/12/2023 2200
+deadline Buy pencil /by 02/12/2023 1400
+deadline Buy pen /by 01/12/2023 1200
+event Eat lunch /from 01/12/2023 1200 /to 01/12/2023 1400
+event Hellweek /from 01/12/2023 1200 /to 05/12/2023 1200
+event Meet hello /from 07/12/2023 1200 /to 07/12/2023 1400
+list
+list 1/12/2023
+bye
