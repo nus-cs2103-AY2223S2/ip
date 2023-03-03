@@ -63,6 +63,15 @@ public class Task {
     }
 
     /**
+     * Returns the original string input of the Task object.
+     *
+     * @return The name of this task and if the task is done or not.
+     */
+    public String original() {
+        return ("[" + this.getStatusIcon() + "] " + this.description);
+    }
+
+    /**
      * Returns the string representation of the Task object.
      *
      * @return The name of this task and if the task is done or not.

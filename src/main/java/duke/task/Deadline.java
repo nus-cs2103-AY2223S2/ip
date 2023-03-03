@@ -26,6 +26,11 @@ public class Deadline extends Task {
         this.date = LocalDate.parse(by);
     }
 
+    @Override
+    public String original() {
+        return "[D]" + super.toString() + "(by: " + date + ")";
+    }
+
     /**
      * Returns the string representation of the Deadline object.
      *

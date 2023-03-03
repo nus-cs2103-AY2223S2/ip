@@ -1,8 +1,20 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Analogous to Storage suggested by the module coordinators.
@@ -79,12 +91,71 @@ public class TaskManagement {
         try {
             FileWriter fw = new FileWriter(this.path);
             for (int i = 0; i < taskStorage.noTasks(); i++) {
-                fw.write(taskStorage.getTask(i).toString());
+                fw.write(taskStorage.getTask(i).original());
                 fw.write(System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Loads the data from the output file into the taskStorage object.
+     *
+     * @return a list of tasks stored.
+     */
+    public List<Task> load() {
+        List<Task> tasks = new ArrayList<>();
+        try {
+            Path path = Paths.get("./data/");
+            Files.createDirectories(path);
+            File file = new File(this.path);
+            file.createNewFile();
+
+            Scanner reader = new Scanner(file);
+            while (reader.hasNextLine()) {
+                String data = reader.nextLine();
+                char action = data.charAt(1);
+                assert action == 'T' || action == 'E' || action == 'D' : "Tasks not stored properly!";
+                Task task;
+                int taskNameStart = 7;
+                int removeFromLength = 7;
+                int dateLength = 10;
+                int byLength = 5;
+                if (action == 'T') {
+                    task = new Todo(data.substring(taskNameStart));
+
+                } else if (action == 'E') {
+                    int symbol = data.indexOf("(");
+                    int symbolClose = data.indexOf(")");
+                    String first = data.substring(symbol + removeFromLength, symbol + removeFromLength + dateLength);
+                    String second = data.substring(symbolClose - dateLength, symbolClose);
+                    task = new Event(data.substring(taskNameStart, symbol), first, second);
+
+                } else if (action == 'D') {
+                    int symbol = data.indexOf("(");
+                    int symbolClose = data.indexOf(")");
+                    String first = data.substring(taskNameStart, symbol);
+                    String second = data.substring(symbol + byLength, symbolClose);
+                    task = new Deadline(first, second);
+
+                } else {
+                    reader.close();
+                    throw new DukeException("Task loaded is formatted incorrectly");
+                }
+                char isDone = data.charAt(4);
+                assert isDone == 'X'
+                        || isDone == ' ' : "The state of the task is stored wrongly";
+                tasks.add(task);
+                if (isDone == 'X') {
+                    task.markAsDone();
+                }
+            }
+            reader.close();
+            return tasks;
+        } catch (IOException | DukeException e) {
+            return tasks;
         }
     }
 
