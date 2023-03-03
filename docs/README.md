@@ -220,6 +220,7 @@ Priority of this task has been set to: HIGH
 Ends the program.
 
 Example of usage:
+
 `bye`
 
 
