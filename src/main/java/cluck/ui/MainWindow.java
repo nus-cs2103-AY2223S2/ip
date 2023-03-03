@@ -1,6 +1,5 @@
 package cluck.ui;
 
-import cluck.Cluck;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-
+import cluck.Cluck;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -25,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Cluck cluck;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Cluck.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Monke.jpg"));
+    private final Image cluckImage = new Image(this.getClass().getResourceAsStream("/images/Cluck.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Monke.jpg"));
 
     @FXML
     public void initialize() {
@@ -47,7 +46,7 @@ public class MainWindow extends AnchorPane {
         String response = cluck.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, cluckImage)
         );
         userInput.clear();
     }
