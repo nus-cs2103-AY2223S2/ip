@@ -1,4 +1,3 @@
 T|0|Meet Jason
-D|0|Assignment 1|27-02-2023 23:59
-E|0|Darien Wedding|24-0 08:00|24-03-203 20:00
 T|0|dinner with friends
+D|0|asdfasdf|23 Mar 20 2359
