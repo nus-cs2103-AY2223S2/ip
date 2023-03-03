@@ -1,0 +1,7 @@
+todo Learn Norwegian
+deadline assignment 1 /by Sun 2359
+event CNY meetup with friends /from 2pm /to 9pm
+mark 3
+list
+unmark 3
+list
