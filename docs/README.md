@@ -1,3 +1,48 @@
+# DukeMeister3000
+> "Tasks not complete, until DukeMeister3000 I used" - Mister Yoda
+
+DukeMeister3000 tracks your tasks and gives you that edge to complete them on time. It is
+- extremely intuitive
+- fast
+- Makes you a sigma male/female
+- ~~quite~~ ~~very~~ ABSOLUTELY simple to use
+
+Simply
+1. Download it [here](https://github.com/daytona65/ip/releases/tag/v0.2-fix)
+2. Run it as a jar file
+3. Start typing your tasks
+4. And there you have it!
+
+Let DukeMeister3000 and Gigachad manage your tasks for you! 💯
+
+Some features:
+- [ ] Deadline setting
+- [ ] GIGACHAD Sigma Role play for your entertainment
+- [ ] Display your current tasks
+- [ ] Stores your tasks when you stop the program and accesses them again on the next startup
+
+If you are a Java programmer, you can review the code easily with its well designed code and JavaDocs. Here's the `newEvent` method:
+```
+    /**
+     * Creates a new Event task and prints a message for the user
+     * confirming the addition of the task to the Task List.
+     *
+     * @param input The user input.
+     * @param taskSize The current Task List size.
+     * @return The created task.
+     */
+    public Task newEvent(String input, int taskSize) throws DukeException {
+        int fromIndex = input.indexOf(" /from ");
+        int toIndex = input.indexOf(" /to ");
+        Task task = new Event(input.substring(6, fromIndex), input.substring(fromIndex + 7, toIndex),
+                input.substring(toIndex + 5));
+        Ui.addMessage(task, taskSize);
+        return task;
+    }
+```
+
+
+
 # User Guide
 
 ## Features 
@@ -167,5 +212,14 @@ Expected outcome:
 ```
 Priority of this task has been set to: HIGH
 ```
+
+<br/>
+
+### `bye` - Ends the program
+
+Ends the program.
+
+Example of usage:
+`bye`
 
 
