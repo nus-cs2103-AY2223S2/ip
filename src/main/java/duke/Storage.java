@@ -18,12 +18,6 @@ public class Storage {
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
 
     /**
-     * Creates a storage file at the intended file path.
-     */
-    public Storage() {
-    }
-
-    /**
      * Saves user-inputted tasks into a file.
      *
      * @param tasks to be saved.

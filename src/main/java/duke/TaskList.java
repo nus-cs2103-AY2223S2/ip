@@ -18,8 +18,8 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public void add(Task t) {
-        this.tasks.add(t);
+    public void add(Task task) {
+        this.tasks.add(task);
     }
 
     /**
