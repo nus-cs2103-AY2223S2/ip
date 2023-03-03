@@ -108,8 +108,9 @@ public class Parser {
     }
 
     private String todoCommand(String[] inputs) throws DukeException {
-        if (inputs.length == 1)
+        if (inputs.length == 1) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
         Task tsk = new Todo(inputs[1]);
         this.data.add(tsk);
         String tskNum = String.format("Now you have %d tasks in the list.", data.size());
@@ -119,8 +120,9 @@ public class Parser {
     }
 
     private String deadlineCommand(String[] inputs) throws DukeException {
-        if (inputs.length == 1)
+        if (inputs.length == 1) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        }
         String[] desc = inputs[1].split(" /by ");
         LocalDateTime date = parseDate(desc[1]);
         Task tsk = new Deadline(desc[0], date);
