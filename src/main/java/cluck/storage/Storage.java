@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import cluck.exceptions.CluckException;
 import cluck.tasklist.TaskList;
 import cluck.tasks.Task;
 
@@ -40,8 +41,12 @@ public class Storage {
             Task currTask;
             Scanner savedFileScanner = new Scanner(saveFile);
             while (savedFileScanner.hasNextLine()) {
-                currTask = Task.buildTaskFromSave(savedFileScanner.nextLine());
-                taskList.addTask(currTask);
+                try {
+                    currTask = Task.buildTaskFromSave(savedFileScanner.nextLine());
+                    taskList.addTask(currTask);
+                } catch (CluckException exception) {
+                    System.out.println(exception.getMessage());
+                }
             }
             return taskList;
         } catch (FileNotFoundException e) {
