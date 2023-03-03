@@ -54,8 +54,7 @@ public class Storage {
                 Task newTask = Parser.convertTaskFromLineInTaskList(currentLine);
                 taskList.add(newTask);
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("File is not found.");
         }
         if (taskList.isEmpty()) {
