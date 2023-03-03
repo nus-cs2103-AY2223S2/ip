@@ -1,6 +1,6 @@
 # User Guide
 
-Duke is a desktop app for managing your tasks.
+EeveeBot is a desktop app for managing your tasks.
 
 - [Features](#features)
   - [Adding new tasks]()
