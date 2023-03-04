@@ -25,8 +25,7 @@ public class Cluck {
      */
     public Cluck() {
         this.taskList = new TaskList();
-        this.storage = new Storage("C:/Users/User/OneDrive - National University of Singapore/"
-                + "NUS/Y2S2/ip/data/CluckSave.txt");
+        this.storage = new Storage();
     }
 
     /**

@@ -11,6 +11,7 @@ import cluck.commands.FindTaskCommand;
 import cluck.commands.InvalidCommand;
 import cluck.commands.ListCommand;
 import cluck.commands.MarkTaskCommand;
+import cluck.commands.NoCommand;
 import cluck.commands.ToDoCommand;
 import cluck.commands.UnmarkTaskCommand;
 import cluck.exceptions.IncorrectArgumentException;
@@ -92,6 +93,9 @@ public class Parser {
 
         case FIND_TASK_COMMAND:
             return buildFindTaskCommand(words, userInput);
+
+        case "":
+            return new NoCommand();
 
         default:
             return new InvalidCommand(userInput);
