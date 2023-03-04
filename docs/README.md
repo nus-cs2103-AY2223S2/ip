@@ -40,6 +40,7 @@ Format: `todo <description>`
 Examples:
 - `todo cut hair`
 - `todo buy gift`
+
 ### Adding a deadline: `deadline`
 Adds a deadline to the tasklist.
 
@@ -50,6 +51,7 @@ Format: `deadline <description> /by <date/time>`
 Examples:
 - `deadline essay /by 01022023 1800`
 - `deadline assignment /by 2023-02-02`
+
 ### Adding a event: `event`
 Adds an event to the tasklist.
 
@@ -61,6 +63,7 @@ Format: `event <description> /from <date/time> /to <date/time>`
 Examples:
 - `event open day /from 04032023 0900 /to 04/03/2023 1700`
 - `event apply for internships /from 2023/01/01 /to 2023-04-31`
+
 ### Listing all tasks: `list`
 Shows a list of all tasks in the tasklist.
 
@@ -77,6 +80,7 @@ Format: `mark <number>`
 Examples:
 - `list` followed by `mark 2` marks the 2nd task in the tasklist
 - `list` followed by `mark 4` marks the 4th task in the tasklist
+
 ### Unmarking a task: `unmark`
 Unmarks a task as done in the tasklist.
 
@@ -88,6 +92,7 @@ Format: `unmark <number>`
 Examples:
 - `list` followed by `unmark 2` unmarks the 2nd task in the tasklist
 - `list` followed by `unmark 4` unmarks the 4th task in the tasklist
+
 ### Deleting a task: `delete`
 Deletes a task in the tasklist.
 
@@ -99,6 +104,7 @@ Format: `delete <number>`
 Examples:
 - `list` followed by `delete 2` deletes the 2nd task in the tasklist
 - `list` followed by `delete 4` deletes the 4th task in the tasklist
+
 ### Filtering by description: `filter`
 Filters tasks whose description contain any of the given keywords.
 Format: `filter <keywords...>`
@@ -111,6 +117,7 @@ Format: `filter <keywords...>`
 Examples:
 - `filter cut` returns `cut hair (by: Jan 01 2023  23:59)`
 - `find slides, script` returns `prepare script` and `prepare slides`
+
 ### Filtering by date: `filterdate`
 Filters tasks whose date matches/is ongoing on any of the given dates.
 Format: `filterdate <dates...>`
@@ -124,22 +131,26 @@ Format: `filterdate <dates...>`
 Examples:
 - `filterdate 01012023` returns `cut hair (by: Jan 01 2023  23:59)`
 - `flterdate 2023-02-01` returns `prepare script (from: Jan 01 2023 00:00 to: Jan 03 2023 23:59)`
+
 ### Sorting by alphabet: `sort`
 Sorts all tasks by alphabetical order and displays them.
 
 Format: `sort`
 - Sorts by task description
+
 ### Sorting by date: `sortdate`
 Sorts all tasks by date and displays them.
 
 Format: `sortdate`
 - All todos will be displayed last
 - Sorts events by their start date
+
 ### Sorting by task type: `sorttask`
 Sorts all tasks by task type and displays them.
 
 Format: `sorttask`
 - All todos will be displayed first, followed by deadlines and then events
+
 ### Sorting by task status: `sortdone`
 Sorts all tasks by status (marked/unmarked) and displays them.
 
