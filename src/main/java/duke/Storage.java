@@ -27,7 +27,7 @@ public class Storage {
      * Returns a Storage object with the filePath as the default Path
      */
     public Storage() {
-        this.filePath = DEFAULTDIRECTORY;
+        this.filePath = DEFAULT_DIRECTORY;
     }
 
     /**
