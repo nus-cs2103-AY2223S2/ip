@@ -28,7 +28,6 @@ public class TaskList {
      * @return Message of adding a new task.
      */
     public String addTask(Task task, boolean isLoad) {
-        assert task == null : "Task can't be null!";
         tasks.add(task);
         if (!isLoad) {
             return "Got it. I've added this task:\n"
