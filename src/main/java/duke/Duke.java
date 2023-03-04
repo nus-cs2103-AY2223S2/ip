@@ -33,37 +33,12 @@ public class Duke extends Application {
      */
     static final String HOME_DIRECTORY = System.getProperty("user.dir");
     static final Path DUKE_LIST_DIRECTORY = Paths.get(HOME_DIRECTORY, "SavedList.txt");
-    static final HashMap<String, Integer> MIN_VALID_LENGTH = new HashMap<>(Map.of(
-            "todo", 6,
-            "deadline", 10,
-            "event", 7,
-            "mark", 6,
-            "unmark", 8,
-            "delete", 8
-    ));
-    /**
-     * Correct formatting of commands given that the name of the command is correct
-     */
-    static final HashMap<String, String> CORRECT_FORMAT = new HashMap<>(Map.of(
-            "todo", "todo THE TASK",
-            "deadline", "deadline THE TASK /by yyyy-mm-ddThh:mm:ss",
-            "event", "event THE TASK /from TIME /to TIME",
-            "mark", "mark NUMBER",
-            "unmark", "unmark NUMBER",
-            "delete", "delete NUMBER",
-            "find", "find WORDS"
-    ));
+    static final String GREETING = "Hello my name is Duke.\nWhat can I do for you?";
+    static final String NAME = "DUKE";
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     /**
      * Returns Duke with the Path specified as filePath and loads the stored tasks
      *
