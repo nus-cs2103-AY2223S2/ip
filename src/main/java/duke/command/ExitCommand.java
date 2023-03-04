@@ -13,15 +13,19 @@ public class ExitCommand extends Command {
      * Saves the file via Storage
      *
      * @param tasks TaskList of all the tasks
-     * @param ui the user interface to interact with the user
-     * @param storage used to save the TaskList to be retrieved in the future
+     * @param ui Ui the user interface to interact with the user
+     * @param storage Storage used to save the TaskList to be retrieved in the future
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveList(tasks);
         ui.closeUi();
     }
-
+    @Override
+    public String execute(TaskList tasks, Storage storage) {
+        storage.saveList(tasks);
+        return "Goodbye. See you again!! :)";
+    }
     /**
      * Returns true as this is an ExitCommand
      *
@@ -30,5 +34,10 @@ public class ExitCommand extends Command {
     @Override
     public boolean isExit() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "bye";
     }
 }

@@ -32,8 +32,8 @@ public class AddTaskCommand extends Command {
      * Saves the file via Storage
      *
      * @param tasks TaskList of all the tasks
-     * @param ui the user interface to interact with the user
-     * @param storage used to save the TaskList to be retrieved in the future
+     * @param ui Ui the user interface to interact with the user
+     * @param storage Storage used to save the TaskList to be retrieved in the future
      * @throws DukeException if the task is in the wrong format
      */
     @Override
@@ -43,6 +43,17 @@ public class AddTaskCommand extends Command {
             tasks.add(task);
             ui.print(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", task, tasks.size()));
             storage.saveList(tasks);
+        } catch (RuntimeException wrongFormat) {
+            throw new DukeException("Please enter the command in the correct format:\n" + correctFormat());
+        }
+    }
+    @Override
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        try{
+            Task task = makeTask();
+            tasks.add(task);
+            storage.saveList(tasks);
+            return String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", task, tasks.size());
         } catch (RuntimeException wrongFormat) {
             throw new DukeException("Please enter the command in the correct format:\n" + correctFormat());
         }
