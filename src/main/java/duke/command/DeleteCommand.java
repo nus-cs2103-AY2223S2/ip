@@ -26,8 +26,8 @@ public class DeleteCommand extends Command {
      * Saves the file via Storage
      *
      * @param tasks TaskList of all the tasks
-     * @param ui the user interface to interact with the user
-     * @param storage used to save the TaskList to be retrieved in the future
+     * @param ui Ui the user interface to interact with the user
+     * @param storage Storage used to save the TaskList to be retrieved in the future
      * @throws DukeException if the String index is not an integer OR if index is not in range of size of TaskList
      */
     @Override

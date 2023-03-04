@@ -23,8 +23,8 @@ public class EchoCommand extends Command {
      * Display the output via Ui showing the input of the user
      *
      * @param tasks TaskList of all the tasks
-     * @param ui the user interface to interact with the user
-     * @param storage used to save the TaskList to be retrieved in the future
+     * @param ui Ui the user interface to interact with the user
+     * @param storage Storage used to save the TaskList to be retrieved in the future
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

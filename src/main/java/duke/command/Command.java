@@ -33,13 +33,26 @@ public class Command {
      * Saves the file via Storage
      *
      * @param tasks TaskList of all the tasks
-     * @param ui the user interface to interact with the user
-     * @param storage used to save the TaskList to be retrieved in the future
+     * @param ui Ui the user interface to interact with the user
+     * @param storage Storage used to save the TaskList to be retrieved in the future
      * @throws DukeException if an issue arises
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        // do the commands purpose
+        // do the commands purpose for command line
         return;
+    }
+
+    /**
+     * Returns the String of the output of the execution
+     * Saves the file via Storage
+     *
+     * @param tasks TaskList of all the tasks
+     * @param storage Storage used to save the TaskList to be retrieved in the future
+     * @return String empty string
+     */
+    public String execute(TaskList tasks, Storage storage) {
+        // do the commands purpose and returns as String for GUi
+        return "";
     }
 
     /**
