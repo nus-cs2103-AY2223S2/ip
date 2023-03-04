@@ -10,7 +10,7 @@ BorzAI is a web-based chatbot that can help manage your todos, deadlines and eve
 - [Commands](#commands)
   - [Adding a todo: `todo`](#adding-a-todo-todo)
   - [Adding a deadline: `deadline`](#adding-a-deadline-deadline)
-  - [Adding a event: `event`](#adding-a-event-event)
+  - [Adding an event: `event`](#adding-an-event-event)
   - [Listing all tasks: `list`](#listing-all-tasks-list)
   - [Marking a task: `mark`](#marking-a-task-mark)
   - [Unmarking a task: `unmark`](#unmarking-a-task-unmark)
@@ -52,7 +52,7 @@ Examples:
 - `deadline essay /by 01022023 1800`
 - `deadline assignment /by 2023-02-02`
 
-### Adding a event: `event`
+### Adding an event: `event`
 Adds an event to the tasklist.
 
 Format: `event <description> /from <date/time> /to <date/time>`
