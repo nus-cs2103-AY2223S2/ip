@@ -161,6 +161,7 @@ Format: `sortdone`
 BorzAI data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## Command Summary
+
 | Command | Description |
 | --- | --- |
 | `todo <description>` | Add todo. |
