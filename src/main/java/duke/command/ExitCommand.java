@@ -21,7 +21,11 @@ public class ExitCommand extends Command {
         storage.saveList(tasks);
         ui.closeUi();
     }
-
+    @Override
+    public String execute(TaskList tasks, Storage storage) {
+        storage.saveList(tasks);
+        return "Goodbye. See you again!! :)";
+    }
     /**
      * Returns true as this is an ExitCommand
      *

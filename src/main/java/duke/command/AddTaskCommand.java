@@ -47,6 +47,17 @@ public class AddTaskCommand extends Command {
             throw new DukeException("Please enter the command in the correct format:\n" + correctFormat());
         }
     }
+    @Override
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        try{
+            Task task = makeTask();
+            tasks.add(task);
+            storage.saveList(tasks);
+            return String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", task, tasks.size());
+        } catch (RuntimeException wrongFormat) {
+            throw new DukeException("Please enter the command in the correct format:\n" + correctFormat());
+        }
+    }
 
     /**
      * Returns the correct Task depending on the command that was entered
