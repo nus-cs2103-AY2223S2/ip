@@ -154,7 +154,7 @@ Format: `sorttask`
 - All todos will be displayed first, followed by deadlines and then events
 
 ### Sorting by task status: `sortdone`
-Sorts all tasks by status (marked/unmarked) and displays them.
+Sorts all tasks by status(marked/unmarked) and displays them.
 
 Format: `sortdone`
 - All unmarked tasks will be displayed first, followed by marked tasks
