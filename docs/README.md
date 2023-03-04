@@ -117,7 +117,7 @@ Format: `filter <keywords...>`
 
 Examples:
 - `filter cut` returns `cut hair (by: Jan 01 2023  23:59)`
-- `find slides, script` returns `prepare script` and `prepare slides`
+- `filter slides, script` returns `prepare script` and `prepare slides`
 
 ### Filtering by date: `filterdate`
 Filters tasks whose date matches/is ongoing on any of the given dates.
@@ -132,7 +132,7 @@ Format: `filterdate <dates...>`
 
 Examples:
 - `filterdate 01012023` returns `cut hair (by: Jan 01 2023  23:59)`
-- `flterdate 2023-02-01` returns `prepare script (from: Jan 01 2023 00:00 to: Jan 03 2023 23:59)`
+- `filterdate 2023-02-01` returns `prepare script (from: Jan 01 2023 00:00 to: Jan 03 2023 23:59)`
 
 ### Sorting by alphabet: `sort`
 Sorts all tasks by alphabetical order and displays them.
