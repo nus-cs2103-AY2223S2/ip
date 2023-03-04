@@ -44,8 +44,8 @@ exits the program.
 
 
 
-## Usage
->*NOTE: To Enter commands press `Send Button` or **Enter ↵** on Keyboard.*
+## Usage 
+>NOTE: To Enter commands press `Send Button` or **Enter ↵** on Keyboard.
 ---
 ### `todo [DESCRIPTION]` - Add todo task
 
