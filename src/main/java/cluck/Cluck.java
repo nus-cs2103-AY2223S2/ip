@@ -1,6 +1,7 @@
 package cluck;
 
 import java.util.Objects;
+import java.util.Scanner;
 
 import cluck.commands.Command;
 import cluck.commands.ExitCommand;
@@ -9,7 +10,6 @@ import cluck.messages.Messages;
 import cluck.parser.Parser;
 import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
-import cluck.ui.Ui;
 
 
 /**
@@ -17,7 +17,6 @@ import cluck.ui.Ui;
  */
 public class Cluck {
     private final TaskList taskList;
-    private final Ui ui;
     private boolean isRunning = true;
     private final Storage storage;
 
@@ -26,9 +25,7 @@ public class Cluck {
      */
     public Cluck() {
         this.taskList = new TaskList();
-        this.ui = new Ui();
-        this.storage = new Storage("C:/Users/User/OneDrive - National University of Singapore/"
-                + "NUS/Y2S2/ip/data/CluckSave.txt");
+        this.storage = new Storage();
     }
 
     /**
@@ -38,7 +35,6 @@ public class Cluck {
      * @param filePath path of saved path as String
      */
     public Cluck(String filePath) {
-        this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.taskList = storage.readSave();
     }
@@ -48,15 +44,13 @@ public class Cluck {
      * begins taking in user commands.
      */
     public void run() {
-        ui.greetUser();
-        String userInput;
-        String response;
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(Messages.MESSAGE_WELCOME
+        );
         while (isRunning) {
-            userInput = ui.readInput();
-            response = getResponse(userInput);
+            String response = getResponse(scanner.nextLine());
             assert Objects.nonNull(response);
-            ui.printResponse(response);
+            System.out.println(response);
         }
         storage.writeSave(taskList);
     }
@@ -75,12 +69,8 @@ public class Cluck {
      * Replace this stub with your completed method.
      */
     public String getResponse(String userInput) {
-        if (Objects.isNull(userInput)) {
-            return Messages.MESSAGE_WELCOME;
-        }
-        Command currCommand;
         try {
-            currCommand = getCommand(userInput);
+            Command currCommand = getCommand(userInput);
             return executeCommand(currCommand);
         } catch (CluckException e) {
             return e.getMessage();

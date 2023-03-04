@@ -19,7 +19,7 @@ public class Messages {
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "That's not...? In the list...? Buh caw?";
     public static final String MESSAGE_INDEX_MISSING = "Which task did you wanna edit? Muckah buck!";
     public static final String MESSAGE_INDEX_INVALID = "Ya gotta give me a working number, bucko!";
-
+    public static final String MESSAGE_NO_COMMAND_GIVEN = "Say something I'm giving up on you ~~~";
     public static final String MESSAGE_INVALID_COMMAND = "That's not a command, you egg!";
     public static final String MESSAGE_DESCRIPTION_MISSING = "Well, you gotta give it a name!";
     public static final String MESSAGE_DUEDATE_FLAG_MISSING = "You're missing the '/by' flag, bucko!";
