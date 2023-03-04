@@ -106,7 +106,8 @@ Examples:
 - `list` followed by `delete 4` deletes the 4th task in the tasklist
 
 ### Filtering by description: `filter`
-Filters tasks whose description contain any of the given keywords.
+Filters tasks whose description contain any of the given keywords. 
+
 Format: `filter <keywords...>`
 - Separate multiple keywords with commas
 - The search is case-sensitive
@@ -120,6 +121,7 @@ Examples:
 
 ### Filtering by date: `filterdate`
 Filters tasks whose date matches/is ongoing on any of the given dates.
+
 Format: `filterdate <dates...>`
 - Separate multiple dates with commas
 - Works only for tasks with dates i.e., deadlines and events
