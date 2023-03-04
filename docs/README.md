@@ -4,7 +4,7 @@
    <img width="590" alt="Ui" src="https://user-images.githubusercontent.com/97421565/220763976-1de030d8-524c-47a3-a534-2852a775d466.png">
 </div>
 
-BorzAI is a web-based chatbot that can help manage your todos, deadline and events in a tasklist. All you have to do is enter commands to tell it what to do and it will help you manage your tasklist accordingly. With this, you can focus on other things without forgetting what you have to do.
+BorzAI is a web-based chatbot that can help manage your todos, deadlines and events in a tasklist. All you have to do is enter commands to tell it what to do and it will help you manage your tasklist accordingly. With this, you can focus on other things without forgetting what you have to do.
 
 - [Quick Start](#quick-start)
 - [Commands](#commands)
