@@ -2,14 +2,11 @@
 
 > “Your mind is for having ideas, not holding them.” – David Allen ([source](https://dansilvestre.com/productivity-quotes/))
 
-Duke frees your mind by remembering things you need to do
+Duke frees your mind by remembering things you need to do. It is a desktop chat-based app with a user-friendly interface that is easy to learn and ~~Fast~~ _SUPER FAST_ to use.
 
-It is 
-- A desktop based app
-- Chat-based
-- Has a user-friendly interface
-- easy to learn
-- ~~Fast~~ _SUPER FAST_ to use
+- [Steps to run](https://github.com/anchengyang/ip/tree/master/docs#steps-to-run)
+- [Features](https://github.com/anchengyang/ip/tree/master/docs#features)
+- [Usage](https://github.com/anchengyang/ip/tree/master/docs#usage)
 
 ## Steps to run
 1. Ensure you have `Java 11` installed in your device
