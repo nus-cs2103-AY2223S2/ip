@@ -132,7 +132,7 @@ Format: `filterdate <dates...>`
 
 Examples:
 - `filterdate 01012023` returns `cut hair (by: Jan 01 2023  23:59)`
-- `filterdate 2023-02-01` returns `prepare script (from: Jan 01 2023 00:00 to: Jan 03 2023 23:59)`
+- `filterdate 2023-02-01` returns `camp (from: Jan 01 2023 00:00 to: Jan 03 2023 23:59)`
 
 ### Sorting by alphabet: `sort`
 Sorts all tasks by alphabetical order and displays them.
