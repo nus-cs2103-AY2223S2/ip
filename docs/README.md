@@ -153,7 +153,8 @@ need to save manually.
 <br />
 ***
 ## Commands Summary
-| Action     | Format, Examples                                                                                             |
+
+| Action     | Format, Examples          <br/>                                                                                   |
 |------------|--------------------------------------------------------------------------------------------------------------|
 | list       | `list`                                                                                                       |
 | todo       | `todo [task]`<br/>e.g., `todo homework`                                                                      |
