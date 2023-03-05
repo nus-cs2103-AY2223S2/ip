@@ -9,10 +9,10 @@ the benefits of a Graphical User Interface (GUI).
 2. Download the latest duke.Launcher.jar from [here](https://github.com/bernicetoh/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Open a command terminal. `cd` into the folder you put the jar file in, and use the `java -jar duke.Launcher.jar` command to run the application. A GUI similar to the below should appear in a few seconds.
-<figure>
+<p>
     <img src="/docs/images/starting_display.png"
          alt="Starting GUI">
-</figure>
+</p>
 
 5. Type the command in the input box and press `Send` to execute it. Some example commands you can try:
 - `list`: List all tasks.
