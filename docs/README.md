@@ -18,7 +18,7 @@ To get a view of all the current tasks.
 ### Mark/Unmark tasks as done or not done
 With an "X", Muse helps to keep track of the tasks that you wish to be marked "done" or "undone". Similar to delete, you specify the index and duke will mark/unmark that task.
 
-Here are the basic commands that you can do: 
+## Here are the basic commands that you can do: 
 - list out tasks  ```list```
 - add a task ```todo mop the floor```
 - mark/unmark tasks as done (or undone) ```mark 6```
