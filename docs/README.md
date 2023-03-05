@@ -16,6 +16,9 @@ Date (for todo and event can be specified by
 ### Delete a task
 By specifying the index which you wish to delete, Muse removes a task from your list of tasks.
 
+### Find a task
+Finds you the tasks whose description/title matches your search term. 
+
 ### List all tasks
 To get a view of all the current tasks.
 
@@ -28,6 +31,7 @@ With an "X", Muse helps to keep track of the tasks that you wish to be marked "d
 - Register actual dates (for events) ```event fireworks /from 14/01/2023 1600/to 16/01/2023 2000```
 - mark/unmark tasks as done (or undone) ```mark 6```
 - set deadlines: ```deadline do assignment /by 14/01/2023 1800```
+- find a task: ```find homework``` (and returns all tasks with homework in its title)
 - For the full instructions, simply ask muse with the following command: ```help```
 
 ## To use the app (JAR file) 
