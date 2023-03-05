@@ -7,6 +7,18 @@ Duke frees your mind by remembering things you need to do. It is a desktop chat-
 - [Steps to run](https://github.com/anchengyang/ip/tree/master/docs#steps-to-run)
 - [Features](https://github.com/anchengyang/ip/tree/master/docs#features)
 - [Usage](https://github.com/anchengyang/ip/tree/master/docs#usage)
+  - [Todo command](https://github.com/anchengyang/ip/tree/master/docs#1-create-todo-items-todo)
+  - [Deadline command](https://github.com/anchengyang/ip/tree/master/docs#2-create-deadlines-deadline)
+  - [Event command](https://github.com/anchengyang/ip/tree/master/docs#3-create-events-event)
+  - [Find command](https://github.com/anchengyang/ip/tree/master/docs#4-filter-by-keyword-find)
+  - [Finddate command](https://github.com/anchengyang/ip/tree/master/docs#5-filter-by-date-finddate)
+  - [Mark command](https://github.com/anchengyang/ip/tree/master/docs#6-mark-items-as-completed--mark)
+  - [Unmark command](https://github.com/anchengyang/ip/tree/master/docs#7-unmark-items-as-uncompleted--unmark)
+  - [Delete command](https://github.com/anchengyang/ip/tree/master/docs#8-delete-items-delete)
+  - [Update description command](https://github.com/anchengyang/ip/tree/master/docs#9-update-the-description-of-existing-tasks-update)
+  - [Update deadline command](https://github.com/anchengyang/ip/tree/master/docs#10-update-the-deadline-of-existing-deadlines-update)
+  - [Exit application](https://github.com/anchengyang/ip/tree/master/docs#11-quits-the-application-on-command-bye)
+- [Command summary](https://github.com/anchengyang/ip/tree/master/docs#command-summary)
 
 ## Steps to run
 1. Ensure you have `Java 11` installed in your device
