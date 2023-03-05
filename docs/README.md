@@ -19,6 +19,7 @@ Duke frees your mind by remembering things you need to do. It is a desktop chat-
   - [Update deadline command](https://github.com/anchengyang/ip/tree/master/docs#10-update-the-deadline-of-existing-deadlines-update)
   - [Exit application](https://github.com/anchengyang/ip/tree/master/docs#11-quits-the-application-on-command-bye)
 - [Command summary](https://github.com/anchengyang/ip/tree/master/docs#command-summary)
+- [Screenshots of app](https://github.com/anchengyang/ip/tree/master/docs#screenshots)
 
 ## Steps to run
 1. Ensure you have `Java 11` installed in your device
