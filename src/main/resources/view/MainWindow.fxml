@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #1F294A;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="launcher.MainWindow">
+    <children>
+      <HBox alignment="CENTER" layoutY="571.0" prefHeight="29.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+              <TextField fx:id="userInput" alignment="BOTTOM_LEFT" onAction="#handleUserInput" prefHeight="30.0" prefWidth="324.0" promptText="Type something..." style="-fx-background-color: #1F294A; -fx-text-fill: #ffffff;" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+              <Button fx:id="sendButton" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#handleUserInput" prefWidth="76.0" style="-fx-background-color: #1F294A;" text="Send" textAlignment="CENTER" textFill="#c6c6c6">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="570.0" prefWidth="399.0" style="-fx-background-color: #1F294A; -fx-border-color: #E3E4E8;" vvalue="1.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefWidth="398.0" style="-fx-background-color: #3B4461#3B4461;" />
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
