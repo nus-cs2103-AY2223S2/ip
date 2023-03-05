@@ -5,20 +5,36 @@
 Duke frees your mind by remembering things you need to do
 
 It is 
+- A desktop based app
 - Chat-based
 - Has a user-friendly interface
 - easy to learn
 - ~~Fast~~ _SUPER FAST_ to use
 
 ## Steps to run
-1. Download the JAR file from the latest release [here](https://github.com/anchengyang/ip/releases)
-2. Open it
-3. Start adding your tasks
-4. Let it manage your tasks for you 👍
+1. Ensure you have `Java 11` installed in your device
+2. Download the JAR file from the latest release [here](https://github.com/anchengyang/ip/releases)
+3. Launch the app from the terminal using this command `java -jar duke.jar`
+4. Start adding your tasks using the commands [here](https://github.com/anchengyang/ip/tree/master/docs#usage) 
+5. Let it manage your tasks for you 👍
 
 ## Features 
 
+### Manages your tasks for you
 
+Add or delete tasks from the todo list using the index.
+
+### Filter tasks
+
+You can easily locate the task you want based on specific keywords or dates.
+
+### Update existing tasks
+
+Easily update the description or deadline of existing tasks without the hassle of deleting and creating new tasks.
+
+### Track completed and uncompleted tasks
+
+Mark or unmark tasks that you have completed.
 
 
 ## Usage
@@ -110,7 +126,7 @@ Example of usage:
 
 `update <index> /description <new changes>`
 
-### 10. Update the deadline of existing deadlines
+### 10. Update the deadline of existing deadlines: `update`
 
 Updates the deadline of existing deadline tasks in the list without having to create a new deadline
 
