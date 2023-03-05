@@ -3,6 +3,7 @@ package cluck.commands;
 import java.time.format.DateTimeParseException;
 
 import cluck.messages.Messages;
+import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 import cluck.tasks.Event;
 import cluck.tasks.Task;
@@ -32,10 +33,11 @@ public class EventCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Task event = new Event(description, startTime, endTime);
             taskList.addTask(event);
+            storage.writetoSave(taskList);
             return Messages.MESSAGE_EVENT_ADDED + "\n" + event
                     + "\n" + String.format(Messages.MESSAGE_LIST_COUNT, taskList.taskCount());
         } catch (DateTimeParseException e) {

@@ -3,6 +3,7 @@ package cluck.commands;
 import java.time.format.DateTimeParseException;
 
 import cluck.messages.Messages;
+import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 import cluck.tasks.Deadline;
 import cluck.tasks.Task;
@@ -29,10 +30,11 @@ public class DeadlineCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Task deadline = new Deadline(description, dueDate);
             taskList.addTask(deadline);
+            storage.writetoSave(taskList);
             return Messages.MESSAGE_DEADLINE_ADDED + "\n" + deadline
                     + "\n" + String.format(Messages.MESSAGE_LIST_COUNT, taskList.taskCount());
         } catch (DateTimeParseException e) {

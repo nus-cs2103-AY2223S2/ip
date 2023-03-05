@@ -1,6 +1,7 @@
 package cluck.commands;
 
 import cluck.messages.Messages;
+import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 
 /**
@@ -10,7 +11,7 @@ import cluck.tasklist.TaskList;
 public class NoCommand implements Command {
     public NoCommand() {};
     @Override
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList, Storage storage) {
         return Messages.MESSAGE_NO_COMMAND_GIVEN;
     }
 }

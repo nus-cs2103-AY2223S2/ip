@@ -1,6 +1,7 @@
 package cluck.commands;
 
 import cluck.messages.Messages;
+import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 import cluck.tasks.Task;
 import cluck.tasks.ToDo;
@@ -24,9 +25,10 @@ public class ToDoCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList, Storage storage) {
         Task task = new ToDo(description);
         taskList.addTask(task);
+        storage.writetoSave(taskList);
         return Messages.MESSAGE_TODO_ADDED + "\n" + task
                 + "\n" + String.format(Messages.MESSAGE_LIST_COUNT, taskList.taskCount());
     }

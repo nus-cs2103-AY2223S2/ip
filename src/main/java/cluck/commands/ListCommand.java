@@ -1,6 +1,7 @@
 package cluck.commands;
 
 import cluck.messages.Messages;
+import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 
 /**
@@ -8,7 +9,7 @@ import cluck.tasklist.TaskList;
  */
 public class ListCommand implements Command {
 
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList, Storage storage) {
         return Messages.MESSAGE_LIST_DISPLAY + "\n" + taskList.toString();
     }
 }

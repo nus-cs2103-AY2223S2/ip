@@ -2,6 +2,7 @@ package cluck.commands;
 
 import cluck.exceptions.TaskIndexOutOfBoundsException;
 import cluck.messages.Messages;
+import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 import cluck.tasks.Task;
 
@@ -23,9 +24,10 @@ public class UnmarkTaskCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Task unmarkedTask = taskList.unmarkTask(taskIndex);
+            storage.writetoSave(taskList);
             return Messages.MESSAGE_UNMARK_SUCCESSFUL + "\n" + unmarkedTask.toString();
         } catch (TaskIndexOutOfBoundsException e) {
             return e.getMessage();

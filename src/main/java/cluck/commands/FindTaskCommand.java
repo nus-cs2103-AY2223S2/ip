@@ -1,6 +1,7 @@
 package cluck.commands;
 
 import cluck.messages.Messages;
+import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 
 /**
@@ -19,7 +20,7 @@ public class FindTaskCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList, Storage storage) {
         TaskList matchingTasks = taskList.findMatches(keyWord);
         if (matchingTasks.taskCount() == 0) {
             return Messages.MESSAGE_NO_MATCHES_FOUND;

@@ -17,15 +17,16 @@ import cluck.tasklist.TaskList;
  */
 public class Cluck {
     private final TaskList taskList;
-    private boolean isRunning = true;
     private final Storage storage;
+    private boolean isRunning = true;
 
     /**
      * Instantiates a new Cluck with no arguments for JavaFx Application use.
      */
     public Cluck() {
         this.taskList = new TaskList();
-        this.storage = new Storage();
+        this.storage = new Storage("/data/cluckSave.txt");
+
     }
 
     /**
@@ -36,7 +37,7 @@ public class Cluck {
      */
     public Cluck(String filePath) {
         this.storage = new Storage(filePath);
-        this.taskList = storage.readSave();
+
     }
 
     /**
@@ -45,14 +46,13 @@ public class Cluck {
      */
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(Messages.MESSAGE_WELCOME
-        );
+        System.out.println(Messages.MESSAGE_WELCOME);
         while (isRunning) {
             String response = getResponse(scanner.nextLine());
             assert Objects.nonNull(response);
             System.out.println(response);
         }
-        storage.writeSave(taskList);
+        storage.writetoSave(taskList);
     }
     private Command getCommand(String userInput) throws CluckException {
         assert Objects.nonNull(userInput);
@@ -62,11 +62,13 @@ public class Cluck {
         if (command instanceof ExitCommand) {
             isRunning = false;
         }
-        return command.execute(taskList);
+        return command.execute(taskList, storage);
     }
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response.
+     *
+     * @param userInput the user input
+     * @return the response
      */
     public String getResponse(String userInput) {
         try {

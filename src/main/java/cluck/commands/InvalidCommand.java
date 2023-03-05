@@ -1,6 +1,7 @@
 package cluck.commands;
 
 import cluck.messages.Messages;
+import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 
 /**
@@ -20,7 +21,7 @@ public class InvalidCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList, Storage storage) {
         return Messages.MESSAGE_INVALID_COMMAND + "\n"
                 + "You typed: " + invalidCommand;
     }

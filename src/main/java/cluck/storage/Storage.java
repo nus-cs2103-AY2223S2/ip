@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
-import cluck.exceptions.CluckException;
+import cluck.exceptions.CorruptedDataException;
 import cluck.tasklist.TaskList;
 import cluck.tasks.Task;
 
@@ -22,36 +24,45 @@ public class Storage {
      *
      * @param filePath the file path of the saved tasks
      */
+
+    private String home = System.getProperty("user.home");
+    private Path filePath;
+
     public Storage(String filePath) {
-        saveFile = new File(filePath);
+        this.filePath = Paths.get(home, "data", filePath);
+
+        // Create tasks file if it doesn't exist
+        saveFile = new File(this.filePath.toString());
+        if (!saveFile.exists()) {
+            try {
+                saveFile.createNewFile();
+            } catch (Exception e) {
+                System.out.println("Crapadoodle! I couldn't create a new file. Something went wrong.");
+            }
+        }
     }
 
-    /**
-     * Reads the saved tasks from the file and returns a task list populated with the saved tasked.
-     *
-     * @return the task list containing instances of Task class
-     */
-    public TaskList readSave() {
-        if (!saveFile.exists()) {
+    private TaskList populateTaskList(TaskList taskList) {
+        Scanner savedFileScanner;
+        try {
+            savedFileScanner = new Scanner(saveFile);
+            saveFile.createNewFile();
+        } catch (Exception e) {
+            e.printStackTrace();
             return new TaskList();
         }
-        try {
-            saveFile.getParentFile().mkdirs();
-            TaskList taskList = new TaskList();
-            Task currTask;
-            Scanner savedFileScanner = new Scanner(saveFile);
-            while (savedFileScanner.hasNextLine()) {
-                try {
-                    currTask = Task.buildTaskFromSave(savedFileScanner.nextLine());
-                    taskList.addTask(currTask);
-                } catch (CluckException exception) {
-                    System.out.println(exception.getMessage());
-                }
+        String taskString;
+        Task currTask;
+        while (savedFileScanner.hasNextLine()) {
+            taskString = savedFileScanner.nextLine();
+            try {
+                currTask = Task.buildTaskFromSave(taskString);
+                taskList.addTask(currTask);
+            } catch (CorruptedDataException e) {
+                System.out.println(e);
             }
-            return taskList;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         }
+        return taskList;
     }
 
     /**
@@ -62,7 +73,7 @@ public class Storage {
      *
      * @param taskList list of task to be saved
      */
-    public void writeSave(TaskList taskList) {
+    public void writetoSave(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(saveFile);
             writer.write(taskList.toSaveFormat());

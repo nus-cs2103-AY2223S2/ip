@@ -1,5 +1,6 @@
 package cluck.commands;
 
+import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 
 /**
@@ -9,5 +10,5 @@ import cluck.tasklist.TaskList;
  * to the user.
  */
 public interface Command {
-    String execute(TaskList taskList);
+    String execute(TaskList taskList, Storage storage);
 }

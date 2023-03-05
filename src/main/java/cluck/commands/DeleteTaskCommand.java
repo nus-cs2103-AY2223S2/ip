@@ -2,6 +2,7 @@ package cluck.commands;
 
 import cluck.exceptions.TaskIndexOutOfBoundsException;
 import cluck.messages.Messages;
+import cluck.storage.Storage;
 import cluck.tasklist.TaskList;
 import cluck.tasks.Task;
 
@@ -23,9 +24,10 @@ public class DeleteTaskCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Task deletedTask = taskList.deleteTask(taskIndex);
+            storage.writetoSave(taskList);
             return Messages.MESSAGE_DELETE_SUCCESSFUL + "\n" + deletedTask + "\n"
                     + String.format(Messages.MESSAGE_LIST_COUNT, taskList.taskCount());
         } catch (TaskIndexOutOfBoundsException e) {
