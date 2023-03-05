@@ -18,82 +18,49 @@ It is
 
 ## Features 
 
-### 1. Create todo items
 
-Allows the user to create a todo item
-`[T] [ ] My todo item`
-
-### 2. Create deadlines
-
-Allows the user to create a deadline
-`[D] [ ] My deadline item (by: Oct 14 2023 04:30 PM)`
-
-### 3. Create events
-
-Allows the user to create an event
-`[E] [ ] My event item (from: Oct 14 2023 04:30 PM to: Oct 19 2023 05:00 PM)`
-
-### 4. Filter by Keyword
-
-Allows the user to filter items in the list by a specific keyword
-
-### 5. Filter by Date
-
-Allows the user to filter deadlines in the list by a specific date
-
-### 6. Mark/Unmark items as completed
-
-Allows the user to mark items in the list as completed or uncompleted
-
-### 7. Delete items
-
-Allows the user to delete items in the list
-
-### 8. Update the description of existing tasks
-
-Allows the user to update the description of existing tasks in the list without having to create a new task
-
-### 9. Update the deadline of existing deadlines
-
-Allows the user to update the deadline of existing deadline tasks in the list without having to create a new deadline
-
-### 10. Quits the application on command
-
-Allows the user to close the application without having to click on the cross button of the window
 
 
 ## Usage
 
-### `todo`
+### 1. Create todo items: `todo`
 
 Create todo items with the given description
+
+`[T] [ ] My todo item`
 
 Example of usage: 
 
 `todo <description>`
 
-### `deadline`
+### 2. Create deadlines: `deadline`
+
 
 Create deadline items with the given description and deadline
 
 HHmm (hour minute in 24 hour time format) is optional to include in the deadline
 
+`[D] [ ] My deadline item (by: Oct 14 2023 04:30 PM)`
+
 Example of usage: 
 
 `deadline <description> /by <yyyy-MM-dd HHmm(optional)>`
 
-### `event`
+
+### 3. Create events: `event`
 
 Create events with the given description and start and end dates
 
 HHmm (hour minute in 24 hour time format) is optional to include in the deadline
 
+`[E] [ ] My event item (from: Oct 14 2023 04:30 PM to: Oct 19 2023 05:00 PM)`
 
 Example of usage: 
 
 `event <description> /from <yyyy-MM-dd HHmm(optional)> /to <yyyy-MM-dd HHmm(optional)>`
 
-### `find`
+
+### 4. Filter by Keyword: `find`
 
 Finds items in the list with descriptions that match the given keyword(s)
 
@@ -101,7 +68,8 @@ Example of usage:
 
 `find <keyword(s)>`
 
-### `finddate`
+
+### 5. Filter by Date: `finddate`
 
 Finds items in the list with dates that match the given date
 
@@ -109,7 +77,8 @@ Example of usage:
 
 `find <date>`
 
-### `mark`
+
+### 6. Mark items as completed:  `mark`
 
 Marks items in the list as completed
 
@@ -117,7 +86,7 @@ Example of usage:
 
 `mark <task number>`
 
-### `unmark`
+### 7. Unmark items as uncompleted:  `unmark`
 
 Unmarks items in the list as uncompleted
 
@@ -125,7 +94,7 @@ Example of usage:
 
 `unmark <task number>`
 
-### `delete`
+### 8. Delete items: `delete`
 
 Deletes items in the list
 
@@ -133,19 +102,25 @@ Example of usage:
 
 `delete <task number>`
 
-### `update`
+### 9. Update the description of existing tasks: `update`
 
-Updates description or deadline of items in the list
+Updates the description of existing tasks in the list without having to create a new task
 
 Example of usage: 
 
 `update <index> /description <new changes>`
 
+### 10. Update the deadline of existing deadlines
+
+Updates the deadline of existing deadline tasks in the list without having to create a new deadline
+
+Example of usage: 
+
 `update <index> /deadline <new changes>`
 
-### `bye`
+### 11. Quits the application on command: `bye`
 
-Quits the application on command
+Quits the application on command without having to click on the cross button of the window
 
 Example of usage:
 
