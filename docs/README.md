@@ -8,7 +8,7 @@ Here are some basic things you can do:
 - add a task ```todo mop the floor```
 - mark/unmark tasks as done (or undone) ```mark 6```
 - set deadlines & events too! ```deadline do assignment /by Monday```
-- For more **cool instructions**, simply ask muse!  ```help```
+- For the full instructions, simply ask muse with the following command:  ```help```
 
 ## To use the app (JAR file) 
 
