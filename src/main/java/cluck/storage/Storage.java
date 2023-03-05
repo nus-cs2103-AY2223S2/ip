@@ -42,7 +42,8 @@ public class Storage {
         }
     }
 
-    private TaskList populateTaskList(TaskList taskList) {
+    public TaskList populateTaskList() {
+        TaskList taskList = new TaskList();
         Scanner savedFileScanner;
         try {
             savedFileScanner = new Scanner(saveFile);

@@ -37,7 +37,7 @@ public class Cluck {
      */
     public Cluck(String filePath) {
         this.storage = new Storage(filePath);
-
+        this.taskList = storage.populateTaskList();
     }
 
     /**
