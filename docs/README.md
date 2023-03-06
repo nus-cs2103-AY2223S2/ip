@@ -52,6 +52,7 @@ Search tasks by their name.
 View tasks based on a specified date.
 
 ## Usage
+NOTE: if a calendar date is to be specified, it must be in the format `YYYY/MM/DD`
 
 ### `todo` - Adds a "To Do" task
 
