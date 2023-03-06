@@ -7,7 +7,7 @@ Duke frees your mind by remembering things you need to do. It is a desktop chat-
 - [Steps to run](https://github.com/anchengyang/ip/tree/master/docs#steps-to-run)
 - [Features](https://github.com/anchengyang/ip/tree/master/docs#features)
 - [Usage](https://github.com/anchengyang/ip/tree/master/docs#usage)
-  - [Todo command]([https://github.com/anchengyang/ip/tree/master/docs#1-create-todo-items-todo](https://anchengyang.github.io/ip/#1-create-todo-items-todo))
+  - [Todo command](#create-a-todo-todo)
   - [Deadline command](https://github.com/anchengyang/ip/tree/master/docs#2-create-deadlines-deadline)
   - [Event command](https://github.com/anchengyang/ip/tree/master/docs#3-create-events-event)
   - [Find command](https://github.com/anchengyang/ip/tree/master/docs#4-filter-by-keyword-find)
