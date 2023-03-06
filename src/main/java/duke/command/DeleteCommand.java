@@ -35,13 +35,10 @@ public class DeleteCommand extends Command {
         try {
             int idx = Integer.parseInt(this.index);
             String taskDescription = tasks.delete(idx);
-            ui.print(String.format(
-                    "Noted, I've removed this task: \n\t%s\nNow you have %d tasks in this list.",
-                    taskDescription,
-                    tasks.size()));
+            ui.print(output(taskDescription, tasks.size());
             storage.saveList(tasks);
         } catch (NumberFormatException notANumber) {
-            throw new DukeException("Please enter a valid number");
+            throw new DukeException(Command.INVALID_NUMBER_MESSAGE);
         }
     }
     @Override
@@ -50,12 +47,14 @@ public class DeleteCommand extends Command {
             int idx = Integer.parseInt(this.index);
             String taskDescription = tasks.delete(idx);
             storage.saveList(tasks);
-            return String.format(
-                    "Noted, I've removed this task: \n\t%s\nNow you have %d tasks in this list.",
-                    taskDescription,
-                    tasks.size());
+            return output(taskDescription, tasks.size());
         } catch (NumberFormatException notANumber) {
-            throw new DukeException("Please enter a valid number");
+            throw new DukeException(Command.INVALID_NUMBER_MESSAGE);
         }
+    }
+
+    private String output(String taskDescription, int size) {
+        return String.format("Noted, I've removed this task: \n\t%s\nNow you have %d tasks in this list.",
+                taskDescription, size)
     }
 }

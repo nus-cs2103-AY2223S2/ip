@@ -32,31 +32,33 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.size() == 0) {
-            throw new DukeException("You do not have any items in your list!");
+            throw new DukeException(Command.EMPTY_LIST_MESSAGE);
         }
         try {
             int idx = Integer.parseInt(this.index);
             tasks.get(idx).setNotDone();
-            ui.print(String.format("Nice! I've unmarked this task as done: \n\t%s",
-                    tasks.get(idx)));
+            ui.print(output(tasks.get(idx).toString()));
             storage.saveList(tasks);
         } catch (NumberFormatException notANumber) {
-            throw new DukeException("Please enter a valid number");
+            throw new DukeException(Command.INVALID_NUMBER_MESSAGE);
         }
     }
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (tasks.size() == 0) {
-            throw new DukeException("You do not have any items in your list!");
+            throw new DukeException(Command.EMPTY_LIST_MESSAGE);
         }
         try {
             int idx = Integer.parseInt(this.index);
             tasks.get(idx).setNotDone();
             storage.saveList(tasks);
-            return String.format("Nice! I've unmarked this task as done: \n\t%s",
-                    tasks.get(idx));
+            return output(tasks.get(idx).toString());
         } catch (NumberFormatException notANumber) {
-            throw new DukeException("Please enter a valid number");
+            throw new DukeException(Command.INVALID_NUMBER_MESSAGE);
         }
+    }
+
+    private String output(String taskString) {
+        return String.format("Nice! I've unmarked this task as done: \n\t%s", taskString);
     }
 }

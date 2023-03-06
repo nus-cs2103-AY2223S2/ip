@@ -9,6 +9,8 @@ import duke.task.TaskList;
  * Represents the basic Command, from which all other commands inherit from
  */
 public class Command {
+    protected static final String INVALID_NUMBER_MESSAGE = "Please enter a valid number";
+    protected static final String EMPTY_LIST_MESSAGE = "You do not have any items in your list!";
     protected final String command;
 
     /**
