@@ -34,7 +34,7 @@ public class Ui {
     }
 
     /**
-     * Let Duke say something
+     * Lets Duke say something
      * @param message given message that Duke needs to say
      */
     public void says(String message) {
@@ -42,7 +42,7 @@ public class Ui {
     }
 
     /**
-     * Let Duke (or Kyle) says what he should say when deleting the whole task list
+     * Lets Duke (or Kyle) says what he should say when deleting the whole task list
      * @return the message
      */
     public static String saysDeleteAllMessage() {
@@ -209,7 +209,7 @@ public class Ui {
 
 
     /**
-     * Unmark task at given index
+     * Unmarks task at given index
      * Updates the most recent command correspondingly
      * @param listOfAction original task list
      * @param commands array of user command line

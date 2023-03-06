@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     /**
-     * Initialize a new TaskList object
+     * Initializes a new TaskList object
      * @param arr
      */
     public TaskList(String[] arr) {
@@ -35,7 +35,7 @@ public class TaskList {
     }
 
     /**
-     * Overwrite task list with new task list
+     * Overwrites task list with new task list
      * @param newTaskList
      */
     public void overwrite(TaskList newTaskList) {
@@ -138,7 +138,7 @@ public class TaskList {
     }
 
     /**
-     * Clear task list entirely
+     * Clears task list entirely
      * @throws EmptyTaskListException if task list is originally empty
      */
     public void clear() throws EmptyTaskListException {

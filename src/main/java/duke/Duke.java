@@ -30,7 +30,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initialize a Duke with given information
+     * Initializes a Duke with given information
      *
      * @param filepath where storage data will be stored
      * @throws FileNotFoundException if such filepath does not exist
@@ -42,7 +42,7 @@ public class Duke {
     }
 
     /**
-     * Represent a new Duke
+     * Represents a new Duke
      */
     public Duke() {
         ui = new Ui();

@@ -23,7 +23,7 @@ public class Parser {
     private static final Ui ui = new Ui();
 
     /**
-     * Update last command
+     * Updates last command
      * @param newCommand type of last command
      */
     public static void updateLastCommand(String newCommand) {
@@ -31,7 +31,7 @@ public class Parser {
     }
 
     /**
-     * Update last command detail
+     * Updates last command detail
      * @param newDetail detail of last command in String
      */
     public static void updateLastCommandDetail(String newDetail) {
@@ -39,7 +39,7 @@ public class Parser {
     }
 
     /**
-     * Update last task list (update to before most recent command is applied on Duke)
+     * Updates last task list (update to before most recent command is applied on Duke)
      * @param newTaskList what the task list was before the most recent command is applied
      */
     public static void updateLastTaskList(TaskList newTaskList) {
@@ -47,7 +47,7 @@ public class Parser {
     }
 
     /**
-     * Return the last task list - the task list before last command is applied
+     * Returns the last task list - the task list before last command is applied
      * @return last task list
      */
     private static TaskList getLastTaskList() {
@@ -59,8 +59,8 @@ public class Parser {
     }
 
     /**
-     * Undo response to user input
-     * And update task list correspondingly
+     * Undoes response to user input
+     * And updates task list correspondingly
      * @param taskList original task list (after the most recent command is done)
      * @return Duke's response
      */
@@ -102,7 +102,7 @@ public class Parser {
     }
 
     /**
-     * Parse and do deleteAll command
+     * Parses and does deleteAll command
      * @param listOfAction original task list
      * @param command input command from user
      * @return message from Duke
