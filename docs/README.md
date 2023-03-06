@@ -1,8 +1,8 @@
-# Duke User Guide
+# CHopper helpdesk User Guide
 
 > “Your mind is for having ideas, not holding them.” – David Allen ([source](https://dansilvestre.com/productivity-quotes/))
 
-Duke frees your mind by remembering things you need to do. It is a desktop chat-based app with a user-friendly interface that is easy to learn and ~~Fast~~ _SUPER FAST_ to use.
+Chopper helpdesk frees your mind by remembering things you need to do. It is a desktop chat-based app with a user-friendly interface that is easy to learn and ~~Fast~~ _SUPER FAST_ to use.
 
 - [Steps to run](#steps-to-run)
 - [Features](#features)
