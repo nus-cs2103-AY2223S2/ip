@@ -45,7 +45,7 @@ public class SnoozeCommand extends Command {
             } else {
                 throw new DukeException(NOT_DEADLINE_MESSAGE);
             }
-            ui.print(output(task.toString()));
+            ui.print(output(task));
             storage.saveList(tasks);
         } catch (NumberFormatException notANumber) {
             throw new DukeException(Command.INVALID_NUMBER_MESSAGE);
@@ -65,13 +65,13 @@ public class SnoozeCommand extends Command {
                 throw new DukeException(NOT_DEADLINE_MESSAGE);
             }
             storage.saveList(tasks);
-            return output(task.toString());
+            return output(task);
         } catch (NumberFormatException notANumber) {
             throw new DukeException(Command.INVALID_NUMBER_MESSAGE);
         }
     }
 
-    private String output(String taskString) {
-        return String.format("Nice! I've snoozed this task: \n\t%s", taskString);
+    private String output(Task task) {
+        return String.format("Nice! I've snoozed this task: \n\t%s", task.toString());
     }
 }
