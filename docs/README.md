@@ -55,9 +55,9 @@ Create todo items with the given description
 
 `[T] [ ] My todo item`
 
-Example of usage: 
+Format: `todo <description>`
 
-`todo <description>`
+Example of usage: `todo clean room`
 
 ### 2. Create deadlines: `deadline`
 
@@ -68,10 +68,9 @@ HHmm (hour minute in 24 hour time format) is optional to include in the deadline
 
 `[D] [ ] My deadline item (by: Oct 14 2023 04:30 PM)`
 
-Example of usage: 
+Format: `deadline <description> /by <yyyy-MM-dd HHmm(optional)>`
 
-`deadline <description> /by <yyyy-MM-dd HHmm(optional)>`
-
+Example of usage: `deadline Apply for university /by 2023-04-01 2359>`
 
 ### 3. Create events: `event`
 
@@ -81,76 +80,71 @@ HHmm (hour minute in 24 hour time format) is optional to include in the deadline
 
 `[E] [ ] My event item (from: Oct 14 2023 04:30 PM to: Oct 19 2023 05:00 PM)`
 
-Example of usage: 
+Format: `event <description> /from <yyyy-MM-dd HHmm(optional)> /to <yyyy-MM-dd HHmm(optional)>`
 
-`event <description> /from <yyyy-MM-dd HHmm(optional)> /to <yyyy-MM-dd HHmm(optional)>`
-
+Example of usage: `event NUS open house /from 2024-03-04 /to 2024-03-04 1900>`
 
 ### 4. Filter by Keyword: `find`
 
 Finds items in the list with descriptions that match the given keyword(s)
 
-Example of usage: 
+Format: `find <keyword(s)>`
 
-`find <keyword(s)>`
-
+Example of usage: `find op`
 
 ### 5. Filter by Date: `finddate`
 
 Finds items in the list with dates that match the given date
 
-Example of usage: 
+Format: `find <date>`
 
-`find <date>`
-
+Example of usage: `find Oct`
 
 ### 6. Mark items as completed:  `mark`
 
 Marks items in the list as completed
 
-Example of usage: 
+Example of usage: `mark <task number>`
 
-`mark <task number>`
+Format: `mark 2`
 
 ### 7. Unmark items as uncompleted:  `unmark`
 
 Unmarks items in the list as uncompleted
 
-Example of usage: 
+Example of usage: `unmark <task number>`
 
-`unmark <task number>`
+Format: `unmark 2`
 
 ### 8. Delete items: `delete`
 
 Deletes items in the list
 
-Example of usage: 
+Format: `delete <task number>`
 
-`delete <task number>`
+Example of usage: `delete 1`
 
 ### 9. Update the description of existing tasks: `update`
 
 Updates the description of existing tasks in the list without having to create a new task
 
-Example of usage: 
+Format: `update <index> /description <new changes>`
 
-`update <index> /description <new changes>`
+Example of usage: `update 2 /description new homework`
 
 ### 10. Update the deadline of existing deadlines: `update`
 
 Updates the deadline of existing deadline tasks in the list without having to create a new deadline
 
-Example of usage: 
+Format: `update <index> /deadline <new changes>`
 
-`update <index> /deadline <new changes>`
+Example of usage: `update 3 /deadline 2023-09-10`
 
 ### 11. Quits the application on command: `bye`
 
 Quits the application on command without having to click on the cross button of the window
 
-Example of usage:
-
-`bye`
+Format: `bye`
 
 ## Command summary
 
