@@ -8,6 +8,8 @@ import Duke.Tasks.Task;
 import Duke.Tasks.Todo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TaskList {
     public static ArrayList<Task> list = new ArrayList<Task>();
@@ -40,6 +42,21 @@ public class TaskList {
         Ui.giveOutput("  " + list.get(num-1).toString());
         list.remove(num-1);
         Ui.giveOutput("Now you have " + list.size() + " tasks in the list.");
+    }
+
+    public static void find(String keyword) {
+        int index = 0;
+        for (Task t : list) {
+            String[] sample = t.toString().split(" ");
+            List<String> temp = new ArrayList<>(Arrays.asList(sample));
+            if (temp.contains(keyword)) {
+                index++;
+                Ui.giveOutput(index + "." + t.toString());
+            }
+            if (index == 0) {
+                Ui.giveOutput("Could not find the given word");
+            }
+        }
     }
 
     public static void add_to_list(String str) throws InvalidCommandException, NoDescriptionException {

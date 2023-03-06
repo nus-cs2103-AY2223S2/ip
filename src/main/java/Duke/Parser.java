@@ -35,6 +35,9 @@ public class Parser {
                 TaskList.delete((num3));
                 Storage.storeData();
                 break;
+            case "find":
+                String keyword = str.split(" ", 2)[1];
+                TaskList.find(keyword);
             default:
                 try {
                     TaskList.add_to_list(str);
