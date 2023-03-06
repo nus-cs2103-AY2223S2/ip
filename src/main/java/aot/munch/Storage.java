@@ -1,10 +1,13 @@
-package munch;
-import AddTasks.Deadlines;
-import AddTasks.Events;
-import AddTasks.Task;
-import AddTasks.Todo;
+package aot.munch;
+import aot.AddTasks.Deadlines;
+import aot.AddTasks.Events;
+import aot.AddTasks.Task;
+import aot.AddTasks.Todo;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,17 +26,29 @@ public class Storage {
         this.path = path;
     }
 
+    private static String getFilePath() throws IOException {
+        try {
+            Path file = Paths.get(System.getProperty("user.dir"), "data");
+            if (!Files.exists(file)) {
+                Files.createDirectory(file);
+            }
+            Path filePath = Paths.get(file.toString(), "SavedTaskList.txt");
+            return filePath.toString();
+        } catch(IOException e) {
+            return Ui.fileErrorMessage();
+        }
+    }
+
     /**
      * Loads the task objects stored in a file and store it in an ArrayList.
      * If file has not been created, creates a new file.
      *
      * @param tasks Stores all the task objects obtained from the file into the arrayList tasks.
-     * @param paths The path of the object file where the task objects are stored in.
      * @return An arrayList consisting of all the task objects previously stored in a file.
      */
-    public static ArrayList<Task> load(ArrayList<Task> tasks, String paths) {
+    public static ArrayList<Task> load(ArrayList<Task> tasks) {
         try {
-            File f = new File(paths);
+            File f = new File(getFilePath());
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String nextLine = s.nextLine();
@@ -42,6 +57,8 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Apologies, file cannot be read!");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return tasks;
     }
@@ -51,19 +68,18 @@ public class Storage {
      * If file has not been created, creates a new file.
      *
      * @param tasks Stores all the task objects in tasks into a file.
-     * @param paths The path of the object file where the task objects are stored in.
      */
 
-    public static void save(ArrayList<Task> tasks, String paths) {
+    public static void save(ArrayList<Task> tasks) {
         try {
-            File storageFile = new File(paths);
+            File storageFile = new File(getFilePath());
             if (!storageFile.exists()) {
                 storageFile.createNewFile();
             } else {
                 storageFile.delete();
                 storageFile.createNewFile();
             }
-            FileWriter fw = new FileWriter(paths);
+            FileWriter fw = new FileWriter(getFilePath());
             for (int i = 0; i < tasks.size(); i++) {
                 fw.write(tasks.get(i).toString());
                 fw.write('\n');

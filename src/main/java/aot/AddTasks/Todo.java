@@ -1,4 +1,5 @@
-package AddTasks;
+package aot.AddTasks;
+
 public class Todo extends Task {
 
     /**

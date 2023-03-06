@@ -1,4 +1,4 @@
-package Exceptions;
+package aot.Exceptions;
 
 public class InvalidInputException extends MunchException {
     public InvalidInputException() {

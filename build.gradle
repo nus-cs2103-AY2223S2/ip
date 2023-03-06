@@ -1,6 +1,8 @@
 plugins {
     id 'java'
+    id 'groovy'
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -11,7 +13,7 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
-    String javaFxVersion = '19'
+    String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
@@ -42,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "Munch"
+    mainClassName = "aot.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "munch"
+    archiveBaseName = "AOT"
     archiveClassifier = null
 }
 

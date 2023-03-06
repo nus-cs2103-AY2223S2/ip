@@ -8,11 +8,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aot.MainWindow">
     <children>
         <TextField fx:id="welcomeMessage" accessibleRole="TEXT" alignment="TOP_CENTER" layoutX="95.0" layoutY="558.0" onAction="#setWelcomeMessage" prefHeight="41.0" prefWidth="229.0" promptText="Eren Jaegar. How can I help you?" text="Eren Jaegar. How can I help you?" AnchorPane.topAnchor="1.0" />
         <VBox fx:id="welcomeContainer" layoutX="12.0" layoutY="6.0" prefHeight="48.0" prefWidth="376.0" />
-        <TextField fx:id="userInput" layoutX="76.0" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="248.0" AnchorPane.bottomAnchor="1.0" />
+        <TextField fx:id="userInput" layoutX="76.0" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="248.0" AnchorPane.bottomAnchor="1.0">
+         <font>
+            <Font name="Academy Engraved LET Plain:1.0" size="13.0" />
+         </font></TextField>
         <Button fx:id="sendButton" alignment="CENTER" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Enter" textAlignment="JUSTIFY">
          <font>
             <Font name="Silom" size="14.0" />

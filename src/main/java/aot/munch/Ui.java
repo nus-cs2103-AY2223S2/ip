@@ -1,4 +1,4 @@
-package munch;
+package aot.munch;
 
 import java.util.Scanner;
 
@@ -84,4 +84,6 @@ public class Ui {
     public static String wrongInputMessage() { return "Eren, I do not understand your request."; }
 
     public static String duplicateTaskMessage() { return "Eren, you already added the following task in your list!"; }
+
+    public static String fileErrorMessage() { return "File error."; }
 }

@@ -1,19 +1,20 @@
-import Exceptions.IncompleteInputException;
-import Exceptions.InvalidInputException;
+package aot;
+
+import aot.AddTasks.Task;
+import aot.Exceptions.IncompleteInputException;
+import aot.Exceptions.InvalidInputException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import munch.Storage;
-import munch.TaskList;
-import munch.Ui;
+import aot.munch.Storage;
+import aot.munch.TaskList;
+import aot.munch.Ui;
 
 import java.util.ArrayList;
 
@@ -36,20 +37,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button exitButton;
 
-    private Munch munch;
-
     private Image user = new Image(this.getClass().getResourceAsStream("/images/eren.jpeg"));
     private Image muncher = new Image(this.getClass().getResourceAsStream("/images/levi.jpeg"));
-    String filePath = "src/main/java/data/SavedTaskList.txt";
+    private Munch munch = new Munch();
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setMunch(Munch d) {
-        munch = d;
-    }
 
     @FXML
     private void setWelcomeMessage() {
@@ -67,7 +63,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InvalidInputException, IncompleteInputException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String[] words = input.split(" ");
         ArrayList<String> response = TaskList.getResponse(munch.tasks, input, words);
@@ -77,6 +73,6 @@ public class MainWindow extends AnchorPane {
         );
         dialogContainer.setPadding(new Insets(10));
         userInput.clear();
-        Storage.save(munch.tasks, filePath);
+        Storage.save(munch.tasks);
     }
 }

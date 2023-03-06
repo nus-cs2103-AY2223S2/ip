@@ -1,25 +1,21 @@
+package aot;
+
 import java.io.IOException;
+
+import aot.munch.Storage;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import munch.TaskList;
-import munch.Ui;
+import aot.munch.Ui;
 
-import javax.swing.text.html.ImageView;
 
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
-    String filePath = "src/main/java/data/SavedTaskList.txt";
-    private Munch munch = new Munch(filePath);
-    private Image muncher = new Image(this.getClass().getResourceAsStream("/images/levi.jpeg"));
 
     @Override
     public void start(Stage stage) {
@@ -29,7 +25,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setTitle(Ui.title());
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setMunch(munch);
+            fxmlLoader.<MainWindow>getController();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package Exceptions;
+package aot.Exceptions;
 
 public class FileNotFoundException extends MunchException {
     public FileNotFoundException() {

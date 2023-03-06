@@ -1,4 +1,4 @@
-package Exceptions;
+package aot.Exceptions;
 
 public class MunchException extends Exception {
     public MunchException(String message) {

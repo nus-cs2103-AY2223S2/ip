@@ -1,14 +1,12 @@
-package munch;
+package aot.munch;
 
-import AddTasks.Deadlines;
-import AddTasks.Events;
-import AddTasks.Task;
-import AddTasks.Todo;
-import Exceptions.IncompleteInputException;
-import Exceptions.InvalidInputException;
+import aot.AddTasks.Deadlines;
+import aot.AddTasks.Events;
+import aot.AddTasks.Task;
+import aot.AddTasks.Todo;
+import aot.Exceptions.InvalidInputException;
 import javafx.application.Platform;
 
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
