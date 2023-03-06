@@ -57,6 +57,9 @@ public class Command {
         return "";
     }
     protected String listString(TaskList tasks) throws DukeException {
+        if (tasks.isEmpty()) {
+            throw new DukeException(EMPTY_LIST_MESSAGE);
+        }
         String lst = String.format("1. %s", tasks.get(1));
         for (int i = 2; i <= tasks.size(); i++) {
             lst += String.format("\n%d. %s", i, tasks.get(i));
