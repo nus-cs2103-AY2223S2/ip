@@ -162,7 +162,7 @@ Format: `bye`
 | 10.     | Update deadlines of existing deadlines | `update <index> /deadline <new changes>`                                                    |
 | 11.     | Quits the application                  | `bye`                                                                                       |
 
-## :iphone: Screenshots
+## 📱 Screenshots
 This is a screenshot of the application on start:
 
   <img src="https://user-images.githubusercontent.com/65301406/218518527-19dfc310-9304-4625-a7ec-072b36cd9072.png" width="50%" height="60%">
