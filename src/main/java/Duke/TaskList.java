@@ -25,41 +25,43 @@ public class TaskList {
     }
 
     //Takes ith number task as argument
-    public static void mark(int num) {
+    public static String mark(int num) {
         list.get(num - 1).toggleTrue();
-        Ui.giveOutput("Nice! I've marked this task as done:");
-        Ui.giveOutput(list.get(num - 1).toString());
+        return "Nice! I've marked this task as done:\n" + list.get(num - 1).toString();
     }
 
-    public static void unmark(int num) {
+    public static String unmark(int num) {
         list.get(num - 1).toggleFalse();
-        Ui.giveOutput("OK, I've marked this task as not done yet:");
-        Ui.giveOutput(list.get(num - 1).toString());
+        return "OK, I've marked this task as not done yet:\n" + list.get(num - 1).toString();
     }
 
-    public static void delete(int num) {
-        Ui.giveOutput("Noted. I've removed this task:");
-        Ui.giveOutput("  " + list.get(num-1).toString());
+    public static String delete(int num) {
+        String temp = "Noted. I've removed this task:\n" + "  " + list.get(num-1).toString() + "\n" +
+                "Now you have " + list.size() + " tasks in the list.";
         list.remove(num-1);
-        Ui.giveOutput("Now you have " + list.size() + " tasks in the list.");
+        return temp;
+
     }
 
-    public static void find(String keyword) {
+    public static String find(String keyword) {
         int index = 0;
+        String tempstr = "";
         for (Task t : list) {
             String[] sample = t.toString().split(" ");
             List<String> temp = new ArrayList<>(Arrays.asList(sample));
+
             if (temp.contains(keyword)) {
                 index++;
-                Ui.giveOutput(index + "." + t.toString());
+                tempstr = tempstr + (index + "." + t.toString());
             }
             if (index == 0) {
-                Ui.giveOutput("Could not find the given word");
+                tempstr = ("Could not find the given word");
             }
         }
+        return tempstr;
     }
 
-    public static void add_to_list(String str) throws InvalidCommandException, NoDescriptionException {
+    public static String add_to_list(String str) throws InvalidCommandException, NoDescriptionException {
 
         if ((str.split(" ", 2).length == 1)) {
             throw new NoDescriptionException();
@@ -78,9 +80,8 @@ public class TaskList {
             throw new InvalidCommandException();
         }
         int size = list.size();
-        Ui.giveOutput("Got it. I've added this task:");
-        Ui.giveOutput("  " + list.get(size-1).toString());
-        Ui.giveOutput("Now you have " + size + " tasks in the list");
+        return "Got it. I've added this task:\n"
+        + "  " + list.get(size-1).toString() + "\n" + "Now you have " + size + " tasks in the list";
     }
 
 
