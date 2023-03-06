@@ -1,4 +1,4 @@
-# Chopper helpdesk
+# :deer: Chopper helpdesk
 > “Your mind is for having ideas, not holding them.” – David Allen ([source](https://dansilvestre.com/productivity-quotes/))
 
 Chopper helpdesk frees your mind by remembering things you need to do
@@ -9,13 +9,13 @@ It is
 - easy to learn
 - ~~Fast~~ _SUPER FAST_ to use
 
-## Steps to run
+## :footprints: Steps to run
 1. Download the JAR file from the latest release [here](https://github.com/anchengyang/ip/releases)
 2. Open it
 3. Start adding your tasks
 4. Let it manage your tasks for you 👍
 
-## How to use
+## :wrench: How to use
 | No. | Feature                                | Command                                                                                     |
 |-----|----------------------------------------|---------------------------------------------------------------------------------------------|
 | 1.  | Create todo items                      | `todo <description>`                                                                        |
@@ -31,7 +31,7 @@ It is
 | 11. | Quits the application                  | `bye`                                                                                       |
 
 
-## Screenshots
+## :iphone: Screenshots
 This is a screenshot of the application on start:
   
   <img src="https://user-images.githubusercontent.com/65301406/218518527-19dfc310-9304-4625-a7ec-072b36cd9072.png" width="50%" height="60%">
