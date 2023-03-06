@@ -8,7 +8,8 @@ import java.util.regex.PatternSyntaxException;
  * Represents a Deadline task
  */
 public class Deadline extends Task {
-    private final LocalDateTime deadline;
+    private static final long DEFAULT_SNOOZE_DAYS = 1;
+    private LocalDateTime deadline;
 
     /**
      * Returns a Deadline stored as not done
@@ -53,6 +54,14 @@ public class Deadline extends Task {
             throws PatternSyntaxException, ArrayIndexOutOfBoundsException, DateTimeParseException {
         super(task, isDone);
         this.deadline = LocalDateTime.parse(deadlineString);
+    }
+    @Override
+    public void snooze() {
+        deadline = deadline.plusDays(DEFAULT_SNOOZE_DAYS);
+    }
+    @Override
+    public boolean isDeadline() {
+        return true;
     }
 
     /**
