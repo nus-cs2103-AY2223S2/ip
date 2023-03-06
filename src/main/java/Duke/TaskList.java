@@ -44,17 +44,17 @@ public class TaskList {
 
     public static void add_to_list(String str) throws InvalidCommandException, NoDescriptionException {
 
-        if((str.split(" ", 2).length == 1)) {
+        if ((str.split(" ", 2).length == 1)) {
             throw new NoDescriptionException();
         }
-        else if((str.split(" ", 2)[0]).equals("todo")) {
+        else if ((str.split(" ", 2)[0]).equals("todo")) {
 
             list.add(new Todo(str));
         }
-        else if((str.split(" ", 2)[0]).equals("deadline")) {
+        else if ((str.split(" ", 2)[0]).equals("deadline")) {
             list.add(new Deadline(str));
         }
-        else if((str.split(" ", 2)[0]).equals("event")) {
+        else if ((str.split(" ", 2)[0]).equals("event")) {
             list.add(new Event(str));
         }
         else {

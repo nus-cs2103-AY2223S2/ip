@@ -21,7 +21,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        if(super.status == true) {
+        if (super.status == true) {
             return "[D][X] " + nameMain + " " + byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
         else {
