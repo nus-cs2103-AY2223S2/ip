@@ -24,7 +24,7 @@ Chopper helpdesk frees your mind by remembering things you need to do. It is a d
 ## 🐾 Steps to run
 1. Ensure you have `Java 11` installed in your device
 2. Download the JAR file from the latest release [here](https://github.com/anchengyang/ip/releases)
-3. Launch the app from the terminal using this command `java -jar duke.jar`
+3. Launch the app from the terminal using this command `java -jar chopperHelpdesk.jar`
 4. Start adding your tasks using the commands [here](#usage) 
 5. Let it manage your tasks for you 👍
 
