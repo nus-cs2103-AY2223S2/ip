@@ -98,7 +98,7 @@ I've added this task for you!
 Now you have 3 task(s) in your list ~~
 ```
 
-### `delete <task_index>` - Deletes a task.
+### `delete <index>` - Deletes a task.
 
 Removes a task from the list.
 
@@ -131,7 +131,7 @@ Task(s) that contains the word 'book':
   1. [T][ ] read book
   2. [T][ ] book restaurant
 ```
-### `mark <task_index>` - Marks a task.
+### `mark <index>` - Marks a task.
 
 Marks a task from the list according to the index.
 
