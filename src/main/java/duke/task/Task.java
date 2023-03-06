@@ -1,11 +1,11 @@
 package duke.task;
 
-import java.util.regex.PatternSyntaxException;
-
 /**
  * Represents a Task, from which all other tasks inherit from
  */
 public class Task {
+    protected static final boolean IS_DONE = false;
+
     private final String task;
     private boolean isDone;
 
@@ -15,7 +15,7 @@ public class Task {
      * @param task String of task to be stored
      */
     public Task(String task) {
-        this(task, false);
+        this(task, IS_DONE);
     }
 
     /**

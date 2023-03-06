@@ -31,7 +31,7 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList tasksWithWords = tasks.find(this.command);
         if (tasksWithWords.isEmpty()) {
-            throw new DukeException("There are no tasks found with words:\n" + this.command);
+            throw new DukeException(noItemsFoundMessage());
         }
 
         ui.print(listString(tasksWithWords));
@@ -40,9 +40,13 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         TaskList tasksWithWords = tasks.find(this.command);
         if (tasksWithWords.isEmpty()) {
-            throw new DukeException("There are no tasks found with words:\n" + this.command);
+            throw new DukeException(noItemsFoundMessage());
         }
 
         return listString(tasksWithWords);
+    }
+
+    private String noItemsFoundMessage() {
+        return String.format("There are no tasks found with words:\n%s", this.command);
     }
 }

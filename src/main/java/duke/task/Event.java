@@ -17,7 +17,7 @@ public class Event extends Task {
      * @throws ArrayIndexOutOfBoundsException if the command was not formatted correctly
      */
     public Event(String cmd) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
-        this(cmd, false);
+        this(cmd, Task.IS_DONE);
     }
 
     /**
