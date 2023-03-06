@@ -21,14 +21,14 @@ Chopper helpdesk frees your mind by remembering things you need to do. It is a d
 - [Command summary](#clipboard-command-summary)
 - [Screenshots of app](#iphone-screenshots)
 
-## :footprints: Steps to run
+## 🐾 Steps to run
 1. Ensure you have `Java 11` installed in your device
 2. Download the JAR file from the latest release [here](https://github.com/anchengyang/ip/releases)
 3. Launch the app from the terminal using this command `java -jar duke.jar`
 4. Start adding your tasks using the commands [here](#usage) 
 5. Let it manage your tasks for you 👍
 
-## :wrench: Features 
+## 🛠️ Features 
 
 ### Manages your tasks for you
 
@@ -47,7 +47,7 @@ Easily update the description or deadline of existing tasks without the hassle o
 Mark or unmark tasks that you have completed.
 
 
-## :seedling: Usage
+## 🌱 Usage
 
 ### 1. Create todo items: `todo`
 
@@ -60,7 +60,6 @@ Format: `todo <description>`
 Example of usage: `todo clean room`
 
 ### 2. Create deadlines: `deadline`
-
 
 Create deadline items with the given description and deadline
 
@@ -146,7 +145,7 @@ Quits the application on command without having to click on the cross button of 
 
 Format: `bye`
 
-## :clipboard: Command summary
+## 📋 Command summary
 
 | **No.** | **Feature**                            | **Command**                                                                                 |
 |---------|----------------------------------------|---------------------------------------------------------------------------------------------|
