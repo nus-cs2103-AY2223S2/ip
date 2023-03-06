@@ -136,7 +136,7 @@ Example of usage: `update 2 /description new homework`
 
 Updates the deadline of existing deadline tasks in the list without having to create a new deadline
 
-Format: `update <index> /deadline <new changes>`
+Format: `update <index> /deadline <yyyy-MM-dd HHmm(optional)>`
 
 Example of usage: `update 3 /deadline 2023-09-10`
 
