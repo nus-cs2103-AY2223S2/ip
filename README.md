@@ -11,7 +11,7 @@ It is
 
 ## :footprints: Steps to run
 1. Download the JAR file from the latest release [here](https://github.com/anchengyang/ip/releases)
-2. Open it
+2. Launch the app in the terminal using the command `java -jar chopperHelpdesk.jar`
 3. Start adding your tasks
 4. Let it manage your tasks for you 👍
 
