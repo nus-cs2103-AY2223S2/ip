@@ -17,6 +17,8 @@ import java.util.HashMap;
  */
 public class Parser {
     static final String VALID_COMMANDS = "bye, list, mark, unmark, delete, todo, deadline, event, find";
+    static final String INVALID_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means. My valid commands are:\n"
+            + VALID_COMMANDS;
     static final HashMap<String, String> CORRECT_FORMAT = new HashMap<>(Map.of(
             "list", "list",
             "bye", "bye",
@@ -39,9 +41,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] words = fullCommand.split(" ");
         if (!CORRECT_FORMAT.containsKey(words[0])) {
-            String notValid = "I'm sorry, but I don't know what that means. My valid commands are:\n";
-            notValid += VALID_COMMANDS;
-            throw new DukeException(notValid);
+            throw new DukeException(INVALID_COMMAND_MESSAGE);
         }
         Command cmd = new Command();
         try {
@@ -68,9 +68,11 @@ public class Parser {
                 cmd = new AddTaskCommand(fullCommand);
             }
         } catch (Exception e) {
-            throw new DukeException("Please enter in the correct format:\n"
-                    + CORRECT_FORMAT.get(words[0]));
+            throw new DukeException(correctFormat(words[0]);
         }
         return cmd;
+    }
+    private static String correctFormat(String typeOfTask) {
+        return String.format("Please enter in the correct format:\n%s", CORRECT_FORMAT.get(typeOfTask));
     }
 }

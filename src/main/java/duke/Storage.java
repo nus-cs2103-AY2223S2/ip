@@ -19,6 +19,8 @@ import java.util.ArrayList;
  * The Storage class that is used to store and read the list of Task(s)
  */
 public class Storage {
+    static final String IO_MESSAGE = "File is corrupted";
+    static final String FILE_ERROR_MESSAGE = "File format of tasks is wrong.";
     static final String HOME_DIRECTORY = System.getProperty("user.dir");
     static final Path DEFAULT_DIRECTORY = Paths.get(HOME_DIRECTORY, "SavedList.txt");
     private final Path filePath;
@@ -49,7 +51,7 @@ public class Storage {
         try {
             return this.readSavedFile(this.filePath);
         } catch (IOException e) {
-            throw new DukeException("File is corrupted.");
+            throw new DukeException(IO_MESSAGE);
         }
     }
 
@@ -72,7 +74,7 @@ public class Storage {
                 try {
                     arr.add(readLineToTask(task));
                 } catch (WrongTaskFormatException | ArrayIndexOutOfBoundsException wrongFormat) {
-                    throw new DukeException("File format of tasks is wrong.");
+                    throw new DukeException(FILE_ERROR_MESSAGE);
                 }
             }
             return arr;
