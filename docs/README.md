@@ -5,7 +5,7 @@
 Chopper helpdesk frees your mind by remembering things you need to do. It is a desktop chat-based app with a user-friendly interface that is easy to learn and ~~Fast~~ _SUPER FAST_ to use.
 
 - [Steps to run](#-steps-to-run)
-- [Features](#wrench-features)
+- [Features](#%EF%B8%8F-features)
 - [Usage](#-usage)
   - [Todo command](#1-create-todo-items-todo)
   - [Deadline command](#2-create-deadlines-deadline)
