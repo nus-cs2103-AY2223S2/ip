@@ -210,6 +210,7 @@ Here's what I spotted:
 ---
 
 View tasks which will end on a specified date or before.
+
 Disclaimer: only tasks created with dates specified in the format `YYYY/MM/DD` will be shown.
 
 ##### Format:
