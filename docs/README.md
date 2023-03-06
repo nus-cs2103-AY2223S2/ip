@@ -1,4 +1,4 @@
-# Chopper helpdesk User Guide
+# :deer: Chopper Helpdesk User Guide
 
 > “Your mind is for having ideas, not holding them.” – David Allen ([source](https://dansilvestre.com/productivity-quotes/))
 
@@ -21,14 +21,14 @@ Chopper helpdesk frees your mind by remembering things you need to do. It is a d
 - [Command summary](#command-summary)
 - [Screenshots of app](#screenshots)
 
-## Steps to run
+## :footprints: Steps to run
 1. Ensure you have `Java 11` installed in your device
 2. Download the JAR file from the latest release [here](https://github.com/anchengyang/ip/releases)
 3. Launch the app from the terminal using this command `java -jar duke.jar`
 4. Start adding your tasks using the commands [here](#usage) 
 5. Let it manage your tasks for you 👍
 
-## Features 
+## :wrench: Features 
 
 ### Manages your tasks for you
 
@@ -47,7 +47,7 @@ Easily update the description or deadline of existing tasks without the hassle o
 Mark or unmark tasks that you have completed.
 
 
-## Usage
+## :seedling: Usage
 
 ### 1. Create todo items: `todo`
 
@@ -146,7 +146,7 @@ Quits the application on command without having to click on the cross button of 
 
 Format: `bye`
 
-## Command summary
+## :clipboard: Command summary
 
 | **No.** | **Feature**                            | **Command**                                                                                 |
 |---------|----------------------------------------|---------------------------------------------------------------------------------------------|
@@ -162,7 +162,7 @@ Format: `bye`
 | 10.     | Update deadlines of existing deadlines | `update <index> /deadline <new changes>`                                                    |
 | 11.     | Quits the application                  | `bye`                                                                                       |
 
-## Screenshots
+## :iphone: Screenshots
 This is a screenshot of the application on start:
 
   <img src="https://user-images.githubusercontent.com/65301406/218518527-19dfc310-9304-4625-a7ec-072b36cd9072.png" width="50%" height="60%">
