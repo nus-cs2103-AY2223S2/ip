@@ -27,6 +27,7 @@ public class Task {
     public Task(String task, boolean isDone) {
         this.task = task;
         this.isDone = isDone;
+        assert task.length() > 0 : "Task description should not be empty!";
     }
 
     /**
