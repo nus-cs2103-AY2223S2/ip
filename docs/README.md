@@ -4,9 +4,9 @@
 
 Chopper helpdesk frees your mind by remembering things you need to do. It is a desktop chat-based app with a user-friendly interface that is easy to learn and ~~Fast~~ _SUPER FAST_ to use.
 
-- [Steps to run](#steps-to-run)
-- [Features](#features)
-- [Usage](#usage)
+- [Steps to run](#footprints-steps-to-run)
+- [Features](#wrench-features)
+- [Usage](#seedling-usage)
   - [Todo command](#1-create-todo-items-todo)
   - [Deadline command](#2-create-deadlines-deadline)
   - [Event command](#3-create-events-event)
@@ -18,8 +18,8 @@ Chopper helpdesk frees your mind by remembering things you need to do. It is a d
   - [Update description command](#9-update-the-description-of-existing-tasks-update)
   - [Update deadline command](#10-update-the-deadline-of-existing-deadlines-update)
   - [Exit application](#11-quits-the-application-on-command-bye)
-- [Command summary](#command-summary)
-- [Screenshots of app](#screenshots)
+- [Command summary](#clipboard-command-summary)
+- [Screenshots of app](#iphone-screenshots)
 
 ## :footprints: Steps to run
 1. Ensure you have `Java 11` installed in your device
