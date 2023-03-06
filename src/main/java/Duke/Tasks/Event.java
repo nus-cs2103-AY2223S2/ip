@@ -23,7 +23,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        if(super.status == true) {
+        if (super.status == true) {
             return "[E][X] " + nameMain + " " + frm.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
         else {
