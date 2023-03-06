@@ -153,8 +153,7 @@ Example of usage:
 `bye`
 
 ## Command summary
-| **No.** | **Feature**                                | **Command**                                                                                     |
-
+| **No.** | **Feature**                                | **Command**                                                                         |
 |-----|----------------------------------------|---------------------------------------------------------------------------------------------|
 | 1.  | Create todo items                      | `todo <description>`                                                                        |
 | 2.  | Create deadlines                       | `deadline <description> /by <yyyy-MM-dd\n HHmm(optional)>`                                  |
