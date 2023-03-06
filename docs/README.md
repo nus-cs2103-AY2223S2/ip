@@ -53,7 +53,9 @@ Mark or unmark tasks that you have completed.
 
 Create todo items with the given description
 
-`[T] [ ] My todo item`
+````
+[T] [ ] My todo item
+````
 
 Format: `todo <description>`
 
@@ -65,7 +67,9 @@ Create deadline items with the given description and deadline
 
 HHmm (hour minute in 24 hour time format) is optional to include in the deadline
 
-`[D] [ ] My deadline item (by: Oct 14 2023 04:30 PM)`
+````
+[D] [ ] My deadline item (by: Oct 14 2023 04:30 PM)
+````
 
 Format: `deadline <description> /by <yyyy-MM-dd HHmm(optional)>`
 
@@ -77,7 +81,9 @@ Create events with the given description and start and end dates
 
 HHmm (hour minute in 24 hour time format) is optional to include in the deadline
 
-`[E] [ ] My event item (from: Oct 14 2023 04:30 PM to: Oct 19 2023 05:00 PM)`
+````
+[E] [ ] My event item (from: Oct 14 2023 04:30 PM to: Oct 19 2023 05:00 PM)
+````
 
 Format: `event <description> /from <yyyy-MM-dd HHmm(optional)> /to <yyyy-MM-dd HHmm(optional)>`
 
