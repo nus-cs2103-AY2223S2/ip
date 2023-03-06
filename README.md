@@ -134,8 +134,8 @@ Display deadline or event in a sorted order.
 
 **Expected result:**
 ```
-*[D][] return book (by Mar 24 2018 02:00pm)
-*[D][] return book (by Oct 15 2019 06:00pm)
+•[D][] return book (by Mar 24 2018 02:00pm)
+•[D][] return book (by Oct 15 2019 06:00pm)
 ```
 
 **Attention:** sort can only be used to sort deadline or event.
