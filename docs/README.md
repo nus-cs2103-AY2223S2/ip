@@ -81,8 +81,9 @@ Here are the tasks in your list:
        ```
 2. If an integer is not entered:
    * After running `delete/mark/unmark/snooze six`
-       ```
-       Please enter a valid number
+      ```
+     Please enter a valid number
+     ```
 
 ### Delete a Task - `delete`
 
