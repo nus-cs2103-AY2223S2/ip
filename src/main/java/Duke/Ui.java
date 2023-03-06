@@ -9,8 +9,8 @@ public class Ui {
     /**
      * greets with welcome message when the program starts
      */
-    public static void greet() {
-        System.out.println("Hello my name is Thanos, my hobbies are helping people maintain their schedule and " +
+    public static String greet() {
+        return ("Hello my name is Thanos, my hobbies are helping people maintain their schedule and " +
                             "destroying galaxies.");
     }
 
