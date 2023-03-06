@@ -7,6 +7,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.SnoozeCommand;
 import duke.command.UnmarkCommand;
 
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.HashMap;
  * The Parser class that is used to take in and parse commands to be used for the correct purpose
  */
 public class Parser {
-    static final String VALID_COMMANDS = "bye, list, mark, unmark, delete, todo, deadline, event, find";
+    static final String VALID_COMMANDS = "bye, list, mark, unmark, delete, todo, deadline, event, find, snooze";
     static final String INVALID_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means. My valid commands are:\n"
             + VALID_COMMANDS;
     static final HashMap<String, String> CORRECT_FORMAT = new HashMap<>(Map.of(
@@ -25,10 +26,11 @@ public class Parser {
             "todo", "todo THE TASK",
             "deadline", "deadline THE TASK /by yyyy-mm-ddThh:mm:ss",
             "event", "event THE TASK /from TIME /to TIME",
-            "mark", "mark NUMBER",
-            "unmark", "unmark NUMBER",
-            "delete", "delete NUMBER",
-            "find", "find WORDS"
+            "mark", "mark INDEX",
+            "unmark", "unmark INDEX",
+            "delete", "delete INDEX",
+            "find", "find WORDS",
+            "snooze", "snooze INDEX"
     ));
 
     /**
@@ -64,11 +66,14 @@ public class Parser {
             case "find":
                 cmd = new FindCommand(words[1]);
                 break;
+            case "snooze":
+                cmd = new SnoozeCommand(words[1]);
+                break;
             default:    // for tasks
                 cmd = new AddTaskCommand(fullCommand);
             }
         } catch (Exception e) {
-            throw new DukeException(correctFormat(words[0]);
+            throw new DukeException(correctFormat(words[0]));
         }
         return cmd;
     }

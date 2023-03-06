@@ -50,7 +50,15 @@ public class Task {
     public void setNotDone() {
         this.isDone = false;
     }
+    /**
+     * Returns a boolean: true if the task is a Deadline, false otherwise
+     *
+     * @return boolean if the command is a Deadline
+     */
+    public boolean isDeadline() { return false; }
+    public void snooze() {
 
+    }
     /**
      * Returns the String task without any formatting
      *
