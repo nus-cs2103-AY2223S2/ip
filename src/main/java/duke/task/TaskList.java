@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * Represents the TaskList that is used to store the tasks using 1-based indexing
  */
 public class TaskList {
+    private static final String NO_ITEMS_MESSAGE = "You do not have any items in your list!";
     private final ArrayList<Task> tasks;
 
     /**
@@ -25,6 +26,9 @@ public class TaskList {
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+    private String getIndexOutOfBoundsMessage() {
+        return String.format("Please enter a number from 1 to %d", this.size());
+    }
 
     /**
      * Returns the Task at the index
@@ -37,9 +41,7 @@ public class TaskList {
         try {
             return tasks.get(index - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(String.format(
-                    "Please enter a number from 1 to %d",
-                    this.size()));
+            throw new DukeException(getIndexOutOfBoundsMessage());
         }
     }
 
@@ -79,16 +81,14 @@ public class TaskList {
      */
     public String delete(int index) throws DukeException {
         if (size() == 0) {
-            throw new DukeException("You do not have any items in your list!");
+            throw new DukeException(NO_ITEMS_MESSAGE);
         }
         try {
             String taskDescription = this.get(index).toString();
             this.tasks.remove(index-1);
             return taskDescription;
         } catch (IndexOutOfBoundsException badNumber) {
-            throw new DukeException(String.format(
-                    "Please enter a number from 1 to %d",
-                    this.size()));
+            throw new DukeException(getIndexOutOfBoundsMessage());
         }
     }
 

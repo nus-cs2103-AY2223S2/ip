@@ -20,7 +20,7 @@ public class Deadline extends Task {
      */
     public Deadline(String cmd)
             throws PatternSyntaxException, ArrayIndexOutOfBoundsException, DateTimeParseException {
-        this(cmd,false);
+        this(cmd, Task.IS_DONE);
     }
 
     /**
