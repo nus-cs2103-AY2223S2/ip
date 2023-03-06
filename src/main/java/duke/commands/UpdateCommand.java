@@ -39,6 +39,8 @@ public class UpdateCommand extends Command {
             } else if (words[2].equals("/deadline") && (t instanceof Deadline)) {
                 Deadline d = (Deadline) t;
                 d.updateDeadline(this.input.split("/deadline")[1].trim());
+            } else if (words[2].equals("/deadline") && !(t instanceof Deadline)) {
+                throw new DukeException(Ui.notDeadline());
             } else {
                 throw new DukeException(Ui.wrongUpdateFormat());
             }

@@ -177,4 +177,8 @@ public class Ui {
     public static String missingIndex() {
         return "Command must be followed by an integer.";
     }
+
+    public static String notDeadline() {
+        return "Task does not have a deadline";
+    }
 }
