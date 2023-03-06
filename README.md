@@ -1,7 +1,7 @@
-# Duke
+# Chopper helpdesk
 > “Your mind is for having ideas, not holding them.” – David Allen ([source](https://dansilvestre.com/productivity-quotes/))
 
-Duke frees your mind by remembering things you need to do
+Chopper helpdesk frees your mind by remembering things you need to do
 
 It is 
 - Chat-based
