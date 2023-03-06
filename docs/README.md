@@ -5,6 +5,7 @@
 </div>
 
 ## Content Page
+
 -   [Introduction](#introduction)
 -   [Quick Start](#quick-start)
     -   [Run the project in terminal](#run-the-project-in-terminal)
@@ -32,6 +33,8 @@ This project, Henz, is based off [Project Duke](https://github.com/nus-cs2103-AY
 
 This is a simple user guide for the usage of Henz Application.
 
+<br/>
+
 ## Quick Start
 
 ### Run the project in terminal
@@ -47,6 +50,8 @@ This is a simple user guide for the usage of Henz Application.
         ```
 5. You should expect the Graphical User Interface (GUI) to appear.
 
+<br/>
+
 ## Command Summary
 
 | Index |            Command to Use            |                        Format                         |                          examples                          |
@@ -61,6 +66,8 @@ This is a simple user guide for the usage of Henz Application.
 |  12   |            Unmarks a Task            |                 `unmark <TaskIndex>`                  |                         `unmark 1`                         |
 |  13   |   Edits the description of a Task    |           `edit <TaskIndex> <Description>`            |                  `edit 1 Do Assignment 1`                  |
 |  15   |           Ending a session           |                         `bye`                         |                           `bye`                            |
+
+<br/>
 
 ## Features
 
@@ -78,6 +85,8 @@ For example, running the command, `todo lunch with prof henz`, would add a Todo 
 > \[T][ ] lunch with prof henz
 > Now you have 1 tasks in the list.
 
+<br/>
+
 ### Adds Deadline Tasks
 
 The `deadline <Description> /by <DateTime>` command allows you to add a Deadline task to your task list.
@@ -92,6 +101,8 @@ For example, running the command, `deadline lunch with prof henz /by 2023-02-15 
 > Got it. I've added this task:
 > \[D][ ] lunch with prof henz ( by: Feb 15 2023, 3:00pm )
 > Now you have 1 tasks in the list.
+
+<br/>
 
 ### Adds Event Tasks
 
@@ -109,6 +120,8 @@ For example, running`event party with prof henz /from 2023-02-15 1500 /to 2023-0
 > \[E][ ] party with prof henz ( from: Feb 15 2023, 3:00pm to: Feb 16 2023, 4:00am )
 > Now you have 1 tasks in the list.
 
+<br/>
+
 ### Edit Tasks
 
 The `edit <TaskIndex> <Description>` command allows you to edit the description of a task in your task list.
@@ -123,6 +136,8 @@ For example, running the command, `edit 1 yum cha with prof hez`, would edit the
 > Nice! I've editd the description of this task:
 > \[D][ ] Yum cha with prof henz ( by: Feb 15 2023 3:00pm )
 
+<br/>
+
 ### Lists All Tasks
 
 The `list` command allows you to view all tasks in your task list.
@@ -132,6 +147,8 @@ For example, running the command `list` will show the content of the list return
 > 1. \[D][ ] yum cha with prof henz ( by: Feb 15 2023, 3:00pm )
 > 2. \[E][ ] party with prof henz ( from: Feb 15 2023, 3:00pm to: Feb 16 2023, 4:00am )
 > 3. \[T][X] grocery shopping
+
+<br/>
 
 ### Mark Tasks as Done
 
@@ -146,6 +163,8 @@ For example, running the command, `mark 1`, would mark the task "yum cha with pr
 > Nice! I've marked this task as done:
 > \[D][X] yum cha with prof henz ( by: Feb 15 2023, 3:00pm )
 
+<br/>
+
 ### Unmark Tasks
 
 The `unmark <TaskIndex>` command allows you to unmark a task that you previously marked as done.
@@ -158,6 +177,8 @@ For example: running the command, `unmark 1`, would unmark the task previously m
 
 > Ok, I've marked this task as not done yet:
 > \[D][ ] yum cha with prof henz ( by: Feb 15 2023, 3:00pm )
+
+<br/>
 
 ### Delete Tasks
 
@@ -173,6 +194,8 @@ For example: running the command, `delete 1`, would unmark the task previously m
 > \[D][ ] yum cha with prof henz ( by: Feb 15 2023, 3:00pm )
 > Now you have 0 tasks in the list.
 
+<br/>
+
 ### Find Tasks
 
 The `find <Description...>` command allows you to find tasks in your task list based on their descriptions.
@@ -184,9 +207,13 @@ For example, running the command `find prof henz`, will find all the task with d
 > 1. \[D][ ] yum cha with prof henz ( by: Feb 15 2023, 3:00pm )
 > 2. \[E][ ] party with prof henz ( from: Feb 15 2023, 3:00pm to: Feb 16 2023, 4:00am )
 
+<br/>
+
 ### Bye
 
 The `bye` command allows you to exit the task list application.
+
+<br/>
 
 ## Miscellaneous
 
@@ -195,6 +222,8 @@ The `bye` command allows you to exit the task list application.
 -   “yyyy-MM-dd HHmm”, e.g. `2022-08-10 13:30`
 
 **Caution:** Avoid from modifying the program data in the data file.
+
+<br/>
 
 ## Useful Resources
 
