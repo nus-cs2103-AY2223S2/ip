@@ -9,10 +9,16 @@ public abstract class Task {
         status = false;
     }
 
+    /**
+     * Changes status of work done to true.
+     */
     public void toggleTrue() {
         status = true;
     }
 
+    /**
+     * Changes status of work done to false.
+     */
     public void toggleFalse() {
         status = false;
     }
