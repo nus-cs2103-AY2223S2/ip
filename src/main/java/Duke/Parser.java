@@ -22,7 +22,8 @@ public class Parser {
             break;
             // need to switch off service
         case "list":
-            TaskList.printList();
+            toGive = TaskList.printList();
+            break;
         case "mark":
             int num1 = Integer.parseInt(str.split(" ", 2)[1]);
             toGive = TaskList.mark(num1); // function handles index
@@ -41,6 +42,7 @@ public class Parser {
         case "find":
             String keyword = str.split(" ", 2)[1];
             toGive = TaskList.find(keyword);
+            break;
         default:
             try {
                 toGive = TaskList.add_to_list(str);

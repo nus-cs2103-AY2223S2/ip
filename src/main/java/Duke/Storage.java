@@ -49,7 +49,7 @@ public class Storage {
             FileWriter fw = new FileWriter(fileAddress, true);
 
             for(int i = 0; i < TaskList.list.size(); i++) {
-                fw.write(TaskList.list.get(i).toString() + "\n");
+                fw.write(TaskList.list.get(i).task_name + "\n");
             }
 
             fw.close();

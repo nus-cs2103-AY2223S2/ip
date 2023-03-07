@@ -14,10 +14,12 @@ import java.util.List;
 public class TaskList {
     public static ArrayList<Task> list = new ArrayList<Task>();
 
-    public static void printList() {
-        for(int i = 0; i < list.size(); i++) {
-            System.out.println((i+1) + ". " + list.get(i).toString());
-        }
+    public static String printList() {
+        String temp = "";
+        for(int i = 0; i < list.size() - 1; i++) {
+            temp = temp + (i+1) + ". " + list.get(i).toString() + "\n";
+      }
+       return temp;
     }
 
     public static int getLength() {
@@ -54,9 +56,9 @@ public class TaskList {
                 index++;
                 tempstr = tempstr + (index + "." + t.toString());
             }
-            if (index == 0) {
-                tempstr = ("Could not find the given word");
-            }
+        }
+        if (index == 0) {
+            tempstr = ("Could not find the given word");
         }
         return tempstr;
     }
