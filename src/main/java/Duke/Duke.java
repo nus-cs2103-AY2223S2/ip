@@ -27,10 +27,6 @@ public class Duke extends Application {
     public void start(Stage stage) {
     }
 
-//    public static void main(String[] args) {
-//        run();
-//    }
-
     public String getResponse(String input) {
         String result = Parser.makeSense(input.strip());
         return result;

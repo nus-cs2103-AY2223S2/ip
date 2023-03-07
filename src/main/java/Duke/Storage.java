@@ -9,9 +9,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    public static File dataDir = new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "lists");
-    public static File fileAddress = new File(System.getProperty("user.dir") + System.getProperty("file.separator")
-            + "lists" + System.getProperty("file.separator") + "taskList.txt");
+    public static File dataDir = new File(System.getProperty("user.dir")
+            + System.getProperty("file.separator") + "lists");
+    public static File fileAddress = new File(System.getProperty("user.dir")
+            + System.getProperty("file.separator") + "lists" + System.getProperty("file.separator") + "taskList.txt");
 
     public static void loadData() { //initialise in the beginning
         try {

@@ -2,7 +2,11 @@ package Duke;
 
 import Duke.Exception.InvalidCommandException;
 import Duke.Exception.NoDescriptionException;
-import Duke.Tasks.*;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.PeriodTask;
+import Duke.Tasks.Task;
+import Duke.Tasks.Todo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,11 +16,11 @@ public class TaskList {
     public static ArrayList<Task> list = new ArrayList<Task>();
 
     public static String printList() {
-        String temp = "";
+        String storeTask = "";
         for(int i = 0; i < list.size(); i++) {
-            temp = temp + (i+1) + ". " + list.get(i).toString() + "\n";
+            storeTask = storeTask + (i+1) + ". " + list.get(i).toString() + "\n";
       }
-       return temp;
+       return storeTask;
     }
 
     public static int getLength() {
