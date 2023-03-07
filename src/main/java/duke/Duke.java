@@ -1,9 +1,13 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.core.Core;
-import duke.gui.ChatPane;
+import duke.gui.MainWindow;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -14,23 +18,25 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
     private Core core;
-    private ChatPane chatPane;
     private Scene scene;
 
     @Override
     public void start(Stage stage) {
         core = new Core();
-        chatPane = new ChatPane((String cmd) -> {
-            return core.respond(cmd);
-        });
-        chatPane.dukeSays(core.setup());
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setupCore(core);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        scene = new Scene(chatPane);
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
-        stage.setScene(scene);
         stage.show();
     }
 }
