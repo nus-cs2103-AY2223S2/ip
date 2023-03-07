@@ -2,10 +2,7 @@ package Duke;
 
 import Duke.Exception.InvalidCommandException;
 import Duke.Exception.NoDescriptionException;
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.Task;
-import Duke.Tasks.Todo;
+import Duke.Tasks.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +13,7 @@ public class TaskList {
 
     public static String printList() {
         String temp = "";
-        for(int i = 0; i < list.size() - 1; i++) {
+        for(int i = 0; i < list.size(); i++) {
             temp = temp + (i+1) + ". " + list.get(i).toString() + "\n";
       }
        return temp;
@@ -39,7 +36,7 @@ public class TaskList {
 
     public static String delete(int num) {
         String temp = "Noted. I've removed this task:\n" + "  " + list.get(num-1).toString() + "\n" +
-                "Now you have " + list.size() + " tasks in the list.";
+                "Now you have " + (list.size() - 1) + " tasks in the list.";
         list.remove(num-1);
         return temp;
 
@@ -77,6 +74,9 @@ public class TaskList {
         }
         else if ((str.split(" ", 2)[0]).equals("event")) {
             list.add(new Event(str));
+        }
+        else if ((str.split(" ", 2)[0]).equals("periodTask")) {
+            list.add(new PeriodTask(str));
         }
         else {
             throw new InvalidCommandException();

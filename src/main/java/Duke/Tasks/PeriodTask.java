@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class PeriodTask extends Task {
-    // Format : PeriodTask submit notebook /between 2019-10-15 /and 2019-10-15
+    // Format : periodTask submit notebook /between 2019-10-15 /and 2019-10-15
     public PeriodTask(String str1) {
         super(str1);
     }

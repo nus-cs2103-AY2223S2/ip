@@ -21,6 +21,7 @@ Hello! My name is Thanos, your personal task manager.
 <input type="checkbox" checked="checked" disabled="disabled">&nbsp;Add a ToDo task</a><br>
 <input type="checkbox" checked="checked" disabled="disabled">&nbsp;Add a Deadline task</a><br>
 <input type="checkbox" checked="checked" disabled="disabled">&nbsp;Add an Event task</a><br>
+<input type="checkbox" checked="checked" disabled="disabled">&nbsp;Add a period task</a><br>
 <input type="checkbox" checked="checked" disabled="disabled">&nbsp;View a list of your tasks</a><br>
 <input type="checkbox" checked="checked" disabled="disabled">&nbsp;Mark task as done</a><br>
 <input type="checkbox" checked="checked" disabled="disabled">&nbsp;Mark task as not done</a><br>
@@ -70,6 +71,21 @@ Adds an Event task to your task manager.
 ```
 event wedding /from 2023-09-12 /to 2023-10-12
 > [E][ ] wedding Sep 12 2023-Oct 12 2023
+> Now you have 3 tasks in the list
+
+```
+----
+### `periodTask` - Add a period task
+
+Adds a period task to your task manager.
+
+**Command Format :** periodTask [task desc] /between [yyyy-mm-dd] /and [yyyy-mm-dd]
+
+**Example of usage:**
+
+```
+periodTask submit book /between 2023-09-12 /and 2023-10-12
+> [E][ ] submit book Sep 12 2023-Oct 12 2023
 > Now you have 3 tasks in the list
 
 ```
