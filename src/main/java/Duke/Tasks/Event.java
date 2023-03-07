@@ -1,7 +1,5 @@
 package Duke.Tasks;
 
-import Duke.Tasks.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -24,10 +22,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (super.status == true) {
-            return "[E][X] " + nameMain + " " + frm.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            return "[E][X] " + nameMain + " " + frm.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) +
+                    "-" + to.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
         else {
-            return "[E][ ] " + nameMain + " " + to.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            return "[E][ ] " + nameMain + " " + frm.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) +
+                    "-" + to.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
     }
 

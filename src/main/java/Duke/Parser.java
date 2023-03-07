@@ -21,6 +21,8 @@ public class Parser {
             parserStatus = false;
             break;
             // need to switch off service
+        case "list":
+            TaskList.printList();
         case "mark":
             int num1 = Integer.parseInt(str.split(" ", 2)[1]);
             toGive = TaskList.mark(num1); // function handles index
