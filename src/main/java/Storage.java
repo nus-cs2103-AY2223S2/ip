@@ -5,27 +5,25 @@ import java.util.Scanner;
 // load tasks from file, save changes to file
 public class Storage {
     private File hardDisk;
-    private ArrayList<Task> taskStorage;
+    private TaskList taskStorage;
 
 
     public Storage(String filepath) {
         this.hardDisk = new File(filepath);
-        this.taskStorage = new ArrayList<>();
+        this.taskStorage = new TaskList();
     }
 
 
-    public String load() throws DukeException {
-        // Level-7 feature: load existing data.txt file if it exists, else create new file
-        // STORAGE!!
+    public void load(Ui ui) {
         try {
             boolean created = hardDisk.createNewFile();
             // load existing data.txt file
             if (!created) {
                 Scanner scanner = new Scanner(hardDisk);
                 if (!scanner.hasNextLine()) {
-                    System.out.println("No Existing Tasks my brother!");
+                    ui.toUser("No Existing Tasks my brother!");
                 } else {
-                    System.out.println("Existing Tasks my brother!");
+                    ui.toUser("Existing Tasks my brother!");
                 }
                 while (scanner.hasNextLine()) {
                     String input = scanner.nextLine();
@@ -44,21 +42,36 @@ public class Storage {
                     if (isDone) {
                         x.markAsDone();
                     }
-                    storage.add(x);
+                    this.taskStorage.add(x);
 
                     // Printout existing storage database
-                    int i = 0;
-                    for (Task task : storage) {
-                        System.out.println((i + 1) + ". " + task.toString());
-                        i++;
-                    }
-                    scanner.close();
+                    this.taskStorage.display(ui);
                 }
+                scanner.close();
             } else {
-                System.out.println("New file created: data.txt");
+                ui.toUser("New file created: data.txt");
             }
         } catch (IOException e) {
-        System.out.println("An error occurred while creating the new file: data.txt");
+            ui.toUser("An error occurred while creating the new file: data.txt");
+            e.printStackTrace();
+        }
+    }
+
+    public TaskList getTasks() {
+        return this.taskStorage;
+    }
+
+
+    public void save(Command c) {
+        if (!(c instanceof ExitCommand || c instanceof DisplayCommand)) {
+            try {
+                FileWriter writer = new FileWriter(hardDisk, false);
+                PrintWriter printWriter = new PrintWriter(writer);
+                this.taskStorage.write(printWriter);
+                printWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

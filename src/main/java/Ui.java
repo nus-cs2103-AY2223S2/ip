@@ -14,8 +14,8 @@ public class Ui {
         return currInput;
     }
 
-    public boolean hasNextCommand() {
-        return inputScanner.hasNextLine();
+    public void toUser(String output) {
+        System.out.println(output);
     }
 
     public void showWelcome() {
@@ -23,16 +23,11 @@ public class Ui {
     }
 
     // to deal with exceptions
-    public void showError(DukeException x) {
+    public void showError(BroException x) {
         System.out.println(x.getMessage());
     }
 
     public void showLoadingError() {
         System.out.println("An error occurred while creating the new file: data.txt");
-    }
-
-
-    public void showFarewell() {
-        System.out.println("ok see you brother all love no cringe!");
     }
 }
