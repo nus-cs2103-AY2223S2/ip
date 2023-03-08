@@ -71,7 +71,7 @@ Exits the program.
 
 **Command Format:**
 - `bye`
- |
+
 ## Command summary
 
 | Command      | Format, Examples                                                                                                        |
