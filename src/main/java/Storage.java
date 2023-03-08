@@ -5,11 +5,12 @@ import java.util.Scanner;
 // load tasks from file, save changes to file
 public class Storage {
     private File hardDisk;
-    private ArrayList<Task> storage;
+    private ArrayList<Task> taskStorage;
+
 
     public Storage(String filepath) {
-        this.hardDisk = new File("data.txt");
-        this.storage = new ArrayList<>();
+        this.hardDisk = new File(filepath);
+        this.taskStorage = new ArrayList<>();
     }
 
 
@@ -44,6 +45,7 @@ public class Storage {
                         x.markAsDone();
                     }
                     storage.add(x);
+
                     // Printout existing storage database
                     int i = 0;
                     for (Task task : storage) {

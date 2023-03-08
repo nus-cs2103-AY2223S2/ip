@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private String input;
+    private ArrayList<Task> taskStorage;
 
     public TaskList() {
+        this.taskStorage =  new ArrayList<>();
+
     }
 
     public TaskList(String input) {

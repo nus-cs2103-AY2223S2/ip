@@ -1,17 +1,16 @@
 import java.time.DateTimeException;
-import java.util.ArrayList;
 
-import java.util.Scanner;
-
-public class Duke {
+public class Bro {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Bro(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
+        // if there is a tasklist, load it
+        // else create empty
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -19,14 +18,30 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
+    /***
     public void run() {
-        //...
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
     }
+
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
+     **/
 
     public static void main(String[] args) {
         /**
@@ -37,13 +52,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
          **/
 
-        ArrayList<Task> storage = new ArrayList<>();
 
 
-
-        System.out.println("Hello Brother\nWelcome to Brother Bot\nWhats up what can I do for you mi amigo");
-
-        Scanner inputScanner = new Scanner(System.in);
         String input;
 
         while(true) {
