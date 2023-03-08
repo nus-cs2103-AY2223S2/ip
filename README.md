@@ -7,4 +7,4 @@ JamesBot frees your mind of having to remember things you need to do. It's,
 2. easy to learn
 3. SUPER FAST to use
 
-Refer to the [User Guide](docs/README.md) for more details about the features available.
+Refer to the [User Guide](https://junhao247.github.io/ip/) for more details about the features available.
