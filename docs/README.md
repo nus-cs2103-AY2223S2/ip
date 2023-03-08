@@ -71,8 +71,9 @@ Exits the program.
 
 **Command Format:**
 - `bye`
+ |
+## Command summary
 
-## Command Summary
 | Command      | Format, Examples                                                                                                        |
 |--------------|-------------------------------------------------------------------------------------------------------------------------|
 | **todo**     | `todo DESCRIPTION` e.g `todo read book`                                                                                 |
@@ -80,7 +81,7 @@ Exits the program.
 | **event**    | `event DESCRIPTION /from DATE_TIME /to DATE_TIME` e.g `event project meeting /from 25/03/2000 1800 /to 25/03/2000 1900` |
 | **mark**     | `mark INDEX_OF_TASK` e.g `mark 1`                                                                                       |
 | **unmark**   | `unmark INDEX_OF_TASK` e.g `unmark 1`                                                                                   |
-| **delete**   | `delete INDEX_OF_TASK` e.g `delete 1`                                                                                   |
+| **delete**   | `delete INDEX_OF_TASK` e.g `delete 1`                                                                                   | 
 | **find**     | `find KEYWORD` e.g `find book`                                                                                          |
 | **list**     | `list`                                                                                                                  |
 | **help**     | `help`                                                                                                                  |
