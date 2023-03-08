@@ -1,3 +1,6 @@
+package brotherbot.ui;
+
+import brotherbot.exceptions.BroException;
 import java.util.Scanner;
 
 public class Ui {
@@ -22,7 +25,7 @@ public class Ui {
         System.out.println("Hello Brother\nWelcome to Brother Bot\nWhats up what can I do for you mi amigo");
     }
 
-    // to deal with exceptions
+    // to deal with brotherbot.exceptions
     public void showError(BroException x) {
         System.out.println(x.getMessage());
     }

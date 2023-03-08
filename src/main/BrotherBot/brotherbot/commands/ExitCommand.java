@@ -1,3 +1,8 @@
+package brotherbot.commands;
+
+import brotherbot.storage.*;
+import brotherbot.ui.Ui;
+
 public class ExitCommand extends Command {
     public ExitCommand(String input) {
         super(input);

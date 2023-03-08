@@ -1,5 +1,9 @@
+package brotherbot.storage;
+
+import brotherbot.commands.*;
+import brotherbot.ui.Ui;
+
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 // load tasks from file, save changes to file
@@ -44,7 +48,7 @@ public class Storage {
                     }
                     this.taskStorage.add(x);
 
-                    // Printout existing storage database
+                    // Printout existing brotherbot.storage database
                     this.taskStorage.display(ui);
                 }
                 scanner.close();

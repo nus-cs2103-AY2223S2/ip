@@ -1,4 +1,9 @@
-public class MarkTaskCommand extends Command{
+package brotherbot.commands;
+
+import brotherbot.storage.*;
+import brotherbot.ui.Ui;
+
+public class MarkTaskCommand extends Command {
 
     public MarkTaskCommand(String input) {
         super(input);

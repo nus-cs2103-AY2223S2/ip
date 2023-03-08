@@ -1,4 +1,9 @@
-public class DisplayCommand extends Command{
+package brotherbot.commands;
+
+import brotherbot.storage.*;
+import brotherbot.ui.Ui;
+
+public class DisplayCommand extends Command {
     public DisplayCommand(String input) {
         super(input);
     }

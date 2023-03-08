@@ -1,3 +1,6 @@
+package brotherbot.storage;
+
+import brotherbot.ui.Ui;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
