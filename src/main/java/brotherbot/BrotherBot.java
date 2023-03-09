@@ -1,3 +1,4 @@
+package brotherbot;
 
 import brotherbot.commands.*;
 import brotherbot.exceptions.BroException;
@@ -19,7 +20,8 @@ public class BrotherBot {
         this.tasks = storage.getTasks();
     }
 
- ››   public void run() {
+
+    public void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

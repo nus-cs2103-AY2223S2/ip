@@ -5,6 +5,7 @@ plugins {
 }
 
 repositories {
+    gradlePluginPortal()
     mavenCentral()
 }
 
@@ -28,14 +29,14 @@ test {
 }
 
 application {
-    mainClassName = "BrotherBot"
+    mainClassName = "brotherbot.BrotherBot"
 }
 
 shadowJar {
-    archiveBaseName = null
+    archiveBaseName = "BrotherBot"
     archiveClassifier = null
 }
 
-run{
+run {
     standardInput = System.in
 }
