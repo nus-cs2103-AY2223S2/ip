@@ -1,6 +1,6 @@
 # User Guide
 
-##DukeyList
+## DukeyList
 DukeyList a great and easy way to manage and keep track of your tasks! Using DukeyList, you can add and remove tasks, 
 and mark them as completed.
 
