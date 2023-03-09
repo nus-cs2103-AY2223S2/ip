@@ -3,5 +3,34 @@ Hello from
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+|____/ \__,_|_|\_\___|  managed by Wesley Teo.
 
+What can I do for you?
+---------------------------------
+---------------------------------
+Got it. I've added this task:
+[T] [ ] todo borrow book
+Now you have 1 tasks in the list.
+---------------------------------
+---------------------------------
+Here are the taks in your list:
+1. [T] [ ] todo borrow book
+---------------------------------
+---------------------------------
+Got it. I've added this task:
+[D] [ ] deadline return book(by: Sunday)
+Now you have 2 tasks in the list.
+---------------------------------
+---------------------------------
+Invalid command, please try again
+---------------------------------
+---------------------------------
+Nice! I've marked this task as done: 
+[X] todo borrow book
+---------------------------------
+---------------------------------
+OK, I've marked this task as not done yet: 
+[ ] todo borrow book
+---------------------------------
+---------------------------------
+Bye. Hope to see you again soon!
