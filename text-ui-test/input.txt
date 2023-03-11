@@ -1,0 +1,10 @@
+todo CS2103T homework
+list
+deadline CS2103T quiz /by Monday
+mark 2
+list
+unmark 2
+list
+event project meeting /from Sun 8pm /to 10pm
+list
+bye
