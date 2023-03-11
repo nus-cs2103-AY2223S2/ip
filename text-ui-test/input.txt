@@ -1,0 +1,19 @@
+todo borrow book
+deadline return book /by 2022-10-12
+event project meeting /from 2022-01-12 1500 /to 2022-02-22
+deadline do homework /by 2023-12-12 1600
+list
+blah
+todo
+deadline
+event
+mark 1
+mark 2
+delete 3
+mark 4
+unmark 1
+find book
+update 1 /description borrow money
+update 2 /by 2021-10-12 1200
+list
+bye
