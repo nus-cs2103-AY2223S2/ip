@@ -1,6 +1,11 @@
-# Duke project template
+# CRYSTAL 
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+
+## Image Credits
+Images were obtained from [https://unsplash.com/](https://unsplash.com/).<br />
+Silhouette image was taken by [Joe Shields](https://unsplash.com/photos/dLij9K4ObYY?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink).<br />
+Crystal image was taken by [Nicole Avagliano](https://unsplash.com/photos/TeLjs2pL5fA?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink).
 
 ## Setting up in Intellij
 
