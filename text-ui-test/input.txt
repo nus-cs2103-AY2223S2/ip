@@ -1,0 +1,13 @@
+todo JS2230 readings 
+event Japan Trip /from January 25th /to February 2nd
+deadline Japan Admin (Mum) /by Thursday
+list
+mark 2
+unmark 3
+mark 4
+todo Lunch
+list
+delete 2
+delete 4
+list
+bye
