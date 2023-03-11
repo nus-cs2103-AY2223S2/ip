@@ -1,0 +1,35 @@
+todo read book
+todo return book
+deadline homework /by 2022-02-02
+event team meeting /from 2023-01-01 /to 2023-04-06
+mark 1
+mark 1
+mark 100
+mark -10
+mark asdf
+mark
+unmark
+unmark 2
+mark 2
+unmark 2
+list
+todo
+deadline
+event
+deadline project /by
+event cny /from 10am
+event dinner /to 8pm
+event event /from /to
+deadline deadline /by yesterday
+event some event /from now /to later
+delete
+delete 1
+list
+delete 2
+delete 50
+delete asdojv
+delete -214
+find homework
+find book
+find
+bye
