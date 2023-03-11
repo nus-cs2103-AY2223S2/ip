@@ -114,6 +114,13 @@ Example: `FIND WATCH`
 
 Find all tasks in the list of tasks that occurs on a specific date. These includes `DEADLINE`, and `EVENT`. `DEADLINE` tasks will be organized according to the time of the deadline, while `EVENT` tasks are considered all-day
 
-Format: `FIND {keyword}`
+Format: `SCHEDULE {date}`
 
-Example: `FIND WATCH`
+**`date`** cannot be empty
+
+**`date`** must be of format `dd-MM-yyyy`
+
+Example: `SCHEDULE 20-02-2022`
+
+
+
