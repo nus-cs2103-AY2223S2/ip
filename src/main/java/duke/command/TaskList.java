@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import duke.exception.EmptyTaskListException;
@@ -146,9 +147,7 @@ public class TaskList {
             throw new EmptyTaskListException();
         }
         Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
-        for (int i = 0; i < this.getValidLen(); i++) {
-            this.arr[i] = null;
-        }
+        this.arr = new String[100];
     }
 
     /**
