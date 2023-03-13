@@ -66,11 +66,11 @@ No duplicate event is allowed.
 
 Example of usage:
 
-`event party /at 10/11/2023 1830`
+`event party /from 10/11/2023 1830 /to 11/11/2023 1830`
 
 Expected outcome:
 
-Event `party` at `10/11/2023 1830` gets added.
+Event `party` from `10/11/2023 1830` to `11/11/2023 1830`  gets added.
 
 ### 3. Add a Deadline task
 Adds a Deadline `<deadline-name>` to be done by `dd/MM/yyyy HHmm`
