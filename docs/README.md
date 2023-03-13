@@ -29,7 +29,7 @@
     - Example of usage:
 
       ```
-      event career fair /from 13/02/2023 1500 to 13/02/2023 1700
+      event career fair /from 13/02/2023 1500 /to 13/02/2023 1700
         ```
 
 - `mark/unmark <task number from 'list'>`: Mark or unmark a task as done
