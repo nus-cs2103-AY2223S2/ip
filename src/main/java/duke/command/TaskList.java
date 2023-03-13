@@ -1,7 +1,6 @@
 package duke.command;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import duke.exception.EmptyTaskListException;
