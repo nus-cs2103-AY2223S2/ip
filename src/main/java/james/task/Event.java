@@ -4,8 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The event class.
- * An event is a task that is listed on the taskList with a time range of /from /to.
+ * Lists an event task on the taskList with a time range of /from /to.
  */
 public class Event extends Task {
     /** Starting time in d/MM/yyyy HHmm format */

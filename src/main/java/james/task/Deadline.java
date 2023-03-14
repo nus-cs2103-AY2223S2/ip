@@ -5,8 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The deadline class.
- * A deadline is a task that is listed on the taskList with a deadline of /by.
+ * Lists a deadline task on the taskList with a deadline of /by.
  */
 public class Deadline extends Task {
     /** Time in d/MM/yyyy HHmm format */

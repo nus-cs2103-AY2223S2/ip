@@ -2,9 +2,8 @@ package james.task;
 
 import java.util.ArrayList;
 
-/** This class encapsulates a TaskList object. */
 public class TaskList {
-    /** The list of user's tasks. */
+    /** Lists user's tasks. */
     private ArrayList<Task> taskList;
 
     /**

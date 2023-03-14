@@ -5,16 +5,16 @@ import james.exception.JamesException;
 import james.task.TaskList;
 
 /**
- * The JamesBot program to be executed.
+ * Executes JamesBot program.
  */
 public class JamesBot {
-    /** The ui to print out JamesBot response. */
+    /** Prints out JamesBot response in the ui. */
     private static Ui ui = new Ui();
 
-    /** The task list that is stored in the user's hard disk. */
+    /** Stores the task list in the user's hard disk. */
     private Storage storage;
 
-    /** The list where tasks are added to. */
+    /** Adds the list of tasks. */
     private TaskList tasks;
 
     /**

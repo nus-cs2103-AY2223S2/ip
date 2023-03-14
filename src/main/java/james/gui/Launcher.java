@@ -3,11 +3,11 @@ package james.gui;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * Launches the program to workaround classpath issues.
  */
 public class Launcher {
     /**
-     * The main method of the Launcher program.
+     * Returns the main method of Launcher program.
      */
     public static void main(String[] args) {
         Application.launch(James.class, args);

@@ -1,8 +1,7 @@
 package james.task;
 
 /**
- * The todo class.
- * A todo is a task that is listed on the taskList without a deadline.
+ * Lists a todo task on the taskList without a deadline.
  */
 public class ToDo extends Task {
     /**

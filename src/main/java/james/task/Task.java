@@ -4,11 +4,11 @@ package james.task;
  * Represents a Task in the task list.
  */
 public class Task {
-    /** The description of the task. */
+    /** Describes the task. */
     protected String description;
 
     /**
-     * boolean field for marking and unmark of tasks
+     * Marking and unmarking of tasks
      */
     protected boolean isDone;
 

@@ -1,11 +1,10 @@
 package james.exception;
 
-/**
- * The JamesException class.
- * A JamesException is an exception that is thrown by James.
- */
-public class JamesException extends Exception {
 
+public class JamesException extends Exception {
+    /**
+     * Throws a JamesException, which is an exception that is thrown by James.
+     */
     public JamesException(String message) {
         super(message);
     }
