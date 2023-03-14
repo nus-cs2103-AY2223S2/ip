@@ -59,7 +59,7 @@ public class EventCommand extends Command {
             tasks.set(idx, event);
             storage.replaceEvent(idx, task, from, to);
         } catch (Exception e) {
-            ui.taskErrorMsg();
+            ui.evenErrMsg();
         }
     }
 

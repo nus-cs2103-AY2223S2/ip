@@ -37,6 +37,20 @@ public class Ui {
         System.out.println("\tOOPS!!! Make sure insert all required input.");
     }
 
+    public void todoErrMsg() {
+        System.out.println("\tMake sure you follow the correct format. \nFormat: todo {task} \ne.g. todo Play volley");
+    }
+
+    public void deadErrMsg() {
+        System.out.println("\tMake sure you follow the correct format. \nFormat: deadline {task} /by {YYYY-MM-DD}" +
+                "\ne.g. deadline study /by 2021-12-25");
+    }
+
+    public void evenErrMsg() {
+        System.out.println("\tMake sure you follow the correct format. \nFormat: deadline {task} /from {YYYY-MM-DD} " +
+                "/to {YYYY-MM-DD} " + "\ne.g. event midterm /from 2021-12-25 /to 2021-12-31");
+    }
+
     public void idxErrorMsg() {
         System.out.println("\tOOPS!!! Please input the right index.");
     }
@@ -102,7 +116,15 @@ public class Ui {
     }
 
     public String printInvalid() {
-        return "OOPS!!! I'm sorry, but I don't know what that means";
+        return "OOPS!!! I'm sorry, but I don't know what that means\nList of valid Requests:\n" +
+                "1. todo {task}\n" +
+                "2. deadline {task} /by {YYYY-MM-DD}\n" +
+                "3. event {task} /from {YYYY-MM-DD} /to {YYYY-MM-DD}\n" +
+                "4. mark {index}\n" +
+                "5. unmark {index}\n" +
+                "6. list\n" +
+                "7. find {key}\n" +
+                "8. update {index} {new task}";
     }
 
     public void printListSize(TaskList taskList) {
@@ -115,5 +137,17 @@ public class Ui {
     public void saveTaskMsg() {
         System.out.println(LINE);
         System.out.println("\tSaved Tasks From Last Session");
+    }
+
+    public String errParse() {
+        return "Please input a valid request\nList of valid Requests:\n" +
+                "1. todo {task}\n" +
+                "2. deadline {task} /by {YYYY-MM-DD}\n" +
+                "3. event {task} /from {YYYY-MM-DD} /to {YYYY-MM-DD}\n" +
+                "4. mark {index}\n" +
+                "5. unmark {index}\n" +
+                "6. list\n" +
+                "7. find {key}\n" +
+                "8. update {index} {new task}";
     }
 }

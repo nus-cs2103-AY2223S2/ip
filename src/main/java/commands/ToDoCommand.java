@@ -54,7 +54,7 @@ public class ToDoCommand extends Command {
             tasks.set(idx, todo);
             storage.replaceToDo(idx, super.getCommand());
         } catch (Exception e) {
-            ui.taskErrorMsg();
+            ui.todoErrMsg();
         }
     }
 

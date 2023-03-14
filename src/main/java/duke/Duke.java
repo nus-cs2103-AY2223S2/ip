@@ -66,7 +66,7 @@ public class Duke {
             c.execute(tasks, ui, storage);
             return c.generate(tasks, ui, storage);
         } catch (Exception e) {
-            return "Please input valid request";
+            return ui.errParse();
         }
     }
 

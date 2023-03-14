@@ -58,7 +58,7 @@ public class DeadlineCommand extends Command {
             tasks.set(idx, deadline);
             storage.replaceDeadline(idx, task, date);
         } catch (Exception e) {
-            ui.taskErrorMsg();
+            ui.deadErrMsg();
         }
     }
 
