@@ -41,14 +41,20 @@ public class Ui {
         System.out.println("\tMake sure you follow the correct format. \nFormat: todo {task} \ne.g. todo Play volley");
     }
 
+    /**
+     * Message for error in deadline command
+     */
     public void deadErrMsg() {
-        System.out.println("\tMake sure you follow the correct format. \nFormat: deadline {task} /by {YYYY-MM-DD}" +
-                "\ne.g. deadline study /by 2021-12-25");
+        System.out.println("\tMake sure you follow the correct format. \nFormat: deadline {task} /by {YYYY-MM-DD}"
+                + "\ne.g. deadline study /by 2021-12-25");
     }
 
+    /**
+     * Message for error in event command
+     */
     public void evenErrMsg() {
-        System.out.println("\tMake sure you follow the correct format. \nFormat: deadline {task} /from {YYYY-MM-DD} " +
-                "/to {YYYY-MM-DD} " + "\ne.g. event midterm /from 2021-12-25 /to 2021-12-31");
+        System.out.println("\tMake sure you follow the correct format. \nFormat: deadline {task} /from {YYYY-MM-DD} "
+                + "/to {YYYY-MM-DD} " + "\ne.g. event midterm /from 2021-12-25 /to 2021-12-31");
     }
 
     public void idxErrorMsg() {
@@ -115,16 +121,18 @@ public class Ui {
         System.out.println("\tOOPS!!! I'm sorry, but I don't know what that means");
     }
 
+    /**
+     * @return message for invalid input
+     */
     public String printInvalid() {
-        return "OOPS!!! I'm sorry, but I don't know what that means\nList of valid Requests:\n" +
-                "1. todo {task}\n" +
-                "2. deadline {task} /by {YYYY-MM-DD}\n" +
-                "3. event {task} /from {YYYY-MM-DD} /to {YYYY-MM-DD}\n" +
-                "4. mark {index}\n" +
-                "5. unmark {index}\n" +
-                "6. list\n" +
-                "7. find {key}\n" +
-                "8. update {index} {new task}";
+        return "OOPS!!! I'm sorry, but I don't know what that means\nList of valid Requests:\n"
+                + "1. todo {task}\n"
+                + "2. deadline {task} /by {YYYY-MM-DD}\n"
+                + "3. event {task} /from {YYYY-MM-DD} /to {YYYY-MM-DD}\n"
+                + "4. mark {index}\n"
+                + "5. unmark {index}\n"
+                + "6. list\n"
+                + "7. find {key}\n" + "8. update {index} {new task}";
     }
 
     public void printListSize(TaskList taskList) {
@@ -139,15 +147,17 @@ public class Ui {
         System.out.println("\tSaved Tasks From Last Session");
     }
 
+    /**
+     * @return message for error input
+     */
     public String errParse() {
-        return "Please input a valid request\nList of valid Requests:\n" +
-                "1. todo {task}\n" +
-                "2. deadline {task} /by {YYYY-MM-DD}\n" +
-                "3. event {task} /from {YYYY-MM-DD} /to {YYYY-MM-DD}\n" +
-                "4. mark {index}\n" +
-                "5. unmark {index}\n" +
-                "6. list\n" +
-                "7. find {key}\n" +
-                "8. update {index} {new task}";
+        return "Please input a valid request\nList of valid Requests:\n"
+                + "1. todo {task}\n"
+                + "2. deadline {task} /by {YYYY-MM-DD}\n"
+                + "3. event {task} /from {YYYY-MM-DD} /to {YYYY-MM-DD}\n"
+                + "4. mark {index}\n" + "5. unmark {index}\n"
+                + "6. list\n"
+                + "7. find {key}\n"
+                + "8. update {index} {new task}";
     }
 }

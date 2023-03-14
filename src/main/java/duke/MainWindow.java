@@ -45,8 +45,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.greet(), dukeImage),
-                DialogBox.getDukeDialog(duke.lastSession() + "\n" + (duke.isTaskEmpty() ? "No data yet" :
-                        duke.getResponse("list")), dukeImage)
+                DialogBox.getDukeDialog(duke.lastSession() + "\n" + (duke.isTaskEmpty() ? "No data yet"
+                        : duke.getResponse("list")), dukeImage)
         );
     }
 
