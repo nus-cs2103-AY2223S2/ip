@@ -1,21 +1,22 @@
 package duke.util;
 
-import duke.command.Command;
-import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import duke.command.Command;
+import duke.task.Todo;
 
 public class ParserTest {
 
     @Test
     void addTodoTest(@TempDir Path tempDir) throws DukeException, IOException {
-        Path temp = Files.createTempFile(null,".txt");
+        Path temp = Files.createTempFile(null, ".txt");
         Ui ui = new Ui();
         Storage storage = new Storage(temp.toString(), ui);
         TaskList tasks = new TaskList(storage.loadData());
@@ -30,7 +31,7 @@ public class ParserTest {
 
     @Test
     void deleteTodoTest(@TempDir Path tempDir) throws DukeException, IOException {
-        Path temp = Files.createTempFile(null,".txt");
+        Path temp = Files.createTempFile(null, ".txt");
         Ui ui = new Ui();
         Storage storage = new Storage(temp.toString(), ui);
         TaskList tasks = new TaskList(storage.loadData());
