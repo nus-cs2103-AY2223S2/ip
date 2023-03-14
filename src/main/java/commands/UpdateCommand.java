@@ -29,6 +29,8 @@ public class UpdateCommand extends Command {
             String command = request[1];
             Command c = Parser.parse(command);
             c.replace(tasks, ui, storage, idx);
+        } catch (IndexOutOfBoundsException e) {
+            ui.outOfBound();
         } catch (Exception e) {
             ui.idxErrorMsg();
         }

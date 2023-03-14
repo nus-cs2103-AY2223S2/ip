@@ -160,4 +160,8 @@ public class Ui {
                 + "7. find {key}\n"
                 + "8. update {index} {new task}";
     }
+
+    public void outOfBound() {
+        System.out.println("Index is out of bound!");
+    }
 }

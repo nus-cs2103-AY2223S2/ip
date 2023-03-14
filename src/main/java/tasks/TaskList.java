@@ -20,6 +20,9 @@ public class TaskList {
      * Prints all the contents in the TaskList
      */
     public void print() {
+        if (list.isEmpty()) {
+            System.out.println("No data yet");
+        }
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             System.out.println("\t" + (i + 1) + ". " + task.toString());
@@ -35,7 +38,10 @@ public class TaskList {
             Task task = list.get(i);
             res = res + (i + 1) + ". " + task.toString() + "\n";
         }
-        return res;
+        return res.equals("")
+                ? "No data yet"
+                : res;
+
     }
 
     /**

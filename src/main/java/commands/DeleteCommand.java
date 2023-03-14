@@ -31,6 +31,8 @@ public class DeleteCommand extends Command {
             ui.removeMsg();
             ui.printTask(task);
             ui.printListSize(tasks);
+        } catch (IndexOutOfBoundsException e) {
+            ui.outOfBound();
         } catch (Exception e) {
             ui.idxErrorMsg();
         }

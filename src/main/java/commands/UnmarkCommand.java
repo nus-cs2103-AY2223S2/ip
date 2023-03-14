@@ -31,6 +31,8 @@ public class UnmarkCommand extends Command {
             ui.unmarkMsg();
             ui.printTask(task);
             tasks.set(idx, task);
+        } catch (IndexOutOfBoundsException e) {
+            ui.outOfBound();
         } catch (Exception e) {
             ui.idxErrorMsg();
         }
