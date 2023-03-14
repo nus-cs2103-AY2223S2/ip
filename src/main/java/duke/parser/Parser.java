@@ -3,7 +3,7 @@ package duke.parser;
 import duke.tasklist.TaskList;
 import duke.storage.Storage;
 import duke.exceptions.DukeException;
-import duke.ui.Sender;
+import duke.sender.Sender;
 
 /**
  * Parses user input and returns a response.

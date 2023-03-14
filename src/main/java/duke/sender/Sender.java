@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.sender;
 import java.util.ArrayList;
 
 import duke.exceptions.DukeException;
@@ -22,12 +22,9 @@ public class Sender {
     /** Handles all the tasks in the current session. */
     private TaskList tasks;
 
-    /** A string that is always used when Duke responds to the user. */
+    /** A string that is always used when duke responds to the user. */
     private String DUKE_RESPONSE = "Duke's response: \n";
 
-    /**
-     * Duke's help message
-     */
     private static String HELP_MESSAGE = "The available commands are: \n" +
             "1) list\n" +
             "2) bye\n" +

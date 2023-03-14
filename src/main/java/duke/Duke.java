@@ -1,7 +1,6 @@
 package duke;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Sender;
 import duke.parser.Parser;
 import duke.exceptions.DukeException;
 
@@ -12,14 +11,11 @@ public class Duke {
     /** Parses user input. */
     private Parser parser;
 
-    /** The path to the file that stores the Tasks on the hard drive. */
-    private String FILE_PATH = "duke.txt";
-
     /**
      * Constructs a new Duke session.
      */
-    public Duke() {
-            Storage storage = new Storage(FILE_PATH);
+    public Duke(String filePath) {
+            Storage storage = new Storage(filePath);
             //Attempts to load Tasks from hard drive into the list of Tasks.
             TaskList tasks = new TaskList(storage.load());
             this.parser = new Parser(storage, tasks);
