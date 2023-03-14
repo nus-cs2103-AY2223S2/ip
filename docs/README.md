@@ -1,6 +1,6 @@
-## **Cluck!** User guide
+# **Cluck!** User guide
 
-### Table of contents:
+## Table of contents:
 - [Quick start](#quick-start)
 - [Commands](#commands)
   - [View all tasks](#view-all-tasks-list)
