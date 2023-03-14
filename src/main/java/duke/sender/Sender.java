@@ -22,9 +22,6 @@ public class Sender {
     /** Handles all the tasks in the current session. */
     private TaskList tasks;
 
-    /** A string that is always used when duke responds to the user. */
-    private String DUKE_RESPONSE = "Duke's response: \n";
-
     private static String HELP_MESSAGE = "The available commands are: \n" +
             "1) list\n" +
             "2) bye\n" +
@@ -84,7 +81,7 @@ public class Sender {
             Task task = tasks.getTask(i);
             taskString += String.format("%s): %s\n", i, task);
         }
-        return DUKE_RESPONSE + "These are the current tasks: \n" + taskString;
+        return "These are the current tasks: \n" + taskString;
     }
 
     /**
@@ -99,7 +96,7 @@ public class Sender {
             Task task = matchingTasks.get(i);
             taskString += task + "\n";
         }
-        return DUKE_RESPONSE + "These are the matching tasks: \n" + taskString;
+        return "These are the matching tasks: \n" + taskString;
     }
 
     /**

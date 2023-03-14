@@ -16,8 +16,7 @@ public class DukeTest {
                 " /from 25th June /to 25th June");
         duke.getResponse("doafter celebrate end of " +
                 "mid terms /after Mid terms");
-        assertEquals("Duke's response: \n" +
-                "These are the current tasks: \n" +
+        assertEquals("These are the current tasks: \n" +
                 "1): [T][ ] buy bread\n" +
                 "2): [D][ ] complete assignment (by: Mar 01 2023)\n" +
                 "3): [E][ ] birthday (from: 25th June to: 25th June)\n" +
