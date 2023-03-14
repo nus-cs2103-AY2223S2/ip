@@ -3,7 +3,6 @@ package commands;
 import java.io.IOException;
 
 import storage.Storage;
-import tasks.Event;
 import tasks.TaskList;
 import ui.Ui;
 

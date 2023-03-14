@@ -26,11 +26,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * @return concatenated task string
+     */
     public String concat() {
         String res = "";
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            res = res + (i + 1) + ". " + task.toString() + "\n" ;
+            res = res + (i + 1) + ". " + task.toString() + "\n";
         }
         return res;
     }
@@ -98,6 +101,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * @param key
+     * @return task that contains key
+     */
     public String printFind(String key) {
         String res = "";
         int idx = 1;

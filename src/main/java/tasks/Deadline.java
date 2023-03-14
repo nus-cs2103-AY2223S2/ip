@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Class that represents Deadline Task
  */
 public class Deadline extends Task {
+    private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd MMM uuuu");
     private LocalDate deadline;
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu");
 
     /**
      * Execute adding a Deadline command
@@ -24,6 +24,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by " + deadline.format(FORMATTER) + ")";
+        return "[D]" + super.toString() + "(by " + deadline.format(FORMAT) + ")";
     }
 }

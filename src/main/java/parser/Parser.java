@@ -1,6 +1,18 @@
 package parser;
 
-import commands.*;
+
+import commands.Command;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.EventCommand;
+import commands.ExitCommand;
+import commands.FindCommand;
+import commands.InvalidCommand;
+import commands.ListCommand;
+import commands.MarkCommand;
+import commands.ToDoCommand;
+import commands.UnmarkCommand;
+import commands.UpdateCommand;
 
 /**
  * Provide parsing mechanism for the user inputs
@@ -12,6 +24,7 @@ public class Parser {
      * @return Command object
      */
     public static Command parse(String command) {
+
         String[] splittedCmd = command.split(" ", 2);
         switch (splittedCmd[0]) {
         case "bye":

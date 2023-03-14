@@ -19,6 +19,10 @@ public class Duke {
     private Ui ui;
 
 
+    /**
+     * Constructor for duke
+     * @throws IOException
+     */
     public Duke() throws IOException {
         ui = new Ui();
         storage = new Storage("./data/duke.txt");

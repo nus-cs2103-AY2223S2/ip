@@ -4,8 +4,8 @@ package tasks;
  * Represents task that can be inserted to the program
  */
 public class Task {
-    private static String UNMARKED = "[ ]";
-    private static String MARKED = "[X]";
+    private static final String UNMARKED = "[ ]";
+    private static final String MARKED = "[X]";
     private boolean isMarked = false;
     private String taskName;
 

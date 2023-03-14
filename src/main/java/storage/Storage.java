@@ -117,8 +117,8 @@ public class Storage {
         bw.close();
         file.delete();
         boolean isSucceed = fileTemp.renameTo(file);
-        assert isSucceed:
-        bw = new BufferedWriter(new FileWriter(file, true));
+        assert isSucceed
+                : bw = new BufferedWriter(new FileWriter(file, true));
     }
 
     /**
@@ -148,8 +148,8 @@ public class Storage {
         bw.close();
         file.delete();
         boolean isSucceed = fileTemp.renameTo(file);
-        assert isSucceed:
-        bw = new BufferedWriter(new FileWriter(file, true));
+        assert isSucceed
+                : bw = new BufferedWriter(new FileWriter(file, true));
     }
 
     /**
@@ -180,8 +180,8 @@ public class Storage {
         bw.close();
         file.delete();
         boolean isSucceed = fileTemp.renameTo(file);
-        assert isSucceed:
-        bw = new BufferedWriter(new FileWriter(file, true));
+        assert isSucceed
+                : bw = new BufferedWriter(new FileWriter(file, true));
     }
 
     /**
@@ -224,6 +224,12 @@ public class Storage {
         bw.close();
     }
 
+    /**
+     * Method to replace Todo task
+     * @param idx
+     * @param task
+     * @throws IOException
+     */
     public void replaceToDo(int idx, String task) throws IOException {
         File fileTemp = new File(TEMP_PATH);
         if (!fileTemp.exists()) {
@@ -246,10 +252,17 @@ public class Storage {
         bw.close();
         file.delete();
         boolean isSucceed = fileTemp.renameTo(file);
-        assert isSucceed:
-        bw = new BufferedWriter(new FileWriter(file, true));
+        assert isSucceed
+                : bw = new BufferedWriter(new FileWriter(file, true));
     }
 
+    /**
+     * Method to replace a Deadline Task
+     * @param idx
+     * @param task
+     * @param date
+     * @throws IOException
+     */
     public void replaceDeadline(int idx, String task, String date) throws IOException {
         File fileTemp = new File(TEMP_PATH);
         if (!fileTemp.exists()) {
@@ -272,10 +285,18 @@ public class Storage {
         bw.close();
         file.delete();
         boolean isSucceed = fileTemp.renameTo(file);
-        assert isSucceed:
-        bw = new BufferedWriter(new FileWriter(file, true));
+        assert isSucceed
+                : bw = new BufferedWriter(new FileWriter(file, true));
     }
 
+    /**
+     * Method to replace an Event task
+     * @param idx
+     * @param task
+     * @param from
+     * @param to
+     * @throws IOException
+     */
     public void replaceEvent(int idx, String task, String from, String to) throws IOException {
         File fileTemp = new File(TEMP_PATH);
         if (!fileTemp.exists()) {
@@ -298,8 +319,8 @@ public class Storage {
         bw.close();
         file.delete();
         boolean isSucceed = fileTemp.renameTo(file);
-        assert isSucceed:
-        bw = new BufferedWriter(new FileWriter(file, true));
+        assert isSucceed
+                : bw = new BufferedWriter(new FileWriter(file, true));
     }
 
 }

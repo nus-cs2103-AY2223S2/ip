@@ -36,6 +36,13 @@ public class UnmarkCommand extends Command {
         }
     }
 
+    /**
+     * generate the action to the save file
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return the string line that will be concatenated to save file
+     */
     public String generate(TaskList tasks, Ui ui, Storage storage) {
         int idx = Integer.parseInt(super.getCommand()) - 1;
         Task task = tasks.get(idx);

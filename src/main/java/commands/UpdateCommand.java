@@ -1,16 +1,15 @@
 package commands;
 
-import exceptions.EmptyTaskException;
-import parser.Parser;
-import storage.Storage;
-import tasks.Deadline;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.ToDo;
-import ui.Ui;
-
 import java.io.IOException;
 
+import parser.Parser;
+import storage.Storage;
+import tasks.TaskList;
+import ui.Ui;
+
+/**
+ * Represent command for replace a task with another task
+ */
 public class UpdateCommand extends Command {
     public UpdateCommand(String string) {
         super(string);

@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,8 +14,6 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -35,6 +35,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = getRoundImage(userImage1, 74);
     private Image dukeImage = getRoundImage(dukeImage1, 74);
 
+    /**
+     * Initialize GUI
+     * @throws IOException
+     */
     @FXML
     public void initialize() throws IOException {
         duke = new Duke("./data/duke.txt");;
@@ -79,13 +83,15 @@ public class MainWindow extends AnchorPane {
         int h = (height / 2);
         int r = radius * radius;
 
-        for (int i = (width / 2) - radius, k = 0; i < w + radius; i++, k++)
+        for (int i = (width / 2) - radius, k = 0; i < w + radius; i++, k++) {
             for (int j = (height / 2) - radius, b = 0; j < h + radius; j++, b++) {
-                if ((i - w) * (i - w) + (j - h) * (j - h) > r)
+                if ((i - w) * (i - w) + (j - h) * (j - h) > r) {
                     pixelWriter.setColor(k, b, c1);
-                else
+                } else {
                     pixelWriter.setColor(k, b, pixelReader.getColor(i, j));
+                }
             }
+        }
         return wImage;
     }
 }

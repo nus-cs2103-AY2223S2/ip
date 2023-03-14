@@ -7,9 +7,10 @@ import java.time.format.DateTimeFormatter;
  * Class that represents Event Task
  */
 public class Event extends Task {
+    private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd MMM uuuu");
     private LocalDate from;
     private LocalDate to;
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu");
+
 
     /**
      * Execute adding an Event command
@@ -29,6 +30,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from " + from.format(FORMATTER) + " to " + to.format(FORMATTER) + ")";
+        return "[E]" + super.toString() + " (from " + from.format(FORMAT) + " to " + to.format(FORMAT) + ")";
     }
 }

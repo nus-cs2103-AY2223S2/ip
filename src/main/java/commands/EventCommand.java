@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import exceptions.EmptyTaskException;
 import storage.Storage;
-import tasks.Deadline;
 import tasks.Event;
 import tasks.TaskList;
 import ui.Ui;
@@ -41,6 +40,12 @@ public class EventCommand extends Command {
         }
     }
 
+    /**
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @param idx index of task
+     */
     public void replace(TaskList tasks, Ui ui, Storage storage, int idx) {
         try {
             if (super.getCommand().equals("")) {
@@ -58,7 +63,13 @@ public class EventCommand extends Command {
         }
     }
 
-
+    /**
+     * generate the action to the save file
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return the string line that will be concatenated to save file
+     */
     public String generate(TaskList tasks, Ui ui, Storage storage) {
         String[] request = super.getCommand().split("/", 3);
         String task = request[0];

@@ -6,7 +6,6 @@ import exceptions.EmptyTaskException;
 import storage.Storage;
 import tasks.Deadline;
 import tasks.TaskList;
-import tasks.ToDo;
 import ui.Ui;
 
 
@@ -41,6 +40,12 @@ public class DeadlineCommand extends Command {
         }
     }
 
+    /**
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @param idx index of task
+     */
     public void replace(TaskList tasks, Ui ui, Storage storage, int idx) {
         try {
             if (super.getCommand().equals("")) {
@@ -57,7 +62,13 @@ public class DeadlineCommand extends Command {
         }
     }
 
-
+    /**
+     * generate the action to the save file
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return the string line that will be concatenated to save file
+     */
     public String generate(TaskList tasks, Ui ui, Storage storage) {
         String[] request = super.getCommand().split("/", 2);
         String task = request[0];
