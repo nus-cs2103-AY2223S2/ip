@@ -52,6 +52,14 @@ public class Duke {
         return ui.printGreet();
     }
 
+    public String lastSession() {
+        return ui.lastSession();
+    }
+
+    public boolean isTaskEmpty() {
+        return tasks.getSize() == 0;
+    }
+
     public String getResponse(String command) {
         try {
             Command c = Parser.parse(command);
@@ -67,7 +75,6 @@ public class Duke {
      * @throws IOException
      */
     public void run() throws IOException {
-        ui.greet();
         boolean isExit = false;
         if (tasks.getSize() > 0) {
             ui.saveTaskMsg();

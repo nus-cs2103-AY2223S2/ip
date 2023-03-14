@@ -44,7 +44,9 @@ public class MainWindow extends AnchorPane {
         duke = new Duke("./data/duke.txt");;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Duke: " + duke.greet(), dukeImage)
+                DialogBox.getDukeDialog(duke.greet(), dukeImage),
+                DialogBox.getDukeDialog(duke.lastSession() + "\n" + (duke.isTaskEmpty() ? "No data yet" :
+                        duke.getResponse("list")), dukeImage)
         );
     }
 

@@ -25,6 +25,10 @@ public class Ui {
         System.out.println(LINE + "\n");
     }
 
+    public String lastSession() {
+        return "Here is your tasks from last session :";
+    }
+
     public String printGreet() {
         return "Hello! I'm duke.\n\tWhat can I do for you?";
     }
