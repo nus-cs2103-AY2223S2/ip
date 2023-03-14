@@ -1,6 +1,6 @@
-## :chicken: Cluck! User guide
+## **Cluck!** User guide
 
-## Table of contents:
+### Table of contents:
 - [Quick start](#quick-start)
 - [Commands](#commands)
   - [View all tasks](#view-all-tasks-list)
@@ -8,41 +8,74 @@
     - [To-do](#to-do-todo-taskdescription)
     - [Deadline](#deadline-deadline-deadlinedescription-by-datetime)
     - [Event](#event-event-eventdescription-from-startdatetime-to-enddatetime)
-  - [Mark task](#mark-task-as-complete-mark-tasknumber)
-  - [Un-mark task](#un-mark-task-as-complete-unmark-tasknumber)
+  - [Mark task](#mark-task-mark-tasknumber)
+  - [Un-mark task](#un-mark-task-unmark-tasknumber)
   - [Delete task](#delete-task-delete-tasknumber)
-  - [Find task](#find-tasks-find-keyword)
+  - [Find task](#find-task-find-keyword)
   - [Exiting Cluck!](#exit-cluck-bye)
+- [Date Time formatting](#date-time-formatting)
 
+___
 ## Quick start
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download _Cluck!_ [here](https://github.com/ChickenChiang/ip/)
+2. Download _Cluck!_ [here.](https://github.com/ChickenChiang/ip/)
 3. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar addressbook.jar command to run the application.A GUI similar to the below should appear in a few seconds.
 4. Type your commands into the command box!
-
+___
 ## Commands
-- The input format of the commands are in `this format` beside the header of describing each command.
+
+- The input format of the commands are in `this format` beside the header describing each command.
+___
 ### View all tasks `list`
+
 - Use this function to list all the tasks in your **_Cluck!_** task list.
+___
 ### Adding tasks
-There are 3 types of tasks that can be added in this version of **_Cluck!_**
+There are 3 types of tasks that can be added in this version of **_Cluck!_**: 
+___
+
 #### To-do `todo <TASK_DESCRIPTION>`
+- Creates a simple to-do task, with a description an a _marked_ or _un-marked_ check box.
+___
 #### Deadline  `deadline <DEADLINE_DESCRIPTION> /by <DATE_TIME>`
-- Ensure that your date time is formatted as such: "dd MMM yy HHmm"
-- Example: `deadline Homework /by 23 Mar 25 2359` creates a deadline called "Homework", with the due date being 23rd March 2025 2359 _(24-hour format for time)_
+
+- Creates a task with a deadline at the given date. 
+- _See [date time formatting](#date-time-formatting) for the right input format_.
+- Example: `deadline Homework /by 23 Mar 25 2359` creates a deadline called "**Homework**", with a due date at **23rd March 2025 11:59 pm** _(24-hour format for time)_
+___
 #### Event `event <EVENT_DESCRIPTION> /from <START_DATE_TIME> /to <END_DATE_TIME>`
-- Ensure that your date time is formatted as such: "dd MMM yy HHmm"
-- Example: `event Dinner with Boss /from 24 Apr 23 2000 /to 24 Apr 23 2230` creates an event called "Dinner with Boss", that starts at 24th April 2023 8pm and ends at 24th Apri 2023 10:30pm.
+
+- Creats an event with a start date and end date. 
+- _See [date time formatting](#date-time-formatting) for the right input format_.
+
+- Example: `event Dinner with Boss /from 24 Apr 23 2000 /to 24 Apr 23 2230` creates an event called "**Dinner with Boss**", that starts at **24th April 2023 8 pm** and ends at **24th April 2023 10:30 pm**.
+___
 ### Mark task `mark <TASK_NUMBER>`
+
 - Marks the task in tasklist at the index given. 
-- _To see the task number, use the `list` command._
+- _To see the task number, use the [list](#view-all-tasks-list) command._
+___
 ### Un-mark task `unmark <TASK_NUMBER>`
+
 - Un-marks the task in tasklist at the index given.
-- _To see the task number, use the `list` command._
+- _To see the task number, use the [list](#view-all-tasks-list) command._
+___
 ### Delete task `delete <TASK_NUMBER>`
+
 - Deletes in tasklist at the index given. 
-- _To see the task number, use the `list` command._
+- _To see the task number, use the [list](#view-all-tasks-list) command._
+___
 ### Find task `find <KEYWORD>`
+
 - Displays all the tasks containing the keyword given. Note that it is not case-sensitive
+___
 ### Exit **_Cluck!_** `bye`
+
 - Closes cluck (not yet implemented... coming soon! For now you have to manually close the GUI.)
+
+## Date-time formatting
+- Date-time inputs should be formatted in the form of `dd MMM yy HHmm`, where:
+  - `dd` is the day of the month in numerical form; _e.g. `dd` for 3rd May would be `03`_, for 24th it would be `24`
+  - `MMM` is the first 3 letters of the month; _e.g, August in `MMM` format is `Aug` (case-insensitive)_
+  - `yy` is the last two digits of the year; _e.g. 2034 in `yy` format is `34`_
+  - `HHmm` is the time in 24-hour format
