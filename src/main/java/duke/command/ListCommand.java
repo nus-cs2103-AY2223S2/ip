@@ -48,7 +48,6 @@ public class ListCommand implements Command {
             IntStream.rangeClosed(1, taskList.getTotalTasks())
                     .forEach(taskNo -> ui.showText(
                             String.format("%d. %s", taskNo, taskList.getTask(taskNo).toString())));
-
         }
 
         ui.showLine();

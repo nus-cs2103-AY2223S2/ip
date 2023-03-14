@@ -22,6 +22,7 @@ public class GraphicalUi implements Ui {
      */
     @Override
     public void showText(String text) {
+        text = text.replaceAll("(.{40})", "$1\n");
         mainWindow.showReply(text);
     }
 

@@ -14,11 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -36,18 +35,16 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
-            dialog.setBackground(new Background(new BackgroundImage(
-                    new Image(MainWindow.class.getResourceAsStream("/images/dialogbox.png")),
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundPosition.CENTER,
-                    new BackgroundSize(1.0, 1.0, true, true, false, false)
+            dialog.setBackground(new Background(new BackgroundFill(
+                    Color.BLACK,
+                    new CornerRadii(2),
+                    Insets.EMPTY
             )));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        dialog.setPadding(new Insets(20, 20, 20, 20));
+        dialog.setPadding(new Insets(6));
         dialog.setText(text);
         displayPicture.setImage(img);
     }
