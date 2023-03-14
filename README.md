@@ -5,6 +5,7 @@ Chatbot with functions:
 - Add todo tasks
 - Add deadline tasks with single deadline
 - Add event tasks with a start time and end time
+- Add duration tasks with a stipulated duration to complete.
 - Function to mark and unmark tasks as done or undone
 - Function to delete unwanted tasks
 - Function to list down recorded tasks

@@ -11,8 +11,7 @@ public class EventTask extends Task {
     private final LocalDate endTime;
 
     /**
-     * Contructor for an event type Task.
-     *
+     * Constructor for an event type Task.
      * @param name Title/name of task.
      * @param startTime Date where task should start.
      * @param endTime Sate where task should end.
@@ -25,7 +24,6 @@ public class EventTask extends Task {
 
     /**
      * Contructor for an event type Task when loaded in from hard drive.
-     *
      * @param name Title/name of task.
      * @param startTime Date where task should start.
      * @param endTime Sate where task should end.

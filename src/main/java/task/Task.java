@@ -9,7 +9,6 @@ public class Task {
 
     /**
      * Constructor for a Task.
-     *
      * @param name Title/name of Task.
      */
     public Task(String name) {
@@ -19,7 +18,6 @@ public class Task {
 
     /**
      * Constructor for a Task when loaded in from hard drive.
-     *
      * @param name Title/name of Task.
      * @param isDone True if Task has been marked as done, false otherwise.
      */

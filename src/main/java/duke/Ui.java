@@ -56,4 +56,9 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         return "Yo! The name is\n" + projName;
     }
+
+    public static void showWelcomeBackMessage() {
+        System.out.println("Welcome back!");
+        System.out.println("Here's the tasks you have:");
+    }
 }

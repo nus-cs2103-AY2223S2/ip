@@ -18,7 +18,6 @@ public class TaskList {
 
     /**
      * Constructor for TaskList when Tasks are present.
-     *
      * @param inputTasks Array of Tasks to be added.
      */
     public TaskList(Task[] inputTasks) {
@@ -28,7 +27,6 @@ public class TaskList {
 
     /**
      * Adds a Task to existing TaskList.
-     *
      * @param task Task to be added to current list.
      */
     public void add(Task task) {
@@ -37,7 +35,6 @@ public class TaskList {
 
     /**
      * Removes task from list at given index.
-     *
      * @param index Index where task is to be removed.
      */
     public void remove(int index) {
@@ -46,7 +43,6 @@ public class TaskList {
 
     /**
      * Returns a task at a given index.
-     *
      * @param index Index where task is to be returned.
      * @return The task requested by Duke.
      */
@@ -56,7 +52,6 @@ public class TaskList {
 
     /**
      * Returns the number of items in the existing TaskList.
-     *
      * @return Number of tasks in the TaskList.
      */
     public int size() {
@@ -65,7 +60,6 @@ public class TaskList {
 
     /**
      * Returns an array of tasks stored in current TaskList.
-     *
      * @return An array of Tasks from current TaskList.
      */
     public Task[] asList() {
@@ -74,7 +68,6 @@ public class TaskList {
 
     public ArrayList<Task> filterByKeyword(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
-
         for (int i = 0; i < tasks.size(); i += 1) {
             Task currentTask = tasks.get(i);
             String taskName = currentTask.getName();
@@ -82,7 +75,6 @@ public class TaskList {
                 filteredTasks.add(currentTask);
             }
         }
-
         return filteredTasks;
     }
 }

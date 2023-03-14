@@ -8,7 +8,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import task.TaskList;
@@ -33,8 +32,6 @@ public class Duke extends Application {
     /**
      * Constructs a Duke object for program to run.
      * Initialises the ui, storage, parser and tasklist to be used for the program.
-     *
-//     * @param filePath Path in which the file is located relative to project root.
      */
     public Duke() {
         ui = new Ui();
@@ -57,50 +54,40 @@ public class Duke extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
-
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
         scene = new Scene(mainLayout);
-
         stage.setScene(scene);
         stage.show();
-
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
-
         userInput.setOnAction((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
-
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
         sendButton.setOnMouseClicked((event) -> {
-            try {
-                handleUserInput();
-            } catch (DukeException | IOException e) {
-                e.printStackTrace();
-            }
+            handleEvent();
         });
-
         userInput.setOnAction((event) -> {
-            try {
-                handleUserInput();
-            } catch (DukeException | IOException e) {
-                e.printStackTrace();
-            }
+            handleEvent();
         });
+    }
+
+    private void handleEvent() {
+        try {
+            handleUserInput();
+        } catch (DukeException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Creates a label with the specified text and adds it to the dialog container.
-     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */

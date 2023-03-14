@@ -6,7 +6,6 @@ package task;
 public class TodoTask extends Task {
     /**
      * Constructor for todo Task.
-     *
      * @param name Title/name of Task.
      */
     public TodoTask(String name) {
@@ -15,7 +14,6 @@ public class TodoTask extends Task {
 
     /**
      * Constructor for todo Task when loaded in from hard drive.
-     *
      * @param name Title/name of task.
      * @param isDone True if task has been marked as done, false otherwise.
      */

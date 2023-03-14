@@ -9,7 +9,6 @@ public class DurationTask extends Task {
 
     /**
      * Constructor for duration type task.
-     *
      * @param name Name of the task.
      * @param hours Number of hours allocated to task.
      * @param mins Number of minutes allocated to task.
@@ -22,7 +21,6 @@ public class DurationTask extends Task {
 
     /**
      * Constructor for duration task when loaded in from hard drive.
-     *
      * @param name Name of the task.
      * @param hours Number of hours allocated to task.
      * @param mins Number of minutes allocated to task.

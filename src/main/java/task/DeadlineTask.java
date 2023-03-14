@@ -11,7 +11,6 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructor for a deadline Task.
-     *
      * @param name Title/name of task.
      * @param date Date which task should be done by.
      */
@@ -22,7 +21,6 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructor for a deadline Task when loaded in from hard drive.
-     *
      * @param name Title/name of task.
      * @param date Date which task should be done by.
      * @param isDone True if task has been marked as done, false otherwise.
