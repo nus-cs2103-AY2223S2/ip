@@ -13,5 +13,9 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.TXT
-text-ui-test/EXPECTED-UNIX.TXT
+/src/test/java/treebot/utils/text-ui-test/ACTUAL.TXT
+src/test/java/treebot/utils/text-ui-test/EXPECTED-UNIX.TXT
+
+#data files
+data
+/data/
