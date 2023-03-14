@@ -38,7 +38,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -58,7 +57,7 @@ public class DialogBox extends HBox {
     }
 
     public void setPadd() {
-        dialog.setPadding(new Insets(16, 12, 19, 12));
+        dialog.setPadding(new Insets(16, 12, 16, 12));
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
