@@ -1,12 +1,10 @@
 package cluck.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import cluck.tasks.Deadline;
-import cluck.tasks.Event;
+import org.junit.jupiter.api.Test;
+
 import cluck.tasks.Task;
 import cluck.tasks.ToDo;
 
@@ -18,6 +16,7 @@ public class TaskTest {
         Task savedTask = Task.buildTaskFromSave(workingTodoSave);
         Task testTask = new ToDo("Meet Jason");
         assertEquals(savedTask, testTask);
+
     }
 
     @Test
