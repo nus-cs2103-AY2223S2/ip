@@ -24,20 +24,19 @@ public class Cluck {
      * Instantiates a new Cluck with no arguments for JavaFx Application use.
      */
     public Cluck() {
-        this.taskList = new TaskList();
         this.storage = new Storage("/data/cluckSave.txt");
+        this.taskList = storage.readSave();
 
     }
 
     /**
-     * Cluck class contains and instance of TaskList, Ui, and Storage.
-     * These classes are the building blocks of Cluck.
+     * Instantiates a Cluck class that will store the data in the given file path.
      *
      * @param filePath path of saved path as String
      */
     public Cluck(String filePath) {
         this.storage = new Storage(filePath);
-        this.taskList = storage.populateTaskList();
+        this.taskList = storage.readSave();
     }
 
     /**
@@ -54,16 +53,19 @@ public class Cluck {
         }
         storage.writetoSave(taskList);
     }
+
     private Command getCommand(String userInput) throws CluckException {
         assert Objects.nonNull(userInput);
         return Parser.commandFactory(userInput);
     }
+
     private String executeCommand(Command command) throws CluckException {
         if (command instanceof ExitCommand) {
             isRunning = false;
         }
         return command.execute(taskList, storage);
     }
+
     /**
      * Gets response.
      *
