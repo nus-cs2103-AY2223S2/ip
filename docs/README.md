@@ -23,9 +23,11 @@ Hello! JeoBot is a 🔥 _fiery_ 🔥 chatbot focused on helping you manage your 
 
 ## Setting Up
 1. Download the latest JAR release file from [here](https://github.com/Jun-How/ip/releases/tag/A-Release).
-2. Double-click it.
-3. Add your tasks.
-4. Let it manage your tasks for you 😉
+2. Open your terminal.
+3. Navigate to the directory where you saved the JAR file.
+4. Type java -jar "jeo_v0.3.jar". It should start running.
+5. Add your tasks.
+6. Let it manage your tasks for you 😉
 
 ## Features
 ### Manage different tasks
@@ -36,12 +38,15 @@ Hello! JeoBot is a 🔥 _fiery_ 🔥 chatbot focused on helping you manage your 
 
 ### Set customisations
 - Optionally add tags to categorise tasks.
-- Multiple (`...`) tags can be added by specifying the command followed by its detail `/tag <detail>` for each tag.
+- Tags can only be added in the same command input as creating tasks.
+- Addition of tags to tasks must come last. <br>Example: `todo read a book /tag cool`
+- Multiple (`...`) tags can be added by specifying the command followed by its detail `/tag <detail>` for each tag. <br>Example: `todo read a book /tag cool /tag impt`
 
 
 ## Commands
+### ❗Important Note: Spaces between arguments are essential!
 ### `todo`
-Adds a Todo task to your list. Tags are optional (indicated by []).
+Adds a Todo task to your list. Tags are optional (indicated by [ ]).
 
 Example of usage:
 `todo buy groceries [/tag impt...]`
@@ -78,25 +83,25 @@ Example of usage:
 
 
 ### `list`
-Displays your current list of tasks
+Displays your current list of tasks.
 
 Example of usage:
 `list`
 
 ### `find`
-Finds tasks that contain the specified keyword
+Finds tasks that contain the specified keyword.
 
 Example of usage:
 `find assignment`
 
 ### `due`
-Finds tasks that are due on the specified date in the format `yyyy-MM-dd`
+Finds tasks that are due on the specified date in the format `yyyy-MM-dd`.
 
 Example of usage:
 `due 2023-03-01`
 
 ### `bye`
-Exits the program
+Exits the program.
 
 Example of usage:
 `bye`
