@@ -12,13 +12,18 @@ public class JeoException extends Exception {
 
     /**
      * Creates a new custom exception with the specified error description.
-     * @param e String describing the error message.
+     * @param e String describing the error message
+     * @param commandType Type of Command
      */
     public JeoException(String e, String commandType) {
         super(e);
         this.commandType = commandType;
     }
 
+    /**
+     * Returns a message string denoting the correct format for each command, if required.
+     * @return message string
+     */
     public String formatMessage() {
         StringBuilder sb = new StringBuilder("\nCommand format: ");
         switch (CommandType.valueOf(commandType.toUpperCase())) {

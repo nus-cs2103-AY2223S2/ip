@@ -13,8 +13,8 @@ public class TodoParserTest {
             String[] splitInput = new String[]{"todo"};
             new TodoParser().parse(splitInput);
         } catch (JeoException e) {
-            assertEquals("[Error] Please enter a task description after todo.\n" +
-                    "Command format: todo <description> [/tag <tag>...]", e.getMessage());
+            assertEquals("[Error] Please enter a task description after todo.\n"
+                    + "Command format: todo <description> [/tag <tag>...]", e.getMessage());
         }
     }
 }

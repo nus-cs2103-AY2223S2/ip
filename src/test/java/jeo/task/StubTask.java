@@ -3,7 +3,7 @@ package jeo.task;
 /**
  * Represents a stub task for testing.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class StubTask extends Task {
     protected String stubDescription;

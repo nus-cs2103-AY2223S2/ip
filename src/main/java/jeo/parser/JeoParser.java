@@ -1,7 +1,5 @@
 package jeo.parser;
 
-import java.util.HashMap;
-
 import jeo.command.ByeCommand;
 import jeo.command.Command;
 import jeo.command.CommandType;
@@ -9,7 +7,7 @@ import jeo.command.ListCommand;
 import jeo.exception.JeoException;
 
 /**
- * Represents the parser which parses user input as a string.
+ * Represents a Parser which parses user input as a string.
  * @author Goh Jun How
  * @version 0.3
  */
@@ -20,10 +18,10 @@ public class JeoParser {
     public static final String TO_PREFIX = "/to";
 
     /**
-     * Accepts a string that represents the raw string input to be parsed as command and action.
-     * @param input String representing the raw string input of current line.
-     * @return HashMap linking each essential aspect of the input to its corresponding substring.
-     * @throws JeoException for custom errors.
+     * Parses the given input string and returns a Command object for execution.
+     * @param input user input split by white spaces
+     * @return Command object
+     * @throws JeoException Custom error if user input does not conform to the expected format
      */
     public static Command parseString(String input) throws JeoException {
         // To prevent interference with saving format

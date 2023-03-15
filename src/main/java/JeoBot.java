@@ -37,7 +37,7 @@ public class JeoBot {
     /**
      * Parses and executes commands which the user inputs before returning the output message accordingly.
      * @param input String representing the input message.
-     * @return The output message.
+     * @return output message.
      */
     public String run(String input) {
         StringBuilder sb = new StringBuilder();

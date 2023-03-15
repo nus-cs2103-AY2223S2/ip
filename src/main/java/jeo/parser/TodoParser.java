@@ -1,17 +1,28 @@
 package jeo.parser;
 
+import static jeo.parser.JeoParser.TAG_PREFIX;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import jeo.command.Command;
 import jeo.command.TodoCommand;
 import jeo.exception.JeoException;
 import jeo.task.ToDo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static jeo.parser.JeoParser.TAG_PREFIX;
-
+/**
+ * Parses input arguments and creates a TodoCommand object.
+ * @author Goh Jun How
+ * @version 0.3
+ */
 public class TodoParser implements Parser {
 
+    /**
+     * Parses the given input arguments and returns a TodoCommand object for execution.
+     * @param splitInput user input split by white spaces
+     * @return TodoCommand object
+     * @throws JeoException Custom error if user input does not conform to the expected format
+     */
     @Override
     public Command parse(String[] splitInput) throws JeoException {
         String description = "";

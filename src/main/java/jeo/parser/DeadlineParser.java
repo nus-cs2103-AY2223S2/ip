@@ -1,18 +1,29 @@
 package jeo.parser;
 
+import static jeo.parser.JeoParser.BY_PREFIX;
+import static jeo.parser.JeoParser.TAG_PREFIX;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import jeo.command.Command;
 import jeo.command.DeadlineCommand;
 import jeo.exception.JeoException;
 import jeo.task.Deadline;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static jeo.parser.JeoParser.BY_PREFIX;
-import static jeo.parser.JeoParser.TAG_PREFIX;
-
+/**
+ * Parses input arguments and creates a DeadlineCommand object.
+ * @author Goh Jun How
+ * @version 0.3
+ */
 public class DeadlineParser implements Parser {
 
+    /**
+     * Parses the given input arguments and returns a DeadlineCommand object for execution.
+     * @param splitInput user input split by white spaces
+     * @return DeadlineCommand object
+     * @throws JeoException Custom error if user input does not conform to the expected format
+     */
     @Override
     public Command parse(String[] splitInput) throws JeoException {
         String description = "";
@@ -34,14 +45,14 @@ public class DeadlineParser implements Parser {
                 break;
             }
         }
-        if (indexOfFirstByPrefix+1 == splitInputLength || indexOfFirstByPrefix+2 == splitInputLength) {
+        if (indexOfFirstByPrefix + 1 == splitInputLength || indexOfFirstByPrefix + 2 == splitInputLength) {
             throw new JeoException("Missing valid date after prefix /by", "deadline");
         }
-        by = splitInput[indexOfFirstByPrefix+1] + " " + splitInput[indexOfFirstByPrefix+2];
-        if (indexOfFirstByPrefix+3 != splitInputLength && splitInput[indexOfFirstByPrefix+3].equals(TAG_PREFIX)) {
+        by = splitInput[indexOfFirstByPrefix + 1] + " " + splitInput[indexOfFirstByPrefix + 2];
+        if (indexOfFirstByPrefix + 3 != splitInputLength && splitInput[indexOfFirstByPrefix + 3].equals(TAG_PREFIX)) {
             tagsString = String.join("\\", ParserUtil.parseTags(
-                    splitInput, indexOfFirstByPrefix+3, "deadline"));
-        } else if (indexOfFirstByPrefix+3 != splitInputLength) {
+                    splitInput, indexOfFirstByPrefix + 3, "deadline"));
+        } else if (indexOfFirstByPrefix + 3 != splitInputLength) {
             throw new JeoException("Invalid command format!", "deadline");
         } else {
             tagsString = String.join("\\", new ArrayList<>());
