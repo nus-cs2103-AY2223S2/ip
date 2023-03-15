@@ -2,7 +2,6 @@ package jeo.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task that lasts for a period of time.
@@ -23,7 +22,7 @@ public class Event extends Task {
      * @param from String representing the start date-time of the task.
      * @param to String representing the end date-time of the task.
      */
-    public Event(String description, String from, String to, String tags) throws DateTimeParseException {
+    public Event(String description, String from, String to, String tags) {
         super(description, tags);
         DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_TIME_PARSED);
         DateTimeFormatter formatterPrint = DateTimeFormatter.ofPattern(DATE_TIME_TO_PRINT);

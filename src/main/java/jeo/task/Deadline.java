@@ -2,7 +2,6 @@ package jeo.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task that has a deadline.
@@ -20,7 +19,7 @@ public class Deadline extends Task {
      * @param description String describing the task.
      * @param by String representing the date-time when the task is due.
      */
-    public Deadline(String description, String by, String tags) throws DateTimeParseException {
+    public Deadline(String description, String by, String tags) {
         super(description, tags);
         DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_TIME_TO_PARSE);
         DateTimeFormatter formatterPrint = DateTimeFormatter.ofPattern(DATE_TIME_TO_PRINT);
