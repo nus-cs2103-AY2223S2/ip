@@ -40,9 +40,9 @@ public class TaskList {
     }
 
     /**
-     * Get total number of tasks in the list.
+     * Gets total number of tasks in the list.
      *
-     * @return Number of tasks.
+     * @return The number of tasks.
      */
     public String getTotalTask() {
         String secondHalf;
@@ -55,7 +55,7 @@ public class TaskList {
     }
 
     /**
-     * Get a specific task in the list.
+     * Gets a specific task in the list.
      *
      * @param index Index of the task to be retrieved.
      * @return The selected task.

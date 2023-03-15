@@ -74,7 +74,7 @@ public abstract class Task {
     }
 
     /**
-     * Visual display of the task status.
+     * Shows a visual display of the task status.
      *
      * @return 'X' as done; ' ' otherwise/
      */
@@ -83,7 +83,7 @@ public abstract class Task {
     }
 
     /**
-     * Concatenate task's type, status and description using ","
+     * Concatenates task's type, status and description using ","
      *
      * @return String of task's information.
      */
