@@ -4,7 +4,7 @@
 
 ### list all tasks: `list`
 
-List all tasks.
+List all tasks. The indices of the tasks are assigned in chronological order of when the tasks are added to the list. 
 
 ### Add a todo task: `todo [task name]`
 
@@ -25,15 +25,22 @@ keyword is separated by a blank space.
 
 ### Delete a task: `delete [task index]`
 
-Delete a task by index. The index of a task can be found in the task list given by the `list` command, and is assigned
-in chronological order of when the tasks are added to the list. 
+Delete a task by index. 
+
+### Mark a task as done: `mark [task index]`
+
+Mark a task as done by index. 
+
+### Unmark a task as done: `unmark [task index]`
+
+Mark a task as undone by index. 
 
 
 ## Usage
 
 ### `List` - List all tasks
 
-All current tasks are stored, and can be listed by `list`. Tasks include todos, deadlines, and events.
+All current tasks are stored, and can be listed by `list`. Tasks include todos, deadlines, and events. 
 
 Example usage: 
 
@@ -153,6 +160,37 @@ Now you have 4 tasks in the list.
 As the task `[D][ ] test (by: Oct 22 2922)` appears the first listed by `list`, it corresponds to the index `1`. When
 a task is deleted, the program also shows the number of tasks left.
 
+### `mark [task index]` - Mark a task as done
+
+Mark a task as done by index. Tasks that are done will be displaed as `[X]` in the display list, otherwise `[ ]` will be displayed instead. 
+
+Example of usage:
+
+`mark 1`
+
+Expected outcome:
+
+```
+Nice! I've marked this task as done:
+  [T][X] test
+```
+
+### `unmark [task index]` - Unmark a task as done
+
+Unmark a task as done by index. This is the reverse command of `mark`. 
+
+Example of usage:
+
+`Unmark 1`
+
+Expected outcome:
+
+```
+OK, I've marked this task as not done yet:
+  [T][ ] test
+```
+
+
 ## Command Summary
 | Action              |                        Format                        |                                          Examples |
 |:--------------------|:----------------------------------------------------:|--------------------------------------------------:|
@@ -162,6 +200,9 @@ a task is deleted, the program also shows the number of tasks left.
 | Add an event        | event [event name] /from [start date] /to [end date] | event recess week /from 2023-02-20 /to 2023-02-26 |
 | Find a task         |                 find [keyword 1] ...                 |                                  find recess 2022 |
 | delete a task       |                    delete [index]                    |                                         delete 10 |
+| mark a task as done |                    mark [index]                      |                                            mark 1 |
+| unmark a task as done |                    unmark [index]                  |                                          unmark 1 |
+
 
 ## FAQ
 If you have any issues and enquiries, please contact us at `bo.ai@u.nus.edu`.
