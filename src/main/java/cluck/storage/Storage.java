@@ -1,7 +1,6 @@
 package cluck.storage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -17,42 +16,59 @@ import cluck.tasks.Task;
  * Storage class handles the reading and writing of saved tasks in a given .txt file.
  */
 public class Storage {
+
+    private String directory;
+    private Path filePath;
     private File saveFile;
+    private File saveDir;
+
 
     /**
      * Instantiates a new Storage.
      *
      * @param filePath the file path of the saved tasks
      */
-
-    private String home = System.getProperty("user.home");
-    private Path filePath;
-
     public Storage(String filePath) {
-        this.filePath = Paths.get(home, "data", filePath);
 
-        // Create tasks file if it doesn't exist
-        saveFile = new File(this.filePath.toString());
-        if (!saveFile.exists()) {
+        this.directory = System.getProperty("user.dir");
+        this.filePath = Paths.get(directory, filePath);
+        this.saveFile = this.filePath.toFile();
+        this.saveDir = this.saveFile.getParentFile();
+
+        if (!this.saveDir.exists()) {
+            this.saveDir.mkdir();
+        }
+        if (!this.saveFile.exists()) {
             try {
-                saveFile.createNewFile();
-            } catch (Exception e) {
-                System.out.println("Crapadoodle! I couldn't create a new file. Something went wrong.");
+                this.saveFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
 
-    private TaskList populateTaskList(TaskList taskList) {
+    /**
+     * Reads saved file at save location, returns a task list class containing the saved tasks.
+     * If the file does not exist, the method returns an empty task list
+     *
+     * @return task list containing saved tasks or empty task list
+     */
+    public TaskList readSave() {
         Scanner savedFileScanner;
         try {
-            savedFileScanner = new Scanner(saveFile);
-            saveFile.createNewFile();
+            savedFileScanner = new Scanner(this.saveFile);
         } catch (Exception e) {
             e.printStackTrace();
             return new TaskList();
         }
+        return this.populateTaskList(savedFileScanner);
+    }
+
+    private TaskList populateTaskList(Scanner savedFileScanner) {
         String taskString;
         Task currTask;
+        TaskList taskList = new TaskList();
+
         while (savedFileScanner.hasNextLine()) {
             taskString = savedFileScanner.nextLine();
             try {
