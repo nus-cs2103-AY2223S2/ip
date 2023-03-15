@@ -11,50 +11,99 @@ import duke.taskmanager.*;
 public class Parser {
 
     /*function parses applicable inputs and prints out respective outputs based on saved state from storage*/
+    public static void parseDelete(String str, TaskList tasks, StringBuilder res) {
+        if (tasks.isEmpty()) {
+            res.append("There is nothing on your list to delete");
+        } else {
+            int index = Integer.parseInt((str.substring(7)));
+            Tasks t = tasks.get(index - 1);
+            res.append("Noted, I've removed this task:\n" + index + ": " + t.icon() + t.completed() + " " + t.getDesc());
+            tasks.remove(index - 1);
+            TaskList.rewrite(tasks);
+            res.append("\nNow you have ").append(tasks.size()).append(" tasks in the list");
+            System.out.println(t.deleted() +
+                    "\nNow you have " +
+                    tasks.size() +
+                    " tasks in the list");
+        }
+    }
+    public static void parseFind(String str, TaskList tasks, StringBuilder res) {
+        System.out.println("Here are the tasks matching the description:");
+        res.append("Here are the tasks matching the description:");
+        if (str.split(" ", 2).length == 1) {
+            System.out.println("enter description you're looking for");
+            res.append("enter description you're looking for");
+        }
+        String keyword = str.split(" ", 2)[1];
+        int n = 1;
+        for (Tasks t : tasks.getList()) {
+            if (t.getDesc().contains(keyword)) {
+                System.out.println(n + ". "
+                        + t.icon()
+                        + t.completed() + " "
+                        + t.getDesc());
+                res.append("\n" + n + ". "
+                        + t.icon()
+                        + t.completed() + " "
+                        + t.getDesc());
+                n++;
+            }
+        }
+    }
+    public static void parseList(String str, TaskList tasks, StringBuilder res) {
+        System.out.println("Here are the tasks in your list:");
+        res.append("Here are the tasks in your list:");
+        if (tasks.isEmpty()) {
+            System.out.println("You have nothing scheduled, add something to the list.");
+            res.append("\nYou have nothing scheduled, add something to the list.");
+        } else {
+            int n = 1;
+            for (Tasks t : tasks.getList()) {
+                System.out.println(n + ". "
+                        + t.icon()
+                        + t.completed() + " "
+                        + t.getDesc());
+                res.append("\n" + ". "
+                        + t.icon()
+                        + t.completed() + " "
+                        + t.getDesc());
+                n++;
+            }
+        }
+    }
+
+    public static void processMark(String str, TaskList tasks, StringBuilder res) {
+        if (str.contains("un")) {
+            int index = Integer.parseInt((str.substring(7)));
+            Tasks t = tasks.get(index - 1);
+            t.unmark();
+            TaskList.rewrite(tasks);
+            res.append("Oops! Stop procrastinating: \n"
+                    + t.completed() + " " + t.getDesc());
+            System.out.println("Oops! Stop procrastinating: \n"
+                    + t.completed() + " " + t.getDesc());
+        } else {
+            int index = Integer.parseInt(str.substring(5));
+            Tasks t = tasks.get(index - 1);
+            t.mark();
+            TaskList.rewrite(tasks);
+            res.append("Nice! I've marked this task as done: \n"
+                    + t.completed() + " " + t.getDesc());
+            System.out.println("Nice! I've marked this task as done: \n"
+                    + t.completed() + " " + t.getDesc());
+        }
+    }
+
     public static String parse(String str, TaskList tasks) {
         assert tasks != null;
         StringBuilder res = new StringBuilder();
         if (str.equals("bye")) {
             Exit();
         } else if (str.contains("delete")) {
-            if (tasks.isEmpty()) {
-                res.append("There is nothing on your list to delete");
-                return res.toString();
-            } else {
-                int index = Integer.parseInt((str.substring(7)));
-                Tasks t = tasks.get(index - 1);
-                tasks.remove(index - 1);
-                TaskList.rewrite(tasks);
-                res.append("\nNow you have ").append(tasks.size()).append(" tasks in the list");
-                System.out.println(t.deleted() +
-                        "\nNow you have " +
-                        tasks.size() +
-                        " tasks in the list");
-                return res.toString();
-            }
+            parseDelete(str, tasks, res);
+            return res.toString();
         } else if (str.contains("find")) {
-            System.out.println("Here are the tasks matching the description:");
-            res.append("Here are the tasks matching the description:");
-            if (str.split(" ", 2).length == 1) {
-                System.out.println("enter description you're looking for");
-                res.append("enter description you're looking for");
-                return res.toString();
-            }
-            String keyword = str.split(" ", 2)[1];
-            int n = 1;
-            for (Tasks t : tasks.getList()) {
-                if (t.getDesc().contains(keyword)) {
-                    System.out.println(n + ". "
-                            + t.icon()
-                            + t.completed() + " "
-                            + t.getDesc());
-                    res.append("\n" + res + n + ". "
-                            + t.icon()
-                            + t.completed() + " "
-                            + t.getDesc());
-                    n++;
-                }
-            }
+            parseFind(str, tasks, res);
             return res.toString();
         } else if (str.contains("cleartags")){
             int index = Integer.parseInt(str.split(" ",2 )[1]);
@@ -90,57 +139,18 @@ public class Parser {
             return res.toString();
         } else {
             if (str.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                res.append("Here are the tasks in your list:");
-                if (tasks.isEmpty()) {
-                    System.out.println("You have nothing scheduled, add something to the list.");
-                    res.append("\nYou have nothing scheduled, add something to the list.");
-                    return res.toString();
-                } else {
-                    int n = 1;
-                    for (Tasks t : tasks.getList()) {
-                        System.out.println(n + ". "
-                                + t.icon()
-                                + t.completed() + " "
-                                + t.getDesc());
-                        res.append("\n" + ". "
-                                + t.icon()
-                                + t.completed() + " "
-                                + t.getDesc());
-                        n++;
-                    }
-                    return res.toString();
-                }
-            } else if (str.contains("mark")) {
+                parseList(str, tasks, res);
+                return res.toString();
 
-                if (str.contains("un")) {
-                    int index = Integer.parseInt((str.substring(7)));
-                    Tasks t = tasks.get(index - 1);
-                    t.unmark();
-                    TaskList.rewrite(tasks);
-                    res.append("Oops! Stop procrastinating: \n"
-                            + t.completed() + " " + t.getDesc());
-                    System.out.println("Oops! Stop procrastinating: \n"
-                            + t.completed() + " " + t.getDesc());
-                    return res.toString();
-                } else {
-                    int index = Integer.parseInt(str.substring(5));
-                    Tasks t = tasks.get(index - 1);
-                    t.mark();
-                    TaskList.rewrite(tasks);
-                    res.append("Nice! I've marked this task as done: \n"
-                            + t.completed() + " " + t.getDesc());
-                    System.out.println("Nice! I've marked this task as done: \n"
-                            + t.completed() + " " + t.getDesc());
-                    return res.toString();
-                }
+            } else if (str.contains("mark")) {
+                processMark(str, tasks, res);
+                return res.toString();
 
             } else {
                 String type = str.split(" ", 2)[0];
                 try {
                     switch (type) {
                         case "todo":
-
                             Tasks t = new ToDo(str);
                             tasks.add(t);
                             System.out.println(t.added() +
