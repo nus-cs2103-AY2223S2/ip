@@ -26,10 +26,15 @@ respective tags, and clear tags for given item.
 Input keyword into dialogbox, and add respective items to list.
 
 Example of usage: 
-
-`todo description `
-`deadline description /by DD-MM-YY`
-`event description /from DD-MM-YY to DD-MM-YY`
+```
+`todo read a book`
+```
+```
+`deadline finish pyp's /by 21-12-2022`
+```
+```
+`event cousin's birthday /from 09-12-2022 to 13-12-2022`
+```
 
 Expected outcome: Tasks added to list
 
