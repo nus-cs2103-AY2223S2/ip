@@ -38,6 +38,7 @@ Hello! JeoBot is a 🔥 _fiery_ 🔥 chatbot focused on helping you manage your 
 
 ### Set customisations
 - Optionally add tags to categorise tasks.
+- Tags should be one word each (no spaces).
 - Tags can only be added in the same command input as creating tasks.
 - Addition of tags to tasks must come last. <br>Example: `todo read a book /tag cool`
 - Multiple (`...`) tags can be added by specifying the command followed by its detail `/tag <detail>` for each tag. <br>Example: `todo read a book /tag cool /tag impt`
