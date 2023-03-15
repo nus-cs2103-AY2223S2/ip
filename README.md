@@ -14,9 +14,11 @@ JeoBot keeps you worry-free by keeping track of the things you need to do.
 
 ### Activation
 1. Download the latest JAR release file from [here](https://github.com/Jun-How/ip/releases/tag/A-Release).
-2. Double-click it.
-3. Add your tasks.
-4. Let it manage your tasks for you 😉
+2. Open your terminal.
+3. Navigate to the directory where you saved the JAR file.
+4. Type java -jar “jeo_v0.3.jar”. It should start running.
+5. Add your tasks.
+6. Let it manage your tasks for you 😉
 
 ### Features
 - [x] Managing different tasks (ToDo, Deadline, Event)
