@@ -30,7 +30,6 @@ public class ParserTest {
         assertEquals(new MarkTaskCommand(validTest6), Parser.parse(validTest6, dummy));
         assertEquals(new DeleteCommand(validTest7), Parser.parse(validTest7, dummy));
         **/
-
         TaskList dummy = new TaskList();
 
         String invalidInput = "deadline eat"; // wrong format
