@@ -7,11 +7,10 @@ import brotherbot.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
-// load tasks from file, save changes to file
 public class Storage {
     private File hardDisk;
     private TaskList taskStorage;
@@ -99,5 +98,7 @@ public class Storage {
             }
         }
     }
+
+
 }
 

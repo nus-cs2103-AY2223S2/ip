@@ -3,14 +3,16 @@ package brotherbot.commands;
 import brotherbot.storage.TaskList;
 import brotherbot.ui.Ui;
 
-public class DisplayCommand extends Command {
+import java.util.ArrayList;
+
+public class FindCommand extends Command {
 
     /**
-     * Constructor to create an DisplayCommand object.
+     * Constructor to create an FindCommand object.
      *
      * @param input Input string required for command execution.
      */
-    public DisplayCommand(String input) {
+    public FindCommand(String input) {
         super(input);
     }
 
@@ -21,9 +23,12 @@ public class DisplayCommand extends Command {
      * @param ui Ui object required for command execution.
      */
     public void execute(TaskList storage, Ui ui) {
-        ui.toUser("Here you go my brother!" );
-        storage.display(ui);
+        String keyword = this.input.substring(5);
+        ui.toUser("Here are the matching task my brother!" );
+        ArrayList<Integer> results = storage.search(keyword);
+        for (Integer i: results) {
+            ui.toUser((i + 1) + ". " + storage.get(i).toString());
+        }
         ui.toUser("Anything else I can do for you top G" );
-
     }
 }

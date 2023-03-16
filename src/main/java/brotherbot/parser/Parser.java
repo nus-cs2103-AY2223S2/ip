@@ -1,11 +1,6 @@
 package brotherbot.parser;
 
-import brotherbot.commands.AddTaskCommand;
-import brotherbot.commands.Command;
-import brotherbot.commands.DeleteCommand;
-import brotherbot.commands.DisplayCommand;
-import brotherbot.commands.ExitCommand;
-import brotherbot.commands.MarkTaskCommand;
+import brotherbot.commands.*;
 
 import brotherbot.exceptions.BroException;
 import brotherbot.storage.TaskList;
@@ -33,8 +28,10 @@ public class Parser {
             command = new DisplayCommand(input);
         } else if (input.length() >= 6 && input.substring(0, 4).equalsIgnoreCase("mark")) {
             command = new MarkTaskCommand(input);
-        } else if (input.length() > 7 && input.substring(0, 6).equalsIgnoreCase("delete")) {
+        } else if (input.length() > 8 && input.substring(0, 6).equalsIgnoreCase("delete")) {
             command = new DeleteCommand(input);
+        } else if (input.length() > 5 && input.substring(0, 3).equalsIgnoreCase("find")) {
+            command = new FindCommand(input);
         } else {
             command = new AddTaskCommand(input);
         }
@@ -45,7 +42,7 @@ public class Parser {
      * Checks if inputs are valid.
      */
     private static void validateInput(String input, TaskList storage) throws BroException {
-        if (!input.contains("todo") && !input.contains("event") && !input.contains("display") && !input.contains("deadline") && !input.contains("mark") && !input.contains("bye") && !input.contains("delete")) {
+        if (!input.contains("todo") && !input.contains("event") && !input.contains("display") && !input.contains("deadline") && !input.contains("mark") && !input.contains("bye") && !input.contains("delete") && !input.contains("find")) {
             throw new BroException("OOPS! invalid command la bro");
         }
         if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("todo") && input.length() <= 5) {
@@ -54,6 +51,10 @@ public class Parser {
 
         if (input.length() > 5 && input.substring(0, 5).equalsIgnoreCase("event") && (!input.contains("/from") || input.indexOf("/from") == 6 || !input.contains("/to") || input.indexOf("/from") > input.indexOf("/to"))) {
             throw new BroException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
+        }
+
+        if (input.length() > 4 && input.substring(0, 3).equalsIgnoreCase("find") && input.length() <= 5) {
+            throw new BroException("what do you want me to find bro... here's the correct format:\nfind XXX");
         }
 
         if (input.length() > 6 && input.substring(0, 6).equalsIgnoreCase("delete")) {

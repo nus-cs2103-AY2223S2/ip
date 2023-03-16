@@ -78,6 +78,23 @@ public class TaskList {
         }
     }
 
+    /**
+     * Search for tasks with relevant keyword.
+     *
+     * @param keyword Keyword used for search.
+     * @return An array of indexes of relevant tasks.
+     */
+    public ArrayList<Integer> search(String keyword) {
+        ArrayList<Integer> relevantTaskIndexes = new ArrayList<>();
+
+        for (int i = 0; i < this.taskStorage.size(); i++) {
+            if (this.taskStorage.get(i).description.contains(keyword)) {
+                relevantTaskIndexes.add(i);
+            }
+        }
+        return relevantTaskIndexes;
+    }
+
     public String getPrintFormat(int index) {
         return this.taskStorage.get(index).toString();
     }
