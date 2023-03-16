@@ -1,6 +1,6 @@
 package brotherbot;
 
-import brotherbot.commands.*;
+import brotherbot.commands.Command;
 import brotherbot.exceptions.BroException;
 import brotherbot.parser.Parser;
 import brotherbot.storage.Storage;
@@ -13,6 +13,7 @@ public class BrotherBot {
     private TaskList tasks;
     private Ui ui;
 
+
     public BrotherBot(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -20,7 +21,9 @@ public class BrotherBot {
         this.tasks = storage.getTasks();
     }
 
-
+    /**
+     * Runs the BrotherBot application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -38,14 +41,12 @@ public class BrotherBot {
         }
     }
 
+    /**
+     * Launches the BrotherBot application.
+     */
     public static void main(String[] args) {
         new BrotherBot("data.txt").run();
     }
-
-
-
-
-
 
 }
 

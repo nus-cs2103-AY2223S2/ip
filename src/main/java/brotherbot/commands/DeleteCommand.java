@@ -6,10 +6,22 @@ import brotherbot.ui.Ui;
 
 
 public class DeleteCommand extends Command {
+
+    /**
+     * Constructor to create an DeleteCommand object.
+     *
+     * @param input Input string required for command execution.
+     */
     public DeleteCommand(String input) {
         super(input);
     }
 
+    /**
+     * Executes command.
+     *
+     * @param storage Existing TaskList object required for command execution.
+     * @param ui Ui object required for command execution.
+     */
     public void execute(TaskList storage, Ui ui) {
         int i = Integer.parseInt(input.substring(7)) - 1;
         Task removed = storage.get(i);

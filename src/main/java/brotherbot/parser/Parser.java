@@ -1,15 +1,29 @@
 package brotherbot.parser;
 
-import brotherbot.commands.*;
+import brotherbot.commands.AddTaskCommand;
+import brotherbot.commands.Command;
+import brotherbot.commands.DeleteCommand;
+import brotherbot.commands.DisplayCommand;
+import brotherbot.commands.ExitCommand;
+import brotherbot.commands.MarkTaskCommand;
+
 import brotherbot.exceptions.BroException;
 import brotherbot.storage.TaskList;
 
 public class Parser {
 
-
+    /**
+     * Constructor to create a Parser object.
+     */
     public Parser() {
     }
 
+    /**
+     * Parse valid user input into corresponding Command objects.
+     *
+     * @return Command object to be executed.
+     * @throws BroException if invalid inputs are parsed.
+     */
     public static Command parse(String input, TaskList storage) throws BroException {
         validateInput(input, storage);
         Command command;
@@ -27,14 +41,9 @@ public class Parser {
         return command;
     }
 
-/**
-        // level-3 feature: use input to construct Storage.Task object and add to array + display array when required + mark Storage.Task as done
-
-
-
-    }
-        **/
-
+    /**
+     * Checks if inputs are valid.
+     */
     private static void validateInput(String input, TaskList storage) throws BroException {
         if (!input.contains("todo") && !input.contains("event") && !input.contains("display") && !input.contains("deadline") && !input.contains("mark") && !input.contains("bye") && !input.contains("delete")) {
             throw new BroException("OOPS! invalid command la bro");

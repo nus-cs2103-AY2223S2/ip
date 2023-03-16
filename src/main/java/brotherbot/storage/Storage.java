@@ -1,9 +1,14 @@
 package brotherbot.storage;
 
-import brotherbot.commands.*;
+import brotherbot.commands.Command;
+import brotherbot.commands.DisplayCommand;
+import brotherbot.commands.ExitCommand;
 import brotherbot.ui.Ui;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 // load tasks from file, save changes to file
@@ -11,13 +16,22 @@ public class Storage {
     private File hardDisk;
     private TaskList taskStorage;
 
-
-    public Storage(String filepath) {
-        this.hardDisk = new File(filepath);
+    /**
+     * Constructor for creating a Storage object.
+     *
+     * @param filePath The path where the Tasks are stored.
+     */
+    public Storage(String filePath) {
+        this.hardDisk = new File(filePath);
         this.taskStorage = new TaskList();
     }
 
-
+    /**
+     * Load existing data into taskList if existing data file exists.
+     * Creates new data file if no existing data file exist.
+     *
+     * @param ui User interface to display the relevant loaded data.
+     */
     public void load(Ui ui) {
         try {
             boolean created = hardDisk.createNewFile();
@@ -31,6 +45,9 @@ public class Storage {
                 }
                 while (scanner.hasNextLine()) {
                     String input = scanner.nextLine();
+                    if (input == "") {
+                        continue;
+                    }
                     boolean isDone = Character.isLetter(input.charAt(8));
                     Task x;
                     if (input.contains("From:")) {
@@ -56,7 +73,7 @@ public class Storage {
                 ui.toUser("New file created: data.txt");
             }
         } catch (IOException e) {
-            ui.toUser("An error occurred while creating the new file: data.txt");
+            ui.showLoadingError();
             e.printStackTrace();
         }
     }
@@ -65,9 +82,13 @@ public class Storage {
         return this.taskStorage;
     }
 
-
-    public void save(Command c) {
-        if (!(c instanceof ExitCommand || c instanceof DisplayCommand)) {
+    /**
+     * Saves existing tasks in taskList into a data file.
+     *
+     * @param command Executed command to determine if save action to update data file is required.
+     */
+    public void save(Command command) {
+        if (!(command instanceof ExitCommand || command instanceof DisplayCommand)) {
             try {
                 FileWriter writer = new FileWriter(hardDisk, false);
                 PrintWriter printWriter = new PrintWriter(writer);

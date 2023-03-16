@@ -1,16 +1,33 @@
 package brotherbot.commands;
 
 import brotherbot.ui.Ui;
-import brotherbot.storage.*;
+import brotherbot.storage.Deadline;
+import brotherbot.storage.Event;
+import brotherbot.storage.Task;
+import brotherbot.storage.TaskList;
+import brotherbot.storage.Todo;
+
 import java.time.DateTimeException;
 
 
 
 public class AddTaskCommand extends Command {
+
+    /**
+     * Constructor to create an AddTaskCommand object.
+     *
+     * @param input Input string required for command execution.
+     */
     public AddTaskCommand(String input) {
         super(input);
     }
 
+    /**
+     * Executes command.
+     *
+     * @param storage Existing TaskList object required for command execution.
+     * @param ui Ui object required for command execution.
+     */
     public void execute(TaskList storage, Ui ui) {
         if (super.input.substring(0, 4).equalsIgnoreCase("todo")) {
             storage.add(new Todo(input.substring(5)));
@@ -39,7 +56,6 @@ public class AddTaskCommand extends Command {
             storage.add(new Task(input));
             int x = storage.size();
             ui.toUser("added to list my brother: \n" + x + "." + storage.get(x - 1).toString() + "\nNow you have " + x + " tasks!");
-
         }
 
     }
