@@ -127,6 +127,14 @@ Examples:
 
 list followed by unmark 2 marks the 2nd task as done.
 
+### 8. bye
+Exit DukeDeluxe.
+
+Please only use this command to exit DukeDeluxe instead of closing the window, or Hachi will not be able to save your tasks to storage!
+
+Tell DukeDeluxe your command in the format:
+
+bye
 
 <!-- ## Usage
 
