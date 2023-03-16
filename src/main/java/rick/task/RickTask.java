@@ -102,7 +102,7 @@ public abstract class RickTask {
     }
 
     /**
-     * Return a boolean indicating if this task's description contains the
+     * Returns a boolean indicating if this task's description contains the
      * given term.
      *
      * @param term The provided term.
