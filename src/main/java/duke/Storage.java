@@ -42,24 +42,23 @@ public class Storage {
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> tasks = new ArrayList<Task>();
-            if (!storageFile.createNewFile()) {
-                // Parse the file and add the tasks
-                Scanner s = new Scanner(storageFile);
-                while (s.hasNext()) {
-                    String line = s.nextLine();
-                    switch (line.charAt(0)) {
-                    case 'T':
-                        tasks.add(Todo.fromSaveFormat(line));
-                        break;
-                    case 'D':
-                        tasks.add(Deadline.fromSaveFormat(line));
-                        break;
-                    case 'E':
-                        tasks.add(Event.fromSaveFormat(line));
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + line);
-                    }
+            if (storageFile.createNewFile()) return tasks;
+            // Parse the file and add the tasks
+            Scanner s = new Scanner(storageFile);
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                switch (line.charAt(0)) {
+                case 'T':
+                    tasks.add(Todo.fromSaveFormat(line));
+                    break;
+                case 'D':
+                    tasks.add(Deadline.fromSaveFormat(line));
+                    break;
+                case 'E':
+                    tasks.add(Event.fromSaveFormat(line));
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + line);
                 }
             }
             return tasks;
