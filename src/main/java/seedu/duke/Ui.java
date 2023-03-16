@@ -16,17 +16,13 @@ public class Ui {
     }
 
     public static String getInput(TaskList tasks, String input) throws DukeException {
-//        Scanner input = new Scanner(System.in);
-        String echo = input;
-        String[] echoSplit = echo.split(" ");
+        String[] inputArgs = input.split(" ");
 
-        if(echo.equals("bye")) {
-//            System.out.println("    -------------------------------------------\n"
-//                    + "    Bye. Hope to see you again soon!\n    -------------------------------------------");
+        if(input.equals("bye")) {
             return "    Bye. Hope to see you again soon!";
         } else {
             Parser parser = new Parser();
-            String reply = parser.parse(echo, echoSplit, COUNTER, tasks);
+            String reply = parser.parse(input, inputArgs, tasks);
             return reply;
         }
 

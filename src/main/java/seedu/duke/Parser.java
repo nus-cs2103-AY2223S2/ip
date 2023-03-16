@@ -6,6 +6,16 @@ package seedu.duke;
  */
 public class Parser {
 
+    public static String LIST = "list";
+    public static String MARK = "mark";
+    public static String UNMARK = "unmark";
+    public static String TODO = "todo";
+    public static String DEADLINE = "deadline";
+    public static String EVENT = "event";
+    public static String FIND = "find";
+    public static String DELETE = "delete";
+
+
     public Parser() throws DukeException {
 
     }
@@ -18,7 +28,8 @@ public class Parser {
      * @param COUNTER int indicating list size
      * @param tasks TaskList object containing the tasks list and functions.
      */
-    public String parse(String echo, String[] echoSplit, int COUNTER, TaskList tasks) throws DukeException {
+    public String parse(String echo, String[] echoSplit, TaskList tasks) throws DukeException {
+
         if (echo.equals("list")) {
             return tasks.showList();
         } else if (echoSplit.length < 2 && !echo.equals("")) {
@@ -38,21 +49,17 @@ public class Parser {
 
             if (echoSplit[0].equals("todo")) {
                 tasks.addToDo(echoSplit);
-                COUNTER++;
                 return "added task";
             } else if (echoSplit[0].equals("deadline")) {
                 tasks.addDeadline(echoSplit, 0);
-                COUNTER++;
                 return "added deadline task";
             } else if (echoSplit[0].equals("event")) {
                 tasks.addEvent(echoSplit, 0);
-                COUNTER++;
                 return "added event task";
             } else if (echoSplit[0].equals("delete")) {
                 int index = Integer.valueOf(echoSplit[1]) - 1;
                 assert index + 1 > 0 : "index should not be less than 0";
                 tasks.delete(index);
-                COUNTER--;
                 return "delete task " + (index+1);
             } else if (echoSplit[0].equals("find")) {
                 return tasks.find(echoSplit);
