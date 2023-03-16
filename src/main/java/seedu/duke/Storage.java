@@ -4,69 +4,73 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 
+/**
+ * Handles reading and writing to a storage file.
+ */
 public class Storage {
-    protected FileWriter fw = null;
-    protected FileReader fr = null;
-    protected String fileName;
+    private FileWriter fw = null;
+    private FileReader fr = null;
+    private String fileName;
+
     public Storage(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Loads tasks from the storage file.
+     *
+     * @return ArrayList of tasks loaded from the storage file.
+     * @throws IOException If an I/O error occurs.
+     */
     public ArrayList<Task> load() throws IOException {
-        ArrayList<Task> list = new ArrayList<Task>();
+        ArrayList<Task> list = new ArrayList<>();
 
         try {
-            Parser parser = new Parser();
-            fr = new FileReader(this.fileName);
-            String task = "";
-            int ch;
-            while ((ch=fr.read()) != -1)
-                task += (char)ch;
-            fr.close();
+            String tasks = getFileContents();
 
-            String[] lines = task.split("\n");
-            String[] taskSplit;
-            for (int i = 0; i < lines.length; i++) {
-                taskSplit = lines[i].split(" ");
+            String[] lines = tasks.split("\n");
+            for (String line : lines) {
+                String[] taskSplit = line.split(" ");
                 String taskLine = getTask(taskSplit);
                 String[] split = taskLine.split(" ");
-
-                if (taskSplit[1].equals("T")){
-                    list.add(new ToDo(taskLine));
+                String taskType = taskSplit[1];
+                switch (taskType) {
+                    case "T":
+                        list.add(new ToDo(taskLine));
+                        break;
+                    case "D":
+                        addDeadline(split, list, 1);
+                        break;
+                    case "E":
+                        addEvent(split, list, 1);
+                        break;
                 }
 
-                if (taskSplit[1].equals("D")){
-                    addDeadline(split, list, 1);
-                }
-
-                if (taskSplit[1].equals("E")){
-                    addEvent(split, list, 1);
-                }
-
-                if (taskSplit[3].equals("Y")) {
+                if (taskSplit[3].equals("?")) {
                     list.get(list.size() - 1).isDone = true;
                 }
             }
 
-
         } catch (FileNotFoundException fe) {
             System.out.println("File not found...creating the file");
             fw = new FileWriter("duke.txt");
-        } catch(ArrayIndexOutOfBoundsException a) {
-//            System.out.println("array...creating the file");
+        } catch (ArrayIndexOutOfBoundsException a) {
             fw = new FileWriter("duke.txt");
-        } catch (DukeException e) {
-            throw new RuntimeException(e);
         } finally {
-//            System.out.println("err...creating the file");
             fw = new FileWriter("duke.txt");
         }
+
         return list;
     }
 
+    /**
+     * Retrieves the description of a task from a given array of strings.
+     *
+     * @param taskSplit The array of strings.
+     * @return A string representing the description of a task.
+     */
     public String getTask(String[] taskSplit){
         String description = "";
         if (taskSplit[1].equals("T")) {
@@ -92,6 +96,28 @@ public class Storage {
 
     }
 
+    /**
+     * Reads the contents of the storage file.
+     *
+     * @return A string containing the contents of the storage file.
+     * @throws IOException If an I/O error occurs.
+     */
+    public String getFileContents() throws IOException {
+        fr = new FileReader(this.fileName);
+        String task = "";
+        int ch;
+        while ((ch=fr.read()) != -1)
+            task += (char)ch;
+        fr.close();
+        return task;
+    }
+
+    /**
+     * Updates the storage file with the current task list.
+     *
+     * @param tasks The task list to be written to the storage file.
+     * @throws IOException If an I/O error occurs.
+     */
     public void updateFile(TaskList tasks) throws IOException {
         fw = new FileWriter(this.fileName);
         for (int i = 0; i < tasks.list.size(); i++) {
@@ -99,7 +125,11 @@ public class Storage {
         }
         fw.flush();
     }
-
+    /**
+     * Closes the file readers and writers.
+     *
+     * @throws IOException If an I/O error occurs.
+     */
     public void close() throws IOException {
         fw.close();
         fr.close();
@@ -113,7 +143,6 @@ public class Storage {
         String to = "";
 
         for (int i = 1; i < echoSplit.length; i++) {
-
             if (echoSplit[i].equals("/from") || echoSplit[i].equals("from:")) {
                 fromI = i;
             }
@@ -143,10 +172,7 @@ public class Storage {
 
         }
         list.add(new Event(task, from, to));
-        if (print == 0)
-            System.out.println("    -------------------------------------------\n    "
-                    + "added: " + task
-                    +"\n    -------------------------------------------");
+
     }
     public void addDeadline(String[] echoSplit, ArrayList<Task> list, int print){
         String task = "";
@@ -171,12 +197,7 @@ public class Storage {
                 }
 
                 list.add(new Deadline(task, date));
-                if (print == 0) {
-                    System.out.println(echoSplit[i+1]);
-                    System.out.println("    -------------------------------------------\n    "
-                            + "added: " + task
-                            +"\n    -------------------------------------------");
-                }
+
 
             }
         }

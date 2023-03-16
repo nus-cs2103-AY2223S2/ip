@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? " Y " : " N "); // mark done task with X
+        return (isDone ? " \u2713 " : " X "); // mark done task with check mark
     }
 
     public String getDescription() {
