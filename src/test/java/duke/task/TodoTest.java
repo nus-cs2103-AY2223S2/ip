@@ -12,9 +12,4 @@ public class TodoTest {
         assertEquals("T||0||Clean the room", todo.toSaveFormat());
     }
 
-//    @Test
-//    public void testFromSaveFormat() {
-//        Todo todo = Todo.fromSaveFormat("T||0||Clean the room");
-//        assertEquals("[T][ ] Clean the room", todo.toString());
-//    }
 }
