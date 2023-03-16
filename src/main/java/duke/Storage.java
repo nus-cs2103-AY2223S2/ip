@@ -43,6 +43,7 @@ public class Storage {
         try {
             ArrayList<Task> tasks = new ArrayList<Task>();
             if (storageFile.createNewFile()) return tasks;
+
             // Parse the file and add the tasks
             Scanner s = new Scanner(storageFile);
             while (s.hasNext()) {
