@@ -9,7 +9,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String deadline) {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         this.deadline = LocalDateTime.parse(deadline, formatter);
     }
 

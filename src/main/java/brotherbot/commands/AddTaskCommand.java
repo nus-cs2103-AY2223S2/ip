@@ -37,8 +37,10 @@ public class AddTaskCommand extends Command {
             }
         } else {
             storage.add(new Task(input));
+            int x = storage.size();
+            ui.toUser("added to list my brother: \n" + x + "." + storage.get(x - 1).toString() + "\nNow you have " + x + " tasks!");
+
         }
-        int x = storage.size();
-        ui.toUser("added to list my brother: \n" + x + "." + storage.get(x - 1).toString() + "\nNow you have " + x + " tasks!");
+
     }
     }

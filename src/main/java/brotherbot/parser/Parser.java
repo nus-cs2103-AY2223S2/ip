@@ -57,6 +57,17 @@ public class Parser {
                 throw new BroException("OOPS inserted number is invalid");
             }
         }
+
+        if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("mark")) {
+            try {
+                Integer.parseInt(input.substring(5));
+            } catch(NumberFormatException e) {
+                throw new BroException("OOPS wrong format my brother! consider this format: \ndelete INSERT_NUMBER");
+            }
+            if (Integer.parseInt(input.substring(5)) > storage.size()) {
+                throw new BroException("OOPS inserted number is invalid");
+            }
+        }
         if (input.length() > 8 && input.substring(0, 8).equalsIgnoreCase("deadline") && (!input.contains("/by") || input.indexOf("/by") == 9)) {
             throw new BroException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
         }
