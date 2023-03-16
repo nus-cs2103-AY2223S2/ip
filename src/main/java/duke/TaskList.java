@@ -7,35 +7,55 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-/** List containing all Tasks*/
+/**
+ * List containing all Tasks
+ */
 public class TaskList {
-    /** ArrayList containing all Tasks*/
+    /**
+     * ArrayList containing all Tasks
+     */
     private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+
     /**
      * Adds a task to the list
+     *
      * @param tsk is Task to be added
      */
     public void addTask(Task tsk) {
         this.tasks.add(tsk);
     }
+
     /**
      * Removes a task from the list
+     *
      * @param id is id of Task to be removed
      */
     public void removeTask(int id) {
         this.tasks.remove(id);
     }
 
+    /**
+     * Checks for duplicates in task list
+     * @param t task to be checked for duplicates
+     * @return true if duplicate exists, false otherwise
+     */
     public boolean handleDup(Task t) {
-        return tasks.contains(t);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task item = tasks.get(i);
+            if (t.getClass() == item.getClass()) {
+                return t.equals(item);
+            }
+        }
+        return false;
     }
 
     /**
      * Handles the list command from user
+     *
      * @return list of all Tasks
      */
     public String handleList() {
@@ -56,6 +76,11 @@ public class TaskList {
     private String handleBye() {
         Storage.upload(this.tasks);
         return "Bye!!!!";
+    }
+
+    private void uploadTask(Task x) {
+        addTask(x);
+        Storage.upload(this.tasks);
     }
 
     private String handleMark(String input) {
@@ -83,32 +108,44 @@ public class TaskList {
     }
 
     private String handleToDo(String input) {
-        ToDo processed = Parser.parseToDo(input);
-        if (!handleDup(processed)) {
-            addTask(processed);
-            return "Duke done adding todo...\n" + processed;
-        } else {
-            return "Task already exists......";
+        try {
+            ToDo processed = Parser.parseToDo(input);
+            if (!handleDup(processed)) {
+                uploadTask(processed);
+                return "Duke done adding todo...\n" + processed;
+            } else {
+                return "Task already exists......";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
 
     private String handleDeadline(String input) {
-        Deadline dl = Parser.parseDeadline(input);
-        if (!handleDup(dl)) {
-            addTask(dl);
-            return "Duke done adding deadline...\n" + dl;
-        } else {
-            return "Task already exists......";
+        try {
+            Deadline dl = Parser.parseDeadline(input);
+            if (!handleDup(dl)) {
+                uploadTask(dl);
+                return "Duke done adding deadline...\n" + dl;
+            } else {
+                return "Task already exists......";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
 
     private String handleEvent(String input) {
-        Event ev = Parser.parseEvent(input);
-        if (!handleDup(ev)) {
-            addTask(ev);
-            return "Duke done adding event...\n" + ev;
-        } else {
-            return "Event already exists......";
+        try {
+            Event ev = Parser.parseEvent(input);
+            if (!handleDup(ev)) {
+                uploadTask(ev);
+                return "Duke done adding event...\n" + ev;
+            } else {
+                return "Event already exists......";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
 
@@ -126,6 +163,7 @@ public class TaskList {
 
     /**
      * Finds tasks in the list that matches keyword
+     *
      * @param input is user's input
      */
     private String handleFind(String input) {
@@ -149,6 +187,7 @@ public class TaskList {
 
     /**
      * Processes all input commands
+     *
      * @param input is user's input
      */
     public String handleInput(String input) {

@@ -2,30 +2,33 @@
 
 ## Features 
 
-### Feature-Add tasks
+### Feature - Add tasks
 
 Add different types of Tasks. The types of tasks available are:
 - To Dos
 - Deadlines
 - Events
 
-### Feature-Delete tasks
+### Feature - Delete tasks
 
 Remove unwanted tasks from the list.
 
-### Feature-Mark tasks
+### Feature - Mark tasks
 
 Mark tasks as **done** or **undone**
 
-### Feature-Find tasks
+### Feature - Find tasks
 
 Find tasks using a specific keyword
 
+### Feature - Save tasks
+
+All tasks are saved into local storage after their input command
 ## Usage
 
 ### `todo` - Adds a todo to the list
 
-Specify a task and it will be added to the list.
+Specify a task, and it will be added to the list.
 
 Example of usage:
 todo Download Duke
@@ -97,4 +100,3 @@ find Download
 
 Expected outcome:
 [T][ ] Download Duke
-
