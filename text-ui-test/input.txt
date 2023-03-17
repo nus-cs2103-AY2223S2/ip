@@ -1,0 +1,7 @@
+deadline read book /by Sunday
+events birthday /from 30th jan /to 30th jan
+list
+mark 1
+mark 2
+unmark 1
+bye
