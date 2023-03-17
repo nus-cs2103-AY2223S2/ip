@@ -10,7 +10,7 @@ public class Task implements Serializable {
     private boolean isDone;
 
     /**
-     * The constructor of this class.
+     * Constructs the class.
      *
      * @param name
      */
@@ -20,7 +20,7 @@ public class Task implements Serializable {
     }
 
     /**
-     * The method that modifies the status of task.
+     * Modifies the status of task.
      *
      * @param status
      */
@@ -29,7 +29,7 @@ public class Task implements Serializable {
     }
 
     /**
-     * The method that returns the status of the task.
+     * Returns the status of the task.
      *
      * @return the status of the task.
      */
@@ -38,7 +38,7 @@ public class Task implements Serializable {
     }
 
     /**
-     * The method that returns the name of the task.
+     * Returns the name of the task.
      *
      * @return the name of the task.
      */
@@ -47,9 +47,9 @@ public class Task implements Serializable {
     }
 
     /**
-     * The toString method.
+     * Returns the toString.
      *
-     * @return the task name.
+     * @return the task list
      */
     public String toString() {
         return name;

@@ -4,20 +4,14 @@ package duke;
  * A task type that the chatting bot can create.
  */
 public class Todos extends Task {
-
-    /**
-     * The constructor of this class.
-     *
-     * @param name
-     */
     public Todos(String name) {
         super(name);
     }
 
     /**
-     * The toString method.
+     * Returns the toString.
      *
-     * @return the task name with the status.
+     * @return the task list
      */
     public String toString() {
         if (this.getStatus()) {

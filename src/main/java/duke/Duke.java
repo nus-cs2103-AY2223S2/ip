@@ -11,7 +11,7 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * The constructor of this class.
+     * Constructs of this class.
      */
     public Duke() {
         storage = new Storage();
@@ -20,8 +20,7 @@ public class Duke {
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
      */
     public String getResponse(String input) {
         String result = null;

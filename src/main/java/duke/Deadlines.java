@@ -15,7 +15,7 @@ public class Deadlines extends Task {
     private LocalTime time = null;
 
     /**
-     * The constructor of this class.
+     * Constructs of this class.
      *
      * @param name
      * @param sTime
@@ -33,13 +33,14 @@ public class Deadlines extends Task {
                 LocalDate date = LocalDate.parse(sTime, df);
                 this.date = date;
             } catch (DateTimeParseException e2) {
-                throw new DukeException("The time format is invalid. Correct examples: '/by 2023-02-16' and '/by 2023-02-16 18:00'");
+                throw new DukeException("The time format is invalid. Correct examples: "
+                        + "'/by 2023-02-16' and '/by 2023-02-16 18:00'");
             }
         }
     }
 
     /**
-     * The method that returns the time of the deadline.
+     * Returns the time of the deadline.
      *
      * @return the LocalTime variable of the deadline.
      */
@@ -48,7 +49,7 @@ public class Deadlines extends Task {
     }
 
     /**
-     * The method that returns the date of the deadline.
+     * Returns the date of the deadline.
      *
      * @return the LocalDate variable of the deadline.
      */
@@ -57,13 +58,13 @@ public class Deadlines extends Task {
     }
 
     /**
-     * The toString method.
+     * Returns the toString.
      *
-     * @return the task name with the specific deadline and status.
+     * @return the task list
      */
     public String toString() {
         DateTimeFormatter tf = DateTimeFormatter.ofPattern("HH:mm");
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy").ISO_DATE;
         String result = "";
         if (this.getStatus()) {
             result += "[D][X] " + this.getName() + " (by: ";

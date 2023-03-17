@@ -10,14 +10,14 @@ import duke.Storage;
 import duke.Task;
 import duke.TaskList;
 
-public class TodoCommandTest {
+class EventCommandTest {
 
     @Test
     void execute() {
         Storage storage = new Storage();
         TaskList tasks = new TaskList();
         try {
-            String fullCommand = "todo go home";
+            String fullCommand = "event finish homework /from 2023-01-25 18:59 /to 2023-02-11";
             Command c = Parser.parse(fullCommand);
             c.execute(tasks, storage);
         } catch (DukeException e) {
@@ -25,6 +25,6 @@ public class TodoCommandTest {
         }
         System.out.println(tasks.size());
         Task test = tasks.get(0);
-        assertEquals("[T][ ] go home", test.toString());
+        assertEquals("[E][ ] finish homework (from: 2023-01-25 18:59 to: 2023-02-11)", test.toString());
     }
 }

@@ -11,7 +11,7 @@ public class UnmarkCommand extends Command {
     private int unmarkNumber;
 
     /**
-     * The constructor of this class.
+     * Constructs this class.
      *
      * @param unmarkNumber
      */
@@ -20,7 +20,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * A method that gets the int variable of the class.
+     * Gets the int variable of the class.
      *
      * @return the unmarkNumber
      */
@@ -29,7 +29,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * The method that includes the execution of the command.
+     * Executes the command.
      *
      * @param list
      * @param store
@@ -47,7 +47,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * The method to see if the programme should exit.
+     * Checks if the programme should exit.
      *
      * @return a boolean value stating the bot should not exit
      */

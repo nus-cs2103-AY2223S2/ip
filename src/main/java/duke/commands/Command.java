@@ -11,7 +11,7 @@ import duke.TaskList;
 public class Command {
 
     /**
-     * The method that includes the execution of the command.
+     * Executes the command.
      *
      * @param list
      * @param store
@@ -23,9 +23,9 @@ public class Command {
     }
 
     /**
-     * The method to see if the programme should exit.
+     * Checks if the programme should exit.
      *
-     * @return a boolean value
+     * @return a boolean value stating the bot should not exit
      */
     public boolean isExit() {
         return false;

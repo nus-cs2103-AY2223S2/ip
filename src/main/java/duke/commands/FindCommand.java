@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     private String targetName;
 
     /**
-     * The constructor of this class.
+     * Constructs this class.
      *
      * @param targetName
      */
@@ -26,7 +26,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * The method that includes the execution of the command.
+     * Executes the command.
      *
      * @param list
      * @param store
@@ -44,8 +44,8 @@ public class FindCommand extends Command {
             response += Integer.toString(count + 1);
             response += ".";
             count++;
-            response += list.get(i).toString();
-            if (i != list.size() - 1) {
+            response += filterList.get(i).toString();
+            if (i != filterList.size() - 1) {
                 response += "\n";
             }
         }
@@ -56,7 +56,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * The method to see if the programme should exit.
+     * Checks if the programme should exit.
      *
      * @return a boolean value stating the bot should not exit
      */

@@ -18,7 +18,7 @@ import duke.commands.UnmarkCommand;
 public class Parser {
 
     /**
-     * A static method that parse the input string.
+     * Parses the input string.
      *
      * @return command objects based on different command keywords.
      */

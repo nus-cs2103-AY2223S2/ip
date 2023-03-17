@@ -27,19 +27,22 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user_icon.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/space_Lin.jpg"));
 
-    private String dukeStyle = "-fx-font-size: 12pt;\n" +
-            "    -fx-font-family: \"Helvetica\";\n" +
-            "    -fx-text-fill: black;\n" +
-            "    -fx-background-color: #e9967a;\n" +
-            "    -fx-font-style: normal;";
+    private String dukeStyle = "-fx-font-size: 12pt;\n"
+            + "    -fx-font-family: \"Helvetica\";\n"
+            + "    -fx-text-fill: black;\n"
+            + "    -fx-background-color: #e9967a;\n"
+            + "    -fx-font-style: normal;";
 
-    private String userStyle = "-fx-font-size: 14pt;\n" +
-            "    -fx-font-family: \"Courier\";\n" +
-            "    -fx-text-fill: black;\n" +
-            "    -fx-background-color: #00ced1;\n" +
-            "    -fx-font-style: normal;\n" +
-            "    -fx-font-weight: normal;";
+    private String userStyle = "-fx-font-size: 14pt;\n"
+            + "    -fx-font-family: \"Courier\";\n"
+            + "    -fx-text-fill: black;\n"
+            + "    -fx-background-color: #00ced1;\n"
+            + "    -fx-font-style: normal;\n"
+            + "    -fx-font-weight: normal;";
 
+    /**
+     * Initializes the Chat bot by sending a greeting message to the user.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

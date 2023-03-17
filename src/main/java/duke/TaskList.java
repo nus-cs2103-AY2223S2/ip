@@ -5,21 +5,17 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 /**
- * The class that abstract the arrayList.
+ * Abstracts the arrayList.
  */
 public class TaskList implements Serializable {
 
     private ArrayList<Task> list;
-
-    /**
-     * The constructor of this class.
-     */
     public TaskList() {
         list = new ArrayList<>();
     }
 
     /**
-     * The method that returns the size of the list.
+     * Returns the size of the list.
      *
      * @return size of the list
      */
@@ -28,7 +24,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * The method that add a task into the list.
+     * Adds a task into the list.
      *
      * @param task
      */
@@ -37,7 +33,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * The method that remove a task from the list.
+     * Removes a task from the list.
      *
      * @param index
      */
@@ -46,7 +42,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * The method that get a task from the list.
+     * Gets a task from the list.
      *
      * @param index
      * @return the task based on the index number
@@ -56,7 +52,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * The method that get a stream from the list.
+     * Gets a stream from the list.
      *
      * @return the stream of task
      */
@@ -65,7 +61,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * The method that get the index based on the given task.
+     * Gets the index based on the given task.
      *
      * @param task
      * @return the index of the task
@@ -74,10 +70,16 @@ public class TaskList implements Serializable {
         return list.indexOf(task);
     }
 
+    /**
+     * Checks if a given task is already in the list.
+     *
+     * @param task
+     * @return if the task present in the list
+     */
     public boolean isExist(Task task) {
         for (Task a: this.list) {
             String s = a.toString();
-            s = s.substring(0,4) + " " + s.substring(5);
+            s = s.substring(0, 4) + " " + s.substring(5);
             if (task.toString().equals(s)) {
                 return true;
             }
@@ -86,7 +88,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * The toString method.
+     * Returns the toString.
      *
      * @return the task list
      */

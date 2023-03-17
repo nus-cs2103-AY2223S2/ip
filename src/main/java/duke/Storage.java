@@ -15,7 +15,7 @@ public class Storage {
     private static String dataPath;
 
     /**
-     * The constructor of this class.
+     * Constructs this class.
      */
     public Storage() {
         dataDir = System.getProperty("user.dir") + File.separator + "data";
@@ -23,7 +23,7 @@ public class Storage {
     }
 
     /**
-     * The method that load the data.
+     * Loads the data.
      *
      * @return the task list which is saved from last access.
      */
@@ -57,7 +57,7 @@ public class Storage {
     }
 
     /**
-     * The method that save the tasks list into the storage file.
+     * Saves the tasks list into the storage file.
      *
      * @param todo
      */
