@@ -1,24 +1,97 @@
-# Duke project template
+# Pix User Guide :poop:
+> The best task manger you have ever used! - Pix
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+**Pix helps to remember stuff for you so that you do not have to! It is a Command-Line based task manager that is ~~easy~~ super easy to learn and quick to use.**
 
-## Setting up in Intellij
+- [Installation](#installation)
+- [Features](#features)
+- [Commands](#commands)
+- [Summary](#command-summary)
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Installation
+1. Ensure that you have java `11` installed.
+2. Download the [Pix.jar](https://github.com/zenithyap/ip/releases/download/A-UserGuide/Pix.jar) file.
+3. Open a terminal and navigate to the folder the file is downloaded in.
+4. Run the command `java -jar ip.jar`
+5. You should see the following:
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+<img src="https://github.com/zenithyap/ip/blob/master/docs/initial.png" alt="initial" width="40%"/>
+
+## Features
+### Manages Your Tasks
+- Able to add/delete tasks
+- Supports 3 tasks, todo, deadlines, and events
+- Mark/Unmark tasks
+- Find tasks by keyword
+
+## Commands
+### `help`
+Shows all the commands.
+
+Format: `help`
+
+### `todo`
+Adds a todo task.
+
+Format: `todo <Description>`
+
+### `dline`
+Adds a deadline task. dueDate to be specified as yyyy-MM-dd HH:mm.
+
+Format: `dline <Description> / <dueDate>`
+
+### `event`
+Adds an Event task. eventStart and eventEnd to be specified as yyyy-MM-dd HH:mm.
+
+Format: `event <Description> / <eventStart> / <eventEnd>`
+
+### `ls`
+Lists all the tasks.
+
+Format: `ls`
+
+### `lsd`
+Lists deadlines that are due by the date and events that area ongoing during the date. Date format as yyyy-MM-dd
+
+Format: `lsd <Date>`
+
+### `mk`
+Marks a task as done.
+
+Format: `mk <Index>`
+
+### `unmk`
+Unmarks a task.
+
+Format: `unmk <Index>`
+
+### `rm`
+Removes a task from the list.
+
+Format: `rm <Index>`
+
+### `find`
+Find tasks that contains a keyword.
+
+Format: `find <Keyword>`
+
+### `bye`
+Exits pix.
+
+Format: `bye`
+
+## Command Summary
+
+| Command | Format                                            |
+|---------|---------------------------------------------------|
+| Help    | `help`                                            |
+| Todo    | `todo <Description>`                              |
+| dline   | `dline <Description> / <dueDate>`                 |
+| event   | `event <Description> / <eventStart> / <eventEnd>` |
+| ls      | `lsd`                                             |
+| lsd     | `lsd <Date>`                                      |
+| mk      | `mk <Index>`                                      |
+| unmk    | `unmk <Index>`                                    |
+| rm      | `rm <Index>`                                      |
+| find    | `find <Keyword>`                                  |
+| bye     | `bye`                                             |

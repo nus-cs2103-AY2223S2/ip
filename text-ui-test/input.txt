@@ -1,0 +1,11 @@
+todo read book
+deadline return book /by idk
+event project meeting /from sometime /to some other time
+todo join music club
+todo study more this sem
+list
+mark 1
+mark 3
+unmark 1
+list
+bye
