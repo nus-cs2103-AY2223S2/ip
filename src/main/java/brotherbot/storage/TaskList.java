@@ -64,15 +64,19 @@ public class TaskList {
             ui.toUser((i + 1) + ". " + task.toString());
             i++;
         }
+        if (this.taskStorage.size() == 0) {
+            ui.toUser("Start adding now my brother!");
+        }
 
     }
 
     /**
      * Writes the list of Tasks into existing data file.
+     *
+     * @param x PrintWriter object to write the list of Tasks object.
      */
     public void write(PrintWriter x) {
-        int i = 0;
-        for (Task task : this.taskStorage) {
+        for (int i = 0; i < this.taskStorage.size(); i++) {
             x.println((i + 1) + ". " + this.taskStorage.get(i));
             i++;
         }

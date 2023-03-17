@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Storage {
@@ -48,14 +50,19 @@ public class Storage {
                         continue;
                     }
                     boolean isDone = Character.isLetter(input.charAt(8));
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+                    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
                     Task x;
                     if (input.contains("From:")) {
                         int endDescription = input.indexOf("From:") - 1;
                         int endStart = input.indexOf("To:") - 1;
-                        x = new Event(input.substring(11, endDescription), input.substring(endDescription + 7, endStart), input.substring(endStart + 5));
+                        String start = LocalDateTime.parse(input.substring(endDescription + 7, endStart), formatter).format(formatter2);
+                        String end = LocalDateTime.parse(input.substring(endStart + 5), formatter).format(formatter2);
+                        x = new Event(input.substring(11, endDescription), start, end);
                     } else if (input.contains("By:")) {
                         int endDescription = input.indexOf("By:") - 1;
-                        x = new Deadline(input.substring(11, endDescription), input.substring(endDescription + 5));
+                        String deadline = LocalDateTime.parse(input.substring(endDescription + 5), formatter).format(formatter2);
+                        x = new Deadline(input.substring(11, endDescription), deadline);
                     } else {
                         x = new Todo(input.substring(11));
                     }
@@ -65,8 +72,9 @@ public class Storage {
                     this.taskStorage.add(x);
 
                     // Printout existing brotherbot.storage database
-                    this.taskStorage.display(ui);
+
                 }
+                this.taskStorage.display(ui);
                 scanner.close();
             } else {
                 ui.toUser("New file created: data.txt");

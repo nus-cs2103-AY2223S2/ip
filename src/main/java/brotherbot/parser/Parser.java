@@ -28,12 +28,18 @@ public class Parser {
             command = new DisplayCommand(input);
         } else if (input.length() >= 6 && input.substring(0, 4).equalsIgnoreCase("mark")) {
             command = new MarkTaskCommand(input);
-        } else if (input.length() > 8 && input.substring(0, 6).equalsIgnoreCase("delete")) {
+        } else if (input.length() >= 8 && input.substring(0, 6).equalsIgnoreCase("delete")) {
             command = new DeleteCommand(input);
-        } else if (input.length() > 5 && input.substring(0, 3).equalsIgnoreCase("find")) {
+        } else if (input.length() >= 6 && input.substring(0, 4).equalsIgnoreCase("find")) {
             command = new FindCommand(input);
-        } else {
+        } else if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("todo")) {
             command = new AddTaskCommand(input);
+        } else if (input.length() > 5 && input.substring(0, 5).equalsIgnoreCase("event")) {
+            command = new AddTaskCommand(input);
+        } else if (input.length() > 8 && input.substring(0, 8).equalsIgnoreCase("deadline")) {
+            command = new AddTaskCommand(input);
+        } else {
+            throw new BroException("OOPS! invalid command la bro");
         }
         return command;
     }
@@ -42,9 +48,11 @@ public class Parser {
      * Checks if inputs are valid.
      */
     private static void validateInput(String input, TaskList storage) throws BroException {
+        /**
         if (!input.contains("todo") && !input.contains("event") && !input.contains("display") && !input.contains("deadline") && !input.contains("mark") && !input.contains("bye") && !input.contains("delete") && !input.contains("find")) {
             throw new BroException("OOPS! invalid command la bro");
         }
+         **/
         if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("todo") && input.length() <= 5) {
             throw new BroException("OOPS wrong format my brother! consider this format: \ntodo xxx");
         }
