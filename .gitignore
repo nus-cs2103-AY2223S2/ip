@@ -13,5 +13,13 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.TXT
+# for testing
+text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/data/
+
+# duke.storage
+data/
+
+# artifacts
+out/artifacts/ip_jar

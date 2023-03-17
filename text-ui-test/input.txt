@@ -1,0 +1,20 @@
+list
+delete 2
+TODO return book
+DEADLINE mark scripts /by 2022-01-11
+EVENT project meeting /from 2023-01-12 /to 2023-02-22
+mark 1
+unmark 1
+delete 1
+mark -1
+unmark -1
+delete -1
+send help
+delete 01
+EVENT project meeting /from 2023-01-12 /to 2023-02-22
+list
+todo
+event project meeting
+date 2023-01-12
+date 2023-01-01
+bye
