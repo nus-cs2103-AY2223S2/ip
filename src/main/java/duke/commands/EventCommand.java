@@ -1,6 +1,9 @@
 package duke.commands;
 
-import duke.*;
+import duke.DukeException;
+import duke.Events;
+import duke.Storage;
+import duke.TaskList;
 
 /**
  * A command type that the chatting bot can read.
