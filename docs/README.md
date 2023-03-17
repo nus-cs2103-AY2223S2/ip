@@ -1,29 +1,72 @@
-# User Guide
+# Duke Task Reminder
+> "What gets measured gets managed." - Peter Drucker [(source)](https://static.store.tax.thomsonreuters.com/static/relatedresource/CMJ--15-01%20sample-article.pdf) 
+> 
+> 
 
-## Features 
+Duke Task Reminder is an application that can help you manage your daily tasks. 
 
-### Feature-ABC
+![image](https://dunliang0513.github.io/ip/Ui.png)
+## Features
 
-Description of the feature.
+### Duke Task Reminder currently supports the following features:
+- [X]  Managing tasks/deadlines/events
+- [X]  List all the tasks/events/deadlines recorded inside the task list.
+- [X]  Delete the tasks/events/deadlines.
+- [X]  Remind the user when there is an upcoming deadline/event.
+- [X]  Search the related tasks/events/deadlines using specific keywords.
 
-### Feature-XYZ
 
-Description of the feature.
 
-## Usage
+## Installation
+1. Ensure you have `Java 11` installed on your computer.
+2. download the latest `Duke_Task_Reminder` from [here](https://github.com/dunliang0513/ip/releases/download/A-Release/Duke_Task_Reminder.jar)
+3. Open terminal and change the directory to the folder that contains the .jar file. Examples: `cd Downloads` 
+4. run the following command in your terminal `java -jar Duke_Task_Reminder.jar`
+5. can start adding your task/event/deadline
 
-### `Keyword` - Describe action
 
-Describe the action and its outcome.
+## How to Use
+### 1. Creating a todo task: `todo`
+`todo <task description>`
 
-Example of usage: 
+example: `todo Study for midterm`
 
-`keyword (optional arguments)`
+### 2. Creating a deadline: `deadline`
+`deadline <deadline description> /by <YYYY-MM-DD>`
 
-Expected outcome:
+example: `deadline CS2101 OP2 Reflection /by 2022-02-26`
 
-Description of the outcome.
+### 3. Creating an event: `event`
+`event <event description> /from <YYYY-MM-DD> /to <YYYY-MM-DD>`
 
-```
-expected output
-```
+example: `event Midterm week /from 2022-02-27 /to 2022-03-05`
+
+### 4. Listing all tasks: `list`
+`list`
+
+example: `list`
+
+### 5. Mark a task as completed: `mark`
+`mark <task index>`
+
+example: `mark 1`
+
+### 6. Mark a task as incomplet: `mark`
+`unmark <task index>`
+
+example: `unmark 1`
+
+### 7. Delete task from list: `delete`
+`delete <task index>`
+
+example: `delete 1`
+
+### 8. Find tasks that match the provided keywords: `find`
+`find <keywords>`
+
+example: `find midterm`
+
+### 9. Remind if there is any events happening in three days: `remind`
+`remind`
+
+example: `remind`
