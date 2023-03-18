@@ -1,5 +1,7 @@
 package cluck.ui;
 
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,7 +10,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import cluck.Cluck;
+import cluck.messages.Messages;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -34,6 +40,9 @@ public class MainWindow extends AnchorPane {
 
     public void setCluck(Cluck c) {
         cluck = c;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Messages.MESSAGE_WELCOME, cluckImage)
+        );
     }
 
     /**
@@ -49,5 +58,20 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, cluckImage)
         );
         userInput.clear();
+
+        // @@author: nate_weldon-reused
+        // This code is adapted from:
+        // https://stackoverflow.com/questions/15747277/how-to-make-java-program-exit-after-a-couple-of-seconds
+        // with minor modification
+        if (input.equals("bye")) {
+            TimerTask task = new TimerTask() {
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            };
+            Timer timer = new Timer("Delay");
+            timer.schedule(task, 500L);
+        }
     }
 }
