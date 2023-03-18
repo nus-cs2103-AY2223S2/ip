@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.text.NumberFormat;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -36,11 +37,14 @@ public class TaskList {
      * @throws DukeException if the task index is invalid.
      */
     public String mark(String[] inputArgs) throws DukeException {
-        int index = Integer.parseInt(inputArgs[1]) - 1;
+        int index;
         try {
+            index = Integer.parseInt(inputArgs[1]) - 1;
             list.get(index).isDone = true;
         } catch (IndexOutOfBoundsException e) {
             return "Invalid index";
+        } catch (NumberFormatException a) {
+            return "Invalid format; Please type a number";
         }
 
         String output = FANCY_LINE + "Nice! I've marked this task as done:\n";
@@ -111,95 +115,76 @@ public class TaskList {
      * @param print an int that specifies whether to print the action or not.
      * @return output message
      */
-    public String addEvent(String[] echoSplit, int print) {
-        StringBuilder task = new StringBuilder();
-        int fromIndex = 0;
-        int toIndex = 0;
-        String fromDate = "";
-        String toDate = "";
-        assert echoSplit.length > 0 : "task length should not be less than 0";
-
-        for (int i = 1; i < echoSplit.length; i++) {
-            boolean isFromWord = echoSplit[i].equals("/from") || echoSplit[i].equals("from:");
-            boolean isToWord = echoSplit[i].equals("/to") || echoSplit[i].equals("to:");
-
-            if (isFromWord) {
-                fromIndex = i;
-            }
-
-            if (isToWord) {
-                toIndex = i;
-
-                for (int j = fromIndex + 1; j < toIndex; j++) {
-                    fromDate += j == toIndex - 1 ? echoSplit[j] : echoSplit[j] + " ";
-                }
-                for (int j = toIndex + 1; j < echoSplit.length; j++) {
-                    toDate += j == echoSplit.length - 1 ? echoSplit[j] : echoSplit[j] + " ";
-                }
-                for (int j = 1; j < fromIndex; j++) {
-                    task.append(echoSplit[j]).append(" ");
-                }
-                break;
-            }
-        }
-        String output;
-        if(task.toString().trim().equals("")) {
-            return FORMAT_ISSUE;
-        }
+    public String addEvent(String[] echoSplit) {
+        String task;
+        Event event;
         try {
-            list.add(new Event(task.toString(), fromDate, toDate));
-            output = FANCY_LINE + "added: " + task + "\n" + FANCY_LINE;
+            int fromIndex = findIndex(echoSplit, "/from");
+            int toIndex = findIndex(echoSplit, "/to");
+
+            task = extractData(echoSplit, 1, fromIndex) + " ";
+            String fromDate = extractData(echoSplit, fromIndex + 1, toIndex);
+            String toDate = extractData(echoSplit, toIndex + 1, echoSplit.length);
+
+            event = new Event(task, fromDate, toDate);
         } catch (DateTimeParseException e) {
             return FORMAT_ISSUE;
+        } catch(IndexOutOfBoundsException a) {
+            return FORMAT_ISSUE;
         }
-
-
-        if (print == 0) {
-            return output;
-        } else {
-            return "";
-        }
+        return deHelper(event, task);
     }
 
-    /**
-     * Adds a Deadline task to the list.
-     *
-     * @param echoSplit an array of String containing the words of the command given.
-     * @param print an int that specifies whether to print the action or not.
-     * @return output message
-     */
-    public String addDeadline(String[] echoSplit, int print) {
-        String task = "";
-        String date = "";
+    public String addDeadline(String[] echoSplit) {
 
-        for (int i = 1; i < echoSplit.length; i++) {
-            boolean isByWord = echoSplit[i].equals("/by") || echoSplit[i].equals("by:");
-            if (isByWord) {
-                for (int j = 1; j < i; j++) {
-                    task += j == i - 1 ? echoSplit[j] : echoSplit[j] + " ";
-                }
-                for (int j = i + 1; j < echoSplit.length; j++) {
-                    date += j == echoSplit.length - 1 ? echoSplit[j] : echoSplit[j] + " ";
-                }
-                String output;
-                if(task.equals("")) {
-                    return FORMAT_ISSUE;
-                }
-                try {
-                    list.add(new Deadline(task, date));
-                    output = echoSplit[i + 1] + "\n" + FANCY_LINE + "added: " + task + "\n " + FANCY_LINE;
-                } catch (DateTimeParseException e) {
-                    return FORMAT_ISSUE;
-                }
 
-                if (print == 0) {
-                    return output;
-                } else {
-                    return "";
-                }
+        String task;
+        Deadline deadline;
+        try {
+            int byIndex = findIndex(echoSplit, "/by");
+
+            task = extractData(echoSplit, 1, byIndex);
+            String date = extractData(echoSplit, byIndex + 1, echoSplit.length);
+
+            deadline = new Deadline(task, date);
+        } catch (DateTimeParseException e) {
+            return FORMAT_ISSUE;
+        } catch(IndexOutOfBoundsException a) {
+            return FORMAT_ISSUE;
+        }
+        return deHelper(deadline, task);
+    }
+
+    private String extractData(String[] echoSplit, int start, int end) {
+        StringBuilder data = new StringBuilder();
+
+        for (int i = start; i < end; i++) {
+            if (i != start) data.append(" ");
+            data.append(echoSplit[i]);
+        }
+
+        return data.toString();
+    }
+
+    private int findIndex(String[] echoSplit, String... targets) {
+        for (int i = 0; i < echoSplit.length; i++) {
+            for (String target : targets) {
+                if (echoSplit[i].equals(target)) return i;
             }
         }
-        return FORMAT_ISSUE;
+
+        return -1;
+    }
+
+    private String deHelper(Task task, String taskDescription) {
+        String output;
+        if (taskDescription.trim().equals("")) {
+            return FORMAT_ISSUE;
+        }
+        list.add(task);
+        output = FANCY_LINE + "added: " + taskDescription + "\n" + FANCY_LINE;
+
+        return output;
     }
 
     /**
@@ -210,9 +195,10 @@ public class TaskList {
      * @return output message
      */
     public String delete(String[] inputArgs) {
-        int index = Integer.parseInt(inputArgs[1]) - 1;
+        int index;
         String item;
         try {
+            index = Integer.parseInt(inputArgs[1]) - 1;
             item = list.get(index).toString();
             list.remove(index);
         } catch (IndexOutOfBoundsException e) {
@@ -229,9 +215,15 @@ public class TaskList {
      * @return output message
      */
     public String find(String[] echoSplit) {
-        System.out.println(FANCY_LINE);
-        String keyword = echoSplit[1];
-        StringBuilder result = new StringBuilder();
+        String keyword;
+        StringBuilder result;
+        try {
+            System.out.println(FANCY_LINE);
+            keyword = echoSplit[1];
+            result = new StringBuilder();
+        } catch (ArrayIndexOutOfBoundsException w) {
+            return "invalid format";
+        }
 
         for (int i = 0; i < list.size(); i++) {
             String description = list.get(i).description;

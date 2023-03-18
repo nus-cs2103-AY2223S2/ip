@@ -41,10 +41,10 @@ public class Storage {
                         list.add(new ToDo(taskLine));
                         break;
                     case "D":
-                        addDeadline(split, list, 1);
+                        addDeadline(split, list);
                         break;
                     case "E":
-                        addEvent(split, list, 1);
+                        addEvent(split, list);
                         break;
                 }
 
@@ -135,72 +135,49 @@ public class Storage {
         fr.close();
     }
 
-    public void addEvent(String[] echoSplit,ArrayList<Task> list, int print){
-        String task = "";
-        int fromI = 0;
-        int toI = 0;
-        String from = "";
-        String to = "";
+    public void addEvent(String[] echoSplit, ArrayList<Task> list) {
+        int fromIndex = findIndex(echoSplit, "/from", "from:");
+        int toIndex = findIndex(echoSplit, "/to", "to:");
 
-        for (int i = 1; i < echoSplit.length; i++) {
-            if (echoSplit[i].equals("/from") || echoSplit[i].equals("from:")) {
-                fromI = i;
-            }
-            if (echoSplit[i].equals("/to") || echoSplit[i].equals("to:")) {
-                toI = i;
+        String task = extractData(echoSplit, 1, fromIndex) + " ";
+        String from = extractData(echoSplit, fromIndex + 1, toIndex);
+        String to = extractData(echoSplit, toIndex + 1, echoSplit.length);
 
-                for (int j = fromI + 1; j < toI; j++) {
-                    if (j == toI - 1) {
-                        from += echoSplit[j];
-                    } else {
-                        from += echoSplit[j] + " ";
-                    }
-                }
-                for (int j = toI + 1; j < echoSplit.length; j++) {
-                    if (j == echoSplit.length - 1) {
-                        to += echoSplit[j];
-                    } else {
-                        to += echoSplit[j] + " ";
-                    }
-                }
-                for (int j = 1; j < fromI; j++) {
-                    task += echoSplit[j] + " ";
-                }
-                break;
-            }
-
-
-        }
         list.add(new Event(task, from, to));
-
     }
-    public void addDeadline(String[] echoSplit, ArrayList<Task> list, int print){
-        String task = "";
-        String date = "";
 
-        for (int i = 1; i < echoSplit.length; i++) {
-            if (echoSplit[i].equals("/by") || echoSplit[i].equals("by:")){
+    public void addDeadline(String[] echoSplit, ArrayList<Task> list) {
+        int byIndex = findIndex(echoSplit, "/by", "by:");
 
-                for (int j = 1; j < i; j++) {
-                    if (j == i-1) {
-                        task += echoSplit[j];
-                    } else {
-                        task += echoSplit[j] + " ";
-                    }
+        String task = extractData(echoSplit, 1, byIndex);
+        String date = extractData(echoSplit, byIndex + 1, echoSplit.length);
+
+        list.add(new Deadline(task, date));
+    }
+
+    private String extractData(String[] echoSplit, int start, int end) {
+        StringBuilder data = new StringBuilder();
+
+        for (int i = start; i < end; i++) {
+            if (i != start) {
+                data.append(" ");
+            }
+            data.append(echoSplit[i]);
+        }
+
+        return data.toString();
+    }
+
+    private int findIndex(String[] echoSplit, String... targets) {
+        for (int i = 0; i < echoSplit.length; i++) {
+            for (String target : targets) {
+                if (echoSplit[i].equals(target)) {
+                    return i;
                 }
-                for (int j = i + 1; j < echoSplit.length; j++) {
-                    if (j == echoSplit.length - 1) {
-                        date += echoSplit[j];
-                    } else {
-                        date += echoSplit[j] + " ";
-                    }
-                }
-
-                list.add(new Deadline(task, date));
-
-
             }
         }
+
+        return -1;
     }
 
 

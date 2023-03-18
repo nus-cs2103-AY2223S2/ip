@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -135,7 +136,12 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+        if(userInput.getText().equals("bye")) {
+            Platform.exit();
+        }
         userInput.clear();
+
+
     }
 
     /**

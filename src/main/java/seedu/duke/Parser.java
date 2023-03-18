@@ -1,5 +1,7 @@
 package seedu.duke;
 
+
+
 /**
  * Class that parses the command given.
  *
@@ -18,8 +20,6 @@ public class Parser {
      * Takes in the command and chooses what function should be used.
      *
      * @param input the command given.
-     * @param inputArgs an array of String containing the words of the command given.
-     * @param COUNTER int indicating list size
      * @param tasks TaskList object containing the tasks list and functions.
      */
     public String parse(String input, TaskList tasks) throws DukeException {
@@ -35,13 +35,13 @@ public class Parser {
                 return tasks.showList();
 
             case DEADLINE:
-                return tasks.addDeadline(inputArgs,0);
+                return tasks.addDeadline(inputArgs);
 
             case TODO:
                 return tasks.addToDo(inputArgs);
 
             case EVENT:
-                return tasks.addEvent(inputArgs, 0);
+                return tasks.addEvent(inputArgs);
 
             case DELETE:
                 return tasks.delete(inputArgs);
