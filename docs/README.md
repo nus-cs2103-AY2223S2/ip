@@ -24,17 +24,27 @@ Fret not! Hi Doraemon is here to save the day!
 
 ## Feature Summary
 
-### `list` - lists all your current tasks
-### `todo {task description}` - adds a new to-do task 
-### `deadline {task description /by {YYYY-MM-DD}` - adds a new deadline
-### `event {task description} /from {start time} /to {end time}` - adds a new event
-### `doafter {task description} /after {time}` - adds a new do-after task
-### `unmark {task number}` - unmarks a task
-### `mark {task number}` - marks a task 
-### `delete {task number}` - deletes a task
-### `find {keyword}` - finds tasks based on a supplied keyword
-### `help` - sends a help message with with all the commands 
-### `bye` - sends a goodbye message
+`list` - lists all your current tasks 
+
+`todo {task description}` - adds a new to-do task 
+
+`deadline {task description /by {YYYY-MM-DD}` - adds a new deadline
+
+`event {task description} /from {start time} /to {end time}` - adds a new event
+
+`doafter {task description} /after {time}` - adds a new do-after task
+
+`unmark {task number}` - unmarks a task
+
+`mark {task number}` - marks a task 
+
+`delete {task number}` - deletes a task
+
+`find {keyword}` - finds tasks based on a supplied keyword
+
+`help` - sends a help message with with all the commands 
+
+`bye` - exits the application
 
 
 ## Examples of usage
