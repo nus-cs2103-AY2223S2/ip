@@ -4,14 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx//8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" minHeight="-Infinity" graphicTextGap="10.0" lineSpacing="1.0" text="Label" wrapText="true">
+        <Label fx:id="dialog" contentDisplay="CENTER" graphicTextGap="10.0" lineSpacing="1.0" minHeight="-Infinity" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-radius: 12; -fx-border-width: 0.5; -fx-padding: 7; -fx-background-color: ECFF76; -fx-background-radius: 12;" text="Label" textFill="#171515" wrapText="true">
          <HBox.margin>
             <Insets left="10.0" right="10.0" />
-         </HBox.margin></Label>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+         </HBox.margin>
+         <font>
+            <Font name="High Tower Text" size="15.0" />
+         </font></Label>
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" style="">
          <HBox.margin>
             <Insets />
          </HBox.margin></ImageView>

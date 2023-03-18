@@ -32,8 +32,6 @@ public class Parser {
         String firstWord = inputSplitByWords[0];
         try {
             switch (firstWord) {
-                case "bye":
-                    return sender.sendGoodByeMessage();
                 case "list":
                     return sender.listAllTasks();
                 case "help":

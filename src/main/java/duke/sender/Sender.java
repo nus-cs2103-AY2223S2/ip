@@ -46,14 +46,6 @@ public class Sender {
     }
 
     /**
-     * Sends a goodbye message to the user.
-     * @return a goodbye message
-     */
-    public String sendGoodByeMessage() {
-        return "Goodbye! :)\n";
-    }
-
-    /**
      * Sends a message to the user informing them that their command was invalid.
      * @return an invalid command message
      */
