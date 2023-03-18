@@ -33,6 +33,8 @@ The description refers to the task details
 Examples:
 
 todo eat burger
+![image](https://user-images.githubusercontent.com/82088609/225622232-10474dc9-4055-4130-9b4b-7bd908d30d79.png)
+
 
 
 ### 2. deadline
@@ -48,6 +50,8 @@ the date refers to the date in YYYY-MM-DD
 Examples:
 
 deadline eat burger /by 2018-01-01
+![image](https://user-images.githubusercontent.com/82088609/225622348-81b3867e-9739-4393-a7f5-9e1f50e42e06.png)
+
 
 ### 3. event
 
@@ -64,6 +68,7 @@ the end date refers to the ending date in YYYY-MM-DD format
 Examples:
 
 event eat burger /from 2018-01-01 /to 2019-01-01
+![image](https://user-images.githubusercontent.com/82088609/225622447-6f24761f-1aa1-465e-bdee-1e865d360663.png)
 
 
 ### 4. list
@@ -75,6 +80,8 @@ Format: list
 Examples:
 
 list
+![image](https://user-images.githubusercontent.com/82088609/225622487-54a717d2-1d69-4ead-9919-5af60c6faa65.png)
+
 
 
 ### 5. delete
@@ -92,6 +99,7 @@ The index must be a positive integer 1, 2, 3, …
 Examples:
 
 list followed by delete 2 deletes the 2nd task.
+![image](https://user-images.githubusercontent.com/82088609/225622530-8e6317cd-9906-401d-a519-d01fb7377dda.png)
 
 
 ### 6. mark
@@ -109,6 +117,7 @@ The index must be a positive integer 1, 2, 3, …
 Examples:
 
 list followed by mark 2 marks the 2nd task as done.
+![image](https://user-images.githubusercontent.com/82088609/225622565-3a46e371-e014-43ae-8bc5-ad68b1757c0e.png)
 
 
 ### 7. unmark
@@ -126,6 +135,8 @@ The index must be a positive integer 1, 2, 3, …
 Examples:
 
 list followed by unmark 2 marks the 2nd task as done.
+![image](https://user-images.githubusercontent.com/82088609/225622615-4c42c47e-f18a-4c62-be25-7bad6994a553.png)
+
 
 ### 8. bye
 Exit DukeDeluxe.
@@ -135,6 +146,8 @@ Please only use this command to exit DukeDeluxe instead of closing the window, o
 Tell DukeDeluxe your command in the format:
 
 bye
+![image](https://user-images.githubusercontent.com/82088609/225622681-e95c9966-98f5-488e-8ab4-0347b283e762.png)
+
 
 <!-- ## Usage
 
