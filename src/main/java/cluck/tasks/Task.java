@@ -18,7 +18,7 @@ public abstract class Task {
      */
     protected static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
-            .appendPattern("dd MM[M] yy[yy] HH[mm]")
+            .appendPattern("dd [MM][MMM][MMMM] [yyyy][yy] HH[mm]")
             .toFormatter(Locale.ROOT);
     /**
      * The Description.
