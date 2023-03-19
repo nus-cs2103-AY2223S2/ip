@@ -200,7 +200,7 @@ public class Ui {
      * the command that has been entered
      */
     public void showUnrecognisedCommandError() {
-        String output = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        String output = "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         System.out.println(output);
         recentOutput += output;
     }

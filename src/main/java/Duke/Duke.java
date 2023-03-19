@@ -31,7 +31,6 @@ public class Duke extends Application {
         new Chatbot(SAVE_DIRECTORY, FILE_NAME).run();
     }
 
-
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -49,6 +48,15 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
+        AnchorPane mainLayout = setupRequiredComponents(stage);
+        formatWindow(stage, mainLayout);
+        setupAnchorPane();
+        addOnClickEvents();
+
+
+    }
+
+    private AnchorPane setupRequiredComponents(Stage stage) {
         //Step 1. Setting up required components
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -66,7 +74,11 @@ public class Duke extends Application {
         assert FILE_NAME != null;
         stage.setScene(scene);
         stage.show();
+        return mainLayout;
 
+    }
+
+    private void formatWindow(Stage stage, AnchorPane mainLayout) {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -88,7 +100,9 @@ public class Duke extends Application {
         userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);
+    }
 
+    private void setupAnchorPane() {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
         AnchorPane.setBottomAnchor(sendButton, 1.0);
@@ -96,6 +110,9 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
+
+    private void addOnClickEvents() {
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -116,10 +133,7 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
-
-
     }
-
 
     /**
      * Iteration 1:
