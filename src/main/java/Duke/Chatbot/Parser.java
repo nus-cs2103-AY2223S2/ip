@@ -26,17 +26,35 @@ public class Parser {
     }
 
     private void setupCommands() {
+        addEndCommand();
+        addListCommand();
+        addMarkCommand();
+        addUnmarkCommand();
+        addTodoCommand();
+        addDeadlineCommand();
+        addEventCommand();
+        addDeleteCommand();
+        addDeleteAllCommand();
+        addFindCommand();
+    }
+
+    private void addEndCommand() {
         commands.put(Messages.MESSAGE_END, (chatbot, args) -> {
             System.out.println(Messages.MESSAGE_END);
             chatbot.isActive = false;
             return true;
         });
 
+    }
+
+    private void addListCommand() {
         commands.put(Messages.MESSAGE_LIST, (chatbot, args) -> {
             chatbot.printTasks();
             return true;
         });
+    }
 
+    private void addMarkCommand() {
         commands.put(Messages.MESSAGE_MARK, (chatbot, args) -> {
 
             Integer index = -1;
@@ -55,6 +73,9 @@ public class Parser {
             return true;
 
         });
+    }
+
+    private void addUnmarkCommand() {
         commands.put(Messages.MESSAGE_UNMARK, (chatbot, args) -> {
 
             Integer index = -1;
@@ -69,7 +90,9 @@ public class Parser {
             chatbot.markAsIncomplete(index);
             return true;
         });
+    }
 
+    private void addTodoCommand() {
         commands.put(Messages.MESSAGE_TODO, (chatbot, args) -> {
             if (args.trim() == "") {
                 ui.showEmptyDescriptionError();
@@ -78,7 +101,9 @@ public class Parser {
             chatbot.addTask(TaskList.Tasktype.TODO, args.trim());
             return true;
         });
+    }
 
+    private void addDeadlineCommand() {
         commands.put(Messages.MESSAGE_DEADLINE, (chatbot, args) -> {
             String[] inputs = args.split("/by", 2);
 
@@ -94,7 +119,9 @@ public class Parser {
 
             return true;
         });
+    }
 
+    private void addEventCommand() {
         commands.put(Messages.MESSAGE_EVENT, (chatbot, args) -> {
             String[] inputs = args.split("(/from | /to)", 3);
 
@@ -110,7 +137,9 @@ public class Parser {
 
             return true;
         });
+    }
 
+    private void addDeleteCommand() {
         commands.put(Messages.MESSAGE_DELETE, (chatbot, args) -> {
             Integer index = -1;
             try {
@@ -124,12 +153,16 @@ public class Parser {
 
             return true;
         });
+    }
 
+    private void addDeleteAllCommand() {
         commands.put(Messages.MESSAGE_DELETE_ALL_DATA, (chatbot, args) -> {
             chatbot.removeAllTasks();
             return true;
         });
+    }
 
+    private void addFindCommand() {
         commands.put(Messages.MESSAGE_FIND, (chatbot, args) -> {
             if (args == "") {
                 ui.showEmptyFindKeywordError();
@@ -137,7 +170,6 @@ public class Parser {
             chatbot.find(args);
             return true;
         });
-
     }
 
     /**
