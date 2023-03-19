@@ -4,7 +4,7 @@ Duke is a task manager to help you organise tasks efficiently!
 
 1. Ensure that you have `Java 11` or above installed
 2. Download the latest `duke.jar` from releases
-3. After unzipping to desired location, double-click `duke.jar` to start Duke.
+3. After moving the file desired location, double-click `duke.jar` to start Duke.
 
 ## Features
 
