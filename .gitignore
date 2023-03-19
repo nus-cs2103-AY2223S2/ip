@@ -16,8 +16,8 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 data/Duke.txt
-.gitignore
 *.class
 *.jar
 *.exe
-src\out\production\main\duke\*.class
+src/out/
+.gitignore
