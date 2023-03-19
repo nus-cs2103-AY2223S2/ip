@@ -114,7 +114,7 @@ public class TaskManagement {
         Task task = new Event(data.substring(taskNameStart, symbol), first, second);
         return task;
     }
-    
+
     private Task loadDeadline(String data, int taskNameStart, int byLength) {
         int symbol = data.indexOf("(");
         int symbolClose = data.indexOf(")");

@@ -96,10 +96,9 @@ public class Duke {
 
     }
 
-
-
     /**
      * The main method of the program.
+     *
      * @param args Not used.
      * @throws IOException Not used.
      * @throws DukeException Not used.

@@ -18,7 +18,7 @@ A task can be marked as undone
 All tasks which contains the given keyword will be shown 
 
 ### Sort
-The list of tasks can be sorted in alphabetical order
+The list of tasks can be sorted by task completeness, then alphabetical order
 
 ### Save a task
 Tasks added to the list can be stored and loaded when the program starts

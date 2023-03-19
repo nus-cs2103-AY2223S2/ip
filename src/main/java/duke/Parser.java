@@ -65,7 +65,6 @@ public class Parser {
         int taskNo = Integer.parseInt(input[1]);
         String response = "";
         try {
-            //int taskNo = Integer.parseInt(input[1]);
             if (taskNo > taskStorage.noTasks() || taskNo <= 0) {
 
                 throw new DukeException("Give a vaild number");
@@ -112,7 +111,7 @@ public class Parser {
         try {
             String[] inpTodo = inp.split(" ");
             if (inpTodo.length == 1) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             String todoTask = inp.substring(5);
             Task todo = new Todo(todoTask);
@@ -127,17 +126,21 @@ public class Parser {
     public String deadline(String inp) {
         String response = "";
         try {
-            if (inp.length() == 8) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline must have a date.");
+            if (inp.length() <= 8) {
+                throw new DukeException("OOPS!!! The description of a deadline must have a date.");
             }
             String deadlineStr = inp.substring(9);
             String[] inputDeadline = deadlineStr.split("/");
             if (inputDeadline.length != 2) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline must have a date.");
+                throw new DukeException("OOPS!!! The description of a deadline must have a date.");
             }
             String deadLineTaskStr = inputDeadline[0];
             assert(inputDeadline[1].contains("by"));
+
             String end = inputDeadline[1].substring(3);
+            if (!inputDeadline[1].contains("by") || end.length() == 3) {
+                throw new DukeException("OOPS!!! The description of a deadline must have a date.");
+            }
             Task deadLineTask = new Deadline(deadLineTaskStr, end);
             response = taskStorage.addTask(deadLineTask);
         } catch (DukeException e) {
@@ -151,21 +154,27 @@ public class Parser {
         String response = "";
 
         try {
-            if (inp.length() == 6) {
-                throw new DukeException("☹ OOPS!!! The description of an event must have a start and end time.");
+            if (inp.length() <= 6) {
+                throw new DukeException("OOPS!!! The description of an event must have a start and end time.");
             }
             String eventStr = inp.substring(6);
 
             String[] eventStrsplit = eventStr.split("/");
             if (eventStrsplit.length != 3) {
-                throw new DukeException("☹ OOPS!!! The description of an event must have a start and end time.");
+                throw new DukeException("OOPS!!! The description of an event must have a start and end time.");
             }
             String eventTaskStr = eventStrsplit[0];
             assert(eventStrsplit[1].contains("from"));
             String eventBegin = eventStrsplit[1].substring(5);
+            if (!eventStrsplit[1].contains("from") || eventBegin.length() <= 5) {
+                throw new DukeException("OOPS!!! The description of an event must have a start and end time.");
+            }
             eventBegin = eventBegin.substring(0, eventBegin.length() - 1);
             assert(eventStrsplit[2].contains("to"));
             String eventEnd = eventStrsplit[2].substring(3);
+            if (!eventStrsplit[2].contains("to") || eventEnd.length() <= 3) {
+                throw new DukeException("OOPS!!! The description of an event must have a start and end time.");
+            }
             Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
             response = taskStorage.addTask(eventTask);
         } catch (DukeException e) {
@@ -199,8 +208,8 @@ public class Parser {
         try {
             StringBuilder chunkOfText = new StringBuilder();
             chunkOfText.append("Here are the matching tasks in your list:\n");
-            if (inp.length() == 5) {
-                throw new DukeException("☹ OOPS!!! There's nothing to find in empty input!");
+            if (inp.length() <= 5) {
+                throw new DukeException("OOPS!!! There's nothing to find in empty input!");
             }
             String findString = inp.substring(5);
             TaskStorage findStorage = new TaskStorage();
