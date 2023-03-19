@@ -55,7 +55,11 @@ public class Chatbot {
 
         }
     }
-    
+
+    public void input(String input) {
+        parser.parse(input);
+    }
+
 
     /**
      * Triggers UI to print the tasks
@@ -163,10 +167,16 @@ public class Chatbot {
         ui.showTaskCompletedMessage(tasks.getTaskInfo(index));
     }
 
-
+    /**
+     * Called to find the arg in the Tasks
+     */
     public void find(String args) {
         ui.showFindMessage(args);
         TaskList foundTasks = tasks.findKeyword(args);
         ui.showTasksMessage(foundTasks.toString());
+    }
+
+    public String getRecentOutput() {
+        return Ui.getRecentOutput();
     }
 }

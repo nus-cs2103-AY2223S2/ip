@@ -16,7 +16,7 @@ public class DukeTest {
     }
 
     @Test
-    public void TaskListDummyTest() {
+    public void taskListDummyTest() {
         TaskList tasks = new TaskList();
 
         assertEquals(tasks.numTasks(), 0);

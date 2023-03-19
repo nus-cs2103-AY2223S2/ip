@@ -5,12 +5,22 @@ package Duke.Chatbot;
  */
 public class Ui {
 
+    private static String recentOutput = "";
+
+    public static String getRecentOutput() {
+        String output = recentOutput;
+        recentOutput = "";
+        return output;
+    }
+
     /**
      * Error message to be shown to user when an error
      * occurs when loading data.
      */
     public void showLoadingError() {
+        String output = "Error loading data!\n";
         System.out.println("Error loading data!");
+        recentOutput += output;
     }
 
     /**
@@ -18,7 +28,9 @@ public class Ui {
      * index user specified is larger than the size of the list
      */
     public void showIndexError() {
-        System.out.println("Error: Index specified must be smaller than current list size.");
+        String output = "Error: Index specified must be smaller than current list size.\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
@@ -27,7 +39,9 @@ public class Ui {
      * mark and unmark commands
      */
     public void showIndexNotSpecifiedError() {
-        System.out.println("Error: Index not specified");
+        String output = "Error: Index not specified\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
@@ -37,37 +51,35 @@ public class Ui {
      * @param newTasksLength length of tasks after this addition
      */
     public void showTaskAddedMessage(String taskMessage, int newTasksLength) {
-        System.out.println("Got it. I've added this task:");
+        String output = "Got it. I've added this task:\n";
+        System.out.println(output);
+        recentOutput += output;
         showTaskEditedMessage(taskMessage, newTasksLength);
 
     }
 
 
     private void showTaskEditedMessage(String taskMessage, int newTasksLength) {
-        System.out.println("\t" + taskMessage);
-        System.out.println("Now you have " + newTasksLength + " tasks in the list");
+        String output = "\t" + taskMessage + "\n";
+        System.out.println(output);
+        recentOutput += output;
+        output = "Now you have " + newTasksLength + " tasks in the list";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
      * Message to be shown to user on startup
      */
     public void showStartupMessage() {
-        String logo = "               _     __,..---\"\"-._                 ';-,\n" +
-                "        ,    _/_),-\"`             '-.                `\\\\\n" +
-                "       \\|.-\"`    -_)                 '.                ||\n" +
-                "       /`   a   ,                      \\              .'/\n" +
-                "       '.___,__/                 .-'    \\_        _.-'.'\n" +
-                "          |\\  \\      \\         /`        _`\"\"\"\"\"\"`_.-'\n" +
-                "             _/;--._, >        |   --.__/ `\"\"\"\"\"\"`\n" +
-                "           (((-'  __//`'-......-;\\      )\n" +
-                "                (((-'       __//  '--. /\n" +
-                "                          (((-'    __//\n" +
-                "                                 (((-'";
+        final String messageStart = "What can I do for you?\n";
+        String output = "Squeak squeak\n";
 
-        String MESSAGE_START = "What can I do for you?";
+        System.out.println("Squeak squeak\n");
+        System.out.println(messageStart);
+        recentOutput += output;
+        recentOutput += messageStart;
 
-        System.out.println("Squeak squeak\n" + logo);
-        System.out.println(MESSAGE_START);
     }
 
     /**
@@ -87,8 +99,13 @@ public class Ui {
      * @param tasks User representation of the tasks that are currently in the list
      */
     public void showTasksMessage(String tasks) {
-        System.out.println("Here are the tasks in your list:");
+        String output = "Here are the tasks in your list:\n";
+        recentOutput += output;
+        System.out.println(output);
+        output = tasks;
+        recentOutput += output;
         System.out.println(tasks);
+
     }
 
     /**
@@ -96,7 +113,9 @@ public class Ui {
      * has already been marked
      */
     public void showTaskStateCompletedError() {
-        System.out.println("Task is already marked as done.");
+        String output = "Task is already marked as done.\n";
+        recentOutput += output;
+        System.out.println(output);
     }
 
     /**
@@ -106,9 +125,13 @@ public class Ui {
      * @param taskMessage User representation of the task the user has just marked
      */
     public void showTaskCompletedMessage(String taskMessage) {
-        System.out.println("Nice! I've marked this task as done:");
+        String output = "Nice! I've marked this task as done:\n";
+        System.out.println(output);
+        recentOutput += output;
 
+        output = "\t" + taskMessage + "\n";
         System.out.println("\t" + taskMessage);
+        recentOutput += output;
     }
 
     /**
@@ -116,7 +139,9 @@ public class Ui {
      * is currently unmarked
      */
     public void showTaskStateIncompletedError() {
-        System.out.println("Task is already marked as incompelted.");
+        String output = "Task is already marked as incompleted.\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
@@ -126,8 +151,14 @@ public class Ui {
      * @param taskMessage User Representation of the task the user has just unmarked.
      */
     public void showTaskIncompletedMessage(String taskMessage) {
-        System.out.println("I have maked this task as incomplete:");
+        String output = "I have maked this task as incomplete:\n";
+        System.out.println(output);
+        recentOutput += output;
+
+        output = "\t" + "taskMessage";
         System.out.println("\t" + taskMessage);
+        recentOutput += output;
+
 
     }
 
@@ -136,7 +167,9 @@ public class Ui {
      * following a Task command.
      */
     public void showEmptyDescriptionError() {
-        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+        String output = "☹ OOPS!!! The description of a todo cannot be empty.\n";
+        System.out.println(output);
+        recentOutput += output;
 
     }
 
@@ -145,8 +178,10 @@ public class Ui {
      * without the appropriate commands
      */
     public void showIncompleteDeadlineArgumentsError() {
-        System.out.println("Error: Invalid number of args. Pls add a /by in your command, " +
-                "or ensure task name is not not empty");
+        String output = "Error: Invalid number of args. Pls add a /by in your command, "
+                + "or ensure task name is not not empty\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
@@ -154,8 +189,10 @@ public class Ui {
      * without the appropriate commands
      */
     public void showIncompleteEventArgumentsError() {
-        System.out.println("Error: Invalid number of args. Pls add a /from and /to in your command," +
-                " or ensure task name is not not empty");
+        String output = "Error: Invalid number of args. Pls add a /from and /to in your command,"
+                + " or ensure task name is not not empty\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
@@ -163,29 +200,36 @@ public class Ui {
      * the command that has been entered
      */
     public void showUnrecognisedCommandError() {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-
+        String output = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
      * Error message to be shown to user if Command given included an invalid datetime
      */
     public void showDateTimeParseError() {
-        System.out.println("Error: Unable to parse datetime.");
+        String output = "Error: Unable to parse datetime.\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
      * Error message to be shown to user if Save data contains unimplemented task types
      */
     public void showUnimplementedTaskTypeError() {
-        System.out.println("Error: Task type is not implemented");
+        String output = "Error: Task type is not implemented\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
      * Message to be shown to user if Deleteall command is run
      */
     public void showRemoveAllTasksMessage() {
-        System.out.println("Deletion complete!");
+        String output = "Deletion complete!\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
@@ -193,7 +237,9 @@ public class Ui {
      * when no tasks are in the list.
      */
     public void showNoTasksMessage() {
-        System.out.println("There are no tasks to print!");
+        String output = "There are no tasks to print!\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 
     /**
@@ -201,7 +247,9 @@ public class Ui {
      * when no Keyword is specified
      */
     public void showEmptyFindKeywordError() {
-        System.out.println("Error: Find has no keyword to find for");
+        String output = "Error: Find has no keyword to find for\n";
+        System.out.println(output);
+        recentOutput += output;
 
     }
 
@@ -212,6 +260,8 @@ public class Ui {
      */
 
     public void showFindMessage(String args) {
-        System.out.println("Finding tasks related to keyword: " + args);
+        String output = "Finding tasks related to keyword: " + args + "\n";
+        System.out.println(output);
+        recentOutput += output;
     }
 }

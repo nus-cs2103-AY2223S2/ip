@@ -16,8 +16,9 @@ import javafx.stage.Stage;
 
 
 public class Duke extends Application {
-    final static String FILE_NAME = "save.txt";
-    final static String SAVE_DIRECTORY = "data";
+    static final String FILE_NAME = "save.txt";
+    static final String SAVE_DIRECTORY = "data";
+    private static final Chatbot dukeChatbot = new Chatbot(SAVE_DIRECTORY, FILE_NAME);
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private ScrollPane scrollPane;
@@ -49,7 +50,6 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Step 1. Setting up required components
-
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -120,6 +120,7 @@ public class Duke extends Application {
 
     }
 
+
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
@@ -155,8 +156,10 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        assert "" != input;
-        return "Duke heard: " + input;
+
+        dukeChatbot.input(input);
+
+        return dukeChatbot.getRecentOutput();
     }
 
 

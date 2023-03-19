@@ -8,8 +8,8 @@ import java.util.function.BiPredicate;
  * Converts user input to make sense of user command
  */
 public class Parser {
-    public static final Map<String, BiPredicate<Chatbot, String>> commands
-            = new HashMap<String, BiPredicate<Chatbot, String>>();
+    public static final Map<String, BiPredicate<Chatbot, String>> commands =
+            new HashMap<String, BiPredicate<Chatbot, String>>();
     private final Chatbot chatbot;
     private final Ui ui;
 
@@ -150,6 +150,7 @@ public class Parser {
         //Assuming commands start with a space.
         String[] userCommand = nextLine.split(" ", 2);
         String upperCaseUserCommand = userCommand[0].toUpperCase();
+
         if (commands.containsKey(upperCaseUserCommand)) {
             boolean processedCommandState = commands.get(upperCaseUserCommand)
                     .test(chatbot, userCommand.length > 1 ? userCommand[1] : "");
