@@ -13,11 +13,13 @@ src/main/resources/docs/
 *.iml
 bin/
 
+src/out/
+
 /text-ui-test/ACTUAL.TXT
-text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/EXPECTED.TXT
 data/Duke.txt
 *.class
 *.jar
 *.exe
-src/out/
+
 .gitignore
