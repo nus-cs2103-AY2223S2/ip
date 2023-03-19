@@ -101,6 +101,29 @@ public class TaskManagement {
         }
     }
 
+    private Task loadTodo(String data, int taskNameStart) {
+        Task task = new Todo(data.substring(taskNameStart));
+        return task;
+    }
+
+    private Task loadEvent(String data, int removeFromLength, int dateLength, int taskNameStart) {
+        int symbol = data.indexOf("(");
+        int symbolClose = data.indexOf(")");
+        String first = data.substring(symbol + removeFromLength, symbol + removeFromLength + dateLength);
+        String second = data.substring(symbolClose - dateLength, symbolClose);
+        Task task = new Event(data.substring(taskNameStart, symbol), first, second);
+        return task;
+    }
+    
+    private Task loadDeadline(String data, int taskNameStart, int byLength) {
+        int symbol = data.indexOf("(");
+        int symbolClose = data.indexOf(")");
+        String first = data.substring(taskNameStart, symbol);
+        String second = data.substring(symbol + byLength, symbolClose);
+        Task task = new Deadline(first, second);
+        return task;
+    }
+
     /**
      * Loads the data from the output file into the taskStorage object.
      *
@@ -125,22 +148,11 @@ public class TaskManagement {
                 int dateLength = 10;
                 int byLength = 5;
                 if (action == 'T') {
-                    task = new Todo(data.substring(taskNameStart));
-
+                    task = loadTodo(data, taskNameStart);
                 } else if (action == 'E') {
-                    int symbol = data.indexOf("(");
-                    int symbolClose = data.indexOf(")");
-                    String first = data.substring(symbol + removeFromLength, symbol + removeFromLength + dateLength);
-                    String second = data.substring(symbolClose - dateLength, symbolClose);
-                    task = new Event(data.substring(taskNameStart, symbol), first, second);
-
+                    task = loadEvent(data, removeFromLength, dateLength, taskNameStart);
                 } else if (action == 'D') {
-                    int symbol = data.indexOf("(");
-                    int symbolClose = data.indexOf(")");
-                    String first = data.substring(taskNameStart, symbol);
-                    String second = data.substring(symbol + byLength, symbolClose);
-                    task = new Deadline(first, second);
-
+                    task = loadDeadline(data, taskNameStart, byLength);
                 } else {
                     reader.close();
                     throw new DukeException("Task loaded is formatted incorrectly");
@@ -159,5 +171,4 @@ public class TaskManagement {
             return tasks;
         }
     }
-
 }
