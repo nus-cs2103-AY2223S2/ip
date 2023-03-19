@@ -1,13 +1,13 @@
 package duke.helper;
 
+import java.time.format.DateTimeParseException;
+
 import duke.contact.ContactList;
 import duke.exceptions.InvalidTaskDescriptionException;
 import duke.tasks.TaskList;
 
 
 
-
-//this is the class that parses commands
 
 /**
  * Helper Class to parse and execute commands from user.
@@ -54,10 +54,11 @@ public class Parser {
             }
         } catch (InvalidTaskDescriptionException e) {
             return e.getMessage();
+        } catch (IndexOutOfBoundsException f) {
+            return "bro wake up and type a proper command";
+        } catch (DateTimeParseException d) {
+            return "bro can u wake up and press the date properly";
         }
-
-
-
 
     }
 }

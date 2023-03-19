@@ -201,7 +201,12 @@ The following is shown:
 
 ### `friend` - Adds a contact to the contact list. 
 
-Adds a given contact to the list of contacts
+Adds a given contact to the list of contact
+
+
+In the format 
+
+friend name handphonenumber
 
 Example of usage:
 

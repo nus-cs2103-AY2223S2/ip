@@ -33,7 +33,6 @@ public class Duke {
      * Loads the existing contact's and tasks.
      * @param filepath1 Relative filepath of ChadGPT's task storage.
      * @param filepath2 Relative filepath of ChadGPT's contacts storage.
-     *
      */
     public Duke(String filepath1, String filepath2) {
         this.taskFilepath = filepath1;
@@ -68,8 +67,7 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Obtains and parses the response from the user.
      */
     public String getResponse(String input) {
         if (input.equals("bye")) {
@@ -82,8 +80,7 @@ public class Duke {
 
 
     /**
-     * Method to start up ChadGPT.
-     *
+     * Starts up CHATGPT.
      * @param args Command line arguments.
      */
     public static void main(String[] args) {

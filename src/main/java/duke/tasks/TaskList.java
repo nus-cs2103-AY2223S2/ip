@@ -176,15 +176,17 @@ public class TaskList {
 
     public String findTask(String word) {
         TaskList taskList = new TaskList(this.size);
-        for (Task item : this.getTasks()) {
-            if (item.hasString(word)) {
-                taskList.append(item);
+        try {
+            for (Task item : this.getTasks()) {
+                if (item.hasString(word)) {
+                    taskList.append(item);
+                }
             }
+            return taskList.listTasks();
+        } catch (Exception e) {
+            return "find me something for real bro\n";
         }
-        return taskList.listTasks();
     }
-
-    //list
 
     /**
      * Method to list out all the tasks for the users view.
@@ -203,7 +205,35 @@ public class TaskList {
             str += str2;
         }
         return str;
+    }
 
+    /**
+     * Method create to parse tasks from storage.
+     * @param data Line read from storage.
+     */
+    public void parseTask(String data) {
+        String[] input = data.split("/");
+        if (input[0].equals("T")) {
+            Todo temp = new Todo(input[2]);
+            if (input[1].equals("true")) {
+                temp.markAsDone();
+            }
+            this.append(temp);
+        } else if (input[0].equals("D")) {
+            Deadline temp = new Deadline(input[2], input[3]);
+            if (input[1].equals("true")) {
+                temp.markAsDone();
+            }
+            this.append(temp);
+        } else if (input[0].equals("E")) {
+            Event temp = new Event(input[2], input[3], input[4]);
+            if (input[1].equals("true")) {
+                temp.markAsDone();
+            }
+            this.append(temp);
+        } else {
+            System.out.println("Invalid type idek how u got here man");
+        }
     }
 
 

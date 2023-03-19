@@ -16,7 +16,6 @@ public class ContactList {
 
     /**
      * Creates a Contact List object ot hold the list of contacts
-     *
      * @param size Maximum number of elements in the contact list
      */
     public ContactList(int size) {
@@ -33,7 +32,6 @@ public class ContactList {
 
     /**
      * Creates a new contact object and adds it into the contact list.
-     *
      * @param name
      * @param phoneNumber
      * @return Output message to display
@@ -68,7 +66,7 @@ public class ContactList {
     }
 
     /**
-     * Method to list out all the contacts the user has.
+     * List out all the contacts the user has.
      *
      */
     public String listContacts() {

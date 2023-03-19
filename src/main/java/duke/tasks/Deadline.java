@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import duke.helper.DateTimeParser;
 
@@ -29,7 +30,7 @@ public class Deadline extends Task {
      * @param endTime Time that the deadline is supposed to be met.
      */
 
-    public Deadline(String name, String endTime) {
+    public Deadline(String name, String endTime) throws DateTimeParseException {
         super(name);
         this.endTime = DateTimeParser.parse(endTime);
     }

@@ -111,28 +111,7 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String temp1 = sc.nextLine();
-                String[] input = temp1.split("/");
-                if (input[0].equals("T")) {
-                    Todo temp = new Todo(input[2]);
-                    if (input[1].equals("true")) {
-                        temp.markAsDone();
-                    }
-                    tasklist.append(temp);
-                } else if (input[0].equals("D")) {
-                    Deadline temp = new Deadline(input[2], input[3]);
-                    if (input[1].equals("true")) {
-                        temp.markAsDone();
-                    }
-                    tasklist.append(temp);
-                } else if (input[0].equals("E")) {
-                    Event temp = new Event(input[2], input[3], input[4]);
-                    if (input[1].equals("true")) {
-                        temp.markAsDone();
-                    }
-                    tasklist.append(temp);
-                } else {
-                    System.out.println("Invalid type idek how u got here man");
-                }
+                tasklist.parseTask(temp1);
             }
 
         } catch (IOException exception) {
