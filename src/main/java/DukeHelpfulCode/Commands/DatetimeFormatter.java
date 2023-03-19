@@ -1,4 +1,4 @@
-package DukeHelpfulCode.Utilities;
+package DukeHelpfulCode.Commands;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

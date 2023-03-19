@@ -5,6 +5,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import DukeHelpfulCode.Utilities.UI;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -20,7 +22,7 @@ public class MainWindow extends AnchorPane {
 
     private DOOK dook;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/feet.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/soyjak.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DOOK.png"));
 
     @FXML
@@ -30,6 +32,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDOOK(DOOK d) {
         dook = d;
+        addDialog(new UI().intro);
     }
 
     /**
@@ -44,6 +47,18 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        userInput.clear();
+    }
+    /**
+     * Creates dialog boxes. Clears the user input after processing.
+     */
+    @FXML
+    private void addDialog(String response) {
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+
         userInput.clear();
     }
 }

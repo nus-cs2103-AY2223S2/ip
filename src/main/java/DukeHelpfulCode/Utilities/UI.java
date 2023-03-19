@@ -12,7 +12,7 @@ public class UI {
      * showError(Exception )
      */
 
-    private static String LINEBREAK = "_________________________________________________________________\n";
+    private static String LINEBREAK = "________________________________________________________\n";
 
     public void showWelcome(){
         /**
@@ -24,13 +24,24 @@ public class UI {
         /**
          * Prints the Logo and Welcome Message
          */
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "______         _        \n"
+                + " |  _ \\ _   _| | _____ \n"
+                + " | | | | | | | |/ / _ \\\n"
+                + " | |_| | |_| |   <  __/\n"
+                + " |____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + LINEBREAK + "Type 'bye' to exit!\n" + LINEBREAK);
     }
+
+    public String logo = "____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    public String intro = "Hello from\n"
+            + logo
+            + LINEBREAK
+            + "Type 'bye' to exit!\n"
+            + LINEBREAK;
 
     public String showCommands(){
         /**

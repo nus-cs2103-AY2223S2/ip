@@ -27,26 +27,14 @@ public class Deadline extends Task{
             "hh:mm a dd-MM-yy", "hh:mm a dd/MM/yy",
             "dd MMM yyyy hh:mm a"};
 
-    public Deadline(String name, String dueDate) {
+    public Deadline(String name, LocalDateTime dueDate) {
         super(name,"deadline");
-        this.dateTime = formatDateTime(dueDate);
-        while (this.dateTime == null){
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Sorry, I don't understand when you need this by.\nPlease enter the Date and Time:\n");
-            String dueTime = scanner.nextLine();
-            this.dateTime = formatDateTime(dueTime);
-        }
+        this.dateTime = dueDate;
     }
 
-    public Deadline(String name, String dueDate, boolean isDone) {
+    public Deadline(String name, LocalDateTime dueDate, boolean isDone) {
         super(name, "deadline", isDone);
-        this.dateTime = formatDateTime(dueDate);
-        while (this.dateTime == null){
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Sorry, I don't understand when you need this by.\nPlease enter the Date and Time:\n");
-            String dueTime = scanner.nextLine();
-            this.dateTime = formatDateTime(dueTime);
-        }
+        this.dateTime = dueDate;
     }
 
     private LocalDateTime formatDateTime(String dueDate) {

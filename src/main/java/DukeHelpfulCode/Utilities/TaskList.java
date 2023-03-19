@@ -75,7 +75,7 @@ public class TaskList {
          * If i > userList.size(), throw TaskNotInListException.
          * If Task done but "mark" and vice versa, throw TaskAlrMarkException.
          *
-         * @param   isMark      User's command to "mar" or "unmark" a Task as done or not done.
+         * @param   isMark      User's command to "mark" or "unmark" a Task as done or not done.
          * @param   i           The index of the Task to be marked. Note that user input i is 1-index, so -1 is needed.
          */
         if (i > this.tasks.size()) {
@@ -101,26 +101,10 @@ public class TaskList {
         if (taskNum > this.len() || taskNum <= 0){
             throw new NoSuchTaskException();
         }
-        else if (this.tasks.get(taskNum-1).isDone()) {
+        else {
             this.tasks.remove(taskNum - 1);
             return "The " + taskNum +"th Task on the list has been removed!\n" + LINEBREAK;
-        } else {
-            return "The " + taskNum +"th Task on the list is not yet complete!";
-            /*
-            System.out.println("The " + taskNum +"th Task on the list is not yet complete!\nAre you sure you want to remove it? y/n");
-            Scanner sc = new Scanner(System.in);
-            String yn = sc.next();
-            if (yn.equals("y")){
-                this.taskList.remove(taskNum - 1);
-                System.out.println("The " + taskNum +"th Task on the list has been removed!\n" + LINEBREAK);
-            } else if (yn.equals("n")){
-                System.out.println("OK, I will leave it!\n" + LINEBREAK);
-            } else {
-                System.out.println("Sorry, I don't understand.\n");
-            }
-            */
         }
-
     }
 
     public int len() {

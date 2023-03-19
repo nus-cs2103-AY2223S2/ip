@@ -10,8 +10,10 @@ import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,25 @@ import DukeHelpfulCode.Tasks.*;
 import DukeHelpfulCode.Exceptions.*;
 
 public class Storage {
+
+    private static String[] possibleFormats = {
+            "yyyy-MM-dd HHmm", "yyyy/MM/dd HHmm",
+            "dd-MM-yyyy HHmm", "dd/MM/yyyy HHmm",
+            "yyyy-MM-dd hh:mm a", "yyyy/MM/dd hh:mm a",
+            "dd-MM-yyyy hh:mm a", "dd/MM/yyyy hh:mm a",
+            "HHmm yyyy-MM-dd", "HHmm yyyy/MM/dd",
+            "HHmm dd-MM-yyyy", "HHmm dd/MM/yyyy",
+            "hh:mm a yyyy-MM-dd", "hh:mm a yyyy/MM/dd",
+            "hh:mm a dd-MM-yyyy", "hh:mm a dd/MM/yyyy",
+            "yy-MM-dd HHmm", "yy/MM/dd HHmm",
+            "dd-MM-yy HHmm", "dd/MM/yy HHmm",
+            "yy-MM-dd hh:mm a", "yy/MM/dd hh:mm a",
+            "dd-MM-yy hh:mm a", "dd/MM/yy hh:mm a",
+            "HHmm yy-MM-dd", "HHmm yy/MM/dd",
+            "HHmm dd-MM-yy", "HHmm dd/MM/yy",
+            "hh:mm a yy-MM-dd", "hh:mm a yy/MM/dd",
+            "hh:mm a dd-MM-yy", "hh:mm a dd/MM/yy",
+            "dd MMM yyyy hh:mm a"};
 
     public String filePath;
 
@@ -54,7 +75,7 @@ public class Storage {
             i++; // to skip the "(by:"
             String dd = s[i] + " " + s[i+1] + " " + s[i+2] + " " + s[i+3] + " " + s[i+4];
             // dd MMM yy hh:mm a)
-            t = new Deadline(name, dd.substring(0,dd.length()-1), isDone);
+            t = new Deadline(name, formatDateTime(dd.substring(0,dd.length()-1)), isDone);
         } else if (type.equals("[E]")){
             while (!s[i].equals("(from:")){
                 name += s[i] + " ";
@@ -66,7 +87,7 @@ public class Storage {
             i+=6; // to skip "to:"
             String ed = s[i] + " " + s[i+1] + " " + s[i+2] + " " + s[i+3] + " " + s[i+4];
             // dd MMM yy hh:mm a)
-            t = new Event(name, sd, ed.substring(0,ed.length()-1),isDone);
+            t = new Event(name, formatDateTime(sd), formatDateTime(ed.substring(0,ed.length()-1)),isDone);
         }
 
         return t;

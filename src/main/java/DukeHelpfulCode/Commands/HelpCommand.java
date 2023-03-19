@@ -13,17 +13,13 @@ public class HelpCommand extends Command{
 
     @Override
     public String execute(TaskList taskList){
-        Command[] allCmd = {new HelpCommand(),
-                new AddCommand(),
-                new DeleteCommand(),
-                new MarkCommand(),
-                new ListCommand(),
-                new ExitCommand()};
-        String commandList = "Here's the list of commands:\n"; // just add the tostring of the commands
-        for (int i = 0; i < allCmd.length; i++){
-            commandList += i+1 + ". " + allCmd[i].toString();
-        }
-        return commandList;
+        return "Here is the list of Commands:\n"
+                + "add <Task Type> <Task>: Adds the task to the list\n"
+                + "mark / unmark <index>: Marks the index-th item as done/not done\n"
+                + "delete <index>: Deletes the index-th item\n"
+                + "list: Shows the current task list\n"
+                + "bye: saves the task list and exits DOOK\n"
+                + "help: shows the list of commands\n";
     };
 
     @Override

@@ -25,7 +25,7 @@ public class DOOK {
 
     public DOOK(){
         this.ui = new UI();
-        this.storage = new Storage("data/tasks.txt");
+        this.storage = new Storage("tasks.txt");
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) { // e should be EmptyTaskListException
@@ -33,6 +33,7 @@ public class DOOK {
             this.tasks = new TaskList();
         } catch (IOException e) {
             e.printStackTrace();
+            this.tasks = new TaskList();
         }
     }
 
@@ -53,7 +54,6 @@ public class DOOK {
      * Runs DOOK.
      */
     public void run() {
-        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -70,24 +70,18 @@ public class DOOK {
         }
     }
 
-
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     protected String getResponse(String input) {
         if (!input.equals("bye")) {
             try {
                 Command c = Parser.parse(input);
                 return c.execute(tasks);
             } catch (DukeException e) {
-                return e.getMessage();
+                return "Sorry, I don't understand. Please enter your command again!";
             }
         }
         else {
             try {
-                storage.write(this.tasks);
+                storage.write(tasks);
                 return new ExitCommand().execute(tasks);
             } catch (IOException e) {
                 return "lol";
