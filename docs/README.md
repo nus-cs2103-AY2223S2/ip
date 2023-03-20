@@ -1,10 +1,10 @@
 # User Guide
 
-Duke is a classy offline task manager written in Java, and it is CLI-based. It functions like a personal assistant, in which a user can chat with Duke and get appopriate responses.
+Duke is a classy offline task manager written in Java, and it is CLI-based. It functions like a personal assistant, in which a user can chat with Duke and get appropriate responses.
 
 ## Quick start
 1. Ensure you have Java 11 or above installed in your device.
-2. Download the latest duke.jar from [here](https://r.mtdv.me/dukedownload).
+2. Download the latest duke.jar from [here](https://github.com/tingyic/ip/releases).
 3. Copy the file to the folder to be the home folder for Duke. 
 4. Open a command terminal, `cd` into the folder and use the `java -jar duke.jar` to run the application.
 
