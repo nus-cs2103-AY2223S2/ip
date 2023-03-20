@@ -28,6 +28,10 @@ public class Task {
         return this.name;
     }
 
+    public String getType() {
+        return this.type;
+    }
+
     public boolean isDone(){
         return isDone;
     }

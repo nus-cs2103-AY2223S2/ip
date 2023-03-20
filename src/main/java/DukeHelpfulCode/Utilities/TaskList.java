@@ -111,7 +111,9 @@ public class TaskList {
         String findResult = "";
         for (int i = 0; i < tasks.size(); i++) {
             for (String keyword : keywords){
-                if (tasks.get(i).toString().contains(keyword)) {
+                if (tasks.get(i).getName().contains(keyword) || tasks.get(i).getType().contains(keyword)
+                        || ((keyword.equals("mark") || keyword.equals("marked") || keyword.equals("done")) && tasks.get(i).isDone())
+                        || ((keyword.equals("not marked") || keyword.equals("unmarked") || keyword.equals("not done")) && !tasks.get(i).isDone())) {
                     findResult += (i+1) + ". " + tasks.get(i).toString() + "\n";
                     break;
                 }
