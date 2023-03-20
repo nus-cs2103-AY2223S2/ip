@@ -8,12 +8,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class to store all the data in appropriate location.
+ */
 public class Storage {
     public static File dataDir = new File(System.getProperty("user.dir")
             + System.getProperty("file.separator") + "lists");
     public static File fileAddress = new File(System.getProperty("user.dir")
             + System.getProperty("file.separator") + "lists" + System.getProperty("file.separator") + "taskList.txt");
 
+    /**
+     * Loads all the data in the beginning.
+     */
     public static void loadData() { //initialise in the beginning
         try {
             if (!dataDir.exists()) {
@@ -40,7 +46,9 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Stores all the data from the main storage arraylist.
+     */
     public static void storeData() {
         try {
             FileWriter fb = new FileWriter(fileAddress);

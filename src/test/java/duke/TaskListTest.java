@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import Duke.TaskList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests functions in TaskList.
+ */
 public class TaskListTest {
 
     @Test

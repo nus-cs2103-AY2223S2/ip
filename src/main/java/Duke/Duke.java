@@ -3,6 +3,9 @@ package Duke;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Manages all initial actions to be taken before the application starts.
+ */
 public class Duke extends Application {
 
 
