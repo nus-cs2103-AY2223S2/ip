@@ -30,7 +30,7 @@ public class ParserTest {
     public void missingDeadlineDescriptionThrowsError() {
         CluckException exception = assertThrows(MissingArgumentException.class, ()
                 -> Parser.commandFactory("deadline /by 23 12 2023 2359"));
-        assertEquals( Messages.MESSAGE_DESCRIPTION_MISSING, exception.getMessage());
+        assertEquals(Messages.MESSAGE_DESCRIPTION_MISSING, exception.getMessage());
     }
 
 
