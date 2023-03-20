@@ -2,6 +2,9 @@ package Duke;
 
 import java.util.Scanner;
 
+/**
+ * handles all input and output of the program.
+ */
 public class Ui {
 
     private static Scanner sc = new Scanner(System.in);

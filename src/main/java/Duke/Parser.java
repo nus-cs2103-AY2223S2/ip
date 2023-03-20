@@ -3,6 +3,10 @@ package Duke;
 import Duke.Exception.InvalidCommandException;
 import Duke.Exception.NoDescriptionException;
 
+/**
+ * A class that makes sense of all the commands and executes them
+ * as the appropriate function.
+ */
 public class Parser {
 
     public static Boolean parserStatus = true; //comment
@@ -17,9 +21,7 @@ public class Parser {
         String toGive="";
         switch (key) {
         case "bye":
-            toGive = "Bye mortal, I will get back to destroying" +
-                    " galaxies";
-            parserStatus = false;
+            toGive = pBye();
             break;
             // need to switch off service
         case "list":
@@ -28,38 +30,68 @@ public class Parser {
             break;
         case "mark":
             assert forAssertion.length == 2 : "forAssertion doesn't have a length of 2";
-            int num1 = Integer.parseInt(str.split(" ", 2)[1]);
-            toGive = TaskList.mark(num1); // function handles index
-            Storage.storeData();
+            toGive = pMark(Integer.parseInt(str.split(" ", 2)[1])); // function handles index
             break;
         case "unmark":
             assert forAssertion.length == 2 : "forAssertion doesn't have a length of 2";
-            int num2 = Integer.parseInt(str.split(" ", 2)[1]);
-            toGive = TaskList.unmark(num2);
-            Storage.storeData();
+            toGive = pUnmark(Integer.parseInt(str.split(" ", 2)[1])); // function handles index
             break;
         case "delete":
             assert forAssertion.length == 2 : "forAssertion doesn't have a length of 2";
-            int num3 = Integer.parseInt(str.split(" ", 2)[1]);
-            toGive = TaskList.delete((num3));
-            Storage.storeData();
+            toGive = pDelete(Integer.parseInt(str.split(" ", 2)[1]));
             break;
         case "find":
-            String keyword = str.split(" ", 2)[1];
-            toGive = TaskList.find(keyword);
+            toGive = pFind(str.split(" ", 2)[1]);
             break;
         default:
-            try {
-                toGive = TaskList.add_to_list(str);
-                Storage.storeData();
-            }
-            catch (InvalidCommandException e) {
-                toGive = "the command is invalid";
-            }
-            catch (NoDescriptionException e) {
-                toGive = "the task needs to have a description";
-            }
+            toGive = pAdd(str);
         }
         return toGive;
     }
+
+    public static String pBye() {
+        parserStatus = false;
+        return "Bye mortal, I will get back to destroying" +
+                " galaxies";
+    }
+
+    public static String pMark(int i) {
+        String str = TaskList.mark(i);
+        Storage.storeData();
+        return str;
+    }
+
+    public static String pUnmark(int i) {
+        String str = TaskList.unmark(i);
+        Storage.storeData();
+        return str;
+    }
+
+    public static String pDelete(int i) {
+        String str = TaskList.delete((i));
+        Storage.storeData();
+        return str;
+    }
+
+    public static String pFind(String str) {
+        return TaskList.find(str);
+    }
+
+    public static String pAdd(String str) {
+        String ret;
+        try {
+            ret = TaskList.add_to_list(str);
+            Storage.storeData();
+        }
+        catch (InvalidCommandException e) {
+            ret = "the command is invalid";
+        }
+        catch (NoDescriptionException e) {
+            ret = "the task needs to have a description";
+        }
+
+        return ret;
+
+    }
+
 }

@@ -1,5 +1,8 @@
 package Duke.Exception;
 
+/**
+ * handles command exception.
+ */
 public class DukeException extends Exception {
     private String message;
 
