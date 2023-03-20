@@ -31,7 +31,7 @@ public class Storage {
      * Existing text file on hard disk containing all tasks loops
      * through to read each line.
      *
-     * @return list of tasks.
+     * @return List of tasks.
      * @throws IOException if file cannot be loaded.
      */
     public List<Task> loadTxtFile() throws IOException {
@@ -54,37 +54,64 @@ public class Storage {
                 taskList.add(taskInformation);
                 taskInformation = bufferedReader.readLine();
             }
-            for (int i = 0; i < taskList.size(); i++) {
-                String task = taskList.get(i);
-                String[] task1 = task.split(" / ");
-                boolean isMarked = false;
-                if (task1[1].equals("[ ]")) {
-                    isMarked = false;
-                } else if (task1[1].equals("[X]")){
-                    isMarked = true;
-                }
-                DateTimeFormatter dateTimeFormatter1 =
-                        DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
-                if (task.startsWith("T")) {
-                    Todo todo = new Todo(i + 1, isMarked, task1[2],
-                            taskList.size());
-                    allTasks.add(todo);
-                } else if (task.startsWith("D")) {
-                    Deadline deadline = new Deadline(i + 1, isMarked, task1[2],
-                            LocalDateTime.parse(task1[3], dateTimeFormatter1), taskList.size());
-                    allTasks.add(deadline);
-                } else if (task.startsWith("E")) {
-                    String[] taskTiming = task1[3].split("-");
-                    Event event = new Event(i + 1, isMarked, task1[2],
-                            LocalDateTime.parse(taskTiming[0], dateTimeFormatter1),
-                            LocalDateTime.parse(taskTiming[1], dateTimeFormatter1), taskList.size());
-                    allTasks.add(event);
-                } else {
-                    assert false: "Erroneous task";
-                }
-            }
+            addAllTasks(taskList, allTasks);
         }
         return allTasks;
+    }
+
+    /**
+     * Adds all tasks from tasks.txt to task list.
+     *
+     * @param taskList List of tasks from tasks.txt.
+     * @param allTasks List to add task to.
+     */
+    public void addAllTasks(List<String> taskList, List<Task> allTasks) {
+        for (int i = 0; i < taskList.size(); i++) {
+            String task = taskList.get(i);
+            String[] task1 = task.split(" / ");
+            boolean isMarked = false;
+            if (task1[1].equals("[ ]")) {
+                isMarked = false;
+            } else if (task1[1].equals("[X]")){
+                isMarked = true;
+            }
+            DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
+            if (task.startsWith("T") || task.startsWith("D") || task.startsWith("E")) {
+                addTask(i, task, task1, isMarked, taskList, dateTimeFormatter1, allTasks);
+            } else {
+                assert false: "Erroneous task";
+            }
+        }
+    }
+
+    /**
+     * Adds task to task list.
+     *
+     * @param index Index of task list.
+     * @param task Task from tasks.txt to be added.
+     * @param task1 Parsed task from tasks.txt to be added.
+     * @param isMarked Task status.
+     * @param taskList List of tasks from tasks.txt.
+     * @param dateTimeFormatter1 Datetime format to be used.
+     * @param allTasks List to add task to.
+     */
+    public void addTask(int index, String task, String[] task1, boolean isMarked, List<String> taskList,
+                        DateTimeFormatter dateTimeFormatter1, List<Task> allTasks) {
+        if (task.startsWith("T")) {
+            Todo todo = new Todo(index + 1, isMarked, task1[2],
+                    taskList.size());
+            allTasks.add(todo);
+        } else if (task.startsWith("D")) {
+            Deadline deadline = new Deadline(index + 1, isMarked, task1[2],
+                    LocalDateTime.parse(task1[3], dateTimeFormatter1), taskList.size());
+            allTasks.add(deadline);
+        } else if (task.startsWith("E")) {
+            String[] taskTiming = task1[3].split("-");
+            Event event = new Event(index + 1, isMarked, task1[2],
+                    LocalDateTime.parse(taskTiming[0], dateTimeFormatter1),
+                    LocalDateTime.parse(taskTiming[1], dateTimeFormatter1), taskList.size());
+            allTasks.add(event);
+        }
     }
 
     public String markOrUnmarkStorage(File file, String command, Task task, DateTimeFormatter dateTimeFormatter1,
@@ -154,42 +181,126 @@ public class Storage {
                 DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
 
         if (command.startsWith("todo")) {
-            String content = "T / " + task.getTaskStatus() + " / " + task.getTask() + "\n";
-            buffer.write(content);
+            saveTodo(buffer, task);
         } else if (command.startsWith("deadline")) {
-            String content = "D / " + task.getTaskStatus() + " / "
-                    + task.getTask() + " / "
-                    + task.getDeadline().format(dateTimeFormatter1) + "\n";
-            buffer.write(content);
+            saveDeadline(buffer, task, dateTimeFormatter1);
         } else if (command.startsWith("event")) {
-            String content = "E / " + task.getTaskStatus() + " / "
-                    + task.getTask() + " / "
-                    + task.getEventStartTime().format(dateTimeFormatter1) + "-"
-                    + task.getEventEndTime().format(dateTimeFormatter1) + "\n";
-            buffer.write(content);
+            saveEvent(buffer, task, dateTimeFormatter1);
         } else if (command.startsWith("mark")) {
-            String unchangedTasks = markOrUnmarkStorage(file, command, task, dateTimeFormatter1,
-                    taskList, "[X]");
-            file.createNewFile();
-            file1 = new FileWriter(file);
-            buffer = new BufferedWriter(file1);
+            String unchangedTasks = saveMarking(file, command, taskList, task, dateTimeFormatter1);
             buffer.write(unchangedTasks);
         } else if (command.startsWith("unmark")) {
-            String unchangedTasks = markOrUnmarkStorage(file, command, task, dateTimeFormatter1,
-                    taskList, "[ ]");
-            file.createNewFile();
-            file1 = new FileWriter(file);
-            buffer = new BufferedWriter(file1);
+            String unchangedTasks = saveUnmarking(file, command, taskList, task, dateTimeFormatter1);
             buffer.write(unchangedTasks);
         } else if (command.startsWith("delete")) {
-            String undeletedTasks = deleteStorage(file, command, taskList);
-            file.createNewFile();
-            file1 = new FileWriter(file);
-            buffer = new BufferedWriter(file1);
+            String undeletedTasks = saveDeleting(file, command, taskList);
             buffer.write(undeletedTasks);
         }
         buffer.close();
     }
+
+    /**
+     * Deletes task from existing file on hard disk.
+     *
+     * @param file Existing file to delete the task from.
+     * @param command Input from user.
+     * @param taskList Task list that updates with task changes.
+     * @throws IOException if file cannot be loaded.
+     */
+    public String saveDeleting(File file, String command, TaskList taskList) throws IOException {
+        String undeletedTasks = deleteStorage(file, command, taskList);
+        file.createNewFile();
+        FileWriter file1 = new FileWriter(file);
+        BufferedWriter buffer = new BufferedWriter(file1);
+        return undeletedTasks;
+    }
+
+    /**
+     * Saves new marking on task to existing file on hard disk.
+     *
+     * @param task Task to be updated on text file.
+     * @param file Existing file to save the updated task on.
+     * @param command Input from user.
+     * @param dateTimeFormatter1 Datetime format to be used
+     * @param taskList Task list that updates with task changes.
+     * @throws IOException if file cannot be loaded.
+     */
+    public String saveMarking(File file, String command, TaskList taskList, Task task
+                              , DateTimeFormatter dateTimeFormatter1) throws IOException {
+        String unchangedTasks = markOrUnmarkStorage(file, command, task, dateTimeFormatter1,
+                taskList, "[X]");
+        file.createNewFile();
+        FileWriter file1 = new FileWriter(file);
+        BufferedWriter buffer = new BufferedWriter(file1);
+        return unchangedTasks;
+    }
+
+    /**
+     * Saves new unmarking on task to existing file on hard disk.
+     *
+     * @param task Task to be updated on text file.
+     * @param file Existing file to save the updated task on.
+     * @param command Input from user.
+     * @param dateTimeFormatter1 Datetime format to be used
+     * @param taskList Task list that updates with task changes.
+     * @throws IOException if file cannot be loaded.
+     */
+    public String saveUnmarking(File file, String command, TaskList taskList, Task task
+            , DateTimeFormatter dateTimeFormatter1) throws IOException {
+        String unchangedTasks = markOrUnmarkStorage(file, command, task, dateTimeFormatter1,
+                taskList, "[ ]");
+        file.createNewFile();
+        FileWriter file1 = new FileWriter(file);
+        BufferedWriter buffer = new BufferedWriter(file1);
+        return unchangedTasks;
+    }
+
+    /**
+     * Saves new todo task to existing file on hard disk.
+     *
+     * @param buffer BufferedWriter to write task to existing file.
+     * @param task Task to be added to text file.
+     * @throws IOException if file cannot be loaded.
+     */
+    public void saveTodo(BufferedWriter buffer, Task task) throws IOException {
+        String content = "T / " + task.getTaskStatus() + " / " + task.getTask() + "\n";
+        buffer.write(content);
+    }
+
+    /**
+     * Saves new deadline task to existing file on hard disk.
+     *
+     * @param buffer BufferedWriter to write task to existing file.
+     * @param task Task to be added to text file.
+     * @param dateTimeFormatter1 Datetime format to be used
+     * @throws IOException if file cannot be loaded.
+     */
+    public void saveDeadline(BufferedWriter buffer, Task task, DateTimeFormatter dateTimeFormatter1)
+            throws IOException {
+        String content = "D / " + task.getTaskStatus() + " / "
+                + task.getTask() + " / "
+                + task.getDeadline().format(dateTimeFormatter1) + "\n";
+        buffer.write(content);
+    }
+
+    /**
+     * Saves new event task to existing file on hard disk.
+     *
+     * @param buffer BufferedWriter to write task to existing file.
+     * @param task Task to be added to text file.
+     * @param dateTimeFormatter1 Datetime format to be used
+     * @throws IOException if file cannot be loaded.
+     */
+    public void saveEvent(BufferedWriter buffer, Task task, DateTimeFormatter dateTimeFormatter1)
+            throws IOException {
+        String content = "E / " + task.getTaskStatus() + " / "
+                + task.getTask() + " / "
+                + task.getEventStartTime().format(dateTimeFormatter1) + "-"
+                + task.getEventEndTime().format(dateTimeFormatter1) + "\n";
+        buffer.write(content);
+    }
+
+
 
     public void saveWholeListToFile(TaskList taskList) throws IOException {
         File file3 = new File(this.filePathParent);

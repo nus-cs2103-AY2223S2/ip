@@ -119,30 +119,21 @@ public class Ui {
         for (int i = 0; i < allTasks.getNumberOfTask(); i++) {
             Task task = allTasks.getTask(i);
             String time = "";
-            if (task.getTaskType().equals("[D]") &&
-                    task.getTask().contains(keyword)) {
-                time = " (by: "
-                        + task.getDeadline().format(dateTimeFormatter1) + ")";
-                output += "\n\t " + numbering + "."
-                        + task.getTaskType() + task.getTaskStatus() + " "
+            if (task.getTaskType().equals("[D]") && task.getTask().contains(keyword)) {
+                time = " (by: " + task.getDeadline().format(dateTimeFormatter1) + ")";
+                output += "\n\t " + numbering + "." + task.getTaskType() + task.getTaskStatus() + " "
                         + task.getTask() + time;
                 numbering += 1;
-            } else if (task.getTaskType().equals("[E]") &&
-                    task.getTask().contains(keyword)) {
+            } else if (task.getTaskType().equals("[E]") && task.getTask().contains(keyword)) {
                 time = " (from: "
-                        + task.getEventStartTime().format(dateTimeFormatter1)
-                        + " to: "
-                        + task.getEventEndTime().format(dateTimeFormatter1)
-                        + ")";
-                output += "\n\t " + numbering + "."
-                        + task.getTaskType() + task.getTaskStatus() + " "
+                        + task.getEventStartTime().format(dateTimeFormatter1) + " to: "
+                        + task.getEventEndTime().format(dateTimeFormatter1) + ")";
+                output += "\n\t " + numbering + "." + task.getTaskType() + task.getTaskStatus() + " "
                         + task.getTask() + time;
                 numbering += 1;
-            } else if (task.getTaskType().equals("[T]") &&
-                    task.getTask().contains(keyword)) {
+            } else if (task.getTaskType().equals("[T]") && task.getTask().contains(keyword)) {
                 time = "";
-                output += "\n\t " + numbering + "."
-                        + task.getTaskType() + task.getTaskStatus() + " "
+                output += "\n\t " + numbering + "." + task.getTaskType() + task.getTaskStatus() + " "
                         + task.getTask() + time;
                 numbering += 1;
             }
