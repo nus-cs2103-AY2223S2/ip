@@ -1,4 +1,4 @@
-**DOOK**
+# **DOOK**
 
 
 **“My unmatched perspicacity, coupled with sheer indefatigability, makes me a feared opponent in any realm of human endeavor.”**
@@ -6,7 +6,7 @@
 – Andrew Tate
 
 
-**NEW UPDATED UI**
+## **NEW UPDATED UI**
 
 ![UI](DOOKui.png)
 
@@ -25,30 +25,67 @@ DOOK frees your mind of having to remember things you need to do. It's,
 
 And it is **FREE**!
 
-Features:
+## Features:
 
-  * 1. help -> Displays the lit of commands.
+### Viewing help : ``help``
 
-    * Format: help
+Brings users to the help page.
 
-  * 2. add -> Adds a Task to your lst
+Format: ``help``
 
-    * Format: add <Task Type> <TaskName> <DateTime>
+### Adding a task: ``add``
 
-  * 3. delete -> Removes the specified Task from your list.
+Adds a task to the list.
 
-    * Format: delete <index>
+Format: ``add <taskType> <task>``
 
-  * 4. mark / unmark -> Marks / Unmarks the specified Task
+Examples:
 
-    * Format: mark/unmark <index>
+``add todo buy onions and garlic``
 
-  * 5. list > Displays your list.
+``add event Jack Birthday Party /from 10/10/23 1700 /to 10/10/23 2200``
 
-    * Format: list
+### Listing all tasks : ``list``
 
-  * 6. bye -> Exits DOOK.
+Shows a list of all tasks in the list.
 
-    * Format: bye
+Format: ``list``
 
+### Finding via keywords : ``find ``
+
+Finds tasks in the list with sepcified keywords.
+
+Format: ``find <keyword 1> <keyword 2> <...>``
+
+Examples :
+
+``find buy marked``
+
+### Marking tasks : ``mark ``
+
+Marks the task at specified index as done.
+
+Format : ``mark <index>``
+
+Examples :
+
+``mark 2``
+
+### Unmarking : ``unmark``
+
+Unmarks the task with specified index.
+
+Format : ``unmark 2``
+
+### Deleting a person : ``delete``
+
+Deletes the specified task from the list.
+
+Format: ``delete``
+
+### Saving the data : ``bye``
+
+Saves the current list for next bootup of DOOK.
+
+Format : ``bye``
 
