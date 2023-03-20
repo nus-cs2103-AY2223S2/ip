@@ -23,7 +23,7 @@ public class UI {
         return new String(b, StandardCharsets.ISO_8859_1);
     }
 
-    public String intro = "Hello from DOOK, your own tasks manager (for irl tasks, not computer ones)\n"
+    public String intro = "Hello from DOOK, your own tasks manager\n(for irl tasks, not computer ones)\n"
             + LINEBREAK;
 
     public String showCommands(){

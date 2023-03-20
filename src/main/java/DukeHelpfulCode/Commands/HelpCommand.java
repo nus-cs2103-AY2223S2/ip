@@ -14,12 +14,13 @@ public class HelpCommand extends Command{
     @Override
     public String execute(TaskList taskList){
         return "Here is the list of Commands:\n"
-                + "add <Task Type> <Task>: Adds the task to the list\n"
-                + "mark / unmark <index>: Marks the index-th item as done/not done\n"
-                + "delete <index>: Deletes the index-th item\n"
-                + "list: Shows the current task list\n"
-                + "bye: saves the task list and exits DOOK\n"
-                + "help: shows the list of commands\n";
+                + ">add <Task Type> <Task>: Adds the task to the list\n"
+                + ">mark / unmark <index>: Marks the index-th item\n    as done/not done\n"
+                + ">delete <index>: Deletes the index-th item\n"
+                + ">list: Shows the current task list\n"
+                + ">find <keywords>: shows the list of tasks with said\n    keywords with their indexes\n"
+                + ">bye: saves the task list and exits DOOK\n"
+                + ">help: shows the list of commands\n";
     };
 
     @Override
