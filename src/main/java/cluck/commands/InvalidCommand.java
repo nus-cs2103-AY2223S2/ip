@@ -14,7 +14,7 @@ public class InvalidCommand implements Command {
     /**
      * Instantiates a new Invalid command.
      *
-     * @param invalidCommand the invalid command
+     * @param invalidCommand The invalid command input by the user.
      */
     public InvalidCommand(String invalidCommand) {
         this.invalidCommand = invalidCommand;

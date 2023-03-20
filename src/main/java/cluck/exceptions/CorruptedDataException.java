@@ -7,7 +7,7 @@ public class CorruptedDataException extends CluckException {
     /**
      * Instantiates a new Corrupted data exception.
      *
-     * @param errorMessage the error message
+     * @param errorMessage The error message.
      */
     public CorruptedDataException(String errorMessage) {
         super(errorMessage);

@@ -40,7 +40,7 @@ public class Parser {
      * Returns true if given string is not a number in String format, false otherwise.
      *
      * @param strNum String of interest.
-     * @return boolean value
+     * @return Boolean value.
      */
     public static boolean isNotNumeric(String strNum) {
         if (strNum == null) {
@@ -58,9 +58,9 @@ public class Parser {
      * Takes the string input of the user and converts it into an executable command.
      *
      * @param userInput takes userInput from Ui class and parses it into a command.
-     * @return subtype of Command interface.
-     * @throws MissingArgumentException   if either flags, descriptions, or task indexes are missing
-     * @throws IncorrectArgumentException if index given is not a number or out of the task list range
+     * @return Subtype of Command interface.
+     * @throws MissingArgumentException   If either flags, descriptions, or task indexes are missing.
+     * @throws IncorrectArgumentException If index given is not a number or out of the task list range.
      */
     public static Command commandFactory(String userInput)
             throws MissingArgumentException, IncorrectArgumentException {

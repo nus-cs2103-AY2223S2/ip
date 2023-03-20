@@ -26,7 +26,7 @@ public class Storage {
     /**
      * Instantiates a new Storage.
      *
-     * @param filePath the file path of the saved tasks
+     * @param filePath File path of the saved tasks.
      */
     public Storage(String filePath) {
         this.directory = System.getProperty("user.dir");
@@ -38,9 +38,9 @@ public class Storage {
 
     /**
      * Reads saved file at save location, returns a task list class containing the saved tasks.
-     * If the file does not exist, the method returns an empty task list
+     * If the file does not exist, the method returns an empty task list.
      *
-     * @return task list containing saved tasks or empty task list
+     * @return Task list containing saved tasks or empty task list.
      */
     public TaskList readSave() {
         try {
@@ -81,7 +81,7 @@ public class Storage {
      * There should be no missing directory error since readSave()
      * will create the save directory if it does not exist.
      *
-     * @param taskList list of task to be saved
+     * @param taskList TaskList instance containing tasks to be saved.
      */
     public void writetoSave(TaskList taskList) {
         try {

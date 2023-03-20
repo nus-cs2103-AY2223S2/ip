@@ -13,7 +13,7 @@ public class FindTaskCommand implements Command {
     /**
      * Instantiates a new Find task command.
      *
-     * @param keyWord the key word
+     * @param keyWord The key word(s).
      */
     public FindTaskCommand(String keyWord) {
         this.keyWord = keyWord;

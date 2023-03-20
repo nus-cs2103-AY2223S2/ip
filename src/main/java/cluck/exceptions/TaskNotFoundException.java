@@ -7,7 +7,7 @@ public class TaskNotFoundException extends CluckException {
     /**
      * Instantiates a new Task not found exception.
      *
-     * @param errorMessage the error message
+     * @param errorMessage The error message.
      */
     public TaskNotFoundException(String errorMessage) {
         super(errorMessage);

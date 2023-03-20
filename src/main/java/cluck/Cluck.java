@@ -32,7 +32,7 @@ public class Cluck {
     /**
      * Instantiates a Cluck class that will store the data in the given file path.
      *
-     * @param filePath path of saved path as String
+     * @param filePath path of saved path as String.
      */
     public Cluck(String filePath) {
         this.storage = new Storage(filePath);
@@ -67,10 +67,10 @@ public class Cluck {
     }
 
     /**
-     * Gets response.
+     * Gets response from execution of the command created by parsing userInput.
      *
-     * @param userInput the user input
-     * @return the response
+     * @param userInput the user input.
+     * @return the response.
      */
     public String getResponse(String userInput) {
         try {
@@ -82,9 +82,10 @@ public class Cluck {
     }
 
     /**
-     * The entry point of application. Creates running instance of Cluck to handle task management
+     * The entry point of application.
+     * Creates running instance of Cluck to handle task management.
      *
-     * @param args the input arguments
+     * @param args the input arguments.
      */
     public static void main(String[] args) {
         new Cluck("C:/Users/User/OneDrive - National University of Singapore/"

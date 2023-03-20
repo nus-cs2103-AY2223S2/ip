@@ -7,7 +7,7 @@ public class CluckException extends Exception {
     /**
      * Instantiates a new Cluck exception.
      *
-     * @param errorMessage the error message
+     * @param errorMessage The error message.
      */
     public CluckException(String errorMessage) {
         super(errorMessage);

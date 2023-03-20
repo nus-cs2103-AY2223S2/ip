@@ -25,10 +25,10 @@ public class Event extends Task {
     /**
      * Instantiates a new Event.
      *
-     * @param isMarked    indicates whether event is marked
-     * @param description event description
-     * @param startTime   when the event starts
-     * @param endTime     when the event ends
+     * @param isMarked    Boolean that indicates whether event is marked.
+     * @param description Event description.
+     * @param startTime   Event start date time.
+     * @param endTime     Event end date time.
      */
     public Event(boolean isMarked, String description, String startTime, String endTime) {
         super(isMarked, description);

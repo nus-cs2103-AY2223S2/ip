@@ -8,7 +8,7 @@ public class MissingArgumentException extends CluckException {
     /**
      * Instantiates a new Missing argument exception.
      *
-     * @param errorMessage the error message
+     * @param errorMessage The error message.
      */
     public MissingArgumentException(String errorMessage) {
         super(errorMessage);
