@@ -1,10 +1,11 @@
 package cluck.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import cluck.exceptions.CorruptedDataException;
 import cluck.tasks.Deadline;
 import cluck.tasks.Task;
 import cluck.tasks.ToDo;
@@ -26,17 +27,14 @@ public class TaskTest {
     }
 
     @Test
-    public void todoIncorrectSave() throws Exception {
+    public void todoIncorrectSave() {
         String workingTodoSave = "T|X|Meet Jason";
-        Task savedTask = Task.buildTaskFromSave(workingTodoSave);
-        assertNull(savedTask);
+        assertThrows(CorruptedDataException.class, ()
+                -> Task.buildTaskFromSave(workingTodoSave));
     }
 
-
-
-
     @Test
-    public void deadlineWithValidDateTime() throws Exception {
+    public void deadlineWithValidDateTime() {
         String description = "Assignment1";
         Deadline validDeadline1 = new Deadline(description, VALID_DATE_TIME_1);
         Deadline validDeadline2 = new Deadline(description, VALID_DATE_TIME_2);

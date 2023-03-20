@@ -7,7 +7,7 @@ public class IncorrectArgumentException extends CluckException {
     /**
      * Instantiates a new Incorrect argument exception.
      *
-     * @param errorMessage the error message
+     * @param errorMessage The error message.
      */
     public IncorrectArgumentException(String errorMessage) {
         super(errorMessage);

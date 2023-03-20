@@ -6,7 +6,7 @@ import cluck.exceptions.TaskIndexOutOfBoundsException;
 import cluck.tasks.Task;
 
 /**
- * TaskList contains the tasks. In a list. Yea.
+ * TaskList contains the tasks.
  */
 public class TaskList {
     private final ArrayList<Task> taskList = new ArrayList<>();
@@ -14,9 +14,9 @@ public class TaskList {
     /**
      * Marks the task at a given index.
      *
-     * @param taskIndex index of task in ArrayList
-     * @return task at index given if mark operation successful
-     * @throws TaskIndexOutOfBoundsException if index given is out of bounds
+     * @param taskIndex Index of task in ArrayList.
+     * @return Task at index given if mark operation successful.
+     * @throws TaskIndexOutOfBoundsException If index given is out of bounds.
      */
     public Task markTask(int taskIndex) throws TaskIndexOutOfBoundsException {
         try {
@@ -31,9 +31,9 @@ public class TaskList {
     /**
      * Un-marks the task at a given index.
      *
-     * @param taskIndex index of task in ArrayList.
-     * @return task at index given if un-mark operation successful.
-     * @throws TaskIndexOutOfBoundsException if index given is out of bounds
+     * @param taskIndex Index of task in ArrayList.
+     * @return Task at index given if un-mark operation successful.
+     * @throws TaskIndexOutOfBoundsException If index given is out of bounds.
      */
     public Task unmarkTask(int taskIndex) throws TaskIndexOutOfBoundsException {
         try {
@@ -48,7 +48,7 @@ public class TaskList {
     /**
      * Adds a task to the task list.
      *
-     * @param task task to be added.
+     * @param task Task to be added.
      */
     public void addTask(Task task) {
         this.taskList.add(task);
@@ -57,9 +57,9 @@ public class TaskList {
     /**
      * Deletes a task from task list at the given index.
      *
-     * @param taskIndex index of task to be deleted.
-     * @return return task if deletion successful.
-     * @throws TaskIndexOutOfBoundsException if index out of bounds of ArrayList
+     * @param taskIndex Index of task to be deleted.
+     * @return Return task if deletion successful.
+     * @throws TaskIndexOutOfBoundsException If index out of bounds of ArrayList.
      */
     public Task deleteTask(int taskIndex) throws TaskIndexOutOfBoundsException {
         try {
@@ -72,7 +72,7 @@ public class TaskList {
     /**
      * Converts all the tasks in task list to a single String in save format.
      *
-     * @return the string
+     * @return String containing all the tasks in the task list.
      */
     public String toSaveFormat() {
         StringBuilder toWrite = new StringBuilder();
@@ -85,7 +85,7 @@ public class TaskList {
     /**
      * Returns the number of tasks in the list.
      *
-     * @return number of tasks in the list
+     * @return Number of tasks in the list.
      */
     public int taskCount() {
         return taskList.size();
@@ -95,8 +95,8 @@ public class TaskList {
      * Find tasks with description containing the given key word.
      * This method is not case-sensitive.
      *
-     * @param keyWord the key word
-     * @return task list containing only the tasks with matching description
+     * @param keyWord The key word.
+     * @return Task list containing only the tasks with matching description.
      */
     public TaskList findMatches(String keyWord) {
         TaskList matchingTasks = new TaskList();
@@ -109,9 +109,9 @@ public class TaskList {
     }
 
     /**
-     * the toString method of the task list returns a String of all the tasks in order of when they were added.
+     * The toString method of the task list returns a String of all the tasks in order of when they were added.
      *
-     * @return string displaying all the tasks
+     * @return String displaying all the tasks.
      */
     public String toString() {
         StringBuilder allTasks = new StringBuilder();

@@ -24,18 +24,12 @@ public abstract class Task {
             .appendPattern("dd MMM yyyy HHmm")
             .toFormatter();
 
-    /**
-     * The Description.
-     */
-    protected String description; // name of the task
-    /**
-     * The Is marked.
-     */
-    protected Boolean isMarked; // indicates whether task is marked
+    protected String description;
+    protected Boolean isMarked;
     /**
      * Instantiates a new Task. All tasks are un-marked initially.
      *
-     * @param description the description of the task
+     * @param description Description of task.
      */
     protected Task(String description) {
         this.description = description;
@@ -45,8 +39,8 @@ public abstract class Task {
     /**
      * Instantiates a new Task, but task can be manually set to be either marked or un-marked.
      *
-     * @param isMarked    whether task is marked
-     * @param description the description of the task
+     * @param isMarked    Boolean value of true if the task is marked, false otherwise.
+     * @param description Description of task.
      */
     protected Task(boolean isMarked, String description) {
         this.description = description;
@@ -56,9 +50,9 @@ public abstract class Task {
     /**
      * Interprets string as local date time.
      *
-     * @param input the input
-     * @return date and time as a LocalDateTime class
-     * @throws DateTimeParseException if input cannot be parsed using the given format
+     * @param input Date time input by user.
+     * @return Date and time as a LocalDateTime class
+     * @throws DateTimeParseException If input cannot be parsed using the given format.
      */
     protected static LocalDateTime interpretLocalDateTime(String input) throws DateTimeParseException {
         return LocalDateTime.parse(input, FORMATTER);
@@ -81,7 +75,7 @@ public abstract class Task {
     /**
      * Abstract method to be overridden by child-classes to save tasks into .txt file.
      *
-     * @return task in the save format as a String
+     * @return Task in the save format as a String.
      */
     public String makeSaveFormat() {
         return String.format("|%1$s|%2$s", this.isMarked ? "1" : "0", this.description);
@@ -90,8 +84,8 @@ public abstract class Task {
     /**
      * Builds task from saved task format.
      *
-     * @param savedTask the saved task
-     * @return the task as a Task class
+     * @param savedTask Saved task.
+     * @return Task as a Task class.
      */
     public static Task buildTaskFromSave(String savedTask) throws CorruptedDataException {
         String[] savedTaskFields = savedTask.split("\\|");
@@ -126,8 +120,8 @@ public abstract class Task {
     /**
      * Checks if the task description contains the keyword.
      *
-     * @param keyWord the key word
-     * @return true if keyword is found, false otherwise.
+     * @param keyWord Keyword(s) of interest.
+     * @return Boolean value of true if keyword(s) is found, false otherwise.
      */
     public boolean containsKeyWord(String keyWord) {
         String lowerCaseDescription = this.description.toLowerCase();

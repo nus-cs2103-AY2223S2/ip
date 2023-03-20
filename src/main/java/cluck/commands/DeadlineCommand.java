@@ -21,8 +21,8 @@ public class DeadlineCommand implements Command {
     /**
      * Instantiates a new Deadline command.
      *
-     * @param description the description
-     * @param dueDate     the due date
+     * @param description The description.
+     * @param dueDate     The due date.
      */
     public DeadlineCommand(String description, String dueDate) {
         this.description = description;

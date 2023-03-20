@@ -17,7 +17,7 @@ public class DeleteTaskCommand implements Command {
     /**
      * Instantiates a new Delete task command.
      *
-     * @param taskIndex the task index
+     * @param taskIndex The task index.
      */
     public DeleteTaskCommand(int taskIndex) {
         this.taskIndex = taskIndex;

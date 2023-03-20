@@ -17,7 +17,7 @@ public class MarkTaskCommand implements Command {
     /**
      * Instantiates a new Mark task command.
      *
-     * @param taskIndex the task index
+     * @param taskIndex The task index.
      */
     public MarkTaskCommand(int taskIndex) {
         this.taskIndex = taskIndex;

@@ -22,9 +22,9 @@ public class EventCommand implements Command {
     /**
      * Instantiates a new Event command.
      *
-     * @param description the description
-     * @param startTime   the start time
-     * @param endTime     the end time
+     * @param description The description.
+     * @param startTime   The start time.
+     * @param endTime     The end time.
      */
     public EventCommand(String description, String startTime, String endTime) {
         this.description = description;

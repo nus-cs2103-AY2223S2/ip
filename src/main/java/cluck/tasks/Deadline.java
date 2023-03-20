@@ -11,8 +11,8 @@ public class Deadline extends Task {
     /**
      * Instantiates a new Deadline.
      *
-     * @param description deadline description
-     * @param dueDate     the due date
+     * @param description Deadline description
+     * @param dueDate     The due date.
      */
     public Deadline(String description, String dueDate) {
         super(description);
@@ -22,9 +22,9 @@ public class Deadline extends Task {
     /**
      * Instantiates a new Deadline.
      *
-     * @param isMarked    whether task is marked
-     * @param description deadline description
-     * @param dueDate     when is the tasks deadline
+     * @param isMarked    Whether task is marked.
+     * @param description Deadline description.
+     * @param dueDate     The task's deadline.
      */
     public Deadline(boolean isMarked, String description, String dueDate) {
         super(isMarked, description);

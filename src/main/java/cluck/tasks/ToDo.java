@@ -9,7 +9,7 @@ public class ToDo extends Task {
     /**
      * Instantiates a new To do.
      *
-     * @param description the description
+     * @param description Task description.
      */
     public ToDo(String description) {
         super(description);
@@ -18,8 +18,8 @@ public class ToDo extends Task {
     /**
      * Instantiates a new To do, but To Do is manually set to be either marked or un-marked.
      *
-     * @param isMarked    the is marked
-     * @param description the description
+     * @param isMarked    Boolean value of true if task is marked, false otherwise.
+     * @param description Task description.
      */
     protected ToDo(boolean isMarked, String description) {
         super(isMarked, description);

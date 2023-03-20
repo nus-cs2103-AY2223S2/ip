@@ -18,7 +18,7 @@ public class ToDoCommand implements Command {
     /**
      * Instantiates a new To do command.
      *
-     * @param description the description
+     * @param description The description.
      */
     public ToDoCommand(String description) {
         this.description = description;

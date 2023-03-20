@@ -15,9 +15,9 @@ public class UnmarkTaskCommand implements Command {
     private final int taskIndex;
 
     /**
-     * Instantiates a new Unmark task command.
+     * Instantiates a new Un-mark task command.
      *
-     * @param taskIndex the task index
+     * @param taskIndex The task index.
      */
     public UnmarkTaskCommand(int taskIndex) {
         this.taskIndex = taskIndex;
