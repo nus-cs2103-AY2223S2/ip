@@ -81,7 +81,7 @@ Format : ``unmark 2``
 
 Deletes the specified task from the list.
 
-Format: ``delete``
+Format: ``delete <index>``
 
 ### Saving the data : ``bye``
 
