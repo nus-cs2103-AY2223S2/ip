@@ -15,7 +15,6 @@
   - [Exiting Cluck!](#exit-cluck-bye)
 - [Date Time formatting](#date-time-formatting)
 
-___
 ## Quick start
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download _Cluck!_ [here.](https://github.com/ChickenChiang/ip/)
@@ -32,20 +31,20 @@ ___
 There are 3 types of tasks that can be added in this version of **_Cluck!_**: 
 ___
 
-  #### To-do `todo <TASK_DESCRIPTION>`
-   - Creates a simple to-do task, with a description an a _marked_ or _un-marked_ check box.
+#### To-do `todo <TASK_DESCRIPTION>`
+   - Creates a simple **to-do** task, with a description an a _marked_ or _un-marked_ check box.
 ___
 #### Deadline  `deadline <DEADLINE_DESCRIPTION> /by <DATE_TIME>`
-  - Creates a task with a deadline at the given date. 
-  - _See [date time formatting](#date-time-formatting) for the right input format_.
+  - Creates a task with a **deadline** at the _given date_. 
   - Example: `deadline Homework /by 23 Mar 25 2359` creates a deadline called "**Homework**", with a due date at **23rd March 2025 11:59 pm** _(24-hour format for time)_
+  - _See [date time formatting](#date-time-formatting) for the right input format_.
 ___
 #### Event `event <EVENT_DESCRIPTION> /from <START_DATE_TIME> /to <END_DATE_TIME>`
 
-  - Creats an event with a start date and end date. 
-  - _See [date time formatting](#date-time-formatting) for the right input format_.
+  - Creats an **event** with a _start date_ and _end date_. 
 
-  - Example: `event Dinner with Boss /from 24 Apr 23 2000 /to 24 Apr 23 2230` creates an event called "**Dinner with Boss**", that starts at **24th April 2023 8 pm** and ends at **24th April 2023 10:30 pm**.
+  - Example: `event Dinner with Boss /from 24 Apr 23 2000 /to 24 Apr 23 2230` creates an **event** called "**Dinner with Boss**", that starts at **24th April 2023 8 pm** and ends at **24th April 2023 10:30 pm**.
+- _See [date time formatting](#date-time-formatting) for the right input format_.
 ___
 ### Mark task `mark <TASK_NUMBER>`
 
@@ -68,11 +67,16 @@ ___
 ___
 ### Exit **_Cluck!_** `bye`
   
-  - Closes cluck (not yet implemented... coming soon! For now you have to manually close the GUI.)
+  - Closes the Cluck! program.
 
 ## Date-time formatting
-  - Date-time inputs should be formatted in the form of `dd MMM yy HHmm`, where:
+
+  - Date-time inputs should have the general format of `dd MMM yyyy HHmm`, where:
     - `dd` is the day of the month in numerical form; _e.g. `dd` for 3rd May would be `03`_, for 24th it would be `24`
     - `MMM` is the first 3 letters of the month; _e.g, August in `MMM` format is `Aug` (case-insensitive)_
     - `yy` is the last two digits of the year; _e.g. 2034 in `yy` format is `34`_
     - `HHmm` is the time in 24-hour format
+  - Additionally, users can use the numerical format of the month instead of the shorted string format
+  - Users can also omit the first two digits of the year and the minutes of the time
+  
+Sample date time inputs: Both `03 Mar 2023 1200` and `03 03 23 12` are equivalent to **_3rd March 2023 12:00pm_**
