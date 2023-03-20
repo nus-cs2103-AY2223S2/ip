@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 import cluck.exceptions.CorruptedDataException;
 import cluck.messages.Messages;
@@ -19,7 +18,12 @@ public abstract class Task {
     protected static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendPattern("dd [MM][MMM][MMMM] [yyyy][yy] HH[mm]")
-            .toFormatter(Locale.ROOT);
+            .toFormatter();
+
+    protected static final DateTimeFormatter DEFAULT_FORMATTER = new DateTimeFormatterBuilder()
+            .appendPattern("dd MMM yyyy HHmm")
+            .toFormatter();
+
     /**
      * The Description.
      */
