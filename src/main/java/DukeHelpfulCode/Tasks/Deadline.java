@@ -56,4 +56,15 @@ public class Deadline extends Task{
         return "[D] " + super.toString() + " (by: " + this.dateTime.format(dtFormatter) + ")";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline objTask = (Deadline) obj;
+            return objTask.getName().equals(this.getName())
+                    && objTask.dateTime.equals(this.dateTime);
+        } else {
+            return false;
+        }
+    }
+
 }

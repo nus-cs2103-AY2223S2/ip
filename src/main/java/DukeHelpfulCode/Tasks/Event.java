@@ -29,4 +29,16 @@ public class Event extends Task{
                 + " to: " + this.endDateTime.format(dtFormatter) + ")";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            Event objTask = (Event) obj;
+            return objTask.getName().equals(this.getName())
+                    && objTask.startDateTime.equals(this.startDateTime)
+                    && objTask.endDateTime.equals(this.endDateTime);
+        } else {
+            return false;
+        }
+    }
+
 }

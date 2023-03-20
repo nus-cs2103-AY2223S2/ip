@@ -7,7 +7,7 @@ public class Task {
      *      markAsDone -> mark Task as done if not done and vice versa.
      */
 
-    private static String LINEBREAK = "_________________________________________________________________\n";
+    private static String LINEBREAK = "=================================\n";
     private String name;
     private Boolean isDone;
     private String type;

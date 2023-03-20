@@ -14,7 +14,7 @@ public class TaskList {
      *      addToList()     -> appends Task to the list
      *      markAsDone(int i)    -> mark Task in i-th index as done.
      */
-    private static String LINEBREAK = "_________________________________________________________________\n";
+    private static String LINEBREAK = "=================================\n";
 
     private static List<Task> tasks = new ArrayList<>();
 
@@ -63,9 +63,12 @@ public class TaskList {
            return "Oops, it seems that you have already added this Task to your list!\n";
         }
          */
-        this.tasks.add(task);
-        return LINEBREAK + "Got it. I've added this task: \n" + task.toString() + "\nNow you have " + this.len() + " tasks in your list.\n" + LINEBREAK;
-
+        if (tasks.contains(task)){
+            return LINEBREAK + "Uhh, you already has dis tasks in da list boss.\n" + LINEBREAK;
+        } else {
+            tasks.add(task);
+            return LINEBREAK + "Got it. I've added this task: \n" + task.toString() + "\nNow you have " + this.len() + " tasks in your list.\n" + LINEBREAK;
+        }
     }
 
     public String mark(boolean isMark, int i) throws NoSuchTaskException, TaskAlrMarkException {

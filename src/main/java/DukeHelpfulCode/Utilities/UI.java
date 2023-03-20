@@ -1,5 +1,6 @@
 package DukeHelpfulCode.Utilities;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import DukeHelpfulCode.Commands.*;
@@ -12,35 +13,17 @@ public class UI {
      * showError(Exception )
      */
 
-    private static String LINEBREAK = "________________________________________________________\n";
-
-    public void showWelcome(){
-        /**
-         * Prints the welcome message
-         *
-         * @param   none
-         * @return  none
-         */
-        /**
-         * Prints the Logo and Welcome Message
-         */
-        String logo = "______         _        \n"
-                + " |  _ \\ _   _| | _____ \n"
-                + " | | | | | | | |/ / _ \\\n"
-                + " | |_| | |_| |   <  __/\n"
-                + " |____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + LINEBREAK + "Type 'bye' to exit!\n" + LINEBREAK);
+    private static String LINEBREAK = "=================================\n";
+    private static String convertFromUtf8ToIso(String s1) {
+        if(s1 == null) {
+            return null;
+        }
+        String s = new String(s1.getBytes(StandardCharsets.UTF_8));
+        byte[] b = s.getBytes(StandardCharsets.ISO_8859_1);
+        return new String(b, StandardCharsets.ISO_8859_1);
     }
 
-    public String logo = "____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    public String intro = "Hello from\n"
-            + logo
-            + LINEBREAK
-            + "Type 'bye' to exit!\n"
+    public String intro = "Hello from DOOK, your own tasks manager (for irl tasks, not computer ones)\n"
             + LINEBREAK;
 
     public String showCommands(){
