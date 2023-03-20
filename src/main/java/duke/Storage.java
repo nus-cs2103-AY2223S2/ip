@@ -6,13 +6,14 @@ import java.nio.file.FileAlreadyExistsException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-
+import java.nio.file.Path;
+import java.nio.file.Paths;
 /**
  * Storage represents the methods that are used to store the user's tasks to a storage file so that they
  * can be saved and retrieved for later use.
  */
 public class Storage {
-
+     private final TaskList list;
 
     /**
      * Constructor for a Storage object, which will facilitate the storing of the user's requests for later retrieval
@@ -21,12 +22,21 @@ public class Storage {
     public Storage(TaskList list) {
 
         File Task_Data = createStorageFile(list);
+        this.list = list;
         try {
             loadTaskData(Task_Data, list);
         } catch (StorageFileFormatException e) {
             System.out.println("There is an error in the format of at least one date in the duke.Storage Data File");
         }
 
+    }
+
+    public void updateStorage() {
+        try {
+            this.updateTasksInFile(list);
+        } catch (IOException e) {
+            System.out.println("Unable to open storage file");
+        }
     }
 
 
@@ -37,7 +47,11 @@ public class Storage {
      */
     private File createStorageFile(TaskList list) {
 
-        File Task_Data = new File("Task Data.txt");
+
+        String homeDirectory = System.getProperty("user.home");
+        String pathOfDataFile = homeDirectory + "/Task_Data";
+
+        File Task_Data = new File(pathOfDataFile);
         try {
             Task_Data.createNewFile();
         } catch (FileAlreadyExistsException e){ // nothing should be done if the file already exists
@@ -56,7 +70,10 @@ public class Storage {
      * @throws IOException
      */
     public void updateTasksInFile (TaskList list) throws IOException {
-        PrintWriter logger = new PrintWriter("Task Data.txt");
+        String homeDirectory = System.getProperty("user.home");
+        String pathOfDataFile = homeDirectory + "/Task_Data";
+
+        PrintWriter logger = new PrintWriter(pathOfDataFile);
         for (int i = 0; i < list.getNumberOfTasks(); i++) {
             logger.write(list.getTaskAtIndex(i) + "\n");
         }

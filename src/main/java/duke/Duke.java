@@ -47,7 +47,7 @@ public class Duke  {
         ui = new UI();
         list = new TaskList();
         storage = new Storage(list);
-        parser = new Parser(storage);
+        parser = new Parser(storage, ui);
     }
 
 
