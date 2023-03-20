@@ -37,15 +37,18 @@ public class Parser {
         } else if (cmdArr[0].toLowerCase(Locale.ROOT).equals("list")){
             cmd = new ListCommand();
 
-        } else if (cmdArr[0].equals("add")){
+        } else if (cmdArr[0].toLowerCase(Locale.ROOT).equals("add")){
             new AddCommandParser();
             cmd = AddCommandParser.parse(cmdArr);
 
-        } else if (cmdArr[0].equals("delete")){
-            cmd = new DeleteCommandParser().parse(cmdArr);
+        } else if (cmdArr[0].toLowerCase(Locale.ROOT).equals("delete")){
+            cmd = DeleteCommandParser.parse(cmdArr);
 
-        } else if (cmdArr[0].equals("mark")){
-            cmd = new MarkCommandParser().parse(cmdArr);
+        } else if (cmdArr[0].toLowerCase(Locale.ROOT).equals("mark")){
+            cmd = MarkCommandParser.parse(cmdArr);
+
+        } else if (cmdArr[0].toLowerCase(Locale.ROOT).equals("find")) {
+            cmd = FindCommandParser.parse(cmdArr);
 
         }
         return cmd;

@@ -107,6 +107,23 @@ public class TaskList {
         }
     }
 
+    public String find(String[] keywords){
+        String findResult = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            for (String keyword : keywords){
+                if (tasks.get(i).toString().contains(keyword)) {
+                    findResult += (i+1) + ". " + tasks.get(i).toString() + "\n";
+                    break;
+                }
+            }
+        }
+        if (findResult.equals("")) {
+            return "No tasks match your search...";
+        } else {
+            return "Here are the tasks that contains the keywords:\n" + findResult;
+        }
+    }
+
     public int len() {
         /**
          * Returns the number of Tasks in the TaskList currently.
@@ -114,7 +131,7 @@ public class TaskList {
          * @param none
          * @return none
          */
-        return this.tasks.size();
+        return tasks.size();
     }
 
 }
