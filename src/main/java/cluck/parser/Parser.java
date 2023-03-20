@@ -101,27 +101,35 @@ public class Parser {
             return new InvalidCommand(userInput);
         }
     }
+
     private static MarkTaskCommand buildMarkTaskCommand(String[] words)
             throws MissingArgumentException, IncorrectArgumentException {
+
         assert Objects.nonNull(words) : "Error, empty user input resulted in creation of Mark Task Command.";
         if (words.length < 2) {
             throw new MissingArgumentException(Messages.MESSAGE_INDEX_MISSING);
         }
+
         if (isNotNumeric(words[1])) {
             throw new IncorrectArgumentException(Messages.MESSAGE_INDEX_INVALID);
         }
+
         int taskIndex = Integer.parseInt(words[1]);
         return new MarkTaskCommand(taskIndex - 1);
     }
+
     private static UnmarkTaskCommand buildUnmarkTaskCommand(String[] words)
             throws MissingArgumentException, IncorrectArgumentException {
+
         assert Objects.nonNull(words) : "Error, empty user input resulted in creation of Un-mark Task Command.";
         if (words.length == 1) {
             throw new MissingArgumentException(Messages.MESSAGE_INDEX_MISSING);
         }
+
         if (isNotNumeric(words[1])) {
             throw new IncorrectArgumentException(Messages.MESSAGE_INDEX_INVALID);
         }
+
         int taskIndex = Integer.parseInt(words[1]);
         return new UnmarkTaskCommand(taskIndex - 1);
     }
@@ -132,9 +140,11 @@ public class Parser {
         if (words.length == 1) {
             throw new MissingArgumentException(Messages.MESSAGE_INDEX_MISSING);
         }
+
         if (isNotNumeric(words[1])) {
             throw new IncorrectArgumentException(Messages.MESSAGE_INDEX_INVALID);
         }
+
         int taskIndex = Integer.parseInt(words[1]);
         return new DeleteTaskCommand(taskIndex - 1);
     }
@@ -143,31 +153,47 @@ public class Parser {
         if (words.length < 2) {
             throw new MissingArgumentException(Messages.MESSAGE_DESCRIPTION_MISSING);
         }
+
         return new ToDoCommand(userInput.substring(5));
     }
 
     private static DeadlineCommand buildDeadlineCommand(String userInput)
             throws MissingArgumentException {
+
         String substring = userInput.substring(9);
         if (!substring.contains(DUE_DATE_FLAG)) {
             throw new MissingArgumentException(Messages.MESSAGE_DUEDATE_FLAG_MISSING);
         }
+        if (substring.indexOf(DUE_DATE_FLAG) == 0) {
+            throw new MissingArgumentException(Messages.MESSAGE_DESCRIPTION_MISSING);
+        }
+
         String[] fields = substring.split(" " + DUE_DATE_FLAG);
         if (fields.length < 2) {
             throw new MissingArgumentException(Messages.MESSAGE_DATE_MISSING);
         }
+
         return new DeadlineCommand(fields[0], fields[1]);
     }
+
     private static EventCommand buildEventCommand(String userInput)
             throws MissingArgumentException {
         String substring = userInput.substring(6);
+
         if (!substring.contains(EVENT_START_FLAG)) {
             throw new MissingArgumentException(Messages.MESSAGE_START_FLAG_MISSING);
         }
+
+        if (substring.indexOf(EVENT_START_FLAG) == 0) {
+            throw new MissingArgumentException(Messages.MESSAGE_DESCRIPTION_MISSING);
+        }
+
         if (!substring.contains(EVENT_END_FLAG)) {
             throw new MissingArgumentException(Messages.MESSAGE_END_FLAG_MISSING);
         }
+
         String[] eventFields = substring.split("\\s/\\w{2,4}\\s");
+
         if (eventFields.length < 3) {
             throw new MissingArgumentException(Messages.MESSAGE_DATE_MISSING);
         }

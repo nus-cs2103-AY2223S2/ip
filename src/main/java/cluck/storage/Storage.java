@@ -29,23 +29,12 @@ public class Storage {
      * @param filePath the file path of the saved tasks
      */
     public Storage(String filePath) {
-
         this.directory = System.getProperty("user.dir");
         this.filePath = Paths.get(directory, filePath);
         this.saveFile = this.filePath.toFile();
         this.saveDir = this.saveFile.getParentFile();
-
-        if (!this.saveDir.exists()) {
-            this.saveDir.mkdir();
-        }
-        if (!this.saveFile.exists()) {
-            try {
-                this.saveFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
+
 
     /**
      * Reads saved file at save location, returns a task list class containing the saved tasks.
@@ -54,29 +43,34 @@ public class Storage {
      * @return task list containing saved tasks or empty task list
      */
     public TaskList readSave() {
-        Scanner savedFileScanner;
         try {
-            savedFileScanner = new Scanner(this.saveFile);
+            if (saveDir.mkdir()) {
+                saveFile.createNewFile();
+                return new TaskList();
+            } else if (saveFile.createNewFile()) {
+                return new TaskList();
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return new TaskList();
         }
-        return this.populateTaskList(savedFileScanner);
+        return this.populateTaskList();
     }
 
-    private TaskList populateTaskList(Scanner savedFileScanner) {
+    private TaskList populateTaskList() {
         String taskString;
         Task currTask;
         TaskList taskList = new TaskList();
+        Scanner savedFileScanner;
 
-        while (savedFileScanner.hasNextLine()) {
-            taskString = savedFileScanner.nextLine();
-            try {
+        try {
+            savedFileScanner = new Scanner(this.saveFile);
+            while (savedFileScanner.hasNextLine()) {
+                taskString = savedFileScanner.nextLine();
                 currTask = Task.buildTaskFromSave(taskString);
                 taskList.addTask(currTask);
-            } catch (CorruptedDataException e) {
-                System.out.println(e);
             }
+        } catch (IOException | CorruptedDataException e) {
+            e.printStackTrace();
         }
         return taskList;
     }

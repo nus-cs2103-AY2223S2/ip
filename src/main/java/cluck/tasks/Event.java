@@ -38,14 +38,14 @@ public class Event extends Task {
 
     @Override
     public String makeSaveFormat() {
-        return "E" + super.makeSaveFormat() + "|" + this.startTime.format(FORMATTER)
-                + "|" + this.endTime.format(FORMATTER) + "\n";
+        return "E" + super.makeSaveFormat() + "|" + this.startTime.format(DEFAULT_FORMATTER)
+                + "|" + this.endTime.format(DEFAULT_FORMATTER) + "\n";
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + this.startTime.format(FORMATTER)
-                + " to: " + this.endTime.format(FORMATTER) + ")";
+        return "[E]" + super.toString() + "(from: " + this.startTime.format(DEFAULT_FORMATTER)
+                + " to: " + this.endTime.format(DEFAULT_FORMATTER) + ")";
 
     }
 }
