@@ -1,8 +1,19 @@
-# Duke project template
+# BrotherBot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "We must live together as brothers or perish together like fools." - Martin Luther King Jr.
 
-## Setting up in Intellij
+We all need a brother out there who's got our back all the time. Introducing BrotherBot, your one-stop task planner with a "Brother" personality. 
+
+Bro! It is:
+
+- ~~Hard~~ Easy to use
+- *Friendly* 
+- Treats u like a real **bro** :star_struck:
+
+
+## Wanna gain real bro?
+
+1. Download it [here]()
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
