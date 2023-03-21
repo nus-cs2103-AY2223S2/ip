@@ -20,9 +20,8 @@ Bro! It is:
 - [X] Tracks tasks
 - [ ] Eat supper with you *(coming soon)*
 
-(if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
    ```
-   Hello from
+   Adapted from
     ____        _        
    |  _ \ _   _| | _____ 
    | | | | | | | |/ / _ \
