@@ -17,8 +17,8 @@ Bro! It is:
 ## Bro features
 
 
-[X] Tracks tasks
-[ ] Eat supper with you *(coming soon)*
+- [X] Tracks tasks
+- [ ] Eat supper with you *(coming soon)*
 
 (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
    ```
