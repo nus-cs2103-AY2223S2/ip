@@ -1,0 +1,10 @@
+todo buy milk
+list
+deadline CS2103T quiz /by Monday
+event project meeting /from Wed 10am /to 12pm
+list
+mark 1
+list
+unmark 1
+list
+bye
