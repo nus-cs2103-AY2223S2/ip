@@ -1,29 +1,41 @@
 # User Guide
 
-## Features 
+## Features
 
-### Feature-ABC
+### Feature-Add Task
 
-Description of the feature.
+You can add Todo/Deadline/Event.
 
-### Feature-XYZ
+> todo read book 
+> 
+> deadline return book /by 2019-10-15 1530
+> 
+> event carnival /from 2019-10-15 1530 /to 2020-12-11 1200
 
-Description of the feature.
+### Feature-Mark/Unmark
 
-## Usage
+Mark specific task as done or not done
 
-### `Keyword` - Describe action
+> mark 1 (mark the first task as done)
+> 
+> unmark 2 (unmark the second task as not done)
+> 
+### Feature-list
 
-Describe the action and its outcome.
+list all the task
 
-Example of usage: 
+> list
 
-`keyword (optional arguments)`
+### Feature-delete
 
-Expected outcome:
+delete specific task from the list
 
-Description of the outcome.
+>Delete 1 (System will delete the first task)
 
-```
-expected output
-```
+### Feature-find
+
+Find tasks which matches your keywords
+
+>find book
+
+
