@@ -8,7 +8,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -47,10 +47,10 @@ public class App extends Application {
 
         Duke instance = new Duke(tasks);
         MainWindow controller = new MainWindow();
-        VBox box = Utils.loadFxmlFile(getClass().getResource("/view/MainWindow.fxml"), controller);
+        AnchorPane windowPane = Utils.loadFxmlFile(getClass().getResource("/view/MainWindow.fxml"), controller);
         controller.setDuke(instance);
 
-        Scene scene = new Scene(box);
+        Scene scene = new Scene(windowPane);
         
         primaryStage.setScene(scene);
         primaryStage.show();

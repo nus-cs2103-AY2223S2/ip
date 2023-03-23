@@ -1,8 +1,8 @@
 package duke.ui;
 
-import java.io.PrintStream;
 import java.net.URL;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import duke.App;
@@ -10,24 +10,24 @@ import duke.Duke;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class MainWindow implements Initializable {
     private Duke instance;
 
-    private PrintStream outputStream;
-
     public void setDuke(Duke instance) {
         this.instance = instance;
-        this.instance.setOutputStream(outputStream);
+        this.instance.setOutput(output::writeAsDuke);
     }
 
     private LinkedList<String> prevCommands = new LinkedList<>();
     private int prevCommandIndex = -1;
 
+    private ListViewWrapper output;
+
     @FXML
-    private TextArea outputTextBox;
+    private ListView<Map.Entry<Boolean, String>> outputListView;
 
     @FXML
     private TextField inputTextBox;
@@ -45,7 +45,7 @@ public class MainWindow implements Initializable {
             return;
         }
 
-        outputStream.format("> %s\n", inputValue);
+        output.writeAsUser(inputValue);
         inputTextBox.clear();
         this.instance.executeCommand(inputValue);
 
@@ -99,6 +99,7 @@ public class MainWindow implements Initializable {
             ke.consume();
         });
 
-        outputStream = new PrintStream(new TextBoxStream(outputTextBox), true);
+        output = new ListViewWrapper(outputListView);
+        output.writeAsDuke("Hello and welcome to your personal task manager, Duke! Enter some commands and tell me what to do!");
     }
 }

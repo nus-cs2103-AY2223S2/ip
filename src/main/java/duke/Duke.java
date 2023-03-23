@@ -1,9 +1,9 @@
 package duke;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,7 +29,7 @@ public class Duke {
 
     private final Map<String, Command> store;
 
-    private PrintStream outputStream;
+    private Consumer<String> outputter;
 
     public Duke(List<Task> tasks) {
         this.tasks = TaskList.fromIterable(tasks);
@@ -72,11 +72,14 @@ public class Duke {
 
         if (cmd != null) {
             Arguments parsed = Parser.parseIntoArguments(tokens);
-            cmd.setOutputStream(outputStream);
+            cmd.setOutputFunc(outputter);
             cmd.accept(parsed, this);
         } else {
             onUnknownCommand(input);
         }
+    }
+    public void setOutput(Consumer<String> outputter) {
+        this.outputter = outputter;
     }
 
     /**
@@ -89,14 +92,12 @@ public class Duke {
     }
 
     public void output(String string) {
-        outputStream.format("Duke: %s\n", string);
+        if (outputter != null) {
+            outputter.accept(string);
+        }
     }
 
     public void output(String string, Object ...args) {
         output(String.format(string, args));
-    }
-
-    public void setOutputStream(PrintStream stream) {
-        this.outputStream = stream;
     }
 }

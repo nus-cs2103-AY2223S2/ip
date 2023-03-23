@@ -1,7 +1,7 @@
 package duke.commands;
 
-import java.io.PrintStream;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import duke.Duke;
 import duke.parser.Arguments;
@@ -43,20 +43,20 @@ public abstract class Command implements BiConsumer<Arguments, Duke> {
      */
     private final String label;
 
-    private PrintStream outputFunc;
+    private Consumer<String> outputFunc;
 
-    public Command setOutputStream(PrintStream outputFunc) {
+    public Command setOutputFunc(Consumer<String> outputFunc) {
         this.outputFunc = outputFunc;
         return this;
     }
 
-    public Command(String label, PrintStream outputFunc) {
+    public Command(String label, Consumer<String> outputFunc) {
         this.label = label;
         this.outputFunc = outputFunc;
     }
 
     public Command(String label) {
-        this(label, System.out);
+        this(label, null);
     }
 
     /**
@@ -64,7 +64,9 @@ public abstract class Command implements BiConsumer<Arguments, Duke> {
      * @param str String to output
      */
     protected void output(String str) {
-        outputFunc.println(str);
+        if (outputFunc != null) {
+            outputFunc.accept(str);
+        }
     }
 
     /**
