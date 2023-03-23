@@ -15,12 +15,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.util.Objects;
+
+import static java.util.Objects.*;
 
 public class BrotherBot extends Application {
 
@@ -29,8 +29,8 @@ public class BrotherBot extends Application {
     private final Ui ui;
     private VBox dialogContainer;
     private TextField userInput;
-    private final Image user = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/user.png")));
-    private final Image brother = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/brother.png")));
+    private final Image user = new Image(requireNonNull(this.getClass().getResourceAsStream("/images/user.png")));
+    private final Image brother = new Image(requireNonNull(this.getClass().getResourceAsStream("/images/brother.png")));
 
 
     public BrotherBot() {
@@ -91,11 +91,11 @@ public class BrotherBot extends Application {
         stage.setTitle("BrotherBot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(500.0);
+        stage.setMinWidth(700.0);
 
-        mainLayout.setPrefSize(500.0, 600.0);
+        mainLayout.setPrefSize(700.0, 600.0);
 
-        scrollPane.setPrefSize(485, 535);
+        scrollPane.setPrefSize(700, 565);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -105,7 +105,7 @@ public class BrotherBot extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(440.0);
+        userInput.setPrefWidth(640.0);
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -115,6 +115,18 @@ public class BrotherBot extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+/**
+        Image backgroundImage = new Image("/images/background.png");
+
+        // Create a BackgroundImage object from the Image object
+        BackgroundImage background = new BackgroundImage(backgroundImage,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+        // Set the background of the VBox container to the BackgroundImage
+        dialogContainer.setBackground(new Background(background));
+**/
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -133,7 +145,7 @@ public class BrotherBot extends Application {
         stage.show();
 
         // load Welcome message
-        Label load = new Label("Welcome to Brother Bot - your one-stop Personal Task Planner with a very 'bro' personality!\nHello my brother, what can I do for you mi amigo...\n Loading prev files: \n" + storage.load());
+        Label load = new Label("Welcome to Brother Bot - your one-stop Personal Task Planner with a very 'bro' personality!\nHello my brother, what can I do for you mi amigo...\n" + storage.load());
         dialogContainer.getChildren().addAll(
                 DialogBox.getBrotherDialog(load, new ImageView(brother))
         );
@@ -148,7 +160,7 @@ public class BrotherBot extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         String output = getResponse(userInput.getText());
-        Label broText = new Label(getResponse(userInput.getText()));
+        Label broText = new Label(output);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getBrotherDialog(broText, new ImageView(brother))

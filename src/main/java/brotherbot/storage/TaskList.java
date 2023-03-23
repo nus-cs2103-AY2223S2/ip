@@ -57,10 +57,10 @@ public class TaskList {
      * Displays the list of Tasks.
      */
     public String display() {
-        String output = null;
+        String output = "\nHere are your existing tasks!";
         int i = 0;
         for(Task task: this.taskStorage) {
-            output = "Here are your existing tasks!\n" + (i + 1) + ". " + task.toString();
+            output =  output + "\n" +  (i + 1) + ". " + task.toString();
             i++;
         }
         if (this.taskStorage.size() == 0) {
