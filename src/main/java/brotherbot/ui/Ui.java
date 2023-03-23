@@ -1,29 +1,28 @@
 package brotherbot.ui;
 
+import brotherbot.DialogBox;
 import brotherbot.exceptions.BroException;
 
-import java.util.Scanner;
+
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+
+import java.util.Objects;
 
 public class Ui {
-    private Scanner inputScanner;
-    private String currInput;
+
+    private VBox dialogContainer;
+
+    private final Image brother = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/brother.png")));
+
 
     /**
      * Constructor for Ui object.
      */
     public Ui() {
-        this.inputScanner = new Scanner(System.in);
-
-    }
-
-    /**
-     * Reads the next input from inputScanner.
-     *
-     * @return String representation of next input.
-     */
-    public String readCommand() {
-        this.currInput = inputScanner.nextLine();
-        return currInput;
+         dialogContainer = new VBox();
     }
 
     /**
@@ -32,14 +31,21 @@ public class Ui {
      * @param output Output to be displayed to user.
      */
     public void toUser(String output) {
-        System.out.println(output);
+        Label broText = new Label(output);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBrotherDialog(broText, new ImageView(brother))
+        );
     }
 
     /**
      * Displays welcome message to user.
      */
     public void showWelcome() {
-        System.out.println("Hello Brother\nWelcome to Brother Bot\nWhats up what can I do for you mi amigo");
+        Label broText = new Label("Hello Brother\nWelcome to Brother Bot\nWhats up what can I do for you mi amigo");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBrotherDialog(broText, new ImageView(brother))
+        );
+
     }
 
     /**
@@ -48,13 +54,10 @@ public class Ui {
      * @param x BroException to be conveyed to user.
      */
     public void showError(BroException x) {
-        System.out.println(x.getMessage());
+        Label broText = new Label(x.getMessage());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBrotherDialog(broText, new ImageView(brother))
+        );
     }
 
-    /**
-     * Displays file loading error message to user.
-     */
-    public void showLoadingError() {
-        System.out.println("An error occurred while creating the new file: data.txt");
-    }
 }

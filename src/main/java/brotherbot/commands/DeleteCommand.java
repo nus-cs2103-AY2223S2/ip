@@ -1,8 +1,7 @@
 package brotherbot.commands;
 
-import brotherbot.storage.TaskList;
 import brotherbot.storage.Task;
-import brotherbot.ui.Ui;
+import brotherbot.storage.TaskList;
 
 
 public class DeleteCommand extends Command {
@@ -22,11 +21,11 @@ public class DeleteCommand extends Command {
      * @param storage Existing TaskList object required for command execution.
      * @param ui Ui object required for command execution.
      */
-    public void execute(TaskList storage, Ui ui) {
+    public String execute(TaskList storage) {
         int i = Integer.parseInt(input.substring(7)) - 1;
         Task removed = storage.get(i);
         storage.remove(i);
-        ui.toUser("Deleted this task for you my brother:\n" + removed.toString());
-        ui.toUser("Now you have " + storage.size() + " tasks left");
+        String output = "Deleted this task for you my brother:\n" + removed.toString()+ "\nNow you have " + storage.size() + " tasks left";
+        return output;
     }
 }

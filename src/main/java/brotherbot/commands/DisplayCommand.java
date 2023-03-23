@@ -1,7 +1,6 @@
 package brotherbot.commands;
 
 import brotherbot.storage.TaskList;
-import brotherbot.ui.Ui;
 
 public class DisplayCommand extends Command {
 
@@ -18,12 +17,11 @@ public class DisplayCommand extends Command {
      * Executes command.
      *
      * @param storage Existing TaskList object required for command execution.
-     * @param ui Ui object required for command execution.
      */
-    public void execute(TaskList storage, Ui ui) {
-        ui.toUser("Here you go my brother!" );
-        storage.display(ui);
-        ui.toUser("Anything else I can do for you top G" );
-
+    public String execute(TaskList storage) {
+        String output;
+        output = ("Here are your existing tasks my brother!" ) + storage.display();
+        output = output + "\nAnything else I can do for you top G";
+        return output;
     }
 }

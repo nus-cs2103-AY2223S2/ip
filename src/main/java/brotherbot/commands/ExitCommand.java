@@ -1,7 +1,6 @@
 package brotherbot.commands;
 
 import brotherbot.storage.TaskList;
-import brotherbot.ui.Ui;
 
 public class ExitCommand extends Command {
 
@@ -18,10 +17,9 @@ public class ExitCommand extends Command {
      * Executes command.
      *
      * @param storage Existing TaskList object required for command execution.
-     * @param ui Ui object required for command execution.
      */
-    public void execute(TaskList storage, Ui ui) {
-        super.isExit = true;
-        ui.toUser("ok see you brother all love no cringe!");
+    public String execute(TaskList storage) {
+        String output = "ok see you brother all love no cringe!";
+        return output;
     }
 }

@@ -1,11 +1,6 @@
 package brotherbot.commands;
 
-import brotherbot.ui.Ui;
-import brotherbot.storage.Deadline;
-import brotherbot.storage.Event;
-import brotherbot.storage.Task;
-import brotherbot.storage.TaskList;
-import brotherbot.storage.Todo;
+import brotherbot.storage.*;
 
 import java.time.DateTimeException;
 
@@ -26,9 +21,9 @@ public class AddTaskCommand extends Command {
      * Executes command.
      *
      * @param storage Existing TaskList object required for command execution.
-     * @param ui Ui object required for command execution.
      */
-    public void execute(TaskList storage, Ui ui) {
+    public String execute(TaskList storage) {
+        String output;
         if (super.input.substring(0, 4).equalsIgnoreCase("todo")) {
             storage.add(new Todo(input.substring(5)));
         } else if (super.input.substring(0, 5).equalsIgnoreCase("event")) {
@@ -41,7 +36,8 @@ public class AddTaskCommand extends Command {
             try {
                 storage.add(new Event(description, start, end));
             } catch (DateTimeException e) {
-                ui.toUser("Invalid Date and Time input brother. Here's the correct format:\ndd/MM/yyyy HHmm");
+                output =  "Invalid Date and Time input brother. Here's the correct format:\ndd/MM/yyyy HHmm";
+                return output;
             }
         } else if (super.input.substring(0, 8).equalsIgnoreCase("deadline")) {
             int startIndex = input.indexOf("/by "); // exception
@@ -50,15 +46,16 @@ public class AddTaskCommand extends Command {
             try {
                 storage.add(new Deadline(description, deadline));
             } catch (DateTimeException e) {
-                ui.toUser("Invalid Date and Time input brother. Here's the correct format:\ndd/MM/yyyy HHmm");
+                output = "Invalid Date and Time input brother. Here's the correct format:\ndd/MM/yyyy HHmm";
+                return output;
             }
         } else {
             storage.add(new Task(input));
 
         }
         int x = storage.size();
-        ui.toUser("added to list my brother: \n" + x + "." + storage.get(x - 1).toString() + "\nNow you have " + x + " tasks!");
-
+        output = "added to list my brother: \n" + x + "." + storage.get(x - 1).toString() + "\nNow you have " + x + " tasks!";
+        return output;
 
     }
-    }
+}

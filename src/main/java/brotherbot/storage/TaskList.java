@@ -1,7 +1,5 @@
 package brotherbot.storage;
 
-import brotherbot.ui.Ui;
-
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -58,15 +56,17 @@ public class TaskList {
     /**
      * Displays the list of Tasks.
      */
-    public void display(Ui ui) {
+    public String display() {
+        String output = null;
         int i = 0;
         for(Task task: this.taskStorage) {
-            ui.toUser((i + 1) + ". " + task.toString());
+            output = "Here are your existing tasks!\n" + (i + 1) + ". " + task.toString();
             i++;
         }
         if (this.taskStorage.size() == 0) {
-            ui.toUser("Start adding now my brother!");
+            output = "You have 0 Existing Tasks.. cannot la brother, start adding now! Faster!";
         }
+        return output;
 
     }
 

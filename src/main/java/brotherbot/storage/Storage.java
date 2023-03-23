@@ -3,7 +3,6 @@ package brotherbot.storage;
 import brotherbot.commands.Command;
 import brotherbot.commands.DisplayCommand;
 import brotherbot.commands.ExitCommand;
-import brotherbot.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -30,20 +29,14 @@ public class Storage {
     /**
      * Load existing data into taskList if existing data file exists.
      * Creates new data file if no existing data file exist.
-     *
-     * @param ui User interface to display the relevant loaded data.
      */
-    public void load(Ui ui) {
+    public String load() {
         try {
+            String output;
             boolean created = hardDisk.createNewFile();
             // load existing data.txt file
             if (!created) {
                 Scanner scanner = new Scanner(hardDisk);
-                if (!scanner.hasNextLine()) {
-                    ui.toUser("No Existing Tasks my brother!");
-                } else {
-                    ui.toUser("Existing Tasks my brother!");
-                }
                 while (scanner.hasNextLine()) {
                     String input = scanner.nextLine();
                     if (input == "") {
@@ -74,14 +67,16 @@ public class Storage {
                     // Printout existing brotherbot.storage database
 
                 }
-                this.taskStorage.display(ui);
+                output = this.taskStorage.display();
                 scanner.close();
             } else {
-                ui.toUser("New file created: data.txt");
+                output = "New file created: data.txt";
             }
+            return output;
         } catch (IOException e) {
-            ui.showLoadingError();
+            String output = "An error occurred while creating the new file: data.txt";
             e.printStackTrace();
+            return output;
         }
     }
 
