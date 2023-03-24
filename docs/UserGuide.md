@@ -45,6 +45,14 @@ Examples:
 
 ``add event Jack Birthday Party /from 10/10/23 1700 /to 10/10/23 2200``
 
+   * Types of Tasks supported:
+      * **Todo** : The simplest type of task, all it needs is the name of the task.
+      * ``add todo Buy Carrots``
+      *  **Deadline** : A type of task with a due date, or a *deadline*. use ``/by`` to indicate the due date.
+      *  ``add deadline Return Book /by 10/10/2023 12:00 pm``
+      *  **Event** : A task with a start date and time, and an end date and time. Use ``/from`` to indicate the start date and time, and ``/to`` for the end date and time.
+      *  ``add event Jack's Birthday Party /from 11/11/2023 1700 /to 11/11/2023 2200``
+
 ### Listing all tasks : ``list``
 
 Shows a list of all tasks in the list.
