@@ -11,6 +11,7 @@ public class ExitCommand extends Command {
      */
     public ExitCommand(String input) {
         super(input);
+        super.isExit = true;
     }
 
     /**
@@ -19,7 +20,7 @@ public class ExitCommand extends Command {
      * @param storage Existing TaskList object required for command execution.
      */
     public String execute(TaskList storage) {
-        String output = "ok see you brother all love no cringe!";
+        String output = "bye brother hope you had a good day!";
         return output;
     }
 }

@@ -6,6 +6,7 @@ import brotherbot.storage.TaskList;
  * Represents a command input by user.
  */
 public abstract class Command {
+    public static boolean isExit;
     protected String input;
 
     /**
@@ -15,6 +16,7 @@ public abstract class Command {
      */
     public Command(String input) {
         this.input = input;
+        isExit = false;
     }
 
     /**
