@@ -8,7 +8,7 @@
 
 ## **NEW UPDATED UI**
 
-![UI](DOOKui.png)
+![UI](Ui.png)
 
 
 DOOK frees your mind of having to remember things you need to do. It's,
@@ -81,7 +81,7 @@ Format : ``unmark 2``
 
 Deletes the specified task from the list.
 
-Format: ``delete``
+Format: ``delete <index>``
 
 ### Saving the data : ``bye``
 
