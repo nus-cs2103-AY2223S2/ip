@@ -13,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Storage {
-    private File hardDisk;
-    private TaskList taskStorage;
+    private final File hardDisk;
+    private final TaskList taskStorage;
 
     /**
      * Constructor for creating a Storage object.
@@ -70,7 +70,7 @@ public class Storage {
                 output = this.taskStorage.display();
                 scanner.close();
             } else {
-                output = "New file created: data.txt";
+                output = "No Existing Tasks, add one now my brother!";
             }
             return output;
         } catch (IOException e) {

@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> taskStorage;
+    private final ArrayList<Task> taskStorage;
 
     /**
      * Constructor for creating a TaskList object containing Tasks.
