@@ -69,6 +69,8 @@ Examples :
 
 ``find buy marked``
 
+   * **Note** : With ``find``, the list of tasks shown with the relevant keywords are shown with their original indexing, i.e. the shown tasks after ``find``-ing may not be in consecutive indexing, but their original positions in the list.
+
 ### Marking tasks : ``mark ``
 
 Marks the task at specified index as done.
