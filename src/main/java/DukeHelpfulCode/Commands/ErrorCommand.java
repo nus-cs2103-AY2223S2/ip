@@ -14,7 +14,7 @@ public class ErrorCommand extends Command{
 
     @Override
     public String execute(TaskList taskList) throws TaskAlrMarkException, NoSuchTaskException {
-        return "Error";
+        return errorMessage;
     }
 
     @Override

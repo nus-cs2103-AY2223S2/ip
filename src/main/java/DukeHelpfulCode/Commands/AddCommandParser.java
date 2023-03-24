@@ -35,7 +35,7 @@ public class AddCommandParser {
             "hh:mm a dd-MM-yy", "hh:mm a dd/MM/yy",
             "dd MMM yyyy hh:mm a"};
 
-    public static Command parse(String[] userInput) throws NoTaskTypeException, NoTaskNameException {
+    public static Command parse(String[] userInput) {
         Task task;
         String taskType;
         String taskName = "";
@@ -43,7 +43,7 @@ public class AddCommandParser {
         try {
             taskType = userInput[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NoTaskTypeException();
+            return new ErrorCommand("Sorry, what kind of task is this?\n");
         }
 
 //        try {
@@ -55,6 +55,9 @@ public class AddCommandParser {
         if (taskType.toLowerCase(Locale.ROOT).equals("todo")) {
             for (int i = 2; i < userInput.length; i++) {
                 taskName += userInput[i] + " ";
+            }
+            if (taskName.equals("")) {
+                return new ErrorCommand("Sorry, no name for this task is given.\n");
             }
             task = new Todo(taskName);
 
@@ -73,7 +76,7 @@ public class AddCommandParser {
                 i++;
             }
             if (taskName.equals("")) {
-                throw new NoTaskNameException();
+                return new ErrorCommand("Sorry, no name for this task is given.\n");
             }
             i++;
             while (!userInput[i].equals("/to")) {
@@ -84,8 +87,11 @@ public class AddCommandParser {
             for (int j = i; j < userInput.length; j++) {
                 end += userInput[j] + " ";
             }
-            //System.out.println(Arrays.asList(userInput));
-            task = new Event(taskName, formatDateTime(start.substring(0,start.length()-1)), formatDateTime(end.substring(0, end.length()-1)));
+            try {
+                task = new Event(taskName, formatDateTime(start.substring(0, start.length() - 1)), formatDateTime(end.substring(0, end.length() - 1)));
+            } catch (DateTimeParseException e) {
+                return new ErrorCommand("Sorry, I don't understand the date you've entered.\n");
+            }
 
         } else if (taskType.toLowerCase(Locale.ROOT).equals("deadline")) {
             String by = "";
@@ -97,27 +103,31 @@ public class AddCommandParser {
                 taskName += userInput[i] + " ";
                 i++;
             }
+            if (taskName.equals("")) {
+                return new ErrorCommand("Sorry, no name for this task is given.\n");
+            }
             i++;
             for (int j = i; j < userInput.length; j++) {
                  by += userInput[j] + " ";
             }
-            task = new Deadline(taskName,formatDateTime(by.substring(0,by.length()-1)));
+            try {
+                task = new Deadline(taskName, formatDateTime(by.substring(0, by.length() - 1)));
+            } catch (DateTimeParseException e) {
+                return new ErrorCommand("Sorry, I don't understand the date you've entered.\n");
+            }
+
         } else {
-            throw new NoTaskTypeException();
+            return new ErrorCommand("Sorry, what kind of task is this?\n");
         }
 
         return new AddCommand(task);
     }
-    private static LocalDateTime formatDateTime(String dueDate) {
+    private static LocalDateTime formatDateTime(String dueDate) throws DateTimeParseException {
         LocalDateTime dt = null;
         for (String format : possibleFormats) {
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-                dt = LocalDateTime.parse(dueDate, formatter);
-                break;
-            } catch (DateTimeParseException e) {
-                // Do nothing, just continue to the next format
-            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+            dt = LocalDateTime.parse(dueDate, formatter);
+            break;
         }
         return dt;
     }
