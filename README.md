@@ -20,6 +20,18 @@ Bro! It is:
 - [X] Tracks tasks
 - [ ] Eat supper with you *(coming soon)*
 
+If you are a Java programmer, you can review the code easily with its well designed code and JavaDocs. Here's the `Launcher` class:
+```
+package brotherbot;
+
+import javafx.application.Application;
+
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(BrotherBot.class, args);
+    }
+}
+
    ```
    Adapted from
     ____        _        
