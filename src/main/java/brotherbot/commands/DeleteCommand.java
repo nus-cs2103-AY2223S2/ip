@@ -19,7 +19,6 @@ public class DeleteCommand extends Command {
      * Executes command.
      *
      * @param storage Existing TaskList object required for command execution.
-     * @param ui Ui object required for command execution.
      */
     public String execute(TaskList storage) {
         int i = Integer.parseInt(input.substring(7)) - 1;

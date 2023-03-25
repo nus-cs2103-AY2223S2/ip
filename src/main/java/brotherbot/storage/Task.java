@@ -3,6 +3,7 @@ package brotherbot.storage;
 public class Task {
     protected String description;
     protected boolean isDone;
+    public String type;
 
     /**
      * Constructor to create a Task object.

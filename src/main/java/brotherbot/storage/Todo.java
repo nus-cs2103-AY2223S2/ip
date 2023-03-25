@@ -9,6 +9,7 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+        super.type = "T";
     }
 
     /**
@@ -18,7 +19,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T] " + "[" + this.getStatusIcon() + "] " + this.description;
+        return  "[" + super.type + "] "  + "[" + this.getStatusIcon() + "] " + this.description;
     }
 
 }

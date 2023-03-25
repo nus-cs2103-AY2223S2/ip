@@ -43,7 +43,8 @@ public class BrotherBot extends Application {
 
     public String welcome() {
             return "Welcome to Brother Bot - your one-stop Personal Task Planner with a very 'bro' personality!\n" +
-                    "Hello my brother, what can I do for you mi amigo...\n" + this.storage.load();
+                    "Hello my brother, what can I do for you mi amigo...\n" + this.storage.load() +
+                    "\n\nInput 'help' to see available commands!";
     }
 }
 

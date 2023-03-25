@@ -15,6 +15,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadline) {
         super(description);
+        super.type = "D";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         this.deadline = LocalDateTime.parse(deadline, formatter);
     }
@@ -27,7 +28,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
-        return "[D] " + "[" + this.getStatusIcon() + "] " + this.description + " By: " + this.deadline.format(formatter);
+        return  "[" + super.type + "] "  + "[" + this.getStatusIcon() + "] " + this.description + " By: " + this.deadline.format(formatter);
     }
 
 }

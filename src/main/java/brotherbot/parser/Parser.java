@@ -5,6 +5,9 @@ import brotherbot.commands.*;
 import brotherbot.exceptions.BroException;
 import brotherbot.storage.TaskList;
 
+import java.time.Duration;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
     /**
@@ -38,8 +41,13 @@ public class Parser {
             command = new AddTaskCommand(input);
         } else if (input.length() > 8 && input.substring(0, 8).equalsIgnoreCase("deadline")) {
             command = new AddTaskCommand(input);
-        } else {
-            throw new BroException("OOPS! invalid command la bro");
+        } else if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("free")) {
+            command = new FreeTimeCommand(input);
+        } else if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("help")) {
+            command = new HelpCommand(input);
+        }
+        else {
+            throw new BroException("OOPS! wrong command la bro, Input 'help' to see available commands!");
         }
         return command;
     }
@@ -78,8 +86,19 @@ public class Parser {
                 throw new BroException("OOPS inserted number is invalid");
             }
         }
+
         if (input.length() > 8 && input.substring(0, 8).equalsIgnoreCase("deadline") && (!input.contains("/by") || input.indexOf("/by") == 9)) {
             throw new BroException("OOPS wrong format my brother! consider this format: \nevent xxx /from xxx /to xxx");
         }
+
+        if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("free")) {
+            try {
+                Duration.parse("PT" + input.substring(5));
+            } catch (DateTimeParseException e) {
+                throw new BroException("Brother, input your free duration following this example: 'xHyyM', replace x " +
+                        "with number of hours and yy with number of minutes! ");
+            }
+        }
+
     }
 }
