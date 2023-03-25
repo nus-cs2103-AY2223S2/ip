@@ -1,21 +1,40 @@
-# Duke project template
+# BrotherBot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "We must live together as brothers or perish together like fools." - Martin Luther King Jr.
 
-## Setting up in Intellij
+We all need a brother out there who's got our back all the time. Introducing BrotherBot, your one-stop task planner with a "Brother" personality. 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Bro! It is:
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+- ~~Hard~~ Easy to use
+- *Friendly* 
+- Treats u like a real **bro** :star_struck:
+
+## Wanna gain real bro?
+
+1. Download it [here]()
+
+## Bro features
+
+
+- [X] Tracks tasks
+- [ ] Eat supper with you *(coming soon)*
+
+If you are a Java programmer, you can review the code easily with its well designed code and JavaDocs. Here's the `Launcher` class:
+```
+package brotherbot;
+
+import javafx.application.Application;
+
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(BrotherBot.class, args);
+    }
+}
+```
+
    ```
-   Hello from
+   Adapted from
     ____        _        
    |  _ \ _   _| | _____ 
    | | | | | | | |/ / _ \
