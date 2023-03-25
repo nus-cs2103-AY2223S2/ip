@@ -13,7 +13,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
+if ! javac -cp /Users/danielling/Desktop/CS2103T/ip/src/main/java -Xlint:none -d ../bin /Users/danielling/Desktop/CS2103T/ip/src/main/java/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
@@ -28,6 +28,7 @@ dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED-UNIX.TXT
+# shellcheck disable=SC2181
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"

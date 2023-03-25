@@ -1,7 +1,20 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello Brother
+Welcome to Brother Bot
+Whats up what can I do for you mi amigo
+added to list my brother:
+ [D] [ ] deadline bball /by today By: today
+ Now you have 1 tasks!
+added to list my brother:
+ [E] [ ] /from today /to tmr From: today  To: tmr
+ Now you have 2 tasks!
+Here you go my brother!
+1. [D] [ ] deadline bball /by today By: today
+2. [E] [ ] /from today /to tmr From: today  To: tmr
+Anything else I can do for you top G
+Marked as you wish my brother:
+1. [D] [X] deadline bball /by today By: today
+ Whats next?
+Here you go my brother!
+1. [D] [X] deadline bball /by today By: today
+2. [E] [ ] /from today /to tmr From: today  To: tmr
+Anything else I can do for you top G
