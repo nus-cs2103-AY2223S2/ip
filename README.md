@@ -31,6 +31,7 @@ public class Launcher {
         Application.launch(BrotherBot.class, args);
     }
 }
+```
 
    ```
    Adapted from
