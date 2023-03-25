@@ -20,7 +20,7 @@ public class DisplayCommand extends Command {
      */
     public String execute(TaskList storage) {
         String output;
-        output = storage.display() + "\nAnything else I can do for you top G";;
+        output = storage.display() + "\nAnything else I can do for you top G";
         return output;
     }
 }

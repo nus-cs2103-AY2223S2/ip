@@ -64,7 +64,7 @@ public class TaskList {
             i++;
         }
         if (this.taskStorage.size() == 0) {
-            output = "You have 0 Existing Tasks.. cannot la brother, start adding now! Faster!";
+            output = "You have 0 Existing Tasks... cannot la brother, start adding now! Faster!";
         }
         return output;
 

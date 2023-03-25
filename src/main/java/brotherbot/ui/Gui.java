@@ -102,11 +102,11 @@ public class Gui {
         stage.setTitle("BrotherBot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(700.0);
+        stage.setMinWidth(750.0);
     }
 
     private void formatScrollPane(ScrollPane scrollPane) {
-        scrollPane.setPrefSize(700, 565);
+        scrollPane.setPrefSize(750, 565);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
@@ -115,13 +115,13 @@ public class Gui {
     }
 
     private void formatAnchorPane(AnchorPane mainLayout) {
-        mainLayout.setPrefSize(700.0, 600.0);
+        mainLayout.setPrefSize(750.0, 600.0);
     }
 
     private void formatDialogContainer(VBox dialogContainer) {
         BackgroundImage backgroundImage = new BackgroundImage(background,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
-                BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background background = new Background(backgroundImage);
         dialogContainer.setBackground(background);
         dialogContainer.setPrefHeight(565);
@@ -141,7 +141,7 @@ public class Gui {
     }
 
     private void formatUserInput(TextField userInput) {
-        userInput.setPrefWidth(640.0);
+        userInput.setPrefWidth(690.0);
     }
 
 }
