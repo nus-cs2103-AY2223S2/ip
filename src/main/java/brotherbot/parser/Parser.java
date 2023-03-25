@@ -19,7 +19,7 @@ public class Parser {
      * @return Command object to be executed.
      * @throws BroException if invalid inputs are parsed.
      */
-    public static Command parse(String input, TaskList storage) throws BroException {
+    public Command parse(String input, TaskList storage) throws BroException {
         validateInput(input, storage);
         Command command;
         if (input.equalsIgnoreCase("bye")) {
@@ -48,21 +48,13 @@ public class Parser {
      * Checks if inputs are valid.
      */
     private static void validateInput(String input, TaskList storage) throws BroException {
-        /**
-        if (!input.contains("todo") && !input.contains("event") && !input.contains("display") && !input.contains("deadline") && !input.contains("mark") && !input.contains("bye") && !input.contains("delete") && !input.contains("find")) {
-            throw new BroException("OOPS! invalid command la bro");
-        }
-         **/
+
         if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("todo") && input.length() <= 5) {
             throw new BroException("OOPS wrong format my brother! consider this format: \ntodo xxx");
         }
 
         if (input.length() > 5 && input.substring(0, 5).equalsIgnoreCase("event") && (!input.contains("/from") || input.indexOf("/from") == 6 || !input.contains("/to") || input.indexOf("/from") > input.indexOf("/to"))) {
             throw new BroException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
-        }
-
-        if (input.length() > 4 && input.substring(0, 3).equalsIgnoreCase("find") && input.length() <= 5) {
-            throw new BroException("what do you want me to find bro... here's the correct format:\nfind XXX");
         }
 
         if (input.length() > 6 && input.substring(0, 6).equalsIgnoreCase("delete")) {
@@ -87,7 +79,7 @@ public class Parser {
             }
         }
         if (input.length() > 8 && input.substring(0, 8).equalsIgnoreCase("deadline") && (!input.contains("/by") || input.indexOf("/by") == 9)) {
-            throw new BroException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
+            throw new BroException("OOPS wrong format my brother! consider this format: \nevent xxx /from xxx /to xxx");
         }
     }
 }

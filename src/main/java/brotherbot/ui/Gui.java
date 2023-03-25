@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
 
 public class Gui {
 
-    private BrotherBot brotherBot;
+    private final BrotherBot brotherBot;
     private Stage stage;
     private VBox dialogContainer;
     private TextField userInput;
@@ -32,7 +32,8 @@ public class Gui {
         this.brotherBot = brotherBot;
     }
 
-    public void start(Stage stage) {
+
+    public void initialise(Stage stage) {
         this.stage = stage;
         stageSetup();
         stage.show();
@@ -41,18 +42,17 @@ public class Gui {
 
 
     private void stageSetup() {
-
         ScrollPane scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
 
         // Stage Setup
+        scrollPane.setStyle("-fx-background: #121c2b");
         BackgroundImage backgroundImage = new BackgroundImage(background,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
-                BackgroundPosition.DEFAULT, new BackgroundSize(
-                background.getWidth(), background.getHeight(), false, false, true, false));
+                BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background background = new Background(backgroundImage);
         dialogContainer.setBackground(background);
-        scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
         Button sendButton = new Button("SEND");
@@ -100,7 +100,7 @@ public class Gui {
 
 
     private void loadWelcome() {
-        Label load = new Label("Welcome to Brother Bot - your one-stop Personal Task Planner with a very 'bro' personality!\nHello my brother, what can I do for you mi amigo...\n" + this.brotherBot.loadHistory());
+        Label load = new Label(this.brotherBot.welcome());
         dialogContainer.getChildren().addAll(
                 DialogBox.getBrotherDialog(load, new ImageView(brother))
         );

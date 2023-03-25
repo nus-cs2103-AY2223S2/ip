@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Storage {
     private final File hardDisk;
@@ -19,10 +21,13 @@ public class Storage {
     /**
      * Constructor for creating a Storage object.
      *
-     * @param filePath The path where the Tasks are stored.
+     * @param filePathString The string representation of the path where the Tasks are stored.
      */
-    public Storage(String filePath) {
-        this.hardDisk = new File(filePath);
+    public Storage(String filePathString) {
+        Path filePath = Paths.get(filePathString);
+        assert filePath.toFile().exists();
+
+        this.hardDisk = new File(filePathString);
         this.taskStorage = new TaskList();
     }
 

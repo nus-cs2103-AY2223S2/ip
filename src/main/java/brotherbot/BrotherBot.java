@@ -14,23 +14,25 @@ public class BrotherBot extends Application {
     private final Storage storage;
     private final TaskList tasks;
     private final Gui gui;
+    private final Parser parser;
 
     public BrotherBot() {
         this.storage = new Storage("data.txt");
         this.tasks = storage.getTasks();
         this.gui = new Gui(this);
+        this.parser = new Parser();
     }
 
 
     @Override
     public void start(Stage stage) {
-        gui.start(stage);
+        gui.initialise(stage);
     }
 
     public String getResponse(String input) {
         String output;
         try {
-            Command c = Parser.parse(input, this.tasks);
+            Command c = this.parser.parse(input, this.tasks);
             output = c.execute(this.tasks);
             storage.save(c);
             return output;
@@ -40,8 +42,10 @@ public class BrotherBot extends Application {
         }
     }
 
-    public String loadHistory() {
-        return this.storage.load();
+
+    public String welcome() {
+            return "Welcome to Brother Bot - your one-stop Personal Task Planner with a very 'bro' personality!\n" +
+                    "Hello my brother, what can I do for you mi amigo...\n" + this.storage.load();
     }
 }
 

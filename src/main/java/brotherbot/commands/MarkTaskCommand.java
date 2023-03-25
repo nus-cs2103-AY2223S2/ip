@@ -21,7 +21,6 @@ public class MarkTaskCommand extends Command {
     public String execute(TaskList storage) {
         int i = Integer.parseInt(input.substring(5)) - 1;
         storage.mark(i);
-        String output = "Marked as you wish my brother:\n" + ((i + 1) + ". " + storage.getPrintFormat(i));
-        return output;
+        return "Marked as you wish my brother:\n" + ((i + 1) + ". " + storage.getPrintFormat(i));
     }
 }

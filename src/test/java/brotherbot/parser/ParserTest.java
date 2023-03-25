@@ -32,16 +32,17 @@ public class ParserTest {
         assertEquals(new DeleteCommand(validTest7), Parser.parse(validTest7, dummy));
         **/
         TaskList dummy = new TaskList();
+        Parser parser = new Parser();
 
         String invalidInput = "deadline eat"; // wrong format
         String typoInput = "tod eat";
         String invalidDeleteInput = "delete 1"; // invalid delete
         String invalidMarkInput = "mark 1"; // invalid mark
 
-        assertThrows(BroException.class, () -> {Parser.parse(invalidInput, dummy);});
-        assertThrows(BroException.class, () -> {Parser.parse(typoInput, dummy);});
-        assertThrows(BroException.class, () -> {Parser.parse(invalidDeleteInput, dummy);});
-        assertThrows(BroException.class, () -> {Parser.parse(invalidMarkInput, dummy);});
+        assertThrows(BroException.class, () -> {parser.parse(invalidInput, dummy);});
+        assertThrows(BroException.class, () -> {parser.parse(typoInput, dummy);});
+        assertThrows(BroException.class, () -> {parser.parse(invalidDeleteInput, dummy);});
+        assertThrows(BroException.class, () -> {parser.parse(invalidMarkInput, dummy);});
     }
 
 }
