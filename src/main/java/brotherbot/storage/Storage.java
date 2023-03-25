@@ -26,7 +26,6 @@ public class Storage {
     public Storage(String filePathString) {
         Path filePath = Paths.get(filePathString);
         assert filePath.toFile().exists();
-
         this.hardDisk = new File(filePathString);
         this.taskStorage = new TaskList();
     }
@@ -37,7 +36,6 @@ public class Storage {
      */
     public String load() {
         try {
-            assert hardDisk.exists();
             String output;
             boolean created = hardDisk.createNewFile();
             assert hardDisk.exists();
