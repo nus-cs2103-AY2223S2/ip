@@ -23,7 +23,6 @@ public class BrotherBot extends Application {
         this.parser = new Parser();
     }
 
-
     @Override
     public void start(Stage stage) {
         gui.initialise(stage);

@@ -32,7 +32,6 @@ public class Gui {
         this.brotherBot = brotherBot;
     }
 
-
     public void initialise(Stage stage) {
         this.stage = stage;
         stageSetup();
