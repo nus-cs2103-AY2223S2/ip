@@ -37,6 +37,7 @@ public class Storage {
      */
     public String load() {
         try {
+            assert hardDisk.exists();
             String output;
             boolean created = hardDisk.createNewFile();
             // load existing data.txt file
@@ -68,9 +69,6 @@ public class Storage {
                         x.markAsDone();
                     }
                     this.taskStorage.add(x);
-
-                    // Printout existing brotherbot.storage database
-
                 }
                 output = this.taskStorage.display();
                 scanner.close();

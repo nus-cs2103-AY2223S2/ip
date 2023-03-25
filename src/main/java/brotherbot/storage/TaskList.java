@@ -90,7 +90,6 @@ public class TaskList {
      */
     public ArrayList<Integer> search(String keyword) {
         ArrayList<Integer> relevantTaskIndexes = new ArrayList<>();
-
         for (int i = 0; i < this.taskStorage.size(); i++) {
             if (this.taskStorage.get(i).description.contains(keyword)) {
                 relevantTaskIndexes.add(i);
