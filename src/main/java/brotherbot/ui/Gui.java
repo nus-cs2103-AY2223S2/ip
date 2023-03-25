@@ -121,7 +121,7 @@ public class Gui {
     private void formatDialogContainer(VBox dialogContainer) {
         BackgroundImage backgroundImage = new BackgroundImage(background,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
-                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+                BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background background = new Background(backgroundImage);
         dialogContainer.setBackground(background);
         dialogContainer.setPrefHeight(565);

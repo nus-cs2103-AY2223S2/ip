@@ -43,7 +43,7 @@ public class Parser {
             command = new AddTaskCommand(input);
         } else if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("free")) {
             command = new FreeTimeCommand(input);
-        } else if (input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("help")) {
+        } else if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("help")) {
             command = new HelpCommand(input);
         }
         else {
@@ -61,8 +61,7 @@ public class Parser {
             throw new BroException("OOPS wrong format my brother! consider this format: \ntodo xxx");
         }
 
-        if (input.length() > 5 && input.substring(0, 5).equalsIgnoreCase("event") && (!input.contains("/from") ||
-                input.indexOf("/from") == 6 || !input.contains("/to") || input.indexOf("/from") > input.indexOf("/to"))) {
+        if (input.length() > 5 && input.substring(0, 5).equalsIgnoreCase("event") && (!input.contains("/from") || input.indexOf("/from") == 6 || !input.contains("/to") || input.indexOf("/from") > input.indexOf("/to"))) {
             throw new BroException("OOPS wrong format my brother! consider this format: \nevent xxxx /from xxx /to xxx");
         }
 
