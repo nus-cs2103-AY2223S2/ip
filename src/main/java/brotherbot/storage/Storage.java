@@ -40,6 +40,7 @@ public class Storage {
             assert hardDisk.exists();
             String output;
             boolean created = hardDisk.createNewFile();
+            assert hardDisk.exists();
             // load existing data.txt file
             if (!created) {
                 Scanner scanner = new Scanner(hardDisk);
