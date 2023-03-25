@@ -43,7 +43,7 @@ public class Parser {
             command = new AddTaskCommand(input);
         } else if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("free")) {
             command = new FreeTimeCommand(input);
-        } else if (input.length() > 4 && input.substring(0, 4).equalsIgnoreCase("help")) {
+        } else if (input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("help")) {
             command = new HelpCommand(input);
         }
         else {

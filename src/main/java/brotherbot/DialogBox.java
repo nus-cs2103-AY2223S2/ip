@@ -19,7 +19,7 @@ public class DialogBox extends HBox {
         formatLabel(l);
         formatImage(iv);
         this.setAlignment(Pos.TOP_RIGHT);
-        setMargin(l, new Insets(0, 10, 0, 10));
+        this.getChildren().addAll(l, iv);
     }
 
     /**
