@@ -12,7 +12,7 @@ Bro! It is:
 
 ## Wanna gain real bro?
 
-1. Download it [here]()
+1. Download it [here](https://github.com/daniellingzy/ip/releases/tag/v0.2)
 
 ## Bro features
 
