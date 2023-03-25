@@ -16,22 +16,11 @@ import javafx.scene.text.FontWeight;
 public class DialogBox extends HBox {
 
     public DialogBox(Label l, ImageView iv) {
-
-        l.setWrapText(true);
-        l.setTextFill(Color.ORANGE);
-        l.setStyle("-fx-font-weight: BOLD;");
-
-        Font poppinsFont = Font.font("Poppins", FontWeight.BOLD, 13.5);
-        l.setFont(poppinsFont);
-
-        iv.setFitWidth(100.0);
-        iv.setFitHeight(110.0);
-
+        formatLabel(l);
+        formatImage(iv);
         this.setAlignment(Pos.TOP_RIGHT);
         setMargin(l, new Insets(0, 10, 0, 10));
-        this.getChildren().addAll(l, iv);
     }
-
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
@@ -53,4 +42,17 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    private void formatLabel(Label l) {
+        l.setWrapText(true);
+        l.setTextFill(Color.ORANGE);
+        l.setStyle("-fx-font-weight: BOLD;");
+        Font poppinsFont = Font.font("Poppins", FontWeight.BOLD, 13.5);
+        l.setFont(poppinsFont);
+        setMargin(l, new Insets(0, 10, 0, 10));
+    }
+
+    private void formatImage(ImageView iv) {
+        iv.setFitWidth(100.0);
+        iv.setFitHeight(110.0);
+    }
 }

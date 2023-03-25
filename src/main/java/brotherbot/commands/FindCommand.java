@@ -22,12 +22,15 @@ public class FindCommand extends Command {
      */
     public String execute(TaskList storage) {
         String keyword = this.input.substring(5);
-        String output = "Here are the matching task my brother!";
+        String output = "Here are the matching task(s) my brother!";
         ArrayList<Integer> results = storage.search(keyword);
+        if (results.isEmpty()) {
+            output = "No matches found brother, try again!";
+            return output;
+        }
         for (Integer i : results) {
             output = output + "\n" + (i + 1) + ". " + storage.get(i).toString();
         }
-        output = output + "\nAnything else I can do for you top G";
         return output;
     }
 

@@ -57,7 +57,7 @@ public class Gui {
         formatSendButton(sendButton);
         formatUserInput(userInput);
         anchor(scrollPane, sendButton);
-
+        
         // User Interaction Setup
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         sendButton.setOnMouseClicked((event) -> {
