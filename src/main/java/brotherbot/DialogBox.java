@@ -28,11 +28,7 @@ public class DialogBox extends HBox {
         iv.setFitHeight(110.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
-<<<<<<< HEAD
         setMargin(l, new Insets(0, 10, 0, 10));
-=======
-        this.setMargin(l, new Insets(0, 10, 0, 10));
->>>>>>> f54d1b27c25a18e80131edb63b3a58fac738bb71
         this.getChildren().addAll(l, iv);
     }
 
