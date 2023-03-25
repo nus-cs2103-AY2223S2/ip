@@ -10,7 +10,7 @@ Bro! It is:
 - *Friendly*
 - Treats u like a real **bro** :star_struck:
 
-## Wanna gain real bro?
+## Wanna gain a real bro?
 
 1. Download it [here](https://github.com/daniellingzy/ip/releases/tag/v0.2)
 
