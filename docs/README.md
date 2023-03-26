@@ -54,6 +54,8 @@ Examples:
 
 ``add event Jack Birthday Party /from 10/10/23 1700 /to 10/10/23 2200``
 
+``add deadline Return Book /by 11/11/2023 2:00 pm``
+
 ### Listing all tasks : ``list``
 
 Shows a list of all tasks in the list.
