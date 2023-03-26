@@ -38,6 +38,15 @@ Format: ``help``
 Adds a task to the list.
 
 Format: ``add <taskType> <task>``
+ 
+ * Task types supported :
+   * ``todo`` : The simplest type of task, only requires a name for the task!
+   * ``deadline`` : A task that has a due date. use ``/by`` to indicate the due date and time.
+   * ``event`` : Similar to a deadline, but also has a start date and time. Use ``/from`` to indicate the start date and time, and ``/to`` for the end date and time.
+ * Date formating :
+   * 2 date formatting are accepted : ``dd/MM/yy`` and ``dd/MM/yyyy``
+   * Supports both 12 hour and 24 hour time : ``hh:mm a`` and ``HHmm``
+   * Date before time : ``dd/MM/yy hh:mm a`` or ``dd/MM/yyyy HHmm``
 
 Examples:
 
@@ -60,6 +69,8 @@ Format: ``find <keyword 1> <keyword 2> <...>``
 Examples :
 
 ``find buy marked``
+
+ * Note: ``find`` returns the tasks with their original indexing, ie the tasks that ``find`` returns may not have consecutive indexing.
 
 ### Marking tasks : ``mark ``
 
