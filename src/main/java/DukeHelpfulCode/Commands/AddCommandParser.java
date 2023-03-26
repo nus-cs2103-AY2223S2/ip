@@ -132,7 +132,6 @@ public class AddCommandParser {
     private static LocalDateTime formatDateTime(String dueDate) throws DateTimeParseException{
         LocalDateTime dt = null;
         for (String format : possibleFormats) {
-            System.out.println(format);
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
                 dt = LocalDateTime.parse(dueDate.toUpperCase(Locale.ROOT), formatter);

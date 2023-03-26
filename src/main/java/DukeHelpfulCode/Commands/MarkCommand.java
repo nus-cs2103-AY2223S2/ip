@@ -2,6 +2,7 @@ package DukeHelpfulCode.Commands;
 
 import DukeHelpfulCode.Exceptions.NoSuchTaskException;
 import DukeHelpfulCode.Exceptions.TaskAlrMarkException;
+import DukeHelpfulCode.Exceptions.TaskAlrUnmarkException;
 import DukeHelpfulCode.Utilities.Storage;
 import DukeHelpfulCode.Utilities.TaskList;
 import DukeHelpfulCode.Utilities.UI;
@@ -20,7 +21,7 @@ public class MarkCommand extends Command{
     public MarkCommand(){};
 
     @Override
-    public String execute(TaskList taskList) throws TaskAlrMarkException, NoSuchTaskException {
+    public String execute(TaskList taskList) throws TaskAlrMarkException, TaskAlrUnmarkException, NoSuchTaskException {
         String res = taskList.mark(isMark, taskNum);
         return res;
     };

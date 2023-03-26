@@ -79,6 +79,8 @@ public class DOOK {
                 return "Sorry, I can't find this task.";
             } catch (TaskAlrMarkException e) {
                 return "Sorry but this task is already marked.";
+            } catch (TaskAlrUnmarkException e) {
+                return "Sorry but this task is not marked.";
             } catch (DukeException e) {
                 return "Sorry, I don't understand.";
             }

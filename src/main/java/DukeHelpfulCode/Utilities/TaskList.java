@@ -71,7 +71,7 @@ public class TaskList {
         }
     }
 
-    public String mark(boolean isMark, int i) throws NoSuchTaskException, TaskAlrMarkException {
+    public String mark(boolean isMark, int i) throws NoSuchTaskException, TaskAlrMarkException, TaskAlrUnmarkException {
         /**
          * Marks the i-1 th index Task as done if not done and vice versa.
          * Note: list is 0-index but displayed as 1-index, hence i would be 1-index.
@@ -86,7 +86,7 @@ public class TaskList {
         } else if (isMark && this.tasks.get(i-1).isDone()) {
             throw new TaskAlrMarkException();
         } else if (!isMark && !this.tasks.get(i-1).isDone()){
-            throw new TaskAlrMarkException();
+            throw new TaskAlrUnmarkException();
         } else {
             return this.tasks.get(i - 1).mark();
         }
