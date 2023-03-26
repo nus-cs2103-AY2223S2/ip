@@ -1,29 +1,29 @@
-# **DOOK**
+# DOOK
 
+## Quick start
 
-**“My unmatched perspicacity, coupled with sheer indefatigability, makes me a feared opponent in any realm of human endeavor.”**
+1. Ensure you have Java `11` or above installed in your Computer.
 
-– Andrew Tate
+1. Download the latest `dook.jar` from [here](https://github.com/iapetusbob/ip/releases).
 
+1. Copy the file to the folder you want to use as the _home folder_ for your DOOK.
 
-## **NEW UPDATED UI**
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar dook.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](Ui.png)
 
-![UI](Ui.png)
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will show all the commands at your disposal.<br>
+   Some example commands you can try:
 
+   * `list` : Lists all contacts.
 
-DOOK frees your mind of having to remember things you need to do. It's,
-  * text-based
-  * easy to learn
-  * FAST SUPER FAST to use
+   * `add todo Buy Carrots` : Adds a task of type *Todo* called **Buy Carrots** to the list.
 
-**All** you need to do is,
+   * `delete 3` : Deletes the 3rd task hown in the tasklist.
 
-  * download it from here.
-  * double-click it.
-  * add your tasks.
-  * let it manage your tasks for you 😉
+   * `bye` : Saves the current tasklist into the harddrive for next boot up of DOOK.
 
-And it is **FREE**!
+1. Refer to the [Features](#features) below for details of each command.
 
 ## Features:
 
@@ -38,15 +38,6 @@ Format: ``help``
 Adds a task to the list.
 
 Format: ``add <taskType> <task>``
- 
- * Task types supported :
-   * ``todo`` : The simplest type of task, only requires a name for the task!
-   * ``deadline`` : A task that has a due date. use ``/by`` to indicate the due date and time.
-   * ``event`` : Similar to a deadline, but also has a start date and time. Use ``/from`` to indicate the start date and time, and ``/to`` for the end date and time.
- * Date formating :
-   * 2 date formatting are accepted : ``dd/MM/yy`` and ``dd/MM/yyyy``
-   * Supports both 12 hour and 24 hour time : ``hh:mm a`` and ``HHmm``
-   * Date before time : ``dd/MM/yy hh:mm a`` or ``dd/MM/yyyy HHmm``
 
 Examples:
 
@@ -54,7 +45,13 @@ Examples:
 
 ``add event Jack Birthday Party /from 10/10/23 1700 /to 10/10/23 2200``
 
-``add deadline Return Book /by 11/11/2023 2:00 pm``
+   * Types of Tasks supported:
+      * **Todo** : The simplest type of task, all it needs is the name of the task.
+      * ``add todo Buy Carrots``
+      *  **Deadline** : A type of task with a due date, or a *deadline*. use ``/by`` to indicate the due date.
+      *  ``add deadline Return Book /by 10/10/2023 12:00 pm``
+      *  **Event** : A task with a start date and time, and an end date and time. Use ``/from`` to indicate the start date and time, and ``/to`` for the end date and time.
+      *  ``add event Jack's Birthday Party /from 11/11/2023 1700 /to 11/11/2023 2200``
 
 ### Listing all tasks : ``list``
 
@@ -72,7 +69,7 @@ Examples :
 
 ``find buy marked``
 
- * Note: ``find`` returns the tasks with their original indexing, ie the tasks that ``find`` returns may not have consecutive indexing.
+   * **Note** : With ``find``, the list of tasks shown with the relevant keywords are shown with their original indexing, i.e. the shown tasks after ``find``-ing may not be in consecutive indexing, but their original positions in the list.
 
 ### Marking tasks : ``mark ``
 
@@ -94,11 +91,10 @@ Format : ``unmark 2``
 
 Deletes the specified task from the list.
 
-Format: ``delete <index>``
+Format: ``delete``
 
 ### Saving the data : ``bye``
 
 Saves the current list for next bootup of DOOK.
 
 Format : ``bye``
-
