@@ -47,6 +47,9 @@ public class Parser {
         } else if (cmdArr[0].toLowerCase(Locale.ROOT).equals("mark")){
             cmd = MarkCommandParser.parse(cmdArr);
 
+        } else if (cmdArr[0].toLowerCase(Locale.ROOT).equals("unmark")){
+            cmd = MarkCommandParser.parse(cmdArr);
+
         } else if (cmdArr[0].toLowerCase(Locale.ROOT).equals("find")) {
             cmd = FindCommandParser.parse(cmdArr);
 

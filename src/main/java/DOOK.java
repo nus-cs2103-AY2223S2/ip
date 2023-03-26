@@ -75,8 +75,12 @@ public class DOOK {
             try {
                 Command c = Parser.parse(input);
                 return c.execute(tasks);
+            } catch (NoSuchTaskException e) {
+                return "Sorry, I can't find this task.";
+            } catch (TaskAlrMarkException e) {
+                return "Sorry but this task is already marked.";
             } catch (DukeException e) {
-                return "Sorry, I don't understand. Please enter your command again!";
+                return "Sorry, I don't understand.";
             }
         }
         else {

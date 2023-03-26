@@ -17,7 +17,12 @@ import java.util.Locale;
 public class AddCommandParser {
 
     private static String[] possibleFormats = {
-            "yyyy-MM-dd HHmm", "yyyy/MM/dd HHmm",
+            "dd/MM/yy HHmm", "dd/MM/yyyy HHmm",
+            "dd/MM/yy hh:mm a", "dd/MM/yyyy hh:mm a",
+    };
+
+    /*
+    *  "yyyy-MM-dd HHmm", "yyyy/MM/dd HHmm",
             "dd-MM-yyyy HHmm", "dd/MM/yyyy HHmm",
             "yyyy-MM-dd hh:mm a", "yyyy/MM/dd hh:mm a",
             "dd-MM-yyyy hh:mm a", "dd/MM/yyyy hh:mm a",
@@ -25,15 +30,16 @@ public class AddCommandParser {
             "HHmm dd-MM-yyyy", "HHmm dd/MM/yyyy",
             "hh:mm a yyyy-MM-dd", "hh:mm a yyyy/MM/dd",
             "hh:mm a dd-MM-yyyy", "hh:mm a dd/MM/yyyy",
-            "yy-MM-dd HHmm", "yy/MM/dd HHmm",
             "dd-MM-yy HHmm", "dd/MM/yy HHmm",
-            "yy-MM-dd hh:mm a", "yy/MM/dd hh:mm a",
+            "yy-MM-dd HHmm", "yy/MM/dd HHmm",
             "dd-MM-yy hh:mm a", "dd/MM/yy hh:mm a",
-            "HHmm yy-MM-dd", "HHmm yy/MM/dd",
+            "yy-MM-dd hh:mm a", "yy/MM/dd hh:mm a",
             "HHmm dd-MM-yy", "HHmm dd/MM/yy",
-            "hh:mm a yy-MM-dd", "hh:mm a yy/MM/dd",
+            "HHmm yy-MM-dd", "HHmm yy/MM/dd",
             "hh:mm a dd-MM-yy", "hh:mm a dd/MM/yy",
-            "dd MMM yyyy hh:mm a"};
+            "hh:mm a yy-MM-dd", "hh:mm a yy/MM/dd",
+            "dd MMM yyyy hh:mm a"
+    * */
 
     public static Command parse(String[] userInput) {
         Task task;
@@ -108,27 +114,34 @@ public class AddCommandParser {
             }
             i++;
             for (int j = i; j < userInput.length; j++) {
-                 by += userInput[j] + " ";
+                by += userInput[j] + " ";
             }
-            try {
-                task = new Deadline(taskName, formatDateTime(by.substring(0, by.length() - 1)));
-            } catch (DateTimeParseException e) {
-                return new ErrorCommand("Sorry, I don't understand the date you've entered.\n");
+            LocalDateTime byDate = formatDateTime(by.substring(0, by.length() - 1));
+            if (byDate == null){
+                return new ErrorCommand("Sorry, I don't understand the date you entered.");
+            } else {
+                task = new Deadline(taskName, byDate);
             }
 
-        } else {
-            return new ErrorCommand("Sorry, what kind of task is this?\n");
-        }
+    } else {
+        return new ErrorCommand("Sorry, what kind of task is this?\n");
+    }
 
         return new AddCommand(task);
-    }
-    private static LocalDateTime formatDateTime(String dueDate) throws DateTimeParseException {
+}
+    private static LocalDateTime formatDateTime(String dueDate) throws DateTimeParseException{
         LocalDateTime dt = null;
         for (String format : possibleFormats) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-            dt = LocalDateTime.parse(dueDate, formatter);
-            break;
+            System.out.println(format);
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+                dt = LocalDateTime.parse(dueDate.toUpperCase(Locale.ROOT), formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                continue;
+            }
         }
         return dt;
     }
+
 }

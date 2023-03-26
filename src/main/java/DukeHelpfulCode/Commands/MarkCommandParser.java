@@ -13,10 +13,14 @@ public class MarkCommandParser {
                 isMark = false;
             }
             index = Integer.parseInt(userInput[1]);
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             return new ErrorCommand("Sorry, I don't understand.");
+        } catch (IndexOutOfBoundsException e) {
+            return new ErrorCommand("Sorry, that index does not exist.");
         }
-        // index = Integer.parseInt(userInput[1]);
+        if (index <= 0) {
+            return new ErrorCommand("Sorry, that index does not exist.");
+        }
 
         return new MarkCommand(isMark, index);
     }
