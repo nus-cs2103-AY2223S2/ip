@@ -15,3 +15,9 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+src/main/java/*.class
+<<<<<<< HEAD
+data/duke.txt
+=======
+src/main/java/test.java
+>>>>>>> branch-Level-8
