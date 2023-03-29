@@ -1,0 +1,16 @@
+list
+todo wash car
+list
+mark 1
+list
+unmark 1
+list
+todo Take out trash
+list
+mark 2
+deadline assignment /by Sunday 3pm
+list
+mark 3
+list
+event Celebration /from morning /to night
+list
