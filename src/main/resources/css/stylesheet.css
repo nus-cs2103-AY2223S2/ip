@@ -1,0 +1,6 @@
+#background {
+    -fx-background-image: url('../images/background_50.jpg');
+    -fx-background-position: center center;
+    -fx-background-size: cover;
+    -fx-background-repeat: stretch;
+}
