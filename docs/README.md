@@ -6,6 +6,7 @@ Pressing the up and down arrow keys will let you see previous commands you have 
 # Commands
 
 ## Summary
+
 | Command    | Syntax                                               | Description                                     |
 |------------|------------------------------------------------------|-------------------------------------------------|
 | `todo`     | `todo <task> [/priority priority]`                   | Create a ToDo.                                  |
