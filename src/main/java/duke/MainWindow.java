@@ -41,6 +41,9 @@ public class MainWindow extends AnchorPane {
         addDialog(Ui.startUp());
     }
 
+    //@@author seriouslia0 -reused
+    //Reused from https://github.com/ezeAng/ip/blob/master/src/main/java/MainWindow.java
+    // with minor modifications
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
