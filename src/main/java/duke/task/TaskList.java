@@ -4,10 +4,17 @@ import duke.storage.Storage;
 
 import java.util.ArrayList;
 
+/**
+ * Main class for TaskList
+ */
 public class TaskList {
     private ArrayList<Task> tasksList = new ArrayList<Task>();
     private Storage storage = new Storage();
 
+    /**
+     * Returns all tasks
+     * @return
+     */
     public String listTaskList() {
         int taskNumber = 1;
         StringBuilder stringBuilder = new StringBuilder();
@@ -20,6 +27,11 @@ public class TaskList {
         return stringBuilder.toString();
     }
 
+    /**
+     * Marks task matching input
+     * @param input
+     * @return
+     */
     public String markTask(String input) {
         int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
         String returnString = tasksList.get(taskNumber).markAsDone();
@@ -28,6 +40,11 @@ public class TaskList {
         return returnString;
     }
 
+    /**
+     * Unmarks task matching input
+     * @param input
+     * @return
+     */
     public String unmarkTask(String input) {
         int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
         String returnString = tasksList.get(taskNumber).markAsNotDone();
@@ -36,6 +53,11 @@ public class TaskList {
         return returnString;
     }
 
+    /**
+     * Adds todo matching input
+     * @param input
+     * @return
+     */
     public String addToDo(String input) {
         StringBuilder stringBuilder = new StringBuilder();
         try {
@@ -57,6 +79,11 @@ public class TaskList {
         return stringBuilder.toString();
     }
 
+    /**
+     * Adds deadline matching input
+     * @param input
+     * @return
+     */
     public String addDeadline(String input) {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -79,6 +106,11 @@ public class TaskList {
         return stringBuilder.toString();
     }
 
+    /**
+     * Adds event matching input
+     * @param input
+     * @return
+     */
     public String addEvent(String input) {
         String inputWithoutCommand = input.substring(6);
 
@@ -102,6 +134,11 @@ public class TaskList {
         return stringBuilder.toString();
     }
 
+    /**
+     * Deletes task matching input
+     * @param input
+     * @return
+     */
     public String deleteTask(String input) {
         int indexToBeRemoved = Integer.parseInt(input.split(" ")[1]);
 
@@ -117,6 +154,11 @@ public class TaskList {
         return stringBuilder.toString();
     }
 
+    /**
+     * Returns String for events matching input
+     * @param input
+     * @return
+     */
     public String findEvent(String input) {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -136,6 +178,10 @@ public class TaskList {
         return stringBuilder.toString();
     }
 
+    /**
+     * Returns help message
+     * @return
+     */
     public String sendHelp() {
         StringBuilder stringBuilder = new StringBuilder();
 

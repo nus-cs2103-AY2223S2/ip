@@ -4,7 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test for Event class
+ */
 public class EventTest {
+    /**
+     * This checks whether the event string is valid
+     */
     @Test
     public void checkEventString(){
         Event event = new Event("event project meeting",

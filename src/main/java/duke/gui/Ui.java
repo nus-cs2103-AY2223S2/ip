@@ -1,6 +1,12 @@
 package duke.gui;
 
+/**
+ * Public Class for UI
+ */
 public class Ui {
+    /**
+     * Displays Welcome Message
+     */
     public void welcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

@@ -21,6 +21,9 @@ import javafx.scene.image.ImageView;
 
 import java.awt.*;
 
+/**
+ * Main Class which runs the whole chatbot.
+ */
 public class Duke extends Application {
     private static Storage storage = new Storage();
     private static TaskList tasks = new TaskList();
@@ -37,6 +40,12 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
+    /**
+     * @param stage the primary stage for this application, onto which
+     * the application scene can be set.
+     * Applications may create other stages, if needed, but they will not be
+     * primary stages.
+     */
     @Override
     public void start(Stage stage) {
         // Step 1. Setting up required components
@@ -132,8 +141,9 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response from user
+     * @param input
+     * @return
      */
     public String getResponse(String input) {
         return parser.getInput(input);

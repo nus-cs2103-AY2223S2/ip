@@ -3,9 +3,17 @@ package duke.parser;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+/**
+ * Main Class for Parser
+ */
 public class Parser {
     private TaskList tasksList = new TaskList();
 
+    /**
+     * Logic to extract string input, so as to execute commands
+     * @param input
+     * @return
+     */
     public String getInput(String input) {
         try {
             String command = input.split(" ")[0];

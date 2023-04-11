@@ -9,7 +9,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Main class for Storage
+ */
 public class Storage {
+    /**
+     * Saves duke so that you can view duke next time when you open the app
+     * @param tasksList
+     */
     public void saveTodoList(ArrayList<Task> tasksList) {
         int taskNumber = 1;
         StringBuilder stringBuilder = new StringBuilder();
