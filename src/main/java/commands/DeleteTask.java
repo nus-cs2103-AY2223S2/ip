@@ -1,22 +1,28 @@
 package commands;
+import storage.Storage;
+import tasklist.TaskList;
 import tasks.Task;
+import ui.Ui;
+
 import java.util.ArrayList;
 
 public class DeleteTask implements Command {
     private int taskIndex;
-    private ArrayList<Task> taskList;
 
-    public DeleteTask(int taskIndex, ArrayList<Task> taskList) {
+    public DeleteTask(int taskIndex) {
         this.taskIndex = taskIndex;
-        this.taskList = taskList;
     }
 
-    public String execute() {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            Task removed = taskList.remove(taskIndex - 1);
+            Task removed = tasks.remove(taskIndex - 1);
         } catch (Exception e) {
-            e.printStackTrace();
+            ui.showErrorMessage(e);
         }
-        return "Removed ";
+        ui.showDelete();
+    }
+
+    public boolean isExit() {
+        return false;
     }
 }

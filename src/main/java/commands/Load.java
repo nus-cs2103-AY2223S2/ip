@@ -1,22 +1,21 @@
 package commands;
-import tasks.Task;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Load implements Command{
-    private ArrayList<Task> tasks;
-
-    public Load(ArrayList<Task> tasks)  {
-        this.tasks = tasks;
+    private String filePath;
+    public Load(String filePath)  {
+        this.filePath = filePath;
     }
 
-    public String execute() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("data/save.txt"))) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String task;
             int count = 0;
             while ((task = reader.readLine()) != null) {
@@ -26,17 +25,17 @@ public class Load implements Command{
                 switch (taskArgs[0]) {
                     case "E": {
                         Command addTask = new ImportTask("event", taskArgs[1], taskArgs[2], tasks);
-                        addTask.execute();
+                        addTask.execute(tasks, ui, storage);
                         break;
                     }
                     case "D": {
                         Command addTask = new ImportTask("deadline", taskArgs[1], taskArgs[2], tasks);
-                        addTask.execute();
+                        addTask.execute(tasks, ui, storage);
                         break;
                     }
                     case "T": {
                         Command addTask = new ImportTask("todo", taskArgs[1], taskArgs[2], tasks);
-                        addTask.execute();
+                        addTask.execute(tasks, ui, storage);
                         break;
                     }
                     default:
@@ -45,10 +44,14 @@ public class Load implements Command{
                 count++;
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            ui.showErrorMessage(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            ui.showErrorMessage(e);
         }
-        return "Completed.";
+        ui.showLoadComplete();
+    }
+
+    public boolean isExit() {
+        return false;
     }
 }

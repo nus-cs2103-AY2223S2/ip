@@ -3,20 +3,21 @@ import exceptions.DukeDeadlineBadInput;
 import exceptions.DukeEventBadInput;
 import exceptions.DukeException;
 import exceptions.DukeTodoNoDescription;
+import storage.Storage;
+import tasklist.TaskList;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
+import ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class AddTask implements Command{
     private Task task;
-    private ArrayList<Task> taskList;
 
-    public AddTask(String taskType, String args, ArrayList<Task> taskList) throws DukeException {
+    public AddTask(String taskType, String args) throws DukeException {
         switch (taskType) {
             case "todo": {
                 if (args == "") {
@@ -50,11 +51,15 @@ public class AddTask implements Command{
                 break;
             }
         }
-        this.taskList = taskList;
     }
 
-    public String execute(){
-        this.taskList.add(task);
-        return "added: " + this.task.getDescription();
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.showLine();
+        tasks.add(task);
+        ui.showAddTaskSuccess(task.getDescription());
+    }
+
+    public boolean isExit() {
+        return false;
     }
 }

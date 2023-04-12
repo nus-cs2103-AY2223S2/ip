@@ -1,40 +1,39 @@
 package commands;
+import storage.Storage;
+import tasklist.TaskList;
 import tasks.Task;
+import ui.Ui;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Save implements Command {
-    private File target;
-    private ArrayList<Task> tasks;
-
-    public Save(ArrayList<Task> tasks) {
-//        this.target = target;
-        this.tasks = tasks;
-    }
-
-    public String execute() {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             File dest = new File("data");
             dest.mkdir();
             File saveFile = new File(dest, "save.txt");
             if (saveFile.createNewFile()) {
-                System.out.println("Save file created: " + saveFile.getName());
+                ui.showSaveFileCreated(saveFile.getName());
             } else {
-                System.out.println("Save file already exists, overwriting...");
+                ui.showOverwrite();
                 saveFile.delete();
                 saveFile.createNewFile();
             }
             FileWriter fileWriter = new FileWriter(saveFile);
-            for (Task task: tasks) {
+            for (Task task: tasks.getTaskList()) {
                 fileWriter.write(task.save());
             }
             fileWriter.close();
-            System.out.println("Saved Successfully.");
+            ui.showSaveComplete();
         } catch (IOException e) {
-            e.printStackTrace();
+            ui.showErrorMessage(e);
         }
-        return "Completed.";
+    }
+
+    public boolean isExit() {
+        return false;
     }
 }

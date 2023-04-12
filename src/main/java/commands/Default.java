@@ -1,16 +1,12 @@
 package commands;
+
 import storage.Storage;
 import tasklist.TaskList;
-import tasks.Task;
 import ui.Ui;
 
-import java.util.ArrayList;
-
-public class ListTasks implements Command{
+public class Default implements Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
-        ui.showTasks(tasks);
-        ui.showLine();
+        ui.showUnknownCommand();
     }
 
     public boolean isExit() {

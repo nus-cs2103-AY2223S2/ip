@@ -4,23 +4,26 @@ import exceptions.DukeDeadlineBadInput;
 import exceptions.DukeEventBadInput;
 import exceptions.DukeException;
 import exceptions.DukeTodoNoDescription;
+import storage.Storage;
+import tasklist.TaskList;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
+import ui.Ui;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 
+/**
+ * Imports one task per command
+ */
 public class ImportTask implements Command{
 
     private Task task;
-    private ArrayList<Task> taskList;
     private String isDone;
 
     // assumes save file has not been tampered with
-    public ImportTask(String taskType, String isDone, String args, ArrayList<Task> taskList) throws DukeException {
+    public ImportTask(String taskType, String isDone, String args, TaskList tasks) throws DukeException {
         switch (taskType) {
             case "todo": {
                 if (args == "") {
@@ -51,14 +54,16 @@ public class ImportTask implements Command{
             }
         }
         this.isDone = isDone;
-        this.taskList = taskList;
     }
 
-    public String execute(){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (this.isDone.equals("true")) {
             this.task.importMark();
         }
-        this.taskList.add(task);
-        return "added: " + this.task.getDescription();
+        tasks.add(task);
+    }
+
+    public boolean isExit() {
+        return false;
     }
 }
