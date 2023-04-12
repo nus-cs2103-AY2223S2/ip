@@ -5,6 +5,7 @@ public class Task {
     protected boolean isDone;
     private static final String PREFIX = "G";
 
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;

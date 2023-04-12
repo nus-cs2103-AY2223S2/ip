@@ -9,6 +9,7 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -31,7 +32,7 @@ public class ImportTask implements Command{
             case "deadline": {
                 try {
                     String[] argumentsSplit = args.split(",", 2);
-                    this.task = new Deadline(argumentsSplit[0], argumentsSplit[1]);
+                    this.task = new Deadline(argumentsSplit[0], LocalDate.parse(argumentsSplit[1]));
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeDeadlineBadInput();
                 }
@@ -42,7 +43,7 @@ public class ImportTask implements Command{
                     String[] argumentsSplit = args.split(",", 2);
                     String desc = argumentsSplit[0];
                     String[] fromAndTo = argumentsSplit[1].split(",", 2);
-                    this.task = new Event(desc, fromAndTo[0], fromAndTo[1]);
+                    this.task = new Event(desc, LocalDate.parse(fromAndTo[0]), LocalDate.parse(fromAndTo[1]));
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeEventBadInput();
                 }

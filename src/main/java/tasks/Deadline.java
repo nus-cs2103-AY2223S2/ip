@@ -1,10 +1,14 @@
 package tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Deadline extends Task{
-    protected String deadline;
+    protected LocalDate deadline;
     private static final String PREFIX = "D";
 
-    public Deadline(String desc, String deadline){
+    public Deadline(String desc, LocalDate deadline){
 //        String[] args = rawargs.split(" ", 2);
         super(desc);
         this.deadline = deadline;
@@ -29,7 +33,7 @@ public class Deadline extends Task{
     public String toString(){
         return super.toString()
                 + " (by: "
-                + this.deadline
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ")";
     }
 }

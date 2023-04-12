@@ -7,6 +7,9 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class AddTask implements Command{
@@ -25,8 +28,10 @@ public class AddTask implements Command{
             case "deadline": {
                 try {
                     String[] argumentsSplit = args.split(" /by ", 2);
-                    this.task = new Deadline(argumentsSplit[0], argumentsSplit[1]);
+                    this.task = new Deadline(argumentsSplit[0], LocalDate.parse(argumentsSplit[1]));
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeDeadlineBadInput();
+                } catch (DateTimeParseException e) {
                     throw new DukeDeadlineBadInput();
                 }
                 break;
@@ -36,8 +41,10 @@ public class AddTask implements Command{
                     String[] argumentsSplit = args.split(" /from ", 2);
                     String desc = argumentsSplit[0];
                     String[] fromAndTo = argumentsSplit[1].split(" /to ", 2);
-                    this.task = new Event(desc, fromAndTo[0], fromAndTo[1]);
+                    this.task = new Event(desc, LocalDate.parse(fromAndTo[0]), LocalDate.parse(fromAndTo[1]));
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeEventBadInput();
+                } catch (DateTimeParseException e) {
                     throw new DukeEventBadInput();
                 }
                 break;

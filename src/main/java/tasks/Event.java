@@ -1,11 +1,13 @@
 package tasks;
 
+import java.time.LocalDate;
+
 public class Event extends Task {
-    protected String from;
-    protected String to;
+    protected LocalDate from;
+    protected LocalDate to;
     private static final String PREFIX = "E";
 
-    public Event(String desc, String from, String to) {
+    public Event(String desc, LocalDate from, LocalDate to) {
         super(desc);
         this.from = from;
         this.to = to;
