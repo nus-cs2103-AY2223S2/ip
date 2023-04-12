@@ -34,6 +34,7 @@ public class Duke {
 
     public void run() {
         ui.showWelcome();
+        ui.showLine();
         boolean isExit = false;
         while (!isExit) {
             try {

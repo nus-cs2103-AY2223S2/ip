@@ -14,7 +14,7 @@ public class Save implements Command {
         try {
             File dest = new File("data");
             dest.mkdir();
-            File saveFile = new File(dest, "save.txt");
+            File saveFile = new File(dest, "tasks.txt");
             if (saveFile.createNewFile()) {
                 ui.showSaveFileCreated(saveFile.getName());
             } else {

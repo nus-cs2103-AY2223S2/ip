@@ -54,7 +54,6 @@ public class AddTask implements Command{
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
         tasks.add(task);
         ui.showAddTaskSuccess(task.getDescription());
     }

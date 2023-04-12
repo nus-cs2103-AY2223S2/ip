@@ -11,9 +11,7 @@ public class Echo implements Command {
         this.input = input;
     }
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
         ui.echo(input);
-        ui.showLine();
     }
 
     public boolean isExit() {

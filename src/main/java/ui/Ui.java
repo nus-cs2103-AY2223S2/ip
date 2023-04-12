@@ -2,6 +2,7 @@ package ui;
 
 import tasklist.TaskList;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Ui {
@@ -46,6 +47,15 @@ public class Ui {
 
     public void showExit() {
         System.out.println("Bye.");
+    }
+
+    public void debugHere() {
+        System.out.println("Debug Line");
+    }
+
+    public void debugFiles() {
+        File file = new File(".");
+        for(String fileNames : file.list()) System.out.println(fileNames);
     }
 
     public void showAddTaskSuccess(String desc) {

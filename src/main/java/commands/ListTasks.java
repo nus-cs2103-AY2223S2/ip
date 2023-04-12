@@ -8,9 +8,7 @@ import java.util.ArrayList;
 
 public class ListTasks implements Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
         ui.showTasks(tasks);
-        ui.showLine();
     }
 
     public boolean isExit() {

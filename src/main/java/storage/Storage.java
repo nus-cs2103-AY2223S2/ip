@@ -8,7 +8,7 @@ import tasklist.TaskList;
  * Storage module which keeps a
  */
 public class Storage {
-    private String filePath = "data/save.txt";
+    private String filePath = "data/tasks.txt";
 
     public Command load() {
         Command c = new Load(filePath);
