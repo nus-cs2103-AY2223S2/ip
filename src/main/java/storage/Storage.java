@@ -1,4 +1,4 @@
-package duke;
+package storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import tasklist.TaskList;
-import tasks.Task;
+import model.TaskList;
+import model.tasks.Task;
 
 /**
  * Class that manages the CRUD of the tasks
@@ -58,11 +58,17 @@ public class Storage {
      * @throws IOException
      */
     public void save(TaskList list) throws IOException {
-        FileWriter fw = new FileWriter(file);
-        for (Task t : list.getList()) {
-            fw.write(t.savedAs() + System.lineSeparator());
+        try {
+            FileWriter fw = new FileWriter(file);
+            for (int i = 0; i < list.size(); i++) {
+                Task task = list.get(i);
+                String taskString = task.savedAs();
+                fw.write(taskString + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        fw.close();
     }
 
 }

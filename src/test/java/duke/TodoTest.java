@@ -2,8 +2,8 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 
-import tasks.Task;
-import tasks.Todo;
+import model.tasks.Task;
+import model.tasks.Todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

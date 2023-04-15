@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+
 import exceptions.DukeException;
 
 import javafx.application.Application;
@@ -9,12 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import tasklist.TaskList;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.PeriodTask;
-import tasks.Task;
-import tasks.Todo;
+import logic.commands.Command;
+import logic.parser.Parser;
+import model.TaskList;
+import storage.Storage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -151,84 +150,11 @@ public class Duke extends Application {
 
     public String getResponse(String input) {
         try {
-            if (input.equals("bye")) {
-                storage.save(tasks);
-                return ui.showBye();
-            }
-            if (input.equals("list")) {
-                return tasks.printList();
-            }
-            String[] parsedCommand = Parser.parseCommand(input);
-
-            switch (parsedCommand[0]) {
-                case "mark":
-                    //Marks tasks as done
-                    int indexM = Integer.parseInt(parsedCommand[1]) - 1;
-                    assert indexM > 0 : "index should be positive";
-                    String resMark = tasks.setDone(indexM);
-                    storage.save(tasks);
-                    return resMark;
-
-                case "unmark":
-                    //Marks tasks as done
-                    int indexU = Integer.parseInt(parsedCommand[1]) - 1;
-                    assert indexU > 0 : "index should be positive";
-                    String resUnmark = tasks.setUndone(indexU);
-                    storage.save(tasks);
-                    return resUnmark;
-
-                case "delete":
-                    //Deletes tasks
-                    int indexD = Integer.valueOf(parsedCommand[1]) - 1;
-                    assert indexD > 0 : "index should be positive";
-                    String resDel = tasks.deleteTask(indexD);
-                    storage.save(tasks);
-                    return resDel;
-
-                case "find":
-                    String keyword = parsedCommand[1];
-                    return tasks.find(keyword);
-
-                case "todo":
-                    //Adds a new Todo to the list
-                    if (parsedCommand.length == 1) {
-                        throw new DukeException("The description of a todo cannot be empty");
-                    }
-                    Todo newT = new Todo(parsedCommand[1], false);
-                    String resT = tasks.addTask(newT);
-                    storage.save(tasks);
-                    return resT;
-
-                case "deadline":
-                    if (parsedCommand.length == 1) {
-                        throw new DukeException("The description of a deadline cannot be empty");
-                    }
-                    Task newD = Deadline.parseCommand(parsedCommand[1]);
-                    String resD = tasks.addTask(newD);
-                    storage.save(tasks);
-                    return resD;
-
-                case "event":
-                    if (parsedCommand.length == 1) {
-                        throw new DukeException("The description of an event cannot be empty");
-                    }
-                    Task newE = Event.parseCommand(parsedCommand[1]);
-                    String resE = tasks.addTask(newE);
-                    storage.save(tasks);
-                    return resE;
-
-                case "period":
-                    if (parsedCommand.length == 1) {
-                        throw new DukeException("The description of an event cannot be empty");
-                    }
-                    Task newP = PeriodTask.parseCommand(parsedCommand[1]);
-                    String resP = tasks.addTask(newP);
-                    storage.save(tasks);
-                    return resP;
-
-                default:
-                    throw new DukeException("Unknown Command");
-            }
+            Parser parser = new Parser();
+            Command cmd = parser.parse(input);
+            String response = cmd.execute(this.tasks);
+            storage.save(tasks);
+            return response;
         } catch (DukeException | IOException e) {
             return (e.getMessage());
         }
@@ -237,15 +163,7 @@ public class Duke extends Application {
     public Duke(String filePath, String filename) {
         ui = new Ui();
         storage = new Storage(filePath, filename);
-        try {
-            tasks = new TaskList(storage.load());
-            System.out.println(tasks);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            tasks = new TaskList();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            tasks = new TaskList();
-        }
-    }
+        tasks = new TaskList();
+        System.out.println(tasks);
+}
 }
