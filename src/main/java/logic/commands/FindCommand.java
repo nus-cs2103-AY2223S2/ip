@@ -3,7 +3,6 @@ package logic.commands;
 import exceptions.DukeException;
 import logic.response.Response;
 import model.TaskList;
-import model.tasks.Todo;
 
 public class FindCommand extends Command {
     private String[] command;
@@ -23,9 +22,12 @@ public class FindCommand extends Command {
     @Override
 	public String execute(TaskList taskList) {
 		String combinedString = String.join(" ", this.command);
-
-		Todo newTodo = new Todo(combinedString);
-		taskList.add(newTodo);
+        TaskList taskListNew = new TaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getTaskDesc().contains(combinedString)) {
+                taskListNew.add(taskList.get(i));
+            }
+        }
 		return Response.getFindTaskResponse(taskList);
 	}
 }
