@@ -1,4 +1,4 @@
-package duke;
+package exceptions;
 
 /**
  * DukeException exception which is an extension of Exception

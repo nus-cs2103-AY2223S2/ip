@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import exceptions.DukeException;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -8,6 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import tasklist.TaskList;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.PeriodTask;
+import tasks.Task;
+import tasks.Todo;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;

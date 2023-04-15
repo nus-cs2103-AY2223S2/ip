@@ -1,7 +1,9 @@
-package duke;
+package tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import exceptions.DukeException;
 
 /**
  * Represents a Deadline task

@@ -1,14 +1,16 @@
-package duke;
+package tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import exceptions.DukeException;
+
 /**
  * Representation of the Event task
  */
-public class PeriodTask extends Task {
+public class Event extends Task {
 
     protected LocalDateTime from;
     protected LocalDateTime to;
@@ -21,8 +23,8 @@ public class PeriodTask extends Task {
      * @param to end date
      * @param isDone whether the task is completed
      */
-    public PeriodTask(String description, LocalDateTime from, LocalDateTime to, Boolean isDone) {
-        super(description, 'P', isDone);
+    public Event(String description, LocalDateTime from, LocalDateTime to, Boolean isDone) {
+        super(description, 'E', isDone);
         this.from = from;
         this.to = to;
         this.timeFormat = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm");
@@ -34,7 +36,7 @@ public class PeriodTask extends Task {
      */
     @Override
     public String toString() {
-        return "[P]" + super.toString() + " (from:" + from.format(timeFormat) + " to:" + to.format(timeFormat) + ")";
+        return "[E]" + super.toString() + " (from:" + from.format(timeFormat) + " to:" + to.format(timeFormat) + ")";
     }
 
     public static Task parseCommand(String str) throws DukeException {
@@ -48,20 +50,20 @@ public class PeriodTask extends Task {
             if (matcher.find()) {
                 endDateTime = matcher.group();
             } else {
-                System.out.println("End date and time not found:");
+                System.out.println("End date and time not found");
             }
         } else {
             System.out.println("Start date and time not found");
         }
         if (detailE.length == 1) {
-            throw new DukeException("When is the event? (dd-MM-yyyy)");
+            throw new DukeException("When is the event?");
         }
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime fromTime = LocalDateTime.parse(startDateTime, formatter1);
         LocalDateTime toTime = LocalDateTime.parse(endDateTime, formatter1);
         assert fromTime.isBefore(toTime) : "End date cannot be earlier than start date";
-        PeriodTask newP = new PeriodTask(detailE[0], fromTime, toTime, false);
-        return newP;
+        Event newE = new Event(detailE[0], fromTime, toTime, false);
+        return newE;
     }
 
     /**

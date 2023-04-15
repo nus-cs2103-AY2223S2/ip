@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import tasklist.TaskList;
+import tasks.Task;
+
 /**
  * Class that manages the CRUD of the tasks
  */
