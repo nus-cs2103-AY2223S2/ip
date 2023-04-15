@@ -1,15 +1,10 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-
-import exceptions.DukeException;
-import exceptions.DukeMarkOutOfBounds;
-import exceptions.DukeTodoNoDescription;
-import storage.Storage;
-import tasklist.TaskList;
-import tasks.*;
-import commands.*;
-import parser.CommandParser;
-import ui.Ui;
+import duke.commands.Command;
+import duke.commands.Save;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.parser.CommandParser;
+import duke.ui.Ui;
 
 public class Duke {
 
@@ -54,6 +49,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("data/duke.tasks.txt").run();
     }
 }
