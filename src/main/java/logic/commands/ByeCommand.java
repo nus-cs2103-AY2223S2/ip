@@ -1,6 +1,8 @@
 package logic.commands;
 
+import logic.response.Response;
 import model.TaskList;
+import logic.response.Response;
 
 public class ByeCommand extends Command {
   
@@ -10,7 +12,7 @@ public class ByeCommand extends Command {
 	
 	@Override
 	public String execute(TaskList taskList) {
-		return "Bye. Hope to see you again soon!";
+		return Response.getExitResponse();
 	}
 
 	@Override

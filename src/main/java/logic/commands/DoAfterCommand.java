@@ -6,6 +6,7 @@ import java.time.format.ResolverStyle;
 
 import exceptions.DukeException;
 import logic.parser.Parser;
+import logic.response.Response;
 import model.TaskList;
 import model.tasks.DoAfter;
 
@@ -39,7 +40,6 @@ public class DoAfterCommand extends Command {
 		LocalDateTime after = parseDoAfterDatetime(unparsedDatetime);
 		DoAfter newDoAfter = new DoAfter(description, after);
 		taskList.add(newDoAfter);
-		return "Got it. I've added this task:" + description + "\nNow you have " +
-		 taskList.size() + " tasks in the list.";
+		return Response.getAddTaskResponse(newDoAfter, taskList);
 	}
 }

@@ -1,9 +1,8 @@
 package logic.commands;
 
-import logic.commands.Command;
 import logic.parser.Parser;
+import logic.response.Response;
 import model.TaskList;
-import model.tasks.Task;
 import model.tasks.Deadline;
 
 import java.time.LocalDateTime;
@@ -43,7 +42,6 @@ public class DeadlineCommand extends Command{
         LocalDateTime by = parseDeadlineDatetime(unparsedDatetime);
         Deadline newDeadline = new Deadline(description, by);
         taskList.add(newDeadline);
-        return "Got it. I've added this task: " + newDeadline + "\nNow you have " +
-				taskList.size() + " tasks in the list.";
+        return Response.getAddTaskResponse(newDeadline, taskList);
 	}
 }

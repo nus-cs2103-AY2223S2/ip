@@ -2,6 +2,7 @@ package logic.commands;
 
 import exceptions.DukeException;
 import exceptions.IllegalIndexException;
+import logic.response.Response;
 import model.TaskList;
 
 public class MarkCommand extends Command {
@@ -31,6 +32,6 @@ public class MarkCommand extends Command {
 	public String execute(TaskList taskList) {
 		int index = Integer.parseInt(command[0]) - 1;
 		taskList.markAsDone(index);
-		return "Nice! I've marked this task as done: " + taskList.get(index);
+		return Response.getMarkTaskResponse(taskList.get(index));
 	}
 }

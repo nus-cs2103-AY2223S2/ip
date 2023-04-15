@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
 import logic.parser.Parser;
+import logic.response.Response;
 import model.TaskList;
 import model.tasks.Event;
 
@@ -44,7 +45,6 @@ public class EventCommand extends Command{
 
 		Event newEvent = new Event(description, from, to);
 		taskList.add(newEvent);
-		return "Got it. I've added this task: " + newEvent + "\nNow you have " +
-				taskList.size() + " tasks in the list.";
+		return Response.getAddTaskResponse(newEvent, taskList);
 	}
 }

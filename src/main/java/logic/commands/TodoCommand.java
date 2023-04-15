@@ -3,6 +3,7 @@ package logic.commands;
 import model.TaskList;
 import model.tasks.Todo;
 import exceptions.DukeException;
+import logic.response.Response;
 
 public class TodoCommand extends Command {
 	private String[] command;
@@ -25,7 +26,6 @@ public class TodoCommand extends Command {
 		
 		Todo newTodo = new Todo(combinedString);
 		taskList.add(newTodo);
-		return "Got it. I've added this task:" + combinedString + "\nNow you have " +
-		 taskList.size() + " tasks in the list.";
+		return Response.getAddTaskResponse(newTodo, taskList);
 	}
 }

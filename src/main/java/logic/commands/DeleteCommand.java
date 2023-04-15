@@ -1,6 +1,7 @@
 package logic.commands;
 
 import logic.parser.Parser;
+import logic.response.Response;
 import model.TaskList;
 import model.tasks.Task;
 
@@ -26,7 +27,6 @@ public class DeleteCommand extends Command{
 		String strIndex = Parser.splitArray(this.command, " ").get(0);
 		int index = Integer.parseInt(strIndex);
 		Task task = taskList.delete(index);
-		return "Noted. I've removed this task: " + task + "\nNow you have " +
-		 taskList.size() + " tasks in the list.";
+		return Response.getDeleteTaskResponse(task, taskList);
 	}
 }

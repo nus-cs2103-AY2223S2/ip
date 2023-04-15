@@ -1,0 +1,2 @@
+T|true|eat breakfast w nikki
+T|false|see the sunrise

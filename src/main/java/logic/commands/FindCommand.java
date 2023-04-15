@@ -1,6 +1,7 @@
 package logic.commands;
 
 import exceptions.DukeException;
+import logic.response.Response;
 import model.TaskList;
 import model.tasks.Todo;
 
@@ -25,7 +26,6 @@ public class FindCommand extends Command {
 
 		Todo newTodo = new Todo(combinedString);
 		taskList.add(newTodo);
-		return "Got it. I've added this task:" + combinedString + "\nNow you have " +
-		 taskList.size() + " tasks in the list.";
+		return Response.getFindTaskResponse(taskList);
 	}
 }
