@@ -4,12 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
-import exceptions.DukeException;
-
 public class Deadline extends Task {
     private final String icon = "[D]";
     protected LocalDateTime by;
-    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm");
+    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd uuuu, HHmm");
 
     public Deadline(String description, LocalDateTime by) {
         super(description);

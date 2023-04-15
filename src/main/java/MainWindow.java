@@ -38,6 +38,10 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         dukeApp = d;
+        String initializeMessage = dukeApp.initialize();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(initializeMessage), new ImageView(dukeImage))
+        );
     }
 
     @FXML

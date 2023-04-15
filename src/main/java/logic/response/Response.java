@@ -57,4 +57,21 @@ public class Response {
 	public static String getInvalidIndexResponse() {
 		return "Please enter a valid index.";
 	}
+
+	public static String returnChatError() {
+		return "I'm sorry, but I don't know what that means :-(";
+	}
+
+	public static String getWelcome() {
+		return "Hello! I'm Corky!\n" +
+			"What can I do for you?";
+	}
+
+	public static String returnChatCreateNewDirectory(String storageDirname) {
+		return "Creating new directory: " + storageDirname + "/n";
+	}
+
+	public static String returnChatCreateNewStorage(String storageName) {
+		return "Creating new storage: " + storageName + "/n";
+	}
 }

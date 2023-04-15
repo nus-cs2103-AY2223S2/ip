@@ -25,7 +25,7 @@ public class DeleteCommand extends Command{
 	@Override
 	public String execute(TaskList taskList) {
 		String strIndex = Parser.splitArray(this.command, " ").get(0);
-		int index = Integer.parseInt(strIndex);
+		int index = Integer.parseInt(strIndex) - 1;
 		Task task = taskList.delete(index);
 		return Response.getDeleteTaskResponse(task, taskList);
 	}

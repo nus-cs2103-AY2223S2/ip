@@ -2,7 +2,6 @@ package logic.commands;
 
 import logic.response.Response;
 import model.TaskList;
-import logic.response.Response;
 
 public class ByeCommand extends Command {
   

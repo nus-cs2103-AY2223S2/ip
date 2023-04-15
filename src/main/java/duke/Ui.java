@@ -3,6 +3,7 @@ package duke;
 /**
  * Represents the UI
  */
+@Deprecated
 public class Ui {
 
     public Ui() {

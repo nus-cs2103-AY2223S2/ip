@@ -3,38 +3,63 @@ package storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
+import logic.commands.DeadlineCommand;
+import logic.commands.DoAfterCommand;
+import logic.commands.EventCommand;
+import logic.response.Response;
 import model.TaskList;
+import model.tasks.Deadline;
+import model.tasks.DoAfter;
+import model.tasks.Event;
 import model.tasks.Task;
+import model.tasks.Todo;
 
 /**
  * Class that manages the CRUD of the tasks
  */
 public class Storage {
 
-    private File folder;
-    private File file;
+    private final String fileName;
+    private final String filePath;
+    private final String completeFilePath;
 
     /**
-     * Constructor for a new Storage class
-     * @param folderName location of the folder
-     * @param fileName name of the file doing read and write
+     * Constructor for Storage.
+     *
+     * @param storageName    Name of storage file. Should be a .txt file.
+     * @param storageDirName Name of directory storing the storage file.
      */
-    public Storage(String folderName, String fileName) {
-        folder = new File(folderName);
-        if (!folder.exists()) {
-            folder.mkdir();
+    public Storage(String filePath, String fileName) {
+		this.fileName = fileName;
+		this.filePath = filePath;
+        this.completeFilePath = String.format("%s%s%s", this.filePath, File.separator, this.fileName);
+    }
+
+
+    /**
+     * Attempts to create a directory and/or storage file if it does not exist.
+     *
+     * @throws IOException Thrown when an error creating the storage file occurs.
+     */
+    public String initializeStorage() throws IOException {
+        Path filePath = Paths.get(this.fileName);
+        Path dirPath = Paths.get(this.filePath);
+        String res = "";
+
+        if (!Files.exists(dirPath)) {
+            Files.createDirectory(dirPath);
+            res += Response.returnChatCreateNewDirectory(this.filePath);
         }
-        file = new File(folder, fileName);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (!Files.exists(filePath)) {
+            Files.createFile(filePath);
+            res += Response.returnChatCreateNewStorage(this.fileName);
         }
+        return res;
     }
 
     /**
@@ -42,14 +67,42 @@ public class Storage {
      * @return ArrayList containing string of tasks
      * @throws IOException
      */
-    public ArrayList<String> load() throws IOException {
-        Scanner s = new Scanner(file);
-        ArrayList<String> tasks = new ArrayList<>();
+    public void load(TaskList taskList) throws IOException {
+        File f = new File(this.completeFilePath);
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
-            String task = s.nextLine();
-            tasks.add(task);
+			String[] taskString = s.nextLine().split("\\|");
+			for (int i = 0; i < taskString.length; i++) {
+				System.out.println(taskString[i]);
+			}
+            switch (taskString[0]) {
+            case "T": {
+                taskList.add(new Todo(taskString[2], Boolean.parseBoolean(taskString[1])));
+                break; 
+            }
+            case "D": {
+                taskList.add(new Deadline(taskString[2],
+                	DeadlineCommand.parseDeadlineDatetime(taskString[3]),
+					Boolean.parseBoolean(taskString[1])));
+                break;
+            }
+            case "E": {
+                taskList.add(new Event(taskString[2],
+					EventCommand.parseEventDatetime(taskString[3]),
+					EventCommand.parseEventDatetime(taskString[4]),
+					Boolean.parseBoolean(taskString[1])));
+                break;
+            }
+            case "DA" : {
+                taskList.add(new DoAfter(taskString[2],
+                	DoAfterCommand.parseDoAfterDatetime(taskString[3]),
+					Boolean.parseBoolean(taskString[1])));
+                break;
+            }
+            default:
+                throw new IOException();
+            }
         }
-        return tasks;
     }
 
     /**
@@ -59,7 +112,7 @@ public class Storage {
      */
     public void save(TaskList list) throws IOException {
         try {
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(this.completeFilePath);
             for (int i = 0; i < list.size(); i++) {
                 Task task = list.get(i);
                 String taskString = task.savedAs();
