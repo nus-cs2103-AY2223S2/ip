@@ -8,21 +8,21 @@ import model.TaskList;
  */
 public class ByeCommand extends Command {
 
-	/**
-	 * Constructor for ByeCommand
-	 */
-	public ByeCommand() {
-		super();
-	}
-	
-	/**
-	 * Executes the Bye Command
-	 * @param taskList The TaskList to be modified
-	 * @return The response to the Bye Command
-	 */
-	@Override
-	public String execute(TaskList taskList) {
-		this.isExit = true;
-		return Response.getExitResponse();
-	}
+    /**
+     * Constructor for ByeCommand
+     */
+    public ByeCommand() {
+        super();
+    }
+
+    /**
+     * Executes the Bye Command
+     * @param taskList The TaskList to be modified
+     * @return The response to the Bye Command
+     */
+    @Override
+    public String execute(TaskList taskList) {
+        setExit();
+        return Response.getExitResponse();
+    }
 }

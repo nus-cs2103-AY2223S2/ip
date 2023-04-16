@@ -26,6 +26,13 @@ import logic.commands.UnmarkCommand;
  */
 public class Parser {
 
+    /**
+     * Parses the input given by the user
+     *
+     * @param input The input given by the user
+     * @return The Command to be executed
+     * @throws DukeException
+     */
     public static Command parse(String input) throws DukeException {
         String[] command = input.split(" ");
         String commandType = command[0];
@@ -34,37 +41,37 @@ public class Parser {
         // make commandType uppercase
         commandType = commandType.toUpperCase();
         switch (commandType) {
-            case "TODO":
-                TodoCommand.validate(args);
-                return new TodoCommand(args);
-            case "DEADLINE":
-                DeadlineCommand.validate(args);
-                return new DeadlineCommand(args);
-            case "EVENT":
-                EventCommand.validate(args);
-                return new EventCommand(args);
-            case "DOAFTER":
-                DoAfterCommand.validate(args);
-                return new DoAfterCommand(args);
-            case "MARK":
-                MarkCommand.validate(args);
-                return new MarkCommand(args);
-            case "UNMARK":
-                UnmarkCommand.validate(args);
-                return new UnmarkCommand(args);
-            case "DELETE":
-                return new DeleteCommand(args);
-            case "FIND":
-                FindCommand.validate(args);
-                return new FindCommand(args);
-            case "HELP":
-                return new HelpCommand();
-            case "LIST":
-                return new ListCommand();
-            case "BYE":
-                return new ByeCommand();
-            default:
-                return new InvalidCommand();
+        case "TODO":
+            TodoCommand.validate(args);
+            return new TodoCommand(args);
+        case "DEADLINE":
+            DeadlineCommand.validate(args);
+            return new DeadlineCommand(args);
+        case "EVENT":
+            EventCommand.validate(args);
+            return new EventCommand(args);
+        case "DOAFTER":
+            DoAfterCommand.validate(args);
+            return new DoAfterCommand(args);
+        case "MARK":
+            MarkCommand.validate(args);
+            return new MarkCommand(args);
+        case "UNMARK":
+            UnmarkCommand.validate(args);
+            return new UnmarkCommand(args);
+        case "DELETE":
+            return new DeleteCommand(args);
+        case "FIND":
+            FindCommand.validate(args);
+            return new FindCommand(args);
+        case "HELP":
+            return new HelpCommand();
+        case "LIST":
+            return new ListCommand();
+        case "BYE":
+            return new ByeCommand();
+        default:
+            return new InvalidCommand();
         }
     }
 

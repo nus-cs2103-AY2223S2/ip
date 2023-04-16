@@ -7,7 +7,7 @@ import model.TaskList;
  */
 public abstract class Command {
 
-    public boolean isExit = false;
+    private boolean isExit = false;
 
     public abstract String execute(TaskList taskList);
 
@@ -16,6 +16,13 @@ public abstract class Command {
      * @return
      */
     public boolean isExit() {
-        return this.isExit();
+        return this.isExit;
+    }
+
+    /**
+     * Sets the isExit flag to true.
+     */
+    public void setExit() {
+        this.isExit = true;
     }
 }

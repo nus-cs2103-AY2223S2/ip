@@ -34,8 +34,8 @@ public class FindCommand extends Command {
      * @return The response to the Find Command
      */
     @Override
-	public String execute(TaskList taskList) {
-		String combinedString = String.join(" ", this.command);
+    public String execute(TaskList taskList) {
+        String combinedString = String.join(" ", this.command);
         TaskList resTaskList = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
             String taskDesc = taskList.get(i).getTaskDesc();
@@ -43,6 +43,6 @@ public class FindCommand extends Command {
                 resTaskList.add(taskList.get(i));
             }
         }
-		return Response.getFindTaskResponse(resTaskList);
-	}
+        return Response.getFindTaskResponse(resTaskList);
+    }
 }
