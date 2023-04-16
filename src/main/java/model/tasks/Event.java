@@ -13,12 +13,25 @@ public class Event extends Task {
     protected LocalDateTime to;
     protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
 
+    /**
+     * Constructor for Event
+     * @param description The description of the Event
+     * @param from The start time of the Event
+     * @param to The end time of the Event
+     */
     public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Constructor for Event
+     * @param description The description of the Event
+     * @param from The start time of the Event
+     * @param to The end time of the Event
+     * @param status The status of the Event
+     */
     public Event(String description, LocalDateTime from, LocalDateTime to, Boolean status) {
         super(description);
         setIsComplete(status);
@@ -26,6 +39,10 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Returns the string representation of the Event to be saved
+     * @return String
+     */
     @Override
     public String savedAs() {
         String formattedTimeFrom = this.from.format(timeFormat.withResolverStyle(ResolverStyle.STRICT));
@@ -34,7 +51,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a string representation of this To-Do task
+     * Returns a string representation of this Event task
      * @return String
      */
     @Override

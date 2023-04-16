@@ -25,6 +25,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for DialogBox.
+     *
+     * @param dialog The dialog to be displayed.
+     * @param displayPicture The image to be displayed.
+     */
     public DialogBox(Label dialog, ImageView displayPicture) {
         this.dialog = dialog;
         this.displayPicture = displayPicture;
@@ -51,10 +57,24 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a dialog box with the user's input.
+     *
+     * @param text The user's input.
+     * @param img The user's image.
+     * @return A dialog box with the user's input.
+     */
     public static DialogBox getUserDialog(Label text, ImageView img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a dialog box with Duke's response.
+     *
+     * @param text Duke's response.
+     * @param img Duke's image.
+     * @return A dialog box with Duke's response.
+     */
     public static DialogBox getDukeDialog(Label text, ImageView img) {
         var db = new DialogBox(text, img);
         db.flip();

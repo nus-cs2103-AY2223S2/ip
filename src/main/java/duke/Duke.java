@@ -22,7 +22,16 @@ public class Duke {
     private TaskList taskList = new TaskList();
     private Storage storage;
 
+    /**
+     * Constructor for Duke
+     */
+    public Duke() {
+    }
 
+    /**
+     * Initializes the Duke Application
+     * @return
+     */
     public String initialize() {
         String response = "";
         this.storage = new Storage(FILEPATH, FILENAME);
@@ -37,6 +46,11 @@ public class Duke {
         return response;
     }
 
+    /**
+     * Returns the response to the input
+     * @param input
+     * @return
+     */
     public String getResponse(String input) {
         try {
             Command cmd = Parser.parse(input);
@@ -51,6 +65,5 @@ public class Duke {
         }
     }
 
-    public Duke() {
-    }
+
 }

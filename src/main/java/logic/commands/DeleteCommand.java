@@ -7,13 +7,25 @@ import model.tasks.Task;
 
 import exceptions.DukeException;
 
+/**
+ * Class representing the Delete Command
+ */
 public class DeleteCommand extends Command{
 	private String[] command;
 
+	/**
+	 * Constructor for DeleteCommand
+	 * @param command The command to be executed
+	 */
 	public DeleteCommand(String[] command) {
 		this.command = command;
 	}
 
+	/**
+	 * Validates the Delete Command
+	 * @param command The command to be validated
+	 * @throws DukeException
+	 */
 	public static void validate(String[] command) throws DukeException {
 		assert command.length > 0 : "Command should not be empty";
 
@@ -22,6 +34,11 @@ public class DeleteCommand extends Command{
 		}
 	}
 
+	/**
+	 * Executes the Delete Command
+	 * @param taskList The TaskList to be modified
+	 * @return The response to the Delete Command
+	 */
 	@Override
 	public String execute(TaskList taskList) {
 		String strIndex = Parser.splitArray(this.command, " ").get(0);

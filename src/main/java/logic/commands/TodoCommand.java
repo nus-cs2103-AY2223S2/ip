@@ -5,13 +5,25 @@ import model.tasks.Todo;
 import exceptions.DukeException;
 import logic.response.Response;
 
+/**
+ * Class representing the Todo Command
+ */
 public class TodoCommand extends Command {
 	private String[] command;
 
+	/**
+	 * Constructor for TodoCommand
+	 * @param command The command to be executed
+	 */
 	public TodoCommand(String[] command) {
 		this.command = command;
 	}
 
+	/**
+	 * Validates the Todo Command
+	 * @param command The command to be validated
+	 * @throws DukeException
+	 */
 	public static void validate(String[] command) throws DukeException {
 		assert command.length > 0 : "Command should not be empty";
 
@@ -20,6 +32,11 @@ public class TodoCommand extends Command {
 		}
 	}
 
+	/**
+	 * Executes the Todo Command
+	 * @param taskList The TaskList to be modified
+	 * @return The response to the Todo Command
+	 */
 	@Override
 	public String execute(TaskList taskList) {
 		String combinedString = String.join(" ", this.command);

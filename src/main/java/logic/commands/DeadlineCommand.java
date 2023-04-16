@@ -10,15 +10,27 @@ import java.time.format.DateTimeFormatter;
 
 import exceptions.DukeException;
 
+/**
+ * Class representing the Deadline Command
+ */
 public class DeadlineCommand extends Command{
 	static final String DEADLINE_DATETIME_FORMAT = "dd-MM-yyyy HHmm";
     static final String DEADLINE_STORAGE_FORMAT = "MMM dd yyyy, HHmm";
 	private String[] command;
 
+	/**
+	 * Constructor for DeadlineCommand
+	 * @param command The command to be executed
+	 */
 	public DeadlineCommand(String[] command) {
 		this.command = command;
 	}
 
+	/**
+	 * Validates the Deadline Command
+	 * @param command The command to be validated
+	 * @throws DukeException
+	 */
 	public static void validate(String[] command) throws DukeException {
 		assert command.length > 0 : "Command should not be empty";
 
@@ -33,15 +45,29 @@ public class DeadlineCommand extends Command{
         }
 	}
 
+	/**
+	 * Parses the Deadline Command
+	 * @param unparsedDatetime The unparsed datetime
+	 * @return The parsed datetime
+	 */
 	public static LocalDateTime parseDeadlineDatetime(String unparsedDatetime) {
 		return LocalDateTime.parse(unparsedDatetime, DateTimeFormatter.ofPattern(DEADLINE_DATETIME_FORMAT));
 	}
 
+	/**
+	 * Parses the Deadline Command
+	 * @param storageDatetime The unparsed datetime
+	 * @return The parsed datetime
+	 */
 	public static LocalDateTime parseDeadlineStorage(String storageDatetime) {
 		return LocalDateTime.parse(storageDatetime, DateTimeFormatter.ofPattern(DEADLINE_STORAGE_FORMAT));
 	}
 
-
+	/**
+	 * Executes the Deadline Command
+	 * @param taskList The TaskList to be modified
+	 * @return The response to the Deadline Command
+	 */
 	@Override
 	public String execute(TaskList taskList) {
 		String description = Parser.splitArray(this.command, "/by").get(0);

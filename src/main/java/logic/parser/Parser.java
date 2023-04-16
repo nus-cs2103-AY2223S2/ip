@@ -25,7 +25,6 @@ import logic.commands.UnmarkCommand;
 /**
  * Class that parses the inputs given by the user
  */
-
 public class Parser {
     
 	public static Command parse(String input) throws DukeException {
@@ -70,6 +69,12 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Splits the array into two parts
+	 * @param array The array to be split
+	 * @param delimiter The delimiter to split the array
+	 * @return The split array
+	 */
 	public static List<String> splitArray(String[] array, String delimiter) {
 		StringBuilder sb = new StringBuilder();
 		List<String> res = new ArrayList<String>();
@@ -87,7 +92,12 @@ public class Parser {
 		return res;
 	}
 	
-
+	/**
+	 * Checks if the string is a valid datetime
+	 * @param str The string to be checked
+	 * @param format The format of the datetime
+	 * @return True if the string is a valid datetime, false otherwise
+	 */
 	public static boolean isValidDatetime(String str, String format) {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern(format);

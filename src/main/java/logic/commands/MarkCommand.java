@@ -5,13 +5,25 @@ import exceptions.IllegalIndexException;
 import logic.response.Response;
 import model.TaskList;
 
+/**
+ * Class representing the Mark Command
+ */
 public class MarkCommand extends Command {
 	private String[] command;
 
+	/**
+	 * Constructor for MarkCommand
+	 * @param command
+	 */
 	public MarkCommand(String[] command) {
 		this.command = command;
 	}
 
+	/**
+	 * Validates the Mark Command
+	 * @param command The command to be validated
+	 * @throws DukeException
+	 */
 	public static void validate(String[] command) throws DukeException {
 		assert command.length > 0 : "Command should not be empty";
 		
@@ -28,6 +40,11 @@ public class MarkCommand extends Command {
 		}
 	}
 
+	/**
+	 * Executes the Mark Command
+	 * @param taskList The TaskList to be modified
+	 * @return The response to the Mark Command
+	 */
 	@Override
 	public String execute(TaskList taskList) {
 		int index = Integer.parseInt(command[0]) - 1;

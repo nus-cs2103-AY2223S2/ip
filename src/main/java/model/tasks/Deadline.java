@@ -4,22 +4,40 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
+/**
+ * Class representing a Deadline task
+ */
 public class Deadline extends Task {
     private final String icon = "[D]";
     protected LocalDateTime by;
     protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
 
+    /**
+     * Constructor for Deadline
+     * @param description The description of the Deadline
+     * @param by The deadline of the Deadline
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Constructor for Deadline
+     * @param description The description of the Deadline
+     * @param by The deadline of the Deadline
+     * @param status The status of the Deadline
+     */
     public Deadline(String description, LocalDateTime by, Boolean status) {
         super(description);
         setIsComplete(status);
         this.by = by;
     }
 
+    /**
+     * Returns the string representation of the Deadline to be saved
+     * @return String
+     */
     @Override
     public String savedAs() {
         String formattedTime = this.by.format(timeFormat.withResolverStyle(ResolverStyle.STRICT));
@@ -27,7 +45,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string representation of this To-Do task
+     * Returns a string representation of this Deadline task
      * @return String
      */
     @Override
