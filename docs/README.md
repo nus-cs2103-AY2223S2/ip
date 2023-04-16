@@ -14,19 +14,19 @@ CorkyNotes supports 4 different types of tasks:
 - Todos
 - Deadlines
 - Events
-- Period Tasks
+- DoAfter
 
 1. Todos
 Todos are tasks with a description and completion status.
 
-2. Deadlines
+1. Deadlines
 Deadlines are tasks with a description, due date, and completion status.
 
-3. Events
+1. Events
 Events are tasks with a description, from date, to date, and completion status.
 
-4. Period Tasks
-Period Taks are tasks with a description, from date, to date, and completion status. Period Tasks are similar to that of Event tasks.
+1. DoAfter
+DoAfter are tasks with a description, after date, and completion status.
 
 
 ### View your tasks
@@ -62,17 +62,17 @@ Command format:
 
 `deadline [description] /by [due_date]`
 
-💡 Ensure `due_date` is `[dd-MM-yyyy] [HH:mm]` 
+💡 Ensure `due_date` is `[dd-MM-yyyy] [HHmm]` 
 
 Example of usage:
 
-`deadline do the dishes /by 24-11-2023 12:00`
+`deadline do the dishes /by 24-11-2023 1200`
 
 Expected outcome:
 
 ```
 Got it. I've added this task:
-[D][ ] do the dishes (by: Nov 24 2023, 12:00 PM)
+[D][ ] do the dishes (by: Nov 24 2023, 1200)
 Now you have 2 tasks in the list.
 ```
 
@@ -83,57 +83,75 @@ Command format:
 
 `event [description] /from [start_date] /to [end date]`
 
-💡 Ensure `start_date` and `end_date` are `[dd-MM-yyyy] [HH:mm]` 
+💡 Ensure `start_date` and `end_date` are `[dd-MM-yyyy] [HHmm]` 
 
 Example of usage:
 
-`event watch football /from 24-11-2023 12:00 /to 24-11-2023 14:00`
+`event watch football /from 24-11-2023 1200 /to 24-11-2023 1400`
 
 Expected outcome:
 
 ```
 Got it. I've added this task:
-[E][ ] watch football (from: Nov 24 2023, 12:00 PM to Nov 24 2023, 2:00 PM)
+[E][ ] watch football (from: Nov 24 2023, 1400 to Nov 24 2023, 1400)
 Now you have 3 tasks in the list.
 ```
 
-### Add event: `Period Task`
-Adds an period task to the list of tasks.
+### Add DoAfter: `doafter`
+Adds an doafter task to the list of tasks.
 
 Command format:
 
-`period [description] /from [start_date] /to [end_date]`
+`doafter [description] /after [after_date]`
 
-💡 Ensure `start_date` and `end_date` are `[dd-MM-yyyy] [HH:mm]` 
+💡 Ensure `after_date` is `[dd-MM-yyyy] [HHmm]` 
 
 Example of usage:
 
-`period watch football /from 24-11-2023 12:00 /to 24-11-2023 14:00`
+`doafter watch football /after 24-11-2023 1400`
 
 Expected outcome:
 
 ```
 Got it. I've added this task:
-[P][ ] watch football (from: Nov 24 2023, 12:00 PM to Nov 24 2023, 2:00 PM)
+[A][ ] watch football (after: Nov 24 2023, 1400)
 Now you have 4 tasks in the list.
 ```
 
-### Mark Task as Done: `done`
+### Mark Task as Done: `mark`
 Marks the task as completed.
 
-Format: `done [index]`
+Format: `mark [index]`
 
 💡 Ensure index is within `{1, 2, ... list_size}`
 
 Example of usage:
 
-`done 2` marks the second task in the list as done.
+`mark 2` marks the second task in the list as done.
 
 Expected outcome:
 
 ```
 Nice! I've marked this task as done:
-[D][X] do the dishes (by: Nov 24 2023, 12:00 PM)
+[D][X] do the dishes (by: Nov 24 2023, 1200)
+```
+
+### Undo Mark Task as Undone: `unmark`
+Unmarks the task as not completed.
+
+Format: `unmark [index]`
+
+💡 Ensure index is within `{1, 2, ... list_size}`
+
+Example of usage:
+
+`unmark 2` unmarks the second task in the list as not done.
+
+Expected outcome:
+
+```
+Noted. I've marked this task as undone:
+[D][ ] do the dishes (by: Nov 24 2023, 1200)
 ```
 
 ### Find Tasks: `find`
@@ -148,6 +166,28 @@ Example of usage:
 `find dishes` lists all tasks that contain dishes.
 
 
+### Help Command: `help`
+Lists all commands and their usage.
+
+Example of usage:
+
+`help`
+
+Expected outcome:
+
+```
+Here are the commands you can use:
+1. todo <task name> - adds a todo task
+2. deadline <task name> /by <deadline> - adds a deadline task
+3. event <task name> /at <start time> to <end time> - adds an event task  
+4. doafter <task name> /after <task number> - adds a doafter task
+5. list - lists all tasks
+6. done <task number> - marks a task as done
+7. delete <task number> - deletes a task
+8. help - shows this help message
+9. find <keyword> - finds tasks with the keyword
+10. bye - exits the program
+```
 
 ### List tasks: `list`
 Lists all tasks that have been added.
