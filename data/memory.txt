@@ -1,1 +1,3 @@
-T|false|eat with nikki
+T|true|eat with nikki
+D|false|see|Nov 24 2000, 1234
+D|true|what|Nov 24 2000, 0600

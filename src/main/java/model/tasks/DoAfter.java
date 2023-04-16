@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
 public class DoAfter extends Task {
-    private final String icon = "[DA]";
+    private final String icon = "[A]";
     protected LocalDateTime by;
-    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm");
+    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
 
     public DoAfter(String description, LocalDateTime by) {
         super(description);
@@ -23,7 +23,7 @@ public class DoAfter extends Task {
     @Override
     public String savedAs() {
         String formattedTime = this.by.format(timeFormat.withResolverStyle(ResolverStyle.STRICT));
-        return String.format("DA|%s|%s|%s", getIsComplete(), formattedTime, getTaskDesc());
+        return String.format("A|%s|%s|%s", getIsComplete(), getTaskDesc(), formattedTime);
     }
 
     /**

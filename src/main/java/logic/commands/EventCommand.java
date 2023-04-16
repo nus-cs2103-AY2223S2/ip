@@ -13,8 +13,8 @@ import exceptions.DukeException;
 
 
 public class EventCommand extends Command{
-	static final String EVENT_DATETIME_FORMAT = "dd-mm-yyyy HHmm";
-	static final String EVENT_STORAGE_FORMAT = "MMM dd uuuu, HHmm";
+	static final String EVENT_DATETIME_FORMAT = "dd-MM-yyyy HHmm";
+	static final String EVENT_STORAGE_FORMAT = "MMM d yyyy, HHmm";
 	private String[] command;
 
 	public EventCommand(String[] command) {
@@ -31,6 +31,10 @@ public class EventCommand extends Command{
 
 	public static LocalDateTime parseEventDatetime(String unparsedDatetime) {
 		return LocalDateTime.parse(unparsedDatetime, DateTimeFormatter.ofPattern(EVENT_DATETIME_FORMAT).withResolverStyle(ResolverStyle.STRICT));
+	}
+
+	public static LocalDateTime parseEventStorage(String storageDatetime) {
+		return LocalDateTime.parse(storageDatetime, DateTimeFormatter.ofPattern(EVENT_STORAGE_FORMAT).withResolverStyle(ResolverStyle.STRICT));
 	}
 
 	@Override

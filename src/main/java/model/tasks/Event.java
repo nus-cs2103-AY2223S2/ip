@@ -2,11 +2,7 @@ package model.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.time.format.ResolverStyle;
-
-import exceptions.DukeException;
 
 /**
  * Representation of the Event task

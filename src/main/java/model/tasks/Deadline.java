@@ -7,7 +7,7 @@ import java.time.format.ResolverStyle;
 public class Deadline extends Task {
     private final String icon = "[D]";
     protected LocalDateTime by;
-    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd uuuu, HHmm");
+    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
 
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -23,7 +23,7 @@ public class Deadline extends Task {
     @Override
     public String savedAs() {
         String formattedTime = this.by.format(timeFormat.withResolverStyle(ResolverStyle.STRICT));
-        return String.format("T|%s|%s|%s", getIsComplete(), formattedTime, getTaskDesc());
+        return String.format("D|%s|%s|%s", getIsComplete(), getTaskDesc(), formattedTime);
     }
 
     /**

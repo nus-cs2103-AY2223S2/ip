@@ -1,5 +1,7 @@
 package logic.parser;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -81,6 +83,15 @@ public class Parser {
 		res.add(sb.toString().trim());
 		return res;
 	}
-
 	
+
+	public static boolean isValidDatetime(String str, String format) {
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(format);
+            dtf.parse(str);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
 }

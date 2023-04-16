@@ -72,9 +72,6 @@ public class Storage {
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
 			String[] taskString = s.nextLine().split("\\|");
-			for (int i = 0; i < taskString.length; i++) {
-				System.out.println(taskString[i]);
-			}
             switch (taskString[0]) {
             case "T": {
                 taskList.add(new Todo(taskString[2], Boolean.parseBoolean(taskString[1])));
@@ -82,14 +79,14 @@ public class Storage {
             }
             case "D": {
                 taskList.add(new Deadline(taskString[2],
-                	DeadlineCommand.parseDeadlineDatetime(taskString[3]),
+                	DeadlineCommand.parseDeadlineStorage(taskString[3]),
 					Boolean.parseBoolean(taskString[1])));
                 break;
             }
             case "E": {
                 taskList.add(new Event(taskString[2],
-					EventCommand.parseEventDatetime(taskString[3]),
-					EventCommand.parseEventDatetime(taskString[4]),
+					EventCommand.parseEventStorage(taskString[3]),
+					EventCommand.parseEventStorage(taskString[4]),
 					Boolean.parseBoolean(taskString[1])));
                 break;
             }

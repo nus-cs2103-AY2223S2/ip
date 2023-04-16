@@ -2,7 +2,6 @@ package logic.commands;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.ResolverStyle;
 
 import exceptions.DukeException;
 import logic.parser.Parser;
@@ -12,7 +11,7 @@ import model.tasks.DoAfter;
 
 public class DoAfterCommand extends Command {
 	static final String DO_AFTER_DATETIME_FORMAT = "dd-mm-yyyy HHmm";
-	static final String DO_AFTER_STORAGE_FORMAT = "MMM dd uuuu, HHmm";
+	static final String DO_AFTER_STORAGE_FORMAT = "MMM dd yyyy, HHmm";
 	private String[] command;
 
 	public DoAfterCommand(String[] command) {
@@ -28,7 +27,11 @@ public class DoAfterCommand extends Command {
 	}
 
 	public static LocalDateTime parseDoAfterDatetime(String unparsedDatetime) {
-		return LocalDateTime.parse(unparsedDatetime, DateTimeFormatter.ofPattern(DO_AFTER_DATETIME_FORMAT).withResolverStyle(ResolverStyle.STRICT));
+		return LocalDateTime.parse(unparsedDatetime, DateTimeFormatter.ofPattern(DO_AFTER_DATETIME_FORMAT));
+	}
+
+	public static LocalDateTime parseDoAfterStorage(String storageDatetime) {
+		return LocalDateTime.parse(storageDatetime, DateTimeFormatter.ofPattern(DO_AFTER_STORAGE_FORMAT));
 	}
 
 	@Override
