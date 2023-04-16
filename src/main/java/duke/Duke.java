@@ -3,7 +3,7 @@ package duke;
 import java.io.IOException;
 
 import exceptions.DukeException;
-
+import logic.commands.ByeCommand;
 import logic.commands.Command;
 import logic.parser.Parser;
 import logic.response.Response;

@@ -14,6 +14,7 @@ import logic.commands.DeleteCommand;
 import logic.commands.DoAfterCommand;
 import logic.commands.EventCommand;
 import logic.commands.FindCommand;
+import logic.commands.HelpCommand;
 import logic.commands.InvalidCommand;
 import logic.commands.ListCommand;
 import logic.commands.MarkCommand;
@@ -27,7 +28,7 @@ import logic.commands.UnmarkCommand;
 
 public class Parser {
     
-	public static Command parse(String input) throws DukeException{
+	public static Command parse(String input) throws DukeException {
 		String[] command = input.split(" ");
 		String commandType = command[0];
 		String[] args = Arrays.copyOfRange(command, 1, command.length);
@@ -58,6 +59,8 @@ public class Parser {
 			case "FIND":	
 				FindCommand.validate(args);
 				return new FindCommand(args);
+			case "HELP":
+                return new HelpCommand();
 			case "LIST":
 				return new ListCommand();
 			case "BYE":

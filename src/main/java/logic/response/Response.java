@@ -74,4 +74,17 @@ public class Response {
 	public static String returnChatCreateNewStorage(String storageName) {
 		return "Creating new storage: " + storageName + "/n";
 	}
+
+	public static String getHelpResponse() {
+		return "Here are the commands you can use:\n" +
+			"1. todo <task name> - adds a todo task\n" +
+			"2. deadline <task name> /by <deadline> - adds a deadline task\n" +
+			"3. event <task name> /at <start time> to <end time> - adds an event task\n" +
+			"4. doafter <task name> /after <task number> - adds a doafter task\n" +
+			"5. list - lists all tasks\n" +
+			"6. done <task number> - marks a task as done\n" +
+			"7. delete <task number> - deletes a task\n" +
+			"8. find <keyword> - finds tasks with the keyword\n" +
+			"9. bye - exits the program";
+	}
 }

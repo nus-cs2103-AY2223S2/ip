@@ -4,7 +4,7 @@ import model.TaskList;
 
 public abstract class Command {
 
-    public boolean isExit;
+    public boolean isExit = false;
 
     public abstract String execute(TaskList taskList);
 
