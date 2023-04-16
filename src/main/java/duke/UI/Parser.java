@@ -4,7 +4,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.CheckDuplicateCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.TodoCommand;
+import duke.command.UnmarkCommand;
 
 /**
  * Parses the input command from user to Duke.
@@ -34,6 +44,9 @@ public class Parser {
         String[] index = taskToAdd.split(" ", 2);
         index[1] = index[1].trim();
         if (index.length <= 1 || index[1].isEmpty()) {
+            throw new DukeException("The description of a todo task cannot be empty.");
+        }
+        if (index[1].isEmpty()) {
             throw new DukeException("The description of a todo task cannot be empty.");
         }
         return new TodoCommand(index);

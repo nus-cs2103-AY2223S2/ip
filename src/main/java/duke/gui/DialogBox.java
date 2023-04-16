@@ -1,4 +1,4 @@
-package duke.GUI;
+package duke.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -32,8 +32,8 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException error) {
+            error.printStackTrace();
         }
 
         dialog.setText(text);
@@ -43,9 +43,6 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
@@ -74,6 +71,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setStyle("-fx-background-color: #FEE8B8;");
         return db;
     }
 }

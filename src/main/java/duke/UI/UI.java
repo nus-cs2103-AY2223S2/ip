@@ -1,6 +1,5 @@
 package duke.UI;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -36,7 +35,7 @@ public class UI {
      * @return The response of Duke to the user.
      */
     public String show() {
-        return response.toString();
+        return response.toString() + "\n";
     }
 
     /**
@@ -63,7 +62,7 @@ public class UI {
 
         for (int i = 0; i < linesLength; i++) {
             String indentedResponse = INDENTATION + lines[i];
-            response.append(indentedResponse + "\n");
+            response = response.append(indentedResponse + "\n");
             System.out.println(indentedResponse);
         }
     }
@@ -96,8 +95,8 @@ public class UI {
      * @param task The task that is marked as done.
      */
     public void showMark(Task task) {
-        printResponse("Nice work! This task has been marked as done:");
-        printResponse("  " + task);
+        String mark = "Nice work! This task has been marked as done:";
+        printResponse(mark, "  " + task);
     }
 
     /**
@@ -105,8 +104,8 @@ public class UI {
      * @param task The task that is unmarked as done.
      */
     public void showUnmark(Task task) {
-        printResponse("Noted. This task has been marked as not done yet:");
-        printResponse("  " + task);
+        String unmark = "Noted. This task has been marked as not done yet:";
+        printResponse(unmark, "  " + task);
     }
 
     /**
@@ -122,7 +121,8 @@ public class UI {
      * Prints an empty line.
      */
     public void printEmptyLine() {
-        System.out.println("\n");
+        response.append("\n");
+        System.out.println();
     }
 
     /**

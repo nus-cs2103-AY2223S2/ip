@@ -1,10 +1,10 @@
-todo CS2103T homework
+todo borrow book
 list
-deadline CS2103T quiz /by Monday
+deadline return book /by Sunday
 mark 2
 list
 unmark 2
 list
-event project meeting /from Sun 8pm /to 10pm
+event project meeting /from Mon 2pm /to 4pm
 list
 bye
