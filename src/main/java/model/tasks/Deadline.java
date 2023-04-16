@@ -8,9 +8,9 @@ import java.time.format.ResolverStyle;
  * Class representing a Deadline task
  */
 public class Deadline extends Task {
-    private final String icon = "[D]";
-    protected LocalDateTime by;
     protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
+    protected LocalDateTime by;
+    private final String icon = "[D]";
 
     /**
      * Constructor for Deadline

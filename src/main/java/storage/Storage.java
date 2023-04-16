@@ -35,11 +35,10 @@ public class Storage {
      * @param storageDirName Name of directory storing the storage file.
      */
     public Storage(String filePath, String fileName) {
-		this.fileName = fileName;
-		this.filePath = filePath;
+        this.fileName = fileName;
+        this.filePath = filePath;
         this.completeFilePath = String.format("%s%s%s", this.filePath, File.separator, this.fileName);
     }
-
 
     /**
      * Attempts to create a directory and/or storage file if it does not exist.
@@ -51,45 +50,49 @@ public class Storage {
         String res = "";
 
         if (!Files.exists(completeFilePath)) {
-            Files.createDirectories(completeFilePath);
-            res += Response.createFileMessage(this.fileName);
-
+            File f = new File(this.filePath);
+            if (!f.exists()) {
+                f.mkdir();
+            }
+            f = new File(this.completeFilePath);
+            f.createNewFile();
+            res = Response.createFileMessage(this.fileName);
         }
         return res;
     }
 
     /**
      * Reads data from the database and inserts it into an ArarayList to be returned
-     * @return ArrayList containing string of tasks
+     *
      * @throws IOException
      */
     public void load(TaskList taskList) throws IOException {
         File f = new File(this.completeFilePath);
         try (Scanner s = new Scanner(f)) {
             while (s.hasNext()) {
-            	String[] taskString = s.nextLine().split("\\|");
+                String[] taskString = s.nextLine().split("\\|");
                 switch (taskString[0]) {
                 case "T": {
                     taskList.add(new Todo(taskString[2], Boolean.parseBoolean(taskString[1])));
-                    break; 
+                    break;
                 }
                 case "D": {
                     taskList.add(new Deadline(taskString[2],
-                    	DeadlineCommand.parseDeadlineStorage(taskString[3]),
-            			Boolean.parseBoolean(taskString[1])));
+                            DeadlineCommand.parseDeadlineStorage(taskString[3]),
+                            Boolean.parseBoolean(taskString[1])));
                     break;
                 }
                 case "E": {
                     taskList.add(new Event(taskString[2],
-            			EventCommand.parseEventStorage(taskString[3]),
-            			EventCommand.parseEventStorage(taskString[4]),
-            			Boolean.parseBoolean(taskString[1])));
+                            EventCommand.parseEventStorage(taskString[3]),
+                            EventCommand.parseEventStorage(taskString[4]),
+                            Boolean.parseBoolean(taskString[1])));
                     break;
                 }
-                case "A" : {
+                case "A": {
                     taskList.add(new DoAfter(taskString[2],
-                    	DoAfterCommand.parseDoAfterStorage(taskString[3]),
-            			Boolean.parseBoolean(taskString[1])));
+                            DoAfterCommand.parseDoAfterStorage(taskString[3]),
+                            Boolean.parseBoolean(taskString[1])));
                     break;
                 }
                 default:
@@ -103,6 +106,7 @@ public class Storage {
 
     /**
      * Saves data in the ArrayList to the databasse
+     *
      * @param list
      * @throws IOException
      */
@@ -119,5 +123,4 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
 }

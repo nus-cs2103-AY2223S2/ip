@@ -8,10 +8,10 @@ import java.time.format.ResolverStyle;
  * Representation of the Event task
  */
 public class Event extends Task {
-    private final String icon = "[E]";
+    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
     protected LocalDateTime from;
     protected LocalDateTime to;
-    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
+    private final String icon = "[E]";
 
     /**
      * Constructor for Event

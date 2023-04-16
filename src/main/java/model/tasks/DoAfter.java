@@ -8,9 +8,9 @@ import java.time.format.ResolverStyle;
  * Class representing a DoAfter task
  */
 public class DoAfter extends Task {
-    private final String icon = "[A]";
-    protected LocalDateTime by;
     protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
+    protected LocalDateTime by;
+    private final String icon = "[A]";
 
     /**
      * Constructor for DoAfter
