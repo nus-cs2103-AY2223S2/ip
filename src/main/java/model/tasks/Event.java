@@ -11,7 +11,7 @@ public class Event extends Task {
     private final String icon = "[E]";
     protected LocalDateTime from;
     protected LocalDateTime to;
-    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm");
+    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
 
     public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
@@ -30,7 +30,7 @@ public class Event extends Task {
     public String savedAs() {
         String formattedTimeFrom = this.from.format(timeFormat.withResolverStyle(ResolverStyle.STRICT));
         String formattedTimeTo = this.to.format(timeFormat.withResolverStyle(ResolverStyle.STRICT));
-        return String.format("T|%s|%s|%s|%s", getIsComplete(), formattedTimeFrom, formattedTimeTo, getTaskDesc());
+        return String.format("E|%s|%s|%s|%s", getIsComplete(), getTaskDesc(), formattedTimeFrom, formattedTimeTo);
     }
 
     /**

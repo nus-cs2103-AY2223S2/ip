@@ -90,9 +90,9 @@ public class Storage {
 					Boolean.parseBoolean(taskString[1])));
                 break;
             }
-            case "DA" : {
+            case "A" : {
                 taskList.add(new DoAfter(taskString[2],
-                	DoAfterCommand.parseDoAfterDatetime(taskString[3]),
+                	DoAfterCommand.parseDoAfterStorage(taskString[3]),
 					Boolean.parseBoolean(taskString[1])));
                 break;
             }

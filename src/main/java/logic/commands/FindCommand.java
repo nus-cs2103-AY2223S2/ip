@@ -14,20 +14,18 @@ public class FindCommand extends Command {
     public static void validate(String[] command) throws DukeException {
         assert command.length > 0 : "Command should not be empty";
 
-        if (command.length == 0) {
-            throw new DukeException("The description of a todo cannot be empty.");
-        }
     }
 
     @Override
 	public String execute(TaskList taskList) {
 		String combinedString = String.join(" ", this.command);
-        TaskList taskListNew = new TaskList();
+        TaskList resTaskList = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).getTaskDesc().contains(combinedString)) {
-                taskListNew.add(taskList.get(i));
+            String taskDesc = taskList.get(i).getTaskDesc();
+            if (taskDesc.contains(combinedString)) {
+                resTaskList.add(taskList.get(i));
             }
         }
-		return Response.getFindTaskResponse(taskList);
+		return Response.getFindTaskResponse(resTaskList);
 	}
 }

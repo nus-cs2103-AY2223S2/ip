@@ -1,2 +1,4 @@
-T|true|eat with nikki
-D|true|what|Nov 24 2000, 0600
+T|false|hi
+A|true|hello|Dec 12 2000, 1400
+D|false|hello|Dec 12 2000, 1400
+E|false|whassup|Dec 12 2000, 1400|Dec 12 2000, 1600
