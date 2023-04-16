@@ -69,36 +69,39 @@ public class Storage {
      */
     public void load(TaskList taskList) throws IOException {
         File f = new File(this.completeFilePath);
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-			String[] taskString = s.nextLine().split("\\|");
-            switch (taskString[0]) {
-            case "T": {
-                taskList.add(new Todo(taskString[2], Boolean.parseBoolean(taskString[1])));
-                break; 
+        try (Scanner s = new Scanner(f)) {
+            while (s.hasNext()) {
+            	String[] taskString = s.nextLine().split("\\|");
+                switch (taskString[0]) {
+                case "T": {
+                    taskList.add(new Todo(taskString[2], Boolean.parseBoolean(taskString[1])));
+                    break; 
+                }
+                case "D": {
+                    taskList.add(new Deadline(taskString[2],
+                    	DeadlineCommand.parseDeadlineStorage(taskString[3]),
+            			Boolean.parseBoolean(taskString[1])));
+                    break;
+                }
+                case "E": {
+                    taskList.add(new Event(taskString[2],
+            			EventCommand.parseEventStorage(taskString[3]),
+            			EventCommand.parseEventStorage(taskString[4]),
+            			Boolean.parseBoolean(taskString[1])));
+                    break;
+                }
+                case "A" : {
+                    taskList.add(new DoAfter(taskString[2],
+                    	DoAfterCommand.parseDoAfterStorage(taskString[3]),
+            			Boolean.parseBoolean(taskString[1])));
+                    break;
+                }
+                default:
+                    throw new IOException();
+                }
             }
-            case "D": {
-                taskList.add(new Deadline(taskString[2],
-                	DeadlineCommand.parseDeadlineStorage(taskString[3]),
-					Boolean.parseBoolean(taskString[1])));
-                break;
-            }
-            case "E": {
-                taskList.add(new Event(taskString[2],
-					EventCommand.parseEventStorage(taskString[3]),
-					EventCommand.parseEventStorage(taskString[4]),
-					Boolean.parseBoolean(taskString[1])));
-                break;
-            }
-            case "A" : {
-                taskList.add(new DoAfter(taskString[2],
-                	DoAfterCommand.parseDoAfterStorage(taskString[3]),
-					Boolean.parseBoolean(taskString[1])));
-                break;
-            }
-            default:
-                throw new IOException();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
