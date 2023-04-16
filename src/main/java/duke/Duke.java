@@ -42,6 +42,9 @@ public class Duke {
             Command cmd = Parser.parse(input);
             String response = cmd.execute(taskList);
             this.storage.save(taskList);
+            if (cmd instanceof ByeCommand) {
+                System.exit(0);
+            }
             return response;
         } catch (DukeException | IOException e) {
             return Response.returnChatError();

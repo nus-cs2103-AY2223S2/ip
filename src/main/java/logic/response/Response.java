@@ -84,7 +84,8 @@ public class Response {
 			"5. list - lists all tasks\n" +
 			"6. done <task number> - marks a task as done\n" +
 			"7. delete <task number> - deletes a task\n" +
-			"8. find <keyword> - finds tasks with the keyword\n" +
-			"9. bye - exits the program";
+			"8. help - shows this help message\n" +
+			"9. find <keyword> - finds tasks with the keyword\n" +
+			"10. bye - exits the program";
 	}
 }
