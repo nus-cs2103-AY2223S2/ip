@@ -97,7 +97,7 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ```
 
-### Add DoAfter: `doafter`
+### Add DoAfter Task: `doafter`
 Adds an doafter task to the list of tasks.
 
 Command format:
