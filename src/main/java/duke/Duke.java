@@ -47,7 +47,7 @@ public class Duke {
             }
             return response;
         } catch (DukeException | IOException e) {
-            return Response.returnChatError();
+            return Response.returnChatError(e);
         }
     }
 

@@ -47,17 +47,13 @@ public class Storage {
      * @throws IOException Thrown when an error creating the storage file occurs.
      */
     public String initializeStorage() throws IOException {
-        Path filePath = Paths.get(this.fileName);
-        Path dirPath = Paths.get(this.filePath);
+        Path completeFilePath = Paths.get(this.completeFilePath);
         String res = "";
 
-        if (!Files.exists(dirPath)) {
-            Files.createDirectory(dirPath);
-            res += Response.returnChatCreateNewDirectory(this.filePath);
-        }
-        if (!Files.exists(filePath)) {
-            Files.createFile(filePath);
-            res += Response.returnChatCreateNewStorage(this.fileName);
+        if (!Files.exists(completeFilePath)) {
+            Files.createDirectories(completeFilePath);
+            res += Response.createFileMessage(this.fileName);
+
         }
         return res;
     }

@@ -58,8 +58,8 @@ public class Response {
 		return "Please enter a valid index.";
 	}
 
-	public static String returnChatError() {
-		return "I'm sorry, but I don't know what that means :-(";
+	public static String returnChatError(Exception e) {
+		return "Error: " + e.getMessage() + "/n";
 	}
 
 	public static String getWelcome() {
@@ -87,5 +87,9 @@ public class Response {
 			"8. help - shows this help message\n" +
 			"9. find <keyword> - finds tasks with the keyword\n" +
 			"10. bye - exits the program";
+	}
+
+	public static String createFileMessage(String fileName) {
+		return "Creating new file: " + fileName + System.lineSeparator();
 	}
 }
