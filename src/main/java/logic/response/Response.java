@@ -51,7 +51,7 @@ public class Response {
 	}
 
 	public static String getInvalidCommandResponse() {
-		return "I'm sorry, but I don't know what that means :-(";
+		return "I'm sorry, but the command you entered is invalid :-(";
 	}
 
 	public static String getInvalidIndexResponse() {

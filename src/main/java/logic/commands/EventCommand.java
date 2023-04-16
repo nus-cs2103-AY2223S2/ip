@@ -2,7 +2,6 @@ package logic.commands;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import logic.parser.Parser;
 import logic.response.Response;
@@ -25,16 +24,6 @@ public class EventCommand extends Command{
 	public static void validate(String[] command) throws DukeException {
 		assert command.length > 0 : "Command should not be empty";
 
-		if (command.length == 0) {
-			throw new DukeException("The description of a event cannot be empty.");
-		}
-
-		String dateString = Parser.splitArray(command, "/from").get(1);
-
-
-		if (!Parser.isValidDatetime(dateString, EVENT_DATETIME_FORMAT)) {
-			throw new DukeException(EVENT_DATETIME_FORMAT);
-		}
 	}
 
 	public static LocalDateTime parseEventDatetime(String unparsedDatetime) {
@@ -54,13 +43,17 @@ public class EventCommand extends Command{
 		
 		String description = Parser.splitArray(this.command, "/from").get(0);
 		
-		System.out.println(description);
+		String unparsedDatetime = Parser.splitArray(this.command, "/from").get(1);
+		System.out.println(unparsedDatetime);
 
 
-		String temp = "Sep 12 2019, 1800";
-		LocalDateTime from = parseEventDatetime(temp);
+		String fromTime = unparsedDatetime.split("/to", 2)[0].trim();
+		String toTime = unparsedDatetime.split("/to", 2)[1].trim();
 
-		Event newEvent = new Event(description, from, from);
+		LocalDateTime from = parseEventDatetime(fromTime);
+		LocalDateTime to = parseEventDatetime(toTime);
+
+		Event newEvent = new Event(description, from, to);
 		taskList.add(newEvent);
 		return Response.getAddTaskResponse(newEvent, taskList);
 	}
