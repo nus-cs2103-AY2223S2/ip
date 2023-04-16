@@ -62,11 +62,6 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) {
-
-        for (int i = 0; i < command.length; i++) {
-            System.out.println(command[i]);
-        }
-
         String description = Parser.splitArray(this.command, "/from").get(0);
 
         String unparsedDatetime = Parser.splitArray(this.command, "/from").get(1);
