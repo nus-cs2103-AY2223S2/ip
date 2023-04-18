@@ -94,6 +94,8 @@ public class Ui {
         System.out.println("Removed");
     }
 
+    public void showFindResults() { System.out.println("Here are the matching tasks in your list: \n");}
+
     public void showErrorMessage(Exception e) {
         System.out.println(e.getMessage());
     }

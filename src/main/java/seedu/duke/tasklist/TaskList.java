@@ -45,6 +45,25 @@ public class TaskList {
         return this.taskList;
     }
 
+    public TaskList search(String query) {
+        TaskList result = new TaskList();
+        for(Task task: taskList) {
+            if (task.getDescription().contains(query)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
+    public TaskList searchButCringe(String query) {
+        TaskList result = new TaskList();
+        this.taskList
+            .stream()
+            .filter(task -> task.getDescription().contains(query))
+            .forEach(result::add);
+        return result;
+    }
+
     /**
      * Return the task at the specified index of the taskList
      * @param i The index of the desired item in the taskList

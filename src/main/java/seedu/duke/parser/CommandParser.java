@@ -1,14 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.AddTask;
-import seedu.duke.commands.Command;
-import seedu.duke.commands.Default;
-import seedu.duke.commands.DeleteTask;
-import seedu.duke.commands.Echo;
-import seedu.duke.commands.Exit;
-import seedu.duke.commands.ListTasks;
-import seedu.duke.commands.Mark;
-import seedu.duke.commands.Save;
+import seedu.duke.commands.*;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.DukeMarkOutOfBounds;
 import seedu.duke.exceptions.DukeTodoNoDescription;
@@ -85,6 +77,10 @@ public class CommandParser {
             case "save": {
                 Command save = new Save();
                 return save;
+            }
+            case "find": {
+                Command find = new Find(arguments);
+                return find;
             }
             case "bye": {
                 Command exit = new Exit();
