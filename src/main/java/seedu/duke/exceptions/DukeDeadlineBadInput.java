@@ -1,6 +1,6 @@
 package seedu.duke.exceptions;
 
-public class DukeDeadlineBadInput extends DukeException{
+public class DukeDeadlineBadInput extends DukeException {
 
     public DukeDeadlineBadInput() {
         super("Incorrect format for deadline. Did you mark the deadline with \"/by\"?\n" +

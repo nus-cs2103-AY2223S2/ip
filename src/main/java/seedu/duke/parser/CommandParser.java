@@ -8,6 +8,12 @@ import seedu.duke.ui.Ui;
 
 public class CommandParser {
     private Ui ui;
+
+    /**
+     * Returns a command that represents the instructions of the input
+     * @param rawInput The user input to be interpreted
+     * @return A command that represents the user's desired changes to be made
+     */
     public Command parse(String rawInput) {
         String[] input = rawInput.trim().split(" ", 2);
         String command = input[0].toLowerCase();
