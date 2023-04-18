@@ -37,6 +37,15 @@ public class TaskList {
         return result;
     }
 
+    public TaskList searchButCringe(String query) {
+        TaskList result = new TaskList();
+        this.taskList
+            .stream()
+            .filter(task -> task.getDescription().contains(query))
+            .forEach(result::add);
+        return result;
+    }
+
     public Task get(int i) {
         return taskList.get(i);
     }

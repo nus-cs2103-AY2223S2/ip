@@ -13,7 +13,7 @@ public class Find implements Command {
 
     public void execute (TaskList tasks, Ui ui, Storage storage) {
         ui.showFindResults();
-        ui.showTasks(tasks.search(query));
+        ui.showTasks(tasks.searchButCringe(query));
     }
 
     public boolean isExit() {
