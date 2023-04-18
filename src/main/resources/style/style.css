@@ -1,0 +1,13 @@
+VBox {
+    -fx-background-image: url("/images/newWallpaper.png");
+    -fx-background-size: 100%;
+    -fx-background-position: bottom;
+    -fx-padding: 10;
+}
+
+.my-dialog {
+    -fx-background-radius: 30;
+    -fx-background-color: white;
+    -fx-opacity: 0.9;
+    -fx-padding: 10;
+}
