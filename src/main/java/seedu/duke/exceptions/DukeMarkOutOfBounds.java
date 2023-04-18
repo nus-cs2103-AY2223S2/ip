@@ -1,4 +1,4 @@
-package exceptions;
+package seedu.duke.exceptions;
 
 public class DukeMarkOutOfBounds extends DukeException{
 

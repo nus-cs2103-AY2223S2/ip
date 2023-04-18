@@ -1,26 +1,23 @@
-package tasks;
+package seedu.duke.tasks;
 
 public class Task {
     protected String description;
     protected boolean isDone;
     private static final String PREFIX = "G";
 
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     };
 
-    public String mark() {
+    public boolean mark() {
         isDone = !isDone;
-        String response;
-        if (isDone) {
-            response = "Alright, I've marked this task as done!\n"
-                    + this.toString();
-        } else {
-            response = "Aight, I marked the task as not done, but wtf did you do, un" + this.description + "?\n"
-                    + this.toString();
-        }
-        return response;
+        return isDone;
+    }
+
+    public void importMark() {
+        isDone = true;
     }
 
     public String getDescription() {
@@ -30,8 +27,8 @@ public class Task {
     public String save() {
         StringBuilder response = new StringBuilder("");
         response.append(PREFIX + ",");
-        response.append(description + ",");
-        response.append(isDone + "\n");
+        response.append(isDone + ",");
+        response.append(description + "\n");
         return response.toString();
     }
 

@@ -1,10 +1,13 @@
-package tasks;
+package seedu.duke.tasks;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
-    protected String deadline;
+    protected LocalDate deadline;
     private static final String PREFIX = "D";
 
-    public Deadline(String desc, String deadline){
+    public Deadline(String desc, LocalDate deadline){
 //        String[] args = rawargs.split(" ", 2);
         super(desc);
         this.deadline = deadline;
@@ -19,9 +22,9 @@ public class Deadline extends Task{
     public String save() {
         StringBuilder response = new StringBuilder("");
         response.append(getPrefix() + ",");
+        response.append(isDone + ",");
         response.append(description + ",");
-        response.append(deadline + ",");
-        response.append(isDone + "\n");
+        response.append(deadline + "\n");
         return response.toString();
     }
 
@@ -29,7 +32,7 @@ public class Deadline extends Task{
     public String toString(){
         return super.toString()
                 + " (by: "
-                + this.deadline
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ")";
     }
 }
