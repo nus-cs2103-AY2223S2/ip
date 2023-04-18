@@ -4,7 +4,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.Load;
 
 /**
- * Storage module which keeps a
+ * Storage module which keeps a persistent record of tasks
  */
 public class Storage {
     private String filePath = "data/duke.tasks.txt";

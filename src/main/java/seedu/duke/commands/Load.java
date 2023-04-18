@@ -14,6 +14,12 @@ public class Load implements Command{
         this.filePath = filePath;
     }
 
+    /**
+     * Executes the command with the specified TaskList, Ui, and, Storage
+     * @param tasks The TaskList object containing the tasks
+     * @param ui The Ui object handling input/output
+     * @param storage The Storage object handling persistent storage
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String task;
@@ -51,6 +57,10 @@ public class Load implements Command{
         ui.showLoadComplete();
     }
 
+    /**
+     * Returns whether the command is an Exit command
+     * @return False
+     */
     public boolean isExit() {
         return false;
     }
