@@ -27,6 +27,16 @@ public class TaskList {
         return this.taskList;
     }
 
+    public TaskList search(String query) {
+        TaskList result = new TaskList();
+        for(Task task: taskList) {
+            if (task.getDescription().contains(query)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
     public Task get(int i) {
         return taskList.get(i);
     }
