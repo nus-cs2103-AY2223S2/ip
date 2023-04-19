@@ -1,8 +1,6 @@
-![image](https://user-images.githubusercontent.com/84606153/233116944-69360a03-91fb-44ea-a446-12b600572b78.png)
-
+![image](https://user-images.githubusercontent.com/84606153/233120107-91182d8f-ed05-42e5-b912-e8faf9cf7e2f.png)
 
 # Duke
-
 This is a individual project made for NUS CS2103T AY22/23 Sem 2. Duke is a todolist manager with a chat ui.
 
 ## To use Duke
