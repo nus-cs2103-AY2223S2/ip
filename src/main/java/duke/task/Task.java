@@ -19,7 +19,9 @@ public abstract class Task {
 
     public String toString() { return "[" + getStatusIcon() + "] " + description; }
 
-    public void setDone() { isDone = true; }
+    public void setDone() {
+        this.isDone = true;
+    }
 
     public void setNotDone() { isDone = false; }
 }
