@@ -5,6 +5,7 @@ import duke.exception.DukeException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -272,18 +273,16 @@ public class TaskList {
     }
 
     public static void findTask(ArrayList<Task> tasks, String statement) {
-        TaskList result = new TaskList();
-        for (Task task : tasks) {
-            if (task.getDescription().contains(statement)) {
-                result.add(task);
-            }
-        }
-        if (result.getTasks().size() == 0) {
+        ArrayList<Task> result = (ArrayList<Task>) tasks.stream()
+                .filter(task -> task.getDescription().contains(statement))
+                .collect(Collectors.toList());
+
+        if (result.isEmpty()) {
             System.out.println("     Sorry, no matching tasks.");
         } else {
             System.out.println("     Here are the matching tasks in your list:");
-            for (int i = 0; i < result.getTasks().size(); i++) {
-                System.out.println("     " + (i + 1) + "." + result.getTasks().get(i));
+            for (int i = 0; i < result.size(); i++) {
+                System.out.println("     " + (i + 1) + "." + result.get(i));
             }
         }
     }
