@@ -7,27 +7,23 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import static duke.task.TaskList.tryAddEvent;
 
-import static duke.task.TaskList.tryAddDeadline;
-
-public class DeadlineCommand extends Command {
-    public DeadlineCommand(String keyword, String statement) {
+public class EventCommand extends Command{
+    public EventCommand(String keyword, String statement) {
         this.keyword = keyword;
         this.statement = statement;
     }
 
     /**
-     * Execute user's "deadline" command and change the storage file accordingly.
+     * Execute user's "event" command and change the storage file accordingly.
      * @param taskList The list containing tasks.
      * @param ui dealing with interactions with the user.
      * @param storage The storage file of tasks.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tasks = taskList.getTasks();
-        tryAddDeadline(tasks, statement);
+        tryAddEvent(tasks, statement);
         try {
             storage.write(tasks);
         } catch (IOException e) {

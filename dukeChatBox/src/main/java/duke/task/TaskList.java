@@ -126,8 +126,7 @@ public class TaskList {
      * @param statement the description and time of the deadline.
      */
     public static void addDeadline(ArrayList<Task> tasks, String statement) {
-        //String[] descriptionBy = statement.split("\\s+/by\\s+");
-        String[] descriptionBy = statement.split("\\s?/by\\s+");
+        String[] descriptionBy = statement.split("\\s+/by\\s+");
         String deadlineDescription = descriptionBy[0];
         String by = descriptionBy[1];
         Deadline newDeadline = new Deadline(deadlineDescription, by);
