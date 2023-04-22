@@ -34,8 +34,14 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
+
+        assert description != null : "Description cannot be null";
+        assert by != null : "By (deadline) cannot be null";
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.by = LocalDateTime.parse(by, formatter);
+
+        assert this.by != null : "Parsed LocalDateTime cannot be null";
     }
 
     public LocalDateTime getBy() {
