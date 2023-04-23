@@ -25,7 +25,7 @@ public class UnmarkCommand extends Command {
     public void runCommand(TaskList taskList, UI ui, Storage storage) {
         int taskNumber = Character.getNumericValue(index[1].charAt(0));
         taskList.unmark(taskNumber, storage);
-        ui.showUnmark(taskList.getTask(taskNumber));
+        ui.showUnmark(taskList.getTask(taskNumber - 1));
     }
 
     @Override

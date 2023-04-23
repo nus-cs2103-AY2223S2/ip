@@ -2,10 +2,10 @@ package duke.command;
 
 import java.util.ArrayList;
 
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.UI.UI;
-import duke.storage.Storage;
 
 /**
  * The find command.

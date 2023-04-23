@@ -21,8 +21,8 @@ import duke.task.Todo;
  * Saves and loads tasks in the hard disk.
  */
 public class Storage {
-    private Path filePath;
     private static final String endOfFilePath = "\\|";
+    private Path filePath;
 
     /**
      * Constructs a new storage file.
@@ -63,7 +63,7 @@ public class Storage {
     }
 
     /**
-     * Convers the file to a <code>TaskList</code> object.
+     * Converts the file to a <code>TaskList</code> object.
      * @return The TaskList converted from the file.
      * @throws IOException If the programme cannot read the file.
      */

@@ -12,7 +12,7 @@ import duke.task.TaskList;
  * depending on user input.
  */
 public class UI {
-    protected static final String OUTPUT_DATE_FORMAT = "MMM dd yyyy HHmm";
+    protected static final String OUTPUT_DATE_FORMAT = "MMM dd yyyy HH:mm";
     protected static final String INDENTATION = "    ";
     private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -96,7 +96,7 @@ public class UI {
      */
     public void showMark(Task task) {
         String mark = "Nice work! This task has been marked as done:";
-        printResponse(mark, "  " + task);
+        printResponse(mark, "  " + task.toString());
     }
 
     /**
@@ -105,7 +105,7 @@ public class UI {
      */
     public void showUnmark(Task task) {
         String unmark = "Noted. This task has been marked as not done yet:";
-        printResponse(unmark, "  " + task);
+        printResponse(unmark, "  " + task.toString());
     }
 
     /**
@@ -114,7 +114,7 @@ public class UI {
      */
     public void showError(Exception error) {
         printResponse(error.getMessage());
-        System.err.println(error);
+        System.err.println(INDENTATION + error);
     }
 
     /**

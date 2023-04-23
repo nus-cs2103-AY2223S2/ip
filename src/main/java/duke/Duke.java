@@ -1,13 +1,12 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import duke.command.Command;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.UI.UI;
 import duke.UI.Parser;
+import duke.UI.UI;
 
 /**
  * An administrative bot that handles a user's tasks.

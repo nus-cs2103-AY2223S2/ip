@@ -21,6 +21,7 @@ import duke.command.UnmarkCommand;
  */
 public class Parser {
     protected static final String INPUT_DATE_FORMAT = "yyyy-MM-dd HH:mm";
+    private static final String LIST = "list";
 
     private Command parseAddCommand(String addCommandType, String taskToAdd) {
         Command command;
@@ -42,10 +43,10 @@ public class Parser {
 
     private Command parseTodoCommand(String taskToAdd) {
         String[] index = taskToAdd.split(" ", 2);
-        index[1] = index[1].trim();
         if (index.length <= 1 || index[1].isEmpty()) {
             throw new DukeException("The description of a todo task cannot be empty.");
         }
+        index[1] = index[1].trim();
         if (index[1].isEmpty()) {
             throw new DukeException("The description of a todo task cannot be empty.");
         }

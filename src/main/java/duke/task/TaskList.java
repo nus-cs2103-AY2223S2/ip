@@ -49,8 +49,20 @@ public class TaskList {
      * Removes the task from the list.
      * @param taskNumber The index of the task to be removed.
      */
-    public void removeTask(int taskNumber) {
+    public void remove(int taskNumber) {
         tasks.remove(taskNumber);
+    }
+
+    /**
+     * Lists all the existing tasks in the list.
+     * @param ui The UI object that displays results to the user.
+     */
+    public void list(UI ui) {
+        ui.printResponse("Here are the tasks in your list:");
+        int numberOfTasks = tasks.size();
+        for (int i = 1; i <= numberOfTasks; i++) {
+            ui.printResponse(i + "." + tasks.get(i - 1));
+        }
     }
 
     /**
@@ -59,10 +71,9 @@ public class TaskList {
      * @param storage Storage in the disk
      */
     public void mark(int taskNumber, Storage storage) {
-        assert taskNumber >= 0 : "taskNumber is non-negative.";
+        assert taskNumber >= 1 : "taskNumber is positive.";
         Task nameOfTask = tasks.get(taskNumber - 1);
         nameOfTask.markAsDone();
-        System.out.println("Nice work! This task has been marked as done: \n" + nameOfTask);
 
         try {
             storage.save(this);
@@ -77,10 +88,9 @@ public class TaskList {
      * @param storage Storage in the disk.
      */
     public void unmark(int taskNumber, Storage storage) {
-        assert taskNumber >= 0 : "taskNumber is non-negative.";
+        assert taskNumber >= 1 : "taskNumber is positive.";
         Task nameOfTask = tasks.get(taskNumber - 1);
         nameOfTask.unmarkAsDone();
-        System.out.println("Noted. This task has been marked as not done yet: \n"  + nameOfTask);
         try {
             storage.save(this);
         } catch (IOException error) {
@@ -95,6 +105,11 @@ public class TaskList {
      */
     public void addTask(Task taskToAdd, Storage storage) {
         tasks.add(taskToAdd);
+        try {
+            storage.addToStorage(taskToAdd);
+        } catch (IOException error) {
+            System.err.println(error.getMessage());
+        }
     }
 
     /**
@@ -104,8 +119,13 @@ public class TaskList {
      * @return The task to be deleted.
      */
     public Task deleteTask(int taskNumber, Storage storage) {
-        assert taskNumber >= 0 : "taskNumber is non-negative";
+        assert taskNumber >= 1 : "taskNumber is positive";
         Task taskToBeDeleted = tasks.remove(taskNumber - 1);
+        try {
+            storage.save(this);
+        } catch (IOException error) {
+            System.err.println(error.getMessage());
+        }
         return taskToBeDeleted;
     }
 
@@ -116,21 +136,21 @@ public class TaskList {
      */
     public void findTask(String string, UI ui) {
         assert string != "" : "string must be non-empty.";
-        ArrayList<Task> searchResults = new ArrayList<>();
+        ArrayList<Task> findResults = new ArrayList<>();
         ArrayList<Integer> taskNumber = new ArrayList<>();
         int num = 1;
 
         for (Task task : tasks) {
             if (task.getNameOfTask().contains(string)) {
-                searchResults.add(task);
+                findResults.add(task);
                 taskNumber.add(num);
             }
             num++;
         }
         ui.printResponse("I have found these matching tasks in your list:");
 
-        for (int i = 0; i < searchResults.size(); i++) {
-            ui.printResponse(taskNumber.get(i) +". " + searchResults.get(i).toString());
+        for (int i = 0; i < findResults.size(); i++) {
+            ui.printResponse(taskNumber.get(i) +". " + findResults.get(i).toString());
         }
     }
 }
