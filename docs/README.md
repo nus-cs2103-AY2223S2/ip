@@ -42,10 +42,8 @@ Adds a task with deadline.
 Format: `deadline TASK_DESCRIPTION /by DATE_AND_TIME`
 
 Examples:
-- `deadline Submit CS2103T quiz /by 23:59` Adds the task **Submit CS2103T quiz** by **23:59**.
-- `deadline Hand in assignment /by 2023-06-09` Adds the task **Hand in assignment** by **2023-06-09**.
-
-> *Note: The DATE_AND_TIME can consist of any date and time components.*
+- `deadline Submit CS2103T quiz /by 2023-01-31 23:59` Adds the task **Submit CS2103T quiz** by **2023-01-31 23:59**.
+- `deadline Hand in assignment /by 2023-06-09 11:59` Adds the task **Hand in assignment** by **2023-06-09 11:59**.
 
 > *DATE_AND_TIME must be of this format: yyyy-MM-dd HH:mm.*
 
@@ -56,12 +54,12 @@ Adds an event task with start and end time.
 Format: `event TASK_DESCRIPTION /from START_DATE_AND_TIME /to END_DATE_AND_TIME`
 
 Examples:
-- `event Meeting /from 15:00 /to 17:00` Adds an event **Meeting** from **15:00** to **17:00**.
-- `event Hackathon /from 2023-09-06 00:00 /to 2023-09-09` Adds an event **Hackathon** from **2023-09-06** to **2023-09-09**.
+- `event Meeting /from 2023-01-23 15:00 /to 2023-01-23 17:00` Adds an event **Meeting** from **2023-01-23 15:00** to
+**2023-01-23 17:00**.
+- `event Hackathon /from 2023-09-06 00:00 /to 2023-09-09 23:59` Adds an event **Hackathon** from **2023-09-06 00:00** to
+**2023-09-09 23:59**.
 
 > *Note: The DATE_AND_TIME can consist of any date and time components.*
-
-> *DATE_AND_TIME must be of this format: yyyy-MM-dd HH:mm.*
 
 ### Marking a task as done `mark`
 
