@@ -1,6 +1,8 @@
 # 📖 Guide to Berry the Task Manager Bot
 
-<img src="Ui.png" alt="Berry User Interface" align="center" max-width="50%" max-height="50%"/>
+<div style="text-align: center">
+<img src="Ui.png" alt="Berry User Interface" align="middle" width="400px"/>
+</div>
 
 ---
 
