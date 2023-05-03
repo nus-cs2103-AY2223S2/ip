@@ -1,5 +1,14 @@
 # 📖 Guide to Berry the Task Manager Bot
 
+<img src="Ui.png" alt="Berry User Interface" align="center" max-width="50%" max-height="50%"/>
+
+---
+
+## 🫅🏻 A Greenfield Project
+
+Berry is a greenfield project enhancing from the [Duke](https://github.com/nus-cs2103-AY2223S2/ip) template, as part
+of a course I have taken - CS2103T at the National University of Singapore (NUS).
+
 ---
 
 ## 🍒 Features
