@@ -1,8 +1,3 @@
----
-layout: page
-title: User Guide
----
-
 # 🍒 Berry the Task Manager Bot 
 
 <div style="text-align: center">
