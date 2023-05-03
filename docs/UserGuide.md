@@ -1,26 +1,37 @@
-# 📖 Guide to Berry the Task Manager Bot
+---
+layout: page
+title: User Guide
+---
+
+# 🍒 Berry the Task Manager Bot 
 
 <div style="text-align: center">
 <img src="Ui.png" alt="Berry User Interface" align="middle" width="400px"/>
 </div>
 
----
-
-## 🫅🏻 A Greenfield Project
+### 🫅🏻 Bye-bye Duke. Hello to Berry!
 
 Berry is a greenfield project enhancing from the [Duke](https://github.com/nus-cs2103-AY2223S2/ip) template, as part
 of a course I have taken - CS2103T at the National University of Singapore (NUS).
 
 ---
 
-## 🍒 Features
+## Table of Contents
+- [📖 Features](#-features)
+- [✨ Coming Soon](#-coming-soon)
+- [️⬇️ How to Download](#-how-to-download)
+- [📕 Commands](#-commands)
+
+---
+
+## 📖 Features
 
 ### 1. Quick Task Management
 
-<p> Use Berry just like a Command Line Interface (CLI)! </p>
+<p> Use Berry just like a <a href="https://en.wikipedia.org/wiki/Command-line_interface">Command Line Interface (CLI)</a>!</p>
 <p> This means that if you are a quick typer, Berry makes your task managament even faster! ⚡️ </p>
 
-### 2. Interactive ChatBot
+### 2. Interactive ChatBot Interface
 
 <p> Finished your task and want to finally delete it or mark it as done?</p>
 
@@ -29,7 +40,7 @@ of a course I have taken - CS2103T at the National University of Singapore (NUS)
 ### 3. Categorise Your Tasks `#amazing`
 
 <p> Why put all your tasks together? </p>
-You can hashtag them and put them into categories
+<p> You can <code>#hashtag</code> them and put them into categories to sort your tasks easily.</p>
 
 ---
 
@@ -51,14 +62,13 @@ You can hashtag them and put them into categories
 
 ---
 
-## 📕 Usage
+## 📕 Commands
 
 ### `help` - shows help menu
 
 Got stuck in between and don't feel like opening this website?
 
 Just ask berry to help you in app <:
-
 
 ---
 
