@@ -22,7 +22,7 @@ of a course I have taken - CS2103T at the National University of Singapore (NUS)
 
 <p> Finished your task and want to finally delete it or mark it as done?</p>
 
-<p> Berry feels happy for you~ See how her apperance changes when you are being productive!</p>
+<p> Berry feels happy for you~ See how her appearance changes when you are being productive!</p>
 
 ### 3. Categorise Your Tasks `#amazing`
 
