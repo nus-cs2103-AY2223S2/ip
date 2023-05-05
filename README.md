@@ -1,5 +1,9 @@
 # 📖 Guide to Berry the Task Manager Bot
 
+<div style="text-align: center">
+<img src="docs/Ui.png" alt="Berry User Interface" align="middle" width="400px"/>
+</div>
+
 ---
 
 ## 🍒 Features
