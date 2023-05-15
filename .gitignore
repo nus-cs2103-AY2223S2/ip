@@ -1,7 +1,25 @@
 # IDEA files
 /.idea/
 /out/
+
+
+.vscode/
+/.settings/
+.gitignore
 /*.iml
+
+#Duke tasklist
+duke.txt
+
+.project
+
+# Class files
+*.class
+
+*.classpath
+
+#.Project
+*.project
 
 # Gradle build files
 /.gradle/
