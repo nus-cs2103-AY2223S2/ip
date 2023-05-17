@@ -1,0 +1,7 @@
+T | 1 | yum cha with prof henz
+D | 0 | party with prof henz | Aug 06 2019, 2:00PM
+E | 0 | project meeting | Aug 06 2019, 2:00PM | Aug 06 2019, 4:00PM
+T | 0 | join sports club
+T | 1 | borrow book
+D | 0 | return book | Feb 06 2019, 2:00PM
+E | 0 | project meeting | Aug 06 2019, 2:00PM | Aug 06 2019, 4:00PM
