@@ -1,4 +1,4 @@
-package seedu.leo;
+package leo.task;
 import leo.task.LeoTaskException;
 import leo.task.Task;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ public class TaskTest {
     public void testDeadline() {
         try {
             Task t = Task.createTask("deadline test /by 1/1/2023 0000".split(" ", 2));
-            assertEquals("[D][ ] test (by: Jan 1 2023, 00:00)", t.toString());
+            assertEquals("[D][ ] test  (by: Jan 1 2023, 00:00)", t.toString());
         } catch (LeoTaskException e) {
             return;
         }
@@ -29,7 +29,7 @@ public class TaskTest {
     public void testEvent() {
         try {
             Task t = Task.createTask("event test /from 1/1/2023 0000 /to 1/1/2023 2359".split(" ", 2));
-            assertEquals("[E][ ] test (from: Jan 1 2023, 00:00, to: Jan 1 2023, 23:59)", t.toString());
+            assertEquals("[E][ ] test  (from: Jan 1 2023, 00:00, to: Jan 1 2023, 23:59)", t.toString());
         } catch (LeoTaskException e) {
             return;
         }
