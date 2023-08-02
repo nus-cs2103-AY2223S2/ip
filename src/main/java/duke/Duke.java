@@ -115,7 +115,7 @@ public class Duke extends Application {
 
         Label dukeText = new Label(this.ui.showWelcome());
         this.dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(dukeText, new ImageView(this.user))
+                DialogBox.getDukeDialog(dukeText, new ImageView(this.duke))
         );
 
         //Part 3. Add functionality to handle user input.
