@@ -1,0 +1,4 @@
+event Lecture /from 1400 /to 1600
+deadline lecture quiz /by tomorrow
+mark 2
+list
