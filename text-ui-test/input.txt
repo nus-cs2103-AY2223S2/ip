@@ -1,0 +1,42 @@
+tola
+todo
+todo read book
+list appear
+list
+deadline
+deadline return book
+deadline return book /by Sunday 2pm
+list
+event
+event programming study
+event programming study /from 5pm
+event programming study /from 5pm /to 9pm
+list
+mark 1
+list
+mark 2
+list
+unmark 2
+list
+delete
+delete 4
+list
+delete 1
+list
+delete 1
+delete 1
+deadline return book /by 2023-02-10 18:00
+deadline assignment /by 2023-02-10
+deadline cooking /by 18:00
+list
+event dance /from 2023-02-10 18:00 /to 2023-02-10 19:00
+list
+event dance /from 2023-02-10 /to 2023-02-10 19:00
+list
+event dance /from 2023-02-10 18:00 /to 2023-02-10
+list
+event dance /from 2023-02-10 /to 2023-02-10
+list
+event dance /from 18:00 /to 19:00
+list
+bye
