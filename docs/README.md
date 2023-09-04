@@ -5,7 +5,7 @@
 
 Duke Task Reminder is an application that can help you manage your daily tasks. 
 
-![image](https://dunliang0513.github.io/ip/Ui.png)
+![image](https://dunliang0513.github.io/Interactive-Chatbot/Ui.png)
 ## Features
 
 ### Duke Task Reminder currently supports the following features:
