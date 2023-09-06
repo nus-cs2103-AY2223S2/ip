@@ -1,24 +1,23 @@
-# Duke project template
+# User Guide for `/* ask-prof-duke */`
+Too much 💩 to remember? FRET NOT! Prof Duke is here to manage your woes! Start using **`/* ask-prof-duke */`**, a chatbot that automates your task
+tracking endeavours and make life so much simpler for you!
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+![demo](https://user-images.githubusercontent.com/87931905/219407500-f8e047ab-b3b0-4fc3-9560-79630b30ff20.gif)
 
-## Setting up in Intellij
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Features
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+These are the commands currently supported on ask-prof-duke:
+
+1. **Add task**: Add a new task to be recorded.
+1. **Delete task**: Delete an existing task.
+1. **List tasks**: List all tasks that are currently recorded.
+1. **Mark task**: Record a task as complete.
+1. **Unmark task**: Record a task as incomplete.
+1. **Find tasks**: Find a task by title.
+1. **Undo**: Undo the previous command executed.
+1. **Exit**: End the current chat session.
+
+<br>
+
+For more information, you can view the user guide [here](https://jmestxr.github.io/ip/).
