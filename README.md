@@ -1,4 +1,5 @@
-# User Guide for `/* ask-prof-duke */`
+# `ask-prof-duke`, a task-tracking chatbot
+
 Too much 💩 to remember? FRET NOT! Prof Duke is here to manage your woes! Start using **`/* ask-prof-duke */`**, a chatbot that automates your task
 tracking endeavours and make life so much simpler for you!
 
