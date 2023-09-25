@@ -5,4 +5,4 @@
 * The command-line application allows you to plan ahead effortlessly
 
 To use the app, simply click here to download
-For more information, please refer to the [user guide](doc/README.md).
+For more information, please refer to the [user guide](docs/README.md).
