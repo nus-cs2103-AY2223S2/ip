@@ -5,7 +5,7 @@
 # 🤖 BorzAI
 > "It's not the load that breaks you down, it's the way you carry it." - Lou Holtz [(source)](https://quotes4sharing.com/3367/)
 
-Let BorzAI unleash the full potential of your mind by memorising things you need to do so you don't have to. It is a web-based chatbot that can help manage your todos, deadline and events in a tasklist. All you have to do is enter commands to tell it what to do and it will help you manage your tasklist accordingly. With this, you can focus on other things without forgetting what you have to do. It's,
+Let BorzAI unleash the full potential of your mind by memorising things you need to do so you don't have to. It is an offline chatbot that can help manage your todos, deadline and events in a tasklist. All you have to do is enter commands to tell it what to do and it will help you manage your tasklist accordingly. With this, you can focus on other things without forgetting what you have to do. It's,
 - simple 🤓
 - fast to learn ⚡️
 - ~~EASY~~ _SUPER EASY_ to use 🤩
