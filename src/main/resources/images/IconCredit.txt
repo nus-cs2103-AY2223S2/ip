@@ -1,0 +1,6 @@
+All images used are taken from https://www.flaticon.com/
+Credit for BotanicIcon.png: <a href="https://www.flaticon.com/free-icons/apple" title="apple icons">Apple icons created by Freepik - Flaticon</a>
+BotanicIcon.png taken from: https://www.flaticon.com/free-icon/apple_4478115
+
+Credit for UserIcon.png: <a href="https://www.flaticon.com/free-icons/cloudy" title="cloudy icons">Cloudy icons created by Freepik - Flaticon</a>
+UserIcon.png taken from: https://www.flaticon.com/free-icon/sun_4478387?related_id=4478387&origin=pack
