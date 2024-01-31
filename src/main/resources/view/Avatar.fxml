@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+
+
+<ImageView xmlns="http://javafx.com/javafx/11" fitHeight="100.0"
+           xmlns:fx="http://javafx.com/fxml"
+           fitWidth="100.0" pickOnBounds="true" preserveRatio="true"/>

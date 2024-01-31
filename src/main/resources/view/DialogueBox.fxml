@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<HBox alignment="TOP_RIGHT" minHeight="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<!--   <fx:include fx:id="textBox" source="DialogueTip.fxml" />-->
+   <Label fx:id="textBox" alignment="CENTER_RIGHT" minHeight="-Infinity" prefWidth="500.0" style="-fx-border-radius: 40 40 40 40; -fx-background-radius: 40 40 40 40; -fx-background-color: #e5701e;" wrapText="true" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
+   </Label>
+   <fx:include fx:id="avatar" source="Avatar.fxml" />
+</HBox>
