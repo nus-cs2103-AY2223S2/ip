@@ -1,24 +1,68 @@
-# Duke project template
+# Task Manager User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This task manager allows you to organize and manage your tasks efficiently. Here are the commands you can use:
 
-## Setting up in Intellij
+## Adding Tasks
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### Todo
+To add a todo task, use the following command:
+```todo <description>```
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Replace `<description>` with the details of your todo task.
+
+### Event
+To add an event task with a specified date range, use the following command:
+``` event <description> /from <date> /to <date>```
+
+Replace `<description>` with the event details and `<date>` with the start and end dates.
+
+### Deadline
+To add a deadline task with a specified due date, use the following command:
+```deadline <description> /by <date>```
+
+Replace `<description>` with the task details and `<date>` with the due date.
+
+## Listing Tasks
+To view the list of tasks, simply use the command:
+```list```
+
+
+## Managing Tasks
+
+### Marking a Task as Done
+To mark a task as done, use the following command:
+```mark <index>```
+
+Replace `<index>` with the index of the task in the list.
+
+### Unmarking a Task
+To unmark a task, use the following command:
+```unmark <index>```
+
+### Deleting a Task
+To remove a task from the list, use the following command:
+```delete <index>```
+
+Replace `<index>` with the index of the task in the list.
+
+## Searching for Tasks
+To find a task in the list using a keyword, use the following command:
+
+```find <keyword>```
+
+Replace `<keyword>` with the search term.
+
+## Undoing the Latest Action
+To undo the most recent action, use the command:
+```undo```
+
+
+## Additional Features
+
+### Saving Tasks
+Tasks are automatically saved in a file named `duke.txt` in the current directory.
+
+Make sure to check the file for your tasks or to transfer them to another device.
+
+---
+
